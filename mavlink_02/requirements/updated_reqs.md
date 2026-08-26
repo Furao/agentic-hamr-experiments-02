@@ -75,8 +75,9 @@ bundled ArduPilotMega, common, standard, and minimal dialect definitions.
 
 ### RC_INSPECTA_00-HLR-22 – Forward allowed MAVLink
 
-When HLR-21 holds and no deny rule holds, MAVLinkFirewall shall copy the original
-Ethernet frame unchanged to the corresponding VMM output.
+When HLR-21 holds and no deny rule holds, MAVLinkFirewall shall copy the complete
+`MAVLinkUDPMessage_Impl` unchanged to the corresponding VMM output. The VMM shall
+inject its preserved `ethernet_frame` into virtio-net.
 
 ### RC_INSPECTA_00-HLR-23 – Allow file-transfer protocol
 
@@ -109,9 +110,10 @@ activation. Logging shall not expose a bypass or alter forwarding.
 
 ### RC_INSPECTA_00-HLR-28 – VMM receive integration
 
-For each of four lanes, the VMM shall accept frames from both the direct RxFirewall
-path and the MAVLinkFirewall path and inject accepted frames into the existing
-virtio-net receive path without changing the transmit route.
+For each of four lanes, the VMM shall accept `RawEthernetMessage` frames from the
+direct RxFirewall path and `MAVLinkUDPMessage_Impl` carriers from the MAVLinkFirewall
+path. It shall inject the direct frame or the carrier's preserved `ethernet_frame`
+into the existing virtio-net receive path without changing the transmit route.
 
 ### RC_INSPECTA_00-HLR-29 – Dispatch period
 

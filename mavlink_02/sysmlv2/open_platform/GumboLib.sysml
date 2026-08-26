@@ -192,6 +192,13 @@ package GumboLib {
         msg.payload_length == udp_payload_length(msg.ethernet_frame) and
         msg.payload_offset + msg.payload_length <= 1600[u16];
 
+      @spec def mavlink_frame_valid(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl): Base_Types::Boolean;
+
+      @spec def mavlink_firmware_flash_command(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl): Base_Types::Boolean;
+
+      def mavlink_allowed(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl): Base_Types::Boolean :=
+        valid_mavlink_carrier(msg) and mavlink_frame_valid(msg) and not mavlink_firmware_flash_command(msg);
+
       def rx_allow_outbound_frame(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
         rx_direct_frame(aframe) or valid_ardupilot_udp(aframe);
 

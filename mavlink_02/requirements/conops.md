@@ -103,7 +103,8 @@ No direct human interaction with the firewall components is introduced.
 2. RxFirewall DM-004 routes the packet to MAVLinkFirewall DM-005.
 3. RxFirewall supplies the preserved Ethernet frame plus validated UDP-payload offset
    and length metadata. MAVLinkFirewall validates only that bounded payload and policy,
-   then forwards the original frame unchanged.
+   then forwards the unchanged carrier. The VMM unwraps the preserved original frame
+   for virtio-net injection.
 4. VMM/ArduPilot DM-006 receives the packet.
 
 Success: allowed traffic, including valid `FILE_TRANSFER_PROTOCOL`, reaches ArduPilot.

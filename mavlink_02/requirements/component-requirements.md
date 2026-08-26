@@ -21,20 +21,20 @@ implementation responsibilities.
 | Component Req ID | Traces to | Requirement |
 |---|---|---|
 | MAVLinkFirewall_Req_Valid | HLR-21 | Validate supplied payload bounds, then recognize exactly one complete, checksum-valid MAVLink v1/v2 frame within that slice using bundled dialect metadata. |
-| MAVLinkFirewall_Req_Allow | HLR-22 | Forward a valid non-denied input Ethernet frame unchanged. |
+| MAVLinkFirewall_Req_Allow | HLR-22 | Forward a valid non-denied input carrier unchanged, preserving both the Ethernet frame and validated bounds. |
 | MAVLinkFirewall_Req_AllowFTP | HLR-23 | Allow valid `FILE_TRANSFER_PROTOCOL` messages unless an independent deny rule applies. |
 | MAVLinkFirewall_Req_DenyFlash | HLR-24 | Drop command envelopes carrying command 42650 or secure flash operation 7. |
 | MAVLinkFirewall_Req_Malformed | HLR-25, HLR-27 | Drop malformed/unsupported/checksum-failing frames and log a specific reason. |
 | MAVLinkFirewall_Req_FailClosed | HLR-26 | Emit no output for absent input or any unprocessable input. |
 | MAVLinkFirewall_Req_NoNetworking | HLR-31 | Consume the bounded UDP payload description supplied by RxFirewall without deriving Ethernet/IP/UDP offsets or implementing networking policy. |
-| MAVLinkFirewall_Int_Output | HLR-21–HLR-26 | Every output corresponds to a structurally valid, allowed input on the same lane. |
+| MAVLinkFirewall_Int_Output | HLR-21–HLR-26 | Every output is a structurally valid, allowed carrier copied from the same input lane. |
 
 ## ArduPilot/VMM
 
 | Component Req ID | Traces to | Requirement |
 |---|---|---|
-| ArduPilotVMM_Req_DualReceive | HLR-28 | Consume four direct RxFirewall inputs and four MAVLinkFirewall inputs, preserving lane identity. |
-| ArduPilotVMM_Req_Virtio | HLR-28 | Inject either accepted receive source through the existing virtio-net path. |
+| ArduPilotVMM_Req_DualReceive | HLR-28 | Consume four direct raw-frame inputs and four MAVLinkFirewall carrier inputs, preserving lane identity. |
+| ArduPilotVMM_Req_Virtio | HLR-28 | Inject either the direct frame or the carrier's preserved `ethernet_frame` through the existing virtio-net path. |
 | ArduPilotVMM_Req_TxUnchanged | HLR-28 | Preserve all existing VMM-to-TxFirewall behavior. |
 
 ## Shared libraries and frozen components

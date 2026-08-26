@@ -89,10 +89,10 @@ package open_platform {
         port EthernetFramesIn1 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
         port EthernetFramesIn2 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
         port EthernetFramesIn3 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
-        port EthernetFramesOut0 : EventDataPort { out :>> type : RawEthernetMessage; }
-        port EthernetFramesOut1 : EventDataPort { out :>> type : RawEthernetMessage; }
-        port EthernetFramesOut2 : EventDataPort { out :>> type : RawEthernetMessage; }
-        port EthernetFramesOut3 : EventDataPort { out :>> type : RawEthernetMessage; }
+        port EthernetFramesOut0 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
+        port EthernetFramesOut1 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
+        port EthernetFramesOut2 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
+        port EthernetFramesOut3 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
 
         part MAVLinkFirewall : open_platform_Software::MAVLinkFirewall;
 
@@ -153,10 +153,10 @@ package open_platform {
         port FirewallRx1 : EventDataPort { in :>> type : RawEthernetMessage; }
         port FirewallRx2 : EventDataPort { in :>> type : RawEthernetMessage; }
         port FirewallRx3 : EventDataPort { in :>> type : RawEthernetMessage; }
-        port MAVLinkFirewallRx0 : EventDataPort { in :>> type : RawEthernetMessage; }
-        port MAVLinkFirewallRx1 : EventDataPort { in :>> type : RawEthernetMessage; }
-        port MAVLinkFirewallRx2 : EventDataPort { in :>> type : RawEthernetMessage; }
-        port MAVLinkFirewallRx3 : EventDataPort { in :>> type : RawEthernetMessage; }
+        port MAVLinkFirewallRx0 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
+        port MAVLinkFirewallRx1 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
+        port MAVLinkFirewallRx2 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
+        port MAVLinkFirewallRx3 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
         port EthernetFramesTx0 : EventDataPort { out :>> type : RawEthernetMessage; }
         port EthernetFramesTx1 : EventDataPort { out :>> type : RawEthernetMessage; }
         port EthernetFramesTx2 : EventDataPort { out :>> type : RawEthernetMessage; }

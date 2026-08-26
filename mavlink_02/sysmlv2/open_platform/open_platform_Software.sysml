@@ -126,16 +126,77 @@ package open_platform_Software {
         port EthernetFramesIn1 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
         port EthernetFramesIn2 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
         port EthernetFramesIn3 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
-        port EthernetFramesOut0 : EventDataPort { out :>> type : RawEthernetMessage; }
-        port EthernetFramesOut1 : EventDataPort { out :>> type : RawEthernetMessage; }
-        port EthernetFramesOut2 : EventDataPort { out :>> type : RawEthernetMessage; }
-        port EthernetFramesOut3 : EventDataPort { out :>> type : RawEthernetMessage; }
+        port EthernetFramesOut0 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
+        port EthernetFramesOut1 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
+        port EthernetFramesOut2 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
+        port EthernetFramesOut3 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
 
         attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
         attribute :>> Period = 1000[ms];
         attribute :>> Compute_Execution_Time = 300[ms] .. 300[ms];
         attribute :>> Stack_Size = 1048576[byte];
         attribute :>> Implementation_Language = Rust;
+
+        language "GUMBO" /*{
+        integration
+            guarantee hlr_22_output0_allowed:
+                GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesOut0);
+            guarantee hlr_22_output1_allowed:
+                GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesOut1);
+            guarantee hlr_22_output2_allowed:
+                GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesOut2);
+            guarantee hlr_22_output3_allowed:
+                GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesOut3);
+
+        compute
+            guarantee hlr_22_23_lane0_allow:
+                (HasEvent(EthernetFramesIn0) and GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesIn0)) implies
+                (HasEvent(EthernetFramesOut0) and EthernetFramesOut0 == EthernetFramesIn0);
+            guarantee hlr_24_lane0_deny_flash:
+                (HasEvent(EthernetFramesIn0) and GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn0) and
+                 GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn0) and
+                 GumboLib::GUMBO__Library::mavlink_firmware_flash_command(EthernetFramesIn0)) implies NoSend(EthernetFramesOut0);
+            guarantee hlr_25_26_lane0_invalid_or_no_input:
+                ((not HasEvent(EthernetFramesIn0)) or
+                 (HasEvent(EthernetFramesIn0) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn0) and
+                  GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn0)))) implies NoSend(EthernetFramesOut0);
+
+            guarantee hlr_22_23_lane1_allow:
+                (HasEvent(EthernetFramesIn1) and GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesIn1)) implies
+                (HasEvent(EthernetFramesOut1) and EthernetFramesOut1 == EthernetFramesIn1);
+            guarantee hlr_24_lane1_deny_flash:
+                (HasEvent(EthernetFramesIn1) and GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn1) and
+                 GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn1) and
+                 GumboLib::GUMBO__Library::mavlink_firmware_flash_command(EthernetFramesIn1)) implies NoSend(EthernetFramesOut1);
+            guarantee hlr_25_26_lane1_invalid_or_no_input:
+                ((not HasEvent(EthernetFramesIn1)) or
+                 (HasEvent(EthernetFramesIn1) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn1) and
+                  GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn1)))) implies NoSend(EthernetFramesOut1);
+
+            guarantee hlr_22_23_lane2_allow:
+                (HasEvent(EthernetFramesIn2) and GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesIn2)) implies
+                (HasEvent(EthernetFramesOut2) and EthernetFramesOut2 == EthernetFramesIn2);
+            guarantee hlr_24_lane2_deny_flash:
+                (HasEvent(EthernetFramesIn2) and GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn2) and
+                 GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn2) and
+                 GumboLib::GUMBO__Library::mavlink_firmware_flash_command(EthernetFramesIn2)) implies NoSend(EthernetFramesOut2);
+            guarantee hlr_25_26_lane2_invalid_or_no_input:
+                ((not HasEvent(EthernetFramesIn2)) or
+                 (HasEvent(EthernetFramesIn2) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn2) and
+                  GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn2)))) implies NoSend(EthernetFramesOut2);
+
+            guarantee hlr_22_23_lane3_allow:
+                (HasEvent(EthernetFramesIn3) and GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesIn3)) implies
+                (HasEvent(EthernetFramesOut3) and EthernetFramesOut3 == EthernetFramesIn3);
+            guarantee hlr_24_lane3_deny_flash:
+                (HasEvent(EthernetFramesIn3) and GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn3) and
+                 GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn3) and
+                 GumboLib::GUMBO__Library::mavlink_firmware_flash_command(EthernetFramesIn3)) implies NoSend(EthernetFramesOut3);
+            guarantee hlr_25_26_lane3_invalid_or_no_input:
+                ((not HasEvent(EthernetFramesIn3)) or
+                 (HasEvent(EthernetFramesIn3) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn3) and
+                  GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn3)))) implies NoSend(EthernetFramesOut3);
+        }*/
     }
 
     part def TxFirewall :> Thread {
@@ -214,10 +275,10 @@ package open_platform_Software {
         port FirewallRx1 : EventDataPort { in :>> type : RawEthernetMessage; }
         port FirewallRx2 : EventDataPort { in :>> type : RawEthernetMessage; }
         port FirewallRx3 : EventDataPort { in :>> type : RawEthernetMessage; }
-        port MAVLinkFirewallRx0 : EventDataPort { in :>> type : RawEthernetMessage; }
-        port MAVLinkFirewallRx1 : EventDataPort { in :>> type : RawEthernetMessage; }
-        port MAVLinkFirewallRx2 : EventDataPort { in :>> type : RawEthernetMessage; }
-        port MAVLinkFirewallRx3 : EventDataPort { in :>> type : RawEthernetMessage; }
+        port MAVLinkFirewallRx0 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
+        port MAVLinkFirewallRx1 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
+        port MAVLinkFirewallRx2 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
+        port MAVLinkFirewallRx3 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
         port EthernetFramesTx0 : EventDataPort { out :>> type : RawEthernetMessage; }
         port EthernetFramesTx1 : EventDataPort { out :>> type : RawEthernetMessage; }
         port EthernetFramesTx2 : EventDataPort { out :>> type : RawEthernetMessage; }

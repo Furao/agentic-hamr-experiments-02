@@ -26,14 +26,22 @@ Project: open_platform | Profile: audited | Updated: 2026-08-26
 | SysModeling | done | 2026-08-26 | Exit criteria met after bounded-payload iteration; architecture approved |
 | SysModeling.1 | done | 2026-08-26 | Existing model-package structure retained |
 | SysModeling.2 | done | 2026-08-26 | Iteration 1: added MAVLinkUDPMessage_Impl with preserved frame and payload offset/length |
-| SysModeling.3 | done | 2026-08-26 | Iteration 1: Rx-to-MAVLink ports use bounded-payload carrier; MAVLink-to-VMM remains RawEthernetMessage |
+| SysModeling.3 | done | 2026-08-26 | Iteration 2: bounded-payload carrier is preserved from RxFirewall through MAVLinkFirewall to VMM; VMM unwraps ethernet_frame |
 | SysModeling.4 | done | 2026-08-26 | Added process wrapper, domain 6, Max_Domain 7, and eight receive-path connections |
 | SysModeling.5 | done | 2026-08-26 | Iteration 1: renamed reserved field frame to ethernet_frame; tipe Well-formed |
 | SysModeling.AP1 | done | 2026-08-26 | Developer approved revised bounded-payload architecture |
 | ChangeExec(CR-01).W1.SysModeling | done | 2026-08-26 | Audited sub-workflow boundary approved; continuing to RxFirewall contracts |
-| CompGUMBOSpec(RxFirewall) | blocked | 2026-08-26 | Getter-refactored contract type-clean; awaiting renewed CompGUMBOSpec.AP1 approval |
+| CompGUMBOSpec(RxFirewall) | done | 2026-08-26 | Exit criteria met; getter-refactored contract approved |
 | CompGUMBOSpec(RxFirewall).1 | done | 2026-08-26 | Replaced TCP contract with exhaustive direct/MAVLink/drop/no-input clauses and output invariants |
 | CompGUMBOSpec(RxFirewall).2 | done | 2026-08-26 | Iteration 1 getter refactor; sireum hamr sysml tipe: Well-formed |
 | CompGUMBOSpec(RxFirewall).3 | done | 2026-08-26 | audit-gumbo-contracts: zero AP-1–AP-9 findings; generated GUMBOX noted stale until CodeGen |
 | CompGUMBOSpec(RxFirewall).4 | done | 2026-08-26 | Review feedback: centralized layout and length logic in getter/spec functions; corrected ipv4_length to network byte order |
-| CompGUMBOSpec(RxFirewall).AP1 | blocked | 2026-08-26 | Getter-refactored contract awaiting developer approval |
+| CompGUMBOSpec(RxFirewall).AP1 | done | 2026-08-26 | Developer approved getter-refactored RxFirewall contract and zero-finding audit |
+| ChangeExec(CR-01).W1.CompGUMBOSpec(RxFirewall) | done | 2026-08-26 | Audited sub-workflow boundary approved; continuing to MAVLinkFirewall contracts |
+| CompGUMBOSpec(MAVLinkFirewall) | in-progress | 2026-08-26 | Contract and specification-only audit prepared; awaiting developer review |
+| CompGUMBOSpec(MAVLinkFirewall).1 | done | 2026-08-26 | Added four-lane allow, firmware-flash deny, invalid, and no-input guarantees plus output invariants |
+| CompGUMBOSpec(MAVLinkFirewall).2 | done | 2026-08-26 | Preserved MAVLinkUDPMessage_Impl through the firewall to VMM; sireum hamr sysml tipe: Well-formed |
+| CompGUMBOSpec(MAVLinkFirewall).3 | done | 2026-08-26 | audit-gumbo-contracts specification-only mode: zero AP-1–AP-9 findings; abstract predicate refinement recorded for W2 |
+| CompGUMBOSpec(MAVLinkFirewall).4 | in-progress | 2026-08-26 | Awaiting developer review of carrier-preserving contract and abstract MAVLink predicate boundary |
+| CompGUMBOSpec(MAVLinkFirewall).AP1 | pending | 2026-08-26 | Developer approval has not been given |
+| ChangeExec(CR-01).W1.CompGUMBOSpec(MAVLinkFirewall) | pending | 2026-08-26 | Audited sub-workflow boundary not yet approved; no later workflow progress is credited |
