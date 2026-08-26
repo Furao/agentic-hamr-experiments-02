@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hamr.dev/schemas/project-measures-v1.schema.json",
+  "title": "HAMR effort-estimation project measures v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generated", "project", "manifest_ref", "inputs", "files", "template_accounting", "assurance", "excluded", "rollups", "caveats"],
+  "$defs": {
+    "provenance": {
+      "enum": ["hamr_generated", "hamr_woven", "hamr_template_retained", "developer_authored", "preserved_origin_unknown", "library", "unknown"]
+    },
+    "generation_mode": { "enum": ["overwrite", "woven", "generate_once", "not_codegen", "unknown"] },
+    "classification_basis": { "enum": ["codegen_report", "marker", "template_comparison", "path_rule", "workflow_status_note", "static_count", "fallback"] },
+    "confidence": { "enum": ["exact", "derived", "unknown"] },
+    "granularity": { "enum": ["exact_step", "workflow_only", "inferred_step", "unattributed"] },
+    "sourced_value": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["source", "classification_basis", "confidence"],
+      "properties": {
+        "source": { "type": "string" },
+        "classification_basis": { "$ref": "#/$defs/classification_basis" },
+        "confidence": { "$ref": "#/$defs/confidence" }
+      }
+    },
+    "bucket": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_type", "generation_mode", "provenance", "classification_basis", "confidence", "workflow", "sloc", "comment_lines", "blank_lines"],
+      "properties": {
+        "artifact_type": { "type": "string" },
+        "artifact_id": { "type": ["string", "null"] },
+        "component": { "type": ["string", "null"] },
+        "generation_mode": { "$ref": "#/$defs/generation_mode" },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "classification_basis": { "$ref": "#/$defs/classification_basis" },
+        "confidence": { "$ref": "#/$defs/confidence" },
+        "workflow": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["key", "granularity"],
+          "properties": {
+            "key": { "type": "string" },
+            "granularity": { "$ref": "#/$defs/granularity" }
+          }
+        },
+        "sloc": { "type": "integer", "minimum": 0 },
+        "comment_lines": { "type": "integer", "minimum": 0 },
+        "blank_lines": { "type": "integer", "minimum": 0 },
+        "items": { "type": ["object", "null"] }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": { "const": 1 },
+    "generated": { "type": "string" },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "path"],
+      "properties": {
+        "name": { "type": "string" },
+        "path": { "type": "string" }
+      }
+    },
+    "manifest_ref": { "type": "string" },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["codegen_report", "classification_mode", "model_dir", "generation_baseline"],
+      "properties": {
+        "codegen_report": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["present", "path", "resource_count_raw", "resource_count_deduped", "overwritten_true", "overwritten_false", "report_status", "orphaned_files"],
+          "properties": {
+            "present": { "type": "boolean" },
+            "path": { "type": ["string", "null"] },
+            "resource_count_raw": { "type": ["integer", "null"] },
+            "resource_count_deduped": { "type": ["integer", "null"] },
+            "overwritten_true": { "type": ["integer", "null"] },
+            "overwritten_false": { "type": ["integer", "null"] },
+            "internal_status": { "type": ["string", "null"] },
+            "report_status": { "enum": ["complete", "partial", "absent"] },
+            "orphaned_files": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "classification_mode": { "enum": ["report", "report_plus_fallback", "fallback_only"] },
+        "model_dir": { "type": ["string", "null"] },
+        "generation_baseline": {
+          "type": ["object", "null"],
+          "additionalProperties": true,
+          "required": ["present"],
+          "properties": {
+            "present": { "type": "boolean" },
+            "path": { "type": ["string", "null"] },
+            "provenance": { "type": ["object", "null"] },
+            "agreement": { "type": ["object", "null"] },
+            "usable": { "type": ["boolean", "null"] }
+          }
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "language", "buckets"],
+        "properties": {
+          "path": { "type": "string" },
+          "language": { "type": "string" },
+          "buckets": { "type": "array", "items": { "$ref": "#/$defs/bucket" }, "minItems": 1 }
+        }
+      }
+    },
+    "template_accounting": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["file", "supplied", "retained", "replaced"],
+        "properties": {
+          "file": { "type": "string" },
+          "supplied": { "type": "integer", "minimum": 0 },
+          "retained": { "type": "integer", "minimum": 0 },
+          "replaced": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "assurance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tests", "coverage", "component_verus", "system_proof", "integration_check", "audit_findings", "generated_resources"],
+      "properties": {
+        "tests": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": ["defined_static", "runtime"],
+          "properties": {
+            "defined_static": { "type": "object", "additionalProperties": true },
+            "runtime": { "type": "object", "additionalProperties": true },
+            "reconciliation": { "type": ["object", "null"] }
+          }
+        },
+        "coverage": { "type": "object", "additionalProperties": true },
+        "component_verus": { "type": "object", "additionalProperties": true },
+        "system_proof": { "type": "object", "additionalProperties": true },
+        "integration_check": { "type": "object", "additionalProperties": true },
+        "audit_findings": { "type": "object", "additionalProperties": true },
+        "contract_audit_findings": { "type": "object", "additionalProperties": true },
+        "generated_resources": { "type": "object", "additionalProperties": true },
+        "structured_sources": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Schema hooks for future structured outputs (verus_results.json, LCOV); null values with a not-available note in Wave 1."
+        }
+      }
+    },
+    "workflow_status": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Step statuses parsed from reports/workflow-status.md, plus the derived completed-workflow set."
+    },
+    "excluded": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "reason"],
+        "properties": {
+          "path": { "type": "string" },
+          "reason": { "type": "string" },
+          "file_count": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "rollups": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["by_provenance", "by_artifact_type", "by_component", "by_step_bucket", "total_sloc"],
+      "properties": {
+        "by_provenance": { "type": "object", "additionalProperties": true },
+        "by_artifact_type": { "type": "object", "additionalProperties": true },
+        "by_component": { "type": "object", "additionalProperties": true },
+        "by_step_bucket": { "type": "object", "additionalProperties": true },
+        "total_sloc": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "caveats": { "type": "array", "items": { "type": "string" } }
+  }
+}

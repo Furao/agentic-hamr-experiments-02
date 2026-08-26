@@ -1,0 +1,71 @@
+{
+  "schema_version": 2,
+  "pricing_date": "2026-08-03",
+  "currency": "USD",
+  "unit": "per_million_tokens",
+  "sources": {
+    "anthropic": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "openai_gpt_5_6_sol": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+    "openai_gpt_5": "https://developers.openai.com/api/docs/models/gpt-5"
+  },
+  "models": {
+    "anthropic/claude-opus-4-8": {
+      "aliases": ["claude-opus-4-8"],
+      "input": 5.0,
+      "output": 25.0,
+      "cache_write": 6.25,
+      "cache_read": 0.5
+    },
+    "anthropic/claude-opus-4-7": {
+      "aliases": ["claude-opus-4-7"],
+      "input": 5.0,
+      "output": 25.0,
+      "cache_write": 6.25,
+      "cache_read": 0.5
+    },
+    "anthropic/claude-sonnet-5": {
+      "aliases": ["claude-sonnet-5"],
+      "input": 2.0,
+      "output": 10.0,
+      "cache_write": 2.5,
+      "cache_read": 0.2,
+      "note": "Introductory public API rate through 2026-08-31; update before later runs."
+    },
+    "anthropic/claude-sonnet-4-6": {
+      "aliases": ["claude-sonnet-4-6"],
+      "input": 3.0,
+      "output": 15.0,
+      "cache_write": 3.75,
+      "cache_read": 0.3
+    },
+    "anthropic/claude-haiku-4-5": {
+      "aliases": ["claude-haiku-4-5"],
+      "input": 1.0,
+      "output": 5.0,
+      "cache_write": 1.25,
+      "cache_read": 0.1
+    },
+    "anthropic/claude-fable-5": {
+      "aliases": ["claude-fable-5"],
+      "input": 10.0,
+      "output": 50.0,
+      "cache_write": 12.5,
+      "cache_read": 1.0
+    },
+    "openai/gpt-5.6-sol": {
+      "aliases": ["gpt-5.6", "gpt-5.6-sol"],
+      "input": 5.0,
+      "output": 30.0,
+      "cache_write": 6.25,
+      "cache_read": 0.5,
+      "note": "Standard public API rate; long-context premiums are not inferable from cumulative Codex snapshots."
+    },
+    "openai/gpt-5": {
+      "aliases": ["gpt-5"],
+      "input": 1.25,
+      "output": 10.0,
+      "cache_write": 1.5625,
+      "cache_read": 0.125
+    }
+  }
+}

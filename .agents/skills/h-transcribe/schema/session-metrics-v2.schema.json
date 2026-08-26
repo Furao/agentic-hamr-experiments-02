@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hamr.dev/schemas/session-metrics-v2.schema.json",
+  "title": "HAMR experiment session metrics v2",
+  "type": "object",
+  "required": ["schema_version", "session", "harness", "scope", "span", "models", "counts", "cost_usd", "friction"],
+  "properties": {
+    "schema_version": {"const": 2},
+    "session": {
+      "type": "object",
+      "required": ["id", "source_path", "source_type", "cwd", "git_branch"],
+      "properties": {
+        "id": {"type": ["string", "null"]},
+        "source_path": {"type": "string"},
+        "source_type": {"enum": ["claude-jsonl", "codex-rollout-jsonl"]},
+        "cwd": {"type": ["string", "null"]},
+        "git_branch": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "harness": {
+      "type": "object",
+      "required": ["name", "version", "adapter_version", "source_format_version"],
+      "properties": {
+        "name": {"enum": ["claude-code", "codex"]},
+        "version": {"type": ["string", "null"]},
+        "adapter_version": {"type": "string"},
+        "source_format_version": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "scope": {
+      "type": "object",
+      "required": ["primary_development_session_only", "subagent_activity", "note"],
+      "properties": {
+        "primary_development_session_only": {"const": true},
+        "subagent_activity": {"const": "excluded"},
+        "note": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "span": {
+      "type": "object",
+      "required": ["first", "last", "wall_clock_seconds", "active_seconds", "active_gap_seconds"],
+      "properties": {
+        "first": {"type": ["string", "null"]},
+        "last": {"type": ["string", "null"]},
+        "wall_clock_seconds": {"type": "integer", "minimum": 0},
+        "active_seconds": {"type": "integer", "minimum": 0},
+        "active_gap_seconds": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "models": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["input", "output", "cache_read", "cache_write"],
+        "properties": {
+          "input": {"type": "integer", "minimum": 0},
+          "output": {"type": "integer", "minimum": 0},
+          "cache_read": {"type": "integer", "minimum": 0},
+          "cache_write": {"type": "integer", "minimum": 0},
+          "reasoning_output": {"type": "integer", "minimum": 0}
+        },
+        "additionalProperties": false
+      }
+    },
+    "counts": {
+      "type": "object",
+      "required": ["user_turns", "assistant_messages", "tool_calls", "tool_results", "malformed_records", "compactions"],
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "cost_usd": {
+      "type": "object",
+      "required": ["api_list_price_equivalent", "actual", "billing_basis", "pricing_date", "note"],
+      "properties": {
+        "api_list_price_equivalent": {
+          "type": "object",
+          "required": ["total", "by_model"],
+          "properties": {
+            "total": {"type": ["number", "null"], "minimum": 0},
+            "by_model": {"type": "object", "additionalProperties": {"type": ["number", "null"], "minimum": 0}}
+          },
+          "additionalProperties": false
+        },
+        "actual": {"type": ["number", "null"], "minimum": 0},
+        "billing_basis": {"type": ["string", "null"]},
+        "pricing_date": {"type": ["string", "null"]},
+        "note": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "friction": {
+      "type": "object",
+      "required": ["escalation_requests", "dynamic_shell_commands", "sandbox_failures", "observed_policy_settings", "observable_approval_outcomes", "parser_coverage_warnings", "epistemic_limitations"],
+      "properties": {
+        "escalation_requests": {"type": "array", "items": {"type": "object"}},
+        "dynamic_shell_commands": {"type": "array", "items": {"type": "object"}},
+        "sandbox_failures": {"type": "array", "items": {"type": "object"}},
+        "observed_policy_settings": {"type": "array", "items": {"type": "object"}},
+        "observable_approval_outcomes": {"type": "array", "items": {"type": "object"}},
+        "parser_coverage_warnings": {"type": "array", "items": {"type": "string"}},
+        "epistemic_limitations": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

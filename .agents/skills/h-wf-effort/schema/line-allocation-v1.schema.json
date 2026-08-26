@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hamr.dev/schemas/line-allocation-v1.schema.json",
+  "title": "HAMR effort-estimation line allocation v1",
+  "description": "Line-level audit detail for project-measures: for every measured file, the 1-based inclusive line ranges owned by each bucket. Invariants enforced at generation time: the ranges across a file's buckets exactly partition lines 1..line_count (no gaps, no overlaps), and each bucket's sloc/comment_lines/blank_lines equal the per-line classification counts over its owned lines, matching the counts recorded in project-measures.json (buckets correspond by position via bucket_index).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generated", "project", "measures_ref", "files"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "generated": { "type": "string" },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "path"],
+      "properties": {
+        "name": { "type": "string" },
+        "path": { "type": "string" }
+      }
+    },
+    "measures_ref": {
+      "type": ["string", "null"],
+      "description": "Filename of the project-measures.json this allocation was generated alongside."
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "language", "line_count", "buckets"],
+        "properties": {
+          "path": { "type": "string" },
+          "language": { "type": "string" },
+          "line_count": { "type": "integer", "minimum": 0 },
+          "buckets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["bucket_index", "artifact_type", "provenance", "generation_mode", "workflow_key", "component", "ranges", "sloc", "comment_lines", "blank_lines"],
+              "properties": {
+                "bucket_index": { "type": "integer", "minimum": 0 },
+                "artifact_type": { "type": "string" },
+                "provenance": { "type": "string" },
+                "generation_mode": { "type": "string" },
+                "workflow_key": { "type": "string" },
+                "component": { "type": ["string", "null"] },
+                "ranges": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "prefixItems": [
+                      { "type": "integer", "minimum": 1 },
+                      { "type": "integer", "minimum": 1 }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "description": "1-based inclusive [start, end] line ranges owned by this bucket; a bucket's ranges need not be contiguous."
+                },
+                "sloc": { "type": "integer", "minimum": 0 },
+                "comment_lines": { "type": "integer", "minimum": 0 },
+                "blank_lines": { "type": "integer", "minimum": 0 }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

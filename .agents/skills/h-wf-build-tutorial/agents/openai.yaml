@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build HAMR Workflow Tutorial"
+  short_description: "Build an evidence-backed HAMR session tutorial"
+  default_prompt: "Use $h-wf-build-tutorial to build an onboarding walkthrough for the current transcribed HAMR experiment."

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "config_id": "counterfactual-v1",
+  "description": "Explicit manual-development counterfactual for Wave 1. Every measured bucket is assigned exactly one category. Conservative principle: where a classification is debatable, choose the category that understates HAMR's benefit, and say so.",
+  "categories": {
+    "common_both_paths": "Authored in both counterfactuals; displayed for both paths and excluded from HAMR-saving claims.",
+    "hamr_path_authored": "Authored by the developer/agent on the HAMR path.",
+    "hamr_generated_manual_replacement": "HAMR-generated; forms the modeled manual-equivalent replacement value.",
+    "manual_only_unmodeled": "Effort the manual path would need that we deliberately do not model.",
+    "excluded_library_or_build_output": "Never counted.",
+    "unknown_provenance": "Origin unresolved (no template baseline); counted in neither headline story, displayed honestly."
+  },
+  "assignment_rules": {
+    "note": "Category is derived from provenance first, then artifact_type for developer-authored buckets. overwrittenIfExists:false sets generation_mode only, never provenance.",
+    "by_provenance": {
+      "hamr_generated": "hamr_generated_manual_replacement",
+      "hamr_woven": "hamr_generated_manual_replacement",
+      "hamr_template_retained": "hamr_generated_manual_replacement",
+      "preserved_origin_unknown": "unknown_provenance",
+      "library": "excluded_library_or_build_output",
+      "unknown": "unknown_provenance"
+    },
+    "developer_authored_by_artifact_type": {
+      "sysml_model": "common_both_paths",
+      "requirements_text": "common_both_paths",
+      "gumbo_contract": "hamr_path_authored",
+      "rust_app_code": "hamr_path_authored",
+      "rust_test_code": "hamr_path_authored",
+      "microkit_config": "hamr_path_authored",
+      "build_script": "hamr_path_authored",
+      "_default": "hamr_path_authored"
+    },
+    "fixed_decisions": [
+      "SysMLv2 models are required in both counterfactuals (John, 2026-08-10): model-authoring effort is common_both_paths and never a HAMR code-generation saving.",
+      "GUMBO contracts default to hamr_path_authored with manual-side specification effort left unmodeled (conservative; config knob, see plan section 13.4).",
+      "bin/build.cmd is skill-generated in agentic runs; it stays hamr_path_authored but is called out separately and modeled as a fixed setup activity."
+    ]
+  },
+  "manual_only_unmodeled": [
+    "Manual-path behavioral specification and verification effort in place of GUMBO contracts and Verus proofs",
+    "Manual-path test-harness construction and test authoring for hand-built infrastructure",
+    "Manual acquisition of seL4/Microkit platform expertise (protection domains, channels, static schedules)",
+    "Manual integration debugging of hand-written IPC/shared-memory plumbing",
+    "Manual maintenance of consistency between architecture documentation and code"
+  ],
+  "exclusions": [
+    { "path_pattern": "sysmlv2/aadl-lib/", "reason": "HAMR/AADL shared library, not project-authored" },
+    { "path_pattern": "**/target/", "reason": "build output" },
+    { "path_pattern": "**/Cargo.lock", "reason": "dependency lock file, tool-generated build output" },
+    { "path_pattern": ".git/", "reason": "version control metadata" },
+    { "path_pattern": "hamr/microkit/attestation/", "reason": "codegen attestation evidence, not development work product" },
+    { "path_pattern": "hamr/microkit/reporting/", "reason": "codegen report artifacts (parsed as evidence, not measured as work product)" },
+    { "path_pattern": "hamr/microkit/build/", "reason": "build output" },
+    { "path_pattern": "reports/", "reason": "process/audit documentation; excluded from effort modeling (conservative: understates authored work)" },
+    { "path_pattern": "experiment-reports/", "reason": "experiment meta-artifacts (transcripts, metrics, assessments), not system development work" },
+    { "path_pattern": "action-requests/", "reason": "change-request sketches; empty in greenfield subjects" },
+    { "path_pattern": ".slang/", "reason": "tool scratch" },
+    { "path_pattern": ".claude/", "reason": "harness configuration" },
+    { "path_pattern": "AGENTS.md", "reason": "harness instructions, not system work product" },
+    { "path_pattern": "CLAUDE.md", "reason": "harness instructions, not system work product" },
+    { "path_pattern": ".mcp.json", "reason": "harness configuration" },
+    { "path_pattern": ".gitignore", "reason": "repository housekeeping" }
+  ]
+}

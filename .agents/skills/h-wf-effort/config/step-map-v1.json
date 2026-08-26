@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "config_id": "step-map-v1",
+  "provenance": {
+    "source": "process/artifacts.md @ hamr-agent-context-git a061504",
+    "note": "Artifact IDs and producing steps taken from the shared-context artifact registry. Granularity records how precisely a final-snapshot artifact can honestly be attributed to a step."
+  },
+  "granularities": {
+    "exact_step": "The artifact is produced at exactly this step.",
+    "workflow_only": "The artifact is produced/revised across several steps of this workflow; a final snapshot cannot be divided among them.",
+    "inferred_step": "The file is generated at one step and edited at the mapped step; attribution of the authored portion is inferred.",
+    "unattributed": "No defensible mapping; counted in the unattributed accounting bucket."
+  },
+  "artifacts": {
+    "ConOps": { "step": "SysPlanAndReq.1", "granularity": "exact_step" },
+    "SysReqs": { "step": "SysPlanAndReq.2", "granularity": "exact_step" },
+    "CompReqs": { "step": "SysPlanAndReq.3", "granularity": "exact_step" },
+    "DataDict": { "step": "SysPlanAndReq.4", "granularity": "exact_step" },
+    "SysModel": { "step": "SysModeling", "granularity": "workflow_only" },
+    "CompContracts": { "step": "CompGUMBOSpec(<component>)", "granularity": "workflow_only", "parameterized": true },
+    "SysSpecs": { "step": "SysGUMBOSysSpecCheck", "granularity": "workflow_only" },
+    "GenCode": { "step": "CodeGen.2", "granularity": "exact_step" },
+    "CodegenReport": { "step": "CodeGen.2", "granularity": "exact_step" },
+    "SysProofVCs": { "step": "SysGUMBOSysSpecCheck.4", "granularity": "exact_step" },
+    "CompImpls": { "step": "CompDev(<component>).2", "granularity": "exact_step", "parameterized": true },
+    "CompTests": { "step": "CompDev(<component>).3", "granularity": "exact_step", "parameterized": true },
+    "Schedule": { "step": "SysSchedDef.1", "granularity": "inferred_step" },
+    "BuildScript": { "step": "CodeGen.4", "granularity": "exact_step" }
+  },
+  "unattributed": { "step": "unattributed", "granularity": "unattributed" }
+}

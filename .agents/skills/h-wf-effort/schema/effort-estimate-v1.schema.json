@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hamr.dev/schemas/effort-estimate-v1.schema.json",
+  "title": "HAMR effort estimate v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generated", "project", "manifest", "estimator", "counterfactual", "scenarios", "steps", "hamr_generated_value", "common_mode", "unmodeled_manual", "session_totals", "comparisons", "attribution_summary", "caveats"],
+  "$defs": {
+    "profile_estimate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hours", "cost_usd"],
+      "properties": {
+        "hours": { "type": "number", "minimum": 0 },
+        "cost_usd": { "type": "number", "minimum": 0 },
+        "by_type": { "type": "object", "additionalProperties": true },
+        "overhead_hours": { "type": "number", "minimum": 0 }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": { "const": 1 },
+    "generated": { "type": "string" },
+    "project": { "type": "object", "additionalProperties": true },
+    "manifest": { "type": "object", "additionalProperties": true },
+    "measures_ref": { "type": "string" },
+    "estimator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "config_sha256", "calibration_status", "scope_note"],
+      "properties": {
+        "model": { "type": "string" },
+        "config_sha256": { "type": "string" },
+        "calibration_status": { "type": "string" },
+        "scope_note": { "type": "string" }
+      }
+    },
+    "counterfactual": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["config_sha256", "assignments"],
+      "properties": {
+        "config_sha256": { "type": "string" },
+        "assignments": { "type": "object", "additionalProperties": true }
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "factor", "note"],
+        "properties": {
+          "name": { "type": "string" },
+          "factor": { "type": "number" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["step_key", "granularity", "status", "measures", "human_estimates", "agent_actuals"],
+        "properties": {
+          "step_key": { "type": "string" },
+          "granularity": { "enum": ["exact_step", "workflow_only", "inferred_step", "unattributed"] },
+          "status": { "type": ["string", "null"] },
+          "measures": { "type": "object", "additionalProperties": true },
+          "assurance": { "type": ["object", "null"] },
+          "human_estimates": {
+            "type": "object",
+            "additionalProperties": { "$ref": "#/$defs/profile_estimate" }
+          },
+          "agent_actuals": { "type": "null", "description": "Reserved for Wave 2 per-step attribution; always null in Wave 1." }
+        }
+      }
+    },
+    "hamr_generated_value": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sloc", "by_artifact_type", "template_accounting", "estimates"],
+      "properties": {
+        "sloc": { "type": "integer", "minimum": 0 },
+        "by_artifact_type": { "type": "object", "additionalProperties": true },
+        "template_accounting": { "type": "object", "additionalProperties": true },
+        "estimates": {
+          "type": "object",
+          "description": "profile -> scenario -> {hours, cost_usd}",
+          "additionalProperties": { "type": "object", "additionalProperties": { "$ref": "#/$defs/profile_estimate" } }
+        }
+      }
+    },
+    "common_mode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sloc", "by_artifact_type", "estimates"],
+      "properties": {
+        "sloc": { "type": "integer", "minimum": 0 },
+        "by_artifact_type": { "type": "object", "additionalProperties": true },
+        "estimates": { "type": "object", "additionalProperties": { "$ref": "#/$defs/profile_estimate" } }
+      }
+    },
+    "authored_hamr_path": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sloc", "by_artifact_type", "estimates"],
+      "properties": {
+        "sloc": { "type": "integer", "minimum": 0 },
+        "by_artifact_type": { "type": "object", "additionalProperties": true },
+        "estimates": { "type": "object", "additionalProperties": { "$ref": "#/$defs/profile_estimate" } }
+      }
+    },
+    "unknown_provenance": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "unmodeled_manual": { "type": "array", "items": { "type": "string" } },
+    "workflow_completion": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Per-workflow statuses and the completed set, carried from measures for scope gating on comparison pages."
+    },
+    "session_totals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "schema_or_adapter", "tokens", "cost_usd", "active_seconds", "wall_clock_seconds", "caveats"],
+      "properties": {
+        "source": { "type": ["string", "null"] },
+        "schema_or_adapter": { "type": ["string", "null"] },
+        "harness": { "type": ["string", "null"] },
+        "harness_version": { "type": ["string", "null"] },
+        "models": { "type": "array", "items": { "type": "string" } },
+        "tokens": { "type": "object", "additionalProperties": true },
+        "cost_usd": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "total"],
+          "properties": {
+            "kind": { "enum": ["actual", "list_price_equivalent", null] },
+            "total": { "type": ["number", "null"] }
+          }
+        },
+        "active_seconds": { "type": ["number", "null"] },
+        "wall_clock_seconds": { "type": ["number", "null"] },
+        "friction": { "type": ["object", "null"] },
+        "caveats": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "comparisons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "scope_alignment", "values", "ratio", "caveats"],
+        "properties": {
+          "kind": { "type": "string" },
+          "scope_alignment": { "enum": ["exact", "partial", "invalid"] },
+          "values": { "type": "object", "additionalProperties": true },
+          "ratio": { "type": ["object", "null"] },
+          "caveats": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "attribution_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coverage", "by_granularity"],
+      "properties": {
+        "coverage": { "type": "number", "minimum": 0, "maximum": 1 },
+        "by_granularity": { "type": "object", "additionalProperties": true }
+      }
+    },
+    "caveats": { "type": "array", "items": { "type": "string" } }
+  }
+}

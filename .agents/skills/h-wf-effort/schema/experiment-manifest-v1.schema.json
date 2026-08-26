@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hamr.dev/schemas/experiment-manifest-v1.schema.json",
+  "title": "HAMR effort-estimation experiment manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "experiment_id",
+    "lifecycle",
+    "workflow",
+    "profile",
+    "actor",
+    "harness",
+    "concept_quote",
+    "concept_sha256",
+    "project_dir",
+    "session_metrics",
+    "metrics_cover_full_run",
+    "known_exclusions"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "experiment_id": { "type": "string", "minLength": 1 },
+    "lifecycle": { "enum": ["greenfield", "change"] },
+    "workflow": { "type": "string", "minLength": 1 },
+    "profile": { "enum": ["audited", "rapid"] },
+    "actor": { "enum": ["agent", "human"] },
+    "harness": { "type": "string", "minLength": 1 },
+    "concept_quote": { "type": "string", "minLength": 1 },
+    "concept_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 of concept_quote; computed by tooling and cross-checked by the measurer against the value it derives from the quote."
+    },
+    "project_dir": {
+      "type": "string",
+      "description": "HAMR project root relative to the experiment directory ('.' when they coincide)."
+    },
+    "session_metrics": {
+      "type": "string",
+      "description": "Path to session-metrics.json relative to the experiment directory."
+    },
+    "metrics_cover_full_run": { "type": "boolean" },
+    "known_exclusions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "hamr_version": {
+      "type": ["string", "null"],
+      "description": "Toolchain version used by the original run, when discoverable; null otherwise."
+    },
+    "generation_baseline": {
+      "type": ["string", "null"],
+      "description": "Path to a prepared pristine-generation baseline, when one exists; usually supplied at measure time via --generation-baseline instead."
+    }
+  }
+}

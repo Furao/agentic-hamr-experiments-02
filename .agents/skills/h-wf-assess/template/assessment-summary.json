@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "run": {
+    "project": "<experiment project path>",
+    "session_id": null,
+    "harness": null,
+    "harness_version": null,
+    "models": [],
+    "profile": null
+  },
+  "findings": []
+}
