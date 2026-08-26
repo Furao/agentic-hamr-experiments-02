@@ -4,8 +4,8 @@
 |---|---|
 | **Change ID** | CR-01 |
 | **Title** | Add inbound MAVLink firewall |
-| **Status** | Draft |
-| **Approved by / date** | Developer review pending |
+| **Status** | Approved |
+| **Approved by / date** | Robbie VanVossen / 2026-08-26 |
 | **Target project** | `open_platform` (`mavlink_02`) |
 | **Baseline** | `7a99f23e7a97460a446bc9dcaf7cb5e18972d8e9` (surveyed 2026-08-26) |
 | **Sketch (provenance)** | `mavlink-firewall-change-sketch.md` (developer-amended 2026-08-26; original at baseline commit); bundled MAVLink references under `mavlink_spec/` |
@@ -208,5 +208,5 @@ behavior and records deviations without modifying the archived sketch.
 | RD-1 | Firmware-update deny policy (§4 F4, §6 W2, §8 risk 1) | Allow `FILE_TRANSFER_PROTOCOL`; reject command envelopes carrying `MAV_CMD_FLASH_BOOTLOADER` or secure flash-bootloader operation 7. | Preserve MAVLink file transfer while blocking the dialect's identified firmware-flash activation commands. | Developer | 2026-08-26 |
 
 Approval rule: the header Status may change to **Approved** only when all review rows
-are resolved. RD-1 is resolved and its plan-body revision is complete; final approval
-is still a distinct act.
+are resolved. RD-1 is resolved, its plan-body revision is complete, and Robbie
+VanVossen approved the plan on 2026-08-26.
