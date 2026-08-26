@@ -27,7 +27,6 @@ verus! {
         Drop,
     }
 
-    #[verifier::external_body]
     fn classify_frame(frame: &open_platform_Data_Model::RawEthernetMessage) -> (result: (RxRoute, u16))
         ensures
             (result.0 is Direct) == GumboLib::rx_direct_frame_spec(*frame),
@@ -35,6 +34,14 @@ verus! {
             (result.0 is Drop) == !GumboLib::rx_allow_outbound_frame_spec(*frame),
             (result.0 is MAVLink) ==> result.1 == GumboLib::udp_payload_length_spec(*frame),
     {
+        proof {
+            assert(GumboLib::valid_arp_spec(*frame) == firewall_core::valid_arp_frame(frame));
+            assert(GumboLib::valid_ipv4_udp_spec(*frame) == firewall_core::valid_udp_frame(frame));
+            assert(GumboLib::UDP_ALLOWED_PORTS_spec().len() == 1);
+            assert(GumboLib::UDP_ALLOWED_PORTS_spec()[0] == DIRECT_UDP_DESTINATION_PORT);
+            assert(GumboLib::udp_is_valid_dst_port_spec(*frame) ==
+                (GumboLib::udp_destination_port_spec(*frame) == DIRECT_UDP_DESTINATION_PORT));
+        }
         match EthFrame::parse(frame) {
             Some(parsed) => match parsed.eth_type {
                 PacketType::Arp(_) => (RxRoute::Direct, 0),
@@ -77,7 +84,6 @@ verus! {
         }
     }
 
-    #[verifier::external_body]
     fn make_mavlink_carrier(frame: open_platform_Data_Model::RawEthernetMessage, payload_length: u16) -> (carrier: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
         requires
             GumboLib::valid_ardupilot_udp_spec(frame),
