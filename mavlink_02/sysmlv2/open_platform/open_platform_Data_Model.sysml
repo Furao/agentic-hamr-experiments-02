@@ -1,0 +1,22 @@
+package open_platform_Data_Model {
+    private import HAMR::*;
+
+    part def u16Array :> Array {
+        part :>> Base_Type : Unsigned_16;
+        attribute :>> Dimensions = 1;
+        attribute :>> Data_Size = 2 [byte];
+        attribute :>> Array_Size_Kind = Fixed;
+    }
+
+    part def RawEthernetMessage :> Array {
+        part :>> Base_Type : Unsigned_8;
+        attribute :>> Dimensions = 1600;
+        attribute :>> Array_Size_Kind = Fixed; 
+        attribute :>> Data_Size = 1600[byte];
+    }
+
+    part def SizedEthernetMessage_Impl :> Struct {
+        part amessage : RawEthernetMessage;
+        part sz : Unsigned_16;
+    }
+}

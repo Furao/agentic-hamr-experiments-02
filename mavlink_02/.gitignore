@@ -1,0 +1,37 @@
+# HAMR project .gitignore
+# Ignores regenerable build output and tool scratch; keeps sources, requirements,
+# reports, and verification evidence tracked.
+
+# --- Build artifacts (Rust crates, Slang/JVM) ---
+**/target/
+**/out/
+
+# --- Sireum / HAMR working & scratch artifacts ---
+.slang/
+.claude.out
+**/microkit.system.merged
+stale_outputs_checked
+*.cmd.jar
+*.cmd.com
+
+# --- IDE / editor / OS ---
+**/.metals/
+**/.vscode/
+**/.idea/
+**/.bloop/
+**/.bsp/
+**/.metadata/
+**/.settings/
+**/.scala-build/
+**/.cache/
+.fleet/
+.DS_Store
+compile_commands.json
+*.aaxl2
+
+# --- Deliberately NOT ignored (tracked as deliverables / evidence) ---
+#   reports/                     workflow-status, change reports, contract audits
+#   integration_constraints/     Logika integration-constraint verification evidence
+#   hamr/microkit/attestation/   codegen attestation reports
+# Do not add a broad *.json ignore -- it would hide real reports such as
+# hamr/microkit/reporting/codegen_report_sysml.json.
