@@ -51,7 +51,7 @@ All allowed messages should be routed to the VMM.
 The VMM needs to be updated to read the network packets coming from the Mavlink firewall.
 
 ## Guidelines
-When updating the RxFirewall, utilize and update the local firewall_core dependency instead of starting from scratch. Also make sure that any changes to
+When updating the RxFirewall, utilize and update the local firewall_core dependency instead of starting from scratch. Also make sure that any changes to the firewall_core does not affect verification of the TxFirewall.
 
 When writing specs or code, avoid combining many vague statements and prefer abstractions that make the code easier to read by humans.
 
