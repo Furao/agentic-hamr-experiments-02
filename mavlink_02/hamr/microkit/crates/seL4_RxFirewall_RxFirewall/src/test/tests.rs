@@ -89,6 +89,19 @@ mod tests {
 
   #[test]
   #[serial]
+  fn disallowed_udp_port_fails_closed() {
+    crate::seL4_RxFirewall_RxFirewall_initialize();
+    let frame = ipv4_udp_frame(1000, 1001, 4);
+
+    put_concrete_inputs(Some(frame), None, None, None);
+    crate::seL4_RxFirewall_RxFirewall_timeTriggered();
+
+    assert_eq!(get_EthernetFramesRxOut0(), None);
+    assert_eq!(get_MAVLinkFramesRxOut0(), None);
+  }
+
+  #[test]
+  #[serial]
   fn routes_arp_and_drops_ipv6() {
     crate::seL4_RxFirewall_RxFirewall_initialize();
     let mut arp = [0u8; open_platform_Data_Model::open_platform_Data_Model_RawEthernetMessage_DIM_0];

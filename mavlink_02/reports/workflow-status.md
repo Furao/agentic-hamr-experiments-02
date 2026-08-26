@@ -68,7 +68,7 @@ Project: open_platform | Profile: audited | Updated: 2026-08-26
 | CompGUMBOSpec(MAVLinkFirewall)-W2R1.AP1 | done | 2026-08-26 | Developer approved revised contract on 2026-08-26 |
 | CodeGen-W2R1 | done | 2026-08-26 | Regenerated successfully after approved component-local function refactor; GumboLib no longer depends on MAVLink predicate hooks |
 | CompDev(RxFirewall).2 | done | 2026-08-26 | Replaced legacy dispatch with four-lane fail-closed routing; RxFirewall owns all Direct/MAVLink/Drop policy, consumes generic EthFrame parse results, and makes no runtime GUMBO-helper calls |
-| CompDev(RxFirewall).3 | done | 2026-08-26 | Added lane-isolation, malformed-length, ARP/IPv6 boundary, no-input, notification, and exhaustive per-lane GUMBOX partition tests; firewall_core remains policy-neutral while exposing generic UDP source-port, destination-port, and length fields |
-| CompDev(RxFirewall).4 | done | 2026-08-26 | 9 Rx tests and 17 firewall_core tests pass; fresh instrumentation covers app 79/79 lines and GUMBOX 285/285 lines |
+| CompDev(RxFirewall).3 | done | 2026-08-26 | Added lane-isolation, malformed-length, disallowed-UDP, ARP/IPv6 boundary, no-input, notification, and exhaustive per-lane GUMBOX partition tests; firewall_core remains policy-neutral while exposing generic UDP source-port, destination-port, and length fields |
+| CompDev(RxFirewall).4 | done | 2026-08-26 | 10 Rx tests and 17 firewall_core tests pass; fresh instrumentation covers app 88/88 lines and GUMBOX 285/285 lines |
 | CompDev(RxFirewall).5 | done | 2026-08-26 | Full active application and contract-oracle paths exercised; grcov reports 100% line coverage for both Rx target files |
 | CompDev(RxFirewall).AP1 | pending | 2026-08-26 | Awaiting audited coverage review before Verus verification |

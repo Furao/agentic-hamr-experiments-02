@@ -40,8 +40,9 @@ verus! {
                 PacketType::Arp(_) => (RxRoute::Direct, 0),
                 PacketType::Ipv4(ipv4) => match ipv4.protocol {
                     Ipv4ProtoPacket::Udp(udp) => {
-                        let mavlink = udp.src_port == ARDUPILOT_SOURCE_PORT
-                            && udp.dst_port == ARDUPILOT_DESTINATION_PORT
+                        let ardupilot_ports = udp.src_port == ARDUPILOT_SOURCE_PORT
+                            && udp.dst_port == ARDUPILOT_DESTINATION_PORT;
+                        let mavlink = ardupilot_ports
                             && UDP_HEADER_LENGTH <= udp.length
                             && ipv4.header.length + ETHERNET_HEADER_LENGTH <= ETHERNET_FRAME_LENGTH
                             && IPV4_HEADER_LENGTH <= ipv4.header.length
@@ -51,14 +52,28 @@ verus! {
                         } else if udp.dst_port == DIRECT_UDP_DESTINATION_PORT {
                             (RxRoute::Direct, 0)
                         } else {
+                            if ardupilot_ports {
+                                info("ArduPilot UDP packet has inconsistent IPv4/UDP lengths");
+                            } else {
+                                info("UDP packet destination port is not allowed by RxFirewall policy");
+                            }
                             (RxRoute::Drop, 0)
                         }
                     }
-                    _ => (RxRoute::Drop, 0),
+                    _ => {
+                        info("IPv4 packet protocol is not allowed by RxFirewall policy");
+                        (RxRoute::Drop, 0)
+                    }
                 },
-                PacketType::Ipv6 => (RxRoute::Drop, 0),
+                PacketType::Ipv6 => {
+                    info("IPv6 packets are not allowed by RxFirewall policy");
+                    (RxRoute::Drop, 0)
+                }
             },
-            None => (RxRoute::Drop, 0),
+            None => {
+                info("Ethernet frame parsing failed");
+                (RxRoute::Drop, 0)
+            }
         }
     }
 
