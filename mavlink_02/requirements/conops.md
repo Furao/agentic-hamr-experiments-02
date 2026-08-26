@@ -101,7 +101,9 @@ No direct human interaction with the firewall components is introduced.
 1. Ground station DM-002 sends one well-formed MAVLink v1/v2 message in a qualifying
    UDP packet.
 2. RxFirewall DM-004 routes the packet to MAVLinkFirewall DM-005.
-3. MAVLinkFirewall validates the frame and policy and forwards it unchanged.
+3. RxFirewall supplies the preserved Ethernet frame plus validated UDP-payload offset
+   and length metadata. MAVLinkFirewall validates only that bounded payload and policy,
+   then forwards the original frame unchanged.
 4. VMM/ArduPilot DM-006 receives the packet.
 
 Success: allowed traffic, including valid `FILE_TRANSFER_PROTOCOL`, reaches ArduPilot.
@@ -135,6 +137,7 @@ is introduced.
 | ID | Function | Description | Security relevance |
 |---|---|---|---|
 | FUNC-1 | Network classification | Parse Ethernet/IPv4/UDP and distinguish the ArduPilot flow. | High |
+| FUNC-1A | Payload boundary handoff | Supply a validated payload offset/length with the preserved frame. | High |
 | FUNC-2 | MAVLink validation | Validate exactly one MAVLink v1/v2 frame against framing and dialect metadata. | High |
 | FUNC-3 | Firmware policy | Allow file transfer but deny approved firmware-flash activation commands. | High |
 | FUNC-4 | Fail-closed routing | Emit no output for invalid, denied, or unprocessable input. | High |
@@ -172,6 +175,8 @@ Constraints:
 4. Make invocations use `SYSTEM_MAKEFILE=custom.mk`.
 5. `requirements/manual_reqs.md` remains unchanged.
 6. LowLevelEthernetDriver and TxFirewall source/model/contracts remain unchanged.
+7. MAVLinkFirewall trusts only payload-boundary metadata established by RxFirewall
+   contracts and never derives Ethernet/IP/UDP offsets itself.
 
 Open issues: none at requirements drafting. Newly discovered firmware activation
 paths or timing infeasibility require plan review rather than silent policy expansion.
@@ -191,6 +196,6 @@ paths or timing infeasibility require plan review rather than silent policy expa
 | DM-002 | Entity | Ground station | External MAVLink UDP peer. | sends to DM-004; communicates with DM-006 |
 | DM-003 | Entity | Ethernet environment | Other inbound/outbound network peers and traffic. | sends to driver/RxFirewall |
 | DM-004 | Entity | RxFirewall | Ethernet/IP/UDP classifier and receive policy enforcement point. | routes qualifying traffic to DM-005 |
-| DM-005 | Entity | MAVLinkFirewall | MAVLink validation and blacklist enforcement point. | forwards allowed traffic to DM-006 |
+| DM-005 | Entity | MAVLinkFirewall | MAVLink validation and blacklist enforcement point operating on a bounded payload supplied by DM-004. | forwards the preserved allowed frame to DM-006 |
 | DM-006 | Entity | VMM/ArduPilot | Linux guest and flight software receiving accepted traffic. | receives from DM-004 and DM-005 |
 | DM-007 | Condition | InvalidOrDenied | Frame is malformed, prohibited, or cannot be processed. | triggers fail-closed no-output behavior |

@@ -8,6 +8,9 @@
 | UDP destination port | Unsigned 16-bit, 0–65535 | ArduPilot VM traffic requires 14562; retained direct UDP includes port 68. |
 | UDP length | Unsigned 16-bit bytes; minimum 8 | Includes UDP header plus payload and must agree with the containing IPv4 length and available carrier bytes. |
 | MAVLink payload slice | Byte sequence, 0–255 payload bytes plus version-specific framing | Exactly the UDP payload; must contain one complete frame and no trailing bytes. |
+| `MAVLinkUDPMessage_Impl` | Struct `{ethernet_frame: RawEthernetMessage, payload_offset: Unsigned_16, payload_length: Unsigned_16}` | RxFirewall-to-MAVLinkFirewall carrier. `ethernet_frame` preserves the original packet; offset and length identify the validated UDP payload. |
+| MAVLink payload offset | Unsigned 16-bit bytes, 0–1600 | Computed by RxFirewall as `14 + IPv4_IHL_bytes + 8`; must be within `ethernet_frame`. With the baseline no-options IPv4 policy (`IHL = 5`), the value is 42. |
+| MAVLink payload length | Unsigned 16-bit bytes, bounded by UDP/frame length | Computed by RxFirewall as `UDP_length - 8`; offset plus length must not exceed the active IPv4 packet or 1600-byte carrier. |
 | MAVLink version magic | Unsigned 8-bit | `0xFE` for v1, `0xFD` for v2. Other values are malformed. |
 | MAVLink payload length | Unsigned 8-bit bytes, 0–255 | Number of MAVLink payload bytes; determines exact frame length with header, checksum, and optional v2 signature. |
 | MAVLink v1 message ID | Unsigned 8-bit, 0–255 | Identifies a message in the resolved dialect metadata. |

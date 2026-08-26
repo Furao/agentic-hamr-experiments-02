@@ -43,8 +43,10 @@ corresponding output path.
 ### RC_INSPECTA_00-HLR-18 – Route ArduPilot UDP to MAVLinkFirewall
 
 For a well-formed IPv4 UDP frame whose source port is 14550 and destination port is
-14562, RxFirewall shall copy the frame unchanged to the corresponding
-MAVLinkFirewall output and shall emit no direct-VMM output on that lane.
+14562, RxFirewall shall send a `MAVLinkUDPMessage_Impl` on the corresponding
+MAVLinkFirewall output and shall emit no direct-VMM output on that lane. The carrier
+shall preserve the original frame and provide the validated UDP payload offset and
+payload length.
 
 ### RC_INSPECTA_00-HLR-19 – Exclusive routing
 
@@ -61,8 +63,11 @@ MAVLink-path routing. Logging shall not alter routing behavior.
 
 ### RC_INSPECTA_00-HLR-21 – MAVLink v1/v2 structural validity
 
-For a qualifying UDP packet, MAVLinkFirewall shall accept only when its UDP payload is
-exactly one complete MAVLink v1 or v2 frame. Validity includes the version magic,
+For a qualifying `MAVLinkUDPMessage_Impl`, MAVLinkFirewall shall first require
+`payload_offset + payload_length` to remain within the preserved frame and the
+metadata to agree with the validated IPv4/UDP layout established by RxFirewall. It
+shall accept only when that bounded payload is exactly one complete MAVLink v1 or v2
+frame. Validity includes the version magic,
 payload length, complete header and payload, message-ID width, checksum including the
 dialect CRC extra, supported v2 incompatibility flags, complete optional signature
 when indicated, and no truncation or trailing bytes. Message metadata shall cover the
@@ -121,9 +126,10 @@ with queue size 1, matching RxFirewall capacity. Lane identity shall be preserve
 
 ### RC_INSPECTA_00-HLR-31 – Separation of concerns
 
-RxFirewall and `firewall_core` shall classify Ethernet/IP/UDP without parsing MAVLink.
-MAVLinkFirewall and its MAVLink policy core shall parse MAVLink without interpreting
-the Ethernet/IP networking stack beyond receiving the bounded UDP payload location.
+RxFirewall and `firewall_core` shall classify Ethernet/IP/UDP without parsing MAVLink
+and shall produce validated payload offset/length metadata. MAVLinkFirewall and its
+MAVLink policy core shall parse only the indicated bounded payload and shall not derive
+or interpret Ethernet/IP/UDP headers.
 
 ### RC_INSPECTA_00-HLR-32 – TxFirewall verification non-regression
 
