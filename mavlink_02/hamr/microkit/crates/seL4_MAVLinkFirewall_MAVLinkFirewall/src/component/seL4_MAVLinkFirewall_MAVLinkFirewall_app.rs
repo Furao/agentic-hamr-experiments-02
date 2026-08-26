@@ -42,56 +42,56 @@ verus! {
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
         // guarantee hlr_22_23_lane0_allow
-        api.EthernetFramesIn0.is_some() && GumboLib::mavlink_allowed_spec(api.EthernetFramesIn0.unwrap()) ==>
+        api.EthernetFramesIn0.is_some() && mavlink_allowed(api.EthernetFramesIn0.unwrap()) ==>
           api.EthernetFramesOut0.is_some() &&
             (api.EthernetFramesOut0.unwrap() == api.EthernetFramesIn0.unwrap()),
         // guarantee hlr_24_lane0_deny_flash
         api.EthernetFramesIn0.is_some() && GumboLib::valid_mavlink_carrier_spec(api.EthernetFramesIn0.unwrap()) &&
-          GumboLib::mavlink_frame_valid_spec(api.EthernetFramesIn0.unwrap()) &&
-          GumboLib::mavlink_firmware_flash_command_spec(api.EthernetFramesIn0.unwrap()) ==>
+          mavlink_frame_valid(api.EthernetFramesIn0.unwrap()) &&
+          mavlink_firmware_flash_command(api.EthernetFramesIn0.unwrap()) ==>
           api.EthernetFramesOut0.is_none(),
         // guarantee hlr_25_26_lane0_invalid_or_no_input
         !(api.EthernetFramesIn0.is_some()) ||
-          api.EthernetFramesIn0.is_some() && !(GumboLib::valid_mavlink_carrier_spec(api.EthernetFramesIn0.unwrap()) && GumboLib::mavlink_frame_valid_spec(api.EthernetFramesIn0.unwrap())) ==>
+          api.EthernetFramesIn0.is_some() && !(GumboLib::valid_mavlink_carrier_spec(api.EthernetFramesIn0.unwrap()) && mavlink_frame_valid(api.EthernetFramesIn0.unwrap())) ==>
           api.EthernetFramesOut0.is_none(),
         // guarantee hlr_22_23_lane1_allow
-        api.EthernetFramesIn1.is_some() && GumboLib::mavlink_allowed_spec(api.EthernetFramesIn1.unwrap()) ==>
+        api.EthernetFramesIn1.is_some() && mavlink_allowed(api.EthernetFramesIn1.unwrap()) ==>
           api.EthernetFramesOut1.is_some() &&
             (api.EthernetFramesOut1.unwrap() == api.EthernetFramesIn1.unwrap()),
         // guarantee hlr_24_lane1_deny_flash
         api.EthernetFramesIn1.is_some() && GumboLib::valid_mavlink_carrier_spec(api.EthernetFramesIn1.unwrap()) &&
-          GumboLib::mavlink_frame_valid_spec(api.EthernetFramesIn1.unwrap()) &&
-          GumboLib::mavlink_firmware_flash_command_spec(api.EthernetFramesIn1.unwrap()) ==>
+          mavlink_frame_valid(api.EthernetFramesIn1.unwrap()) &&
+          mavlink_firmware_flash_command(api.EthernetFramesIn1.unwrap()) ==>
           api.EthernetFramesOut1.is_none(),
         // guarantee hlr_25_26_lane1_invalid_or_no_input
         !(api.EthernetFramesIn1.is_some()) ||
-          api.EthernetFramesIn1.is_some() && !(GumboLib::valid_mavlink_carrier_spec(api.EthernetFramesIn1.unwrap()) && GumboLib::mavlink_frame_valid_spec(api.EthernetFramesIn1.unwrap())) ==>
+          api.EthernetFramesIn1.is_some() && !(GumboLib::valid_mavlink_carrier_spec(api.EthernetFramesIn1.unwrap()) && mavlink_frame_valid(api.EthernetFramesIn1.unwrap())) ==>
           api.EthernetFramesOut1.is_none(),
         // guarantee hlr_22_23_lane2_allow
-        api.EthernetFramesIn2.is_some() && GumboLib::mavlink_allowed_spec(api.EthernetFramesIn2.unwrap()) ==>
+        api.EthernetFramesIn2.is_some() && mavlink_allowed(api.EthernetFramesIn2.unwrap()) ==>
           api.EthernetFramesOut2.is_some() &&
             (api.EthernetFramesOut2.unwrap() == api.EthernetFramesIn2.unwrap()),
         // guarantee hlr_24_lane2_deny_flash
         api.EthernetFramesIn2.is_some() && GumboLib::valid_mavlink_carrier_spec(api.EthernetFramesIn2.unwrap()) &&
-          GumboLib::mavlink_frame_valid_spec(api.EthernetFramesIn2.unwrap()) &&
-          GumboLib::mavlink_firmware_flash_command_spec(api.EthernetFramesIn2.unwrap()) ==>
+          mavlink_frame_valid(api.EthernetFramesIn2.unwrap()) &&
+          mavlink_firmware_flash_command(api.EthernetFramesIn2.unwrap()) ==>
           api.EthernetFramesOut2.is_none(),
         // guarantee hlr_25_26_lane2_invalid_or_no_input
         !(api.EthernetFramesIn2.is_some()) ||
-          api.EthernetFramesIn2.is_some() && !(GumboLib::valid_mavlink_carrier_spec(api.EthernetFramesIn2.unwrap()) && GumboLib::mavlink_frame_valid_spec(api.EthernetFramesIn2.unwrap())) ==>
+          api.EthernetFramesIn2.is_some() && !(GumboLib::valid_mavlink_carrier_spec(api.EthernetFramesIn2.unwrap()) && mavlink_frame_valid(api.EthernetFramesIn2.unwrap())) ==>
           api.EthernetFramesOut2.is_none(),
         // guarantee hlr_22_23_lane3_allow
-        api.EthernetFramesIn3.is_some() && GumboLib::mavlink_allowed_spec(api.EthernetFramesIn3.unwrap()) ==>
+        api.EthernetFramesIn3.is_some() && mavlink_allowed(api.EthernetFramesIn3.unwrap()) ==>
           api.EthernetFramesOut3.is_some() &&
             (api.EthernetFramesOut3.unwrap() == api.EthernetFramesIn3.unwrap()),
         // guarantee hlr_24_lane3_deny_flash
         api.EthernetFramesIn3.is_some() && GumboLib::valid_mavlink_carrier_spec(api.EthernetFramesIn3.unwrap()) &&
-          GumboLib::mavlink_frame_valid_spec(api.EthernetFramesIn3.unwrap()) &&
-          GumboLib::mavlink_firmware_flash_command_spec(api.EthernetFramesIn3.unwrap()) ==>
+          mavlink_frame_valid(api.EthernetFramesIn3.unwrap()) &&
+          mavlink_firmware_flash_command(api.EthernetFramesIn3.unwrap()) ==>
           api.EthernetFramesOut3.is_none(),
         // guarantee hlr_25_26_lane3_invalid_or_no_input
         !(api.EthernetFramesIn3.is_some()) ||
-          api.EthernetFramesIn3.is_some() && !(GumboLib::valid_mavlink_carrier_spec(api.EthernetFramesIn3.unwrap()) && GumboLib::mavlink_frame_valid_spec(api.EthernetFramesIn3.unwrap())) ==>
+          api.EthernetFramesIn3.is_some() && !(GumboLib::valid_mavlink_carrier_spec(api.EthernetFramesIn3.unwrap()) && mavlink_frame_valid(api.EthernetFramesIn3.unwrap())) ==>
           api.EthernetFramesOut3.is_none(),
         // END MARKER TIME TRIGGERED ENSURES
     {
@@ -123,6 +123,34 @@ verus! {
     log::warn!("Unexpected channel: {0}", channel);
   }
 
-  // PLACEHOLDER MARKER GUMBO METHODS
+  // BEGIN MARKER GUMBO METHODS
+  /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus
+  /// specification function that must have the following signature:
+  /// 
+  ///   pub open spec fn mavlink_frame_valid__developer_verus(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> (res: bool) { ... }
+  /// 
+  /// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+  pub open spec fn mavlink_frame_valid(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+  {
+    mavlink_frame_valid__developer_verus(msg)
+  }
+
+  /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus
+  /// specification function that must have the following signature:
+  /// 
+  ///   pub open spec fn mavlink_firmware_flash_command__developer_verus(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> (res: bool) { ... }
+  /// 
+  /// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+  pub open spec fn mavlink_firmware_flash_command(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+  {
+    mavlink_firmware_flash_command__developer_verus(msg)
+  }
+
+  pub open spec fn mavlink_allowed(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+  {
+    GumboLib::valid_mavlink_carrier_spec(msg) && mavlink_frame_valid(msg) &&
+      !(mavlink_firmware_flash_command(msg))
+  }
+  // END MARKER GUMBO METHODS
 
 }

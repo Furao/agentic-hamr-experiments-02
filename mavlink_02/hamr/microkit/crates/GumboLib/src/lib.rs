@@ -349,34 +349,6 @@ pub fn valid_mavlink_carrier(msg: open_platform_Data_Model::MAVLinkUDPMessage_Im
     (msg.payload_offset + msg.payload_length <= 1600u16)
 }
 
-/// GUMBOX wrapper for the GUMBO spec function `test` that delegates to the developer-supplied GUMBOX
-/// specification function that must have the following signature:
-/// 
-///   pub exec fn mavlink_frame_valid__developer_gumbox(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> (res: bool) { ... }
-/// 
-/// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
-pub fn mavlink_frame_valid(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
-{
-  mavlink_frame_valid__developer_gumbox(msg)
-}
-
-/// GUMBOX wrapper for the GUMBO spec function `test` that delegates to the developer-supplied GUMBOX
-/// specification function that must have the following signature:
-/// 
-///   pub exec fn mavlink_firmware_flash_command__developer_gumbox(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> (res: bool) { ... }
-/// 
-/// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
-pub fn mavlink_firmware_flash_command(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
-{
-  mavlink_firmware_flash_command__developer_gumbox(msg)
-}
-
-pub fn mavlink_allowed(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
-{
-  valid_mavlink_carrier(msg) && mavlink_frame_valid(msg) &&
-    !(mavlink_firmware_flash_command(msg))
-}
-
 pub fn rx_allow_outbound_frame(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
 {
   rx_direct_frame(aframe) || valid_ardupilot_udp(aframe)
@@ -700,34 +672,6 @@ verus! {
       (msg.payload_offset == udp_payload_offset_spec()) &&
       (msg.payload_length == udp_payload_length_spec(msg.ethernet_frame)) &&
       (msg.payload_offset + msg.payload_length <= 1600u16)
-  }
-
-  /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus
-  /// specification function that must have the following signature:
-  /// 
-  ///   pub open spec fn mavlink_frame_valid__developer_verus(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> (res: bool) { ... }
-  /// 
-  /// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
-  pub open spec fn mavlink_frame_valid_spec(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
-  {
-    mavlink_frame_valid__developer_verus(msg)
-  }
-
-  /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus
-  /// specification function that must have the following signature:
-  /// 
-  ///   pub open spec fn mavlink_firmware_flash_command__developer_verus(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> (res: bool) { ... }
-  /// 
-  /// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
-  pub open spec fn mavlink_firmware_flash_command_spec(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
-  {
-    mavlink_firmware_flash_command__developer_verus(msg)
-  }
-
-  pub open spec fn mavlink_allowed_spec(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
-  {
-    valid_mavlink_carrier_spec(msg) && mavlink_frame_valid_spec(msg) &&
-      !(mavlink_firmware_flash_command_spec(msg))
   }
 
   pub open spec fn rx_allow_outbound_frame_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool

@@ -996,11 +996,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 202,
+                  "beginLine": 195,
                   "beginCol": 6,
-                  "endLine": 203,
+                  "endLine": 196,
                   "endCol": 61,
-                  "offset": 10567,
+                  "offset": 10113,
                   "length": 167
                 }
             },
@@ -2564,11 +2564,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 202,
+                  "beginLine": 195,
                   "beginCol": 6,
-                  "endLine": 203,
+                  "endLine": 196,
                   "endCol": 61,
-                  "offset": 10567,
+                  "offset": 10113,
                   "length": 167
                 }
             },
@@ -4132,11 +4132,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 202,
+                  "beginLine": 195,
                   "beginCol": 6,
-                  "endLine": 203,
+                  "endLine": 196,
                   "endCol": 61,
-                  "offset": 10567,
+                  "offset": 10113,
                   "length": 167
                 }
             },
@@ -5700,11 +5700,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 202,
+                  "beginLine": 195,
                   "beginCol": 6,
-                  "endLine": 203,
+                  "endLine": 196,
                   "endCol": 61,
-                  "offset": 10567,
+                  "offset": 10113,
                   "length": 167
                 }
             },
@@ -6299,11 +6299,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 222,
+                  "beginLine": 232,
                   "beginCol": 12,
-                  "endLine": 224,
+                  "endLine": 234,
                   "endCol": 182,
-                  "offset": 15594,
+                  "offset": 15552,
                   "length": 337
                 }
             },
@@ -6563,11 +6563,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 225,
+                  "beginLine": 235,
                   "beginCol": 12,
-                  "endLine": 227,
+                  "endLine": 237,
                   "endCol": 205,
-                  "offset": 15945,
+                  "offset": 15903,
                   "length": 362
                 }
             },
@@ -6843,11 +6843,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 228,
+                  "beginLine": 238,
                   "beginCol": 12,
-                  "endLine": 230,
+                  "endLine": 240,
                   "endCol": 42,
-                  "offset": 16321,
+                  "offset": 16279,
                   "length": 204
                 }
             },
@@ -7219,11 +7219,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 231,
+                  "beginLine": 241,
                   "beginCol": 12,
-                  "endLine": 232,
+                  "endLine": 242,
                   "endCol": 74,
-                  "offset": 16539,
+                  "offset": 16497,
                   "length": 105
                 }
             },
@@ -7259,11 +7259,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 234,
+                  "beginLine": 244,
                   "beginCol": 12,
-                  "endLine": 236,
+                  "endLine": 246,
                   "endCol": 183,
-                  "offset": 16663,
+                  "offset": 16621,
                   "length": 338
                 }
             },
@@ -7523,11 +7523,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 237,
+                  "beginLine": 247,
                   "beginCol": 12,
-                  "endLine": 239,
+                  "endLine": 249,
                   "endCol": 205,
-                  "offset": 17015,
+                  "offset": 16973,
                   "length": 362
                 }
             },
@@ -7803,11 +7803,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 240,
+                  "beginLine": 250,
                   "beginCol": 12,
-                  "endLine": 242,
+                  "endLine": 252,
                   "endCol": 42,
-                  "offset": 17391,
+                  "offset": 17349,
                   "length": 204
                 }
             },
@@ -8179,11 +8179,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 243,
+                  "beginLine": 253,
                   "beginCol": 12,
-                  "endLine": 244,
+                  "endLine": 254,
                   "endCol": 74,
-                  "offset": 17609,
+                  "offset": 17567,
                   "length": 105
                 }
             },
@@ -8219,11 +8219,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 246,
+                  "beginLine": 256,
                   "beginCol": 12,
-                  "endLine": 248,
+                  "endLine": 258,
                   "endCol": 183,
-                  "offset": 17733,
+                  "offset": 17691,
                   "length": 338
                 }
             },
@@ -8483,11 +8483,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 249,
+                  "beginLine": 259,
                   "beginCol": 12,
-                  "endLine": 251,
+                  "endLine": 261,
                   "endCol": 205,
-                  "offset": 18085,
+                  "offset": 18043,
                   "length": 362
                 }
             },
@@ -8763,11 +8763,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 252,
+                  "beginLine": 262,
                   "beginCol": 12,
-                  "endLine": 254,
+                  "endLine": 264,
                   "endCol": 46,
-                  "offset": 18461,
+                  "offset": 18419,
                   "length": 208
                 }
             },
@@ -9139,11 +9139,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 255,
+                  "beginLine": 265,
                   "beginCol": 12,
-                  "endLine": 256,
+                  "endLine": 266,
                   "endCol": 74,
-                  "offset": 18683,
+                  "offset": 18641,
                   "length": 105
                 }
             },
@@ -9179,11 +9179,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 258,
+                  "beginLine": 268,
                   "beginCol": 12,
-                  "endLine": 260,
+                  "endLine": 270,
                   "endCol": 183,
-                  "offset": 18807,
+                  "offset": 18765,
                   "length": 338
                 }
             },
@@ -9443,11 +9443,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 261,
+                  "beginLine": 271,
                   "beginCol": 12,
-                  "endLine": 263,
+                  "endLine": 273,
                   "endCol": 205,
-                  "offset": 19159,
+                  "offset": 19117,
                   "length": 362
                 }
             },
@@ -9723,11 +9723,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 264,
+                  "beginLine": 274,
                   "beginCol": 12,
-                  "endLine": 266,
+                  "endLine": 276,
                   "endCol": 46,
-                  "offset": 19535,
+                  "offset": 19493,
                   "length": 208
                 }
             },
@@ -10099,11 +10099,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 267,
+                  "beginLine": 277,
                   "beginCol": 12,
-                  "endLine": 268,
+                  "endLine": 278,
                   "endCol": 74,
-                  "offset": 19757,
+                  "offset": 19715,
                   "length": 105
                 }
             },
@@ -10146,28 +10146,28 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 152,
+                  "beginLine": 162,
                   "beginCol": 12,
-                  "endLine": 154,
+                  "endLine": 164,
                   "endCol": 90,
-                  "offset": 10432,
-                  "length": 242
+                  "offset": 10806,
+                  "length": 216
                 }
             },
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_allowed",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_allowed",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 199,
-                  "beginCol": 6,
-                  "endLine": 200,
-                  "endCol": 106,
-                  "offset": 10352,
-                  "length": 205
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 146,
+                  "beginCol": 12,
+                  "endLine": 149,
+                  "endCol": 54,
+                  "offset": 10112,
+                  "length": 245
                 }
             },
             {
@@ -10189,33 +10189,33 @@
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_frame_valid",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_frame_valid",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 195,
-                  "beginCol": 6,
-                  "endLine": 195,
-                  "endCol": 104,
-                  "offset": 10113,
-                  "length": 98
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 142,
+                  "beginCol": 12,
+                  "endLine": 142,
+                  "endCol": 84,
+                  "offset": 9913,
+                  "length": 72
                 }
             },
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_firmware_flash_command",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_firmware_flash_command",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 197,
-                  "beginCol": 6,
-                  "endLine": 197,
-                  "endCol": 115,
-                  "offset": 10227,
-                  "length": 109
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 144,
+                  "beginCol": 12,
+                  "endLine": 144,
+                  "endCol": 95,
+                  "offset": 10007,
+                  "length": 83
                 }
             },
             {
@@ -10599,7 +10599,55 @@
                   "endLine": 47,
                   "endCol": 79,
                   "offset": 1370,
-                  "length": 236
+                  "length": 221
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_allowed",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 149,
+                  "beginCol": 3,
+                  "endLine": 153,
+                  "endCol": 3,
+                  "offset": 6908,
+                  "length": 224
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_frame_valid",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 133,
+                  "beginCol": 3,
+                  "endLine": 136,
+                  "endCol": 3,
+                  "offset": 6126,
+                  "length": 152
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_firmware_flash_command",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 144,
+                  "beginCol": 3,
+                  "endLine": 147,
+                  "endCol": 3,
+                  "offset": 6729,
+                  "length": 174
                 }
             }
           ]
@@ -10618,12 +10666,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 155,
+                  "beginLine": 165,
                   "beginCol": 12,
-                  "endLine": 158,
-                  "endCol": 128,
-                  "offset": 10688,
-                  "length": 369
+                  "endLine": 168,
+                  "endCol": 102,
+                  "offset": 11036,
+                  "length": 317
                 }
             },
             {
@@ -10645,33 +10693,33 @@
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_frame_valid",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_frame_valid",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 195,
-                  "beginCol": 6,
-                  "endLine": 195,
-                  "endCol": 104,
-                  "offset": 10113,
-                  "length": 98
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 142,
+                  "beginCol": 12,
+                  "endLine": 142,
+                  "endCol": 84,
+                  "offset": 9913,
+                  "length": 72
                 }
             },
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_firmware_flash_command",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_firmware_flash_command",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 197,
-                  "beginCol": 6,
-                  "endLine": 197,
-                  "endCol": 115,
-                  "offset": 10227,
-                  "length": 109
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 144,
+                  "beginCol": 12,
+                  "endLine": 144,
+                  "endCol": 95,
+                  "offset": 10007,
+                  "length": 83
                 }
             },
             {
@@ -11054,8 +11102,40 @@
                   "beginCol": 11,
                   "endLine": 52,
                   "endCol": 42,
-                  "offset": 1652,
-                  "length": 330
+                  "offset": 1637,
+                  "length": 300
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_frame_valid",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 133,
+                  "beginCol": 3,
+                  "endLine": 136,
+                  "endCol": 3,
+                  "offset": 6126,
+                  "length": 152
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_firmware_flash_command",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 144,
+                  "beginCol": 3,
+                  "endLine": 147,
+                  "endCol": 3,
+                  "offset": 6729,
+                  "length": 174
                 }
             }
           ]
@@ -11074,12 +11154,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 159,
+                  "beginLine": 169,
                   "beginCol": 12,
-                  "endLine": 162,
-                  "endCol": 120,
-                  "offset": 11071,
-                  "length": 347
+                  "endLine": 172,
+                  "endCol": 94,
+                  "offset": 11367,
+                  "length": 321
                 }
             },
             {
@@ -11101,17 +11181,17 @@
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_frame_valid",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_frame_valid",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 195,
-                  "beginCol": 6,
-                  "endLine": 195,
-                  "endCol": 104,
-                  "offset": 10113,
-                  "length": 98
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 142,
+                  "beginCol": 12,
+                  "endLine": 142,
+                  "endCol": 84,
+                  "offset": 9913,
+                  "length": 72
                 }
             },
             {
@@ -11494,8 +11574,24 @@
                   "beginCol": 11,
                   "endLine": 56,
                   "endCol": 42,
-                  "offset": 2040,
-                  "length": 280
+                  "offset": 1995,
+                  "length": 265
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_frame_valid",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 133,
+                  "beginCol": 3,
+                  "endLine": 136,
+                  "endCol": 3,
+                  "offset": 6126,
+                  "length": 152
                 }
             }
           ]
@@ -11514,28 +11610,28 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 164,
+                  "beginLine": 174,
                   "beginCol": 12,
-                  "endLine": 166,
+                  "endLine": 176,
                   "endCol": 90,
-                  "offset": 11433,
-                  "length": 242
+                  "offset": 11703,
+                  "length": 216
                 }
             },
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_allowed",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_allowed",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 199,
-                  "beginCol": 6,
-                  "endLine": 200,
-                  "endCol": 106,
-                  "offset": 10352,
-                  "length": 205
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 146,
+                  "beginCol": 12,
+                  "endLine": 149,
+                  "endCol": 54,
+                  "offset": 10112,
+                  "length": 245
                 }
             },
             {
@@ -11557,33 +11653,33 @@
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_frame_valid",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_frame_valid",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 195,
-                  "beginCol": 6,
-                  "endLine": 195,
-                  "endCol": 104,
-                  "offset": 10113,
-                  "length": 98
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 142,
+                  "beginCol": 12,
+                  "endLine": 142,
+                  "endCol": 84,
+                  "offset": 9913,
+                  "length": 72
                 }
             },
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_firmware_flash_command",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_firmware_flash_command",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 197,
-                  "beginCol": 6,
-                  "endLine": 197,
-                  "endCol": 115,
-                  "offset": 10227,
-                  "length": 109
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 144,
+                  "beginCol": 12,
+                  "endLine": 144,
+                  "endCol": 95,
+                  "offset": 10007,
+                  "length": 83
                 }
             },
             {
@@ -11966,8 +12062,56 @@
                   "beginCol": 11,
                   "endLine": 60,
                   "endCol": 79,
-                  "offset": 2364,
-                  "length": 236
+                  "offset": 2304,
+                  "length": 221
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_allowed",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 149,
+                  "beginCol": 3,
+                  "endLine": 153,
+                  "endCol": 3,
+                  "offset": 6908,
+                  "length": 224
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_frame_valid",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 133,
+                  "beginCol": 3,
+                  "endLine": 136,
+                  "endCol": 3,
+                  "offset": 6126,
+                  "length": 152
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_firmware_flash_command",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 144,
+                  "beginCol": 3,
+                  "endLine": 147,
+                  "endCol": 3,
+                  "offset": 6729,
+                  "length": 174
                 }
             }
           ]
@@ -11986,12 +12130,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 167,
+                  "beginLine": 177,
                   "beginCol": 12,
-                  "endLine": 170,
-                  "endCol": 128,
-                  "offset": 11689,
-                  "length": 369
+                  "endLine": 180,
+                  "endCol": 102,
+                  "offset": 11933,
+                  "length": 317
                 }
             },
             {
@@ -12013,33 +12157,33 @@
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_frame_valid",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_frame_valid",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 195,
-                  "beginCol": 6,
-                  "endLine": 195,
-                  "endCol": 104,
-                  "offset": 10113,
-                  "length": 98
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 142,
+                  "beginCol": 12,
+                  "endLine": 142,
+                  "endCol": 84,
+                  "offset": 9913,
+                  "length": 72
                 }
             },
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_firmware_flash_command",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_firmware_flash_command",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 197,
-                  "beginCol": 6,
-                  "endLine": 197,
-                  "endCol": 115,
-                  "offset": 10227,
-                  "length": 109
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 144,
+                  "beginCol": 12,
+                  "endLine": 144,
+                  "endCol": 95,
+                  "offset": 10007,
+                  "length": 83
                 }
             },
             {
@@ -12422,8 +12566,40 @@
                   "beginCol": 11,
                   "endLine": 65,
                   "endCol": 42,
-                  "offset": 2646,
-                  "length": 330
+                  "offset": 2571,
+                  "length": 300
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_frame_valid",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 133,
+                  "beginCol": 3,
+                  "endLine": 136,
+                  "endCol": 3,
+                  "offset": 6126,
+                  "length": 152
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_firmware_flash_command",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 144,
+                  "beginCol": 3,
+                  "endLine": 147,
+                  "endCol": 3,
+                  "offset": 6729,
+                  "length": 174
                 }
             }
           ]
@@ -12442,12 +12618,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 171,
+                  "beginLine": 181,
                   "beginCol": 12,
-                  "endLine": 174,
-                  "endCol": 120,
-                  "offset": 12072,
-                  "length": 347
+                  "endLine": 184,
+                  "endCol": 94,
+                  "offset": 12264,
+                  "length": 321
                 }
             },
             {
@@ -12469,17 +12645,17 @@
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_frame_valid",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_frame_valid",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 195,
-                  "beginCol": 6,
-                  "endLine": 195,
-                  "endCol": 104,
-                  "offset": 10113,
-                  "length": 98
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 142,
+                  "beginCol": 12,
+                  "endLine": 142,
+                  "endCol": 84,
+                  "offset": 9913,
+                  "length": 72
                 }
             },
             {
@@ -12862,8 +13038,24 @@
                   "beginCol": 11,
                   "endLine": 69,
                   "endCol": 42,
-                  "offset": 3034,
-                  "length": 280
+                  "offset": 2929,
+                  "length": 265
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_frame_valid",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 133,
+                  "beginCol": 3,
+                  "endLine": 136,
+                  "endCol": 3,
+                  "offset": 6126,
+                  "length": 152
                 }
             }
           ]
@@ -12882,28 +13074,28 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 176,
+                  "beginLine": 186,
                   "beginCol": 12,
-                  "endLine": 178,
+                  "endLine": 188,
                   "endCol": 90,
-                  "offset": 12434,
-                  "length": 242
+                  "offset": 12600,
+                  "length": 216
                 }
             },
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_allowed",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_allowed",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 199,
-                  "beginCol": 6,
-                  "endLine": 200,
-                  "endCol": 106,
-                  "offset": 10352,
-                  "length": 205
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 146,
+                  "beginCol": 12,
+                  "endLine": 149,
+                  "endCol": 54,
+                  "offset": 10112,
+                  "length": 245
                 }
             },
             {
@@ -12925,33 +13117,33 @@
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_frame_valid",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_frame_valid",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 195,
-                  "beginCol": 6,
-                  "endLine": 195,
-                  "endCol": 104,
-                  "offset": 10113,
-                  "length": 98
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 142,
+                  "beginCol": 12,
+                  "endLine": 142,
+                  "endCol": 84,
+                  "offset": 9913,
+                  "length": 72
                 }
             },
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_firmware_flash_command",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_firmware_flash_command",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 197,
-                  "beginCol": 6,
-                  "endLine": 197,
-                  "endCol": 115,
-                  "offset": 10227,
-                  "length": 109
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 144,
+                  "beginCol": 12,
+                  "endLine": 144,
+                  "endCol": 95,
+                  "offset": 10007,
+                  "length": 83
                 }
             },
             {
@@ -13334,8 +13526,56 @@
                   "beginCol": 11,
                   "endLine": 73,
                   "endCol": 79,
-                  "offset": 3358,
-                  "length": 236
+                  "offset": 3238,
+                  "length": 221
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_allowed",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 149,
+                  "beginCol": 3,
+                  "endLine": 153,
+                  "endCol": 3,
+                  "offset": 6908,
+                  "length": 224
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_frame_valid",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 133,
+                  "beginCol": 3,
+                  "endLine": 136,
+                  "endCol": 3,
+                  "offset": 6126,
+                  "length": 152
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_firmware_flash_command",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 144,
+                  "beginCol": 3,
+                  "endLine": 147,
+                  "endCol": 3,
+                  "offset": 6729,
+                  "length": 174
                 }
             }
           ]
@@ -13354,12 +13594,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 179,
+                  "beginLine": 189,
                   "beginCol": 12,
-                  "endLine": 182,
-                  "endCol": 128,
-                  "offset": 12690,
-                  "length": 369
+                  "endLine": 192,
+                  "endCol": 102,
+                  "offset": 12830,
+                  "length": 317
                 }
             },
             {
@@ -13381,33 +13621,33 @@
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_frame_valid",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_frame_valid",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 195,
-                  "beginCol": 6,
-                  "endLine": 195,
-                  "endCol": 104,
-                  "offset": 10113,
-                  "length": 98
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 142,
+                  "beginCol": 12,
+                  "endLine": 142,
+                  "endCol": 84,
+                  "offset": 9913,
+                  "length": 72
                 }
             },
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_firmware_flash_command",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_firmware_flash_command",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 197,
-                  "beginCol": 6,
-                  "endLine": 197,
-                  "endCol": 115,
-                  "offset": 10227,
-                  "length": 109
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 144,
+                  "beginCol": 12,
+                  "endLine": 144,
+                  "endCol": 95,
+                  "offset": 10007,
+                  "length": 83
                 }
             },
             {
@@ -13790,8 +14030,40 @@
                   "beginCol": 11,
                   "endLine": 78,
                   "endCol": 42,
-                  "offset": 3640,
-                  "length": 330
+                  "offset": 3505,
+                  "length": 300
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_frame_valid",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 133,
+                  "beginCol": 3,
+                  "endLine": 136,
+                  "endCol": 3,
+                  "offset": 6126,
+                  "length": 152
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_firmware_flash_command",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 144,
+                  "beginCol": 3,
+                  "endLine": 147,
+                  "endCol": 3,
+                  "offset": 6729,
+                  "length": 174
                 }
             }
           ]
@@ -13810,12 +14082,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 183,
+                  "beginLine": 193,
                   "beginCol": 12,
-                  "endLine": 186,
-                  "endCol": 120,
-                  "offset": 13073,
-                  "length": 347
+                  "endLine": 196,
+                  "endCol": 94,
+                  "offset": 13161,
+                  "length": 321
                 }
             },
             {
@@ -13837,17 +14109,17 @@
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_frame_valid",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_frame_valid",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 195,
-                  "beginCol": 6,
-                  "endLine": 195,
-                  "endCol": 104,
-                  "offset": 10113,
-                  "length": 98
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 142,
+                  "beginCol": 12,
+                  "endLine": 142,
+                  "endCol": 84,
+                  "offset": 9913,
+                  "length": 72
                 }
             },
             {
@@ -14230,8 +14502,24 @@
                   "beginCol": 11,
                   "endLine": 82,
                   "endCol": 42,
-                  "offset": 4028,
-                  "length": 280
+                  "offset": 3863,
+                  "length": 265
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_frame_valid",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 133,
+                  "beginCol": 3,
+                  "endLine": 136,
+                  "endCol": 3,
+                  "offset": 6126,
+                  "length": 152
                 }
             }
           ]
@@ -14250,28 +14538,28 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 188,
+                  "beginLine": 198,
                   "beginCol": 12,
-                  "endLine": 190,
+                  "endLine": 200,
                   "endCol": 90,
-                  "offset": 13435,
-                  "length": 242
+                  "offset": 13497,
+                  "length": 216
                 }
             },
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_allowed",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_allowed",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 199,
-                  "beginCol": 6,
-                  "endLine": 200,
-                  "endCol": 106,
-                  "offset": 10352,
-                  "length": 205
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 146,
+                  "beginCol": 12,
+                  "endLine": 149,
+                  "endCol": 54,
+                  "offset": 10112,
+                  "length": 245
                 }
             },
             {
@@ -14293,33 +14581,33 @@
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_frame_valid",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_frame_valid",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 195,
-                  "beginCol": 6,
-                  "endLine": 195,
-                  "endCol": 104,
-                  "offset": 10113,
-                  "length": 98
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 142,
+                  "beginCol": 12,
+                  "endLine": 142,
+                  "endCol": 84,
+                  "offset": 9913,
+                  "length": 72
                 }
             },
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_firmware_flash_command",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_firmware_flash_command",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 197,
-                  "beginCol": 6,
-                  "endLine": 197,
-                  "endCol": 115,
-                  "offset": 10227,
-                  "length": 109
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 144,
+                  "beginCol": 12,
+                  "endLine": 144,
+                  "endCol": 95,
+                  "offset": 10007,
+                  "length": 83
                 }
             },
             {
@@ -14702,8 +14990,56 @@
                   "beginCol": 11,
                   "endLine": 86,
                   "endCol": 79,
-                  "offset": 4352,
-                  "length": 236
+                  "offset": 4172,
+                  "length": 221
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_allowed",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 149,
+                  "beginCol": 3,
+                  "endLine": 153,
+                  "endCol": 3,
+                  "offset": 6908,
+                  "length": 224
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_frame_valid",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 133,
+                  "beginCol": 3,
+                  "endLine": 136,
+                  "endCol": 3,
+                  "offset": 6126,
+                  "length": 152
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_firmware_flash_command",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 144,
+                  "beginCol": 3,
+                  "endLine": 147,
+                  "endCol": 3,
+                  "offset": 6729,
+                  "length": 174
                 }
             }
           ]
@@ -14722,12 +15058,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 191,
+                  "beginLine": 201,
                   "beginCol": 12,
-                  "endLine": 194,
-                  "endCol": 128,
-                  "offset": 13691,
-                  "length": 369
+                  "endLine": 204,
+                  "endCol": 102,
+                  "offset": 13727,
+                  "length": 317
                 }
             },
             {
@@ -14749,33 +15085,33 @@
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_frame_valid",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_frame_valid",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 195,
-                  "beginCol": 6,
-                  "endLine": 195,
-                  "endCol": 104,
-                  "offset": 10113,
-                  "length": 98
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 142,
+                  "beginCol": 12,
+                  "endLine": 142,
+                  "endCol": 84,
+                  "offset": 9913,
+                  "length": 72
                 }
             },
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_firmware_flash_command",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_firmware_flash_command",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 197,
-                  "beginCol": 6,
-                  "endLine": 197,
-                  "endCol": 115,
-                  "offset": 10227,
-                  "length": 109
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 144,
+                  "beginCol": 12,
+                  "endLine": 144,
+                  "endCol": 95,
+                  "offset": 10007,
+                  "length": 83
                 }
             },
             {
@@ -15158,8 +15494,40 @@
                   "beginCol": 11,
                   "endLine": 91,
                   "endCol": 42,
-                  "offset": 4634,
-                  "length": 330
+                  "offset": 4439,
+                  "length": 300
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_frame_valid",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 133,
+                  "beginCol": 3,
+                  "endLine": 136,
+                  "endCol": 3,
+                  "offset": 6126,
+                  "length": 152
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_firmware_flash_command",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 144,
+                  "beginCol": 3,
+                  "endLine": 147,
+                  "endCol": 3,
+                  "offset": 6729,
+                  "length": 174
                 }
             }
           ]
@@ -15178,12 +15546,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
-                  "beginLine": 195,
+                  "beginLine": 205,
                   "beginCol": 12,
-                  "endLine": 198,
-                  "endCol": 120,
-                  "offset": 14074,
-                  "length": 347
+                  "endLine": 208,
+                  "endCol": 94,
+                  "offset": 14058,
+                  "length": 321
                 }
             },
             {
@@ -15205,17 +15573,17 @@
             {
               "type": "Slice",
               "kind": "Model",
-              "meta": "Invoked GUMBO Annex Library Method: GumboLib::mavlink_frame_valid",
+              "meta": "Invoked GUMBO Subclause Method: mavlink_frame_valid",
               "pos":
                 {
                   "type": "Position",
-                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/GumboLib.sysml",
-                  "beginLine": 195,
-                  "beginCol": 6,
-                  "endLine": 195,
-                  "endCol": 104,
-                  "offset": 10113,
-                  "length": 98
+                  "uri": "..\/..\/..\/sysmlv2\/open_platform\/open_platform_Software.sysml",
+                  "beginLine": 142,
+                  "beginCol": 12,
+                  "endLine": 142,
+                  "endCol": 84,
+                  "offset": 9913,
+                  "length": 72
                 }
             },
             {
@@ -15598,8 +15966,24 @@
                   "beginCol": 11,
                   "endLine": 95,
                   "endCol": 42,
-                  "offset": 5022,
-                  "length": 280
+                  "offset": 4797,
+                  "length": 265
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: mavlink_frame_valid",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_MAVLinkFirewall_MAVLinkFirewall\/src\/component\/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+                  "beginLine": 133,
+                  "beginCol": 3,
+                  "endLine": 136,
+                  "endCol": 3,
+                  "offset": 6126,
+                  "length": 152
                 }
             }
           ]

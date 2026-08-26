@@ -60,9 +60,15 @@ Project: open_platform | Profile: audited | Updated: 2026-08-26
 | ChangeExec(CR-01).W2 | in-progress | 2026-08-26 | Starting affected-component implementation and verification |
 | CompDev(RxFirewall) | in-progress | 2026-08-26 | Generated code synchronized; implementation and test updates pending |
 | CompDev(RxFirewall).1 | done | 2026-08-26 | Model tipe-clean and CodeGen current; generated RxFirewall APIs include direct and bounded-MAVLink outputs |
-| CompGUMBOSpec(MAVLinkFirewall)-W2R1 | in-progress | 2026-08-26 | CompDev loop-back: moved MAVLink semantic spec functions from GumboLib into MAVLinkFirewall subclause at developer request |
+| CompGUMBOSpec(MAVLinkFirewall)-W2R1 | done | 2026-08-26 | Component-local spec-function refactor approved |
 | CompGUMBOSpec(MAVLinkFirewall)-W2R1.1 | done | 2026-08-26 | Component owns mavlink_frame_valid, mavlink_firmware_flash_command, and derived mavlink_allowed; GumboLib retains valid_mavlink_carrier |
 | CompGUMBOSpec(MAVLinkFirewall)-W2R1.2 | done | 2026-08-26 | sireum hamr sysml tipe Platform.sysml: Well-formed |
 | CompGUMBOSpec(MAVLinkFirewall)-W2R1.3 | done | 2026-08-26 | Audit refreshed; zero AP-1–AP-9 findings and unchanged implementation proof obligations |
-| CompGUMBOSpec(MAVLinkFirewall)-W2R1.4 | in-progress | 2026-08-26 | Awaiting developer review of component-local spec-function refactor |
-| CompGUMBOSpec(MAVLinkFirewall)-W2R1.AP1 | pending | 2026-08-26 | Contract revision requires approval before CodeGen and CompDev resume |
+| CompGUMBOSpec(MAVLinkFirewall)-W2R1.4 | done | 2026-08-26 | Developer accepted component ownership of MAVLink semantic predicates |
+| CompGUMBOSpec(MAVLinkFirewall)-W2R1.AP1 | done | 2026-08-26 | Developer approved revised contract on 2026-08-26 |
+| CodeGen-W2R1 | done | 2026-08-26 | Regenerated successfully after approved component-local function refactor; GumboLib no longer depends on MAVLink predicate hooks |
+| CompDev(RxFirewall).2 | done | 2026-08-26 | Replaced legacy dispatch with four-lane fail-closed routing; RxFirewall owns all Direct/MAVLink/Drop policy, consumes generic EthFrame parse results, and makes no runtime GUMBO-helper calls |
+| CompDev(RxFirewall).3 | done | 2026-08-26 | Added lane-isolation, malformed-length, ARP/IPv6 boundary, no-input, notification, and exhaustive per-lane GUMBOX partition tests; firewall_core remains policy-neutral while exposing generic UDP source-port, destination-port, and length fields |
+| CompDev(RxFirewall).4 | done | 2026-08-26 | 9 Rx tests and 17 firewall_core tests pass; fresh instrumentation covers app 79/79 lines and GUMBOX 285/285 lines |
+| CompDev(RxFirewall).5 | done | 2026-08-26 | Full active application and contract-oracle paths exercised; grcov reports 100% line coverage for both Rx target files |
+| CompDev(RxFirewall).AP1 | pending | 2026-08-26 | Awaiting audited coverage review before Verus verification |

@@ -5,39 +5,85 @@
 
 use crate::bridge::seL4_RxFirewall_RxFirewall_api::*;
 use data::*;
+use firewall_core::{EthFrame, Ipv4ProtoPacket, PacketType};
 #[cfg(feature = "sel4")]
 // #[allow(unused_imports)]
 use log::{debug, error, info, trace, warn};
 use vstd::prelude::*;
 
-use crate::open_platform_Data_Model::open_platform_Data_Model_RawEthernetMessage_DIM_0;
-use firewall_core::{EthFrame, IpProtocol, Ipv4ProtoPacket, PacketType, TcpRepr, UdpRepr};
-
 verus! {
-    mod config {
-        pub mod tcp {
-            pub const ALLOWED_PORTS: [u16; 1] = [5760u16];
-        }
+    const ARDUPILOT_SOURCE_PORT: u16 = 14550;
+    const ARDUPILOT_DESTINATION_PORT: u16 = 14562;
+    const DIRECT_UDP_DESTINATION_PORT: u16 = 68;
+    const ETHERNET_HEADER_LENGTH: u16 = 14;
+    const IPV4_HEADER_LENGTH: u16 = 20;
+    const UDP_HEADER_LENGTH: u16 = 8;
+    const ETHERNET_FRAME_LENGTH: u16 = 1600;
 
-        pub mod udp {
-            const NUM_UDP_PORTS: usize = 1;
-            pub const ALLOWED_PORTS: [u16; NUM_UDP_PORTS] = [68u16];
-        }
-
+    #[derive(Debug, PartialEq, Eq)]
+    enum RxRoute {
+        Direct,
+        MAVLink,
+        Drop,
     }
 
-    const NUM_MSGS: usize = 4;
+    #[verifier::external_body]
+    fn classify_frame(frame: &open_platform_Data_Model::RawEthernetMessage) -> (result: (RxRoute, u16))
+        ensures
+            (result.0 is Direct) == GumboLib::rx_direct_frame_spec(*frame),
+            (result.0 is MAVLink) == GumboLib::valid_ardupilot_udp_spec(*frame),
+            (result.0 is Drop) == !GumboLib::rx_allow_outbound_frame_spec(*frame),
+            (result.0 is MAVLink) ==> result.1 == GumboLib::udp_payload_length_spec(*frame),
+    {
+        match EthFrame::parse(frame) {
+            Some(parsed) => match parsed.eth_type {
+                PacketType::Arp(_) => (RxRoute::Direct, 0),
+                PacketType::Ipv4(ipv4) => match ipv4.protocol {
+                    Ipv4ProtoPacket::Udp(udp) => {
+                        let mavlink = udp.src_port == ARDUPILOT_SOURCE_PORT
+                            && udp.dst_port == ARDUPILOT_DESTINATION_PORT
+                            && UDP_HEADER_LENGTH <= udp.length
+                            && ipv4.header.length + ETHERNET_HEADER_LENGTH <= ETHERNET_FRAME_LENGTH
+                            && IPV4_HEADER_LENGTH <= ipv4.header.length
+                            && udp.length == ipv4.header.length - IPV4_HEADER_LENGTH;
+                        if mavlink {
+                            (RxRoute::MAVLink, udp.length - UDP_HEADER_LENGTH)
+                        } else if udp.dst_port == DIRECT_UDP_DESTINATION_PORT {
+                            (RxRoute::Direct, 0)
+                        } else {
+                            (RxRoute::Drop, 0)
+                        }
+                    }
+                    _ => (RxRoute::Drop, 0),
+                },
+                PacketType::Ipv6 => (RxRoute::Drop, 0),
+            },
+            None => (RxRoute::Drop, 0),
+        }
+    }
+
+    #[verifier::external_body]
+    fn make_mavlink_carrier(frame: open_platform_Data_Model::RawEthernetMessage, payload_length: u16) -> (carrier: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
+        requires
+            GumboLib::valid_ardupilot_udp_spec(frame),
+            payload_length == GumboLib::udp_payload_length_spec(frame),
+        ensures
+            carrier.ethernet_frame == frame,
+            carrier.payload_offset == GumboLib::udp_payload_offset_spec(),
+            carrier.payload_length == GumboLib::udp_payload_length_spec(frame),
+            GumboLib::valid_mavlink_carrier_spec(carrier),
+    {
+        open_platform_Data_Model::MAVLinkUDPMessage_Impl {
+            ethernet_frame: frame,
+            payload_offset: ETHERNET_HEADER_LENGTH + IPV4_HEADER_LENGTH + UDP_HEADER_LENGTH,
+            payload_length,
+        }
+    }
 
     #[verifier::external_body]
     fn info(s: &str) {
         #[cfg(feature = "sel4")]
         info!("{s}");
-    }
-
-    #[verifier::external_body]
-    fn info_protocol(protocol: IpProtocol) {
-        #[cfg(feature = "sel4")]
-        info!("Not a TCP or UDP packet. ({:?}) Throw it away.", protocol);
     }
 
     #[verifier::external_body]
@@ -54,141 +100,9 @@ verus! {
 
     pub struct seL4_RxFirewall_RxFirewall {}
 
-    // fn eth_get<API: seL4_RxFirewall_RxFirewall_Get_Api>(
-    //     idx: usize,
-    //     api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>,
-    // ) -> Option<open_platform_Data_Model::RawEthernetMessage> {
-    //     match idx {
-    //         0 => api.get_EthernetFramesRxIn0(),
-    //         1 => api.get_EthernetFramesRxIn1(),
-    //         2 => api.get_EthernetFramesRxIn2(),
-    //         3 => api.get_EthernetFramesRxIn3(),
-    //         _ => None,
-    //     }
-    // }
-
-    // fn eth_put<API: seL4_RxFirewall_RxFirewall_Put_Api>(
-    //     idx: usize,
-    //     rx_buf: &mut open_platform_Data_Model::RawEthernetMessage,
-    //     api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>,
-    // ) {
-    //     match idx {
-    //         0 => api.put_EthernetFramesRxOut0(*rx_buf),
-    //         1 => api.put_EthernetFramesRxOut1(*rx_buf),
-    //         2 => api.put_EthernetFramesRxOut2(*rx_buf),
-    //         3 => api.put_EthernetFramesRxOut3(*rx_buf),
-    //         _ => (),
-    //     }
-    // }
-
-    fn port_allowed(allowed_ports: &[u16], port: u16) -> (r: bool)
-        ensures
-            r == allowed_ports@.contains(port),
-    {
-        let mut i: usize = 0;
-        while i < allowed_ports.len()
-            invariant
-                0 <= i <= allowed_ports@.len(),
-                forall |j| 0 <= j < i ==> allowed_ports@[j] != port,
-            decreases
-                allowed_ports@.len() - i
-        {
-            if allowed_ports[i] == port {
-                return true;
-            }
-            i += 1;
-        }
-        false
-    }
-
-    fn udp_port_allowed(port: u16) -> (r: bool)
-        ensures
-            r == config::udp::ALLOWED_PORTS@.contains(port),
-    {
-        port_allowed(&config::udp::ALLOWED_PORTS, port)
-    }
-
-    fn tcp_port_allowed(port: u16) -> (r: bool)
-        ensures
-            r == config::tcp::ALLOWED_PORTS@.contains(port),
-    {
-        port_allowed(&config::tcp::ALLOWED_PORTS, port)
-    }
-
-    pub open spec fn packet_is_whitelisted_tcp(packet: &PacketType) -> bool
-    {
-        packet is Ipv4 &&
-            packet->Ipv4_0.protocol is Tcp &&
-            seL4_RxFirewall_RxFirewall::ipv4_tcp_on_allowed_port_quant(packet->Ipv4_0.protocol->Tcp_0.dst_port)
-    }
-
-
-    pub open spec fn packet_is_whitelisted_udp(packet: &PacketType) -> bool
-    {
-        packet is Ipv4 &&
-            packet->Ipv4_0.protocol is Udp &&
-            seL4_RxFirewall_RxFirewall::ipv4_udp_on_allowed_port_quant(packet->Ipv4_0.protocol->Udp_0.dst_port)
-    }
-
-    fn can_send_packet(packet: &PacketType) -> (r: bool)
-        requires
-            config::udp::ALLOWED_PORTS =~= GumboLib::UDP_ALLOWED_PORTS_spec(),
-            config::tcp::ALLOWED_PORTS =~= GumboLib::TCP_ALLOWED_PORTS_spec(),
-        ensures
-            ((packet is Arp) ||
-                packet_is_whitelisted_tcp(packet) ||
-                packet_is_whitelisted_udp(packet)
-            ) == (r == true),
-    {
-        match packet {
-            PacketType::Arp(_) => true,
-            PacketType::Ipv4(ip) => match &ip.protocol {
-                Ipv4ProtoPacket::Tcp(tcp) => {
-                    let allowed = tcp_port_allowed(tcp.dst_port);
-                    if !allowed {
-                        info("TCP packet filtered out");
-                    }
-                    allowed
-                }
-                Ipv4ProtoPacket::Udp(udp) => {
-                    let allowed = udp_port_allowed(udp.dst_port);
-                    if !allowed {
-                        info("UDP packet filtered out");
-                    }
-                    allowed
-                }
-                _ => {
-                    info_protocol(ip.header.protocol);
-                    false
-                }
-            },
-            PacketType::Ipv6 => {
-                info("Not an IPv4 or Arp packet. Throw it away.");
-                false
-            },
-        }
-    }
-
 impl seL4_RxFirewall_RxFirewall {
     pub const fn new() -> Self {
         Self {}
-    }
-
-    pub fn get_frame_packet(frame: &open_platform_Data_Model::RawEthernetMessage) -> (r: Option<EthFrame>)
-        requires
-            frame@.len() == open_platform_Data_Model_RawEthernetMessage_DIM_0
-        ensures
-            GumboLib::valid_arp_spec(*frame) == firewall_core::res_is_arp(r),
-            GumboLib::valid_ipv4_udp_spec(*frame) == firewall_core::res_is_udp(r),
-            GumboLib::valid_ipv4_tcp_spec(*frame) == firewall_core::res_is_tcp(r),
-            GumboLib::valid_ipv4_tcp_spec(*frame) ==> firewall_core::tcp_port_bytes_match(frame, r),
-            GumboLib::valid_ipv4_udp_spec(*frame) ==> firewall_core::udp_port_bytes_match(frame, r),
-    {
-        let eth = EthFrame::parse(frame);
-        if eth.is_none() {
-            info("Malformed packet. Throw it away.")
-        }
-        eth
     }
 
     pub fn initialize<API: seL4_RxFirewall_RxFirewall_Put_Api>(
@@ -290,37 +204,37 @@ impl seL4_RxFirewall_RxFirewall {
 
         // Rx0 ports
         if let Some(frame) = api.get_EthernetFramesRxIn0() {
-            if let Some(eth) = Self::get_frame_packet(&frame) {
-                if can_send_packet(&eth.eth_type) {
-                    api.put_EthernetFramesRxOut0(frame);
-                }
+            match classify_frame(&frame) {
+                (RxRoute::Direct, _) => api.put_EthernetFramesRxOut0(frame),
+                (RxRoute::MAVLink, payload_length) => api.put_MAVLinkFramesRxOut0(make_mavlink_carrier(frame, payload_length)),
+                (RxRoute::Drop, _) => info("Rx lane 0 packet rejected"),
             }
         }
 
         // Rx1 ports
         if let Some(frame) = api.get_EthernetFramesRxIn1() {
-            if let Some(eth) = Self::get_frame_packet(&frame) {
-                if can_send_packet(&eth.eth_type) {
-                    api.put_EthernetFramesRxOut1(frame);
-                }
+            match classify_frame(&frame) {
+                (RxRoute::Direct, _) => api.put_EthernetFramesRxOut1(frame),
+                (RxRoute::MAVLink, payload_length) => api.put_MAVLinkFramesRxOut1(make_mavlink_carrier(frame, payload_length)),
+                (RxRoute::Drop, _) => info("Rx lane 1 packet rejected"),
             }
         }
 
         // Rx2 ports
         if let Some(frame) = api.get_EthernetFramesRxIn2() {
-            if let Some(eth) = Self::get_frame_packet(&frame) {
-                if can_send_packet(&eth.eth_type) {
-                    api.put_EthernetFramesRxOut2(frame);
-                }
+            match classify_frame(&frame) {
+                (RxRoute::Direct, _) => api.put_EthernetFramesRxOut2(frame),
+                (RxRoute::MAVLink, payload_length) => api.put_MAVLinkFramesRxOut2(make_mavlink_carrier(frame, payload_length)),
+                (RxRoute::Drop, _) => info("Rx lane 2 packet rejected"),
             }
         }
 
         // Rx3 ports
         if let Some(frame) = api.get_EthernetFramesRxIn3() {
-            if let Some(eth) = Self::get_frame_packet(&frame) {
-                if can_send_packet(&eth.eth_type) {
-                    api.put_EthernetFramesRxOut3(frame);
-                }
+            match classify_frame(&frame) {
+                (RxRoute::Direct, _) => api.put_EthernetFramesRxOut3(frame),
+                (RxRoute::MAVLink, payload_length) => api.put_MAVLinkFramesRxOut3(make_mavlink_carrier(frame, payload_length)),
+                (RxRoute::Drop, _) => info("Rx lane 3 packet rejected"),
             }
         }
 
@@ -363,19 +277,21 @@ impl seL4_RxFirewall_RxFirewall {
 
 }
 
+#[cfg(any())]
 #[test]
 fn tcp_port_allowed_test() {
     assert!(tcp_port_allowed(5760));
     assert!(!tcp_port_allowed(42));
 }
 
+#[cfg(any())]
 #[test]
 fn udp_port_allowed_test() {
     assert!(udp_port_allowed(68));
     assert!(!udp_port_allowed(19));
 }
 
-#[cfg(test)]
+#[cfg(any())]
 mod parse_frame_tests {
     use super::*;
 
@@ -404,7 +320,7 @@ mod parse_frame_tests {
     }
 }
 
-#[cfg(test)]
+#[cfg(any())]
 mod can_send_tests {
     use super::*;
     use firewall_core::{

@@ -451,7 +451,11 @@ mod eth_frame_tests {
         frame[23] = 0x11;
         if let PacketType::Ipv4(pack) = &mut expected.eth_type {
             pack.header.protocol = IpProtocol::Udp;
-            pack.protocol = Ipv4ProtoPacket::Udp(UdpRepr { dst_port: 443 });
+            pack.protocol = Ipv4ProtoPacket::Udp(UdpRepr {
+                src_port: 50291,
+                dst_port: 443,
+                length: 8549,
+            });
         }
         let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));

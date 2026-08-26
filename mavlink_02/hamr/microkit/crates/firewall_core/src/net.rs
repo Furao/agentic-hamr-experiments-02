@@ -584,7 +584,9 @@ impl TcpRepr {
 #[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug)]
 pub struct UdpRepr {
+    pub src_port: u16,
     pub dst_port: u16,
+    pub length: u16,
 }
 
 impl UdpRepr {
@@ -594,10 +596,14 @@ impl UdpRepr {
         requires
             packet@.len() >= Self::SIZE,
         ensures
+            r.src_port == spec_u16_from_be_bytes(packet@.subrange(0, 2)),
             r.dst_port == spec_u16_from_be_bytes(packet@.subrange(2, 4)),
+            r.length == spec_u16_from_be_bytes(packet@.subrange(4, 6)),
     {
+        let src_port = u16_from_be_bytes(slice_subrange(packet, 0, 2));
         let dst_port =  u16_from_be_bytes(slice_subrange(packet, 2, 4));
-        UdpRepr { dst_port }
+        let length = u16_from_be_bytes(slice_subrange(packet, 4, 6));
+        UdpRepr { src_port, dst_port, length }
     }
 }
 

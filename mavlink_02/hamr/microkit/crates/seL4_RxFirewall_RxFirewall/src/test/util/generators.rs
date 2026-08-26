@@ -47,6 +47,12 @@ pub fn u16_strategy_cust(range: core::ops::RangeInclusive<u16>) -> impl Strategy
   range
 }
 
+/// default proptest strategy for bool: any value of the type
+pub fn bool_strategy_default() -> impl Strategy<Value = bool>
+{
+  any::<bool>()
+}
+
 /// default proptest strategy for u32: any value of the type
 pub fn u32_strategy_default() -> impl Strategy<Value = u32>
 {
@@ -57,12 +63,6 @@ pub fn u32_strategy_default() -> impl Strategy<Value = u32>
 pub fn u32_strategy_cust(range: core::ops::RangeInclusive<u32>) -> impl Strategy<Value = u32>
 {
   range
-}
-
-/// default proptest strategy for bool: any value of the type
-pub fn bool_strategy_default() -> impl Strategy<Value = bool>
-{
-  any::<bool>()
 }
 
 pub fn open_platform_Data_Model_RawEthernetMessage_strategy_default() -> impl Strategy<Value = open_platform_Data_Model::RawEthernetMessage>

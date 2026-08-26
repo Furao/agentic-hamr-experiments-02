@@ -105,7 +105,7 @@ verus! {
       value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
       requires
         // guarantee hlr_22_output0_allowed
-        GumboLib::mavlink_allowed_spec(value),
+        crate::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app::mavlink_allowed(value),
       ensures
         old(self).EthernetFramesIn0 == self.EthernetFramesIn0,
         old(self).EthernetFramesIn1 == self.EthernetFramesIn1,
@@ -124,7 +124,7 @@ verus! {
       value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
       requires
         // guarantee hlr_22_output1_allowed
-        GumboLib::mavlink_allowed_spec(value),
+        crate::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app::mavlink_allowed(value),
       ensures
         old(self).EthernetFramesIn0 == self.EthernetFramesIn0,
         old(self).EthernetFramesIn1 == self.EthernetFramesIn1,
@@ -143,7 +143,7 @@ verus! {
       value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
       requires
         // guarantee hlr_22_output2_allowed
-        GumboLib::mavlink_allowed_spec(value),
+        crate::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app::mavlink_allowed(value),
       ensures
         old(self).EthernetFramesIn0 == self.EthernetFramesIn0,
         old(self).EthernetFramesIn1 == self.EthernetFramesIn1,
@@ -162,7 +162,7 @@ verus! {
       value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
       requires
         // guarantee hlr_22_output3_allowed
-        GumboLib::mavlink_allowed_spec(value),
+        crate::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app::mavlink_allowed(value),
       ensures
         old(self).EthernetFramesIn0 == self.EthernetFramesIn0,
         old(self).EthernetFramesIn1 == self.EthernetFramesIn1,
