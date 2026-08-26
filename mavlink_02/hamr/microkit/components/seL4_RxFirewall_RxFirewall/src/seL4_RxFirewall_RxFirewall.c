@@ -10,6 +10,10 @@ volatile sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *EthernetFrame
 volatile sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *EthernetFramesRxOut1_queue_1;
 volatile sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *EthernetFramesRxOut2_queue_1;
 volatile sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *EthernetFramesRxOut3_queue_1;
+volatile sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *MAVLinkFramesRxOut0_queue_1;
+volatile sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *MAVLinkFramesRxOut1_queue_1;
+volatile sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *MAVLinkFramesRxOut2_queue_1;
+volatile sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *MAVLinkFramesRxOut3_queue_1;
 volatile sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *EthernetFramesRxIn0_queue_1;
 sb_queue_open_platform_Data_Model_RawEthernetMessage_1_Recv_t EthernetFramesRxIn0_recv_queue;
 volatile sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *EthernetFramesRxIn1_queue_1;
@@ -41,6 +45,30 @@ bool put_EthernetFramesRxOut2(const open_platform_Data_Model_RawEthernetMessage 
 
 bool put_EthernetFramesRxOut3(const open_platform_Data_Model_RawEthernetMessage *data) {
   sb_queue_open_platform_Data_Model_RawEthernetMessage_1_enqueue((sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *) EthernetFramesRxOut3_queue_1, (open_platform_Data_Model_RawEthernetMessage *) data);
+
+  return true;
+}
+
+bool put_MAVLinkFramesRxOut0(const open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
+  sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_enqueue((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) MAVLinkFramesRxOut0_queue_1, (open_platform_Data_Model_MAVLinkUDPMessage_Impl *) data);
+
+  return true;
+}
+
+bool put_MAVLinkFramesRxOut1(const open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
+  sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_enqueue((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) MAVLinkFramesRxOut1_queue_1, (open_platform_Data_Model_MAVLinkUDPMessage_Impl *) data);
+
+  return true;
+}
+
+bool put_MAVLinkFramesRxOut2(const open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
+  sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_enqueue((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) MAVLinkFramesRxOut2_queue_1, (open_platform_Data_Model_MAVLinkUDPMessage_Impl *) data);
+
+  return true;
+}
+
+bool put_MAVLinkFramesRxOut3(const open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
+  sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_enqueue((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) MAVLinkFramesRxOut3_queue_1, (open_platform_Data_Model_MAVLinkUDPMessage_Impl *) data);
 
   return true;
 }
@@ -105,6 +133,14 @@ void init(void) {
   sb_queue_open_platform_Data_Model_RawEthernetMessage_1_init((sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *) EthernetFramesRxOut2_queue_1);
 
   sb_queue_open_platform_Data_Model_RawEthernetMessage_1_init((sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *) EthernetFramesRxOut3_queue_1);
+
+  sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_init((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) MAVLinkFramesRxOut0_queue_1);
+
+  sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_init((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) MAVLinkFramesRxOut1_queue_1);
+
+  sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_init((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) MAVLinkFramesRxOut2_queue_1);
+
+  sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_init((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) MAVLinkFramesRxOut3_queue_1);
 
   sb_queue_open_platform_Data_Model_RawEthernetMessage_1_Recv_init(&EthernetFramesRxIn0_recv_queue, (sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *) EthernetFramesRxIn0_queue_1);
 

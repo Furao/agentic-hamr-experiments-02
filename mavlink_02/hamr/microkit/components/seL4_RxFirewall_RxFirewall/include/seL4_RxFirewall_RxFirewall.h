@@ -13,6 +13,10 @@ bool put_EthernetFramesRxOut0(const open_platform_Data_Model_RawEthernetMessage 
 bool put_EthernetFramesRxOut1(const open_platform_Data_Model_RawEthernetMessage *data);
 bool put_EthernetFramesRxOut2(const open_platform_Data_Model_RawEthernetMessage *data);
 bool put_EthernetFramesRxOut3(const open_platform_Data_Model_RawEthernetMessage *data);
+bool put_MAVLinkFramesRxOut0(const open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);
+bool put_MAVLinkFramesRxOut1(const open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);
+bool put_MAVLinkFramesRxOut2(const open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);
+bool put_MAVLinkFramesRxOut3(const open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);
 bool EthernetFramesRxIn0_is_empty(void);
 bool get_EthernetFramesRxIn0_poll(sb_event_counter_t *numDropped, open_platform_Data_Model_RawEthernetMessage *data);
 bool get_EthernetFramesRxIn0(open_platform_Data_Model_RawEthernetMessage *data);

@@ -19,6 +19,10 @@ extern "C" {
   fn put_EthernetFramesRxOut1(value: *mut open_platform_Data_Model::RawEthernetMessage) -> bool;
   fn put_EthernetFramesRxOut2(value: *mut open_platform_Data_Model::RawEthernetMessage) -> bool;
   fn put_EthernetFramesRxOut3(value: *mut open_platform_Data_Model::RawEthernetMessage) -> bool;
+  fn put_MAVLinkFramesRxOut0(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+  fn put_MAVLinkFramesRxOut1(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+  fn put_MAVLinkFramesRxOut2(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+  fn put_MAVLinkFramesRxOut3(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
 }
 
 pub fn unsafe_get_EthernetFramesRxIn0() -> Option<open_platform_Data_Model::RawEthernetMessage>
@@ -97,6 +101,34 @@ pub fn unsafe_put_EthernetFramesRxOut3(value: &open_platform_Data_Model::RawEthe
   }
 }
 
+pub fn unsafe_put_MAVLinkFramesRxOut0(value: &open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    return put_MAVLinkFramesRxOut0(value as *const open_platform_Data_Model::MAVLinkUDPMessage_Impl as *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl);
+  }
+}
+
+pub fn unsafe_put_MAVLinkFramesRxOut1(value: &open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    return put_MAVLinkFramesRxOut1(value as *const open_platform_Data_Model::MAVLinkUDPMessage_Impl as *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl);
+  }
+}
+
+pub fn unsafe_put_MAVLinkFramesRxOut2(value: &open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    return put_MAVLinkFramesRxOut2(value as *const open_platform_Data_Model::MAVLinkUDPMessage_Impl as *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl);
+  }
+}
+
+pub fn unsafe_put_MAVLinkFramesRxOut3(value: &open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    return put_MAVLinkFramesRxOut3(value as *const open_platform_Data_Model::MAVLinkUDPMessage_Impl as *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl);
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
 //////////////////////////////////////////////////////////////////////////////////
@@ -114,6 +146,10 @@ lazy_static::lazy_static! {
   pub static ref OUT_EthernetFramesRxOut1: Mutex<Option<open_platform_Data_Model::RawEthernetMessage>> = Mutex::new(None);
   pub static ref OUT_EthernetFramesRxOut2: Mutex<Option<open_platform_Data_Model::RawEthernetMessage>> = Mutex::new(None);
   pub static ref OUT_EthernetFramesRxOut3: Mutex<Option<open_platform_Data_Model::RawEthernetMessage>> = Mutex::new(None);
+  pub static ref OUT_MAVLinkFramesRxOut0: Mutex<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>> = Mutex::new(None);
+  pub static ref OUT_MAVLinkFramesRxOut1: Mutex<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>> = Mutex::new(None);
+  pub static ref OUT_MAVLinkFramesRxOut2: Mutex<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>> = Mutex::new(None);
+  pub static ref OUT_MAVLinkFramesRxOut3: Mutex<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>> = Mutex::new(None);
 }
 
 #[cfg(test)]
@@ -127,6 +163,10 @@ pub fn initialize_test_globals() {
     *OUT_EthernetFramesRxOut1.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *OUT_EthernetFramesRxOut2.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *OUT_EthernetFramesRxOut3.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_MAVLinkFramesRxOut0.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_MAVLinkFramesRxOut1.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_MAVLinkFramesRxOut2.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_MAVLinkFramesRxOut3.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -218,6 +258,42 @@ pub fn put_EthernetFramesRxOut3(value: *mut open_platform_Data_Model::RawEtherne
 {
   unsafe {
     *OUT_EthernetFramesRxOut3.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
+    return true;
+  }
+}
+
+#[cfg(test)]
+pub fn put_MAVLinkFramesRxOut0(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    *OUT_MAVLinkFramesRxOut0.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
+    return true;
+  }
+}
+
+#[cfg(test)]
+pub fn put_MAVLinkFramesRxOut1(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    *OUT_MAVLinkFramesRxOut1.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
+    return true;
+  }
+}
+
+#[cfg(test)]
+pub fn put_MAVLinkFramesRxOut2(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    *OUT_MAVLinkFramesRxOut2.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
+    return true;
+  }
+}
+
+#[cfg(test)]
+pub fn put_MAVLinkFramesRxOut3(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    *OUT_MAVLinkFramesRxOut3.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }

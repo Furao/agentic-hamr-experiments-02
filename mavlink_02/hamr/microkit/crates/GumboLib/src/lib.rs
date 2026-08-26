@@ -151,7 +151,7 @@ pub fn wellformed_arp_frame(aframe: open_platform_Data_Model::RawEthernetMessage
 pub fn valid_ipv4_length(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
 {
   (aframe.len() == 1600) &&
-    (two_bytes_to_u16_be(aframe[16], aframe[17]) <= 9000u16)
+    (ipv4_length(aframe) <= 9000u16)
 }
 
 pub fn valid_ipv4_protocol(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
@@ -200,7 +200,7 @@ pub fn valid_ipv4(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
 
 pub fn ipv4_length(aframe: open_platform_Data_Model::RawEthernetMessage) -> u16
 {
-  two_bytes_to_u16_le(aframe[16], aframe[17])
+  two_bytes_to_u16_be(aframe[16], aframe[17])
 }
 
 pub fn valid_output_arp_size(output: open_platform_Data_Model::SizedEthernetMessage_Impl) -> bool
@@ -213,7 +213,7 @@ pub fn valid_output_ipv4_size(
   output: open_platform_Data_Model::SizedEthernetMessage_Impl) -> bool
 {
   (input.len() == 1600) &&
-    (output.sz == two_bytes_to_u16_be(input[16], input[17]) + 14u16)
+    (output.sz == ipv4_length(input) + ethernet_header_length())
 }
 
 pub fn tx_allow_outbound_frame(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
@@ -281,10 +281,105 @@ pub fn valid_ipv4_udp_port(aframe: open_platform_Data_Model::RawEthernetMessage)
   valid_ipv4_udp(aframe) && udp_is_valid_dst_port(aframe)
 }
 
+pub fn udp_source_port(aframe: open_platform_Data_Model::RawEthernetMessage) -> u16
+{
+  two_bytes_to_u16_be(aframe[34], aframe[35])
+}
+
+pub fn udp_destination_port(aframe: open_platform_Data_Model::RawEthernetMessage) -> u16
+{
+  two_bytes_to_u16_be(aframe[36], aframe[37])
+}
+
+pub fn ethernet_header_length() -> u16
+{
+  14u16
+}
+
+pub fn ipv4_header_length() -> u16
+{
+  20u16
+}
+
+pub fn udp_header_length() -> u16
+{
+  8u16
+}
+
+pub fn udp_length(aframe: open_platform_Data_Model::RawEthernetMessage) -> u16
+{
+  two_bytes_to_u16_be(aframe[38], aframe[39])
+}
+
+pub fn udp_payload_length(aframe: open_platform_Data_Model::RawEthernetMessage) -> u16
+{
+  if (udp_header_length() <= udp_length(aframe)) {
+    udp_length(aframe) - udp_header_length()
+  } else {
+    0u16
+  }
+}
+
+pub fn udp_payload_offset() -> u16
+{
+  ethernet_header_length() + ipv4_header_length() + udp_header_length()
+}
+
+pub fn valid_ardupilot_udp(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
+{
+  valid_ipv4_udp(aframe) &&
+    (udp_source_port(aframe) == 14550u16) &&
+    (udp_destination_port(aframe) == 14562u16) &&
+    (udp_header_length() <= udp_length(aframe)) &&
+    (ipv4_length(aframe) + ethernet_header_length() <= 1600u16) &&
+    (ipv4_length(aframe) == udp_length(aframe) + ipv4_header_length())
+}
+
+pub fn rx_direct_frame(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
+{
+  valid_arp(aframe) ||
+    valid_ipv4_udp_port(aframe) && !(valid_ardupilot_udp(aframe))
+}
+
+pub fn valid_mavlink_carrier(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  valid_ardupilot_udp(msg.ethernet_frame) &&
+    (msg.payload_offset == udp_payload_offset()) &&
+    (msg.payload_length == udp_payload_length(msg.ethernet_frame)) &&
+    (msg.payload_offset + msg.payload_length <= 1600u16)
+}
+
+/// GUMBOX wrapper for the GUMBO spec function `test` that delegates to the developer-supplied GUMBOX
+/// specification function that must have the following signature:
+/// 
+///   pub exec fn mavlink_frame_valid__developer_gumbox(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> (res: bool) { ... }
+/// 
+/// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+pub fn mavlink_frame_valid(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  mavlink_frame_valid__developer_gumbox(msg)
+}
+
+/// GUMBOX wrapper for the GUMBO spec function `test` that delegates to the developer-supplied GUMBOX
+/// specification function that must have the following signature:
+/// 
+///   pub exec fn mavlink_firmware_flash_command__developer_gumbox(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> (res: bool) { ... }
+/// 
+/// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+pub fn mavlink_firmware_flash_command(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  mavlink_firmware_flash_command__developer_gumbox(msg)
+}
+
+pub fn mavlink_allowed(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  valid_mavlink_carrier(msg) && mavlink_frame_valid(msg) &&
+    !(mavlink_firmware_flash_command(msg))
+}
+
 pub fn rx_allow_outbound_frame(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
 {
-  valid_arp(aframe) || valid_ipv4_tcp_port(aframe) ||
-    valid_ipv4_udp_port(aframe)
+  rx_direct_frame(aframe) || valid_ardupilot_udp(aframe)
 }
 // END MARKER GUMBO RUST MARKER
 
@@ -409,7 +504,7 @@ verus! {
   pub open spec fn valid_ipv4_length_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
   {
     (aframe.len() == 1600) &&
-      (two_bytes_to_u16_be_spec(aframe[16], aframe[17]) <= 9000u16)
+      (ipv4_length_spec(aframe) <= 9000u16)
   }
 
   pub open spec fn valid_ipv4_protocol_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
@@ -458,7 +553,7 @@ verus! {
 
   pub open spec fn ipv4_length_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> u16
   {
-    two_bytes_to_u16_le_spec(aframe[16], aframe[17])
+    two_bytes_to_u16_be_spec(aframe[16], aframe[17])
   }
 
   pub open spec fn valid_output_arp_size_spec(output: open_platform_Data_Model::SizedEthernetMessage_Impl) -> bool
@@ -471,7 +566,7 @@ verus! {
     output: open_platform_Data_Model::SizedEthernetMessage_Impl) -> bool
   {
     (input.len() == 1600) &&
-      (output.sz == two_bytes_to_u16_be_spec(input[16], input[17]) + 14u16)
+      (output.sz == ipv4_length_spec(input) + ethernet_header_length_spec())
   }
 
   pub open spec fn tx_allow_outbound_frame_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
@@ -539,10 +634,105 @@ verus! {
     valid_ipv4_udp_spec(aframe) && udp_is_valid_dst_port_spec(aframe)
   }
 
+  pub open spec fn udp_source_port_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> u16
+  {
+    two_bytes_to_u16_be_spec(aframe[34], aframe[35])
+  }
+
+  pub open spec fn udp_destination_port_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> u16
+  {
+    two_bytes_to_u16_be_spec(aframe[36], aframe[37])
+  }
+
+  pub open spec fn ethernet_header_length_spec() -> u16
+  {
+    14u16
+  }
+
+  pub open spec fn ipv4_header_length_spec() -> u16
+  {
+    20u16
+  }
+
+  pub open spec fn udp_header_length_spec() -> u16
+  {
+    8u16
+  }
+
+  pub open spec fn udp_length_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> u16
+  {
+    two_bytes_to_u16_be_spec(aframe[38], aframe[39])
+  }
+
+  pub open spec fn udp_payload_length_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> u16
+  {
+    if (udp_header_length_spec() <= udp_length_spec(aframe)) {
+      (udp_length_spec(aframe) - udp_header_length_spec()) as u16
+    } else {
+      0u16
+    }
+  }
+
+  pub open spec fn udp_payload_offset_spec() -> u16
+  {
+    (ethernet_header_length_spec() + ipv4_header_length_spec() + udp_header_length_spec()) as u16
+  }
+
+  pub open spec fn valid_ardupilot_udp_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
+  {
+    valid_ipv4_udp_spec(aframe) &&
+      (udp_source_port_spec(aframe) == 14550u16) &&
+      (udp_destination_port_spec(aframe) == 14562u16) &&
+      (udp_header_length_spec() <= udp_length_spec(aframe)) &&
+      (ipv4_length_spec(aframe) + ethernet_header_length_spec() <= 1600u16) &&
+      (ipv4_length_spec(aframe) == udp_length_spec(aframe) + ipv4_header_length_spec())
+  }
+
+  pub open spec fn rx_direct_frame_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
+  {
+    valid_arp_spec(aframe) ||
+      valid_ipv4_udp_port_spec(aframe) && !(valid_ardupilot_udp_spec(aframe))
+  }
+
+  pub open spec fn valid_mavlink_carrier_spec(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+  {
+    valid_ardupilot_udp_spec(msg.ethernet_frame) &&
+      (msg.payload_offset == udp_payload_offset_spec()) &&
+      (msg.payload_length == udp_payload_length_spec(msg.ethernet_frame)) &&
+      (msg.payload_offset + msg.payload_length <= 1600u16)
+  }
+
+  /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus
+  /// specification function that must have the following signature:
+  /// 
+  ///   pub open spec fn mavlink_frame_valid__developer_verus(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> (res: bool) { ... }
+  /// 
+  /// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+  pub open spec fn mavlink_frame_valid_spec(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+  {
+    mavlink_frame_valid__developer_verus(msg)
+  }
+
+  /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus
+  /// specification function that must have the following signature:
+  /// 
+  ///   pub open spec fn mavlink_firmware_flash_command__developer_verus(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> (res: bool) { ... }
+  /// 
+  /// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+  pub open spec fn mavlink_firmware_flash_command_spec(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+  {
+    mavlink_firmware_flash_command__developer_verus(msg)
+  }
+
+  pub open spec fn mavlink_allowed_spec(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+  {
+    valid_mavlink_carrier_spec(msg) && mavlink_frame_valid_spec(msg) &&
+      !(mavlink_firmware_flash_command_spec(msg))
+  }
+
   pub open spec fn rx_allow_outbound_frame_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
   {
-    valid_arp_spec(aframe) || valid_ipv4_tcp_port_spec(aframe) ||
-      valid_ipv4_udp_port_spec(aframe)
+    rx_direct_frame_spec(aframe) || valid_ardupilot_udp_spec(aframe)
   }
   // END MARKER GUMBO VERUS MARKER
 

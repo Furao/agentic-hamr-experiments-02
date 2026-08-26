@@ -209,77 +209,81 @@ impl seL4_RxFirewall_RxFirewall {
         old(api).EthernetFramesRxOut1.is_none(),
         old(api).EthernetFramesRxOut2.is_none(),
         old(api).EthernetFramesRxOut3.is_none(),
+        old(api).MAVLinkFramesRxOut0.is_none(),
+        old(api).MAVLinkFramesRxOut1.is_none(),
+        old(api).MAVLinkFramesRxOut2.is_none(),
+        old(api).MAVLinkFramesRxOut3.is_none(),
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
-        // guarantee hlr_05_rx0_can_send_arp
-        api.EthernetFramesRxIn0.is_some() && GumboLib::valid_arp_spec(api.EthernetFramesRxIn0.unwrap()) ==>
+        // guarantee hlr_05_13_rx0_direct
+        api.EthernetFramesRxIn0.is_some() && GumboLib::rx_direct_frame_spec(api.EthernetFramesRxIn0.unwrap()) ==>
           api.EthernetFramesRxOut0.is_some() &&
-            (api.EthernetFramesRxIn0.unwrap() == api.EthernetFramesRxOut0.unwrap()),
-        // guarantee hlr_06_rx0_can_send_ipv4_tcp
-        api.EthernetFramesRxIn0.is_some() && GumboLib::valid_ipv4_tcp_port_spec(api.EthernetFramesRxIn0.unwrap()) ==>
-          api.EthernetFramesRxOut0.is_some() &&
-            (api.EthernetFramesRxIn0.unwrap() == api.EthernetFramesRxOut0.unwrap()),
-        // guarantee hlr_13_rx0_can_send_ipv4_udp
-        api.EthernetFramesRxIn0.is_some() && GumboLib::valid_ipv4_udp_port_spec(api.EthernetFramesRxIn0.unwrap()) ==>
-          api.EthernetFramesRxOut0.is_some() &&
-            (api.EthernetFramesRxIn0.unwrap() == api.EthernetFramesRxOut0.unwrap()),
-        // guarantee hlr_15_rx0_disallow
+            (api.EthernetFramesRxOut0.unwrap() == api.EthernetFramesRxIn0.unwrap()) &&
+            api.MAVLinkFramesRxOut0.is_none(),
+        // guarantee hlr_18_rx0_mavlink
+        api.EthernetFramesRxIn0.is_some() && GumboLib::valid_ardupilot_udp_spec(api.EthernetFramesRxIn0.unwrap()) ==>
+          api.EthernetFramesRxOut0.is_none() && api.MAVLinkFramesRxOut0.is_some() &&
+            (api.MAVLinkFramesRxOut0.unwrap().ethernet_frame == api.EthernetFramesRxIn0.unwrap()) &&
+            (api.MAVLinkFramesRxOut0.unwrap().payload_offset == GumboLib::udp_payload_offset_spec()) &&
+            (api.MAVLinkFramesRxOut0.unwrap().payload_length == GumboLib::udp_payload_length_spec(api.EthernetFramesRxIn0.unwrap())),
+        // guarantee hlr_06_15_rx0_drop
         api.EthernetFramesRxIn0.is_some() && !(GumboLib::rx_allow_outbound_frame_spec(api.EthernetFramesRxIn0.unwrap())) ==>
-          api.EthernetFramesRxOut0.is_none(),
+          api.EthernetFramesRxOut0.is_none() && api.MAVLinkFramesRxOut0.is_none(),
         // guarantee hlr_17_rx0_no_input
-        api.EthernetFramesRxIn0.is_some() || api.EthernetFramesRxOut0.is_none(),
-        // guarantee hlr_05_rx1_can_send_arp
-        api.EthernetFramesRxIn1.is_some() && GumboLib::valid_arp_spec(api.EthernetFramesRxIn1.unwrap()) ==>
+        !(api.EthernetFramesRxIn0.is_some()) ==>
+          api.EthernetFramesRxOut0.is_none() && api.MAVLinkFramesRxOut0.is_none(),
+        // guarantee hlr_05_13_rx1_direct
+        api.EthernetFramesRxIn1.is_some() && GumboLib::rx_direct_frame_spec(api.EthernetFramesRxIn1.unwrap()) ==>
           api.EthernetFramesRxOut1.is_some() &&
-            (api.EthernetFramesRxIn1.unwrap() == api.EthernetFramesRxOut1.unwrap()),
-        // guarantee hlr_06_rx1_can_send_ipv4_tcp
-        api.EthernetFramesRxIn1.is_some() && GumboLib::valid_ipv4_tcp_port_spec(api.EthernetFramesRxIn1.unwrap()) ==>
-          api.EthernetFramesRxOut1.is_some() &&
-            (api.EthernetFramesRxIn1.unwrap() == api.EthernetFramesRxOut1.unwrap()),
-        // guarantee hlr_13_rx1_can_send_ipv4_udp
-        api.EthernetFramesRxIn1.is_some() && GumboLib::valid_ipv4_udp_port_spec(api.EthernetFramesRxIn1.unwrap()) ==>
-          api.EthernetFramesRxOut1.is_some() &&
-            (api.EthernetFramesRxIn1.unwrap() == api.EthernetFramesRxOut1.unwrap()),
-        // guarantee hlr_15_rx1_disallow
+            (api.EthernetFramesRxOut1.unwrap() == api.EthernetFramesRxIn1.unwrap()) &&
+            api.MAVLinkFramesRxOut1.is_none(),
+        // guarantee hlr_18_rx1_mavlink
+        api.EthernetFramesRxIn1.is_some() && GumboLib::valid_ardupilot_udp_spec(api.EthernetFramesRxIn1.unwrap()) ==>
+          api.EthernetFramesRxOut1.is_none() && api.MAVLinkFramesRxOut1.is_some() &&
+            (api.MAVLinkFramesRxOut1.unwrap().ethernet_frame == api.EthernetFramesRxIn1.unwrap()) &&
+            (api.MAVLinkFramesRxOut1.unwrap().payload_offset == GumboLib::udp_payload_offset_spec()) &&
+            (api.MAVLinkFramesRxOut1.unwrap().payload_length == GumboLib::udp_payload_length_spec(api.EthernetFramesRxIn1.unwrap())),
+        // guarantee hlr_06_15_rx1_drop
         api.EthernetFramesRxIn1.is_some() && !(GumboLib::rx_allow_outbound_frame_spec(api.EthernetFramesRxIn1.unwrap())) ==>
-          api.EthernetFramesRxOut1.is_none(),
+          api.EthernetFramesRxOut1.is_none() && api.MAVLinkFramesRxOut1.is_none(),
         // guarantee hlr_17_rx1_no_input
-        api.EthernetFramesRxIn1.is_some() || api.EthernetFramesRxOut1.is_none(),
-        // guarantee hlr_05_rx2_can_send_arp
-        api.EthernetFramesRxIn2.is_some() && GumboLib::valid_arp_spec(api.EthernetFramesRxIn2.unwrap()) ==>
+        !(api.EthernetFramesRxIn1.is_some()) ==>
+          api.EthernetFramesRxOut1.is_none() && api.MAVLinkFramesRxOut1.is_none(),
+        // guarantee hlr_05_13_rx2_direct
+        api.EthernetFramesRxIn2.is_some() && GumboLib::rx_direct_frame_spec(api.EthernetFramesRxIn2.unwrap()) ==>
           api.EthernetFramesRxOut2.is_some() &&
-            (api.EthernetFramesRxIn2.unwrap() == api.EthernetFramesRxOut2.unwrap()),
-        // guarantee hlr_06_rx2_can_send_ipv4_tcp
-        api.EthernetFramesRxIn2.is_some() && GumboLib::valid_ipv4_tcp_port_spec(api.EthernetFramesRxIn2.unwrap()) ==>
-          api.EthernetFramesRxOut2.is_some() &&
-            (api.EthernetFramesRxIn2.unwrap() == api.EthernetFramesRxOut2.unwrap()),
-        // guarantee hlr_13_rx2_can_send_ipv4_udp
-        api.EthernetFramesRxIn2.is_some() && GumboLib::valid_ipv4_udp_port_spec(api.EthernetFramesRxIn2.unwrap()) ==>
-          api.EthernetFramesRxOut2.is_some() &&
-            (api.EthernetFramesRxIn2.unwrap() == api.EthernetFramesRxOut2.unwrap()),
-        // guarantee hlr_15_rx2_disallow
+            (api.EthernetFramesRxOut2.unwrap() == api.EthernetFramesRxIn2.unwrap()) &&
+            api.MAVLinkFramesRxOut2.is_none(),
+        // guarantee hlr_18_rx2_mavlink
+        api.EthernetFramesRxIn2.is_some() && GumboLib::valid_ardupilot_udp_spec(api.EthernetFramesRxIn2.unwrap()) ==>
+          api.EthernetFramesRxOut2.is_none() && api.MAVLinkFramesRxOut2.is_some() &&
+            (api.MAVLinkFramesRxOut2.unwrap().ethernet_frame == api.EthernetFramesRxIn2.unwrap()) &&
+            (api.MAVLinkFramesRxOut2.unwrap().payload_offset == GumboLib::udp_payload_offset_spec()) &&
+            (api.MAVLinkFramesRxOut2.unwrap().payload_length == GumboLib::udp_payload_length_spec(api.EthernetFramesRxIn2.unwrap())),
+        // guarantee hlr_06_15_rx2_drop
         api.EthernetFramesRxIn2.is_some() && !(GumboLib::rx_allow_outbound_frame_spec(api.EthernetFramesRxIn2.unwrap())) ==>
-          api.EthernetFramesRxOut2.is_none(),
+          api.EthernetFramesRxOut2.is_none() && api.MAVLinkFramesRxOut2.is_none(),
         // guarantee hlr_17_rx2_no_input
-        api.EthernetFramesRxIn2.is_some() || api.EthernetFramesRxOut2.is_none(),
-        // guarantee hlr_05_rx3_can_send_arp
-        api.EthernetFramesRxIn3.is_some() && GumboLib::valid_arp_spec(api.EthernetFramesRxIn3.unwrap()) ==>
+        !(api.EthernetFramesRxIn2.is_some()) ==>
+          api.EthernetFramesRxOut2.is_none() && api.MAVLinkFramesRxOut2.is_none(),
+        // guarantee hlr_05_13_rx3_direct
+        api.EthernetFramesRxIn3.is_some() && GumboLib::rx_direct_frame_spec(api.EthernetFramesRxIn3.unwrap()) ==>
           api.EthernetFramesRxOut3.is_some() &&
-            (api.EthernetFramesRxIn3.unwrap() == api.EthernetFramesRxOut3.unwrap()),
-        // guarantee hlr_06_rx3_can_send_ipv4_tcp
-        api.EthernetFramesRxIn3.is_some() && GumboLib::valid_ipv4_tcp_port_spec(api.EthernetFramesRxIn3.unwrap()) ==>
-          api.EthernetFramesRxOut3.is_some() &&
-            (api.EthernetFramesRxIn3.unwrap() == api.EthernetFramesRxOut3.unwrap()),
-        // guarantee hlr_13_rx3_can_send_ipv4_udp
-        api.EthernetFramesRxIn3.is_some() && GumboLib::valid_ipv4_udp_port_spec(api.EthernetFramesRxIn3.unwrap()) ==>
-          api.EthernetFramesRxOut3.is_some() &&
-            (api.EthernetFramesRxIn3.unwrap() == api.EthernetFramesRxOut3.unwrap()),
-        // guarantee hlr_15_rx3_disallow
+            (api.EthernetFramesRxOut3.unwrap() == api.EthernetFramesRxIn3.unwrap()) &&
+            api.MAVLinkFramesRxOut3.is_none(),
+        // guarantee hlr_18_rx3_mavlink
+        api.EthernetFramesRxIn3.is_some() && GumboLib::valid_ardupilot_udp_spec(api.EthernetFramesRxIn3.unwrap()) ==>
+          api.EthernetFramesRxOut3.is_none() && api.MAVLinkFramesRxOut3.is_some() &&
+            (api.MAVLinkFramesRxOut3.unwrap().ethernet_frame == api.EthernetFramesRxIn3.unwrap()) &&
+            (api.MAVLinkFramesRxOut3.unwrap().payload_offset == GumboLib::udp_payload_offset_spec()) &&
+            (api.MAVLinkFramesRxOut3.unwrap().payload_length == GumboLib::udp_payload_length_spec(api.EthernetFramesRxIn3.unwrap())),
+        // guarantee hlr_06_15_rx3_drop
         api.EthernetFramesRxIn3.is_some() && !(GumboLib::rx_allow_outbound_frame_spec(api.EthernetFramesRxIn3.unwrap())) ==>
-          api.EthernetFramesRxOut3.is_none(),
+          api.EthernetFramesRxOut3.is_none() && api.MAVLinkFramesRxOut3.is_none(),
         // guarantee hlr_17_rx3_no_input
-        api.EthernetFramesRxIn3.is_some() || api.EthernetFramesRxOut3.is_none(),
+        !(api.EthernetFramesRxIn3.is_some()) ==>
+          api.EthernetFramesRxOut3.is_none() && api.MAVLinkFramesRxOut3.is_none(),
         // END MARKER TIME TRIGGERED ENSURES
     {
         trace("compute entrypoint invoked");

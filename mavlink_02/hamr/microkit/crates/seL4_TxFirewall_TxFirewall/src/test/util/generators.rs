@@ -93,6 +93,28 @@ pub fn open_platform_Data_Model_u16Array_strategy_cust<u16_strategy: Strategy<Va
   })
 }
 
+pub fn open_platform_Data_Model_MAVLinkUDPMessage_Impl_strategy_default() -> impl Strategy<Value = open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+{
+  open_platform_Data_Model_MAVLinkUDPMessage_Impl_strategy_cust(
+    open_platform_Data_Model_RawEthernetMessage_strategy_default(),
+    any::<u16>(),
+    any::<u16>()
+  )
+}
+
+pub fn open_platform_Data_Model_MAVLinkUDPMessage_Impl_strategy_cust
+  <ethernet_frame_open_platform_Data_Model_RawEthernetMessage_strategy: Strategy<Value = open_platform_Data_Model::RawEthernetMessage>, 
+   payload_offset_u16_strategy: Strategy<Value = u16>, 
+   payload_length_u16_strategy: Strategy<Value = u16>> (
+  ethernet_frame_strategy: ethernet_frame_open_platform_Data_Model_RawEthernetMessage_strategy,
+  payload_offset_strategy: payload_offset_u16_strategy,
+  payload_length_strategy: payload_length_u16_strategy) -> impl Strategy<Value = open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+{
+  (ethernet_frame_strategy, payload_offset_strategy, payload_length_strategy).prop_map(|(ethernet_frame, payload_offset, payload_length)| {
+    open_platform_Data_Model::MAVLinkUDPMessage_Impl { ethernet_frame, payload_offset, payload_length }
+  })
+}
+
 pub fn open_platform_Data_Model_SizedEthernetMessage_Impl_strategy_default() -> impl Strategy<Value = open_platform_Data_Model::SizedEthernetMessage_Impl>
 {
   open_platform_Data_Model_SizedEthernetMessage_Impl_strategy_cust(

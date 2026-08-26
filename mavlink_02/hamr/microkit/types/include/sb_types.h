@@ -4,4 +4,5 @@
 
 #include <sb_aadl_types.h>
 #include <sb_queue_open_platform_Data_Model_RawEthernetMessage_1.h>
+#include <sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1.h>
 #include <sb_queue_open_platform_Data_Model_SizedEthernetMessage_Impl_1.h>

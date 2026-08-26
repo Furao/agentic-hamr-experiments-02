@@ -25,3 +25,15 @@ bool put_EthernetFramesTx0(const open_platform_Data_Model_RawEthernetMessage *da
 bool put_EthernetFramesTx1(const open_platform_Data_Model_RawEthernetMessage *data);
 bool put_EthernetFramesTx2(const open_platform_Data_Model_RawEthernetMessage *data);
 bool put_EthernetFramesTx3(const open_platform_Data_Model_RawEthernetMessage *data);
+bool MAVLinkFirewallRx0_is_empty(void);
+bool get_MAVLinkFirewallRx0_poll(sb_event_counter_t *numDropped, open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);
+bool get_MAVLinkFirewallRx0(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);
+bool MAVLinkFirewallRx1_is_empty(void);
+bool get_MAVLinkFirewallRx1_poll(sb_event_counter_t *numDropped, open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);
+bool get_MAVLinkFirewallRx1(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);
+bool MAVLinkFirewallRx2_is_empty(void);
+bool get_MAVLinkFirewallRx2_poll(sb_event_counter_t *numDropped, open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);
+bool get_MAVLinkFirewallRx2(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);
+bool MAVLinkFirewallRx3_is_empty(void);
+bool get_MAVLinkFirewallRx3_poll(sb_event_counter_t *numDropped, open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);
+bool get_MAVLinkFirewallRx3(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);

@@ -40,6 +40,38 @@ verus! {
     {
       extern_api::unsafe_put_EthernetFramesRxOut3(&value);
     }
+
+    #[verifier::external_body]
+    fn unverified_put_MAVLinkFramesRxOut0(
+      &mut self,
+      value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
+    {
+      extern_api::unsafe_put_MAVLinkFramesRxOut0(&value);
+    }
+
+    #[verifier::external_body]
+    fn unverified_put_MAVLinkFramesRxOut1(
+      &mut self,
+      value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
+    {
+      extern_api::unsafe_put_MAVLinkFramesRxOut1(&value);
+    }
+
+    #[verifier::external_body]
+    fn unverified_put_MAVLinkFramesRxOut2(
+      &mut self,
+      value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
+    {
+      extern_api::unsafe_put_MAVLinkFramesRxOut2(&value);
+    }
+
+    #[verifier::external_body]
+    fn unverified_put_MAVLinkFramesRxOut3(
+      &mut self,
+      value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
+    {
+      extern_api::unsafe_put_MAVLinkFramesRxOut3(&value);
+    }
   }
 
   pub trait seL4_RxFirewall_RxFirewall_Get_Api: seL4_RxFirewall_RxFirewall_Api {
@@ -96,13 +128,20 @@ verus! {
     pub ghost EthernetFramesRxOut0: Option<open_platform_Data_Model::RawEthernetMessage>,
     pub ghost EthernetFramesRxOut1: Option<open_platform_Data_Model::RawEthernetMessage>,
     pub ghost EthernetFramesRxOut2: Option<open_platform_Data_Model::RawEthernetMessage>,
-    pub ghost EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>
+    pub ghost EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>,
+    pub ghost MAVLinkFramesRxOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+    pub ghost MAVLinkFramesRxOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+    pub ghost MAVLinkFramesRxOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+    pub ghost MAVLinkFramesRxOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
   }
 
   impl<API: seL4_RxFirewall_RxFirewall_Put_Api> seL4_RxFirewall_RxFirewall_Application_Api<API> {
     pub fn put_EthernetFramesRxOut0(
       &mut self,
       value: open_platform_Data_Model::RawEthernetMessage)
+      requires
+        // guarantee hlr_05_13_direct_out0
+        GumboLib::rx_direct_frame_spec(value),
       ensures
         old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
@@ -112,6 +151,10 @@ verus! {
         old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
         old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
         old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
     {
       self.api.unverified_put_EthernetFramesRxOut0(value);
       self.EthernetFramesRxOut0 = Some(value);
@@ -119,6 +162,9 @@ verus! {
     pub fn put_EthernetFramesRxOut1(
       &mut self,
       value: open_platform_Data_Model::RawEthernetMessage)
+      requires
+        // guarantee hlr_05_13_direct_out1
+        GumboLib::rx_direct_frame_spec(value),
       ensures
         old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
@@ -128,6 +174,10 @@ verus! {
         self.EthernetFramesRxOut1 == Some(value),
         old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
         old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
     {
       self.api.unverified_put_EthernetFramesRxOut1(value);
       self.EthernetFramesRxOut1 = Some(value);
@@ -135,6 +185,9 @@ verus! {
     pub fn put_EthernetFramesRxOut2(
       &mut self,
       value: open_platform_Data_Model::RawEthernetMessage)
+      requires
+        // guarantee hlr_05_13_direct_out2
+        GumboLib::rx_direct_frame_spec(value),
       ensures
         old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
@@ -144,6 +197,10 @@ verus! {
         old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
         self.EthernetFramesRxOut2 == Some(value),
         old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
     {
       self.api.unverified_put_EthernetFramesRxOut2(value);
       self.EthernetFramesRxOut2 = Some(value);
@@ -151,6 +208,9 @@ verus! {
     pub fn put_EthernetFramesRxOut3(
       &mut self,
       value: open_platform_Data_Model::RawEthernetMessage)
+      requires
+        // guarantee hlr_05_13_direct_out3
+        GumboLib::rx_direct_frame_spec(value),
       ensures
         old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
@@ -160,9 +220,105 @@ verus! {
         old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
         old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
         self.EthernetFramesRxOut3 == Some(value),
+        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
     {
       self.api.unverified_put_EthernetFramesRxOut3(value);
       self.EthernetFramesRxOut3 = Some(value);
+    }
+    pub fn put_MAVLinkFramesRxOut0(
+      &mut self,
+      value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
+      requires
+        // guarantee hlr_18_mavlink_out0
+        GumboLib::valid_mavlink_carrier_spec(value),
+      ensures
+        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
+        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
+        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
+        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
+        self.MAVLinkFramesRxOut0 == Some(value),
+        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
+    {
+      self.api.unverified_put_MAVLinkFramesRxOut0(value);
+      self.MAVLinkFramesRxOut0 = Some(value);
+    }
+    pub fn put_MAVLinkFramesRxOut1(
+      &mut self,
+      value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
+      requires
+        // guarantee hlr_18_mavlink_out1
+        GumboLib::valid_mavlink_carrier_spec(value),
+      ensures
+        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
+        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
+        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
+        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
+        self.MAVLinkFramesRxOut1 == Some(value),
+        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
+    {
+      self.api.unverified_put_MAVLinkFramesRxOut1(value);
+      self.MAVLinkFramesRxOut1 = Some(value);
+    }
+    pub fn put_MAVLinkFramesRxOut2(
+      &mut self,
+      value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
+      requires
+        // guarantee hlr_18_mavlink_out2
+        GumboLib::valid_mavlink_carrier_spec(value),
+      ensures
+        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
+        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
+        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
+        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
+        self.MAVLinkFramesRxOut2 == Some(value),
+        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
+    {
+      self.api.unverified_put_MAVLinkFramesRxOut2(value);
+      self.MAVLinkFramesRxOut2 = Some(value);
+    }
+    pub fn put_MAVLinkFramesRxOut3(
+      &mut self,
+      value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
+      requires
+        // guarantee hlr_18_mavlink_out3
+        GumboLib::valid_mavlink_carrier_spec(value),
+      ensures
+        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
+        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
+        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
+        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
+        self.MAVLinkFramesRxOut3 == Some(value),
+    {
+      self.api.unverified_put_MAVLinkFramesRxOut3(value);
+      self.MAVLinkFramesRxOut3 = Some(value);
     }
   }
 
@@ -178,6 +334,10 @@ verus! {
         old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
         old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
         old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
     {
       self.api.unverified_get_EthernetFramesRxIn0(&Ghost(self.EthernetFramesRxIn0))
     }
@@ -192,6 +352,10 @@ verus! {
         old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
         old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
         old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
     {
       self.api.unverified_get_EthernetFramesRxIn1(&Ghost(self.EthernetFramesRxIn1))
     }
@@ -206,6 +370,10 @@ verus! {
         old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
         old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
         old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
     {
       self.api.unverified_get_EthernetFramesRxIn2(&Ghost(self.EthernetFramesRxIn2))
     }
@@ -220,6 +388,10 @@ verus! {
         old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
         old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
         old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
     {
       self.api.unverified_get_EthernetFramesRxIn3(&Ghost(self.EthernetFramesRxIn3))
     }
@@ -240,7 +412,11 @@ verus! {
       EthernetFramesRxOut0: None,
       EthernetFramesRxOut1: None,
       EthernetFramesRxOut2: None,
-      EthernetFramesRxOut3: None
+      EthernetFramesRxOut3: None,
+      MAVLinkFramesRxOut0: None,
+      MAVLinkFramesRxOut1: None,
+      MAVLinkFramesRxOut2: None,
+      MAVLinkFramesRxOut3: None
     }
   }
 
@@ -261,7 +437,11 @@ verus! {
       EthernetFramesRxOut0: None,
       EthernetFramesRxOut1: None,
       EthernetFramesRxOut2: None,
-      EthernetFramesRxOut3: None
+      EthernetFramesRxOut3: None,
+      MAVLinkFramesRxOut0: None,
+      MAVLinkFramesRxOut1: None,
+      MAVLinkFramesRxOut2: None,
+      MAVLinkFramesRxOut3: None
     }
   }
 

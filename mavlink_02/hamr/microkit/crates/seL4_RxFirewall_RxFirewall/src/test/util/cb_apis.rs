@@ -21,6 +21,23 @@ pub fn testInitializeCB() -> HarnessResult
   // [InvokeEntryPoint]: Invoke the entry point
   crate::seL4_RxFirewall_RxFirewall_initialize();
 
+  // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+  let api_EthernetFramesRxOut0 = get_EthernetFramesRxOut0();
+  let api_EthernetFramesRxOut1 = get_EthernetFramesRxOut1();
+  let api_EthernetFramesRxOut2 = get_EthernetFramesRxOut2();
+  let api_EthernetFramesRxOut3 = get_EthernetFramesRxOut3();
+  let api_MAVLinkFramesRxOut0 = get_MAVLinkFramesRxOut0();
+  let api_MAVLinkFramesRxOut1 = get_MAVLinkFramesRxOut1();
+  let api_MAVLinkFramesRxOut2 = get_MAVLinkFramesRxOut2();
+  let api_MAVLinkFramesRxOut3 = get_MAVLinkFramesRxOut3();
+
+  // [CheckPost]: invoke the oracle function
+  if !GUMBOX::initialize_IEP_Post (api_EthernetFramesRxOut0, api_EthernetFramesRxOut1, api_EthernetFramesRxOut2, api_EthernetFramesRxOut3, api_MAVLinkFramesRxOut0, api_MAVLinkFramesRxOut1, api_MAVLinkFramesRxOut2, api_MAVLinkFramesRxOut3) {
+    return HarnessResult::FailedPostcondition(
+      TestCaseError::Fail("Postcondition failed: incorrect output behavior".into())
+    );
+  }
+
   return HarnessResult::Passed
 }
 
@@ -80,9 +97,13 @@ pub fn testComputeCB(
   let api_EthernetFramesRxOut1 = get_EthernetFramesRxOut1();
   let api_EthernetFramesRxOut2 = get_EthernetFramesRxOut2();
   let api_EthernetFramesRxOut3 = get_EthernetFramesRxOut3();
+  let api_MAVLinkFramesRxOut0 = get_MAVLinkFramesRxOut0();
+  let api_MAVLinkFramesRxOut1 = get_MAVLinkFramesRxOut1();
+  let api_MAVLinkFramesRxOut2 = get_MAVLinkFramesRxOut2();
+  let api_MAVLinkFramesRxOut3 = get_MAVLinkFramesRxOut3();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::compute_CEP_Post(api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3, api_EthernetFramesRxOut0, api_EthernetFramesRxOut1, api_EthernetFramesRxOut2, api_EthernetFramesRxOut3) {
+  if !GUMBOX::compute_CEP_Post(api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3, api_EthernetFramesRxOut0, api_EthernetFramesRxOut1, api_EthernetFramesRxOut2, api_EthernetFramesRxOut3, api_MAVLinkFramesRxOut0, api_MAVLinkFramesRxOut1, api_MAVLinkFramesRxOut2, api_MAVLinkFramesRxOut3) {
     return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
   }
 

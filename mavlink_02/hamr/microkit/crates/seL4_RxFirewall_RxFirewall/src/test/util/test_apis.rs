@@ -82,3 +82,27 @@ pub fn get_EthernetFramesRxOut3() -> Option<open_platform_Data_Model::RawEtherne
 {
   return extern_api::OUT_EthernetFramesRxOut3.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
+
+/// getter for OUT EventDataPort
+pub fn get_MAVLinkFramesRxOut0() -> Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+{
+  return extern_api::OUT_MAVLinkFramesRxOut0.lock().unwrap_or_else(|e| e.into_inner()).clone()
+}
+
+/// getter for OUT EventDataPort
+pub fn get_MAVLinkFramesRxOut1() -> Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+{
+  return extern_api::OUT_MAVLinkFramesRxOut1.lock().unwrap_or_else(|e| e.into_inner()).clone()
+}
+
+/// getter for OUT EventDataPort
+pub fn get_MAVLinkFramesRxOut2() -> Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+{
+  return extern_api::OUT_MAVLinkFramesRxOut2.lock().unwrap_or_else(|e| e.into_inner()).clone()
+}
+
+/// getter for OUT EventDataPort
+pub fn get_MAVLinkFramesRxOut3() -> Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+{
+  return extern_api::OUT_MAVLinkFramesRxOut3.lock().unwrap_or_else(|e| e.into_inner()).clone()
+}

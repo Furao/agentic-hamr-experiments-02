@@ -38,10 +38,21 @@ Project: open_platform | Profile: audited | Updated: 2026-08-26
 | CompGUMBOSpec(RxFirewall).4 | done | 2026-08-26 | Review feedback: centralized layout and length logic in getter/spec functions; corrected ipv4_length to network byte order |
 | CompGUMBOSpec(RxFirewall).AP1 | done | 2026-08-26 | Developer approved getter-refactored RxFirewall contract and zero-finding audit |
 | ChangeExec(CR-01).W1.CompGUMBOSpec(RxFirewall) | done | 2026-08-26 | Audited sub-workflow boundary approved; continuing to MAVLinkFirewall contracts |
-| CompGUMBOSpec(MAVLinkFirewall) | in-progress | 2026-08-26 | Contract and specification-only audit prepared; awaiting developer review |
+| CompGUMBOSpec(MAVLinkFirewall) | done | 2026-08-26 | Exit criteria met; carrier-preserving fail-closed contract approved with deliberate uninterpreted spec predicates |
 | CompGUMBOSpec(MAVLinkFirewall).1 | done | 2026-08-26 | Added four-lane allow, firmware-flash deny, invalid, and no-input guarantees plus output invariants |
 | CompGUMBOSpec(MAVLinkFirewall).2 | done | 2026-08-26 | Preserved MAVLinkUDPMessage_Impl through the firewall to VMM; sireum hamr sysml tipe: Well-formed |
 | CompGUMBOSpec(MAVLinkFirewall).3 | done | 2026-08-26 | audit-gumbo-contracts specification-only mode: zero AP-1–AP-9 findings; abstract predicate refinement recorded for W2 |
-| CompGUMBOSpec(MAVLinkFirewall).4 | in-progress | 2026-08-26 | Awaiting developer review of carrier-preserving contract and abstract MAVLink predicate boundary |
-| CompGUMBOSpec(MAVLinkFirewall).AP1 | pending | 2026-08-26 | Developer approval has not been given |
-| ChangeExec(CR-01).W1.CompGUMBOSpec(MAVLinkFirewall) | pending | 2026-08-26 | Audited sub-workflow boundary not yet approved; no later workflow progress is credited |
+| CompGUMBOSpec(MAVLinkFirewall).4 | done | 2026-08-26 | Developer accepted deliberate uninterpreted mavlink_frame_valid and mavlink_firmware_flash_command proof boundary |
+| CompGUMBOSpec(MAVLinkFirewall).AP1 | done | 2026-08-26 | Developer approved MAVLinkFirewall contracts on 2026-08-26 |
+| ChangeExec(CR-01).W1.CompGUMBOSpec(MAVLinkFirewall) | done | 2026-08-26 | Audited sub-workflow boundary approved; continuing to system GUMBO integration check |
+| SysGUMBOIntegrationCheck | done | 2026-08-26 | Exit criteria met; Logika returned exit 0 |
+| SysGUMBOIntegrationCheck.1 | done | 2026-08-26 | Expected receiver-side integration handshakes N=0; pass is vacuous by reusable-contract design; no scratch artifacts produced |
+| SysGUMBOIntegrationCheck.2 | n/a | 2026-08-26 | No Logika failures to diagnose |
+| SysGUMBOIntegrationCheck.3 | n/a | 2026-08-26 | No contract revisions required by Logika |
+| ChangeExec(CR-01).W1.SysGUMBOIntegrationCheck | done | 2026-08-26 | Audited sub-workflow boundary approved; continuing to CodeGen |
+| CodeGen | done | 2026-08-26 | Generation completed successfully under hamr/microkit; awaiting audited sub-workflow boundary approval |
+| CodeGen.1 | done | 2026-08-26 | Existing model configuration confirmed: Microkit, ../../hamr, workspace root ../..; selected Platform::ZCU102_Impl at line 13 |
+| CodeGen.2 | done | 2026-08-26 | Iteration 1 selected the unbound inner system and failed; iteration 2 exposed missing new-component markers; iteration 3 generated successfully after marker reconciliation |
+| CodeGen.3 | done | 2026-08-26 | Output confirmed under project hamr/microkit; VMM/driver custom marker content preserved; generated fixme scratch removed; report status Success |
+| CodeGen.4 | n/a | 2026-08-26 | Existing generated project; first-generation build-script setup does not apply |
+| ChangeExec(CR-01).W1.CodeGen | in-progress | 2026-08-26 | Awaiting audited sub-workflow boundary approval before W2 implementation |

@@ -15,6 +15,12 @@ typedef uint8_t open_platform_Data_Model_RawEthernetMessage [open_platform_Data_
 
 typedef uint16_t open_platform_Data_Model_u16Array [open_platform_Data_Model_u16Array_DIM_0];
 
+typedef struct open_platform_Data_Model_MAVLinkUDPMessage_Impl {
+  open_platform_Data_Model_RawEthernetMessage ethernet_frame;
+  uint16_t payload_offset;
+  uint16_t payload_length;
+} open_platform_Data_Model_MAVLinkUDPMessage_Impl;
+
 typedef struct open_platform_Data_Model_SizedEthernetMessage_Impl {
   open_platform_Data_Model_RawEthernetMessage amessage;
   uint16_t sz;

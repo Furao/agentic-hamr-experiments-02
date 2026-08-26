@@ -2,6 +2,7 @@
 
 include!("RawEthernetMessage.rs");
 include!("u16Array.rs");
+include!("MAVLinkUDPMessage_Impl.rs");
 include!("SizedEthernetMessage_Impl.rs");
 
 /*

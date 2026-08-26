@@ -14,67 +14,260 @@ macro_rules! impliesL {
   };
 }
 
-/** Compute Entrypoint Contract
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port EthernetFramesRxOut0
   *
-  * guarantee hlr_05_rx0_can_send_arp
-  * @param api_EthernetFramesRxIn0 incoming event data port
-  * @param api_EthernetFramesRxOut0 outgoing event data port
+  * guarantee hlr_05_13_direct_out0
   */
-pub fn compute_spec_hlr_05_rx0_can_send_arp_guarantee(
-  api_EthernetFramesRxIn0: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut0: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+pub fn I_Guar_EthernetFramesRxOut0(EthernetFramesRxOut0: open_platform_Data_Model::RawEthernetMessage) -> bool
+{
+  GumboLib::rx_direct_frame(EthernetFramesRxOut0)
+}
+
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port EthernetFramesRxOut0
+  *
+  * guarantee hlr_05_13_direct_out0
+  */
+pub fn I_Guar_Guard_EthernetFramesRxOut0(EthernetFramesRxOut0: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
 {
   implies!(
-    api_EthernetFramesRxIn0.is_some() && GumboLib::valid_arp(api_EthernetFramesRxIn0.unwrap()),
-    api_EthernetFramesRxOut0.is_some() &&
-      (api_EthernetFramesRxIn0.unwrap() == api_EthernetFramesRxOut0.unwrap()))
+    EthernetFramesRxOut0.is_some(),
+    I_Guar_EthernetFramesRxOut0(EthernetFramesRxOut0.unwrap())
+  )
+}
+
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port EthernetFramesRxOut1
+  *
+  * guarantee hlr_05_13_direct_out1
+  */
+pub fn I_Guar_EthernetFramesRxOut1(EthernetFramesRxOut1: open_platform_Data_Model::RawEthernetMessage) -> bool
+{
+  GumboLib::rx_direct_frame(EthernetFramesRxOut1)
+}
+
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port EthernetFramesRxOut1
+  *
+  * guarantee hlr_05_13_direct_out1
+  */
+pub fn I_Guar_Guard_EthernetFramesRxOut1(EthernetFramesRxOut1: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+{
+  implies!(
+    EthernetFramesRxOut1.is_some(),
+    I_Guar_EthernetFramesRxOut1(EthernetFramesRxOut1.unwrap())
+  )
+}
+
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port EthernetFramesRxOut2
+  *
+  * guarantee hlr_05_13_direct_out2
+  */
+pub fn I_Guar_EthernetFramesRxOut2(EthernetFramesRxOut2: open_platform_Data_Model::RawEthernetMessage) -> bool
+{
+  GumboLib::rx_direct_frame(EthernetFramesRxOut2)
+}
+
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port EthernetFramesRxOut2
+  *
+  * guarantee hlr_05_13_direct_out2
+  */
+pub fn I_Guar_Guard_EthernetFramesRxOut2(EthernetFramesRxOut2: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+{
+  implies!(
+    EthernetFramesRxOut2.is_some(),
+    I_Guar_EthernetFramesRxOut2(EthernetFramesRxOut2.unwrap())
+  )
+}
+
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port EthernetFramesRxOut3
+  *
+  * guarantee hlr_05_13_direct_out3
+  */
+pub fn I_Guar_EthernetFramesRxOut3(EthernetFramesRxOut3: open_platform_Data_Model::RawEthernetMessage) -> bool
+{
+  GumboLib::rx_direct_frame(EthernetFramesRxOut3)
+}
+
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port EthernetFramesRxOut3
+  *
+  * guarantee hlr_05_13_direct_out3
+  */
+pub fn I_Guar_Guard_EthernetFramesRxOut3(EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+{
+  implies!(
+    EthernetFramesRxOut3.is_some(),
+    I_Guar_EthernetFramesRxOut3(EthernetFramesRxOut3.unwrap())
+  )
+}
+
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port MAVLinkFramesRxOut0
+  *
+  * guarantee hlr_18_mavlink_out0
+  */
+pub fn I_Guar_MAVLinkFramesRxOut0(MAVLinkFramesRxOut0: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  GumboLib::valid_mavlink_carrier(MAVLinkFramesRxOut0)
+}
+
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port MAVLinkFramesRxOut0
+  *
+  * guarantee hlr_18_mavlink_out0
+  */
+pub fn I_Guar_Guard_MAVLinkFramesRxOut0(MAVLinkFramesRxOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  implies!(
+    MAVLinkFramesRxOut0.is_some(),
+    I_Guar_MAVLinkFramesRxOut0(MAVLinkFramesRxOut0.unwrap())
+  )
+}
+
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port MAVLinkFramesRxOut1
+  *
+  * guarantee hlr_18_mavlink_out1
+  */
+pub fn I_Guar_MAVLinkFramesRxOut1(MAVLinkFramesRxOut1: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  GumboLib::valid_mavlink_carrier(MAVLinkFramesRxOut1)
+}
+
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port MAVLinkFramesRxOut1
+  *
+  * guarantee hlr_18_mavlink_out1
+  */
+pub fn I_Guar_Guard_MAVLinkFramesRxOut1(MAVLinkFramesRxOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  implies!(
+    MAVLinkFramesRxOut1.is_some(),
+    I_Guar_MAVLinkFramesRxOut1(MAVLinkFramesRxOut1.unwrap())
+  )
+}
+
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port MAVLinkFramesRxOut2
+  *
+  * guarantee hlr_18_mavlink_out2
+  */
+pub fn I_Guar_MAVLinkFramesRxOut2(MAVLinkFramesRxOut2: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  GumboLib::valid_mavlink_carrier(MAVLinkFramesRxOut2)
+}
+
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port MAVLinkFramesRxOut2
+  *
+  * guarantee hlr_18_mavlink_out2
+  */
+pub fn I_Guar_Guard_MAVLinkFramesRxOut2(MAVLinkFramesRxOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  implies!(
+    MAVLinkFramesRxOut2.is_some(),
+    I_Guar_MAVLinkFramesRxOut2(MAVLinkFramesRxOut2.unwrap())
+  )
+}
+
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port MAVLinkFramesRxOut3
+  *
+  * guarantee hlr_18_mavlink_out3
+  */
+pub fn I_Guar_MAVLinkFramesRxOut3(MAVLinkFramesRxOut3: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  GumboLib::valid_mavlink_carrier(MAVLinkFramesRxOut3)
+}
+
+/** I-Guar: Integration constraint on RxFirewall's outgoing event data port MAVLinkFramesRxOut3
+  *
+  * guarantee hlr_18_mavlink_out3
+  */
+pub fn I_Guar_Guard_MAVLinkFramesRxOut3(MAVLinkFramesRxOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  implies!(
+    MAVLinkFramesRxOut3.is_some(),
+    I_Guar_MAVLinkFramesRxOut3(MAVLinkFramesRxOut3.unwrap())
+  )
+}
+
+/** IEP-Post: Initialize Entrypoint Post-Condition
+  *
+  * @param api_EthernetFramesRxOut0 outgoing event data port
+  * @param api_EthernetFramesRxOut1 outgoing event data port
+  * @param api_EthernetFramesRxOut2 outgoing event data port
+  * @param api_EthernetFramesRxOut3 outgoing event data port
+  * @param api_MAVLinkFramesRxOut0 outgoing event data port
+  * @param api_MAVLinkFramesRxOut1 outgoing event data port
+  * @param api_MAVLinkFramesRxOut2 outgoing event data port
+  * @param api_MAVLinkFramesRxOut3 outgoing event data port
+  */
+pub fn initialize_IEP_Post(
+  api_EthernetFramesRxOut0: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_EthernetFramesRxOut1: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_EthernetFramesRxOut2: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_MAVLinkFramesRxOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_MAVLinkFramesRxOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_MAVLinkFramesRxOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  // I-Guar-Guard: Integration constraints for RxFirewall's outgoing ports"
+  I_Guar_Guard_EthernetFramesRxOut0(api_EthernetFramesRxOut0) &
+  I_Guar_Guard_EthernetFramesRxOut1(api_EthernetFramesRxOut1) &
+  I_Guar_Guard_EthernetFramesRxOut2(api_EthernetFramesRxOut2) &
+  I_Guar_Guard_EthernetFramesRxOut3(api_EthernetFramesRxOut3) &
+  I_Guar_Guard_MAVLinkFramesRxOut0(api_MAVLinkFramesRxOut0) &
+  I_Guar_Guard_MAVLinkFramesRxOut1(api_MAVLinkFramesRxOut1) &
+  I_Guar_Guard_MAVLinkFramesRxOut2(api_MAVLinkFramesRxOut2) &
+  I_Guar_Guard_MAVLinkFramesRxOut3(api_MAVLinkFramesRxOut3)
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_06_rx0_can_send_ipv4_tcp
+  * guarantee hlr_05_13_rx0_direct
   * @param api_EthernetFramesRxIn0 incoming event data port
   * @param api_EthernetFramesRxOut0 outgoing event data port
+  * @param api_MAVLinkFramesRxOut0 outgoing event data port
   */
-pub fn compute_spec_hlr_06_rx0_can_send_ipv4_tcp_guarantee(
+pub fn compute_spec_hlr_05_13_rx0_direct_guarantee(
   api_EthernetFramesRxIn0: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut0: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut0: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    api_EthernetFramesRxIn0.is_some() && GumboLib::valid_ipv4_tcp_port(api_EthernetFramesRxIn0.unwrap()),
+    api_EthernetFramesRxIn0.is_some() && GumboLib::rx_direct_frame(api_EthernetFramesRxIn0.unwrap()),
     api_EthernetFramesRxOut0.is_some() &&
-      (api_EthernetFramesRxIn0.unwrap() == api_EthernetFramesRxOut0.unwrap()))
+      (api_EthernetFramesRxOut0.unwrap() == api_EthernetFramesRxIn0.unwrap()) &&
+      api_MAVLinkFramesRxOut0.is_none())
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_13_rx0_can_send_ipv4_udp
+  * guarantee hlr_18_rx0_mavlink
   * @param api_EthernetFramesRxIn0 incoming event data port
   * @param api_EthernetFramesRxOut0 outgoing event data port
+  * @param api_MAVLinkFramesRxOut0 outgoing event data port
   */
-pub fn compute_spec_hlr_13_rx0_can_send_ipv4_udp_guarantee(
+pub fn compute_spec_hlr_18_rx0_mavlink_guarantee(
   api_EthernetFramesRxIn0: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut0: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut0: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    api_EthernetFramesRxIn0.is_some() && GumboLib::valid_ipv4_udp_port(api_EthernetFramesRxIn0.unwrap()),
-    api_EthernetFramesRxOut0.is_some() &&
-      (api_EthernetFramesRxIn0.unwrap() == api_EthernetFramesRxOut0.unwrap()))
+    api_EthernetFramesRxIn0.is_some() && GumboLib::valid_ardupilot_udp(api_EthernetFramesRxIn0.unwrap()),
+    api_EthernetFramesRxOut0.is_none() && api_MAVLinkFramesRxOut0.is_some() &&
+      (api_MAVLinkFramesRxOut0.unwrap().ethernet_frame == api_EthernetFramesRxIn0.unwrap()) &&
+      (api_MAVLinkFramesRxOut0.unwrap().payload_offset == GumboLib::udp_payload_offset()) &&
+      (api_MAVLinkFramesRxOut0.unwrap().payload_length == GumboLib::udp_payload_length(api_EthernetFramesRxIn0.unwrap())))
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_15_rx0_disallow
+  * guarantee hlr_06_15_rx0_drop
   * @param api_EthernetFramesRxIn0 incoming event data port
   * @param api_EthernetFramesRxOut0 outgoing event data port
+  * @param api_MAVLinkFramesRxOut0 outgoing event data port
   */
-pub fn compute_spec_hlr_15_rx0_disallow_guarantee(
+pub fn compute_spec_hlr_06_15_rx0_drop_guarantee(
   api_EthernetFramesRxIn0: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut0: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut0: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
     api_EthernetFramesRxIn0.is_some() && !(GumboLib::rx_allow_outbound_frame(api_EthernetFramesRxIn0.unwrap())),
-    api_EthernetFramesRxOut0.is_none())
+    api_EthernetFramesRxOut0.is_none() && api_MAVLinkFramesRxOut0.is_none())
 }
 
 /** Compute Entrypoint Contract
@@ -82,75 +275,72 @@ pub fn compute_spec_hlr_15_rx0_disallow_guarantee(
   * guarantee hlr_17_rx0_no_input
   * @param api_EthernetFramesRxIn0 incoming event data port
   * @param api_EthernetFramesRxOut0 outgoing event data port
+  * @param api_MAVLinkFramesRxOut0 outgoing event data port
   */
 pub fn compute_spec_hlr_17_rx0_no_input_guarantee(
   api_EthernetFramesRxIn0: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut0: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
-{
-  api_EthernetFramesRxIn0.is_some() | api_EthernetFramesRxOut0.is_none()
-}
-
-/** Compute Entrypoint Contract
-  *
-  * guarantee hlr_05_rx1_can_send_arp
-  * @param api_EthernetFramesRxIn1 incoming event data port
-  * @param api_EthernetFramesRxOut1 outgoing event data port
-  */
-pub fn compute_spec_hlr_05_rx1_can_send_arp_guarantee(
-  api_EthernetFramesRxIn1: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut1: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut0: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    api_EthernetFramesRxIn1.is_some() && GumboLib::valid_arp(api_EthernetFramesRxIn1.unwrap()),
-    api_EthernetFramesRxOut1.is_some() &&
-      (api_EthernetFramesRxIn1.unwrap() == api_EthernetFramesRxOut1.unwrap()))
+    !(api_EthernetFramesRxIn0.is_some()),
+    api_EthernetFramesRxOut0.is_none() && api_MAVLinkFramesRxOut0.is_none())
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_06_rx1_can_send_ipv4_tcp
+  * guarantee hlr_05_13_rx1_direct
   * @param api_EthernetFramesRxIn1 incoming event data port
   * @param api_EthernetFramesRxOut1 outgoing event data port
+  * @param api_MAVLinkFramesRxOut1 outgoing event data port
   */
-pub fn compute_spec_hlr_06_rx1_can_send_ipv4_tcp_guarantee(
+pub fn compute_spec_hlr_05_13_rx1_direct_guarantee(
   api_EthernetFramesRxIn1: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut1: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut1: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    api_EthernetFramesRxIn1.is_some() && GumboLib::valid_ipv4_tcp_port(api_EthernetFramesRxIn1.unwrap()),
+    api_EthernetFramesRxIn1.is_some() && GumboLib::rx_direct_frame(api_EthernetFramesRxIn1.unwrap()),
     api_EthernetFramesRxOut1.is_some() &&
-      (api_EthernetFramesRxIn1.unwrap() == api_EthernetFramesRxOut1.unwrap()))
+      (api_EthernetFramesRxOut1.unwrap() == api_EthernetFramesRxIn1.unwrap()) &&
+      api_MAVLinkFramesRxOut1.is_none())
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_13_rx1_can_send_ipv4_udp
+  * guarantee hlr_18_rx1_mavlink
   * @param api_EthernetFramesRxIn1 incoming event data port
   * @param api_EthernetFramesRxOut1 outgoing event data port
+  * @param api_MAVLinkFramesRxOut1 outgoing event data port
   */
-pub fn compute_spec_hlr_13_rx1_can_send_ipv4_udp_guarantee(
+pub fn compute_spec_hlr_18_rx1_mavlink_guarantee(
   api_EthernetFramesRxIn1: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut1: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut1: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    api_EthernetFramesRxIn1.is_some() && GumboLib::valid_ipv4_udp_port(api_EthernetFramesRxIn1.unwrap()),
-    api_EthernetFramesRxOut1.is_some() &&
-      (api_EthernetFramesRxIn1.unwrap() == api_EthernetFramesRxOut1.unwrap()))
+    api_EthernetFramesRxIn1.is_some() && GumboLib::valid_ardupilot_udp(api_EthernetFramesRxIn1.unwrap()),
+    api_EthernetFramesRxOut1.is_none() && api_MAVLinkFramesRxOut1.is_some() &&
+      (api_MAVLinkFramesRxOut1.unwrap().ethernet_frame == api_EthernetFramesRxIn1.unwrap()) &&
+      (api_MAVLinkFramesRxOut1.unwrap().payload_offset == GumboLib::udp_payload_offset()) &&
+      (api_MAVLinkFramesRxOut1.unwrap().payload_length == GumboLib::udp_payload_length(api_EthernetFramesRxIn1.unwrap())))
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_15_rx1_disallow
+  * guarantee hlr_06_15_rx1_drop
   * @param api_EthernetFramesRxIn1 incoming event data port
   * @param api_EthernetFramesRxOut1 outgoing event data port
+  * @param api_MAVLinkFramesRxOut1 outgoing event data port
   */
-pub fn compute_spec_hlr_15_rx1_disallow_guarantee(
+pub fn compute_spec_hlr_06_15_rx1_drop_guarantee(
   api_EthernetFramesRxIn1: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut1: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut1: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
     api_EthernetFramesRxIn1.is_some() && !(GumboLib::rx_allow_outbound_frame(api_EthernetFramesRxIn1.unwrap())),
-    api_EthernetFramesRxOut1.is_none())
+    api_EthernetFramesRxOut1.is_none() && api_MAVLinkFramesRxOut1.is_none())
 }
 
 /** Compute Entrypoint Contract
@@ -158,75 +348,72 @@ pub fn compute_spec_hlr_15_rx1_disallow_guarantee(
   * guarantee hlr_17_rx1_no_input
   * @param api_EthernetFramesRxIn1 incoming event data port
   * @param api_EthernetFramesRxOut1 outgoing event data port
+  * @param api_MAVLinkFramesRxOut1 outgoing event data port
   */
 pub fn compute_spec_hlr_17_rx1_no_input_guarantee(
   api_EthernetFramesRxIn1: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut1: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
-{
-  api_EthernetFramesRxIn1.is_some() | api_EthernetFramesRxOut1.is_none()
-}
-
-/** Compute Entrypoint Contract
-  *
-  * guarantee hlr_05_rx2_can_send_arp
-  * @param api_EthernetFramesRxIn2 incoming event data port
-  * @param api_EthernetFramesRxOut2 outgoing event data port
-  */
-pub fn compute_spec_hlr_05_rx2_can_send_arp_guarantee(
-  api_EthernetFramesRxIn2: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut2: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut1: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    api_EthernetFramesRxIn2.is_some() && GumboLib::valid_arp(api_EthernetFramesRxIn2.unwrap()),
-    api_EthernetFramesRxOut2.is_some() &&
-      (api_EthernetFramesRxIn2.unwrap() == api_EthernetFramesRxOut2.unwrap()))
+    !(api_EthernetFramesRxIn1.is_some()),
+    api_EthernetFramesRxOut1.is_none() && api_MAVLinkFramesRxOut1.is_none())
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_06_rx2_can_send_ipv4_tcp
+  * guarantee hlr_05_13_rx2_direct
   * @param api_EthernetFramesRxIn2 incoming event data port
   * @param api_EthernetFramesRxOut2 outgoing event data port
+  * @param api_MAVLinkFramesRxOut2 outgoing event data port
   */
-pub fn compute_spec_hlr_06_rx2_can_send_ipv4_tcp_guarantee(
+pub fn compute_spec_hlr_05_13_rx2_direct_guarantee(
   api_EthernetFramesRxIn2: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut2: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut2: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    api_EthernetFramesRxIn2.is_some() && GumboLib::valid_ipv4_tcp_port(api_EthernetFramesRxIn2.unwrap()),
+    api_EthernetFramesRxIn2.is_some() && GumboLib::rx_direct_frame(api_EthernetFramesRxIn2.unwrap()),
     api_EthernetFramesRxOut2.is_some() &&
-      (api_EthernetFramesRxIn2.unwrap() == api_EthernetFramesRxOut2.unwrap()))
+      (api_EthernetFramesRxOut2.unwrap() == api_EthernetFramesRxIn2.unwrap()) &&
+      api_MAVLinkFramesRxOut2.is_none())
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_13_rx2_can_send_ipv4_udp
+  * guarantee hlr_18_rx2_mavlink
   * @param api_EthernetFramesRxIn2 incoming event data port
   * @param api_EthernetFramesRxOut2 outgoing event data port
+  * @param api_MAVLinkFramesRxOut2 outgoing event data port
   */
-pub fn compute_spec_hlr_13_rx2_can_send_ipv4_udp_guarantee(
+pub fn compute_spec_hlr_18_rx2_mavlink_guarantee(
   api_EthernetFramesRxIn2: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut2: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut2: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    api_EthernetFramesRxIn2.is_some() && GumboLib::valid_ipv4_udp_port(api_EthernetFramesRxIn2.unwrap()),
-    api_EthernetFramesRxOut2.is_some() &&
-      (api_EthernetFramesRxIn2.unwrap() == api_EthernetFramesRxOut2.unwrap()))
+    api_EthernetFramesRxIn2.is_some() && GumboLib::valid_ardupilot_udp(api_EthernetFramesRxIn2.unwrap()),
+    api_EthernetFramesRxOut2.is_none() && api_MAVLinkFramesRxOut2.is_some() &&
+      (api_MAVLinkFramesRxOut2.unwrap().ethernet_frame == api_EthernetFramesRxIn2.unwrap()) &&
+      (api_MAVLinkFramesRxOut2.unwrap().payload_offset == GumboLib::udp_payload_offset()) &&
+      (api_MAVLinkFramesRxOut2.unwrap().payload_length == GumboLib::udp_payload_length(api_EthernetFramesRxIn2.unwrap())))
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_15_rx2_disallow
+  * guarantee hlr_06_15_rx2_drop
   * @param api_EthernetFramesRxIn2 incoming event data port
   * @param api_EthernetFramesRxOut2 outgoing event data port
+  * @param api_MAVLinkFramesRxOut2 outgoing event data port
   */
-pub fn compute_spec_hlr_15_rx2_disallow_guarantee(
+pub fn compute_spec_hlr_06_15_rx2_drop_guarantee(
   api_EthernetFramesRxIn2: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut2: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut2: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
     api_EthernetFramesRxIn2.is_some() && !(GumboLib::rx_allow_outbound_frame(api_EthernetFramesRxIn2.unwrap())),
-    api_EthernetFramesRxOut2.is_none())
+    api_EthernetFramesRxOut2.is_none() && api_MAVLinkFramesRxOut2.is_none())
 }
 
 /** Compute Entrypoint Contract
@@ -234,75 +421,72 @@ pub fn compute_spec_hlr_15_rx2_disallow_guarantee(
   * guarantee hlr_17_rx2_no_input
   * @param api_EthernetFramesRxIn2 incoming event data port
   * @param api_EthernetFramesRxOut2 outgoing event data port
+  * @param api_MAVLinkFramesRxOut2 outgoing event data port
   */
 pub fn compute_spec_hlr_17_rx2_no_input_guarantee(
   api_EthernetFramesRxIn2: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut2: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
-{
-  api_EthernetFramesRxIn2.is_some() | api_EthernetFramesRxOut2.is_none()
-}
-
-/** Compute Entrypoint Contract
-  *
-  * guarantee hlr_05_rx3_can_send_arp
-  * @param api_EthernetFramesRxIn3 incoming event data port
-  * @param api_EthernetFramesRxOut3 outgoing event data port
-  */
-pub fn compute_spec_hlr_05_rx3_can_send_arp_guarantee(
-  api_EthernetFramesRxIn3: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut2: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    api_EthernetFramesRxIn3.is_some() && GumboLib::valid_arp(api_EthernetFramesRxIn3.unwrap()),
-    api_EthernetFramesRxOut3.is_some() &&
-      (api_EthernetFramesRxIn3.unwrap() == api_EthernetFramesRxOut3.unwrap()))
+    !(api_EthernetFramesRxIn2.is_some()),
+    api_EthernetFramesRxOut2.is_none() && api_MAVLinkFramesRxOut2.is_none())
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_06_rx3_can_send_ipv4_tcp
+  * guarantee hlr_05_13_rx3_direct
   * @param api_EthernetFramesRxIn3 incoming event data port
   * @param api_EthernetFramesRxOut3 outgoing event data port
+  * @param api_MAVLinkFramesRxOut3 outgoing event data port
   */
-pub fn compute_spec_hlr_06_rx3_can_send_ipv4_tcp_guarantee(
+pub fn compute_spec_hlr_05_13_rx3_direct_guarantee(
   api_EthernetFramesRxIn3: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    api_EthernetFramesRxIn3.is_some() && GumboLib::valid_ipv4_tcp_port(api_EthernetFramesRxIn3.unwrap()),
+    api_EthernetFramesRxIn3.is_some() && GumboLib::rx_direct_frame(api_EthernetFramesRxIn3.unwrap()),
     api_EthernetFramesRxOut3.is_some() &&
-      (api_EthernetFramesRxIn3.unwrap() == api_EthernetFramesRxOut3.unwrap()))
+      (api_EthernetFramesRxOut3.unwrap() == api_EthernetFramesRxIn3.unwrap()) &&
+      api_MAVLinkFramesRxOut3.is_none())
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_13_rx3_can_send_ipv4_udp
+  * guarantee hlr_18_rx3_mavlink
   * @param api_EthernetFramesRxIn3 incoming event data port
   * @param api_EthernetFramesRxOut3 outgoing event data port
+  * @param api_MAVLinkFramesRxOut3 outgoing event data port
   */
-pub fn compute_spec_hlr_13_rx3_can_send_ipv4_udp_guarantee(
+pub fn compute_spec_hlr_18_rx3_mavlink_guarantee(
   api_EthernetFramesRxIn3: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    api_EthernetFramesRxIn3.is_some() && GumboLib::valid_ipv4_udp_port(api_EthernetFramesRxIn3.unwrap()),
-    api_EthernetFramesRxOut3.is_some() &&
-      (api_EthernetFramesRxIn3.unwrap() == api_EthernetFramesRxOut3.unwrap()))
+    api_EthernetFramesRxIn3.is_some() && GumboLib::valid_ardupilot_udp(api_EthernetFramesRxIn3.unwrap()),
+    api_EthernetFramesRxOut3.is_none() && api_MAVLinkFramesRxOut3.is_some() &&
+      (api_MAVLinkFramesRxOut3.unwrap().ethernet_frame == api_EthernetFramesRxIn3.unwrap()) &&
+      (api_MAVLinkFramesRxOut3.unwrap().payload_offset == GumboLib::udp_payload_offset()) &&
+      (api_MAVLinkFramesRxOut3.unwrap().payload_length == GumboLib::udp_payload_length(api_EthernetFramesRxIn3.unwrap())))
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_15_rx3_disallow
+  * guarantee hlr_06_15_rx3_drop
   * @param api_EthernetFramesRxIn3 incoming event data port
   * @param api_EthernetFramesRxOut3 outgoing event data port
+  * @param api_MAVLinkFramesRxOut3 outgoing event data port
   */
-pub fn compute_spec_hlr_15_rx3_disallow_guarantee(
+pub fn compute_spec_hlr_06_15_rx3_drop_guarantee(
   api_EthernetFramesRxIn3: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
     api_EthernetFramesRxIn3.is_some() && !(GumboLib::rx_allow_outbound_frame(api_EthernetFramesRxIn3.unwrap())),
-    api_EthernetFramesRxOut3.is_none())
+    api_EthernetFramesRxOut3.is_none() && api_MAVLinkFramesRxOut3.is_none())
 }
 
 /** Compute Entrypoint Contract
@@ -310,12 +494,16 @@ pub fn compute_spec_hlr_15_rx3_disallow_guarantee(
   * guarantee hlr_17_rx3_no_input
   * @param api_EthernetFramesRxIn3 incoming event data port
   * @param api_EthernetFramesRxOut3 outgoing event data port
+  * @param api_MAVLinkFramesRxOut3 outgoing event data port
   */
 pub fn compute_spec_hlr_17_rx3_no_input_guarantee(
   api_EthernetFramesRxIn3: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
-  api_EthernetFramesRxIn3.is_some() | api_EthernetFramesRxOut3.is_none()
+  implies!(
+    !(api_EthernetFramesRxIn3.is_some()),
+    api_EthernetFramesRxOut3.is_none() && api_MAVLinkFramesRxOut3.is_none())
 }
 
 /** CEP-T-Guar: Top-level guarantee contracts for RxFirewall's compute entrypoint
@@ -328,6 +516,10 @@ pub fn compute_spec_hlr_17_rx3_no_input_guarantee(
   * @param api_EthernetFramesRxOut1 outgoing event data port
   * @param api_EthernetFramesRxOut2 outgoing event data port
   * @param api_EthernetFramesRxOut3 outgoing event data port
+  * @param api_MAVLinkFramesRxOut0 outgoing event data port
+  * @param api_MAVLinkFramesRxOut1 outgoing event data port
+  * @param api_MAVLinkFramesRxOut2 outgoing event data port
+  * @param api_MAVLinkFramesRxOut3 outgoing event data port
   */
 pub fn compute_CEP_T_Guar(
   api_EthernetFramesRxIn0: Option<open_platform_Data_Model::RawEthernetMessage>,
@@ -337,30 +529,30 @@ pub fn compute_CEP_T_Guar(
   api_EthernetFramesRxOut0: Option<open_platform_Data_Model::RawEthernetMessage>,
   api_EthernetFramesRxOut1: Option<open_platform_Data_Model::RawEthernetMessage>,
   api_EthernetFramesRxOut2: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_MAVLinkFramesRxOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_MAVLinkFramesRxOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_MAVLinkFramesRxOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
-  let r0: bool = compute_spec_hlr_05_rx0_can_send_arp_guarantee(api_EthernetFramesRxIn0, api_EthernetFramesRxOut0);
-  let r1: bool = compute_spec_hlr_06_rx0_can_send_ipv4_tcp_guarantee(api_EthernetFramesRxIn0, api_EthernetFramesRxOut0);
-  let r2: bool = compute_spec_hlr_13_rx0_can_send_ipv4_udp_guarantee(api_EthernetFramesRxIn0, api_EthernetFramesRxOut0);
-  let r3: bool = compute_spec_hlr_15_rx0_disallow_guarantee(api_EthernetFramesRxIn0, api_EthernetFramesRxOut0);
-  let r4: bool = compute_spec_hlr_17_rx0_no_input_guarantee(api_EthernetFramesRxIn0, api_EthernetFramesRxOut0);
-  let r5: bool = compute_spec_hlr_05_rx1_can_send_arp_guarantee(api_EthernetFramesRxIn1, api_EthernetFramesRxOut1);
-  let r6: bool = compute_spec_hlr_06_rx1_can_send_ipv4_tcp_guarantee(api_EthernetFramesRxIn1, api_EthernetFramesRxOut1);
-  let r7: bool = compute_spec_hlr_13_rx1_can_send_ipv4_udp_guarantee(api_EthernetFramesRxIn1, api_EthernetFramesRxOut1);
-  let r8: bool = compute_spec_hlr_15_rx1_disallow_guarantee(api_EthernetFramesRxIn1, api_EthernetFramesRxOut1);
-  let r9: bool = compute_spec_hlr_17_rx1_no_input_guarantee(api_EthernetFramesRxIn1, api_EthernetFramesRxOut1);
-  let r10: bool = compute_spec_hlr_05_rx2_can_send_arp_guarantee(api_EthernetFramesRxIn2, api_EthernetFramesRxOut2);
-  let r11: bool = compute_spec_hlr_06_rx2_can_send_ipv4_tcp_guarantee(api_EthernetFramesRxIn2, api_EthernetFramesRxOut2);
-  let r12: bool = compute_spec_hlr_13_rx2_can_send_ipv4_udp_guarantee(api_EthernetFramesRxIn2, api_EthernetFramesRxOut2);
-  let r13: bool = compute_spec_hlr_15_rx2_disallow_guarantee(api_EthernetFramesRxIn2, api_EthernetFramesRxOut2);
-  let r14: bool = compute_spec_hlr_17_rx2_no_input_guarantee(api_EthernetFramesRxIn2, api_EthernetFramesRxOut2);
-  let r15: bool = compute_spec_hlr_05_rx3_can_send_arp_guarantee(api_EthernetFramesRxIn3, api_EthernetFramesRxOut3);
-  let r16: bool = compute_spec_hlr_06_rx3_can_send_ipv4_tcp_guarantee(api_EthernetFramesRxIn3, api_EthernetFramesRxOut3);
-  let r17: bool = compute_spec_hlr_13_rx3_can_send_ipv4_udp_guarantee(api_EthernetFramesRxIn3, api_EthernetFramesRxOut3);
-  let r18: bool = compute_spec_hlr_15_rx3_disallow_guarantee(api_EthernetFramesRxIn3, api_EthernetFramesRxOut3);
-  let r19: bool = compute_spec_hlr_17_rx3_no_input_guarantee(api_EthernetFramesRxIn3, api_EthernetFramesRxOut3);
+  let r0: bool = compute_spec_hlr_05_13_rx0_direct_guarantee(api_EthernetFramesRxIn0, api_EthernetFramesRxOut0, api_MAVLinkFramesRxOut0);
+  let r1: bool = compute_spec_hlr_18_rx0_mavlink_guarantee(api_EthernetFramesRxIn0, api_EthernetFramesRxOut0, api_MAVLinkFramesRxOut0);
+  let r2: bool = compute_spec_hlr_06_15_rx0_drop_guarantee(api_EthernetFramesRxIn0, api_EthernetFramesRxOut0, api_MAVLinkFramesRxOut0);
+  let r3: bool = compute_spec_hlr_17_rx0_no_input_guarantee(api_EthernetFramesRxIn0, api_EthernetFramesRxOut0, api_MAVLinkFramesRxOut0);
+  let r4: bool = compute_spec_hlr_05_13_rx1_direct_guarantee(api_EthernetFramesRxIn1, api_EthernetFramesRxOut1, api_MAVLinkFramesRxOut1);
+  let r5: bool = compute_spec_hlr_18_rx1_mavlink_guarantee(api_EthernetFramesRxIn1, api_EthernetFramesRxOut1, api_MAVLinkFramesRxOut1);
+  let r6: bool = compute_spec_hlr_06_15_rx1_drop_guarantee(api_EthernetFramesRxIn1, api_EthernetFramesRxOut1, api_MAVLinkFramesRxOut1);
+  let r7: bool = compute_spec_hlr_17_rx1_no_input_guarantee(api_EthernetFramesRxIn1, api_EthernetFramesRxOut1, api_MAVLinkFramesRxOut1);
+  let r8: bool = compute_spec_hlr_05_13_rx2_direct_guarantee(api_EthernetFramesRxIn2, api_EthernetFramesRxOut2, api_MAVLinkFramesRxOut2);
+  let r9: bool = compute_spec_hlr_18_rx2_mavlink_guarantee(api_EthernetFramesRxIn2, api_EthernetFramesRxOut2, api_MAVLinkFramesRxOut2);
+  let r10: bool = compute_spec_hlr_06_15_rx2_drop_guarantee(api_EthernetFramesRxIn2, api_EthernetFramesRxOut2, api_MAVLinkFramesRxOut2);
+  let r11: bool = compute_spec_hlr_17_rx2_no_input_guarantee(api_EthernetFramesRxIn2, api_EthernetFramesRxOut2, api_MAVLinkFramesRxOut2);
+  let r12: bool = compute_spec_hlr_05_13_rx3_direct_guarantee(api_EthernetFramesRxIn3, api_EthernetFramesRxOut3, api_MAVLinkFramesRxOut3);
+  let r13: bool = compute_spec_hlr_18_rx3_mavlink_guarantee(api_EthernetFramesRxIn3, api_EthernetFramesRxOut3, api_MAVLinkFramesRxOut3);
+  let r14: bool = compute_spec_hlr_06_15_rx3_drop_guarantee(api_EthernetFramesRxIn3, api_EthernetFramesRxOut3, api_MAVLinkFramesRxOut3);
+  let r15: bool = compute_spec_hlr_17_rx3_no_input_guarantee(api_EthernetFramesRxIn3, api_EthernetFramesRxOut3, api_MAVLinkFramesRxOut3);
 
-  return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8 && r9 && r10 && r11 && r12 && r13 && r14 && r15 && r16 && r17 && r18 && r19;
+  return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8 && r9 && r10 && r11 && r12 && r13 && r14 && r15;
 }
 
 /** CEP-Post: Compute Entrypoint Post-Condition for RxFirewall
@@ -373,6 +565,10 @@ pub fn compute_CEP_T_Guar(
   * @param api_EthernetFramesRxOut1 outgoing event data port
   * @param api_EthernetFramesRxOut2 outgoing event data port
   * @param api_EthernetFramesRxOut3 outgoing event data port
+  * @param api_MAVLinkFramesRxOut0 outgoing event data port
+  * @param api_MAVLinkFramesRxOut1 outgoing event data port
+  * @param api_MAVLinkFramesRxOut2 outgoing event data port
+  * @param api_MAVLinkFramesRxOut3 outgoing event data port
   */
 pub fn compute_CEP_Post(
   api_EthernetFramesRxIn0: Option<open_platform_Data_Model::RawEthernetMessage>,
@@ -382,10 +578,24 @@ pub fn compute_CEP_Post(
   api_EthernetFramesRxOut0: Option<open_platform_Data_Model::RawEthernetMessage>,
   api_EthernetFramesRxOut1: Option<open_platform_Data_Model::RawEthernetMessage>,
   api_EthernetFramesRxOut2: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>) -> bool
+  api_EthernetFramesRxOut3: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_MAVLinkFramesRxOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_MAVLinkFramesRxOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_MAVLinkFramesRxOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_MAVLinkFramesRxOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
-  // CEP-Guar: guarantee clauses of RxFirewall's compute entrypoint
-  let r0: bool = compute_CEP_T_Guar(api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3, api_EthernetFramesRxOut0, api_EthernetFramesRxOut1, api_EthernetFramesRxOut2, api_EthernetFramesRxOut3);
+  // I-Guar-Guard: Integration constraints for RxFirewall's outgoing ports
+  let r0: bool = I_Guar_Guard_EthernetFramesRxOut0(api_EthernetFramesRxOut0);
+  let r1: bool = I_Guar_Guard_EthernetFramesRxOut1(api_EthernetFramesRxOut1);
+  let r2: bool = I_Guar_Guard_EthernetFramesRxOut2(api_EthernetFramesRxOut2);
+  let r3: bool = I_Guar_Guard_EthernetFramesRxOut3(api_EthernetFramesRxOut3);
+  let r4: bool = I_Guar_Guard_MAVLinkFramesRxOut0(api_MAVLinkFramesRxOut0);
+  let r5: bool = I_Guar_Guard_MAVLinkFramesRxOut1(api_MAVLinkFramesRxOut1);
+  let r6: bool = I_Guar_Guard_MAVLinkFramesRxOut2(api_MAVLinkFramesRxOut2);
+  let r7: bool = I_Guar_Guard_MAVLinkFramesRxOut3(api_MAVLinkFramesRxOut3);
 
-  return r0;
+  // CEP-Guar: guarantee clauses of RxFirewall's compute entrypoint
+  let r8: bool = compute_CEP_T_Guar(api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3, api_EthernetFramesRxOut0, api_EthernetFramesRxOut1, api_EthernetFramesRxOut2, api_EthernetFramesRxOut3, api_MAVLinkFramesRxOut0, api_MAVLinkFramesRxOut1, api_MAVLinkFramesRxOut2, api_MAVLinkFramesRxOut3);
+
+  return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8;
 }
