@@ -55,4 +55,14 @@ Project: open_platform | Profile: audited | Updated: 2026-08-26
 | CodeGen.2 | done | 2026-08-26 | Iteration 1 selected the unbound inner system and failed; iteration 2 exposed missing new-component markers; iteration 3 generated successfully after marker reconciliation |
 | CodeGen.3 | done | 2026-08-26 | Output confirmed under project hamr/microkit; VMM/driver custom marker content preserved; generated fixme scratch removed; report status Success |
 | CodeGen.4 | n/a | 2026-08-26 | Existing generated project; first-generation build-script setup does not apply |
-| ChangeExec(CR-01).W1.CodeGen | in-progress | 2026-08-26 | Awaiting audited sub-workflow boundary approval before W2 implementation |
+| ChangeExec(CR-01).W1.CodeGen | done | 2026-08-26 | Audited sub-workflow boundary approved; W1 complete |
+| ChangeExec(CR-01).W1 | done | 2026-08-26 | Requirements, model, contracts, integration check, and CodeGen approved |
+| ChangeExec(CR-01).W2 | in-progress | 2026-08-26 | Starting affected-component implementation and verification |
+| CompDev(RxFirewall) | in-progress | 2026-08-26 | Generated code synchronized; implementation and test updates pending |
+| CompDev(RxFirewall).1 | done | 2026-08-26 | Model tipe-clean and CodeGen current; generated RxFirewall APIs include direct and bounded-MAVLink outputs |
+| CompGUMBOSpec(MAVLinkFirewall)-W2R1 | in-progress | 2026-08-26 | CompDev loop-back: moved MAVLink semantic spec functions from GumboLib into MAVLinkFirewall subclause at developer request |
+| CompGUMBOSpec(MAVLinkFirewall)-W2R1.1 | done | 2026-08-26 | Component owns mavlink_frame_valid, mavlink_firmware_flash_command, and derived mavlink_allowed; GumboLib retains valid_mavlink_carrier |
+| CompGUMBOSpec(MAVLinkFirewall)-W2R1.2 | done | 2026-08-26 | sireum hamr sysml tipe Platform.sysml: Well-formed |
+| CompGUMBOSpec(MAVLinkFirewall)-W2R1.3 | done | 2026-08-26 | Audit refreshed; zero AP-1–AP-9 findings and unchanged implementation proof obligations |
+| CompGUMBOSpec(MAVLinkFirewall)-W2R1.4 | in-progress | 2026-08-26 | Awaiting developer review of component-local spec-function refactor |
+| CompGUMBOSpec(MAVLinkFirewall)-W2R1.AP1 | pending | 2026-08-26 | Contract revision requires approval before CodeGen and CompDev resume |

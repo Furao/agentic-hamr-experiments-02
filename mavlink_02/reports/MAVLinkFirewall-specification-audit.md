@@ -16,12 +16,12 @@ input carrier, preserving the Ethernet frame and the payload boundary establishe
 RxFirewall. Integration guarantees export the context-independent `mavlink_allowed`
 invariant on every output lane.
 
-This is a specification-only audit because the MAVLinkFirewall generated crate does
-not yet exist. The abstract `mavlink_frame_valid` and
+The component-local abstract `mavlink_frame_valid` and
 `mavlink_firmware_flash_command` predicates deliberately state the security boundary
-without duplicating a variable-length MAVLink parser in GUMBO. Their executable and
-verified definitions remain W2 proof obligations, and CodeGen compatibility must be
-confirmed in W1.
+without duplicating a variable-length MAVLink parser in GUMBO. The component-local
+`mavlink_allowed` function composes them with the reusable
+`GumboLib::valid_mavlink_carrier` networking boundary. Their executable and verified
+definitions remain W2 proof obligations.
 
 ## 2. Findings
 
@@ -58,10 +58,11 @@ behavior.
 
 ## 5. Unscored Observations
 
-`mavlink_frame_valid` and `mavlink_firmware_flash_command` are bodyless `@spec`
-predicates. They make the intended contract readable and avoid replicated wire-format
-offsets, but do not themselves prove that an implementation parses MAVLink framing,
-dialect CRC-extra values, command envelopes, or secure-command operation 7 correctly.
+The MAVLinkFirewall-local `mavlink_frame_valid` and
+`mavlink_firmware_flash_command` functions are bodyless `@spec` predicates. They make
+the intended contract readable and avoid replicated wire-format offsets, but do not
+themselves prove that an implementation parses MAVLink framing, dialect CRC-extra
+values, command envelopes, or secure-command operation 7 correctly.
 The verified MAVLink core must refine these predicates, and its tests must bind them
 to concrete byte-level cases. This limitation is outside AP-1–AP-9 and is therefore
 not scored.

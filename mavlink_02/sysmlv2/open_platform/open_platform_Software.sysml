@@ -138,64 +138,74 @@ package open_platform_Software {
         attribute :>> Implementation_Language = Rust;
 
         language "GUMBO" /*{
+        functions
+            @spec def mavlink_frame_valid(msg: MAVLinkUDPMessage_Impl): Base_Types::Boolean;
+
+            @spec def mavlink_firmware_flash_command(msg: MAVLinkUDPMessage_Impl): Base_Types::Boolean;
+
+            def mavlink_allowed(msg: MAVLinkUDPMessage_Impl): Base_Types::Boolean :=
+                GumboLib::GUMBO__Library::valid_mavlink_carrier(msg) and
+                mavlink_frame_valid(msg) and
+                not mavlink_firmware_flash_command(msg);
+
         integration
             guarantee hlr_22_output0_allowed:
-                GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesOut0);
+                mavlink_allowed(EthernetFramesOut0);
             guarantee hlr_22_output1_allowed:
-                GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesOut1);
+                mavlink_allowed(EthernetFramesOut1);
             guarantee hlr_22_output2_allowed:
-                GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesOut2);
+                mavlink_allowed(EthernetFramesOut2);
             guarantee hlr_22_output3_allowed:
-                GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesOut3);
+                mavlink_allowed(EthernetFramesOut3);
 
         compute
             guarantee hlr_22_23_lane0_allow:
-                (HasEvent(EthernetFramesIn0) and GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesIn0)) implies
+                (HasEvent(EthernetFramesIn0) and mavlink_allowed(EthernetFramesIn0)) implies
                 (HasEvent(EthernetFramesOut0) and EthernetFramesOut0 == EthernetFramesIn0);
             guarantee hlr_24_lane0_deny_flash:
                 (HasEvent(EthernetFramesIn0) and GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn0) and
-                 GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn0) and
-                 GumboLib::GUMBO__Library::mavlink_firmware_flash_command(EthernetFramesIn0)) implies NoSend(EthernetFramesOut0);
+                 mavlink_frame_valid(EthernetFramesIn0) and
+                 mavlink_firmware_flash_command(EthernetFramesIn0)) implies NoSend(EthernetFramesOut0);
             guarantee hlr_25_26_lane0_invalid_or_no_input:
                 ((not HasEvent(EthernetFramesIn0)) or
                  (HasEvent(EthernetFramesIn0) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn0) and
-                  GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn0)))) implies NoSend(EthernetFramesOut0);
+                  mavlink_frame_valid(EthernetFramesIn0)))) implies NoSend(EthernetFramesOut0);
 
             guarantee hlr_22_23_lane1_allow:
-                (HasEvent(EthernetFramesIn1) and GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesIn1)) implies
+                (HasEvent(EthernetFramesIn1) and mavlink_allowed(EthernetFramesIn1)) implies
                 (HasEvent(EthernetFramesOut1) and EthernetFramesOut1 == EthernetFramesIn1);
             guarantee hlr_24_lane1_deny_flash:
                 (HasEvent(EthernetFramesIn1) and GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn1) and
-                 GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn1) and
-                 GumboLib::GUMBO__Library::mavlink_firmware_flash_command(EthernetFramesIn1)) implies NoSend(EthernetFramesOut1);
+                 mavlink_frame_valid(EthernetFramesIn1) and
+                 mavlink_firmware_flash_command(EthernetFramesIn1)) implies NoSend(EthernetFramesOut1);
             guarantee hlr_25_26_lane1_invalid_or_no_input:
                 ((not HasEvent(EthernetFramesIn1)) or
                  (HasEvent(EthernetFramesIn1) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn1) and
-                  GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn1)))) implies NoSend(EthernetFramesOut1);
+                  mavlink_frame_valid(EthernetFramesIn1)))) implies NoSend(EthernetFramesOut1);
 
             guarantee hlr_22_23_lane2_allow:
-                (HasEvent(EthernetFramesIn2) and GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesIn2)) implies
+                (HasEvent(EthernetFramesIn2) and mavlink_allowed(EthernetFramesIn2)) implies
                 (HasEvent(EthernetFramesOut2) and EthernetFramesOut2 == EthernetFramesIn2);
             guarantee hlr_24_lane2_deny_flash:
                 (HasEvent(EthernetFramesIn2) and GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn2) and
-                 GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn2) and
-                 GumboLib::GUMBO__Library::mavlink_firmware_flash_command(EthernetFramesIn2)) implies NoSend(EthernetFramesOut2);
+                 mavlink_frame_valid(EthernetFramesIn2) and
+                 mavlink_firmware_flash_command(EthernetFramesIn2)) implies NoSend(EthernetFramesOut2);
             guarantee hlr_25_26_lane2_invalid_or_no_input:
                 ((not HasEvent(EthernetFramesIn2)) or
                  (HasEvent(EthernetFramesIn2) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn2) and
-                  GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn2)))) implies NoSend(EthernetFramesOut2);
+                  mavlink_frame_valid(EthernetFramesIn2)))) implies NoSend(EthernetFramesOut2);
 
             guarantee hlr_22_23_lane3_allow:
-                (HasEvent(EthernetFramesIn3) and GumboLib::GUMBO__Library::mavlink_allowed(EthernetFramesIn3)) implies
+                (HasEvent(EthernetFramesIn3) and mavlink_allowed(EthernetFramesIn3)) implies
                 (HasEvent(EthernetFramesOut3) and EthernetFramesOut3 == EthernetFramesIn3);
             guarantee hlr_24_lane3_deny_flash:
                 (HasEvent(EthernetFramesIn3) and GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn3) and
-                 GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn3) and
-                 GumboLib::GUMBO__Library::mavlink_firmware_flash_command(EthernetFramesIn3)) implies NoSend(EthernetFramesOut3);
+                 mavlink_frame_valid(EthernetFramesIn3) and
+                 mavlink_firmware_flash_command(EthernetFramesIn3)) implies NoSend(EthernetFramesOut3);
             guarantee hlr_25_26_lane3_invalid_or_no_input:
                 ((not HasEvent(EthernetFramesIn3)) or
                  (HasEvent(EthernetFramesIn3) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn3) and
-                  GumboLib::GUMBO__Library::mavlink_frame_valid(EthernetFramesIn3)))) implies NoSend(EthernetFramesOut3);
+                  mavlink_frame_valid(EthernetFramesIn3)))) implies NoSend(EthernetFramesOut3);
         }*/
     }
 
