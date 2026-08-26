@@ -23,10 +23,17 @@ Project: open_platform | Profile: audited | Updated: 2026-08-26
 | SysPlanAndReq.4 | done | 2026-08-26 | Data dictionary defines networking/MAVLink fields, ranges, routing, lanes, and timing |
 | SysPlanAndReq.AP1 | done | 2026-08-26 | Developer approved ConOps, SysReqs, CompReqs, and DataDict |
 | ChangeExec(CR-01).W1.SysPlanAndReq | done | 2026-08-26 | Audited sub-workflow boundary approved; continuing to delta SysModeling |
-| SysModeling | blocked | 2026-08-26 | Iteration 1 type-clean; awaiting renewed SysModeling.AP1 approval |
+| SysModeling | done | 2026-08-26 | Exit criteria met after bounded-payload iteration; architecture approved |
 | SysModeling.1 | done | 2026-08-26 | Existing model-package structure retained |
 | SysModeling.2 | done | 2026-08-26 | Iteration 1: added MAVLinkUDPMessage_Impl with preserved frame and payload offset/length |
 | SysModeling.3 | done | 2026-08-26 | Iteration 1: Rx-to-MAVLink ports use bounded-payload carrier; MAVLink-to-VMM remains RawEthernetMessage |
 | SysModeling.4 | done | 2026-08-26 | Added process wrapper, domain 6, Max_Domain 7, and eight receive-path connections |
 | SysModeling.5 | done | 2026-08-26 | Iteration 1: renamed reserved field frame to ethernet_frame; tipe Well-formed |
-| SysModeling.AP1 | blocked | 2026-08-26 | Revised bounded-payload architecture awaiting developer approval |
+| SysModeling.AP1 | done | 2026-08-26 | Developer approved revised bounded-payload architecture |
+| ChangeExec(CR-01).W1.SysModeling | done | 2026-08-26 | Audited sub-workflow boundary approved; continuing to RxFirewall contracts |
+| CompGUMBOSpec(RxFirewall) | blocked | 2026-08-26 | Getter-refactored contract type-clean; awaiting renewed CompGUMBOSpec.AP1 approval |
+| CompGUMBOSpec(RxFirewall).1 | done | 2026-08-26 | Replaced TCP contract with exhaustive direct/MAVLink/drop/no-input clauses and output invariants |
+| CompGUMBOSpec(RxFirewall).2 | done | 2026-08-26 | Iteration 1 getter refactor; sireum hamr sysml tipe: Well-formed |
+| CompGUMBOSpec(RxFirewall).3 | done | 2026-08-26 | audit-gumbo-contracts: zero AP-1–AP-9 findings; generated GUMBOX noted stale until CodeGen |
+| CompGUMBOSpec(RxFirewall).4 | done | 2026-08-26 | Review feedback: centralized layout and length logic in getter/spec functions; corrected ipv4_length to network byte order |
+| CompGUMBOSpec(RxFirewall).AP1 | blocked | 2026-08-26 | Getter-refactored contract awaiting developer approval |

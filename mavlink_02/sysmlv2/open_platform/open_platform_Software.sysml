@@ -40,68 +40,84 @@ package open_platform_Software {
         attribute :>> Implementation_Language = Rust;			
 
         language "GUMBO" /*{
+        integration
+            guarantee hlr_05_13_direct_out0:
+                GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxOut0);
+            guarantee hlr_05_13_direct_out1:
+                GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxOut1);
+            guarantee hlr_05_13_direct_out2:
+                GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxOut2);
+            guarantee hlr_05_13_direct_out3:
+                GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxOut3);
+            guarantee hlr_18_mavlink_out0:
+                GumboLib::GUMBO__Library::valid_mavlink_carrier(MAVLinkFramesRxOut0);
+            guarantee hlr_18_mavlink_out1:
+                GumboLib::GUMBO__Library::valid_mavlink_carrier(MAVLinkFramesRxOut1);
+            guarantee hlr_18_mavlink_out2:
+                GumboLib::GUMBO__Library::valid_mavlink_carrier(MAVLinkFramesRxOut2);
+            guarantee hlr_18_mavlink_out3:
+                GumboLib::GUMBO__Library::valid_mavlink_carrier(MAVLinkFramesRxOut3);
 
         compute
-
-            guarantee hlr_05_rx0_can_send_arp:
-            ((HasEvent(EthernetFramesRxIn0) and GumboLib::GUMBO__Library::valid_arp(EthernetFramesRxIn0)) implies 
-                (HasEvent(EthernetFramesRxOut0) and (EthernetFramesRxIn0 == EthernetFramesRxOut0)));
-            guarantee hlr_06_rx0_can_send_ipv4_tcp:
-            ((HasEvent(EthernetFramesRxIn0) and GumboLib::GUMBO__Library::valid_ipv4_tcp_port(EthernetFramesRxIn0)) implies 
-                (HasEvent(EthernetFramesRxOut0) and (EthernetFramesRxIn0 == EthernetFramesRxOut0)));
-            guarantee hlr_13_rx0_can_send_ipv4_udp:
-            ((HasEvent(EthernetFramesRxIn0) and GumboLib::GUMBO__Library::valid_ipv4_udp_port(EthernetFramesRxIn0)) implies 
-                (HasEvent(EthernetFramesRxOut0) and (EthernetFramesRxIn0 == EthernetFramesRxOut0)));
-            guarantee hlr_15_rx0_disallow:
-            (HasEvent(EthernetFramesRxIn0) and not GumboLib::GUMBO__Library::rx_allow_outbound_frame(EthernetFramesRxIn0)) implies 
-                (NoSend(EthernetFramesRxOut0));
+            guarantee hlr_05_13_rx0_direct:
+                (HasEvent(EthernetFramesRxIn0) and GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxIn0)) implies
+                (HasEvent(EthernetFramesRxOut0) and EthernetFramesRxOut0 == EthernetFramesRxIn0 and NoSend(MAVLinkFramesRxOut0));
+            guarantee hlr_18_rx0_mavlink:
+                (HasEvent(EthernetFramesRxIn0) and GumboLib::GUMBO__Library::valid_ardupilot_udp(EthernetFramesRxIn0)) implies
+                (NoSend(EthernetFramesRxOut0) and HasEvent(MAVLinkFramesRxOut0) and
+                 MAVLinkFramesRxOut0.ethernet_frame == EthernetFramesRxIn0 and
+                 MAVLinkFramesRxOut0.payload_offset == GumboLib::GUMBO__Library::udp_payload_offset() and
+                 MAVLinkFramesRxOut0.payload_length == GumboLib::GUMBO__Library::udp_payload_length(EthernetFramesRxIn0));
+            guarantee hlr_06_15_rx0_drop:
+                (HasEvent(EthernetFramesRxIn0) and not GumboLib::GUMBO__Library::rx_allow_outbound_frame(EthernetFramesRxIn0)) implies
+                (NoSend(EthernetFramesRxOut0) and NoSend(MAVLinkFramesRxOut0));
             guarantee hlr_17_rx0_no_input:
-            (HasEvent(EthernetFramesRxIn0) | NoSend(EthernetFramesRxOut0));
+                (not HasEvent(EthernetFramesRxIn0)) implies (NoSend(EthernetFramesRxOut0) and NoSend(MAVLinkFramesRxOut0));
 
-            guarantee hlr_05_rx1_can_send_arp:
-            ((HasEvent(EthernetFramesRxIn1) and GumboLib::GUMBO__Library::valid_arp(EthernetFramesRxIn1)) implies 
-                (HasEvent(EthernetFramesRxOut1) and (EthernetFramesRxIn1 == EthernetFramesRxOut1)));
-            guarantee hlr_06_rx1_can_send_ipv4_tcp:
-            ((HasEvent(EthernetFramesRxIn1) and GumboLib::GUMBO__Library::valid_ipv4_tcp_port(EthernetFramesRxIn1)) implies 
-                (HasEvent(EthernetFramesRxOut1) and (EthernetFramesRxIn1 == EthernetFramesRxOut1)));
-            guarantee hlr_13_rx1_can_send_ipv4_udp:
-            ((HasEvent(EthernetFramesRxIn1) and GumboLib::GUMBO__Library::valid_ipv4_udp_port(EthernetFramesRxIn1)) implies 
-                (HasEvent(EthernetFramesRxOut1) and (EthernetFramesRxIn1 == EthernetFramesRxOut1)));
-            guarantee hlr_15_rx1_disallow:
-            (HasEvent(EthernetFramesRxIn1) and not GumboLib::GUMBO__Library::rx_allow_outbound_frame(EthernetFramesRxIn1)) implies 
-                (NoSend(EthernetFramesRxOut1));
+            guarantee hlr_05_13_rx1_direct:
+                (HasEvent(EthernetFramesRxIn1) and GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxIn1)) implies
+                (HasEvent(EthernetFramesRxOut1) and EthernetFramesRxOut1 == EthernetFramesRxIn1 and NoSend(MAVLinkFramesRxOut1));
+            guarantee hlr_18_rx1_mavlink:
+                (HasEvent(EthernetFramesRxIn1) and GumboLib::GUMBO__Library::valid_ardupilot_udp(EthernetFramesRxIn1)) implies
+                (NoSend(EthernetFramesRxOut1) and HasEvent(MAVLinkFramesRxOut1) and
+                 MAVLinkFramesRxOut1.ethernet_frame == EthernetFramesRxIn1 and
+                 MAVLinkFramesRxOut1.payload_offset == GumboLib::GUMBO__Library::udp_payload_offset() and
+                 MAVLinkFramesRxOut1.payload_length == GumboLib::GUMBO__Library::udp_payload_length(EthernetFramesRxIn1));
+            guarantee hlr_06_15_rx1_drop:
+                (HasEvent(EthernetFramesRxIn1) and not GumboLib::GUMBO__Library::rx_allow_outbound_frame(EthernetFramesRxIn1)) implies
+                (NoSend(EthernetFramesRxOut1) and NoSend(MAVLinkFramesRxOut1));
             guarantee hlr_17_rx1_no_input:
-            (HasEvent(EthernetFramesRxIn1) | NoSend(EthernetFramesRxOut1));
+                (not HasEvent(EthernetFramesRxIn1)) implies (NoSend(EthernetFramesRxOut1) and NoSend(MAVLinkFramesRxOut1));
 
-            guarantee hlr_05_rx2_can_send_arp:
-            ((HasEvent(EthernetFramesRxIn2) and GumboLib::GUMBO__Library::valid_arp(EthernetFramesRxIn2)) implies 
-                (HasEvent(EthernetFramesRxOut2) and (EthernetFramesRxIn2 == EthernetFramesRxOut2)));
-            guarantee hlr_06_rx2_can_send_ipv4_tcp:
-            ((HasEvent(EthernetFramesRxIn2) and GumboLib::GUMBO__Library::valid_ipv4_tcp_port(EthernetFramesRxIn2)) implies 
-                (HasEvent(EthernetFramesRxOut2) and (EthernetFramesRxIn2 == EthernetFramesRxOut2)));
-            guarantee hlr_13_rx2_can_send_ipv4_udp:
-            ((HasEvent(EthernetFramesRxIn2) and GumboLib::GUMBO__Library::valid_ipv4_udp_port(EthernetFramesRxIn2)) implies 
-                (HasEvent(EthernetFramesRxOut2) and (EthernetFramesRxIn2 == EthernetFramesRxOut2)));
-            guarantee hlr_15_rx2_disallow:
-            (HasEvent(EthernetFramesRxIn2) and not GumboLib::GUMBO__Library::rx_allow_outbound_frame(EthernetFramesRxIn2)) implies 
-                (NoSend(EthernetFramesRxOut2));
+            guarantee hlr_05_13_rx2_direct:
+                (HasEvent(EthernetFramesRxIn2) and GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxIn2)) implies
+                (HasEvent(EthernetFramesRxOut2) and EthernetFramesRxOut2 == EthernetFramesRxIn2 and NoSend(MAVLinkFramesRxOut2));
+            guarantee hlr_18_rx2_mavlink:
+                (HasEvent(EthernetFramesRxIn2) and GumboLib::GUMBO__Library::valid_ardupilot_udp(EthernetFramesRxIn2)) implies
+                (NoSend(EthernetFramesRxOut2) and HasEvent(MAVLinkFramesRxOut2) and
+                 MAVLinkFramesRxOut2.ethernet_frame == EthernetFramesRxIn2 and
+                 MAVLinkFramesRxOut2.payload_offset == GumboLib::GUMBO__Library::udp_payload_offset() and
+                 MAVLinkFramesRxOut2.payload_length == GumboLib::GUMBO__Library::udp_payload_length(EthernetFramesRxIn2));
+            guarantee hlr_06_15_rx2_drop:
+                (HasEvent(EthernetFramesRxIn2) and not GumboLib::GUMBO__Library::rx_allow_outbound_frame(EthernetFramesRxIn2)) implies
+                (NoSend(EthernetFramesRxOut2) and NoSend(MAVLinkFramesRxOut2));
             guarantee hlr_17_rx2_no_input:
-            (HasEvent(EthernetFramesRxIn2) | NoSend(EthernetFramesRxOut2));
+                (not HasEvent(EthernetFramesRxIn2)) implies (NoSend(EthernetFramesRxOut2) and NoSend(MAVLinkFramesRxOut2));
 
-            guarantee hlr_05_rx3_can_send_arp:
-            ((HasEvent(EthernetFramesRxIn3) and GumboLib::GUMBO__Library::valid_arp(EthernetFramesRxIn3)) implies 
-                (HasEvent(EthernetFramesRxOut3) and (EthernetFramesRxIn3 == EthernetFramesRxOut3)));
-            guarantee hlr_06_rx3_can_send_ipv4_tcp:
-            ((HasEvent(EthernetFramesRxIn3) and GumboLib::GUMBO__Library::valid_ipv4_tcp_port(EthernetFramesRxIn3)) implies 
-                (HasEvent(EthernetFramesRxOut3) and (EthernetFramesRxIn3 == EthernetFramesRxOut3)));
-            guarantee hlr_13_rx3_can_send_ipv4_udp:
-            ((HasEvent(EthernetFramesRxIn3) and GumboLib::GUMBO__Library::valid_ipv4_udp_port(EthernetFramesRxIn3)) implies 
-                (HasEvent(EthernetFramesRxOut3) and (EthernetFramesRxIn3 == EthernetFramesRxOut3)));
-            guarantee hlr_15_rx3_disallow:
-            (HasEvent(EthernetFramesRxIn3) and not GumboLib::GUMBO__Library::rx_allow_outbound_frame(EthernetFramesRxIn3)) implies 
-                (NoSend(EthernetFramesRxOut3));
+            guarantee hlr_05_13_rx3_direct:
+                (HasEvent(EthernetFramesRxIn3) and GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxIn3)) implies
+                (HasEvent(EthernetFramesRxOut3) and EthernetFramesRxOut3 == EthernetFramesRxIn3 and NoSend(MAVLinkFramesRxOut3));
+            guarantee hlr_18_rx3_mavlink:
+                (HasEvent(EthernetFramesRxIn3) and GumboLib::GUMBO__Library::valid_ardupilot_udp(EthernetFramesRxIn3)) implies
+                (NoSend(EthernetFramesRxOut3) and HasEvent(MAVLinkFramesRxOut3) and
+                 MAVLinkFramesRxOut3.ethernet_frame == EthernetFramesRxIn3 and
+                 MAVLinkFramesRxOut3.payload_offset == GumboLib::GUMBO__Library::udp_payload_offset() and
+                 MAVLinkFramesRxOut3.payload_length == GumboLib::GUMBO__Library::udp_payload_length(EthernetFramesRxIn3));
+            guarantee hlr_06_15_rx3_drop:
+                (HasEvent(EthernetFramesRxIn3) and not GumboLib::GUMBO__Library::rx_allow_outbound_frame(EthernetFramesRxIn3)) implies
+                (NoSend(EthernetFramesRxOut3) and NoSend(MAVLinkFramesRxOut3));
             guarantee hlr_17_rx3_no_input:
-            (HasEvent(EthernetFramesRxIn3) | NoSend(EthernetFramesRxOut3));
+                (not HasEvent(EthernetFramesRxIn3)) implies (NoSend(EthernetFramesRxOut3) and NoSend(MAVLinkFramesRxOut3));
         }*/
     }
 

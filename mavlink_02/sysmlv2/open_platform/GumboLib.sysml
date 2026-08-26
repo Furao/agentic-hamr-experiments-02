@@ -70,7 +70,7 @@ package GumboLib {
 
       def valid_ipv4_length(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
         size(aframe) == 1600 and
-        (two_bytes_to_u16_be(aframe#(16), aframe#(17)) <= 9000[u16]);
+        (ipv4_length(aframe) <= 9000[u16]);
 
       def valid_ipv4_protocol(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
         size(aframe) == 1600 and
@@ -106,14 +106,13 @@ package GumboLib {
         frame_is_wellformed_eth2(aframe) and frame_has_ipv4(aframe) and wellformed_ipv4_frame(aframe);
 
       def ipv4_length(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Unsigned_16 :=
-        two_bytes_to_u16_le(aframe#(16),aframe#(17));
+        two_bytes_to_u16_be(aframe#(16), aframe#(17));
 
       def valid_output_arp_size(output: open_platform_Data_Model::SizedEthernetMessage_Impl): Base_Types::Boolean :=
         output.sz == 64[u16];
 
       def valid_output_ipv4_size(input: open_platform_Data_Model::RawEthernetMessage, output: open_platform_Data_Model::SizedEthernetMessage_Impl): Base_Types::Boolean :=
-        //output.sz == (ipv4_length(input)+14[u16]);
-        (size(input) == 1600) and (output.sz == (two_bytes_to_u16_be(input#(16),input#(17))+14[u16]));
+        (size(input) == 1600) and (output.sz == (ipv4_length(input) + ethernet_header_length()));
 
       def tx_allow_outbound_frame(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
         valid_arp(aframe) | valid_ipv4(aframe);
@@ -154,10 +153,47 @@ package GumboLib {
       def valid_ipv4_udp_port(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
         valid_ipv4_udp(aframe) and udp_is_valid_dst_port(aframe);
 
+      def udp_source_port(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Unsigned_16 :=
+        two_bytes_to_u16_be(aframe#(34), aframe#(35));
+
+      def udp_destination_port(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Unsigned_16 :=
+        two_bytes_to_u16_be(aframe#(36), aframe#(37));
+
+      def ethernet_header_length(): Base_Types::Unsigned_16 := 14[u16];
+
+      def ipv4_header_length(): Base_Types::Unsigned_16 := 20[u16];
+
+      def udp_header_length(): Base_Types::Unsigned_16 := 8[u16];
+
+      def udp_length(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Unsigned_16 :=
+        two_bytes_to_u16_be(aframe#(38), aframe#(39));
+
+      def udp_payload_length(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Unsigned_16 :=
+        if udp_header_length() <= udp_length(aframe) ? udp_length(aframe) - udp_header_length() else 0[u16];
+
+      def udp_payload_offset(): Base_Types::Unsigned_16 :=
+        ethernet_header_length() + ipv4_header_length() + udp_header_length();
+
+      def valid_ardupilot_udp(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
+        valid_ipv4_udp(aframe) and
+        udp_source_port(aframe) == 14550[u16] and
+        udp_destination_port(aframe) == 14562[u16] and
+        udp_header_length() <= udp_length(aframe) and
+        ipv4_length(aframe) + ethernet_header_length() <= 1600[u16] and
+        ipv4_length(aframe) == udp_length(aframe) + ipv4_header_length();
+
+      def rx_direct_frame(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
+        valid_arp(aframe) or
+        (valid_ipv4_udp_port(aframe) and not valid_ardupilot_udp(aframe));
+
+      def valid_mavlink_carrier(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl): Base_Types::Boolean :=
+        valid_ardupilot_udp(msg.ethernet_frame) and
+        msg.payload_offset == udp_payload_offset() and
+        msg.payload_length == udp_payload_length(msg.ethernet_frame) and
+        msg.payload_offset + msg.payload_length <= 1600[u16];
+
       def rx_allow_outbound_frame(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
-        valid_arp(aframe)
-        or valid_ipv4_tcp_port(aframe)
-        or valid_ipv4_udp_port(aframe);
+        rx_direct_frame(aframe) or valid_ardupilot_udp(aframe);
 
   }*/
 }
