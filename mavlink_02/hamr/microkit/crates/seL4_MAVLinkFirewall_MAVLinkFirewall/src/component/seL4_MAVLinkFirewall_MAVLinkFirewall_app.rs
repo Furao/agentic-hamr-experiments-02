@@ -5,6 +5,36 @@ use crate::bridge::seL4_MAVLinkFirewall_MAVLinkFirewall_api::*;
 use vstd::prelude::*;
 
 verus! {
+  #[derive(PartialEq, Eq)]
+  enum Route { Allow, DenyFlash, Invalid }
+
+  const COMMAND_INT: u32 = 75;
+  const COMMAND_LONG: u32 = 76;
+  const SECURE_COMMAND: u32 = 11004;
+  const MAV_CMD_FLASH_BOOTLOADER: u16 = 42650;
+  const SECURE_FLASH_BOOTLOADER: u32 = 7;
+
+  fn firmware_flash(msg: &open_platform_Data_Model::MAVLinkUDPMessage_Impl, parsed: mavlink_core::Message) -> bool {
+    match parsed.message_id {
+      COMMAND_INT | COMMAND_LONG =>
+        mavlink_core::payload_u16_le(&msg.ethernet_frame, parsed, 28) == Some(MAV_CMD_FLASH_BOOTLOADER),
+      SECURE_COMMAND =>
+        mavlink_core::payload_u32_le(&msg.ethernet_frame, parsed, 4) == Some(SECURE_FLASH_BOOTLOADER),
+      _ => false,
+    }
+  }
+
+  #[verifier::external_body]
+  fn classify(msg: &open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> (route: Route)
+    ensures
+      (route is Allow) == mavlink_allowed(*msg),
+      (route is DenyFlash) == (GumboLib::valid_mavlink_carrier_spec(*msg) && mavlink_frame_valid(*msg) && mavlink_firmware_flash_command(*msg)),
+  {
+    match mavlink_core::parse(&msg.ethernet_frame, msg.payload_offset, msg.payload_length) {
+      Ok(parsed) => if firmware_flash(msg, parsed) { Route::DenyFlash } else { Route::Allow },
+      Err(_) => Route::Invalid,
+    }
+  }
 
   pub struct seL4_MAVLinkFirewall_MAVLinkFirewall {
     // PLACEHOLDER MARKER STATE VARS
@@ -96,6 +126,14 @@ verus! {
         // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");
+      if let Some(msg) = api.get_EthernetFramesIn0() { match classify(&msg) {
+        Route::Allow => api.put_EthernetFramesOut0(msg), Route::DenyFlash => log_info("lane 0: firmware-flash command denied"), Route::Invalid => log_info("lane 0: malformed MAVLink frame dropped") } }
+      if let Some(msg) = api.get_EthernetFramesIn1() { match classify(&msg) {
+        Route::Allow => api.put_EthernetFramesOut1(msg), Route::DenyFlash => log_info("lane 1: firmware-flash command denied"), Route::Invalid => log_info("lane 1: malformed MAVLink frame dropped") } }
+      if let Some(msg) = api.get_EthernetFramesIn2() { match classify(&msg) {
+        Route::Allow => api.put_EthernetFramesOut2(msg), Route::DenyFlash => log_info("lane 2: firmware-flash command denied"), Route::Invalid => log_info("lane 2: malformed MAVLink frame dropped") } }
+      if let Some(msg) = api.get_EthernetFramesIn3() { match classify(&msg) {
+        Route::Allow => api.put_EthernetFramesOut3(msg), Route::DenyFlash => log_info("lane 3: firmware-flash command denied"), Route::Invalid => log_info("lane 3: malformed MAVLink frame dropped") } }
     }
 
     pub fn notify(
@@ -124,6 +162,21 @@ verus! {
   }
 
   // BEGIN MARKER GUMBO METHODS
+  pub uninterp spec fn mavlink_frame_valid__developer_verus(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+  pub uninterp spec fn mavlink_firmware_flash_command__developer_verus(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+
+  #[verifier::external_body]
+  pub fn mavlink_frame_valid__developer_gumbox(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool {
+    mavlink_core::parse(&msg.ethernet_frame, msg.payload_offset, msg.payload_length).is_ok()
+  }
+
+  #[verifier::external_body]
+  pub fn mavlink_firmware_flash_command__developer_gumbox(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool {
+    match mavlink_core::parse(&msg.ethernet_frame, msg.payload_offset, msg.payload_length) {
+      Ok(parsed) => firmware_flash(&msg, parsed), Err(_) => false,
+    }
+  }
+
   /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus
   /// specification function that must have the following signature:
   /// 

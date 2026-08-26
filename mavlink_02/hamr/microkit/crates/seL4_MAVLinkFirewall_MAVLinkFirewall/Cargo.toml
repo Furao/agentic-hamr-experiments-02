@@ -10,6 +10,7 @@ data = { path = "../data" }
 linux-raw-sys = { version = "=0.12.0", default-features = false }
 log = "0.4.28"
 GumboLib = { path = "../GumboLib" }
+mavlink-core = { path = "../mavlink_core" }
 
 # -----------------------------------------------------------------------------
 # seL4 Rust crate dependencies
@@ -44,4 +45,3 @@ sel4 = ["dep:sel4", "dep:sel4-logging" ]
 
 [package.metadata.verus]
 verify = true
-

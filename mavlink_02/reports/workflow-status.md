@@ -58,7 +58,7 @@ Project: open_platform | Profile: audited | Updated: 2026-08-26
 | ChangeExec(CR-01).W1.CodeGen | done | 2026-08-26 | Audited sub-workflow boundary approved; W1 complete |
 | ChangeExec(CR-01).W1 | done | 2026-08-26 | Requirements, model, contracts, integration check, and CodeGen approved |
 | ChangeExec(CR-01).W2 | in-progress | 2026-08-26 | Starting affected-component implementation and verification |
-| CompDev(RxFirewall) | in-progress | 2026-08-26 | Generated code synchronized; implementation and test updates pending |
+| CompDev(RxFirewall) | done | 2026-08-26 | Exit criteria met: tests and full coverage pass; Verus 27/0; only justified platform logging adapters remain external |
 | CompDev(RxFirewall).1 | done | 2026-08-26 | Model tipe-clean and CodeGen current; generated RxFirewall APIs include direct and bounded-MAVLink outputs |
 | CompGUMBOSpec(MAVLinkFirewall)-W2R1 | done | 2026-08-26 | Component-local spec-function refactor approved |
 | CompGUMBOSpec(MAVLinkFirewall)-W2R1.1 | done | 2026-08-26 | Component owns mavlink_frame_valid, mavlink_firmware_flash_command, and derived mavlink_allowed; GumboLib retains valid_mavlink_carrier |
@@ -74,5 +74,17 @@ Project: open_platform | Profile: audited | Updated: 2026-08-26
 | CompDev(RxFirewall).AP1 | done | 2026-08-26 | Developer approved 10/10 Rx tests, 17/17 firewall_core tests, and 100% Rx app/GUMBOX line coverage |
 | CompDev(RxFirewall).6 | done | 2026-08-26 | Iteration 2 RxFirewall Verus pass: 27 verified, 0 errors; firewall_core reports 39/0 after strengthening generic UDP parser postconditions |
 | CompDev(RxFirewall).7 | done | 2026-08-26 | Removed external_body from classifier and carrier constructor; proved parser/GUMBO equivalence and single allowed UDP port; only three platform logging adapters remain external |
-| CompDev(RxFirewall).AP2 | pending | 2026-08-26 | Awaiting verification sign-off; remaining external bodies are limited to info, trace, and warn_channel platform adapters |
+| CompDev(RxFirewall).AP2 | done | 2026-08-26 | Developer approved Verus 27/0 and the three remaining platform logging adapter external bodies |
 | CompDev(RxFirewall).cross-crate-diagnostic | done | 2026-08-26 | TxFirewall passes 16/0; LowLevel driver blocked before verification by missing SEL4_INCLUDE_DIRS/SEL4_PREFIX; MAVLinkFirewall awaits its planned developer MAVLink predicate hooks |
+| ChangeExec(CR-01).W2.CompDev(RxFirewall) | done | 2026-08-26 | Developer approved audited RxFirewall sub-workflow boundary and continued W2 |
+| CompDev(TxFirewall)/VerifyOnly.6 | done | 2026-08-26 | Current shared firewall_core verifies 39/0 and frozen TxFirewall verifies 16/0 |
+| CompDev(TxFirewall)/VerifyOnly.7 | done | 2026-08-26 | No verification iteration required; TxFirewall component, bridge, tests.rs, and lib.rs are unchanged from baseline 7a99f23 |
+| CompDev(TxFirewall)/VerifyOnly.AP2 | done | 2026-08-26 | Developer accepted 16/0 verification and generator-only codegen drift |
+| CompDev(TxFirewall)/VerifyOnly | done | 2026-08-26 | Exit criteria for VerifyOnly met without TxFirewall behavioral or proof regression |
+| CompDev(MAVLinkFirewall) | in-progress | 2026-08-26 | Resumed W2 after approved RxFirewall and TxFirewall verification gates |
+| CompDev(MAVLinkFirewall).1 | done | 2026-08-26 | Model is Well-formed with aadl-lib source path; generated component-local predicate hooks and four-lane APIs are current |
+| CompDev(MAVLinkFirewall).2 | done | 2026-08-26 | Added separate policy-neutral mavlink_core with generated 284-message CRC/min/max metadata and exact v1/v2 framing/checksum/signature checks; component owns flash-command policy, four-lane routing, and reason logging |
+| CompDev(MAVLinkFirewall).3 | done | 2026-08-26 | Added FTP, non-flash, COMMAND_LONG flash, secure-operation-7, malformed checksum, lane isolation, no-input, notification, per-lane GUMBOX partition, signed-v2, v1, bounds, flags, length, unknown-ID, and checksum tests |
+| CompDev(MAVLinkFirewall).4 | done | 2026-08-26 | 7 MAVLinkFirewall tests and 3 mavlink_core tests pass; coverage is app 53/53, GUMBOX 191/191, and policy-neutral parser lib 111/111 lines |
+| CompDev(MAVLinkFirewall).5 | done | 2026-08-26 | Full active application, contract-oracle, and parser branches exercised; generated 284-arm dialect lookup recorded as mechanical metadata |
+| CompDev(MAVLinkFirewall).AP1 | pending | 2026-08-26 | Awaiting audited coverage review before Verus verification |
