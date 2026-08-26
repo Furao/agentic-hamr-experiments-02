@@ -1,0 +1,3 @@
+[submodule "mavlink_02/hamr/microkit/vmm/deps/libvmm"]
+	path = mavlink_02/hamr/microkit/vmm/deps/libvmm
+	url = https://github.com/au-ts/libvmm.git
