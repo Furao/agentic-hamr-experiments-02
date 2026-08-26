@@ -19,4 +19,10 @@ package open_platform_Data_Model {
         part amessage : RawEthernetMessage;
         part sz : Unsigned_16;
     }
+
+    part def MAVLinkUDPMessage_Impl :> Struct {
+        part ethernet_frame : RawEthernetMessage;
+        part payload_offset : Unsigned_16;
+        part payload_length : Unsigned_16;
+    }
 }

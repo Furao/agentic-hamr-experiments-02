@@ -7,4 +7,5 @@ package open_platform_Properties {
     attribute Domain_TxFirewall : CASE_Scheduling::Domain = 3;
     attribute Domain_LowLevelEthernetDriver : CASE_Scheduling::Domain = 4;
     attribute Domain_RxFirewall : CASE_Scheduling::Domain = 5;
+    attribute Domain_MAVLinkFirewall : CASE_Scheduling::Domain = 6;
 }

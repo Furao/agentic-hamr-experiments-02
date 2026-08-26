@@ -28,6 +28,10 @@ package open_platform_Software {
         port EthernetFramesRxOut1 : EventDataPort { out :>> type : RawEthernetMessage; }
         port EthernetFramesRxOut2 : EventDataPort { out :>> type : RawEthernetMessage; }
         port EthernetFramesRxOut3 : EventDataPort { out :>> type : RawEthernetMessage; }
+        port MAVLinkFramesRxOut0 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
+        port MAVLinkFramesRxOut1 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
+        port MAVLinkFramesRxOut2 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
+        port MAVLinkFramesRxOut3 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
 
         attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
         attribute :>> Period = 1000[ms]; 
@@ -99,6 +103,23 @@ package open_platform_Software {
             guarantee hlr_17_rx3_no_input:
             (HasEvent(EthernetFramesRxIn3) | NoSend(EthernetFramesRxOut3));
         }*/
+    }
+
+    part def MAVLinkFirewall :> Thread {
+        port EthernetFramesIn0 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
+        port EthernetFramesIn1 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
+        port EthernetFramesIn2 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
+        port EthernetFramesIn3 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
+        port EthernetFramesOut0 : EventDataPort { out :>> type : RawEthernetMessage; }
+        port EthernetFramesOut1 : EventDataPort { out :>> type : RawEthernetMessage; }
+        port EthernetFramesOut2 : EventDataPort { out :>> type : RawEthernetMessage; }
+        port EthernetFramesOut3 : EventDataPort { out :>> type : RawEthernetMessage; }
+
+        attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
+        attribute :>> Period = 1000[ms];
+        attribute :>> Compute_Execution_Time = 300[ms] .. 300[ms];
+        attribute :>> Stack_Size = 1048576[byte];
+        attribute :>> Implementation_Language = Rust;
     }
 
     part def TxFirewall :> Thread {
@@ -177,6 +198,10 @@ package open_platform_Software {
         port FirewallRx1 : EventDataPort { in :>> type : RawEthernetMessage; }
         port FirewallRx2 : EventDataPort { in :>> type : RawEthernetMessage; }
         port FirewallRx3 : EventDataPort { in :>> type : RawEthernetMessage; }
+        port MAVLinkFirewallRx0 : EventDataPort { in :>> type : RawEthernetMessage; }
+        port MAVLinkFirewallRx1 : EventDataPort { in :>> type : RawEthernetMessage; }
+        port MAVLinkFirewallRx2 : EventDataPort { in :>> type : RawEthernetMessage; }
+        port MAVLinkFirewallRx3 : EventDataPort { in :>> type : RawEthernetMessage; }
         port EthernetFramesTx0 : EventDataPort { out :>> type : RawEthernetMessage; }
         port EthernetFramesTx1 : EventDataPort { out :>> type : RawEthernetMessage; }
         port EthernetFramesTx2 : EventDataPort { out :>> type : RawEthernetMessage; }

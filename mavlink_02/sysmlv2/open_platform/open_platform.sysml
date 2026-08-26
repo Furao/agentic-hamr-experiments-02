@@ -49,6 +49,10 @@ package open_platform {
         port EthernetFramesRxOut1 : EventDataPort { out :>> type : RawEthernetMessage; }
         port EthernetFramesRxOut2 : EventDataPort { out :>> type : RawEthernetMessage; }
         port EthernetFramesRxOut3 : EventDataPort { out :>> type : RawEthernetMessage; }
+        port MAVLinkFramesRxOut0 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
+        port MAVLinkFramesRxOut1 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
+        port MAVLinkFramesRxOut2 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
+        port MAVLinkFramesRxOut3 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
 
         part RxFirewall : open_platform_Software::RxFirewall;
         connection c1 : PortConnection 
@@ -67,9 +71,49 @@ package open_platform {
             connect RxFirewall.EthernetFramesRxOut2 to EthernetFramesRxOut2;
         connection c8 : PortConnection
             connect RxFirewall.EthernetFramesRxOut3 to EthernetFramesRxOut3;
+        connection c9 : PortConnection
+            connect RxFirewall.MAVLinkFramesRxOut0 to MAVLinkFramesRxOut0;
+        connection c10 : PortConnection
+            connect RxFirewall.MAVLinkFramesRxOut1 to MAVLinkFramesRxOut1;
+        connection c11 : PortConnection
+            connect RxFirewall.MAVLinkFramesRxOut2 to MAVLinkFramesRxOut2;
+        connection c12 : PortConnection
+            connect RxFirewall.MAVLinkFramesRxOut3 to MAVLinkFramesRxOut3;
 
             
         attribute :>> Domain = open_platform_Properties::Domain_RxFirewall;
+    }
+
+    part def MAVLinkFirewall_seL4 :> Process {
+        port EthernetFramesIn0 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
+        port EthernetFramesIn1 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
+        port EthernetFramesIn2 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
+        port EthernetFramesIn3 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
+        port EthernetFramesOut0 : EventDataPort { out :>> type : RawEthernetMessage; }
+        port EthernetFramesOut1 : EventDataPort { out :>> type : RawEthernetMessage; }
+        port EthernetFramesOut2 : EventDataPort { out :>> type : RawEthernetMessage; }
+        port EthernetFramesOut3 : EventDataPort { out :>> type : RawEthernetMessage; }
+
+        part MAVLinkFirewall : open_platform_Software::MAVLinkFirewall;
+
+        connection c1 : PortConnection
+            connect EthernetFramesIn0 to MAVLinkFirewall.EthernetFramesIn0;
+        connection c2 : PortConnection
+            connect EthernetFramesIn1 to MAVLinkFirewall.EthernetFramesIn1;
+        connection c3 : PortConnection
+            connect EthernetFramesIn2 to MAVLinkFirewall.EthernetFramesIn2;
+        connection c4 : PortConnection
+            connect EthernetFramesIn3 to MAVLinkFirewall.EthernetFramesIn3;
+        connection c5 : PortConnection
+            connect MAVLinkFirewall.EthernetFramesOut0 to EthernetFramesOut0;
+        connection c6 : PortConnection
+            connect MAVLinkFirewall.EthernetFramesOut1 to EthernetFramesOut1;
+        connection c7 : PortConnection
+            connect MAVLinkFirewall.EthernetFramesOut2 to EthernetFramesOut2;
+        connection c8 : PortConnection
+            connect MAVLinkFirewall.EthernetFramesOut3 to EthernetFramesOut3;
+
+        attribute :>> Domain = open_platform_Properties::Domain_MAVLinkFirewall;
     }
 
     part def TxFirewall_seL4 :> Process {
@@ -109,6 +153,10 @@ package open_platform {
         port FirewallRx1 : EventDataPort { in :>> type : RawEthernetMessage; }
         port FirewallRx2 : EventDataPort { in :>> type : RawEthernetMessage; }
         port FirewallRx3 : EventDataPort { in :>> type : RawEthernetMessage; }
+        port MAVLinkFirewallRx0 : EventDataPort { in :>> type : RawEthernetMessage; }
+        port MAVLinkFirewallRx1 : EventDataPort { in :>> type : RawEthernetMessage; }
+        port MAVLinkFirewallRx2 : EventDataPort { in :>> type : RawEthernetMessage; }
+        port MAVLinkFirewallRx3 : EventDataPort { in :>> type : RawEthernetMessage; }
         port EthernetFramesTx0 : EventDataPort { out :>> type : RawEthernetMessage; }
         port EthernetFramesTx1 : EventDataPort { out :>> type : RawEthernetMessage; }
         port EthernetFramesTx2 : EventDataPort { out :>> type : RawEthernetMessage; }
@@ -125,12 +173,20 @@ package open_platform {
         connection c4 : PortConnection 
             connect FirewallRx3 to ArduPilot.FirewallRx3;
         connection c5 : PortConnection
-            connect ArduPilot.EthernetFramesTx0 to EthernetFramesTx0;
+            connect MAVLinkFirewallRx0 to ArduPilot.MAVLinkFirewallRx0;
         connection c6 : PortConnection
-            connect ArduPilot.EthernetFramesTx1 to EthernetFramesTx1;
+            connect MAVLinkFirewallRx1 to ArduPilot.MAVLinkFirewallRx1;
         connection c7 : PortConnection
-            connect ArduPilot.EthernetFramesTx2 to EthernetFramesTx2;
+            connect MAVLinkFirewallRx2 to ArduPilot.MAVLinkFirewallRx2;
         connection c8 : PortConnection
+            connect MAVLinkFirewallRx3 to ArduPilot.MAVLinkFirewallRx3;
+        connection c9 : PortConnection
+            connect ArduPilot.EthernetFramesTx0 to EthernetFramesTx0;
+        connection c10 : PortConnection
+            connect ArduPilot.EthernetFramesTx1 to EthernetFramesTx1;
+        connection c11 : PortConnection
+            connect ArduPilot.EthernetFramesTx2 to EthernetFramesTx2;
+        connection c12 : PortConnection
             connect ArduPilot.EthernetFramesTx3 to EthernetFramesTx3;
             
         attribute :>> Domain = open_platform_Properties::Domain_ArduPilot;
@@ -149,6 +205,7 @@ package open_platform {
         part TxFirewall : TxFirewall_seL4;
         part LowLevelEthernetDriver : LowLevelEthernetDriver_seL4;
         part ArduPilot : ArduPilot_seL4;
+        part MAVLinkFirewall : MAVLinkFirewall_seL4;
 
         attribute Domain : CASE_Scheduling::Domain = 2;
         connection c1 : PortConnection
@@ -186,6 +243,24 @@ package open_platform {
         connect TxFirewall.EthernetFramesTxOut2 to LowLevelEthernetDriver.EthernetFramesTx2;
         connection c16 : PortConnection
         connect TxFirewall.EthernetFramesTxOut3 to LowLevelEthernetDriver.EthernetFramesTx3;
+
+        connection c17 : PortConnection
+        connect RxFirewall.MAVLinkFramesRxOut0 to MAVLinkFirewall.EthernetFramesIn0;
+        connection c18 : PortConnection
+        connect RxFirewall.MAVLinkFramesRxOut1 to MAVLinkFirewall.EthernetFramesIn1;
+        connection c19 : PortConnection
+        connect RxFirewall.MAVLinkFramesRxOut2 to MAVLinkFirewall.EthernetFramesIn2;
+        connection c20 : PortConnection
+        connect RxFirewall.MAVLinkFramesRxOut3 to MAVLinkFirewall.EthernetFramesIn3;
+
+        connection c21 : PortConnection
+        connect MAVLinkFirewall.EthernetFramesOut0 to ArduPilot.MAVLinkFirewallRx0;
+        connection c22 : PortConnection
+        connect MAVLinkFirewall.EthernetFramesOut1 to ArduPilot.MAVLinkFirewallRx1;
+        connection c23 : PortConnection
+        connect MAVLinkFirewall.EthernetFramesOut2 to ArduPilot.MAVLinkFirewallRx2;
+        connection c24 : PortConnection
+        connect MAVLinkFirewall.EthernetFramesOut3 to ArduPilot.MAVLinkFirewallRx3;
     }
 
     part def seL4_MOCK :> seL4 {
