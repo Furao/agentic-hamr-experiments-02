@@ -91,8 +91,6 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
     &mut self,
     api: &mut seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API>) 
   {
-        #[cfg(feature = "sel4")]
-        trace!("compute entrypoint invoked");
         let tmp: open_platform_Data_Model::RawEthernetMessage = [0; open_platform_Data_Model::open_platform_Data_Model_RawEthernetMessage_DIM_0];
 
         for i in 0..NUM_MSGS {

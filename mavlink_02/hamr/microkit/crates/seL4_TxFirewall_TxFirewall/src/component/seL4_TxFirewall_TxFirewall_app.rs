@@ -240,8 +240,6 @@ verus! {
         api.EthernetFramesTxIn3.is_some() || api.EthernetFramesTxOut3.is_none(),
         // END MARKER TIME TRIGGERED ENSURES
     {
-        trace("compute entrypoint invoked");
-
         // Tx0 ports
         if let Some(frame) = api.get_EthernetFramesTxIn0() {
             if let Some(eth) = Self::get_frame_packet(&frame) {

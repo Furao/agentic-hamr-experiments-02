@@ -221,8 +221,6 @@ impl seL4_RxFirewall_RxFirewall {
           api.EthernetFramesRxOut3.is_none() && api.MAVLinkFramesRxOut3.is_none(),
         // END MARKER TIME TRIGGERED ENSURES
     {
-        trace("compute entrypoint invoked");
-
         // Rx0 ports
         if let Some(frame) = api.get_EthernetFramesRxIn0() {
             match classify_frame(&frame) {

@@ -157,7 +157,6 @@ verus! {
           api.EthernetFramesOut3.is_none(),
         // END MARKER TIME TRIGGERED ENSURES
     {
-      log_info("compute entrypoint invoked");
       if let Some(msg) = api.get_EthernetFramesIn0() { match classify(&msg) {
         Route::Allow => api.put_EthernetFramesOut0(msg), Route::DenyFlash => log_info("lane 0: firmware-flash command denied"), Route::Invalid => log_info("lane 0: malformed MAVLink frame dropped") } }
       if let Some(msg) = api.get_EthernetFramesIn1() { match classify(&msg) {
