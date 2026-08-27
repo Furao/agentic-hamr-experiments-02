@@ -14,7 +14,7 @@ Project: open_platform | Profile: audited | Updated: 2026-08-27
 | ChangePlan(CR-01).AP1 | done | 2026-08-26 | Approved by Robbie VanVossen on 2026-08-26; ChangeExec unlocked |
 | ChangeExec(CR-01) | in-progress | 2026-08-26 | Draft workflow accepted; executing approved plan under audited profile |
 | ChangeExec(CR-01).1 | done | 2026-08-26 | Approved plan consistent; drift since 7a99f23 limited to reviewed sketch amendment, plan, and workflow status |
-| ChangeExec(CR-01).2 | in-progress | 2026-08-26 | Executing W1 of W4 |
+| ChangeExec(CR-01).2 | in-progress | 2026-08-27 | W1 and W2 approved; W3 integration complete and awaiting wave review |
 | ChangeExec(CR-01).W1 | in-progress | 2026-08-26 | Starting delta SysPlanAndReq; audited sub-workflow gates apply |
 | SysPlanAndReq | done | 2026-08-26 | Exit criteria met; requirements approved by developer |
 | SysPlanAndReq.1 | done | 2026-08-26 | ConOps records actors, fail-closed behavior, Rx-equivalent timing/capacity, and CR provenance |
@@ -57,7 +57,7 @@ Project: open_platform | Profile: audited | Updated: 2026-08-27
 | CodeGen.4 | n/a | 2026-08-26 | Existing generated project; first-generation build-script setup does not apply |
 | ChangeExec(CR-01).W1.CodeGen | done | 2026-08-26 | Audited sub-workflow boundary approved; W1 complete |
 | ChangeExec(CR-01).W1 | done | 2026-08-26 | Requirements, model, contracts, integration check, and CodeGen approved |
-| ChangeExec(CR-01).W2 | in-progress | 2026-08-26 | Starting affected-component implementation and verification |
+| ChangeExec(CR-01).W2 | done | 2026-08-27 | Developer approved affected-component implementation and verification wave on 2026-08-27 |
 | CompDev(RxFirewall) | done | 2026-08-26 | Exit criteria met: tests and full coverage pass; Verus 27/0; only justified platform logging adapters remain external |
 | CompDev(RxFirewall).1 | done | 2026-08-26 | Model tipe-clean and CodeGen current; generated RxFirewall APIs include direct and bounded-MAVLink outputs |
 | CompGUMBOSpec(MAVLinkFirewall)-W2R1 | done | 2026-08-26 | Component-local spec-function refactor approved |
@@ -81,7 +81,7 @@ Project: open_platform | Profile: audited | Updated: 2026-08-27
 | CompDev(TxFirewall)/VerifyOnly.7 | done | 2026-08-26 | No verification iteration required; TxFirewall component, bridge, tests.rs, and lib.rs are unchanged from baseline 7a99f23 |
 | CompDev(TxFirewall)/VerifyOnly.AP2 | done | 2026-08-26 | Developer accepted 16/0 verification and generator-only codegen drift |
 | CompDev(TxFirewall)/VerifyOnly | done | 2026-08-26 | Exit criteria for VerifyOnly met without TxFirewall behavioral or proof regression |
-| CompDev(MAVLinkFirewall) | in-progress | 2026-08-26 | Resumed W2 after approved RxFirewall and TxFirewall verification gates |
+| CompDev(MAVLinkFirewall) | done | 2026-08-27 | Exit criteria met: approved full coverage, 7/7 component tests, 3/3 core tests, MAVLinkFirewall 16/0, and mavlink_core 7/0 |
 | CompDev(MAVLinkFirewall).1 | done | 2026-08-26 | Model is Well-formed with aadl-lib source path; generated component-local predicate hooks and four-lane APIs are current |
 | CompDev(MAVLinkFirewall).2 | done | 2026-08-26 | Added separate policy-neutral mavlink_core with generated 284-message CRC/min/max metadata and exact v1/v2 framing/checksum/signature checks; component owns flash-command policy, four-lane routing, and reason logging |
 | CompDev(MAVLinkFirewall).3 | done | 2026-08-26 | Added FTP, non-flash, COMMAND_LONG flash, secure-operation-7, malformed checksum, lane isolation, no-input, notification, per-lane GUMBOX partition, signed-v2, v1, bounds, flags, length, unknown-ID, and checksum tests |
@@ -91,16 +91,28 @@ Project: open_platform | Profile: audited | Updated: 2026-08-27
 | CompDev(MAVLinkFirewall).6 | done | 2026-08-26 | Iteration 2 Verus pass: 14 verified, 0 errors; Rust-only parser inspection moved outside verus block |
 | CompDev(MAVLinkFirewall).7 | done | 2026-08-27 | Removed classifier trust boundary: concrete component-owned specs refine verified mavlink_core framing/CRC/policy; only log_info and log_warn_channel retain external_body; no assumptions or assume_specification |
 | CompDev(MAVLinkFirewall).8 | done | 2026-08-27 | Post-CodeGen verification/tests pass: MAVLinkFirewall 16/0 and 7/7 tests; mavlink_core 7/0 and 3/3 tests; shared-contract regression RxFirewall 27/0 and TxFirewall 16/0 |
-| CompDev(MAVLinkFirewall).AP2 | pending | 2026-08-27 | Awaiting developer verification sign-off for trust-boundary removal and affected-component regression pass |
+| CompDev(MAVLinkFirewall).AP2 | done | 2026-08-27 | Developer approved trust-boundary removal and affected-component verification results on 2026-08-27 |
 | CompGUMBOSpec(MAVLinkFirewall)-W2R2 | done | 2026-08-27 | Overflow-safe carrier contract and concrete verified MAVLink predicates approved; exit criteria met |
 | CompGUMBOSpec(MAVLinkFirewall)-W2R2.1 | done | 2026-08-27 | Concrete mavlink_core specs cover v1/v2 framing, exact carrier bounds, 284-message metadata, X.25 CRC, and flash classification; standalone Verus passes 7/0; valid_ardupilot_udp now uses guarded subtraction to exclude u16 wraparound |
 | CompGUMBOSpec(MAVLinkFirewall)-W2R2.2 | done | 2026-08-27 | sireum hamr sysml tipe --sourcepath ../aadl-lib:. Platform.sysml: Well-formed |
 | CompGUMBOSpec(MAVLinkFirewall)-W2R2.3 | done | 2026-08-27 | audit-gumbo-contracts full audit refreshed: zero AP-1–AP-9 findings; resolved unsigned length-wrap observation and concrete verified predicate refinement recorded |
 | CompGUMBOSpec(MAVLinkFirewall)-W2R2.4 | done | 2026-08-27 | Contract revisions complete; no catalog finding-demonstration tests required |
 | CompGUMBOSpec(MAVLinkFirewall)-W2R2.AP1 | done | 2026-08-27 | Developer approved revised contract and audit on 2026-08-27 |
-| CodeGen-W2R2 | in-progress | 2026-08-27 | Regenerating woven GUMBO/Verus artifacts after approved valid_ardupilot_udp contract correction |
+| CodeGen-W2R2 | done | 2026-08-27 | Regeneration exit criteria met; woven overflow-safe contract verified by affected components |
 | CodeGen-W2R2.1 | done | 2026-08-27 | Reused recorded Microkit configuration from Platform.sysml: output ../../hamr with workspace root ../.. |
 | CodeGen-W2R2.2 | done | 2026-08-27 | HAMR SysML code generation completed successfully; generated GumboLib now contains guarded IPv4-minus-header UDP length predicate |
 | CodeGen-W2R2.3 | done | 2026-08-27 | Output confirmed under project hamr/microkit; editable MAVLink app/tests, mavlink_core dependency, and verified core preserved |
 | CodeGen-W2R2.4 | n/a | 2026-08-27 | Existing bin/build.cmd retained; regeneration rather than first generation |
-| CodeGen-W2R2 | done | 2026-08-27 | Regeneration exit criteria met; resuming CompDev verification iteration |
+| ChangeExec(CR-01).W2.CompDev(MAVLinkFirewall) | done | 2026-08-27 | Audited CompDev boundary approved; MAVLinkFirewall implementation and verified parser complete |
+| ChangeExec(CR-01).W2.AP1 | done | 2026-08-27 | Developer approved W2 wave gate on 2026-08-27 |
+| ChangeExec(CR-01).W3 | done | 2026-08-27 | Developer approved VMM/custom.mk integration, full build, and domain-6 schedule on 2026-08-27 |
+| ChangeExec(CR-01).W3.VMM | done | 2026-08-27 | VMM drains all four MAVLink carrier queues and delivers each preserved ethernet_frame through the existing virtio receive backend; generated direct and transmit paths retained |
+| SysSchedDef | done | 2026-08-27 | Draft workflow exit criteria met for concrete schedule ordering/domain mapping; broader timing/schema analysis remains TBD |
+| SysSchedDef.1 | done | 2026-08-27 | Added domain 6 after RxFirewall so cyclic order is driver 4 -> Rx 5 -> MAVLink 6 -> ArduPilot 2; retained existing slots and 30,000-unit firewall allocation |
+| SysSchedDef.2 | n/a | 2026-08-27 | Workflow step is explicitly TBD; limitation recorded for W3 review |
+| ChangeExec(CR-01).W3.Build | done | 2026-08-27 | Updated custom.mk with MAVLink image/type/rules and VMM link; full SYSTEM_MAKEFILE=custom.mk ZCU102 debug build passes and Microkit produced 147.98 MiB loader image |
+| ChangeExec(CR-01).W3.AP1 | done | 2026-08-27 | Developer approved W3 wave gate on 2026-08-27 |
+| ChangeExec(CR-01).W4 | in-progress | 2026-08-27 | Final software evidence collected; manual ZCU102 hardware procedure prepared and awaiting execution |
+| ChangeExec(CR-01).W4.Hardware | pending | 2026-08-27 | reports/CR-01-add-mavlink-firewall-hardware-test.md contains 12 required physical test cases; no hardware result inferred |
+| ChangeExec(CR-01).W4.Tests | done | 2026-08-27 | Fresh host runs: MAVLinkFirewall 7/7, RxFirewall 10/10, TxFirewall 4/4; executable entrypoint lines covered; frozen LowLevel host test is incompatible with x86/seL4 AArch64 build, while full AArch64 system build passes |
+| ChangeExec(CR-01).W4.Verify | done | 2026-08-27 | MAVLinkFirewall 16/0, RxFirewall 27/0, TxFirewall 16/0; frozen LowLevel standalone target retains pre-existing feature/configuration failure, while full custom.mk AArch64 cargo-verus build passes |

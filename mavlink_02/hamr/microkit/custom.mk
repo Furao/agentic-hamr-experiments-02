@@ -17,14 +17,14 @@ LIBS := --start-group -lmicrokit -Tmicrokit.ld --end-group
 
 MSD ?= microkit.system
 
-IMAGES := seL4_RxFirewall_RxFirewall.elf seL4_RxFirewall_RxFirewall_MON.elf seL4_TxFirewall_TxFirewall.elf seL4_TxFirewall_TxFirewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf pacer.elf
+IMAGES := seL4_RxFirewall_RxFirewall.elf seL4_RxFirewall_RxFirewall_MON.elf seL4_TxFirewall_TxFirewall.elf seL4_TxFirewall_TxFirewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf seL4_MAVLinkFirewall_MAVLinkFirewall.elf seL4_MAVLinkFirewall_MAVLinkFirewall_MON.elf pacer.elf
 IMAGE_FILE = loader.img
 REPORT_FILE = report.txt
 
 UTIL_OBJS = printf.o util.o
 
 TYPES_DIR = $(TOP_DIR)/types
-TYPE_OBJS := $(TOP_DIR)/build/sb_queue_open_platform_Data_Model_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_open_platform_Data_Model_SizedEthernetMessage_Impl_1.o
+TYPE_OBJS := $(TOP_DIR)/build/sb_queue_open_platform_Data_Model_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1.o $(TOP_DIR)/build/sb_queue_open_platform_Data_Model_SizedEthernetMessage_Impl_1.o
 
 # exporting TOP_TYPES_INCLUDE in case other makefiles need it
 export TOP_TYPES_INCLUDE = -I$(TYPES_DIR)/include
@@ -42,6 +42,10 @@ ${CHECK_FLAGS_BOARD_MD5}:
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_DIR)/util/include
 
 $(TOP_DIR)/build/sb_queue_open_platform_Data_Model_RawEthernetMessage_1.o: $(TOP_DIR)/types/src/sb_queue_open_platform_Data_Model_RawEthernetMessage_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
+
+$(TOP_DIR)/build/sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1.o: $(TOP_DIR)/types/src/sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
@@ -93,6 +97,17 @@ seL4_ArduPilot_ArduPilot_user.o: $(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/
 seL4_ArduPilot_ArduPilot.o: $(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/include
 
+# monitor
+seL4_MAVLinkFirewall_MAVLinkFirewall_MON.o: $(TOP_DIR)/components/seL4_MAVLinkFirewall_MAVLinkFirewall/src/seL4_MAVLinkFirewall_MAVLinkFirewall_MON.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_MAVLinkFirewall_MAVLinkFirewall/include
+
+# user code
+seL4_MAVLinkFirewall_MAVLinkFirewall_rust:
+	make -C ${CRATES_DIR}/seL4_MAVLinkFirewall_MAVLinkFirewall $(RUST_MAKE_TARGET)
+
+seL4_MAVLinkFirewall_MAVLinkFirewall.o: $(TOP_DIR)/components/seL4_MAVLinkFirewall_MAVLinkFirewall/src/seL4_MAVLinkFirewall_MAVLinkFirewall.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_MAVLinkFirewall_MAVLinkFirewall/include
+
 pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_INCLUDE)
 
@@ -124,6 +139,12 @@ seL4_ArduPilot_ArduPilot_MON.elf: seL4_ArduPilot_ArduPilot_MON.o
 seL4_ArduPilot_ArduPilot.elf: $(UTIL_OBJS) $(TYPE_OBJS) vmm.a seL4_ArduPilot_ArduPilot.o
 	$(LD) $(LDFLAGS) $(filter %.o, $^) -L . -lvmm $(LIBS) -o $@
 
+seL4_MAVLinkFirewall_MAVLinkFirewall_MON.elf: seL4_MAVLinkFirewall_MAVLinkFirewall_MON.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+seL4_MAVLinkFirewall_MAVLinkFirewall.elf: $(UTIL_OBJS) $(TYPE_OBJS) seL4_MAVLinkFirewall_MAVLinkFirewall_rust seL4_MAVLinkFirewall_MAVLinkFirewall.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/seL4_MAVLinkFirewall_MAVLinkFirewall/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lseL4_MAVLinkFirewall_MAVLinkFirewall -o $@
+
 pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
@@ -147,12 +168,16 @@ test::
 	make -C ${CRATES_DIR}/seL4_RxFirewall_RxFirewall test
 	make -C ${CRATES_DIR}/seL4_TxFirewall_TxFirewall test
 	make -C ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver test
+	make -C ${CRATES_DIR}/seL4_MAVLinkFirewall_MAVLinkFirewall test
 
 clean:: 
 	make -C ${CRATES_DIR}/seL4_RxFirewall_RxFirewall clean
 	make -C ${CRATES_DIR}/seL4_TxFirewall_TxFirewall clean
 	make -C ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver clean
+	make -C ${CRATES_DIR}/seL4_MAVLinkFirewall_MAVLinkFirewall clean
 
 verus: 
 	make -C ${CRATES_DIR}/seL4_RxFirewall_RxFirewall verus
 	make -C ${CRATES_DIR}/seL4_TxFirewall_TxFirewall verus
+	make -C ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver verus
+	make -C ${CRATES_DIR}/seL4_MAVLinkFirewall_MAVLinkFirewall verus

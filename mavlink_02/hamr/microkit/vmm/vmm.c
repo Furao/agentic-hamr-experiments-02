@@ -34,6 +34,11 @@ uintptr_t guest_ram_vaddr;
 #define open_platform_Data_Model_RawEthernetMessage_DIM_0 1600
 
 typedef uint8_t open_platform_Data_Model_RawEthernetMessage [open_platform_Data_Model_RawEthernetMessage_DIM_0];
+typedef struct open_platform_Data_Model_MAVLinkUDPMessage_Impl {
+    open_platform_Data_Model_RawEthernetMessage ethernet_frame;
+    uint16_t payload_offset;
+    uint16_t payload_length;
+} open_platform_Data_Model_MAVLinkUDPMessage_Impl;
 bool get_FirewallRx0(open_platform_Data_Model_RawEthernetMessage *data);
 bool get_FirewallRx1(open_platform_Data_Model_RawEthernetMessage *data);
 bool get_FirewallRx2(open_platform_Data_Model_RawEthernetMessage *data);
@@ -42,6 +47,14 @@ bool FirewallRx0_is_empty(void);
 bool FirewallRx1_is_empty(void);
 bool FirewallRx2_is_empty(void);
 bool FirewallRx3_is_empty(void);
+bool get_MAVLinkFirewallRx0(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);
+bool get_MAVLinkFirewallRx1(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);
+bool get_MAVLinkFirewallRx2(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);
+bool get_MAVLinkFirewallRx3(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data);
+bool MAVLinkFirewallRx0_is_empty(void);
+bool MAVLinkFirewallRx1_is_empty(void);
+bool MAVLinkFirewallRx2_is_empty(void);
+bool MAVLinkFirewallRx3_is_empty(void);
 bool put_EthernetFramesTx0(const open_platform_Data_Model_RawEthernetMessage *data);
 bool put_EthernetFramesTx1(const open_platform_Data_Model_RawEthernetMessage *data);
 bool put_EthernetFramesTx2(const open_platform_Data_Model_RawEthernetMessage *data);
@@ -229,17 +242,38 @@ bool get_FirewallRx(uint8_t idx, open_platform_Data_Model_RawEthernetMessage *da
     }
 }
 
+bool get_MAVLinkFirewallRx(uint8_t idx, open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
+    switch (idx) {
+        case 0:
+            return !MAVLinkFirewallRx0_is_empty() && get_MAVLinkFirewallRx0(data);
+        case 1:
+            return !MAVLinkFirewallRx1_is_empty() && get_MAVLinkFirewallRx1(data);
+        case 2:
+            return !MAVLinkFirewallRx2_is_empty() && get_MAVLinkFirewallRx2(data);
+        case 3:
+            return !MAVLinkFirewallRx3_is_empty() && get_MAVLinkFirewallRx3(data);
+        default:
+            return false;
+    }
+}
+
+static void deliver_rx_frame(open_platform_Data_Model_RawEthernetMessage *frame) {
+    bool respond = custom_virtio_net_handle_rx(
+        &virtio_net, frame, open_platform_Data_Model_RawEthernetMessage_DIM_0);
+    if (respond) {
+        custom_virtio_net_respond_to_guest(&virtio_net);
+    }
+}
+
 
 void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
     // printf("Ardupilot: Time Triggered\n");
     // TODO: Implement API funcs <-> virtio-net backend translation
     open_platform_Data_Model_RawEthernetMessage rx;
+    open_platform_Data_Model_MAVLinkUDPMessage_Impl mavlink_rx;
     for(int i = 0; i < 4; i++){
         if (get_FirewallRx(i, &rx)) {
-            bool respond = custom_virtio_net_handle_rx(&virtio_net, &rx, open_platform_Data_Model_RawEthernetMessage_DIM_0);
-            if (respond) {
-                 custom_virtio_net_respond_to_guest(&virtio_net);
-            }
+            deliver_rx_frame(&rx);
             // int i;
             // LOG_VMM("Ardu: Rx Packet: ");
 
@@ -247,6 +281,9 @@ void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
             //     printf("%02x ", rx[i]);
             // }
             // printf("\n");
+        }
+        if (get_MAVLinkFirewallRx(i, &mavlink_rx)) {
+            deliver_rx_frame(&mavlink_rx.ethernet_frame);
         }
     }
 }

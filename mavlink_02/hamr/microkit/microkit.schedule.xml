@@ -9,4 +9,6 @@
   <domain name="domain_4" length="30000" /> <!-- seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON -->
   <domain name="domain_1" length="3000" /> <!-- pacer -->
   <domain name="domain_5" length="30000" /> <!-- seL4_RxFirewall_RxFirewall_MON -->
+  <domain name="domain_1" length="3000" /> <!-- pacer -->
+  <domain name="domain_6" length="30000" /> <!-- seL4_MAVLinkFirewall_MAVLinkFirewall_MON -->
 </domain_schedule>

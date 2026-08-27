@@ -5,6 +5,7 @@
 # --- Build artifacts (Rust crates, Slang/JVM) ---
 **/target/
 **/out/
+**/build/
 
 # --- Sireum / HAMR working & scratch artifacts ---
 .slang/
