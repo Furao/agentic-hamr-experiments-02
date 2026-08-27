@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "experiment_id": "mavlink_02",
+  "lifecycle": "change",
+  "workflow": "ChangeExec(CR-01)",
+  "profile": "audited",
+  "actor": "agent",
+  "harness": "codex",
+  "concept_quote": "# Reduce potential cyber attacks by adding a mavlink firewall that can blacklist certain mavlink commands/messages\n\n## Goals for updated system functionality\nIncrease the cyber resilience of the system by adding a protocol specific firewall which can reject specific or malformed mavlink messages before they can make it to the Ardupilot software running in the VM. THe mavlink firewall should reject any messages that can update firmware.",
+  "concept_sha256": "90eb65e0daa6fe4a6733366be7b8fe486c6c04b0f13b020e342cef545e430a45",
+  "project_dir": ".",
+  "session_metrics": "experiment-reports/session-metrics.json",
+  "metrics_cover_full_run": true,
+  "known_exclusions": [
+    "Subagent activity is excluded by the schema-v2 session metrics adapter.",
+    "Actual billed cost is unavailable; session cost is API list-price equivalent only.",
+    "No pristine generation baseline was prepared; generate-once non-marker provenance remains unknown."
+  ],
+  "hamr_version": null,
+  "generation_baseline": null
+}
