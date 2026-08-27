@@ -89,7 +89,7 @@ pub open spec fn frame_valid_spec(frame: Seq<u8>, offset: u16, length: u16) -> b
       &&& available == header + payload + 2 + signature
       &&& meta.is_some()
       &&& (if frame[start] == 0xfe { payload == meta.unwrap().2 as int }
-           else { meta.unwrap().1 as int <= payload <= meta.unwrap().2 as int })
+           else { payload <= meta.unwrap().2 as int })
       &&& {
         let checksum_at = start + header + payload;
         let computed = crc_accumulate_spec(meta.unwrap().0,
@@ -103,9 +103,12 @@ pub open spec fn firmware_flash_spec(frame: Seq<u8>, offset: u16, length: u16) -
     frame_valid_spec(frame, offset, length) && {
       let start = offset as int;
       let header: int = if frame[start] == 0xfe { 6 } else { 10 };
+      let payload = frame[start + 1] as int;
       let id: u32 = if frame[start] == 0xfe { frame[start + 5] as u32 } else { u24_le_spec(frame, start + 7) };
-      ((id == 75 || id == 76) && u16_le_spec(frame, start + header + 28) == 42650u16) ||
-        (id == 11004 && u32_le_spec(frame, start + header + 4) == 7u32)
+      ((id == 75 || id == 76) && payload >= 30 &&
+        u16_le_spec(frame, start + header + 28) == 42650u16) ||
+        (id == 11004 && payload >= 8 &&
+          u32_le_spec(frame, start + header + 4) == 7u32)
     }
 }
 
@@ -134,16 +137,16 @@ pub fn classify(frame: &[u8; 1600], offset: u16, length: u16) -> (result: u8)
     if available != header + payload + 2 + signature { return 0; }
     let meta = match dialect::metadata(id) { Some(value) => value, None => return 0 };
     if if magic == 0xfe { payload != meta.2 as usize }
-       else { payload < meta.1 as usize || payload > meta.2 as usize } { return 0; }
+       else { payload > meta.2 as usize } { return 0; }
     let checksum_at = start + header + payload;
     let crc = crc_accumulate_verified(meta.0, crc_fold(frame, start + 1, checksum_at, 0xffff));
     let received = frame[checksum_at] as u16 | ((frame[checksum_at + 1] as u16) << 8);
     if crc != received { return 0; }
     let payload_at = start + header;
-    if (id == 75 || id == 76) &&
+    if (id == 75 || id == 76) && payload >= 30 &&
        (frame[payload_at + 28] as u16 | ((frame[payload_at + 29] as u16) << 8)) == 42650 {
         2
-    } else if id == 11004 &&
+    } else if id == 11004 && payload >= 8 &&
        (frame[payload_at + 4] as u32 | ((frame[payload_at + 5] as u32) << 8) |
         ((frame[payload_at + 6] as u32) << 16) | ((frame[payload_at + 7] as u32) << 24)) == 7 {
         2

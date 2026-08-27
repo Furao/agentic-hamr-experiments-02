@@ -17,6 +17,19 @@ pub enum InvalidReason {
     Checksum,
 }
 
+impl InvalidReason {
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::CarrierBounds => "carrier bounds are invalid",
+            Self::UnsupportedVersion => "unsupported MAVLink version/magic",
+            Self::UnsupportedIncompatibilityFlags => "unsupported MAVLink 2 incompatibility flags",
+            Self::TruncatedOrTrailingBytes => "MAVLink frame length is invalid",
+            Self::UnknownMessage => "message ID is absent from the configured MAVLink dialect",
+            Self::Checksum => "MAVLink checksum is invalid",
+        }
+    }
+}
+
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct Message {
     pub message_id: u32,
@@ -58,12 +71,10 @@ pub fn parse(frame: &[u8], carrier_offset: u16, carrier_length: u16) -> Result<M
 
     let exact_length = header_length + payload_length + 2 + signature_length;
     if available != exact_length { return Err(InvalidReason::TruncatedOrTrailingBytes); }
-    let (crc_extra, minimum_length, maximum_length) = dialect::crc_extra(message_id).ok_or(InvalidReason::UnknownMessage)?;
+    let (crc_extra, _minimum_length, maximum_length) = dialect::crc_extra(message_id).ok_or(InvalidReason::UnknownMessage)?;
     let valid_payload_length = if header_length == 6 {
         payload_length == maximum_length
-    } else {
-        payload_length >= minimum_length && payload_length <= maximum_length
-    };
+    } else { payload_length <= maximum_length };
     if !valid_payload_length { return Err(InvalidReason::TruncatedOrTrailingBytes); }
     let checksum_offset = start + header_length + payload_length;
     let mut crc = 0xffffu16;
@@ -90,6 +101,24 @@ pub fn payload_u32_le(frame: &[u8], message: Message, offset: usize) -> Option<u
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn invalid_reasons_have_distinct_messages() {
+        let reasons = [
+            InvalidReason::CarrierBounds,
+            InvalidReason::UnsupportedVersion,
+            InvalidReason::UnsupportedIncompatibilityFlags,
+            InvalidReason::TruncatedOrTrailingBytes,
+            InvalidReason::UnknownMessage,
+            InvalidReason::Checksum,
+        ];
+        for (index, reason) in reasons.iter().enumerate() {
+            assert!(!reason.as_str().is_empty());
+            for other in &reasons[index + 1..] {
+                assert_ne!(reason.as_str(), other.as_str());
+            }
+        }
+    }
 
     fn v2(message_id: u32, payload: &[u8], incompat: u8) -> Vec<u8> {
         let signature = if incompat & MAVLINK_V2_SIGNED != 0 { 13 } else { 0 };
@@ -134,8 +163,10 @@ mod tests {
     fn rejects_bad_flags_lengths_checksum_and_unknown_id() {
         let bad_flags = v2(76, &[0; 33], 0x02);
         assert_eq!(parse(&bad_flags, 0, bad_flags.len() as u16), Err(InvalidReason::UnsupportedIncompatibilityFlags));
-        let short_payload = v2(76, &[0; 32], 0);
-        assert_eq!(parse(&short_payload, 0, short_payload.len() as u16), Err(InvalidReason::TruncatedOrTrailingBytes));
+        let truncated_zeros = v2(76, &[0; 32], 0);
+        assert!(parse(&truncated_zeros, 0, truncated_zeros.len() as u16).is_ok());
+        let overlong_payload = v2(76, &[0; 34], 0);
+        assert_eq!(parse(&overlong_payload, 0, overlong_payload.len() as u16), Err(InvalidReason::TruncatedOrTrailingBytes));
         let mut checksum = v2(76, &[0; 33], 0);
         checksum[12] ^= 1;
         assert_eq!(parse(&checksum, 0, checksum.len() as u16), Err(InvalidReason::Checksum));

@@ -158,13 +158,13 @@ verus! {
         // END MARKER TIME TRIGGERED ENSURES
     {
       if let Some(msg) = api.get_EthernetFramesIn0() { match classify(&msg) {
-        Route::Allow => api.put_EthernetFramesOut0(msg), Route::DenyFlash => log_info("lane 0: firmware-flash command denied"), Route::Invalid => log_info("lane 0: malformed MAVLink frame dropped") } }
+        Route::Allow => api.put_EthernetFramesOut0(msg), Route::DenyFlash => log_info("lane 0: firmware-flash command denied"), Route::Invalid => log_invalid_mavlink(0, &msg) } }
       if let Some(msg) = api.get_EthernetFramesIn1() { match classify(&msg) {
-        Route::Allow => api.put_EthernetFramesOut1(msg), Route::DenyFlash => log_info("lane 1: firmware-flash command denied"), Route::Invalid => log_info("lane 1: malformed MAVLink frame dropped") } }
+        Route::Allow => api.put_EthernetFramesOut1(msg), Route::DenyFlash => log_info("lane 1: firmware-flash command denied"), Route::Invalid => log_invalid_mavlink(1, &msg) } }
       if let Some(msg) = api.get_EthernetFramesIn2() { match classify(&msg) {
-        Route::Allow => api.put_EthernetFramesOut2(msg), Route::DenyFlash => log_info("lane 2: firmware-flash command denied"), Route::Invalid => log_info("lane 2: malformed MAVLink frame dropped") } }
+        Route::Allow => api.put_EthernetFramesOut2(msg), Route::DenyFlash => log_info("lane 2: firmware-flash command denied"), Route::Invalid => log_invalid_mavlink(2, &msg) } }
       if let Some(msg) = api.get_EthernetFramesIn3() { match classify(&msg) {
-        Route::Allow => api.put_EthernetFramesOut3(msg), Route::DenyFlash => log_info("lane 3: firmware-flash command denied"), Route::Invalid => log_info("lane 3: malformed MAVLink frame dropped") } }
+        Route::Allow => api.put_EthernetFramesOut3(msg), Route::DenyFlash => log_info("lane 3: firmware-flash command denied"), Route::Invalid => log_invalid_mavlink(3, &msg) } }
     }
 
     pub fn notify(
@@ -184,6 +184,17 @@ verus! {
   pub fn log_info(msg: &str)
   {
     log::info!("{0}", msg);
+  }
+
+  #[verifier::external_body]
+  pub fn log_invalid_mavlink(
+    lane: u8,
+    msg: &open_platform_Data_Model::MAVLinkUDPMessage_Impl)
+  {
+    match mavlink_core::parse(&msg.ethernet_frame, msg.payload_offset, msg.payload_length) {
+      Err(reason) => log::info!("lane {0}: MAVLink frame dropped: {1}", lane, reason.as_str()),
+      Ok(_) => log::info!("lane {0}: MAVLink frame dropped: invalid Ethernet/IPv4/UDP carrier", lane),
+    }
   }
 
   #[verifier::external_body]
