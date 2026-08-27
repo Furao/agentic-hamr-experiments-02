@@ -2,7 +2,7 @@
 
 **Component**: `MAVLinkFirewall` (MAVLink validation and command firewall)  
 **Model File**: `sysmlv2/open_platform/open_platform_Software.sysml`, lines 124–201  
-**Date**: 2026-08-26  
+**Date**: 2026-08-27
 **Auditor**: HAMR GUMBO Contract Audit  
 **Classification**: Security-Critical
 
@@ -16,12 +16,13 @@ input carrier, preserving the Ethernet frame and the payload boundary establishe
 RxFirewall. Integration guarantees export the context-independent `mavlink_allowed`
 invariant on every output lane.
 
-The component-local abstract `mavlink_frame_valid` and
-`mavlink_firmware_flash_command` predicates deliberately state the security boundary
-without duplicating a variable-length MAVLink parser in GUMBO. The component-local
-`mavlink_allowed` function composes them with the reusable
-`GumboLib::valid_mavlink_carrier` networking boundary. Their executable and verified
-definitions remain W2 proof obligations.
+The component-local `mavlink_frame_valid` and
+`mavlink_firmware_flash_command` predicates state the MAVLink security boundary
+without duplicating variable-length wire offsets in GUMBO. Their developer Verus
+definitions are now concrete predicates over `mavlink_core`'s verified framing,
+dialect-metadata, X.25 checksum, and command-field specifications. The
+component-local `mavlink_allowed` function composes those predicates with the reusable
+`GumboLib::valid_mavlink_carrier` networking boundary.
 
 ## 2. Findings
 
@@ -33,8 +34,9 @@ Catalog disposition:
 - AP-2: every denied or invalid case requires `NoSend` on its corresponding output.
 - AP-3: every lane explicitly requires no output when no input is present.
 - AP-4: all security-relevant carrier fields participate in
-  `valid_mavlink_carrier`; MAVLink structure, checksum, and deny policy participate
-  through the two abstract predicates.
+  `valid_mavlink_carrier`; MAVLink structure, checksum, dialect metadata, and deny
+  policy participate through the two component-local predicates and their concrete
+  verified definitions.
 - AP-5: allowed, valid-and-denied, and invalid cases cover every present input.
 - AP-6: every output lane exports the `mavlink_allowed` integration invariant.
 - AP-7: the three present-input partitions are disjoint.
@@ -50,22 +52,26 @@ Catalog disposition:
 ## 4. Demonstration Tests
 
 No finding-demonstration tests are required because the model contract has zero
-catalog findings. CodeGen must first produce the MAVLinkFirewall GUMBOX functions.
-CompDev.3 must then add functional tests covering allowed `FILE_TRANSFER_PROTOCOL`,
-both firmware-flash deny encodings, malformed and checksum-failing MAVLink v1/v2
-frames, invalid payload bounds, all four lanes, carrier preservation, and no-input
-behavior.
+catalog findings. Existing CompDev tests cover allowed `FILE_TRANSFER_PROTOCOL`, both
+firmware-flash deny encodings, malformed and checksum-failing MAVLink v1/v2 frames,
+invalid payload bounds, all four lanes, carrier preservation, and no-input behavior.
 
 ## 5. Unscored Observations
 
-The MAVLinkFirewall-local `mavlink_frame_valid` and
-`mavlink_firmware_flash_command` functions are bodyless `@spec` predicates. They make
-the intended contract readable and avoid replicated wire-format offsets, but do not
-themselves prove that an implementation parses MAVLink framing, dialect CRC-extra
-values, command envelopes, or secure-command operation 7 correctly.
-The verified MAVLink core must refine these predicates, and its tests must bind them
-to concrete byte-level cases. This limitation is outside AP-1–AP-9 and is therefore
-not scored.
+The MAVLinkFirewall-local functions remain bodyless `@spec` declarations in SysML,
+as required for component-owned developer definitions. The generated proof hooks now
+delegate to concrete `mavlink_core` specifications rather than uninterpreted
+predicates. The verified core covers MAVLink v1/v2 framing, signed-v2 length, complete
+284-message dialect CRC/min/max metadata, X.25 checksum, command envelopes, command
+42650, and secure-command operation 7. Standalone Verus verification passes 7/0.
+
+The proof iteration also exposed a non-catalog arithmetic issue in
+`valid_ardupilot_udp`: expressing IPv4 length as unsigned `udp_length +
+ipv4_header_length` admitted modular wraparound. The model now first requires
+`ipv4_header_length <= ipv4_length` and then compares `udp_length` with the guarded
+subtraction `ipv4_length - ipv4_header_length`. This is outside AP-1–AP-9, is not
+scored as a catalog finding, and is resolved in the current model. `sireum hamr sysml
+tipe` reports `Well-formed!`.
 
 HLR-27 requires rejection logging. GUMBO compute contracts describe port/state
 behavior rather than logging side effects, and the catalog has no logging pattern.

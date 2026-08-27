@@ -180,7 +180,8 @@ package GumboLib {
         udp_destination_port(aframe) == 14562[u16] and
         udp_header_length() <= udp_length(aframe) and
         ipv4_length(aframe) + ethernet_header_length() <= 1600[u16] and
-        ipv4_length(aframe) == udp_length(aframe) + ipv4_header_length();
+        ipv4_header_length() <= ipv4_length(aframe) and
+        udp_length(aframe) == ipv4_length(aframe) - ipv4_header_length();
 
       def rx_direct_frame(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
         valid_arp(aframe) or

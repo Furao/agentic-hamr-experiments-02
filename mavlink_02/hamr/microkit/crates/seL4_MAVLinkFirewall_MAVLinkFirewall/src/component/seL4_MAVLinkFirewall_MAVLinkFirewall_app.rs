@@ -4,35 +4,67 @@ use data::*;
 use crate::bridge::seL4_MAVLinkFirewall_MAVLinkFirewall_api::*;
 use vstd::prelude::*;
 
+fn firmware_flash_runtime(msg: &open_platform_Data_Model::MAVLinkUDPMessage_Impl, parsed: mavlink_core::Message) -> bool {
+  match parsed.message_id {
+    75 | 76 => mavlink_core::payload_u16_le(&msg.ethernet_frame, parsed, 28) == Some(42650),
+    11004 => mavlink_core::payload_u32_le(&msg.ethernet_frame, parsed, 4) == Some(7),
+    _ => false,
+  }
+}
+
+pub fn mavlink_frame_valid__developer_gumbox(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool {
+  mavlink_core::parse(&msg.ethernet_frame, msg.payload_offset, msg.payload_length).is_ok()
+}
+
+pub fn mavlink_firmware_flash_command__developer_gumbox(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool {
+  match mavlink_core::parse(&msg.ethernet_frame, msg.payload_offset, msg.payload_length) {
+    Ok(parsed) => firmware_flash_runtime(&msg, parsed), Err(_) => false,
+  }
+}
+
 verus! {
   #[derive(PartialEq, Eq)]
   enum Route { Allow, DenyFlash, Invalid }
 
-  const COMMAND_INT: u32 = 75;
-  const COMMAND_LONG: u32 = 76;
-  const SECURE_COMMAND: u32 = 11004;
-  const MAV_CMD_FLASH_BOOTLOADER: u16 = 42650;
-  const SECURE_FLASH_BOOTLOADER: u32 = 7;
-
-  fn firmware_flash(msg: &open_platform_Data_Model::MAVLinkUDPMessage_Impl, parsed: mavlink_core::Message) -> bool {
-    match parsed.message_id {
-      COMMAND_INT | COMMAND_LONG =>
-        mavlink_core::payload_u16_le(&msg.ethernet_frame, parsed, 28) == Some(MAV_CMD_FLASH_BOOTLOADER),
-      SECURE_COMMAND =>
-        mavlink_core::payload_u32_le(&msg.ethernet_frame, parsed, 4) == Some(SECURE_FLASH_BOOTLOADER),
-      _ => false,
+  fn carrier_valid(msg: &open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> (valid: bool)
+    ensures valid == GumboLib::valid_mavlink_carrier_spec(*msg)
+  {
+    let frame = &msg.ethernet_frame;
+    let destination_valid = frame[0] != 0 || frame[1] != 0 || frame[2] != 0 ||
+      frame[3] != 0 || frame[4] != 0 || frame[5] != 0;
+    let ipv4_length = (frame[16] as u16) * 256 + frame[17] as u16;
+    let udp_length = (frame[38] as u16) * 256 + frame[39] as u16;
+    let lengths_valid = ipv4_length <= 9000 && udp_length >= 8 &&
+      ipv4_length + 14 <= 1600 && ipv4_length >= 20 &&
+      udp_length == ipv4_length - 20;
+    proof {
+      assert(ipv4_length == GumboLib::ipv4_length_spec(*frame));
+      assert(udp_length == GumboLib::udp_length_spec(*frame));
+      assert(destination_valid == GumboLib::valid_frame_dst_addr_spec(*frame));
+      assert(lengths_valid == (GumboLib::valid_ipv4_length_spec(*frame) &&
+        GumboLib::udp_header_length_spec() <= GumboLib::udp_length_spec(*frame) &&
+        GumboLib::ipv4_length_spec(*frame) + GumboLib::ethernet_header_length_spec() <= 1600u16 &&
+        GumboLib::ipv4_header_length_spec() <= GumboLib::ipv4_length_spec(*frame) &&
+        GumboLib::udp_length_spec(*frame) == GumboLib::ipv4_length_spec(*frame) - GumboLib::ipv4_header_length_spec()));
     }
+    destination_valid && frame[12] == 8 && frame[13] == 0 && frame[14] == 0x45 &&
+      frame[23] == 17 &&
+      frame[34] == 0x38 && frame[35] == 0xd6 && frame[36] == 0x38 && frame[37] == 0xe2 &&
+      lengths_valid &&
+      msg.payload_offset == 42 && msg.payload_length == udp_length - 8 &&
+      msg.payload_offset + msg.payload_length <= 1600
   }
 
-  #[verifier::external_body]
   fn classify(msg: &open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> (route: Route)
     ensures
       (route is Allow) == mavlink_allowed(*msg),
       (route is DenyFlash) == (GumboLib::valid_mavlink_carrier_spec(*msg) && mavlink_frame_valid(*msg) && mavlink_firmware_flash_command(*msg)),
   {
-    match mavlink_core::parse(&msg.ethernet_frame, msg.payload_offset, msg.payload_length) {
-      Ok(parsed) => if firmware_flash(msg, parsed) { Route::DenyFlash } else { Route::Allow },
-      Err(_) => Route::Invalid,
+    if !carrier_valid(msg) { return Route::Invalid; }
+    match mavlink_core::verified::classify(&msg.ethernet_frame, msg.payload_offset, msg.payload_length) {
+      2 => Route::DenyFlash,
+      1 => Route::Allow,
+      _ => Route::Invalid,
     }
   }
 
@@ -161,22 +193,21 @@ verus! {
     log::warn!("Unexpected channel: {0}", channel);
   }
 
+  pub open spec fn mavlink_frame_valid__developer_verus(
+    msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl
+  ) -> bool {
+    mavlink_core::verified::frame_valid_spec(
+      msg.ethernet_frame@, msg.payload_offset, msg.payload_length)
+  }
+
+  pub open spec fn mavlink_firmware_flash_command__developer_verus(
+    msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl
+  ) -> bool {
+    mavlink_core::verified::firmware_flash_spec(
+      msg.ethernet_frame@, msg.payload_offset, msg.payload_length)
+  }
+
   // BEGIN MARKER GUMBO METHODS
-  pub uninterp spec fn mavlink_frame_valid__developer_verus(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
-  pub uninterp spec fn mavlink_firmware_flash_command__developer_verus(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
-
-  #[verifier::external_body]
-  pub fn mavlink_frame_valid__developer_gumbox(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool {
-    mavlink_core::parse(&msg.ethernet_frame, msg.payload_offset, msg.payload_length).is_ok()
-  }
-
-  #[verifier::external_body]
-  pub fn mavlink_firmware_flash_command__developer_gumbox(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool {
-    match mavlink_core::parse(&msg.ethernet_frame, msg.payload_offset, msg.payload_length) {
-      Ok(parsed) => firmware_flash(&msg, parsed), Err(_) => false,
-    }
-  }
-
   /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus
   /// specification function that must have the following signature:
   /// 

@@ -332,7 +332,8 @@ pub fn valid_ardupilot_udp(aframe: open_platform_Data_Model::RawEthernetMessage)
     (udp_destination_port(aframe) == 14562u16) &&
     (udp_header_length() <= udp_length(aframe)) &&
     (ipv4_length(aframe) + ethernet_header_length() <= 1600u16) &&
-    (ipv4_length(aframe) == udp_length(aframe) + ipv4_header_length())
+    (ipv4_header_length() <= ipv4_length(aframe)) &&
+    (udp_length(aframe) == ipv4_length(aframe) - ipv4_header_length())
 }
 
 pub fn rx_direct_frame(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
@@ -657,7 +658,8 @@ verus! {
       (udp_destination_port_spec(aframe) == 14562u16) &&
       (udp_header_length_spec() <= udp_length_spec(aframe)) &&
       (ipv4_length_spec(aframe) + ethernet_header_length_spec() <= 1600u16) &&
-      (ipv4_length_spec(aframe) == udp_length_spec(aframe) + ipv4_header_length_spec())
+      (ipv4_header_length_spec() <= ipv4_length_spec(aframe)) &&
+      (udp_length_spec(aframe) == ipv4_length_spec(aframe) - ipv4_header_length_spec())
   }
 
   pub open spec fn rx_direct_frame_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool

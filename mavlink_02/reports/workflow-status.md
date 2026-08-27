@@ -1,6 +1,6 @@
 # Workflow Status
 
-Project: open_platform | Profile: audited | Updated: 2026-08-26
+Project: open_platform | Profile: audited | Updated: 2026-08-27
 
 | Step | Status | Updated | Notes |
 |------|--------|---------|-------|
@@ -87,4 +87,20 @@ Project: open_platform | Profile: audited | Updated: 2026-08-26
 | CompDev(MAVLinkFirewall).3 | done | 2026-08-26 | Added FTP, non-flash, COMMAND_LONG flash, secure-operation-7, malformed checksum, lane isolation, no-input, notification, per-lane GUMBOX partition, signed-v2, v1, bounds, flags, length, unknown-ID, and checksum tests |
 | CompDev(MAVLinkFirewall).4 | done | 2026-08-26 | 7 MAVLinkFirewall tests and 3 mavlink_core tests pass; coverage is app 53/53, GUMBOX 191/191, and policy-neutral parser lib 111/111 lines |
 | CompDev(MAVLinkFirewall).5 | done | 2026-08-26 | Full active application, contract-oracle, and parser branches exercised; generated 284-arm dialect lookup recorded as mechanical metadata |
-| CompDev(MAVLinkFirewall).AP1 | pending | 2026-08-26 | Awaiting audited coverage review before Verus verification |
+| CompDev(MAVLinkFirewall).AP1 | done | 2026-08-26 | Developer approved 7/7 component tests, 3/3 parser tests, and 100% app/GUMBOX/parser line coverage |
+| CompDev(MAVLinkFirewall).6 | done | 2026-08-26 | Iteration 2 Verus pass: 14 verified, 0 errors; Rust-only parser inspection moved outside verus block |
+| CompDev(MAVLinkFirewall).7 | done | 2026-08-27 | Removed classifier trust boundary: concrete component-owned specs refine verified mavlink_core framing/CRC/policy; only log_info and log_warn_channel retain external_body; no assumptions or assume_specification |
+| CompDev(MAVLinkFirewall).8 | done | 2026-08-27 | Post-CodeGen verification/tests pass: MAVLinkFirewall 16/0 and 7/7 tests; mavlink_core 7/0 and 3/3 tests; shared-contract regression RxFirewall 27/0 and TxFirewall 16/0 |
+| CompDev(MAVLinkFirewall).AP2 | pending | 2026-08-27 | Awaiting developer verification sign-off for trust-boundary removal and affected-component regression pass |
+| CompGUMBOSpec(MAVLinkFirewall)-W2R2 | done | 2026-08-27 | Overflow-safe carrier contract and concrete verified MAVLink predicates approved; exit criteria met |
+| CompGUMBOSpec(MAVLinkFirewall)-W2R2.1 | done | 2026-08-27 | Concrete mavlink_core specs cover v1/v2 framing, exact carrier bounds, 284-message metadata, X.25 CRC, and flash classification; standalone Verus passes 7/0; valid_ardupilot_udp now uses guarded subtraction to exclude u16 wraparound |
+| CompGUMBOSpec(MAVLinkFirewall)-W2R2.2 | done | 2026-08-27 | sireum hamr sysml tipe --sourcepath ../aadl-lib:. Platform.sysml: Well-formed |
+| CompGUMBOSpec(MAVLinkFirewall)-W2R2.3 | done | 2026-08-27 | audit-gumbo-contracts full audit refreshed: zero AP-1–AP-9 findings; resolved unsigned length-wrap observation and concrete verified predicate refinement recorded |
+| CompGUMBOSpec(MAVLinkFirewall)-W2R2.4 | done | 2026-08-27 | Contract revisions complete; no catalog finding-demonstration tests required |
+| CompGUMBOSpec(MAVLinkFirewall)-W2R2.AP1 | done | 2026-08-27 | Developer approved revised contract and audit on 2026-08-27 |
+| CodeGen-W2R2 | in-progress | 2026-08-27 | Regenerating woven GUMBO/Verus artifacts after approved valid_ardupilot_udp contract correction |
+| CodeGen-W2R2.1 | done | 2026-08-27 | Reused recorded Microkit configuration from Platform.sysml: output ../../hamr with workspace root ../.. |
+| CodeGen-W2R2.2 | done | 2026-08-27 | HAMR SysML code generation completed successfully; generated GumboLib now contains guarded IPv4-minus-header UDP length predicate |
+| CodeGen-W2R2.3 | done | 2026-08-27 | Output confirmed under project hamr/microkit; editable MAVLink app/tests, mavlink_core dependency, and verified core preserved |
+| CodeGen-W2R2.4 | n/a | 2026-08-27 | Existing bin/build.cmd retained; regeneration rather than first generation |
+| CodeGen-W2R2 | done | 2026-08-27 | Regeneration exit criteria met; resuming CompDev verification iteration |

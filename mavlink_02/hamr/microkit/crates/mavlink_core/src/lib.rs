@@ -1,6 +1,7 @@
 #![cfg_attr(not(test), no_std)]
 
 mod dialect;
+pub mod verified;
 
 pub const MAVLINK_V1_MAGIC: u8 = 0xfe;
 pub const MAVLINK_V2_MAGIC: u8 = 0xfd;
