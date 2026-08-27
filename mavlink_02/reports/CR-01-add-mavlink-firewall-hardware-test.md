@@ -63,4 +63,4 @@ test procedure passing after the correction.
 | Role | Name | Decision | Date |
 |---|---|---|---|
 | Hardware-test operator | Robbie VanVossen | Pass | 2026-08-27 |
-| Developer reviewer | Pending | Pending | Pending |
+| Developer reviewer | Robbie VanVossen | Approved with W4 wave gate | 2026-08-27 |

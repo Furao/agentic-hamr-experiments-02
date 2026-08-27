@@ -4,8 +4,9 @@
 |---|---|
 | **Change ID** | CR-01 |
 | **Title** | Add inbound MAVLink firewall |
-| **Status** | Approved |
+| **Status** | Executed |
 | **Approved by / date** | Robbie VanVossen / 2026-08-26 |
+| **Executed / completion approval** | Robbie VanVossen / 2026-08-27 |
 | **Target project** | `open_platform` (`mavlink_02`) |
 | **Baseline** | `7a99f23e7a97460a446bc9dcaf7cb5e18972d8e9` (surveyed 2026-08-26) |
 | **Sketch (provenance)** | `mavlink-firewall-change-sketch.md` (developer-amended 2026-08-26; original at baseline commit); bundled MAVLink references under `mavlink_spec/` |

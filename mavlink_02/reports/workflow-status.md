@@ -12,10 +12,9 @@ Project: open_platform | Profile: audited | Updated: 2026-08-27
 | ChangePlan(CR-01).5 | done | 2026-08-26 | Iteration 2: W2 now gates shared firewall_core changes on clean TxFirewall verification |
 | ChangePlan(CR-01).6 | done | 2026-08-26 | Iteration 2: sketch drift and resulting plan revision recorded; approved at AP1 |
 | ChangePlan(CR-01).AP1 | done | 2026-08-26 | Approved by Robbie VanVossen on 2026-08-26; ChangeExec unlocked |
-| ChangeExec(CR-01) | in-progress | 2026-08-26 | Draft workflow accepted; executing approved plan under audited profile |
+| ChangeExec(CR-01) | done | 2026-08-27 | Exit criteria met; all four waves, back-propagation, final pass, change report, and audited completion review approved by Robbie VanVossen |
 | ChangeExec(CR-01).1 | done | 2026-08-26 | Approved plan consistent; drift since 7a99f23 limited to reviewed sketch amendment, plan, and workflow status |
 | ChangeExec(CR-01).2 | done | 2026-08-27 | W1-W4 executed; W4 hardware and refreshed software gate pass after MAVLink v2 truncation correction |
-| ChangeExec(CR-01).W1 | in-progress | 2026-08-26 | Starting delta SysPlanAndReq; audited sub-workflow gates apply |
 | SysPlanAndReq | done | 2026-08-26 | Exit criteria met; requirements approved by developer |
 | SysPlanAndReq.1 | done | 2026-08-26 | ConOps records actors, fail-closed behavior, Rx-equivalent timing/capacity, and CR provenance |
 | SysPlanAndReq.2 | done | 2026-08-26 | updated_reqs.md retains HLR naming; gaps resolved with exact routing, failure, timing, and capacity criteria |
@@ -112,10 +111,14 @@ Project: open_platform | Profile: audited | Updated: 2026-08-27
 | SysSchedDef.2 | n/a | 2026-08-27 | Workflow step is explicitly TBD; limitation recorded for W3 review |
 | ChangeExec(CR-01).W3.Build | done | 2026-08-27 | Updated custom.mk with MAVLink image/type/rules and VMM link; full SYSTEM_MAKEFILE=custom.mk ZCU102 debug build passes and Microkit produced 147.98 MiB loader image |
 | ChangeExec(CR-01).W3.AP1 | done | 2026-08-27 | Developer approved W3 wave gate on 2026-08-27 |
-| ChangeExec(CR-01).W4 | done | 2026-08-27 | Manual ZCU102 procedure and refreshed software/build gate pass; awaiting audited W4 wave approval |
+| ChangeExec(CR-01).W4 | done | 2026-08-27 | Manual ZCU102 procedure and refreshed software/build gate passed and were approved by Robbie VanVossen |
 | ChangeExec(CR-01).W4.Hardware | done | 2026-08-27 | Robbie VanVossen reports all 12 cases pass; console and packet evidence recorded, including 221/221 valid messages after truncation correction |
 | ChangeExec(CR-01).W4.MAVLinkV2Iteration | done | 2026-08-27 | Hardware exposed legal trailing-zero payload truncation rejected as too short; runtime and verified v2 length rules corrected, policy reads bounded, and requirements back-propagation staged |
 | ChangeExec(CR-01).W4.Tests | done | 2026-08-27 | Fresh host runs: firewall_core 17/17, mavlink_core 4/4, MAVLinkFirewall 7/7, RxFirewall 10/10, TxFirewall 4/4; frozen LowLevel host test retains missing seL4 build-environment limitation |
 | ChangeExec(CR-01).W4.Verify | done | 2026-08-27 | Fresh Verus: firewall_core 39/0, mavlink_core 7/0 via MAVLink build, MAVLinkFirewall 16/0, RxFirewall 27/0, TxFirewall 16/0; full custom.mk ZCU102 build passes including frozen LowLevel |
 | ChangeExec(CR-01).W4.Build | done | 2026-08-27 | Full SYSTEM_MAKEFILE=custom.mk ZCU102/debug rebuild passes; 147.98 MiB loader SHA-256 f0189ae8ea42ef2e46b1257510ccf2544c2c420cbe2e0c6cce7624be978156e9 |
-| ChangeExec(CR-01).W4.AP1 | in-progress | 2026-08-27 | Audited wave review awaiting developer approval |
+| ChangeExec(CR-01).W4.AP1 | done | 2026-08-27 | Robbie VanVossen approved the W4 hardware/software/build wave gate |
+| ChangeExec(CR-01).3 | done | 2026-08-27 | Back-propagation sweep complete; manual_reqs.md unchanged and HLR-21, component allocation, and DataDict clarify legal MAVLink v2 trailing-zero truncation |
+| ChangeExec(CR-01).4 | done | 2026-08-27 | Final pass consolidated fresh tests, Verus, 221/221 capture validation, and passing full custom.mk ZCU102 build; known LowLevel host-only limitation retained |
+| ChangeExec(CR-01).5 | done | 2026-08-27 | Standard change report written at reports/CR-01-add-mavlink-firewall.md with traceability, deviations, non-impact evidence, and verification summary |
+| ChangeExec(CR-01).AP2 | done | 2026-08-27 | Robbie VanVossen approved the completed change, final report, impact reconciliation, and evidence |
