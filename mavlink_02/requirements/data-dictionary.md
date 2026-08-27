@@ -12,7 +12,7 @@
 | MAVLink payload offset | Unsigned 16-bit bytes, 0–1600 | Computed by RxFirewall as `14 + IPv4_IHL_bytes + 8`; must be within `ethernet_frame`. With the baseline no-options IPv4 policy (`IHL = 5`), the value is 42. |
 | MAVLink payload length | Unsigned 16-bit bytes, bounded by UDP/frame length | Computed by RxFirewall as `UDP_length - 8`; offset plus length must not exceed the active IPv4 packet or 1600-byte carrier. |
 | MAVLink version magic | Unsigned 8-bit | `0xFE` for v1, `0xFD` for v2. Other values are malformed. |
-| MAVLink payload length | Unsigned 8-bit bytes, 0–255 | Number of MAVLink payload bytes; determines exact frame length with header, checksum, and optional v2 signature. |
+| MAVLink payload length | Unsigned 8-bit bytes, 0–255 | Number of transmitted MAVLink payload bytes; determines exact frame length with header, checksum, and optional v2 signature. MAVLink v2 may omit a trailing all-zero payload suffix up to the dialect maximum; MAVLink v1 uses the fixed dialect length. |
 | MAVLink v1 message ID | Unsigned 8-bit, 0–255 | Identifies a message in the resolved dialect metadata. |
 | MAVLink v2 message ID | Unsigned 24-bit, 0–16,777,215 | Little-endian three-byte message identifier in the v2 header. |
 | MAVLink incompatibility flags | Unsigned 8-bit bitset | Unsupported set bits make the v2 frame invalid; the signature-present bit requires a complete 13-byte signature. |

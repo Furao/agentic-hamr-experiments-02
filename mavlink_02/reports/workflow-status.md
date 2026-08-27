@@ -14,7 +14,7 @@ Project: open_platform | Profile: audited | Updated: 2026-08-27
 | ChangePlan(CR-01).AP1 | done | 2026-08-26 | Approved by Robbie VanVossen on 2026-08-26; ChangeExec unlocked |
 | ChangeExec(CR-01) | in-progress | 2026-08-26 | Draft workflow accepted; executing approved plan under audited profile |
 | ChangeExec(CR-01).1 | done | 2026-08-26 | Approved plan consistent; drift since 7a99f23 limited to reviewed sketch amendment, plan, and workflow status |
-| ChangeExec(CR-01).2 | in-progress | 2026-08-27 | W1 and W2 approved; W3 integration complete and awaiting wave review |
+| ChangeExec(CR-01).2 | done | 2026-08-27 | W1-W4 executed; W4 hardware and refreshed software gate pass after MAVLink v2 truncation correction |
 | ChangeExec(CR-01).W1 | in-progress | 2026-08-26 | Starting delta SysPlanAndReq; audited sub-workflow gates apply |
 | SysPlanAndReq | done | 2026-08-26 | Exit criteria met; requirements approved by developer |
 | SysPlanAndReq.1 | done | 2026-08-26 | ConOps records actors, fail-closed behavior, Rx-equivalent timing/capacity, and CR provenance |
@@ -112,7 +112,10 @@ Project: open_platform | Profile: audited | Updated: 2026-08-27
 | SysSchedDef.2 | n/a | 2026-08-27 | Workflow step is explicitly TBD; limitation recorded for W3 review |
 | ChangeExec(CR-01).W3.Build | done | 2026-08-27 | Updated custom.mk with MAVLink image/type/rules and VMM link; full SYSTEM_MAKEFILE=custom.mk ZCU102 debug build passes and Microkit produced 147.98 MiB loader image |
 | ChangeExec(CR-01).W3.AP1 | done | 2026-08-27 | Developer approved W3 wave gate on 2026-08-27 |
-| ChangeExec(CR-01).W4 | in-progress | 2026-08-27 | Final software evidence collected; manual ZCU102 hardware procedure prepared and awaiting execution |
-| ChangeExec(CR-01).W4.Hardware | pending | 2026-08-27 | reports/CR-01-add-mavlink-firewall-hardware-test.md contains 12 required physical test cases; no hardware result inferred |
-| ChangeExec(CR-01).W4.Tests | done | 2026-08-27 | Fresh host runs: MAVLinkFirewall 7/7, RxFirewall 10/10, TxFirewall 4/4; executable entrypoint lines covered; frozen LowLevel host test is incompatible with x86/seL4 AArch64 build, while full AArch64 system build passes |
-| ChangeExec(CR-01).W4.Verify | done | 2026-08-27 | MAVLinkFirewall 16/0, RxFirewall 27/0, TxFirewall 16/0; frozen LowLevel standalone target retains pre-existing feature/configuration failure, while full custom.mk AArch64 cargo-verus build passes |
+| ChangeExec(CR-01).W4 | done | 2026-08-27 | Manual ZCU102 procedure and refreshed software/build gate pass; awaiting audited W4 wave approval |
+| ChangeExec(CR-01).W4.Hardware | done | 2026-08-27 | Robbie VanVossen reports all 12 cases pass; console and packet evidence recorded, including 221/221 valid messages after truncation correction |
+| ChangeExec(CR-01).W4.MAVLinkV2Iteration | done | 2026-08-27 | Hardware exposed legal trailing-zero payload truncation rejected as too short; runtime and verified v2 length rules corrected, policy reads bounded, and requirements back-propagation staged |
+| ChangeExec(CR-01).W4.Tests | done | 2026-08-27 | Fresh host runs: firewall_core 17/17, mavlink_core 4/4, MAVLinkFirewall 7/7, RxFirewall 10/10, TxFirewall 4/4; frozen LowLevel host test retains missing seL4 build-environment limitation |
+| ChangeExec(CR-01).W4.Verify | done | 2026-08-27 | Fresh Verus: firewall_core 39/0, mavlink_core 7/0 via MAVLink build, MAVLinkFirewall 16/0, RxFirewall 27/0, TxFirewall 16/0; full custom.mk ZCU102 build passes including frozen LowLevel |
+| ChangeExec(CR-01).W4.Build | done | 2026-08-27 | Full SYSTEM_MAKEFILE=custom.mk ZCU102/debug rebuild passes; 147.98 MiB loader SHA-256 f0189ae8ea42ef2e46b1257510ccf2544c2c420cbe2e0c6cce7624be978156e9 |
+| ChangeExec(CR-01).W4.AP1 | in-progress | 2026-08-27 | Audited wave review awaiting developer approval |

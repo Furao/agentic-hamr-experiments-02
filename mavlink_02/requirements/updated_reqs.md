@@ -70,7 +70,9 @@ shall accept only when that bounded payload is exactly one complete MAVLink v1 o
 frame. Validity includes the version magic,
 payload length, complete header and payload, message-ID width, checksum including the
 dialect CRC extra, supported v2 incompatibility flags, complete optional signature
-when indicated, and no truncation or trailing bytes. Message metadata shall cover the
+when indicated, and no incomplete framing or trailing bytes. MAVLink v2 trailing-zero
+payload truncation is valid when the transmitted payload length does not exceed the
+dialect maximum; MAVLink v1 retains its fixed dialect payload length. Message metadata shall cover the
 bundled ArduPilotMega, common, standard, and minimal dialect definitions.
 
 ### RC_INSPECTA_00-HLR-22 – Forward allowed MAVLink

@@ -1,0 +1,960 @@
+Xilinx Zynq MP First Stage Boot Loader 
+Release 2021.1   Jun  6 2021  -  07:07:32
+NOTICE:  ATF running on XCZU9EG/silicon v4/RTL5.1 at 0xfffea000
+NOTICE:  BL31: v2.4(release):v1.1-7609-g851523ea2
+NOTICE:  BL31: Built : 08:27:07, Apr 28 2021
+
+
+U-Boot 2021.01-dirty (Nov 19 2024 - 09:14:05 -0500)
+
+Model: ZynqMP ZCU102 Rev1.0
+Board: Xilinx ZynqMP
+DRAM:  4 GiB
+PMUFW:	v1.1
+EL Level:	EL2
+Chip ID:	zu9eg
+NAND:  0 MiB
+MMC:   mmc@ff170000: 0
+Loading Environment from FAT... OK
+In:    serial
+Out:   serial
+Err:   serial
+Net:   
+ZYNQ GEM: ff0e0000, mdio bus ff0e0000, phyaddr 12, interface rgmii-id
+eth0: ethernet@ff0e0000
+Hit any key to stop autoboot:  2  0
+ZynqMP> 
+ZynqMP> 
+ZynqMP> 
+ZynqMP> 
+ZynqMP> 
+ZynqMP> 
+ZynqMP> 
+ZynqMP> run boot_microkit 
+BOOTP broadcast 1
+BOOTP broadcast 2
+BOOTP broadcast 3
+DHCP client bound to address 192.168.60.148 (752 ms)
+*** Warning: no boot file name; using 'C0A83C94.img'
+Using ethernet@ff0e0000 device
+TFTP from server 172.27.5.40; our IP address is 192.168.60.148; sending through gateway 192.168.60.158
+Filename 'C0A83C94.img'.
+Load address: 0x8000000
+Loading: *
+TFTP error: 'File not found' (1)
+Not retrying...
+Using ethernet@ff0e0000 device
+TFTP from server 172.27.5.40; our IP address is 192.168.60.148; sending through gateway 192.168.60.158
+Filename 'boot_files/zynqmp/loader.img'.
+Load address: 0x40000000
+Loading: *#################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 ########################################
+	 5.6 MiB/s
+done
+Bytes transferred = 155167500 (93fab0c hex)
+## Starting application at 0x40000000 ...
+LDR|INFO: Setting all interrupts to Group 1
+LDR|INFO: GICv2 ITLinesNumber: 0x00000005
+LDR|INFO|CPU0: CurrentEL=EL2
+LDR|INFO|CPU0: Resetting CNTVOFF
+LDR|INFO: disabling MMU (if it was enabled)
+LDR|INFO: PSCI version is 1.1
+LDR|INFO: loader for seL4 starting
+LDR|INFO: flags:
+             seL4 configured as hypervisor
+LDR|INFO: kernel:      entry:   0x0000008000000000
+LDR|INFO: root server: physmem: 0x0000000000346000 -- 0x0000000009411000
+LDR|INFO:              virtmem: 0x0000000000200000 -- 0x00000000092cb000
+LDR|INFO:              entry  : 0x00000000002225cc
+LDR|INFO: region: 0x00000000   addr: 0x0000000000000000   size: 0x0000000000346000   offset: 0x0000000000000000   type: 0x0000000000000001
+LDR|INFO: region: 0x00000001   addr: 0x0000000000346000   size: 0x000000000000a8ec   offset: 0x0000000000346000   type: 0x0000000000000001
+LDR|INFO: region: 0x00000002   addr: 0x00000000003608f0   size: 0x00000000000146c8   offset: 0x00000000003508ec   type: 0x0000000000000001
+LDR|INFO: region: 0x00000003   addr: 0x0000000000384fb8   size: 0x0000000000010088   offset: 0x0000000000364fb4   type: 0x0000000000000001
+LDR|INFO: region: 0x00000004   addr: 0x0000000000396000   size: 0x00000000005a27a8   offset: 0x000000000037503c   type: 0x0000000000000001
+LDR|INFO: region: 0x00000005   addr: 0x0000000000939000   size: 0x0000000008ad6000   offset: 0x00000000009177e4   type: 0x0000000000000001
+LDR|INFO: region: 0x00000006   addr: 0x0000000009410000   size: 0x00000000000001f8   offset: 0x00000000093ed7e4   type: 0x0000000000000001
+LDR|INFO: copying region 0x00000000
+LDR|INFO: copying region 0x00000001
+LDR|INFO: copying region 0x00000002
+LDR|INFO: copying region 0x00000003
+LDR|INFO: copying region 0x00000004
+LDR|INFO: copying region 0x00000005
+LDR|INFO: copying region 0x00000006
+LDR|INFO|CPU0: active CPUs to start: 0x00000001
+LDR|INFO|CPU0: enabling MMU
+LDR|INFO|CPU0: CurrentEL=EL2
+LDR|INFO|CPU0: Resetting CNTVOFF
+LDR|INFO|CPU0: enabling MMU
+LDR|INFO|CPU0: jumping to kernel
+Warning:  gpt_cntfrq 99990008, expected 100000000
+Bootstrapping kernel
+available phys memory regions: 2
+  [0..80000000)
+  [800000000..880000000)
+reserved virt address space regions: 2
+  [8000000000..8000346000)
+  [8000346000..8009411000)
+Booting all finished, dropped to user space
+INFO  [sel4_capdl_initializer::initialize] Starting CapDL initializer
+INFO  [sel4_capdl_initializer::initialize] Starting threads
+MONseL4_Ar|INFOIINFONINFOFINFOOduPilot:  [s   [eM  [si  [sc_ArduPireL4_oth_dkeL4_ieL4_tlot|INF TxFiMriveoRxFinMAVLiO: startrewaor_correwa inkFsting "stll_Tare] rll_RtireweeL4_ArddxFir!Init
+xFirall_uPilot_AewalialiewalMAVLrduPilotl::czingl::cinkF"
+seL4_ompo DriompoirewArduPilonentver
+nentall:t_ArduPi::seINFO::se:comlot|INFOL4_T  [eL4_Rpone: CopyinxFirth_dxFirnt::g guest ewalriveewalseL4kernel il_Txr_col_Rx_MAVmage to Firere] FireLink0x800000wallInitwallFire000 (0x1_appiali_appwall4e9a00 b] inzed ] in_MAVytes)
+itialGEM itiaLinkize endevilizeFiretrypoice
+ entwallnt invrypoin_appoked
+t invo] inked
+itialize entrypoint invoked
+seL4_ArduPilot_ArduPilot|INFO: Copying guest DTB to 0x820000000 (0xc33f bytes)
+seL4_ArduPilot_ArduPilot|INFO: Copying guest initial RAM disk to 0x820100000 (0x744df50 bytes)
+seL4_ArduPilot_ArduPilot|INFO: initialised virtual GICv2 (distributor: 0xf9010000)
+seL4_ArduPilot_ArduPilot|INFO: Register passthrough vIRQ 0x35 on vCPU 0x0 (IRQ channel: 0x1)
+seL4_ArduPilot_ArduPilot|INFO: Register passthrough vIRQ 0x51 on vCPU 0x0 (IRQ channel: 0x2)
+seL4_ArduPilot_ArduPilot|INFO: starting guest at 0x800000000, DTB at 0x820000000, initial RAM disk at 0x820100000
+[    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd034]
+[    0.000000] Linux version 5.10.0-xilinx-v2021.1 (oe-user@oe-host) (aarch64-xilinx-linux-gcc (GCC) 10.2.0, GNU ld (GNU Binutils) 2.35.1) #1 SMP Tue Aug 24 05:53:21 UTC 2021
+[    0.000000] Machine model: ZynqMP ZCU102 Rev1.0
+[    0.000000] earlycon: cdns0 at MMIO 0x00000000ff000000 (options '115200n8')
+[    0.000000] printk: bootconsole [cdns0] enabled
+[    0.000000] efi: UEFI not found.
+[    0.000000] cma: Reserved 256 MiB at 0x0000000830000000
+[    0.000000] Zone ranges:
+[    0.000000]   DMA32    [mem 0x0000000800000000-0x000000083fffffff]
+[    0.000000]   Normal   empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000800000000-0x000000083fffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000800000000-0x000000083fffffff]
+[    0.000000] On node 0 totalpages: 262144
+[    0.000000]   DMA32 zone: 4096 pages used for memmap
+[    0.000000]   DMA32 zone: 0 pages reserved
+[    0.000000]   DMA32 zone: 262144 pages, LIFO batch:63
+[    0.000000] psci: probing for conduit method from DT.
+[    0.000000] psci: PSCIv1.2 detected in firmware.
+[    0.000000] psci: Using standard PSCI v0.2 function IDs
+[    0.000000] psci: Trusted OS migration not required
+[    0.000000] psci: SMC Calling Convention v1.0
+[    0.000000] percpu: Embedded 22 pages/cpu s51032 r8192 d30888 u90112
+[    0.000000] pcpu-alloc: s51032 r8192 d30888 u90112 alloc=22*4096
+[    0.000000] pcpu-alloc: [0] 0 [0] 1 [0] 2 [0] 3 
+[    0.000000] Detected VIPT I-cache on CPU0
+[    0.000000] CPU features: detected: ARM erratum 845719
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 258048
+[    0.000000] Kernel command line: console=ttyPS0,115200n8 root=/dev/ram0 maxcpus=1 nosmp earlycon debug loglevel=8 earlyprintk=serial
+[    0.000000] Dentry cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.000000] Memory: 620860K/1048576K available (14144K kernel code, 998K rwdata, 3968K rodata, 2176K init, 603K bss, 165572K reserved, 262144K cma-reserved)
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU event tracing is enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] random: get_random_bytes called from start_kernel+0x31c/0x524 with crng_init=0
+[    0.000000] arch_timer: cp15 timer(s) running at 99.99MHz (virt).
+[    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x170f8de2d3, max_idle_ns: 440795206112 ns
+[    0.000004] sched_clock: 56 bits at 99MHz, resolution 10ns, wraps every 4398046511101ns
+[    0.008323] Console: colour dummy device 80x25
+[    0.013642] Calibrating delay loop (skipped), value calculated using timer frequency.. 199.98 BogoMIPS (lpj=399960)
+[    0.023386] pid_max: default: 32768 minimum: 301
+[    0.027493] Mount-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.035105] Mountpoint-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.045312] rcu: Hierarchical SRCU implementation.
+[    0.048907] EFI services will not be available.
+[    0.052815] smp: Bringing up secondary CPUs ...
+[    0.056561] smp: Brought up 1 node, 1 CPU
+[    0.060485] SMP: Total of 1 processors activated.
+[    0.064897] CPU features: detected: 32-bit EL0 Support
+[    0.070249] CPU features: detected: CRC32 instructions
+[    0.076122] CPU: All CPU(s) started at EL1
+[    0.079987] alternatives: patching kernel code
+[    0.086030] devtmpfs: initialized
+[    0.105799] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.111229] futex hash table entries: 1024 (order: 4, 65536 bytes, linear)
+[    0.136822] pinctrl core: initialized pinctrl subsystem
+[    0.138738] DMI not present or invalid.
+[    0.140653] NET: Registered protocol family 16
+[    0.148471] DMA: preallocated 128 KiB GFP_KERNEL pool for atomic allocations
+[    0.152251] DMA: preallocated 128 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+[    0.160069] audit: initializing netlink subsys (disabled)
+[    0.166245] cpuidle: using governor menu
+[    0.169855] hw-breakpoint: found 6 breakpoint and 4 watchpoint registers.
+[    0.175649] audit: type=2000 audit(0.116:1): state=initialized audit_enabled=0 res=1
+[    0.183448] ASID allocator initialised with 65536 entries
+[    0.189392] Serial: AMBA PL011 UART driver
+[    0.232460] HugeTLB registered 1.00 GiB page size, pre-allocated 0 pages
+[    0.234150] HugeTLB registered 32.0 MiB page size, pre-allocated 0 pages
+[    0.240203] HugeTLB registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.247826] HugeTLB registered 64.0 KiB page size, pre-allocated 0 pages
+INFO  [eth_driver_core] PHY: Speed: S1000, Duplex: Full
+INFO  [seL4_LowLevelEthernetDriver_LowLevelEthernetDriver::component::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app] initialize entrypoint invoked
+INFO  [seL4_LowLevelEthernetDriver_LowLevelEthernetDriver::component::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app] Acked driver IRQ
+[    3.758092] cryptd: max_cpu_qlen set to 1000
+[    3.842319] DRBG: Continuing without Jitter RNG
+[    3.955243] raid6: neonx8   gen()   659 MB/s
+[    4.027346] raid6: neonx8   xor()   500 MB/s
+[    4.098153] raid6: neonx4   gen()   682 MB/s
+[    4.170266] raid6: neonx4   xor()   493 MB/s
+[    4.242375] raid6: neonx2   gen()   643 MB/s
+[    4.314470] raid6: neonx2   xor()   451 MB/s
+[    4.386577] raid6: neonx1   gen()   548 MB/s
+[    4.458684] raid6: neonx1   xor()   383 MB/s
+[    4.529490] raid6: int64x8  gen()   451 MB/s
+[    4.601586] raid6: int64x8  xor()   243 MB/s
+[    4.673704] raid6: int64x4  gen()   496 MB/s
+[    4.745795] raid6: int64x4  xor()   256 MB/s
+[    4.817894] raid6: int64x2  gen()   434 MB/s
+[    4.890001] raid6: int64x2  xor()   236 MB/s
+[    4.960793] raid6: int64x1  gen()   318 MB/s
+[    5.032911] raid6: int64x1  xor()   163 MB/s
+[    5.032950] raid6: using algorithm neonx4 gen() 682 MB/s
+[    5.036819] raid6: .... xor() 493 MB/s, rmw enabled
+[    5.042212] raid6: using neon recovery algorithm
+[    5.046651] iommu: Default domain type: Translated 
+[    5.052202] SCSI subsystem initialized
+[    5.055885] libata version 3.00 loaded.
+[    5.059896] usbcore: registered new interface driver usbfs
+[    5.064108] usbcore: registered new interface driver hub
+[    5.069551] usbcore: registered new device driver usb
+[    5.075432] mc: Linux media interface: v0.10
+[    5.079286] videodev: Linux video capture interface: v2.00
+[    5.085176] EDAC MC: Ver: 3.0.0
+[    5.087573] zynqmp-ipi-mbox mailbox@ff990400: Registered ZynqMP IPI mbox with TX/RX channels.
+[    5.097049] FPGA manager framework
+[    5.099124] Advanced Linux Sound Architecture Driver Initialized.
+[    5.106754] Bluetooth: Core ver 2.22
+[    5.108640] NET: Registered protocol family 31
+[    5.114407] Bluetooth: HCI device and connection manager initialized
+[    5.120271] Bluetooth: HCI socket layer initialized
+[    5.124195] Bluetooth: L2CAP socket layer initialized
+[    5.130035] Bluetooth: SCO socket layer initialized
+[    5.134351] clocksource: Switched to clocksource arch_sys_counter
+[    5.140276] VFS: Disk quotas dquot_6.6.0
+[    5.144059] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    5.165221] NET: Registered protocol family 2
+[    5.165564] tcp_listen_portaddr_hash hash table entries: 512 (order: 1, 8192 bytes, linear)
+[    5.172973] TCP established hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    5.180815] TCP bind hash table entries: 8192 (order: 5, 131072 bytes, linear)
+[    5.188585] TCP: Hash tables configured (established 8192 bind 8192)
+[    5.194468] UDP hash table entries: 512 (order: 2, 16384 bytes, linear)
+[    5.200291] UDP-Lite hash table entries: 512 (order: 2, 16384 bytes, linear)
+[    5.208181] NET: Registered protocol family 1
+[    5.212271] RPC: Registered named UNIX socket transport module.
+[    5.217840] RPC: Registered udp transport module.
+[    5.221911] RPC: Registered tcp transport module.
+[    5.227589] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    5.235422] PCI: CLS 0 bytes, default 64
+[    5.237421] Trying to unpack rootfs image as initramfs...
+[   24.437529] Freeing initrd memory: 122880K
+[   24.697259] Initialise system trusted keyrings
+[   24.698792] workingset: timestamp_bits=46 max_order=18 bucket_order=0
+[   24.704680] NFS: Registering the id_resolver key type
+[   24.708527] Key type id_resolver registered
+[   24.712419] Key type id_legacy registered
+[   24.716342] nfs4filelayout_init: NFSv4 File Layout Driver Registering...
+[   24.722310] jffs2: version 2.2. (NAND) (SUMMARY)  © 2001-2006 Red Hat, Inc.
+[   24.849373] NET: Registered protocol family 38
+[   24.849418] xor: measuring software checksum speed
+[   24.866708]    8regs           :   794 MB/sec
+[   24.878478]    32regs          :   838 MB/sec
+[   24.892230]    arm64_neon      :   795 MB/sec
+[   24.892270] xor: using function: 32regs (838 MB/sec)
+[   24.895889] Key type asymmetric registered
+[   24.899955] Asymmetric key parser 'x509' registered
+[   24.905620] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 247)
+[   24.913464] io scheduler mq-deadline registered
+[   24.917319] io scheduler kyber registered
+[   24.923441] ps_pcie_dma init()
+VIRTIO(NET): operation: reset
+[   25.018991] Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
+[   25.024382] Serial: AMBA driver
+[   25.028460] cacheinfo: Unable to detect cache hierarchy for CPU 0
+[   25.046030] brd: module loaded
+[   25.061448] loop: module loaded
+[   25.063437] mtdoops: mtd device (mtddev=name/number) must be supplied
+[   25.069641] libphy: Fixed MDIO Bus: probed
+[   25.075081] tun: Universal TUN/TAP device driver, 1.6
+VIRTIO(NET): operation: get device features
+VIRTIO(NET): operation: get device features
+VIRTIO(NET): device config: 2
+VIRTIO(NET): data.DriverFeaturesSel: 1
+VIRTIO(NET): features: 0x1
+VIRTIO(NET): data.DriverFeaturesSel: 0
+VIRTIO(NET): features: 0x20
+VIRTIO(NET): device config: 0
+VIRTIO(NET): device config: 0
+VIRTIO(NET): device config: 0
+VIRTIO(NET): device config: 0
+VIRTIO(NET): device config: 1
+VIRTIO(NET): device config: 1
+[   25.178199] CAN device driver interface
+[   25.180022] usbcore: registered new interface driver asix
+[   25.181794] usbcore: registered new interface driver ax88179_178a
+[   25.187850] usbcore: registered new interface driver cdc_ether
+[   25.193647] usbcore: registered new interface driver net1080
+[   25.199270] usbcore: registered new interface driver cdc_subset
+[   25.205152] usbcore: registered new interface driver zaurus
+[   25.210877] usbcore: registered new interface driver cdc_ncm
+[   25.217195] usbcore: registered new interface driver uas
+[   25.222594] usbcore: registered new interface driver usb-storage
+[   25.228602] i2c /dev entries driver
+[   25.234685] usbcore: registered new interface driver uvcvideo
+[   25.236690] USB Video Class driver (1.1.1)
+[   25.244314] device-mapper: ioctl: 4.43.0-ioctl (2020-10-01) initialised: dm-devel@redhat.com
+[   25.249950] Bluetooth: HCI UART driver ver 2.3
+[   25.253798] Bluetooth: HCI UART protocol H4 registered
+[   25.259644] Bluetooth: HCI UART protocol BCSP registered
+[   25.263972] Bluetooth: HCI UART protocol LL registered
+[   25.269406] Bluetooth: HCI UART protocol ATH3K registered
+[   25.275272] Bluetooth: HCI UART protocol Three-wire (H5) registered
+[   25.281145] Bluetooth: HCI UART protocol Intel registered
+[   25.286984] Bluetooth: HCI UART protocol QCA registered
+[   25.291230] usbcore: registered new interface driver bcm203x
+[   25.296856] usbcore: registered new interface driver bpa10x
+[   25.302615] usbcore: registered new interface driver bfusb
+[   25.308469] usbcore: registered new interface driver btusb
+[   25.314340] usbcore: registered new interface driver ath3k
+[   25.320426] sdhci: Secure Digital Host Controller Interface driver
+[   25.325996] sdhci: Copyright(c) Pierre Ossman
+[   25.329898] sdhci-pltfm: SDHCI platform and OF driver helper
+[   25.336018] ledtrig-cpu: registered to indicate activity on CPUs
+[   25.341673] zynqmp_firmware_probe Platform Management API v1.1
+[   25.347479] zynqmp_firmware_probe Trustzone version v1.0
+[   25.386490] zynqmp-pinctrl firmware:zynqmp-firmware:pinctrl: zynqmp pinctrl initialized
+[   25.531993] alg: No test for xilinx-zynqmp-aes (zynqmp-aes)
+[   25.532093] zynqmp_aes firmware:zynqmp-firmware:zynqmp-aes: AES Successfully Registered
+[   25.540068] alg: No test for xilinx-keccak-384 (zynqmp-keccak-384)
+[   25.547607] alg: No test for xilinx-zynqmp-rsa (zynqmp-rsa)
+[   25.551738] usbcore: registered new interface driver usbhid
+[   25.557338] usbhid: USB HID core driver
+[   25.565443] fpga_manager fpga0: Xilinx ZynqMP FPGA Manager registered
+[   25.569058] usbcore: registered new interface driver snd-usb-audio
+[   25.576856] pktgen: Packet Generator for packet performance testing. Version: 2.75
+[   25.581261] IPVS: Registered protocols (TCP, UDP)
+[   25.586662] IPVS: Connection hash table configured (size=4096, memory=64Kbytes)
+[   25.593016] IPVS: ipvs loaded.
+[   25.596361] IPVS: [rr] scheduler registered.
+[   25.600395] Initializing XFRM netlink socket
+[   25.604502] NET: Registered protocol family 10
+[   25.610551] Segment Routing with IPv6
+[   25.613927] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[   25.620061] NET: Registered protocol family 17
+[   25.623697] NET: Registered protocol family 15
+[   25.627591] can: controller area network core
+[   25.631528] NET: Registered protocol family 29
+[   25.635917] can: raw protocol
+[   25.639302] can: broadcast manager protocol
+[   25.643213] can: netlink gateway - max_hops=1
+[   25.647442] Bluetooth: RFCOMM TTY layer initialized
+[   25.652965] Bluetooth: RFCOMM socket layer initialized
+[   25.657296] Bluetooth: RFCOMM ver 1.11
+[   25.661012] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[   25.666625] Bluetooth: BNEP filters: protocol multicast
+[   25.672481] Bluetooth: BNEP socket layer initialized
+[   25.676407] Bluetooth: HIDP (Human Interface Emulation) ver 1.2
+[   25.682290] Bluetooth: HIDP socket layer initialized
+[   25.688201] 9pnet: Installing 9P2000 support
+[   25.692013] Key type dns_resolver registered
+[   25.696146] registered taskstats version 1
+[   25.699819] Loading compiled-in X.509 certificates
+[   25.707987] Btrfs loaded, crc32c=crc32c-generic
+[   25.738940] ff000000.serial: ttyPS0 at MMIO 0xff000000 (irq = 20, base_baud = 6249375) is a xuartps
+[   25.748593] printk: console [ttyPS0] enabled
+[   25.748593] printk: console [ttyPS0] enabled
+[   25.752898] printk: bootconsole [cdns0] disabled
+[   25.752898] printk: bootconsole [cdns0] disabled
+[   25.764236] of-fpga-region fpga-full: FPGA Region probed
+[   25.782198] cpufreq: cpufreq_online: CPU0: Running at unlisted initial frequency: 1199880 KHz, changing to: 1199999 KHz
+[   25.832780] of_cfs_init
+[   25.836368] of_cfs_init: OK
+[   25.840404] cfg80211: Loading compiled-in X.509 certificates for regulatory database
+[   25.863663] mmc0: SDHCI controller on ff170000.mmc [ff170000.mmc] using ADMA 64-bit
+[   25.963471] mmc0: new high speed SDHC card at address aaaa
+[   25.975195] mmcblk0: mmc0:aaaa SC16G 14.8 GiB 
+[   25.992481]  mmcblk0: p1 p2 p3 p4
+[   26.351644] cfg80211: Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+[   26.359395] zynqmp_pll_disable() clock disable failed for dpll_int, ret = -13
+[   26.373206] ALSA device list:
+[   26.376779]   No soundcards found.
+[   26.380966] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+[   26.390456] cfg80211: failed to load regulatory.db
+[   26.398554] Freeing unused kernel memory: 2176K
+[   26.410409] Run /init as init process
+[   26.414055]   with arguments:
+[   26.417708]     /init
+[   26.419984]   with environment:
+[   26.423569]     HOME=/
+[   26.425913]     TERM=linux
+[   26.429419]     earlyprintk=serial
+INIT: version 2.97 booting
+Starting udev
+[   26.755307] udevd[228]: starting version 3.2.9
+[   26.761196] random: udevd: uninitialized urandom read (16 bytes read)
+[   26.768710] random: udevd: uninitialized urandom read (16 bytes read)
+[   26.776530] random: udevd: uninitialized urandom read (16 bytes read)
+[   26.804156] udevd[229]: starting eudev-3.2.9
+[   27.514446] random: fast init done
+[   28.526863] EXT4-fs (mmcblk0p2): mounted filesystem with ordered data mode. Opts: (null)
+[   28.546533] EXT4-fs (mmcblk0p3): mounted filesystem with ordered data mode. Opts: (null)
+[   28.567683] FAT-fs (mmcblk0p1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+[   28.659582] EXT4-fs (mmcblk0p4): mounting ext2 file system using the ext4 subsystem
+[   28.709954] EXT4-fs (mmcblk0p4): warning: mounting unchecked fs, running e2fsck is recommended
+[   28.723731] EXT4-fs (mmcblk0p4): mounted filesystem without journal. Opts: (null)
+[   29.674102] urandom_read: 3 callbacks suppressed
+[   29.674107] random: dd: uninitialized urandom read (512 bytes read)
+INFO  [seL4_TxFirewall_TxFirewall::component::seL4_TxFirewall_TxFirewall_app] IPv6 packet: Throw it away.
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] IPv4 packet protocol is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_TxFirewall_TxFirewall::component::seL4_TxFirewall_TxFirewall_app] IPv6 packet: Throw it away.
+INFO  [seL4_TxFirewall_TxFirewall::component::seL4_TxFirewall_TxFirewall_app] IPv6 packet: Throw it away.
+INFO  [seL4_TxFirewall_TxFirewall::component::seL4_TxFirewall_TxFirewall_app] IPv6 packet: Throw it away.
+INFO  [seL4_TxFirewall_TxFirewall::component::seL4_TxFirewall_TxFirewall_app] IPv6 packet: Throw it away.
+INFO  [seL4_TxFirewall_TxFirewall::component::seL4_TxFirewall_TxFirewall_app] IPv6 packet: Throw it away.
+[   34.518390] random: crng init done
+INFO  [seL4_TxFirewall_TxFirewall::component::seL4_TxFirewall_TxFirewall_app] IPv6 packet: Throw it away.
+INFO  [seL4_TxFirewall_TxFirewall::component::seL4_TxFirewall_TxFirewall_app] IPv6 packet: Throw it away.
+[   48.174755] process 'docker_data/tmp/qemu-check842285008/check' started with executable stack
+INFO  [seL4_TxFirewall_TxFirewall::component::seL4_TxFirewall_TxFirewall_app] IPv6 packet: Throw it away.
+INFO  [seL4_TxFirewall_TxFirewall::component::seL4_TxFirewall_TxFirewall_app] IPv6 packet: Throw it away.
+INFO  [seL4_TxFirewall_TxFirewall::component::seL4_TxFirewall_TxFirewall_app] IPv6 packet: Throw it away.
+[  158.042873] br-1a16e5dd574b: port 1(veth54a9f15) entered blocking state
+[  158.050300] br-1a16e5dd574b: port 1(veth54a9f15) entered disabled state
+[  158.058225] device veth54a9f15 entered promiscuous mode
+[  158.725746] cgroup: runc (970) created nested cgroup for controller "memory" which has incomplete hierarchy support. Nested cgroups may change behavior in the future.
+[  158.741113] cgroup: "memory" requires setting use_hierarchy to 1 on the root
+[  158.797985] cgroup: cgroup: disabling cgroup2 socket matching due to net_prio or net_cls activation
+[  161.527053] eth0: renamed from vethc662dec
+[  161.536858] IPv6: ADDRCONF(NETDEV_CHANGE): veth54a9f15: link becomes ready
+[  161.544533] br-1a16e5dd574b: port 1(veth54a9f15) entered blocking state
+[  161.552274] br-1a16e5dd574b: port 1(veth54a9f15) entered forwarding state
+[  161.568179] IPv6: ADDRCONF(NETDEV_CHANGE): br-1a16e5dd574b: link becomes ready
+
+PetaLinux 2021.1 zcu102-zynqmp ttyPS0
+
+
+7[r[999;999H[6n8root@zcu102-zynqmp:~# INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 1 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+
+root@zcu102-zynqmp:~# 
+root@zcu102-zynqmp:~# INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_TxFirewall_TxFirewall::component::seL4_TxFirewall_TxFirewall_app] IPv6 packet: Throw it away.
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] IPv4 packet protocol is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] IPv4 packet protocol is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] IPv4 packet protocol is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] IPv4 packet protocol is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] IPv4 packet protocol is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 2: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 1: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 2: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 1: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 1 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 1 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 1 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewINFO  all_[seL4_MAVLRxFireinkFwall_RirewxFirewall:all::c:comomponeponent::sent::L4_RxFseL4irewal_MAVl_RxFiLinkrewallFire_app] wallUDP pa_MAVcket dLinkestinaFiretion pwallort is_app not a] lallowedne 0 by Rx: maFirewalforll polmed icy
+IMAVLNFO  [ink seL4_RframxFirewe drall_RxoppeFirewad
+ll::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 1: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: firmware-flash command denied
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 1 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 1 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 1 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_TxFirewall_TxFirewall::component::seL4_TxFirewall_TxFirewall_app] IPv6 packet: Throw it away.
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] UDP packet destination port is not allowed by RxFirewall policy
+INFO  [seL4_RxFirewall_RxFirewall::component::seL4_RxFirewall_RxFirewall_app] Rx lane 0 packet rejected
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped
+INFO  [seL4_MAVLinkFirewall_MAVLinkFirewall::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app] lane 0: malformed MAVLink frame dropped

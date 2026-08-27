@@ -20,7 +20,7 @@ implementation responsibilities.
 
 | Component Req ID | Traces to | Requirement |
 |---|---|---|
-| MAVLinkFirewall_Req_Valid | HLR-21 | Validate supplied payload bounds, then recognize exactly one complete, checksum-valid MAVLink v1/v2 frame within that slice using bundled dialect metadata. |
+| MAVLinkFirewall_Req_Valid | HLR-21 | Validate supplied payload bounds, then recognize exactly one complete, checksum-valid MAVLink v1/v2 frame within that slice using bundled dialect metadata, accepting MAVLink v2 trailing-zero payload truncation up to the dialect maximum. |
 | MAVLinkFirewall_Req_Allow | HLR-22 | Forward a valid non-denied input carrier unchanged, preserving both the Ethernet frame and validated bounds. |
 | MAVLinkFirewall_Req_AllowFTP | HLR-23 | Allow valid `FILE_TRANSFER_PROTOCOL` messages unless an independent deny rule applies. |
 | MAVLinkFirewall_Req_DenyFlash | HLR-24 | Drop command envelopes carrying command 42650 or secure flash operation 7. |
