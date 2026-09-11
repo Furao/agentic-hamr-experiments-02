@@ -25,9 +25,9 @@ pub struct Message {
 }
 
 pub open spec fn crc_accumulate_spec(byte: u8, crc: u16) -> u16 {
-    let tmp0 = byte ^ (crc as u8);
-    let tmp = tmp0 ^ (tmp0 << 4);
-    (crc >> 8) ^ ((tmp as u16) << 8) ^ ((tmp as u16) << 3) ^ ((tmp as u16) >> 4)
+    let input_mix = byte ^ (crc as u8);
+    let mixed_byte = input_mix ^ (input_mix << CRC_NIBBLE_SHIFT);
+    (crc >> BITS_PER_BYTE) ^ ((mixed_byte as u16) << BITS_PER_BYTE) ^ ((mixed_byte as u16) << CRC_POLYNOMIAL_MIX_SHIFT) ^ ((mixed_byte as u16) >> CRC_NIBBLE_SHIFT)
 }
 
 pub open spec fn crc_fold_spec(frame: Seq<u8>, start: int, end: int, crc: u16) -> u16
@@ -81,41 +81,84 @@ pub fn crc_fold(frame: &[u8], start: usize, end: usize, initial: u16) -> (result
 }
 
 pub open spec fn u16_le_spec(frame: Seq<u8>, at: int) -> u16 {
-    (frame[at] as u16) | ((frame[at + 1] as u16) << 8)
+    (frame[at] as u16) | ((frame[at + 1] as u16) << BITS_PER_BYTE)
 }
 
 pub open spec fn u24_le_spec(frame: Seq<u8>, at: int) -> u32 {
-    (frame[at] as u32) | ((frame[at + 1] as u32) << 8) | ((frame[at + 2] as u32) << 16)
+    (frame[at] as u32) | ((frame[at + 1] as u32) << BITS_PER_BYTE) | ((frame[at + 2] as u32) << (2 * BITS_PER_BYTE))
 }
 
 pub open spec fn u32_le_spec(frame: Seq<u8>, at: int) -> u32 {
-    (frame[at] as u32) | ((frame[at + 1] as u32) << 8) |
-      ((frame[at + 2] as u32) << 16) | ((frame[at + 3] as u32) << 24)
+    (frame[at] as u32) | ((frame[at + 1] as u32) << BITS_PER_BYTE) |
+      ((frame[at + 2] as u32) << (2 * BITS_PER_BYTE)) | ((frame[at + 3] as u32) << (3 * BITS_PER_BYTE))
+}
+
+/// Field offsets are relative to the magic byte; lengths and positions are in bytes.
+/// These selectors retain the underlying Seq indexing semantics; validity guards
+/// belong to frame_valid_spec rather than supplying defaults for missing fields.
+pub open spec fn magic_spec(frame: Seq<u8>, start: int) -> u8 {
+    frame[start + MAGIC_OFFSET as int]
+}
+
+pub open spec fn payload_length_spec(frame: Seq<u8>, start: int) -> int {
+    frame[start + PAYLOAD_LENGTH_OFFSET as int] as int
+}
+
+pub open spec fn incompat_flags_spec(frame: Seq<u8>, start: int) -> u8 {
+    frame[start + V2_INCOMPAT_FLAGS_OFFSET as int]
+}
+
+pub open spec fn header_length_spec(frame: Seq<u8>, start: int) -> int {
+    if magic_spec(frame, start) == MAVLINK_V1_MAGIC { V1_HEADER_BYTES as int }
+    else { V2_HEADER_BYTES as int }
+}
+
+pub open spec fn message_id_spec(frame: Seq<u8>, start: int) -> u32 {
+    if magic_spec(frame, start) == MAVLINK_V1_MAGIC {
+        frame[start + V1_MESSAGE_ID_OFFSET as int] as u32
+    } else {
+        u24_le_spec(frame, start + V2_MESSAGE_ID_OFFSET as int)
+    }
+}
+
+pub open spec fn signature_length_spec(frame: Seq<u8>, start: int) -> int {
+    if magic_spec(frame, start) == MAVLINK_V2_MAGIC &&
+        (incompat_flags_spec(frame, start) & MAVLINK_V2_SIGNED) != 0 {
+        SIGNATURE_BYTES as int
+    } else { 0 }
 }
 
 pub open spec fn frame_valid_spec(frame: Seq<u8>, offset: u16, length: u16) -> bool {
     let start = offset as int;
     let available = length as int;
+    let magic = magic_spec(frame, start);
+    // Carrier bounds and supported wire format.
     &&& available > 0
     &&& start + available <= frame.len()
-    &&& (frame[start] == 0xfe || frame[start] == 0xfd)
-    &&& (frame[start] == 0xfe ==> available >= 8)
-    &&& (frame[start] == 0xfd ==> available >= 12 && (frame[start + 2] & !1u8) == 0)
+    &&& (magic == MAVLINK_V1_MAGIC || magic == MAVLINK_V2_MAGIC)
+    &&& (magic == MAVLINK_V1_MAGIC ==> available >= V1_MIN_FRAME_BYTES)
+    &&& (magic == MAVLINK_V2_MAGIC ==> available >= V2_MIN_FRAME_BYTES &&
+          (incompat_flags_spec(frame, start) & !SUPPORTED_INCOMPAT_FLAGS) == 0)
     &&& {
-      let header: int = if frame[start] == 0xfe { 6 } else { 10 };
-      let payload = frame[start + 1] as int;
-      let signature: int = if frame[start] == 0xfd && (frame[start + 2] & 1u8) != 0 { 13 } else { 0 };
-      let id: u32 = if frame[start] == 0xfe { frame[start + 5] as u32 } else { u24_le_spec(frame, start + 7) };
-      let meta = dialect::metadata_spec(id);
-      &&& available == header + payload + 2 + signature
-      &&& meta.is_some()
-      &&& (if frame[start] == 0xfe { payload == meta.unwrap().2 as int }
-           else { payload <= meta.unwrap().2 as int })
+      let header_length = header_length_spec(frame, start);
+      let payload_length = payload_length_spec(frame, start);
+      let signature_length = signature_length_spec(frame, start);
+      let metadata = dialect::metadata_spec(message_id_spec(frame, start));
+      // Exact framing, known message type, and existing payload-length rules.
+      &&& available == header_length + payload_length + CHECKSUM_BYTES + signature_length
+      &&& metadata.is_some()
       &&& {
-        let checksum_at = start + header + payload;
-        let computed = crc_accumulate_spec(meta.unwrap().0,
-          crc_fold_spec(frame, start + 1, checksum_at, 0xffffu16));
-        computed == u16_le_spec(frame, checksum_at)
+        let (crc_extra, _minimum_payload_length, maximum_payload_length) = metadata.unwrap();
+        &&& (if magic == MAVLINK_V1_MAGIC { payload_length == maximum_payload_length as int }
+             else { payload_length <= maximum_payload_length as int })
+        &&& {
+          // The checksum excludes magic and the optional signature trailer.
+          let checksum_offset = start + header_length + payload_length;
+          let header_and_payload_crc = crc_fold_spec(
+              frame, start + CRC_START_OFFSET as int, checksum_offset, CRC_INITIAL);
+          let expected_checksum = crc_accumulate_spec(crc_extra, header_and_payload_crc);
+          expected_checksum == u16_le_spec(frame, checksum_offset)
+        }
       }
     }
 }
@@ -123,35 +166,35 @@ pub open spec fn frame_valid_spec(frame: Seq<u8>, offset: u16, length: u16) -> b
 // Field getters are called only after the parser has checked the carrier/header bounds.
 fn get_magic(frame: &[u8], start: usize) -> (value: u8)
     requires start < frame.len()
-    ensures value == frame[start as int]
+    ensures value == magic_spec(frame@, start as int)
 {
     frame[start + MAGIC_OFFSET]
 }
 
 fn get_payload_length(frame: &[u8], start: usize) -> (value: usize)
     requires start + PAYLOAD_LENGTH_OFFSET < frame.len()
-    ensures value == frame[start as int + 1] as int
+    ensures value == payload_length_spec(frame@, start as int)
 {
     frame[start + PAYLOAD_LENGTH_OFFSET] as usize
 }
 
 fn get_v2_incompat_flags(frame: &[u8], start: usize) -> (value: u8)
     requires start + V2_INCOMPAT_FLAGS_OFFSET < frame.len()
-    ensures value == frame[start as int + 2]
+    ensures value == incompat_flags_spec(frame@, start as int)
 {
     frame[start + V2_INCOMPAT_FLAGS_OFFSET]
 }
 
 fn get_v1_message_id(frame: &[u8], start: usize) -> (value: u32)
     requires start + V1_MESSAGE_ID_OFFSET < frame.len()
-    ensures value == frame[start as int + 5] as u32
+    ensures value == frame[start as int + V1_MESSAGE_ID_OFFSET as int] as u32
 {
     frame[start + V1_MESSAGE_ID_OFFSET] as u32
 }
 
 fn get_v2_message_id(frame: &[u8], start: usize) -> (value: u32)
     requires start + V2_HEADER_BYTES <= frame.len()
-    ensures value == u24_le_spec(frame@, start as int + 7)
+    ensures value == u24_le_spec(frame@, start as int + V2_MESSAGE_ID_OFFSET as int)
 {
     let at = start + V2_MESSAGE_ID_OFFSET;
     (frame[at] as u32)
@@ -173,10 +216,9 @@ pub fn parse(frame: &[u8], offset: u16, length: u16) -> (result: Result<Message,
       result.is_ok() ==> {
         let message = result.unwrap();
         let start = offset as int;
-        &&& message.message_id == (if frame[start] == 0xfe { frame[start + 5] as u32 }
-                                   else { u24_le_spec(frame@, start + 7) })
-        &&& message.payload_offset == start + (if frame[start] == 0xfe { 6int } else { 10int })
-        &&& message.payload_length == frame[start + 1] as int
+        &&& message.message_id == message_id_spec(frame@, start)
+        &&& message.payload_offset == start + header_length_spec(frame@, start)
+        &&& message.payload_length == payload_length_spec(frame@, start)
         &&& message.payload_offset + message.payload_length <= frame.len()
       },
 {
