@@ -1,6 +1,6 @@
 # Workflow Status
 
-Project: open_platform | Profile: audited | Updated: 2026-08-27
+Project: open_platform | Profile: audited | Updated: 2026-09-11
 
 | Step | Status | Updated | Notes |
 |------|--------|---------|-------|
@@ -122,3 +122,7 @@ Project: open_platform | Profile: audited | Updated: 2026-08-27
 | ChangeExec(CR-01).4 | done | 2026-08-27 | Final pass consolidated fresh tests, Verus, 221/221 capture validation, and passing full custom.mk ZCU102 build; known LowLevel host-only limitation retained |
 | ChangeExec(CR-01).5 | done | 2026-08-27 | Standard change report written at reports/CR-01-add-mavlink-firewall.md with traceability, deviations, non-impact evidence, and verification summary |
 | ChangeExec(CR-01).AP2 | done | 2026-08-27 | Robbie VanVossen approved the completed change, final report, impact reconciliation, and evidence |
+
+## Subsequent maintenance
+
+- 2026-09-11: Developer-requested MAVLink core consolidation completed, including follow-up policy separation. One verified core parser serves routing, runtime contracts, and diagnostics; firmware-flash implementation/specification/tests reside in MAVLinkFirewall. Duplicate parser/table removed. Core tests 6/6, component tests 8/8; target verification core 9/0 and MAVLinkFirewall 17/0. Details: [mavlink-core-consolidation.md](mavlink-core-consolidation.md).

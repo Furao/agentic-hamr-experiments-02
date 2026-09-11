@@ -1,21 +1,11 @@
 #![cfg_attr(not(test), no_std)]
 
-mod dialect;
 pub mod verified;
+pub use verified::{parse, InvalidReason, Message};
 
 pub const MAVLINK_V1_MAGIC: u8 = 0xfe;
 pub const MAVLINK_V2_MAGIC: u8 = 0xfd;
 pub const MAVLINK_V2_SIGNED: u8 = 0x01;
-
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub enum InvalidReason {
-    CarrierBounds,
-    UnsupportedVersion,
-    UnsupportedIncompatibilityFlags,
-    TruncatedOrTrailingBytes,
-    UnknownMessage,
-    Checksum,
-}
 
 impl InvalidReason {
     pub const fn as_str(self) -> &'static str {
@@ -28,74 +18,6 @@ impl InvalidReason {
             Self::Checksum => "MAVLink checksum is invalid",
         }
     }
-}
-
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub struct Message {
-    pub message_id: u32,
-    pub payload_offset: usize,
-    pub payload_length: usize,
-}
-
-fn crc_accumulate(byte: u8, crc: u16) -> u16 {
-    let mut tmp = byte ^ (crc as u8);
-    tmp ^= tmp << 4;
-    (crc >> 8) ^ ((tmp as u16) << 8) ^ ((tmp as u16) << 3) ^ ((tmp as u16) >> 4)
-}
-
-pub fn parse(frame: &[u8], carrier_offset: u16, carrier_length: u16) -> Result<Message, InvalidReason> {
-    let start = carrier_offset as usize;
-    let available = carrier_length as usize;
-    let end = start.checked_add(available).ok_or(InvalidReason::CarrierBounds)?;
-    if end > frame.len() || available == 0 { return Err(InvalidReason::CarrierBounds); }
-
-    let (header_length, payload_length, message_id, signature_length) = match frame[start] {
-        MAVLINK_V1_MAGIC => {
-            if available < 8 { return Err(InvalidReason::TruncatedOrTrailingBytes); }
-            (6usize, frame[start + 1] as usize, frame[start + 5] as u32, 0usize)
-        }
-        MAVLINK_V2_MAGIC => {
-            if available < 12 { return Err(InvalidReason::TruncatedOrTrailingBytes); }
-            let incompat = frame[start + 2];
-            if incompat & !MAVLINK_V2_SIGNED != 0 {
-                return Err(InvalidReason::UnsupportedIncompatibilityFlags);
-            }
-            let id = frame[start + 7] as u32
-                | ((frame[start + 8] as u32) << 8)
-                | ((frame[start + 9] as u32) << 16);
-            (10usize, frame[start + 1] as usize, id,
-                if incompat & MAVLINK_V2_SIGNED != 0 { 13 } else { 0 })
-        }
-        _ => return Err(InvalidReason::UnsupportedVersion),
-    };
-
-    let exact_length = header_length + payload_length + 2 + signature_length;
-    if available != exact_length { return Err(InvalidReason::TruncatedOrTrailingBytes); }
-    let (crc_extra, _minimum_length, maximum_length) = dialect::crc_extra(message_id).ok_or(InvalidReason::UnknownMessage)?;
-    let valid_payload_length = if header_length == 6 {
-        payload_length == maximum_length
-    } else { payload_length <= maximum_length };
-    if !valid_payload_length { return Err(InvalidReason::TruncatedOrTrailingBytes); }
-    let checksum_offset = start + header_length + payload_length;
-    let mut crc = 0xffffu16;
-    for byte in &frame[start + 1..checksum_offset] { crc = crc_accumulate(*byte, crc); }
-    crc = crc_accumulate(crc_extra, crc);
-    let received = frame[checksum_offset] as u16 | ((frame[checksum_offset + 1] as u16) << 8);
-    if crc != received { return Err(InvalidReason::Checksum); }
-    Ok(Message { message_id, payload_offset: start + header_length, payload_length })
-}
-
-pub fn payload_u16_le(frame: &[u8], message: Message, offset: usize) -> Option<u16> {
-    if offset.checked_add(2)? > message.payload_length { return None; }
-    let at = message.payload_offset + offset;
-    Some(frame[at] as u16 | ((frame[at + 1] as u16) << 8))
-}
-
-pub fn payload_u32_le(frame: &[u8], message: Message, offset: usize) -> Option<u32> {
-    if offset.checked_add(4)? > message.payload_length { return None; }
-    let at = message.payload_offset + offset;
-    Some(frame[at] as u32 | ((frame[at + 1] as u32) << 8)
-        | ((frame[at + 2] as u32) << 16) | ((frame[at + 3] as u32) << 24))
 }
 
 #[cfg(test)]
@@ -130,10 +52,10 @@ mod tests {
         frame[8] = (message_id >> 8) as u8;
         frame[9] = (message_id >> 16) as u8;
         frame[10..10 + payload.len()].copy_from_slice(payload);
-        let extra = dialect::crc_extra(message_id).unwrap().0;
+        let extra = verified::dialect::metadata(message_id).unwrap().0;
         let mut crc = 0xffff;
-        for byte in &frame[1..10 + payload.len()] { crc = crc_accumulate(*byte, crc); }
-        crc = crc_accumulate(extra, crc);
+        for byte in &frame[1..10 + payload.len()] { crc = verified::crc_accumulate_verified(*byte, crc); }
+        crc = verified::crc_accumulate_verified(extra, crc);
         let at = 10 + payload.len();
         frame[at] = crc as u8;
         frame[at + 1] = (crc >> 8) as u8;
@@ -145,8 +67,8 @@ mod tests {
         frame[0] = MAVLINK_V1_MAGIC; frame[1] = payload.len() as u8; frame[5] = message_id;
         frame[6..6 + payload.len()].copy_from_slice(payload);
         let mut crc = 0xffff;
-        for byte in &frame[1..6 + payload.len()] { crc = crc_accumulate(*byte, crc); }
-        crc = crc_accumulate(crc_extra, crc);
+        for byte in &frame[1..6 + payload.len()] { crc = verified::crc_accumulate_verified(*byte, crc); }
+        crc = verified::crc_accumulate_verified(crc_extra, crc);
         let at = 6 + payload.len(); frame[at] = crc as u8; frame[at + 1] = (crc >> 8) as u8;
         frame
     }
@@ -179,15 +101,50 @@ mod tests {
     }
 
     #[test]
-    fn accepts_v1_and_reads_bounded_payload_fields() {
-        let mut payload = [0u8; 33];
-        payload[4..8].copy_from_slice(&7u32.to_le_bytes());
-        payload[28..30].copy_from_slice(&42650u16.to_le_bytes());
-        let frame = v1(76, &payload, 152);
-        let message = parse(&frame, 0, frame.len() as u16).unwrap();
-        assert_eq!(payload_u16_le(&frame, message, 28), Some(42650));
-        assert_eq!(payload_u32_le(&frame, message, 4), Some(7));
-        assert_eq!(payload_u16_le(&frame, message, usize::MAX), None);
-        assert_eq!(payload_u32_le(&frame, message, 31), None);
+    fn accepts_v1() {
+        let frame = v1(76, &[0; 33], 152);
+        assert_eq!(parse(&frame, 0, frame.len() as u16),
+            Ok(Message { message_id: 76, payload_offset: 6, payload_length: 33 }));
+    }
+    #[test]
+    fn preserves_all_diagnostic_reasons_and_carrier_bounds() {
+        for (frame, offset, length, reason) in [
+            (vec![], 0, 0, InvalidReason::CarrierBounds),
+            (vec![0; 8], u16::MAX, 1, InvalidReason::CarrierBounds),
+            (vec![0; 8], 0, u16::MAX, InvalidReason::CarrierBounds),
+            (vec![0; 8], 8, 1, InvalidReason::CarrierBounds),
+            (vec![MAVLINK_V2_MAGIC; 11], 0, 11, InvalidReason::TruncatedOrTrailingBytes),
+        ] {
+            assert_eq!(parse(&frame, offset, length), Err(reason));
+        }
+        let valid = v2(76, &[0; 33], 0);
+        let mut trailing = valid.clone();
+        trailing.push(0);
+        assert_eq!(parse(&trailing, 0, trailing.len() as u16),
+            Err(InvalidReason::TruncatedOrTrailingBytes));
+        let short_v1 = v1(76, &[0; 32], 152);
+        assert_eq!(parse(&short_v1, 0, short_v1.len() as u16),
+            Err(InvalidReason::TruncatedOrTrailingBytes));
+        let mut signed = v2(76, &[0; 33], MAVLINK_V2_SIGNED);
+        signed.pop();
+        assert_eq!(parse(&signed, 0, signed.len() as u16),
+            Err(InvalidReason::TruncatedOrTrailingBytes));
+    }
+
+    #[test]
+    fn returns_payload_locations_at_carrier_boundaries() {
+        for (packet, id, header, payload_len) in [
+            (v2(110, &[0; 254], 0), 110, 10, 254),
+            (v2(76, &[0; 29], MAVLINK_V2_SIGNED), 76, 10, 29),
+            (v1(76, &[0; 33], 152), 76, 6, 33),
+        ] {
+            for start in [0, 42, 1600 - packet.len()] {
+                let mut carrier = [0; 1600];
+                carrier[start..start + packet.len()].copy_from_slice(&packet);
+                assert_eq!(parse(&carrier, start as u16, packet.len() as u16),
+                    Ok(Message { message_id: id, payload_offset: start + header,
+                                 payload_length: payload_len }));
+            }
+        }
     }
 }

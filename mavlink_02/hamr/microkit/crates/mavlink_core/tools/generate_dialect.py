@@ -4,7 +4,6 @@ import xml.etree.ElementTree as ET
 
 ROOT = pathlib.Path(__file__).resolve().parents[5]
 SPEC = ROOT / "action-requests/CR-01-add-mavlink-firewall/mavlink_spec"
-OUT = pathlib.Path(__file__).resolve().parents[1] / "src/dialect.rs"
 VERIFIED_OUT = pathlib.Path(__file__).resolve().parents[1] / "src/dialect_verified.rs"
 SIZES = {"double": 8, "uint64_t": 8, "int64_t": 8, "float": 4,
          "uint32_t": 4, "int32_t": 4, "uint16_t": 2, "int16_t": 2,
@@ -47,12 +46,6 @@ messages = {}
 for filename in ("minimal.xml", "common.xml", "standard.xml", "ardupilotmega.xml"):
     for message in ET.parse(SPEC / filename).getroot().findall(".//message"):
         messages[int(message.attrib["id"])] = metadata(message)
-
-lines = ["// Generated from the bundled MAVLink XML dialects; do not edit manually.",
-         "pub fn crc_extra(message_id: u32) -> Option<(u8, usize, usize)> {", "    match message_id {"]
-lines += [f"        {message_id} => Some(({crc}, {minimum}, {maximum}))," for message_id, (crc, minimum, maximum) in sorted(messages.items())]
-lines += ["        _ => None,", "    }", "}", ""]
-OUT.write_text("\n".join(lines))
 
 verified = ["// Generated from the bundled MAVLink XML dialects; do not edit manually.",
             "use vstd::prelude::*;", "", "verus! {"]

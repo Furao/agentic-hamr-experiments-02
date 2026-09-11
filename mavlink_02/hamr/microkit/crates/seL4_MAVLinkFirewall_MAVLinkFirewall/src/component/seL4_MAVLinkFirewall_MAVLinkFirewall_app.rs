@@ -4,25 +4,52 @@ use data::*;
 use crate::bridge::seL4_MAVLinkFirewall_MAVLinkFirewall_api::*;
 use vstd::prelude::*;
 
-fn firmware_flash_runtime(msg: &open_platform_Data_Model::MAVLinkUDPMessage_Impl, parsed: mavlink_core::Message) -> bool {
-  match parsed.message_id {
-    75 | 76 => mavlink_core::payload_u16_le(&msg.ethernet_frame, parsed, 28) == Some(42650),
-    11004 => mavlink_core::payload_u32_le(&msg.ethernet_frame, parsed, 4) == Some(7),
-    _ => false,
-  }
-}
-
 pub fn mavlink_frame_valid__developer_gumbox(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool {
   mavlink_core::parse(&msg.ethernet_frame, msg.payload_offset, msg.payload_length).is_ok()
 }
 
 pub fn mavlink_firmware_flash_command__developer_gumbox(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool {
-  match mavlink_core::parse(&msg.ethernet_frame, msg.payload_offset, msg.payload_length) {
-    Ok(parsed) => firmware_flash_runtime(&msg, parsed), Err(_) => false,
-  }
+  classify_mavlink(&msg.ethernet_frame, msg.payload_offset, msg.payload_length) == 2
 }
 
 verus! {
+  pub open spec fn firmware_flash_spec(frame: Seq<u8>, offset: u16, length: u16) -> bool {
+      mavlink_core::verified::frame_valid_spec(frame, offset, length) && {
+        let start = offset as int;
+        let header: int = if frame[start] == 0xfe { 6 } else { 10 };
+        let payload = frame[start + 1] as int;
+        let id: u32 = if frame[start] == 0xfe { frame[start + 5] as u32 } else { mavlink_core::verified::u24_le_spec(frame, start + 7) };
+        ((id == 75 || id == 76) && payload >= 30 &&
+          mavlink_core::verified::u16_le_spec(frame, start + header + 28) == 42650u16) ||
+          (id == 11004 && payload >= 8 &&
+            mavlink_core::verified::u32_le_spec(frame, start + header + 4) == 7u32)
+      }
+  }
+
+  // Policy belongs to this component; all callers use the same verified parser.
+  fn classify_mavlink(frame: &[u8], offset: u16, length: u16) -> (result: u8)
+      ensures
+        result <= 2,
+        (result != 0) == mavlink_core::verified::frame_valid_spec(frame@, offset, length),
+        (result == 2) == firmware_flash_spec(frame@, offset, length),
+  {
+      let parsed = match mavlink_core::verified::parse(frame, offset, length) {
+          Ok(message) => message,
+          Err(_) => return 0,
+      };
+      let payload_at = parsed.payload_offset;
+      let payload = parsed.payload_length;
+      let id = parsed.message_id;
+      if (id == 75 || id == 76) && payload >= 30 &&
+         (frame[payload_at + 28] as u16 | ((frame[payload_at + 29] as u16) << 8)) == 42650 {
+          2
+      } else if id == 11004 && payload >= 8 &&
+         (frame[payload_at + 4] as u32 | ((frame[payload_at + 5] as u32) << 8) |
+          ((frame[payload_at + 6] as u32) << 16) | ((frame[payload_at + 7] as u32) << 24)) == 7 {
+          2
+      } else { 1 }
+  }
+
   #[derive(PartialEq, Eq)]
   enum Route { Allow, DenyFlash, Invalid }
 
@@ -61,7 +88,7 @@ verus! {
       (route is DenyFlash) == (GumboLib::valid_mavlink_carrier_spec(*msg) && mavlink_frame_valid(*msg) && mavlink_firmware_flash_command(*msg)),
   {
     if !carrier_valid(msg) { return Route::Invalid; }
-    match mavlink_core::verified::classify(&msg.ethernet_frame, msg.payload_offset, msg.payload_length) {
+    match classify_mavlink(&msg.ethernet_frame, msg.payload_offset, msg.payload_length) {
       2 => Route::DenyFlash,
       1 => Route::Allow,
       _ => Route::Invalid,
@@ -213,7 +240,7 @@ verus! {
   pub open spec fn mavlink_firmware_flash_command__developer_verus(
     msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl
   ) -> bool {
-    mavlink_core::verified::firmware_flash_spec(
+    firmware_flash_spec(
       msg.ethernet_frame@, msg.payload_offset, msg.payload_length)
   }
 
@@ -247,4 +274,74 @@ verus! {
   }
   // END MARKER GUMBO METHODS
 
+}
+
+#[cfg(test)]
+mod policy_tests {
+    use super::classify_mavlink;
+    use mavlink_core::{InvalidReason, MAVLINK_V1_MAGIC, MAVLINK_V2_MAGIC, MAVLINK_V2_SIGNED};
+    fn v2(message_id: u32, payload: &[u8], incompat: u8) -> Vec<u8> {
+        let signature = if incompat & MAVLINK_V2_SIGNED != 0 { 13 } else { 0 };
+        let mut frame = vec![0u8; 10 + payload.len() + 2 + signature];
+        frame[0] = MAVLINK_V2_MAGIC;
+        frame[1] = payload.len() as u8;
+        frame[2] = incompat;
+        frame[7] = message_id as u8;
+        frame[8] = (message_id >> 8) as u8;
+        frame[9] = (message_id >> 16) as u8;
+        frame[10..10 + payload.len()].copy_from_slice(payload);
+        let extra = match message_id { 75 => 158, 76 => 152, 11004 => 11, _ => panic!("unexpected fixture ID") };
+        let mut crc = 0xffff;
+        for byte in &frame[1..10 + payload.len()] { crc = mavlink_core::verified::crc_accumulate_verified(*byte, crc); }
+        crc = mavlink_core::verified::crc_accumulate_verified(extra, crc);
+        let at = 10 + payload.len();
+        frame[at] = crc as u8;
+        frame[at + 1] = (crc >> 8) as u8;
+        frame
+    }
+
+    fn v1(message_id: u8, payload: &[u8], crc_extra: u8) -> Vec<u8> {
+        let mut frame = vec![0u8; 6 + payload.len() + 2];
+        frame[0] = MAVLINK_V1_MAGIC; frame[1] = payload.len() as u8; frame[5] = message_id;
+        frame[6..6 + payload.len()].copy_from_slice(payload);
+        let mut crc = 0xffff;
+        for byte in &frame[1..6 + payload.len()] { crc = mavlink_core::verified::crc_accumulate_verified(*byte, crc); }
+        crc = mavlink_core::verified::crc_accumulate_verified(crc_extra, crc);
+        let at = 6 + payload.len(); frame[at] = crc as u8; frame[at + 1] = (crc >> 8) as u8;
+        frame
+    }
+
+    #[test]
+    fn firmware_policy_handles_versions_truncation_and_carrier_offsets() {
+        let mut command = [0; 33];
+        command[28..30].copy_from_slice(&42650u16.to_le_bytes());
+        let mut remote = [0; 12];
+        remote[4..8].copy_from_slice(&7u32.to_le_bytes());
+        let mut bad_crc = v2(76, &command, 0);
+        bad_crc[10] ^= 1;
+        for (packet, expected) in [
+            (v2(76, &command, 0), Ok(2)),
+            (v2(75, &command[..30], 0), Ok(2)),
+            (v2(76, &command[..29], 0), Ok(1)),
+            (v2(76, &[0; 33], 0), Ok(1)),
+            (v2(11004, &remote, 0), Ok(2)),
+            (v2(11004, &remote[..7], 0), Ok(1)),
+            (v2(11004, &[0; 12], 0), Ok(1)),
+            (v2(76, &command, MAVLINK_V2_SIGNED), Ok(2)),
+            (bad_crc, Err(InvalidReason::Checksum)),
+        ] {
+            for start in [0, 42, 1600 - packet.len()] {
+                let mut carrier = [0; 1600];
+                carrier[start..start + packet.len()].copy_from_slice(&packet);
+                assert_eq!(classify_mavlink(&carrier, start as u16, packet.len() as u16),
+                    expected.unwrap_or(0));
+            }
+        }
+        let mut command = [0; 33];
+        command[28..30].copy_from_slice(&42650u16.to_le_bytes());
+        let packet = v1(76, &command, 152);
+        assert_eq!(classify_mavlink(&packet, 0, packet.len() as u16), 2);
+        let packet = v1(76, &[0; 33], 152);
+        assert_eq!(classify_mavlink(&packet, 0, packet.len() as u16), 1);
+    }
 }

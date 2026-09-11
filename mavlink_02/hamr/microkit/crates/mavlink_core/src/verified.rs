@@ -1,10 +1,27 @@
 use vstd::prelude::*;
 
-mod dialect {
+pub(crate) mod dialect {
     include!("dialect_verified.rs");
 }
 
 verus! {
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum InvalidReason {
+    CarrierBounds,
+    UnsupportedVersion,
+    UnsupportedIncompatibilityFlags,
+    TruncatedOrTrailingBytes,
+    UnknownMessage,
+    Checksum,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct Message {
+    pub message_id: u32,
+    pub payload_offset: usize,
+    pub payload_length: usize,
+}
 
 pub open spec fn crc_accumulate_spec(byte: u8, crc: u16) -> u16 {
     let tmp0 = byte ^ (crc as u8);
@@ -39,7 +56,7 @@ pub fn crc_accumulate_verified(byte: u8, crc: u16) -> (result: u16)
     (crc >> 8) ^ ((tmp as u16) << 8) ^ ((tmp as u16) << 3) ^ ((tmp as u16) >> 4)
 }
 
-pub fn crc_fold(frame: &[u8; 1600], start: usize, end: usize, initial: u16) -> (result: u16)
+pub fn crc_fold(frame: &[u8], start: usize, end: usize, initial: u16) -> (result: u16)
     requires start <= end <= frame@.len()
     ensures result == crc_fold_spec(frame@, start as int, end as int, initial)
 {
@@ -99,58 +116,45 @@ pub open spec fn frame_valid_spec(frame: Seq<u8>, offset: u16, length: u16) -> b
     }
 }
 
-pub open spec fn firmware_flash_spec(frame: Seq<u8>, offset: u16, length: u16) -> bool {
-    frame_valid_spec(frame, offset, length) && {
-      let start = offset as int;
-      let header: int = if frame[start] == 0xfe { 6 } else { 10 };
-      let payload = frame[start + 1] as int;
-      let id: u32 = if frame[start] == 0xfe { frame[start + 5] as u32 } else { u24_le_spec(frame, start + 7) };
-      ((id == 75 || id == 76) && payload >= 30 &&
-        u16_le_spec(frame, start + header + 28) == 42650u16) ||
-        (id == 11004 && payload >= 8 &&
-          u32_le_spec(frame, start + header + 4) == 7u32)
-    }
-}
-
-pub fn classify(frame: &[u8; 1600], offset: u16, length: u16) -> (result: u8)
+/// Validate one complete MAVLink frame and return its policy-neutral payload location.
+pub fn parse(frame: &[u8], offset: u16, length: u16) -> (result: Result<Message, InvalidReason>)
     ensures
-      result <= 2,
-      (result != 0) == frame_valid_spec(frame@, offset, length),
-      (result == 2) == firmware_flash_spec(frame@, offset, length),
+      result.is_ok() == frame_valid_spec(frame@, offset, length),
+      result.is_ok() ==> {
+        let message = result.unwrap();
+        let start = offset as int;
+        &&& message.message_id == (if frame[start] == 0xfe { frame[start + 5] as u32 }
+                                   else { u24_le_spec(frame@, start + 7) })
+        &&& message.payload_offset == start + (if frame[start] == 0xfe { 6int } else { 10int })
+        &&& message.payload_length == frame[start + 1] as int
+        &&& message.payload_offset + message.payload_length <= frame.len()
+      },
 {
     let start = offset as usize;
     let available = length as usize;
-    if available == 0 || start > 1600 || available > 1600 - start { return 0; }
+    if available == 0 || start > frame.len() || available > frame.len() - start { return Err(InvalidReason::CarrierBounds); }
     let magic = frame[start];
     let (header, signature, id) = if magic == 0xfe {
-        if available < 8 { return 0; }
+        if available < 8 { return Err(InvalidReason::TruncatedOrTrailingBytes); }
         (6usize, 0usize, frame[start + 5] as u32)
     } else if magic == 0xfd {
-        if available < 12 { return 0; }
+        if available < 12 { return Err(InvalidReason::TruncatedOrTrailingBytes); }
         let incompat = frame[start + 2];
-        if incompat & !1u8 != 0 { return 0; }
+        if incompat & !1u8 != 0 { return Err(InvalidReason::UnsupportedIncompatibilityFlags); }
         let id = frame[start + 7] as u32 | ((frame[start + 8] as u32) << 8) |
           ((frame[start + 9] as u32) << 16);
         (10usize, if incompat & 1u8 != 0 { 13 } else { 0 }, id)
-    } else { return 0; };
+    } else { return Err(InvalidReason::UnsupportedVersion); };
     let payload = frame[start + 1] as usize;
-    if available != header + payload + 2 + signature { return 0; }
-    let meta = match dialect::metadata(id) { Some(value) => value, None => return 0 };
+    if available != header + payload + 2 + signature { return Err(InvalidReason::TruncatedOrTrailingBytes); }
+    let meta = match dialect::metadata(id) { Some(value) => value, None => return Err(InvalidReason::UnknownMessage) };
     if if magic == 0xfe { payload != meta.2 as usize }
-       else { payload > meta.2 as usize } { return 0; }
+       else { payload > meta.2 as usize } { return Err(InvalidReason::TruncatedOrTrailingBytes); }
     let checksum_at = start + header + payload;
     let crc = crc_accumulate_verified(meta.0, crc_fold(frame, start + 1, checksum_at, 0xffff));
     let received = frame[checksum_at] as u16 | ((frame[checksum_at + 1] as u16) << 8);
-    if crc != received { return 0; }
-    let payload_at = start + header;
-    if (id == 75 || id == 76) && payload >= 30 &&
-       (frame[payload_at + 28] as u16 | ((frame[payload_at + 29] as u16) << 8)) == 42650 {
-        2
-    } else if id == 11004 && payload >= 8 &&
-       (frame[payload_at + 4] as u32 | ((frame[payload_at + 5] as u32) << 8) |
-        ((frame[payload_at + 6] as u32) << 16) | ((frame[payload_at + 7] as u32) << 24)) == 7 {
-        2
-    } else { 1 }
+    if crc != received { return Err(InvalidReason::Checksum); }
+    Ok(Message { message_id: id, payload_offset: start + header, payload_length: payload })
 }
 
 }
