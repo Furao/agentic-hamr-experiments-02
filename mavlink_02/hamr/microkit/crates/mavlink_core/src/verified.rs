@@ -1,4 +1,5 @@
 use vstd::prelude::*;
+use crate::wire::*;
 
 pub(crate) mod dialect {
     include!("dialect_verified.rs");
@@ -51,9 +52,12 @@ proof fn crc_fold_append(frame: Seq<u8>, start: int, end: int, initial: u16)
 pub fn crc_accumulate_verified(byte: u8, crc: u16) -> (result: u16)
     ensures result == crc_accumulate_spec(byte, crc)
 {
-    let mut tmp = byte ^ (crc as u8);
-    tmp ^= tmp << 4;
-    (crc >> 8) ^ ((tmp as u16) << 8) ^ ((tmp as u16) << 3) ^ ((tmp as u16) >> 4)
+    let mut mixed_byte = byte ^ (crc as u8);
+    mixed_byte ^= mixed_byte << CRC_NIBBLE_SHIFT;
+    (crc >> BITS_PER_BYTE)
+        ^ ((mixed_byte as u16) << BITS_PER_BYTE)
+        ^ ((mixed_byte as u16) << CRC_POLYNOMIAL_MIX_SHIFT)
+        ^ ((mixed_byte as u16) >> CRC_NIBBLE_SHIFT)
 }
 
 pub fn crc_fold(frame: &[u8], start: usize, end: usize, initial: u16) -> (result: u16)
@@ -116,6 +120,52 @@ pub open spec fn frame_valid_spec(frame: Seq<u8>, offset: u16, length: u16) -> b
     }
 }
 
+// Field getters are called only after the parser has checked the carrier/header bounds.
+fn get_magic(frame: &[u8], start: usize) -> (value: u8)
+    requires start < frame.len()
+    ensures value == frame[start as int]
+{
+    frame[start + MAGIC_OFFSET]
+}
+
+fn get_payload_length(frame: &[u8], start: usize) -> (value: usize)
+    requires start + PAYLOAD_LENGTH_OFFSET < frame.len()
+    ensures value == frame[start as int + 1] as int
+{
+    frame[start + PAYLOAD_LENGTH_OFFSET] as usize
+}
+
+fn get_v2_incompat_flags(frame: &[u8], start: usize) -> (value: u8)
+    requires start + V2_INCOMPAT_FLAGS_OFFSET < frame.len()
+    ensures value == frame[start as int + 2]
+{
+    frame[start + V2_INCOMPAT_FLAGS_OFFSET]
+}
+
+fn get_v1_message_id(frame: &[u8], start: usize) -> (value: u32)
+    requires start + V1_MESSAGE_ID_OFFSET < frame.len()
+    ensures value == frame[start as int + 5] as u32
+{
+    frame[start + V1_MESSAGE_ID_OFFSET] as u32
+}
+
+fn get_v2_message_id(frame: &[u8], start: usize) -> (value: u32)
+    requires start + V2_HEADER_BYTES <= frame.len()
+    ensures value == u24_le_spec(frame@, start as int + 7)
+{
+    let at = start + V2_MESSAGE_ID_OFFSET;
+    (frame[at] as u32)
+        | ((frame[at + 1] as u32) << BITS_PER_BYTE)
+        | ((frame[at + 2] as u32) << (2 * BITS_PER_BYTE))
+}
+
+fn get_checksum(frame: &[u8], at: usize) -> (value: u16)
+    requires at + CHECKSUM_BYTES <= frame.len()
+    ensures value == u16_le_spec(frame@, at as int)
+{
+    (frame[at] as u16) | ((frame[at + 1] as u16) << BITS_PER_BYTE)
+}
+
 /// Validate one complete MAVLink frame and return its policy-neutral payload location.
 pub fn parse(frame: &[u8], offset: u16, length: u16) -> (result: Result<Message, InvalidReason>)
     ensures
@@ -132,29 +182,60 @@ pub fn parse(frame: &[u8], offset: u16, length: u16) -> (result: Result<Message,
 {
     let start = offset as usize;
     let available = length as usize;
-    if available == 0 || start > frame.len() || available > frame.len() - start { return Err(InvalidReason::CarrierBounds); }
-    let magic = frame[start];
-    let (header, signature, id) = if magic == 0xfe {
-        if available < 8 { return Err(InvalidReason::TruncatedOrTrailingBytes); }
-        (6usize, 0usize, frame[start + 5] as u32)
-    } else if magic == 0xfd {
-        if available < 12 { return Err(InvalidReason::TruncatedOrTrailingBytes); }
-        let incompat = frame[start + 2];
-        if incompat & !1u8 != 0 { return Err(InvalidReason::UnsupportedIncompatibilityFlags); }
-        let id = frame[start + 7] as u32 | ((frame[start + 8] as u32) << 8) |
-          ((frame[start + 9] as u32) << 16);
-        (10usize, if incompat & 1u8 != 0 { 13 } else { 0 }, id)
-    } else { return Err(InvalidReason::UnsupportedVersion); };
-    let payload = frame[start + 1] as usize;
-    if available != header + payload + 2 + signature { return Err(InvalidReason::TruncatedOrTrailingBytes); }
-    let meta = match dialect::metadata(id) { Some(value) => value, None => return Err(InvalidReason::UnknownMessage) };
-    if if magic == 0xfe { payload != meta.2 as usize }
-       else { payload > meta.2 as usize } { return Err(InvalidReason::TruncatedOrTrailingBytes); }
-    let checksum_at = start + header + payload;
-    let crc = crc_accumulate_verified(meta.0, crc_fold(frame, start + 1, checksum_at, 0xffff));
-    let received = frame[checksum_at] as u16 | ((frame[checksum_at + 1] as u16) << 8);
-    if crc != received { return Err(InvalidReason::Checksum); }
-    Ok(Message { message_id: id, payload_offset: start + header, payload_length: payload })
+    if available == 0 || start > frame.len() || available > frame.len() - start {
+        return Err(InvalidReason::CarrierBounds);
+    }
+
+    let magic = get_magic(frame, start);
+    let (header_length, signature_length, message_id) = if magic == MAVLINK_V1_MAGIC {
+        if available < V1_MIN_FRAME_BYTES {
+            return Err(InvalidReason::TruncatedOrTrailingBytes);
+        }
+        (V1_HEADER_BYTES, 0usize, get_v1_message_id(frame, start))
+    } else if magic == MAVLINK_V2_MAGIC {
+        if available < V2_MIN_FRAME_BYTES {
+            return Err(InvalidReason::TruncatedOrTrailingBytes);
+        }
+        let incompat_flags = get_v2_incompat_flags(frame, start);
+        if incompat_flags & !SUPPORTED_INCOMPAT_FLAGS != 0 {
+            return Err(InvalidReason::UnsupportedIncompatibilityFlags);
+        }
+        // Account for the signature trailer; this parser does not authenticate it.
+        let signature_length = if incompat_flags & MAVLINK_V2_SIGNED != 0 {
+            SIGNATURE_BYTES
+        } else { 0 };
+        (V2_HEADER_BYTES, signature_length, get_v2_message_id(frame, start))
+    } else {
+        return Err(InvalidReason::UnsupportedVersion);
+    };
+
+    let payload_length = get_payload_length(frame, start);
+    let expected_frame_length = header_length + payload_length + CHECKSUM_BYTES + signature_length;
+    if available != expected_frame_length {
+        return Err(InvalidReason::TruncatedOrTrailingBytes);
+    }
+    let (crc_extra, _minimum_payload_length, maximum_payload_length) = match dialect::metadata(message_id) {
+        Some(metadata) => metadata,
+        None => return Err(InvalidReason::UnknownMessage),
+    };
+    // Preserve the existing v1 length rule; v2 permits truncated trailing zero bytes.
+    let invalid_payload_length = if magic == MAVLINK_V1_MAGIC {
+        payload_length != maximum_payload_length as usize
+    } else {
+        payload_length > maximum_payload_length as usize
+    };
+    if invalid_payload_length {
+        return Err(InvalidReason::TruncatedOrTrailingBytes);
+    }
+
+    let payload_offset = start + header_length;
+    let checksum_offset = payload_offset + payload_length;
+    let header_and_payload_crc = crc_fold(frame, start + CRC_START_OFFSET, checksum_offset, CRC_INITIAL);
+    let expected_checksum = crc_accumulate_verified(crc_extra, header_and_payload_crc);
+    if expected_checksum != get_checksum(frame, checksum_offset) {
+        return Err(InvalidReason::Checksum);
+    }
+    Ok(Message { message_id, payload_offset, payload_length })
 }
 
 }
