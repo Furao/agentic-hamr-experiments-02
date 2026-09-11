@@ -27,7 +27,7 @@ pub struct Message {
 pub open spec fn crc_accumulate_spec(byte: u8, crc: u16) -> u16 {
     let input_mix = byte ^ (crc as u8);
     let mixed_byte = input_mix ^ (input_mix << CRC_NIBBLE_SHIFT);
-    (crc >> BITS_PER_BYTE) ^ ((mixed_byte as u16) << BITS_PER_BYTE) ^ ((mixed_byte as u16) << CRC_POLYNOMIAL_MIX_SHIFT) ^ ((mixed_byte as u16) >> CRC_NIBBLE_SHIFT)
+    (crc >> ONE_BYTE_SHIFT) ^ ((mixed_byte as u16) << ONE_BYTE_SHIFT) ^ ((mixed_byte as u16) << CRC_POLYNOMIAL_MIX_SHIFT) ^ ((mixed_byte as u16) >> CRC_NIBBLE_SHIFT)
 }
 
 pub open spec fn crc_fold_spec(frame: Seq<u8>, start: int, end: int, crc: u16) -> u16
@@ -54,8 +54,8 @@ pub fn crc_accumulate_verified(byte: u8, crc: u16) -> (result: u16)
 {
     let mut mixed_byte = byte ^ (crc as u8);
     mixed_byte ^= mixed_byte << CRC_NIBBLE_SHIFT;
-    (crc >> BITS_PER_BYTE)
-        ^ ((mixed_byte as u16) << BITS_PER_BYTE)
+    (crc >> ONE_BYTE_SHIFT)
+        ^ ((mixed_byte as u16) << ONE_BYTE_SHIFT)
         ^ ((mixed_byte as u16) << CRC_POLYNOMIAL_MIX_SHIFT)
         ^ ((mixed_byte as u16) >> CRC_NIBBLE_SHIFT)
 }
@@ -81,16 +81,16 @@ pub fn crc_fold(frame: &[u8], start: usize, end: usize, initial: u16) -> (result
 }
 
 pub open spec fn u16_le_spec(frame: Seq<u8>, at: int) -> u16 {
-    (frame[at] as u16) | ((frame[at + 1] as u16) << BITS_PER_BYTE)
+    (frame[at] as u16) | ((frame[at + 1] as u16) << ONE_BYTE_SHIFT)
 }
 
 pub open spec fn u24_le_spec(frame: Seq<u8>, at: int) -> u32 {
-    (frame[at] as u32) | ((frame[at + 1] as u32) << BITS_PER_BYTE) | ((frame[at + 2] as u32) << (2 * BITS_PER_BYTE))
+    (frame[at] as u32) | ((frame[at + 1] as u32) << ONE_BYTE_SHIFT) | ((frame[at + 2] as u32) << TWO_BYTE_SHIFT)
 }
 
 pub open spec fn u32_le_spec(frame: Seq<u8>, at: int) -> u32 {
-    (frame[at] as u32) | ((frame[at + 1] as u32) << BITS_PER_BYTE) |
-      ((frame[at + 2] as u32) << (2 * BITS_PER_BYTE)) | ((frame[at + 3] as u32) << (3 * BITS_PER_BYTE))
+    (frame[at] as u32) | ((frame[at + 1] as u32) << ONE_BYTE_SHIFT) |
+      ((frame[at + 2] as u32) << TWO_BYTE_SHIFT) | ((frame[at + 3] as u32) << THREE_BYTE_SHIFT)
 }
 
 /// Field offsets are relative to the magic byte; lengths and positions are in bytes.
@@ -198,15 +198,15 @@ fn get_v2_message_id(frame: &[u8], start: usize) -> (value: u32)
 {
     let at = start + V2_MESSAGE_ID_OFFSET;
     (frame[at] as u32)
-        | ((frame[at + 1] as u32) << BITS_PER_BYTE)
-        | ((frame[at + 2] as u32) << (2 * BITS_PER_BYTE))
+        | ((frame[at + 1] as u32) << ONE_BYTE_SHIFT)
+        | ((frame[at + 2] as u32) << TWO_BYTE_SHIFT)
 }
 
 fn get_checksum(frame: &[u8], at: usize) -> (value: u16)
     requires at + CHECKSUM_BYTES <= frame.len()
     ensures value == u16_le_spec(frame@, at as int)
 {
-    (frame[at] as u16) | ((frame[at + 1] as u16) << BITS_PER_BYTE)
+    (frame[at] as u16) | ((frame[at + 1] as u16) << ONE_BYTE_SHIFT)
 }
 
 /// Validate one complete MAVLink frame and return its policy-neutral payload location.

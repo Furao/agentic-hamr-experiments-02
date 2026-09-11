@@ -13,6 +13,11 @@ pub fn mavlink_firmware_flash_command__developer_gumbox(msg: open_platform_Data_
 }
 
 verus! {
+  // Local bit counts for shifting by whole bytes.
+  pub(crate) const ONE_BYTE_SHIFT: u32 = 8;
+  pub(crate) const TWO_BYTE_SHIFT: u32 = 16;
+  pub(crate) const THREE_BYTE_SHIFT: u32 = 24;
+
   // Message and operation names from the bundled common.xml and ardupilotmega.xml.
   pub(crate) const COMMAND_INT_ID: u32 = 75;
   pub(crate) const COMMAND_LONG_ID: u32 = 76;
@@ -53,7 +58,7 @@ verus! {
     ensures value == command_field_spec(frame@, payload_offset as int)
   {
     let at = payload_offset + COMMAND_FIELD_OFFSET;
-    (frame[at] as u16) | ((frame[at + 1] as u16) << mavlink_core::wire::BITS_PER_BYTE)
+    (frame[at] as u16) | ((frame[at + 1] as u16) << ONE_BYTE_SHIFT)
   }
 
   fn get_secure_operation(frame: &[u8], payload_offset: usize) -> (value: u32)
@@ -61,9 +66,9 @@ verus! {
     ensures value == secure_operation_spec(frame@, payload_offset as int)
   {
     let at = payload_offset + SECURE_OPERATION_OFFSET;
-    (frame[at] as u32) | ((frame[at + 1] as u32) << mavlink_core::wire::BITS_PER_BYTE)
-      | ((frame[at + 2] as u32) << (2 * mavlink_core::wire::BITS_PER_BYTE))
-      | ((frame[at + 3] as u32) << (3 * mavlink_core::wire::BITS_PER_BYTE))
+    (frame[at] as u32) | ((frame[at + 1] as u32) << ONE_BYTE_SHIFT)
+      | ((frame[at + 2] as u32) << TWO_BYTE_SHIFT)
+      | ((frame[at + 3] as u32) << THREE_BYTE_SHIFT)
   }
 
   const NETWORK_BYTE_RADIX: u16 = 256;

@@ -26,7 +26,10 @@ pub const V2_MIN_FRAME_BYTES: usize = V2_HEADER_BYTES + CHECKSUM_BYTES;
 // The CRC covers the header after magic, then payload, then the dialect CRC_EXTRA.
 pub const CRC_START_OFFSET: usize = PAYLOAD_LENGTH_OFFSET;
 pub const CRC_INITIAL: u16 = 0xffff;
-pub const BITS_PER_BYTE: u32 = 8;
+// Bit counts for shifting by whole bytes.
+pub const ONE_BYTE_SHIFT: u32 = 8;
+pub const TWO_BYTE_SHIFT: u32 = 16;
+pub const THREE_BYTE_SHIFT: u32 = 24;
 // Shifts in the byte-wise CRC-16/MCRF4XX recurrence (reflected polynomial 0x8408).
 pub const CRC_NIBBLE_SHIFT: u32 = 4;
 pub const CRC_POLYNOMIAL_MIX_SHIFT: u32 = 3;

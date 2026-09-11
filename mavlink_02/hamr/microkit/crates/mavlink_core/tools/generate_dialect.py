@@ -9,7 +9,7 @@ VERIFIED_OUT = pathlib.Path(__file__).resolve().parents[1] / "src/dialect_verifi
 CRC_INITIAL = 0xffff
 BYTE_MASK = 0xff
 CRC_MASK = 0xffff
-BITS_PER_BYTE = 8
+ONE_BYTE_SHIFT = 8
 CRC_NIBBLE_SHIFT = 4
 CRC_POLYNOMIAL_MIX_SHIFT = 3
 SIZES = {"double": 8, "uint64_t": 8, "int64_t": 8, "float": 4,
@@ -19,7 +19,7 @@ SIZES = {"double": 8, "uint64_t": 8, "int64_t": 8, "float": 4,
 def accumulate(byte, crc):
     tmp = byte ^ (crc & BYTE_MASK)
     tmp ^= (tmp << CRC_NIBBLE_SHIFT) & BYTE_MASK
-    return ((crc >> BITS_PER_BYTE) ^ (tmp << BITS_PER_BYTE)
+    return ((crc >> ONE_BYTE_SHIFT) ^ (tmp << ONE_BYTE_SHIFT)
             ^ (tmp << CRC_POLYNOMIAL_MIX_SHIFT) ^ (tmp >> CRC_NIBBLE_SHIFT)) & CRC_MASK
 
 def metadata(message):
@@ -48,7 +48,7 @@ def metadata(message):
         for byte in (base + " ").encode(): crc = accumulate(byte, crc)
         for byte in (field.attrib["name"] + " ").encode(): crc = accumulate(byte, crc)
         if "[" in field_type: crc = accumulate(int(field_type.split("[")[1][:-1]), crc)
-    return ((crc & BYTE_MASK) ^ (crc >> BITS_PER_BYTE), minimum, maximum)
+    return ((crc & BYTE_MASK) ^ (crc >> ONE_BYTE_SHIFT), minimum, maximum)
 
 messages = {}
 for filename in ("minimal.xml", "common.xml", "standard.xml", "ardupilotmega.xml"):

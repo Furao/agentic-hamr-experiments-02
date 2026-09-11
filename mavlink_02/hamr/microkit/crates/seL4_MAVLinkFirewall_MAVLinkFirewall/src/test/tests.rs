@@ -3,6 +3,7 @@
 // Fixture metadata from the bundled MAVLink XML dialects.
 use crate::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app::*;
 use mavlink_core::wire::*;
+use crate::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app::ONE_BYTE_SHIFT;
 const COMMAND_INT_PAYLOAD_BYTES: usize = 35;
 const COMMAND_LONG_PAYLOAD_BYTES: usize = 33;
 const SECURE_COMMAND_PAYLOAD_BYTES: usize = 232;
@@ -25,7 +26,7 @@ pub(super) mod tests {
 
   fn crc_accumulate(byte: u8, crc: u16) -> u16 {
     let mut tmp = byte ^ crc as u8; tmp ^= tmp << CRC_NIBBLE_SHIFT;
-    (crc >> BITS_PER_BYTE) ^ ((tmp as u16) << BITS_PER_BYTE)
+    (crc >> ONE_BYTE_SHIFT) ^ ((tmp as u16) << ONE_BYTE_SHIFT)
       ^ ((tmp as u16) << CRC_POLYNOMIAL_MIX_SHIFT) ^ ((tmp as u16) >> CRC_NIBBLE_SHIFT)
   }
 
