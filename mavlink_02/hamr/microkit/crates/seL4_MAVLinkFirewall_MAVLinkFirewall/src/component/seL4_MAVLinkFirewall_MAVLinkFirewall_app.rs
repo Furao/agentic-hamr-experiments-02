@@ -50,7 +50,7 @@ verus! {
 
   fn get_command(frame: &[u8], payload_offset: usize) -> (value: u16)
     requires payload_offset + COMMAND_FIELD_END <= frame.len()
-    ensures value == mavlink_core::verified::u16_le_spec(frame@, payload_offset as int + 28)
+    ensures value == command_field_spec(frame@, payload_offset as int)
   {
     let at = payload_offset + COMMAND_FIELD_OFFSET;
     (frame[at] as u16) | ((frame[at + 1] as u16) << mavlink_core::wire::BITS_PER_BYTE)
@@ -58,7 +58,7 @@ verus! {
 
   fn get_secure_operation(frame: &[u8], payload_offset: usize) -> (value: u32)
     requires payload_offset + SECURE_OPERATION_END <= frame.len()
-    ensures value == mavlink_core::verified::u32_le_spec(frame@, payload_offset as int + 4)
+    ensures value == secure_operation_spec(frame@, payload_offset as int)
   {
     let at = payload_offset + SECURE_OPERATION_OFFSET;
     (frame[at] as u32) | ((frame[at + 1] as u32) << mavlink_core::wire::BITS_PER_BYTE)
@@ -70,30 +70,62 @@ verus! {
 
   fn get_network_u16(frame: &[u8], at: usize) -> (value: u16)
     requires at + 2 <= frame.len()
-    ensures value == (frame[at as int] as u16) * 256 + frame[at as int + 1] as u16
+    ensures value == (frame[at as int] as u16) * NETWORK_BYTE_RADIX + frame[at as int + 1] as u16
   {
     (frame[at] as u16) * NETWORK_BYTE_RADIX + frame[at + 1] as u16
   }
 
+  /// Payload offsets follow MAVLink's serialized field order from the bundled XML.
+  /// Callers guard payload lengths; selectors retain the underlying Seq semantics.
+  pub open spec fn command_field_spec(frame: Seq<u8>, payload_offset: int) -> u16 {
+    let command_field_offset: int = 28;
+    mavlink_core::verified::u16_le_spec(frame, payload_offset + command_field_offset)
+  }
+
+  pub open spec fn secure_operation_spec(frame: Seq<u8>, payload_offset: int) -> u32 {
+    let secure_operation_offset: int = 4;
+    mavlink_core::verified::u32_le_spec(frame, payload_offset + secure_operation_offset)
+  }
+
+  pub open spec fn command_requests_bootloader_flash_spec(
+    frame: Seq<u8>, message_id: u32, payload_offset: int, payload_length: int,
+  ) -> bool {
+    let command_int_id: u32 = 75;
+    let command_long_id: u32 = 76;
+    let command_field_end: int = 30;
+    let flash_bootloader_command: u16 = 42650;
+    (message_id == command_int_id || message_id == command_long_id) &&
+      payload_length >= command_field_end &&
+      command_field_spec(frame, payload_offset) == flash_bootloader_command
+  }
+
+  pub open spec fn secure_command_requests_bootloader_flash_spec(
+    frame: Seq<u8>, message_id: u32, payload_offset: int, payload_length: int,
+  ) -> bool {
+    let secure_command_id: u32 = 11004;
+    let operation_field_end: int = 8;
+    let flash_bootloader_operation: u32 = 7;
+    message_id == secure_command_id && payload_length >= operation_field_end &&
+      secure_operation_spec(frame, payload_offset) == flash_bootloader_operation
+  }
+
   pub open spec fn firmware_flash_spec(frame: Seq<u8>, offset: u16, length: u16) -> bool {
-      mavlink_core::verified::frame_valid_spec(frame, offset, length) && {
-        let start = offset as int;
-        let header: int = if frame[start] == 0xfe { 6 } else { 10 };
-        let payload = frame[start + 1] as int;
-        let id: u32 = if frame[start] == 0xfe { frame[start + 5] as u32 } else { mavlink_core::verified::u24_le_spec(frame, start + 7) };
-        ((id == 75 || id == 76) && payload >= 30 &&
-          mavlink_core::verified::u16_le_spec(frame, start + header + 28) == 42650u16) ||
-          (id == 11004 && payload >= 8 &&
-            mavlink_core::verified::u32_le_spec(frame, start + header + 4) == 7u32)
-      }
+    mavlink_core::verified::frame_valid_spec(frame, offset, length) && {
+      let start = offset as int;
+      let payload_offset = start + mavlink_core::verified::header_length_spec(frame, start);
+      let payload_length = mavlink_core::verified::payload_length_spec(frame, start);
+      let message_id = mavlink_core::verified::message_id_spec(frame, start);
+      command_requests_bootloader_flash_spec(frame, message_id, payload_offset, payload_length) ||
+        secure_command_requests_bootloader_flash_spec(frame, message_id, payload_offset, payload_length)
+    }
   }
 
   // Policy belongs to this component; all callers use the same verified parser.
   fn classify_mavlink(frame: &[u8], offset: u16, length: u16) -> (result: u8)
       ensures
-        result <= 2,
-        (result != 0) == mavlink_core::verified::frame_valid_spec(frame@, offset, length),
-        (result == 2) == firmware_flash_spec(frame@, offset, length),
+        result <= CLASS_FLASH,
+        (result != CLASS_INVALID) == mavlink_core::verified::frame_valid_spec(frame@, offset, length),
+        (result == CLASS_FLASH) == firmware_flash_spec(frame@, offset, length),
   {
       let parsed = match mavlink_core::verified::parse(frame, offset, length) {
           Ok(message) => message,
