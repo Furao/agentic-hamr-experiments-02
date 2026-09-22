@@ -174,18 +174,26 @@ package GumboLib {
       def udp_payload_offset(): Base_Types::Unsigned_16 :=
         ethernet_header_length() + ipv4_header_length() + udp_header_length();
 
-      def valid_ardupilot_udp(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
+      // CR-02 LLR-4: both UDP routes require consistent, carrier-bounded lengths.
+      // Keep the Tx-facing valid_ipv4 predicate unchanged.
+      def rx_bounded_udp(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
         valid_ipv4_udp(aframe) and
-        udp_source_port(aframe) == 14550[u16] and
-        udp_destination_port(aframe) == 14562[u16] and
-        udp_header_length() <= udp_length(aframe) and
-        ipv4_length(aframe) + ethernet_header_length() <= 1600[u16] and
         ipv4_header_length() <= ipv4_length(aframe) and
+        ipv4_length(aframe) <= 1600[u16] - ethernet_header_length() and
+        udp_header_length() <= udp_length(aframe) and
         udp_length(aframe) == ipv4_length(aframe) - ipv4_header_length();
 
+      def valid_ardupilot_udp(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
+        rx_bounded_udp(aframe) and
+        udp_source_port(aframe) == 14550[u16] and
+        udp_destination_port(aframe) == 14562[u16];
+
+      // CR-02 HLR-13: both exclusions apply independently.
       def rx_direct_frame(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
         valid_arp(aframe) or
-        (valid_ipv4_udp_port(aframe) and not valid_ardupilot_udp(aframe));
+        (rx_bounded_udp(aframe) and udp_is_valid_dst_port(aframe) and
+         udp_source_port(aframe) != 14550[u16] and
+         udp_destination_port(aframe) != 14562[u16]);
 
       def valid_mavlink_carrier(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl): Base_Types::Boolean :=
         valid_ardupilot_udp(msg.ethernet_frame) and

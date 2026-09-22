@@ -59,62 +59,95 @@ package open_platform_Software {
             guarantee hlr_18_mavlink_out3:
                 GumboLib::GUMBO__Library::valid_mavlink_carrier(MAVLinkFramesRxOut3);
 
+        // CR-02 HLR-17 / LLR-1: initialization fabricates no frame events.
+        initialize
+            guarantee hlr_17_initialize_lane0:
+                NoSend(EthernetFramesRxOut0) and NoSend(MAVLinkFramesRxOut0);
+            guarantee hlr_17_initialize_lane1:
+                NoSend(EthernetFramesRxOut1) and NoSend(MAVLinkFramesRxOut1);
+            guarantee hlr_17_initialize_lane2:
+                NoSend(EthernetFramesRxOut2) and NoSend(MAVLinkFramesRxOut2);
+            guarantee hlr_17_initialize_lane3:
+                NoSend(EthernetFramesRxOut3) and NoSend(MAVLinkFramesRxOut3);
+
         compute
+            // CR-02 HLR-29 / LLR-10: frozen Recovery mode suppresses every lane.
+            guarantee hlr_29_llr_10_rx0_recovery:
+                (current_mode == open_platform_Data_Model::OperatingMode.Recovery) implies
+                (NoSend(EthernetFramesRxOut0) and NoSend(MAVLinkFramesRxOut0));
+            guarantee hlr_29_llr_10_rx1_recovery:
+                (current_mode == open_platform_Data_Model::OperatingMode.Recovery) implies
+                (NoSend(EthernetFramesRxOut1) and NoSend(MAVLinkFramesRxOut1));
+            guarantee hlr_29_llr_10_rx2_recovery:
+                (current_mode == open_platform_Data_Model::OperatingMode.Recovery) implies
+                (NoSend(EthernetFramesRxOut2) and NoSend(MAVLinkFramesRxOut2));
+            guarantee hlr_29_llr_10_rx3_recovery:
+                (current_mode == open_platform_Data_Model::OperatingMode.Recovery) implies
+                (NoSend(EthernetFramesRxOut3) and NoSend(MAVLinkFramesRxOut3));
+
             guarantee hlr_05_13_rx0_direct:
-                (HasEvent(EthernetFramesRxIn0) and GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxIn0)) implies
+                (current_mode == open_platform_Data_Model::OperatingMode.Normal and
+                 HasEvent(EthernetFramesRxIn0) and GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxIn0)) implies
                 (HasEvent(EthernetFramesRxOut0) and EthernetFramesRxOut0 == EthernetFramesRxIn0 and NoSend(MAVLinkFramesRxOut0));
             guarantee hlr_18_rx0_mavlink:
-                (HasEvent(EthernetFramesRxIn0) and GumboLib::GUMBO__Library::valid_ardupilot_udp(EthernetFramesRxIn0)) implies
+                (current_mode == open_platform_Data_Model::OperatingMode.Normal and
+                 HasEvent(EthernetFramesRxIn0) and GumboLib::GUMBO__Library::valid_ardupilot_udp(EthernetFramesRxIn0)) implies
                 (NoSend(EthernetFramesRxOut0) and HasEvent(MAVLinkFramesRxOut0) and
                  MAVLinkFramesRxOut0.ethernet_frame == EthernetFramesRxIn0 and
                  MAVLinkFramesRxOut0.payload_offset == GumboLib::GUMBO__Library::udp_payload_offset() and
                  MAVLinkFramesRxOut0.payload_length == GumboLib::GUMBO__Library::udp_payload_length(EthernetFramesRxIn0));
-            guarantee hlr_06_15_rx0_drop:
+            guarantee hlr_15_llr_2_rx0_drop:
                 (HasEvent(EthernetFramesRxIn0) and not GumboLib::GUMBO__Library::rx_allow_outbound_frame(EthernetFramesRxIn0)) implies
                 (NoSend(EthernetFramesRxOut0) and NoSend(MAVLinkFramesRxOut0));
             guarantee hlr_17_rx0_no_input:
                 (not HasEvent(EthernetFramesRxIn0)) implies (NoSend(EthernetFramesRxOut0) and NoSend(MAVLinkFramesRxOut0));
 
             guarantee hlr_05_13_rx1_direct:
-                (HasEvent(EthernetFramesRxIn1) and GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxIn1)) implies
+                (current_mode == open_platform_Data_Model::OperatingMode.Normal and
+                 HasEvent(EthernetFramesRxIn1) and GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxIn1)) implies
                 (HasEvent(EthernetFramesRxOut1) and EthernetFramesRxOut1 == EthernetFramesRxIn1 and NoSend(MAVLinkFramesRxOut1));
             guarantee hlr_18_rx1_mavlink:
-                (HasEvent(EthernetFramesRxIn1) and GumboLib::GUMBO__Library::valid_ardupilot_udp(EthernetFramesRxIn1)) implies
+                (current_mode == open_platform_Data_Model::OperatingMode.Normal and
+                 HasEvent(EthernetFramesRxIn1) and GumboLib::GUMBO__Library::valid_ardupilot_udp(EthernetFramesRxIn1)) implies
                 (NoSend(EthernetFramesRxOut1) and HasEvent(MAVLinkFramesRxOut1) and
                  MAVLinkFramesRxOut1.ethernet_frame == EthernetFramesRxIn1 and
                  MAVLinkFramesRxOut1.payload_offset == GumboLib::GUMBO__Library::udp_payload_offset() and
                  MAVLinkFramesRxOut1.payload_length == GumboLib::GUMBO__Library::udp_payload_length(EthernetFramesRxIn1));
-            guarantee hlr_06_15_rx1_drop:
+            guarantee hlr_15_llr_2_rx1_drop:
                 (HasEvent(EthernetFramesRxIn1) and not GumboLib::GUMBO__Library::rx_allow_outbound_frame(EthernetFramesRxIn1)) implies
                 (NoSend(EthernetFramesRxOut1) and NoSend(MAVLinkFramesRxOut1));
             guarantee hlr_17_rx1_no_input:
                 (not HasEvent(EthernetFramesRxIn1)) implies (NoSend(EthernetFramesRxOut1) and NoSend(MAVLinkFramesRxOut1));
 
             guarantee hlr_05_13_rx2_direct:
-                (HasEvent(EthernetFramesRxIn2) and GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxIn2)) implies
+                (current_mode == open_platform_Data_Model::OperatingMode.Normal and
+                 HasEvent(EthernetFramesRxIn2) and GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxIn2)) implies
                 (HasEvent(EthernetFramesRxOut2) and EthernetFramesRxOut2 == EthernetFramesRxIn2 and NoSend(MAVLinkFramesRxOut2));
             guarantee hlr_18_rx2_mavlink:
-                (HasEvent(EthernetFramesRxIn2) and GumboLib::GUMBO__Library::valid_ardupilot_udp(EthernetFramesRxIn2)) implies
+                (current_mode == open_platform_Data_Model::OperatingMode.Normal and
+                 HasEvent(EthernetFramesRxIn2) and GumboLib::GUMBO__Library::valid_ardupilot_udp(EthernetFramesRxIn2)) implies
                 (NoSend(EthernetFramesRxOut2) and HasEvent(MAVLinkFramesRxOut2) and
                  MAVLinkFramesRxOut2.ethernet_frame == EthernetFramesRxIn2 and
                  MAVLinkFramesRxOut2.payload_offset == GumboLib::GUMBO__Library::udp_payload_offset() and
                  MAVLinkFramesRxOut2.payload_length == GumboLib::GUMBO__Library::udp_payload_length(EthernetFramesRxIn2));
-            guarantee hlr_06_15_rx2_drop:
+            guarantee hlr_15_llr_2_rx2_drop:
                 (HasEvent(EthernetFramesRxIn2) and not GumboLib::GUMBO__Library::rx_allow_outbound_frame(EthernetFramesRxIn2)) implies
                 (NoSend(EthernetFramesRxOut2) and NoSend(MAVLinkFramesRxOut2));
             guarantee hlr_17_rx2_no_input:
                 (not HasEvent(EthernetFramesRxIn2)) implies (NoSend(EthernetFramesRxOut2) and NoSend(MAVLinkFramesRxOut2));
 
             guarantee hlr_05_13_rx3_direct:
-                (HasEvent(EthernetFramesRxIn3) and GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxIn3)) implies
+                (current_mode == open_platform_Data_Model::OperatingMode.Normal and
+                 HasEvent(EthernetFramesRxIn3) and GumboLib::GUMBO__Library::rx_direct_frame(EthernetFramesRxIn3)) implies
                 (HasEvent(EthernetFramesRxOut3) and EthernetFramesRxOut3 == EthernetFramesRxIn3 and NoSend(MAVLinkFramesRxOut3));
             guarantee hlr_18_rx3_mavlink:
-                (HasEvent(EthernetFramesRxIn3) and GumboLib::GUMBO__Library::valid_ardupilot_udp(EthernetFramesRxIn3)) implies
+                (current_mode == open_platform_Data_Model::OperatingMode.Normal and
+                 HasEvent(EthernetFramesRxIn3) and GumboLib::GUMBO__Library::valid_ardupilot_udp(EthernetFramesRxIn3)) implies
                 (NoSend(EthernetFramesRxOut3) and HasEvent(MAVLinkFramesRxOut3) and
                  MAVLinkFramesRxOut3.ethernet_frame == EthernetFramesRxIn3 and
                  MAVLinkFramesRxOut3.payload_offset == GumboLib::GUMBO__Library::udp_payload_offset() and
                  MAVLinkFramesRxOut3.payload_length == GumboLib::GUMBO__Library::udp_payload_length(EthernetFramesRxIn3));
-            guarantee hlr_06_15_rx3_drop:
+            guarantee hlr_15_llr_2_rx3_drop:
                 (HasEvent(EthernetFramesRxIn3) and not GumboLib::GUMBO__Library::rx_allow_outbound_frame(EthernetFramesRxIn3)) implies
                 (NoSend(EthernetFramesRxOut3) and NoSend(MAVLinkFramesRxOut3));
             guarantee hlr_17_rx3_no_input:

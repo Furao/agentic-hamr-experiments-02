@@ -2,7 +2,7 @@
 
 Date: 2026-09-22. Source: `Open_Platform_HLRs_26_09_22_07.md` and
 `w1-requirements-planning-07.md`. Profile: audited.
-Status: structural steps complete; awaiting SysModeling.AP1 architecture approval.
+Status: SysModeling.AP1 and audited sub-workflow boundary approved by the developer on 2026-09-22.
 
 ## Architecture changes
 
@@ -68,5 +68,7 @@ no code generation, application edits, schedule edits, or requirements edits occ
 
 SysModeling.AP1 asks whether each requirement has an architectural home and each
 component/connection traces to a requirement. This report and the _07 allocation map
-provide that review surface. The audited model gate and ChangeExec's SysModeling
-sub-workflow boundary await developer approval before CompGUMBOSpec begins.
+provide that review surface. The developer approved the audited model gate and
+ChangeExec's SysModeling sub-workflow boundary on 2026-09-22.
+
+Approval update: developer replied “approved”; SysModeling is complete and RxFirewall CompGUMBOSpec follows.
