@@ -1,6 +1,13 @@
 package open_platform_Data_Model {
     private import HAMR::*;
 
+    // CR-02 HLR-24, HLR-26; LLR-10/11: sampled control mode.
+    // Normal is first; explicit startup guarantees follow in CompGUMBOSpec.
+    enum def OperatingMode {
+        enum Normal;
+        enum Recovery;
+    }
+
     part def u16Array :> Array {
         part :>> Base_Type : Unsigned_16;
         attribute :>> Dimensions = 1;

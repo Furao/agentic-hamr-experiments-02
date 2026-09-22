@@ -8,4 +8,5 @@ package open_platform_Properties {
     attribute Domain_LowLevelEthernetDriver : CASE_Scheduling::Domain = 4;
     attribute Domain_RxFirewall : CASE_Scheduling::Domain = 5;
     attribute Domain_MAVLinkFirewall : CASE_Scheduling::Domain = 6;
+    attribute Domain_ModeManager : CASE_Scheduling::Domain = 7;
 }

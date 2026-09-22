@@ -41,6 +41,7 @@ package open_platform {
     }
 
     part def RxFirewall_seL4 :> Process {
+        port current_mode : DataPort { in :>> type : OperatingMode; }
         port EthernetFramesRxIn0 : EventDataPort { in :>> type : RawEthernetMessage; }
         port EthernetFramesRxIn1 : EventDataPort { in :>> type : RawEthernetMessage; }
         port EthernetFramesRxIn2 : EventDataPort { in :>> type : RawEthernetMessage; }
@@ -55,6 +56,8 @@ package open_platform {
         port MAVLinkFramesRxOut3 : EventDataPort { out :>> type : MAVLinkUDPMessage_Impl; }
 
         part RxFirewall : open_platform_Software::RxFirewall;
+        connection mode_input : PortConnection
+            connect current_mode to RxFirewall.current_mode;
         connection c1 : PortConnection 
             connect EthernetFramesRxIn0 to RxFirewall.EthernetFramesRxIn0;
         connection c2 : PortConnection 
@@ -85,6 +88,8 @@ package open_platform {
     }
 
     part def MAVLinkFirewall_seL4 :> Process {
+        port current_mode : DataPort { in :>> type : OperatingMode; }
+        port error_status : DataPort { out :>> type : Base_Types::Boolean; }
         port EthernetFramesIn0 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
         port EthernetFramesIn1 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
         port EthernetFramesIn2 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
@@ -96,6 +101,10 @@ package open_platform {
 
         part MAVLinkFirewall : open_platform_Software::MAVLinkFirewall;
 
+        connection mode_input : PortConnection
+            connect current_mode to MAVLinkFirewall.current_mode;
+        connection error_output : PortConnection
+            connect MAVLinkFirewall.error_status to error_status;
         connection c1 : PortConnection
             connect EthernetFramesIn0 to MAVLinkFirewall.EthernetFramesIn0;
         connection c2 : PortConnection
@@ -114,6 +123,23 @@ package open_platform {
             connect MAVLinkFirewall.EthernetFramesOut3 to EthernetFramesOut3;
 
         attribute :>> Domain = open_platform_Properties::Domain_MAVLinkFirewall;
+    }
+
+    // CR-02: one periodic ModeManager thread per Microkit process.
+    part def ModeManager_seL4 :> Process {
+        port error_status : DataPort { in :>> type : Base_Types::Boolean; }
+        port mode_to_rx : DataPort { out :>> type : OperatingMode; }
+        port mode_to_mavlink : DataPort { out :>> type : OperatingMode; }
+
+        part ModeManager : open_platform_Software::ModeManager;
+        attribute :>> Domain = open_platform_Properties::Domain_ModeManager;
+
+        connection error_input : PortConnection
+            connect error_status to ModeManager.error_status;
+        connection rx_mode_output : PortConnection
+            connect ModeManager.mode_to_rx to mode_to_rx;
+        connection mavlink_mode_output : PortConnection
+            connect ModeManager.mode_to_mavlink to mode_to_mavlink;
     }
 
     part def TxFirewall_seL4 :> Process {
@@ -201,11 +227,20 @@ package open_platform {
     }
 
     part def seL4 :> System {
+        part ModeManager : ModeManager_seL4;
         part RxFirewall : RxFirewall_seL4;
         part TxFirewall : TxFirewall_seL4;
         part LowLevelEthernetDriver : LowLevelEthernetDriver_seL4;
         part ArduPilot : ArduPilot_seL4;
         part MAVLinkFirewall : MAVLinkFirewall_seL4;
+
+        // CR-02 HLR-25/26/27: sampled error feedback and mode distribution.
+        connection mavlink_error_to_manager : PortConnection
+            connect MAVLinkFirewall.error_status to ModeManager.error_status;
+        connection manager_mode_to_rx : PortConnection
+            connect ModeManager.mode_to_rx to RxFirewall.current_mode;
+        connection manager_mode_to_mavlink : PortConnection
+            connect ModeManager.mode_to_mavlink to MAVLinkFirewall.current_mode;
 
         attribute Domain : CASE_Scheduling::Domain = 2;
         connection c1 : PortConnection

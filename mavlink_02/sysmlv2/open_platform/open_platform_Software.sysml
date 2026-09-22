@@ -20,6 +20,7 @@ package open_platform_Software {
     }
 
     part def RxFirewall :> Thread {
+        port current_mode : DataPort { in :>> type : OperatingMode; }
         port EthernetFramesRxIn0: EventDataPort {in :>> type : RawEthernetMessage; }
         port EthernetFramesRxIn1: EventDataPort {in :>> type : RawEthernetMessage; }
         port EthernetFramesRxIn2: EventDataPort {in :>> type : RawEthernetMessage; } 
@@ -122,6 +123,9 @@ package open_platform_Software {
     }
 
     part def MAVLinkFirewall :> Thread {
+        // CR-02 HLR-25/26/28/30; LLR-11/12/15: monitor observes these ports.
+        port current_mode : DataPort { in :>> type : OperatingMode; }
+        port error_status : DataPort { out :>> type : Base_Types::Boolean; }
         port EthernetFramesIn0 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
         port EthernetFramesIn1 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
         port EthernetFramesIn2 : EventDataPort { in :>> type : MAVLinkUDPMessage_Impl; }
@@ -207,6 +211,21 @@ package open_platform_Software {
                  (HasEvent(EthernetFramesIn3) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn3) and
                   mavlink_frame_valid(EthernetFramesIn3)))) implies NoSend(EthernetFramesOut3);
         }*/
+    }
+
+    // CR-02 HLR-23/24/26/27; LLR-11/14/20.
+    // Stateful contracts are added by the following CompGUMBOSpec workflow.
+    part def ModeManager :> Thread {
+        port error_status : DataPort { in :>> type : Base_Types::Boolean; }
+        port mode_to_rx : DataPort { out :>> type : OperatingMode; }
+        port mode_to_mavlink : DataPort { out :>> type : OperatingMode; }
+
+        attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
+        // Align with the existing firewall period; validate visibility in W3.
+        attribute :>> Period = 1000[ms];
+        attribute :>> Compute_Execution_Time = 100[ms] .. 100[ms];
+        attribute :>> Stack_Size = 1048576[byte];
+        attribute :>> Implementation_Language = Rust;
     }
 
     part def TxFirewall :> Thread {

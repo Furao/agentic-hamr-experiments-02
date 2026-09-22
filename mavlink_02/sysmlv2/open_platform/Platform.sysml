@@ -7,7 +7,7 @@ package Platform {
     part def Proc :> Processor {
         attribute :>> Frame_Period = 1950 [ms];
         attribute :>> Clock_Period = 2 [ms];
-        attribute :>> Max_Domain = 7;
+        attribute :>> Max_Domain = 8;
     }
 
     part def ZCU102_Impl :> System {
