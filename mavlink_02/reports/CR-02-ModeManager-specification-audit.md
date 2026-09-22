@@ -5,7 +5,7 @@ Component: `ModeManager`; classification: safety/security-critical mode control.
 Model: `sysmlv2/open_platform/open_platform_Software.sysml`, ModeManager block.
 Authority: `action-requests/CR-02-add-mode-manager/Open_Platform_HLRs_26_09_22_07.md`.
 Mode: specification-only; no ModeManager generated crate exists yet.
-Status: critique complete; audited CompGUMBOSpec.AP1 approval pending.
+Status: developer approved contracts and audited CompGUMBOSpec.AP1 on 2026-09-22.
 
 ## 1. Executive summary
 

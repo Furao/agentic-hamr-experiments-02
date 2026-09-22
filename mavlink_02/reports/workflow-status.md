@@ -4,10 +4,10 @@ Project: open_platform | Profile: audited | Updated: 2026-09-22
 
 | Step | Status | Updated | Notes |
 |------|--------|---------|-------|
-| ChangeExec(CR-02) | in-progress | 2026-09-22 | Audited W1; ModeManager contracts/type-check/audit ready for signoff |
+| ChangeExec(CR-02) | in-progress | 2026-09-22 | Audited W1; integration check exit 0, vacuous by design N=0; awaiting boundary approval before CodeGen |
 | ChangeExec(CR-02).1 | done | 2026-09-22 | Approved plan/all RDs resolved; HEAD 24ba011d4f0a49c727a9b6c9cd28941f536891b4 drift is request/planning records only; approved source baseline unchanged |
 | ChangeExec(CR-02).2 | in-progress | 2026-09-22 | W1 started per approved sequence; W2/W3 not started |
-| ChangeExec(CR-02).W1 | in-progress | 2026-09-22 | ModeManager contract AP1 pending; integration check and generation follow; monitor/reporting feasibility remains required at W1 CodeGen gate |
+| ChangeExec(CR-02).W1 | in-progress | 2026-09-22 | All component contracts approved; integration check complete, boundary approval pending; generation/reporting feasibility remains required |
 | ChangeExec(CR-02).W1.Requirements | done | 2026-09-22 | _07 supplies derived LLR-1–21; allocation and RF-1–RF-4 disposition in w1-requirements-planning-07.md; legacy document synchronization tracked for final sweep |
 | ChangeExec(CR-02).W1.SysModeling | done | 2026-09-22 | Developer approved architecture and audited sub-workflow boundary; continuing to RxFirewall contracts |
 | ChangeExec(CR-02).W1.SysModeling.1 | done | 2026-09-22 | Retained existing package/file layout and local aadl-lib |
@@ -28,12 +28,17 @@ Project: open_platform | Profile: audited | Updated: 2026-09-22
 | ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).3 | done | 2026-09-22 | Zero new model-clause catalog findings; stale generated contracts and truncated SECURE_COMMAND developer-hook concern recorded |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).4 | done | 2026-09-22 | Model revisions complete; W1 generated reporter feasibility and W2 hook refinement/runtime tests remain explicit obligations |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).AP1 | done | 2026-09-22 | Developer approved contracts, refinement observation and runtime obligations; no implementation requirement waived |
-| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager) | in-progress | 2026-09-22 | Review ready; reports/CR-02-ModeManager-specification-audit.md |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager) | done | 2026-09-22 | Developer approved contracts, zero-finding audit and audited boundary |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).1 | done | 2026-09-22 | Retained mode, initial Normal outputs, exact latched transition and post-state publication to both consumers |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).2 | done | 2026-09-22 | First tipe run exit 0 Well-formed |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).3 | done | 2026-09-22 | Specification-only audit: zero AP-1–AP-9 findings; all four state/input combinations covered |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).4 | done | 2026-09-22 | No audit revisions or waivers required; startup/runtime publication checks remain W1/W2 |
-| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).AP1 | blocked | 2026-09-22 | Awaiting developer contract and audited boundary approval before SysGUMBOIntegrationCheck |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).AP1 | done | 2026-09-22 | Developer explicitly approved ModeManager contracts |
+| ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck | done | 2026-09-22 | Exit criteria met: Logika exit 0, vacuous by design N=0; no scratch; audited boundary approval pending |
+| ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.1 | done | 2026-09-22 | Enumerated zero receiver integration assumes before run; no diagnostics/output artifacts; see reports/CR-02-integration-check.md |
+| ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.2 | n/a | 2026-09-22 | No integration failures to diagnose |
+| ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.3 | n/a | 2026-09-22 | No contract revisions required |
+| ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.boundary | blocked | 2026-09-22 | Awaiting developer acceptance of N=0 result before CodeGen |
 | ChangeExec(CR-02).W1.AP1 | not-started | 2026-09-22 | Model/contracts/generation gates not yet reached |
 | ChangeExec(CR-02).W2 | not-started | 2026-09-22 | Awaiting W1 gate |
 | ChangeExec(CR-02).W3 | not-started | 2026-09-22 | Awaiting W2 gate |
