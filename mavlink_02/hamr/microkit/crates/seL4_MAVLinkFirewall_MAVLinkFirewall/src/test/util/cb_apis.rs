@@ -22,13 +22,15 @@ pub fn testInitializeCB() -> HarnessResult
   crate::seL4_MAVLinkFirewall_MAVLinkFirewall_initialize();
 
   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+  let rejected_count = get_rejected_count();
   let api_EthernetFramesOut0 = get_EthernetFramesOut0();
   let api_EthernetFramesOut1 = get_EthernetFramesOut1();
   let api_EthernetFramesOut2 = get_EthernetFramesOut2();
   let api_EthernetFramesOut3 = get_EthernetFramesOut3();
+  let api_error_status = get_error_status();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::initialize_IEP_Post (api_EthernetFramesOut0, api_EthernetFramesOut1, api_EthernetFramesOut2, api_EthernetFramesOut3) {
+  if !GUMBOX::initialize_IEP_Post (rejected_count, api_EthernetFramesOut0, api_EthernetFramesOut1, api_EthernetFramesOut2, api_EthernetFramesOut3, api_error_status) {
     return HarnessResult::FailedPostcondition(
       TestCaseError::Fail("Postcondition failed: incorrect output behavior".into())
     );
@@ -69,33 +71,47 @@ testInitializeCB_macro {
   * @param api_EthernetFramesIn1 incoming event data port
   * @param api_EthernetFramesIn2 incoming event data port
   * @param api_EthernetFramesIn3 incoming event data port
+  * @param api_current_mode incoming data port
   */
 pub fn testComputeCB(
   api_EthernetFramesIn0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesIn1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesIn2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
-  api_EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> HarnessResult
+  api_EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_current_mode: open_platform_Data_Model::OperatingMode) -> HarnessResult
 {
   // Initialize the app
   crate::seL4_MAVLinkFirewall_MAVLinkFirewall_initialize();
+
+  // [SaveInLocal]: retrieve and save the current (input) values of GUMBO-declared local state variables as retrieved
+  //                from the component state
+  let In_rejected_count: u16 = get_rejected_count();
+
+  // [CheckPre]: check/filter based on pre-condition.
+  if !GUMBOX::compute_CEP_Pre (In_rejected_count, api_EthernetFramesIn0, api_EthernetFramesIn1, api_EthernetFramesIn2, api_EthernetFramesIn3, api_current_mode) {
+    return HarnessResult::RejectedPrecondition;
+  }
 
   // [PutInPorts]: Set values on the input ports
   put_EthernetFramesIn0(api_EthernetFramesIn0);
   put_EthernetFramesIn1(api_EthernetFramesIn1);
   put_EthernetFramesIn2(api_EthernetFramesIn2);
   put_EthernetFramesIn3(api_EthernetFramesIn3);
+  put_current_mode(api_current_mode);
 
   // [InvokeEntryPoint]: Invoke the entry point
   crate::seL4_MAVLinkFirewall_MAVLinkFirewall_timeTriggered();
 
   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+  let rejected_count = get_rejected_count();
   let api_EthernetFramesOut0 = get_EthernetFramesOut0();
   let api_EthernetFramesOut1 = get_EthernetFramesOut1();
   let api_EthernetFramesOut2 = get_EthernetFramesOut2();
   let api_EthernetFramesOut3 = get_EthernetFramesOut3();
+  let api_error_status = get_error_status();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::compute_CEP_Post(api_EthernetFramesIn0, api_EthernetFramesIn1, api_EthernetFramesIn2, api_EthernetFramesIn3, api_EthernetFramesOut0, api_EthernetFramesOut1, api_EthernetFramesOut2, api_EthernetFramesOut3) {
+  if !GUMBOX::compute_CEP_Post(In_rejected_count, rejected_count, api_EthernetFramesIn0, api_EthernetFramesIn1, api_EthernetFramesIn2, api_EthernetFramesIn3, api_current_mode, api_EthernetFramesOut0, api_EthernetFramesOut1, api_EthernetFramesOut2, api_EthernetFramesOut3, api_error_status) {
     return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
   }
 
@@ -106,7 +122,7 @@ pub fn testComputeCB(
   */
 pub fn testComputeCB_container(container: PreStateContainer) -> HarnessResult
 {
-  return testComputeCB(container.api_EthernetFramesIn0, container.api_EthernetFramesIn1, container.api_EthernetFramesIn2, container.api_EthernetFramesIn3)
+  return testComputeCB(container.api_EthernetFramesIn0, container.api_EthernetFramesIn1, container.api_EthernetFramesIn2, container.api_EthernetFramesIn3, container.api_current_mode)
 }
 
 #[macro_export]
@@ -118,17 +134,116 @@ testComputeCB_macro {
     api_EthernetFramesIn0: $api_EthernetFramesIn0_strat:expr,
     api_EthernetFramesIn1: $api_EthernetFramesIn1_strat:expr,
     api_EthernetFramesIn2: $api_EthernetFramesIn2_strat:expr,
-    api_EthernetFramesIn3: $api_EthernetFramesIn3_strat:expr
+    api_EthernetFramesIn3: $api_EthernetFramesIn3_strat:expr,
+    api_current_mode: $api_current_mode_strat:expr
   ) => {
     proptest!{
       #![proptest_config($config)]
       #[test]
       #[serial]
       fn $test_name(
-        (api_EthernetFramesIn0, api_EthernetFramesIn1, api_EthernetFramesIn2, api_EthernetFramesIn3)
-            in ($api_EthernetFramesIn0_strat, $api_EthernetFramesIn1_strat, $api_EthernetFramesIn2_strat, $api_EthernetFramesIn3_strat)
+        (api_EthernetFramesIn0, api_EthernetFramesIn1, api_EthernetFramesIn2, api_EthernetFramesIn3, api_current_mode)
+            in ($api_EthernetFramesIn0_strat, $api_EthernetFramesIn1_strat, $api_EthernetFramesIn2_strat, $api_EthernetFramesIn3_strat, $api_current_mode_strat)
       ) {
-        match$crate::test::util::cb_apis::testComputeCB(api_EthernetFramesIn0, api_EthernetFramesIn1, api_EthernetFramesIn2, api_EthernetFramesIn3) {
+        match$crate::test::util::cb_apis::testComputeCB(api_EthernetFramesIn0, api_EthernetFramesIn1, api_EthernetFramesIn2, api_EthernetFramesIn3, api_current_mode) {
+          $crate::test::util::cb_apis::HarnessResult::RejectedPrecondition => {
+            return Err(proptest::test_runner::TestCaseError::reject(
+              "Precondition failed: invalid input combination",
+            ))
+          }
+          $crate::test::util::cb_apis::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::test::util::cb_apis::HarnessResult::Passed => { }
+        }
+      }
+    }
+  };
+}
+
+/** Contract-based test harness for the compute entry point
+  *
+  * @param In_rejected_count pre-state state variable
+  * @param api_EthernetFramesIn0 incoming event data port
+  * @param api_EthernetFramesIn1 incoming event data port
+  * @param api_EthernetFramesIn2 incoming event data port
+  * @param api_EthernetFramesIn3 incoming event data port
+  * @param api_current_mode incoming data port
+  */
+pub fn testComputeCBwGSV(
+  In_rejected_count: u16,
+  api_EthernetFramesIn0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesIn1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesIn2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_current_mode: open_platform_Data_Model::OperatingMode) -> HarnessResult
+{
+  // Initialize the app
+  crate::seL4_MAVLinkFirewall_MAVLinkFirewall_initialize();
+
+  // [CheckPre]: check/filter based on pre-condition.
+  if !GUMBOX::compute_CEP_Pre (In_rejected_count, api_EthernetFramesIn0, api_EthernetFramesIn1, api_EthernetFramesIn2, api_EthernetFramesIn3, api_current_mode) {
+    return HarnessResult::RejectedPrecondition;
+  }
+
+  // [PutInPorts]: Set values on the input ports
+  put_EthernetFramesIn0(api_EthernetFramesIn0);
+  put_EthernetFramesIn1(api_EthernetFramesIn1);
+  put_EthernetFramesIn2(api_EthernetFramesIn2);
+  put_EthernetFramesIn3(api_EthernetFramesIn3);
+  put_current_mode(api_current_mode);
+
+  // [SetInStateVars]: set the pre-state values of state variables
+  put_rejected_count(In_rejected_count);
+
+  // [InvokeEntryPoint]: Invoke the entry point
+  crate::seL4_MAVLinkFirewall_MAVLinkFirewall_timeTriggered();
+
+  // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+  let rejected_count = get_rejected_count();
+  let api_EthernetFramesOut0 = get_EthernetFramesOut0();
+  let api_EthernetFramesOut1 = get_EthernetFramesOut1();
+  let api_EthernetFramesOut2 = get_EthernetFramesOut2();
+  let api_EthernetFramesOut3 = get_EthernetFramesOut3();
+  let api_error_status = get_error_status();
+
+  // [CheckPost]: invoke the oracle function
+  if !GUMBOX::compute_CEP_Post(In_rejected_count, rejected_count, api_EthernetFramesIn0, api_EthernetFramesIn1, api_EthernetFramesIn2, api_EthernetFramesIn3, api_current_mode, api_EthernetFramesOut0, api_EthernetFramesOut1, api_EthernetFramesOut2, api_EthernetFramesOut3, api_error_status) {
+    return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
+  }
+
+  return HarnessResult::Passed
+}
+
+/** Contract-based test harness for the compute entry point
+  */
+pub fn testComputeCBwGSV_container(container: PreStateContainer_wGSV) -> HarnessResult
+{
+  return testComputeCBwGSV(container.In_rejected_count, container.api_EthernetFramesIn0, container.api_EthernetFramesIn1, container.api_EthernetFramesIn2, container.api_EthernetFramesIn3, container.api_current_mode)
+}
+
+#[macro_export]
+macro_rules!
+testComputeCBwGSV_macro {
+  (
+    $test_name: ident,
+    config: $config:expr,
+    In_rejected_count: $In_rejected_count_strat:expr,
+    api_EthernetFramesIn0: $api_EthernetFramesIn0_strat:expr,
+    api_EthernetFramesIn1: $api_EthernetFramesIn1_strat:expr,
+    api_EthernetFramesIn2: $api_EthernetFramesIn2_strat:expr,
+    api_EthernetFramesIn3: $api_EthernetFramesIn3_strat:expr,
+    api_current_mode: $api_current_mode_strat:expr
+  ) => {
+    proptest!{
+      #![proptest_config($config)]
+      #[test]
+      #[serial]
+      fn $test_name(
+        (In_rejected_count, api_EthernetFramesIn0, api_EthernetFramesIn1, api_EthernetFramesIn2, api_EthernetFramesIn3, api_current_mode)
+            in ($In_rejected_count_strat, $api_EthernetFramesIn0_strat, $api_EthernetFramesIn1_strat, $api_EthernetFramesIn2_strat, $api_EthernetFramesIn3_strat, $api_current_mode_strat)
+      ) {
+        match $crate::test::util::cb_apis::testComputeCBwGSV(In_rejected_count, api_EthernetFramesIn0, api_EthernetFramesIn1, api_EthernetFramesIn2, api_EthernetFramesIn3, api_current_mode) {
           $crate::test::util::cb_apis::HarnessResult::RejectedPrecondition => {
             return Err(proptest::test_runner::TestCaseError::reject(
               "Precondition failed: invalid input combination",

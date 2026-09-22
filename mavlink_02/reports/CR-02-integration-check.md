@@ -43,7 +43,7 @@ scratch. `git diff --check` passed.
 
 All three component contract approvals are recorded. The integration-check exit
 criteria are met with the N=0 qualification. ChangeExec's audited sub-workflow
-boundary awaits approval before CodeGen.
+boundary was approved by the developer on 2026-09-22; CodeGen follows.
 
 W1 generation must still inspect startup control values and monitor sampling hooks,
 compile the R2U2 specification and demonstrate a supported same-dispatch reporting

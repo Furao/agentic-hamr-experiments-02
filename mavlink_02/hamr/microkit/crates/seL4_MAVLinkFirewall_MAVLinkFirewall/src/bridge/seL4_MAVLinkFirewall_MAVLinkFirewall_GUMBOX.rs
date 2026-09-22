@@ -42,9 +42,62 @@ pub fn mavlink_allowed(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) ->
     !(mavlink_firmware_flash_command(msg))
 }
 
+pub fn rejection_limit() -> u16
+{
+  20u16
+}
+
+pub fn error_threshold() -> u16
+{
+  5u16
+}
+
+pub fn rejection_total(
+  lane0: bool,
+  lane1: bool,
+  lane2: bool,
+  lane3: bool) -> u16
+{
+  (if (lane0) {
+    1u16
+  } else {
+    0u16
+  }) +
+    (if (lane1) {
+      1u16
+    } else {
+      0u16
+    }) +
+    (if (lane2) {
+      1u16
+    } else {
+      0u16
+    }) +
+    (if (lane3) {
+      1u16
+    } else {
+      0u16
+    })
+}
+
+pub fn saturated_rejection_count(
+  count: u16,
+  increment: u16) -> u16
+{
+  if (count >= rejection_limit()) {
+    rejection_limit()
+  } else {
+    if (increment >= rejection_limit() - count) {
+      rejection_limit()
+    } else {
+      count + increment
+    }
+  }
+}
+
 /** I-Guar: Integration constraint on MAVLinkFirewall's outgoing event data port EthernetFramesOut0
   *
-  * guarantee hlr_22_output0_allowed
+  * guarantee hlr_22_llr_9_output0_allowed
   */
 pub fn I_Guar_EthernetFramesOut0(EthernetFramesOut0: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
 {
@@ -53,7 +106,7 @@ pub fn I_Guar_EthernetFramesOut0(EthernetFramesOut0: open_platform_Data_Model::M
 
 /** I-Guar: Integration constraint on MAVLinkFirewall's outgoing event data port EthernetFramesOut0
   *
-  * guarantee hlr_22_output0_allowed
+  * guarantee hlr_22_llr_9_output0_allowed
   */
 pub fn I_Guar_Guard_EthernetFramesOut0(EthernetFramesOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
@@ -65,7 +118,7 @@ pub fn I_Guar_Guard_EthernetFramesOut0(EthernetFramesOut0: Option<open_platform_
 
 /** I-Guar: Integration constraint on MAVLinkFirewall's outgoing event data port EthernetFramesOut1
   *
-  * guarantee hlr_22_output1_allowed
+  * guarantee hlr_22_llr_9_output1_allowed
   */
 pub fn I_Guar_EthernetFramesOut1(EthernetFramesOut1: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
 {
@@ -74,7 +127,7 @@ pub fn I_Guar_EthernetFramesOut1(EthernetFramesOut1: open_platform_Data_Model::M
 
 /** I-Guar: Integration constraint on MAVLinkFirewall's outgoing event data port EthernetFramesOut1
   *
-  * guarantee hlr_22_output1_allowed
+  * guarantee hlr_22_llr_9_output1_allowed
   */
 pub fn I_Guar_Guard_EthernetFramesOut1(EthernetFramesOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
@@ -86,7 +139,7 @@ pub fn I_Guar_Guard_EthernetFramesOut1(EthernetFramesOut1: Option<open_platform_
 
 /** I-Guar: Integration constraint on MAVLinkFirewall's outgoing event data port EthernetFramesOut2
   *
-  * guarantee hlr_22_output2_allowed
+  * guarantee hlr_22_llr_9_output2_allowed
   */
 pub fn I_Guar_EthernetFramesOut2(EthernetFramesOut2: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
 {
@@ -95,7 +148,7 @@ pub fn I_Guar_EthernetFramesOut2(EthernetFramesOut2: open_platform_Data_Model::M
 
 /** I-Guar: Integration constraint on MAVLinkFirewall's outgoing event data port EthernetFramesOut2
   *
-  * guarantee hlr_22_output2_allowed
+  * guarantee hlr_22_llr_9_output2_allowed
   */
 pub fn I_Guar_Guard_EthernetFramesOut2(EthernetFramesOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
@@ -107,7 +160,7 @@ pub fn I_Guar_Guard_EthernetFramesOut2(EthernetFramesOut2: Option<open_platform_
 
 /** I-Guar: Integration constraint on MAVLinkFirewall's outgoing event data port EthernetFramesOut3
   *
-  * guarantee hlr_22_output3_allowed
+  * guarantee hlr_22_llr_9_output3_allowed
   */
 pub fn I_Guar_EthernetFramesOut3(EthernetFramesOut3: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
 {
@@ -116,7 +169,7 @@ pub fn I_Guar_EthernetFramesOut3(EthernetFramesOut3: open_platform_Data_Model::M
 
 /** I-Guar: Integration constraint on MAVLinkFirewall's outgoing event data port EthernetFramesOut3
   *
-  * guarantee hlr_22_output3_allowed
+  * guarantee hlr_22_llr_9_output3_allowed
   */
 pub fn I_Guar_Guard_EthernetFramesOut3(EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
@@ -126,49 +179,245 @@ pub fn I_Guar_Guard_EthernetFramesOut3(EthernetFramesOut3: Option<open_platform_
   )
 }
 
-/** IEP-Post: Initialize Entrypoint Post-Condition
+/** Initialize EntryPointContract
   *
+  * guarantee hlr_31_llr_11_initial_count
+  * @param rejected_count post-state state variable
+  */
+pub fn initialize_hlr_31_llr_11_initial_count(rejected_count: u16) -> bool
+{
+  rejected_count == 0u16
+}
+
+/** Initialize EntryPointContract
+  *
+  * guarantee hlr_25_llr_11_initial_error_status
+  * @param api_error_status outgoing data port
+  */
+pub fn initialize_hlr_25_llr_11_initial_error_status(api_error_status: bool) -> bool
+{
+  api_error_status == false
+}
+
+/** Initialize EntryPointContract
+  *
+  * guarantee hlr_21_initialize_lane0
+  * @param api_EthernetFramesOut0 outgoing event data port
+  */
+pub fn initialize_hlr_21_initialize_lane0(api_EthernetFramesOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  api_EthernetFramesOut0.is_none()
+}
+
+/** Initialize EntryPointContract
+  *
+  * guarantee hlr_21_initialize_lane1
+  * @param api_EthernetFramesOut1 outgoing event data port
+  */
+pub fn initialize_hlr_21_initialize_lane1(api_EthernetFramesOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  api_EthernetFramesOut1.is_none()
+}
+
+/** Initialize EntryPointContract
+  *
+  * guarantee hlr_21_initialize_lane2
+  * @param api_EthernetFramesOut2 outgoing event data port
+  */
+pub fn initialize_hlr_21_initialize_lane2(api_EthernetFramesOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  api_EthernetFramesOut2.is_none()
+}
+
+/** Initialize EntryPointContract
+  *
+  * guarantee hlr_21_initialize_lane3
+  * @param api_EthernetFramesOut3 outgoing event data port
+  */
+pub fn initialize_hlr_21_initialize_lane3(api_EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  api_EthernetFramesOut3.is_none()
+}
+
+/** IEP-Guar: Initialize Entrypoint for MAVLinkFirewall
+  *
+  * @param rejected_count post-state state variable
   * @param api_EthernetFramesOut0 outgoing event data port
   * @param api_EthernetFramesOut1 outgoing event data port
   * @param api_EthernetFramesOut2 outgoing event data port
   * @param api_EthernetFramesOut3 outgoing event data port
+  * @param api_error_status outgoing data port
   */
-pub fn initialize_IEP_Post(
+pub fn initialize_IEP_Guar(
+  rejected_count: u16,
   api_EthernetFramesOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
-  api_EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+  api_EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_error_status: bool) -> bool
+{
+  initialize_hlr_31_llr_11_initial_count(rejected_count) &&
+  initialize_hlr_25_llr_11_initial_error_status(api_error_status) &&
+  initialize_hlr_21_initialize_lane0(api_EthernetFramesOut0) &&
+  initialize_hlr_21_initialize_lane1(api_EthernetFramesOut1) &&
+  initialize_hlr_21_initialize_lane2(api_EthernetFramesOut2) &&
+  initialize_hlr_21_initialize_lane3(api_EthernetFramesOut3)
+}
+
+/** IEP-Post: Initialize Entrypoint Post-Condition
+  *
+  * @param rejected_count post-state state variable
+  * @param api_EthernetFramesOut0 outgoing event data port
+  * @param api_EthernetFramesOut1 outgoing event data port
+  * @param api_EthernetFramesOut2 outgoing event data port
+  * @param api_EthernetFramesOut3 outgoing event data port
+  * @param api_error_status outgoing data port
+  */
+pub fn initialize_IEP_Post(
+  rejected_count: u16,
+  api_EthernetFramesOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_error_status: bool) -> bool
 {
   // I-Guar-Guard: Integration constraints for MAVLinkFirewall's outgoing ports"
   I_Guar_Guard_EthernetFramesOut0(api_EthernetFramesOut0) &
   I_Guar_Guard_EthernetFramesOut1(api_EthernetFramesOut1) &
   I_Guar_Guard_EthernetFramesOut2(api_EthernetFramesOut2) &
-  I_Guar_Guard_EthernetFramesOut3(api_EthernetFramesOut3)
+  I_Guar_Guard_EthernetFramesOut3(api_EthernetFramesOut3)&& 
+
+  initialize_IEP_Guar(rejected_count, api_EthernetFramesOut0, api_EthernetFramesOut1, api_EthernetFramesOut2, api_EthernetFramesOut3, api_error_status)
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_22_23_lane0_allow
+  * assumes hlr_31_count_pre_bound
+  * @param In_rejected_count pre-state state variable
+  */
+pub fn compute_spec_hlr_31_count_pre_bound_assume(In_rejected_count: u16) -> bool
+{
+  In_rejected_count <= rejection_limit()
+}
+
+/** CEP-T-Assm: Top-level assume contracts for MAVLinkFirewall's compute entrypoint
+  *
+  * @param In_rejected_count pre-state state variable
+  */
+pub fn compute_CEP_T_Assm(In_rejected_count: u16) -> bool
+{
+  let r0: bool = compute_spec_hlr_31_count_pre_bound_assume(In_rejected_count);
+
+  return r0;
+}
+
+/** CEP-Pre: Compute Entrypoint Pre-Condition for MAVLinkFirewall
+  *
+  * @param In_rejected_count pre-state state variable
   * @param api_EthernetFramesIn0 incoming event data port
+  * @param api_EthernetFramesIn1 incoming event data port
+  * @param api_EthernetFramesIn2 incoming event data port
+  * @param api_EthernetFramesIn3 incoming event data port
+  * @param api_current_mode incoming data port
+  */
+pub fn compute_CEP_Pre(
+  In_rejected_count: u16,
+  api_EthernetFramesIn0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesIn1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesIn2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_current_mode: open_platform_Data_Model::OperatingMode) -> bool
+{
+  // CEP-Assm: assume clauses of MAVLinkFirewall's compute entrypoint
+  let r0: bool = compute_CEP_T_Assm(In_rejected_count);
+
+  return r0;
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_31_count_post_bound
+  * @param rejected_count post-state state variable
+  */
+pub fn compute_spec_hlr_31_count_post_bound_guarantee(rejected_count: u16) -> bool
+{
+  rejected_count <= rejection_limit()
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_31_llr_13_count_monotonic
+  * @param In_rejected_count pre-state state variable
+  * @param rejected_count post-state state variable
+  */
+pub fn compute_spec_hlr_31_llr_13_count_monotonic_guarantee(
+  In_rejected_count: u16,
+  rejected_count: u16) -> bool
+{
+  rejected_count >= In_rejected_count
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_31_llr_13_count_update
+  * @param In_rejected_count pre-state state variable
+  * @param rejected_count post-state state variable
+  * @param api_EthernetFramesIn0 incoming event data port
+  * @param api_EthernetFramesIn1 incoming event data port
+  * @param api_EthernetFramesIn2 incoming event data port
+  * @param api_EthernetFramesIn3 incoming event data port
+  */
+pub fn compute_spec_hlr_31_llr_13_count_update_guarantee(
+  In_rejected_count: u16,
+  rejected_count: u16,
+  api_EthernetFramesIn0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesIn1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesIn2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  rejected_count == saturated_rejection_count(In_rejected_count, rejection_total(api_EthernetFramesIn0.is_some() && !(mavlink_allowed(api_EthernetFramesIn0.unwrap())), api_EthernetFramesIn1.is_some() && !(mavlink_allowed(api_EthernetFramesIn1.unwrap())), api_EthernetFramesIn2.is_some() && !(mavlink_allowed(api_EthernetFramesIn2.unwrap())), api_EthernetFramesIn3.is_some() && !(mavlink_allowed(api_EthernetFramesIn3.unwrap()))))
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_25_llr_12_post_count_error_status
+  * @param rejected_count post-state state variable
+  * @param api_error_status outgoing data port
+  */
+pub fn compute_spec_hlr_25_llr_12_post_count_error_status_guarantee(
+  rejected_count: u16,
+  api_error_status: bool) -> bool
+{
+  api_error_status == (rejected_count >= error_threshold())
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_22_llr_3_lane0_allow
+  * @param api_EthernetFramesIn0 incoming event data port
+  * @param api_current_mode incoming data port
   * @param api_EthernetFramesOut0 outgoing event data port
   */
-pub fn compute_spec_hlr_22_23_lane0_allow_guarantee(
+pub fn compute_spec_hlr_22_llr_3_lane0_allow_guarantee(
   api_EthernetFramesIn0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_current_mode: open_platform_Data_Model::OperatingMode,
   api_EthernetFramesOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    api_EthernetFramesIn0.is_some() && mavlink_allowed(api_EthernetFramesIn0.unwrap()),
+    (api_current_mode == open_platform_Data_Model::OperatingMode::Normal) &&
+      api_EthernetFramesIn0.is_some() &&
+      mavlink_allowed(api_EthernetFramesIn0.unwrap()),
     api_EthernetFramesOut0.is_some() &&
       (api_EthernetFramesOut0.unwrap() == api_EthernetFramesIn0.unwrap()))
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_24_lane0_deny_flash
+  * guarantee hlr_19_32_lane0_deny_flash
   * @param api_EthernetFramesIn0 incoming event data port
   * @param api_EthernetFramesOut0 outgoing event data port
   */
-pub fn compute_spec_hlr_24_lane0_deny_flash_guarantee(
+pub fn compute_spec_hlr_19_32_lane0_deny_flash_guarantee(
   api_EthernetFramesIn0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
@@ -181,43 +430,76 @@ pub fn compute_spec_hlr_24_lane0_deny_flash_guarantee(
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_25_26_lane0_invalid_or_no_input
+  * guarantee hlr_20_lane0_invalid
   * @param api_EthernetFramesIn0 incoming event data port
   * @param api_EthernetFramesOut0 outgoing event data port
   */
-pub fn compute_spec_hlr_25_26_lane0_invalid_or_no_input_guarantee(
+pub fn compute_spec_hlr_20_lane0_invalid_guarantee(
   api_EthernetFramesIn0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    !(api_EthernetFramesIn0.is_some()) ||
-      api_EthernetFramesIn0.is_some() && !(GumboLib::valid_mavlink_carrier(api_EthernetFramesIn0.unwrap()) && mavlink_frame_valid(api_EthernetFramesIn0.unwrap())),
+    api_EthernetFramesIn0.is_some() && !(GumboLib::valid_mavlink_carrier(api_EthernetFramesIn0.unwrap()) && mavlink_frame_valid(api_EthernetFramesIn0.unwrap())),
     api_EthernetFramesOut0.is_none())
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_22_23_lane1_allow
+  * guarantee hlr_21_lane0_no_input
+  * @param api_EthernetFramesIn0 incoming event data port
+  * @param api_EthernetFramesOut0 outgoing event data port
+  */
+pub fn compute_spec_hlr_21_lane0_no_input_guarantee(
+  api_EthernetFramesIn0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  implies!(
+    !(api_EthernetFramesIn0.is_some()),
+    api_EthernetFramesOut0.is_none())
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_28_llr_10_lane0_recovery
+  * @param api_current_mode incoming data port
+  * @param api_EthernetFramesOut0 outgoing event data port
+  */
+pub fn compute_spec_hlr_28_llr_10_lane0_recovery_guarantee(
+  api_current_mode: open_platform_Data_Model::OperatingMode,
+  api_EthernetFramesOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  implies!(
+    (api_current_mode == open_platform_Data_Model::OperatingMode::Recovery),
+    api_EthernetFramesOut0.is_none())
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_22_llr_3_lane1_allow
   * @param api_EthernetFramesIn1 incoming event data port
+  * @param api_current_mode incoming data port
   * @param api_EthernetFramesOut1 outgoing event data port
   */
-pub fn compute_spec_hlr_22_23_lane1_allow_guarantee(
+pub fn compute_spec_hlr_22_llr_3_lane1_allow_guarantee(
   api_EthernetFramesIn1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_current_mode: open_platform_Data_Model::OperatingMode,
   api_EthernetFramesOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    api_EthernetFramesIn1.is_some() && mavlink_allowed(api_EthernetFramesIn1.unwrap()),
+    (api_current_mode == open_platform_Data_Model::OperatingMode::Normal) &&
+      api_EthernetFramesIn1.is_some() &&
+      mavlink_allowed(api_EthernetFramesIn1.unwrap()),
     api_EthernetFramesOut1.is_some() &&
       (api_EthernetFramesOut1.unwrap() == api_EthernetFramesIn1.unwrap()))
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_24_lane1_deny_flash
+  * guarantee hlr_19_32_lane1_deny_flash
   * @param api_EthernetFramesIn1 incoming event data port
   * @param api_EthernetFramesOut1 outgoing event data port
   */
-pub fn compute_spec_hlr_24_lane1_deny_flash_guarantee(
+pub fn compute_spec_hlr_19_32_lane1_deny_flash_guarantee(
   api_EthernetFramesIn1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
@@ -230,43 +512,76 @@ pub fn compute_spec_hlr_24_lane1_deny_flash_guarantee(
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_25_26_lane1_invalid_or_no_input
+  * guarantee hlr_20_lane1_invalid
   * @param api_EthernetFramesIn1 incoming event data port
   * @param api_EthernetFramesOut1 outgoing event data port
   */
-pub fn compute_spec_hlr_25_26_lane1_invalid_or_no_input_guarantee(
+pub fn compute_spec_hlr_20_lane1_invalid_guarantee(
   api_EthernetFramesIn1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    !(api_EthernetFramesIn1.is_some()) ||
-      api_EthernetFramesIn1.is_some() && !(GumboLib::valid_mavlink_carrier(api_EthernetFramesIn1.unwrap()) && mavlink_frame_valid(api_EthernetFramesIn1.unwrap())),
+    api_EthernetFramesIn1.is_some() && !(GumboLib::valid_mavlink_carrier(api_EthernetFramesIn1.unwrap()) && mavlink_frame_valid(api_EthernetFramesIn1.unwrap())),
     api_EthernetFramesOut1.is_none())
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_22_23_lane2_allow
+  * guarantee hlr_21_lane1_no_input
+  * @param api_EthernetFramesIn1 incoming event data port
+  * @param api_EthernetFramesOut1 outgoing event data port
+  */
+pub fn compute_spec_hlr_21_lane1_no_input_guarantee(
+  api_EthernetFramesIn1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  implies!(
+    !(api_EthernetFramesIn1.is_some()),
+    api_EthernetFramesOut1.is_none())
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_28_llr_10_lane1_recovery
+  * @param api_current_mode incoming data port
+  * @param api_EthernetFramesOut1 outgoing event data port
+  */
+pub fn compute_spec_hlr_28_llr_10_lane1_recovery_guarantee(
+  api_current_mode: open_platform_Data_Model::OperatingMode,
+  api_EthernetFramesOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  implies!(
+    (api_current_mode == open_platform_Data_Model::OperatingMode::Recovery),
+    api_EthernetFramesOut1.is_none())
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_22_llr_3_lane2_allow
   * @param api_EthernetFramesIn2 incoming event data port
+  * @param api_current_mode incoming data port
   * @param api_EthernetFramesOut2 outgoing event data port
   */
-pub fn compute_spec_hlr_22_23_lane2_allow_guarantee(
+pub fn compute_spec_hlr_22_llr_3_lane2_allow_guarantee(
   api_EthernetFramesIn2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_current_mode: open_platform_Data_Model::OperatingMode,
   api_EthernetFramesOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    api_EthernetFramesIn2.is_some() && mavlink_allowed(api_EthernetFramesIn2.unwrap()),
+    (api_current_mode == open_platform_Data_Model::OperatingMode::Normal) &&
+      api_EthernetFramesIn2.is_some() &&
+      mavlink_allowed(api_EthernetFramesIn2.unwrap()),
     api_EthernetFramesOut2.is_some() &&
       (api_EthernetFramesOut2.unwrap() == api_EthernetFramesIn2.unwrap()))
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_24_lane2_deny_flash
+  * guarantee hlr_19_32_lane2_deny_flash
   * @param api_EthernetFramesIn2 incoming event data port
   * @param api_EthernetFramesOut2 outgoing event data port
   */
-pub fn compute_spec_hlr_24_lane2_deny_flash_guarantee(
+pub fn compute_spec_hlr_19_32_lane2_deny_flash_guarantee(
   api_EthernetFramesIn2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
@@ -279,43 +594,76 @@ pub fn compute_spec_hlr_24_lane2_deny_flash_guarantee(
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_25_26_lane2_invalid_or_no_input
+  * guarantee hlr_20_lane2_invalid
   * @param api_EthernetFramesIn2 incoming event data port
   * @param api_EthernetFramesOut2 outgoing event data port
   */
-pub fn compute_spec_hlr_25_26_lane2_invalid_or_no_input_guarantee(
+pub fn compute_spec_hlr_20_lane2_invalid_guarantee(
   api_EthernetFramesIn2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    !(api_EthernetFramesIn2.is_some()) ||
-      api_EthernetFramesIn2.is_some() && !(GumboLib::valid_mavlink_carrier(api_EthernetFramesIn2.unwrap()) && mavlink_frame_valid(api_EthernetFramesIn2.unwrap())),
+    api_EthernetFramesIn2.is_some() && !(GumboLib::valid_mavlink_carrier(api_EthernetFramesIn2.unwrap()) && mavlink_frame_valid(api_EthernetFramesIn2.unwrap())),
     api_EthernetFramesOut2.is_none())
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_22_23_lane3_allow
+  * guarantee hlr_21_lane2_no_input
+  * @param api_EthernetFramesIn2 incoming event data port
+  * @param api_EthernetFramesOut2 outgoing event data port
+  */
+pub fn compute_spec_hlr_21_lane2_no_input_guarantee(
+  api_EthernetFramesIn2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  implies!(
+    !(api_EthernetFramesIn2.is_some()),
+    api_EthernetFramesOut2.is_none())
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_28_llr_10_lane2_recovery
+  * @param api_current_mode incoming data port
+  * @param api_EthernetFramesOut2 outgoing event data port
+  */
+pub fn compute_spec_hlr_28_llr_10_lane2_recovery_guarantee(
+  api_current_mode: open_platform_Data_Model::OperatingMode,
+  api_EthernetFramesOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  implies!(
+    (api_current_mode == open_platform_Data_Model::OperatingMode::Recovery),
+    api_EthernetFramesOut2.is_none())
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_22_llr_3_lane3_allow
   * @param api_EthernetFramesIn3 incoming event data port
+  * @param api_current_mode incoming data port
   * @param api_EthernetFramesOut3 outgoing event data port
   */
-pub fn compute_spec_hlr_22_23_lane3_allow_guarantee(
+pub fn compute_spec_hlr_22_llr_3_lane3_allow_guarantee(
   api_EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_current_mode: open_platform_Data_Model::OperatingMode,
   api_EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    api_EthernetFramesIn3.is_some() && mavlink_allowed(api_EthernetFramesIn3.unwrap()),
+    (api_current_mode == open_platform_Data_Model::OperatingMode::Normal) &&
+      api_EthernetFramesIn3.is_some() &&
+      mavlink_allowed(api_EthernetFramesIn3.unwrap()),
     api_EthernetFramesOut3.is_some() &&
       (api_EthernetFramesOut3.unwrap() == api_EthernetFramesIn3.unwrap()))
 }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_24_lane3_deny_flash
+  * guarantee hlr_19_32_lane3_deny_flash
   * @param api_EthernetFramesIn3 incoming event data port
   * @param api_EthernetFramesOut3 outgoing event data port
   */
-pub fn compute_spec_hlr_24_lane3_deny_flash_guarantee(
+pub fn compute_spec_hlr_19_32_lane3_deny_flash_guarantee(
   api_EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
@@ -328,77 +676,134 @@ pub fn compute_spec_hlr_24_lane3_deny_flash_guarantee(
 
 /** Compute Entrypoint Contract
   *
-  * guarantee hlr_25_26_lane3_invalid_or_no_input
+  * guarantee hlr_20_lane3_invalid
   * @param api_EthernetFramesIn3 incoming event data port
   * @param api_EthernetFramesOut3 outgoing event data port
   */
-pub fn compute_spec_hlr_25_26_lane3_invalid_or_no_input_guarantee(
+pub fn compute_spec_hlr_20_lane3_invalid_guarantee(
   api_EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
 {
   implies!(
-    !(api_EthernetFramesIn3.is_some()) ||
-      api_EthernetFramesIn3.is_some() && !(GumboLib::valid_mavlink_carrier(api_EthernetFramesIn3.unwrap()) && mavlink_frame_valid(api_EthernetFramesIn3.unwrap())),
+    api_EthernetFramesIn3.is_some() && !(GumboLib::valid_mavlink_carrier(api_EthernetFramesIn3.unwrap()) && mavlink_frame_valid(api_EthernetFramesIn3.unwrap())),
+    api_EthernetFramesOut3.is_none())
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_21_lane3_no_input
+  * @param api_EthernetFramesIn3 incoming event data port
+  * @param api_EthernetFramesOut3 outgoing event data port
+  */
+pub fn compute_spec_hlr_21_lane3_no_input_guarantee(
+  api_EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  implies!(
+    !(api_EthernetFramesIn3.is_some()),
+    api_EthernetFramesOut3.is_none())
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_28_llr_10_lane3_recovery
+  * @param api_current_mode incoming data port
+  * @param api_EthernetFramesOut3 outgoing event data port
+  */
+pub fn compute_spec_hlr_28_llr_10_lane3_recovery_guarantee(
+  api_current_mode: open_platform_Data_Model::OperatingMode,
+  api_EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+{
+  implies!(
+    (api_current_mode == open_platform_Data_Model::OperatingMode::Recovery),
     api_EthernetFramesOut3.is_none())
 }
 
 /** CEP-T-Guar: Top-level guarantee contracts for MAVLinkFirewall's compute entrypoint
   *
+  * @param In_rejected_count pre-state state variable
+  * @param rejected_count post-state state variable
   * @param api_EthernetFramesIn0 incoming event data port
   * @param api_EthernetFramesIn1 incoming event data port
   * @param api_EthernetFramesIn2 incoming event data port
   * @param api_EthernetFramesIn3 incoming event data port
+  * @param api_current_mode incoming data port
   * @param api_EthernetFramesOut0 outgoing event data port
   * @param api_EthernetFramesOut1 outgoing event data port
   * @param api_EthernetFramesOut2 outgoing event data port
   * @param api_EthernetFramesOut3 outgoing event data port
+  * @param api_error_status outgoing data port
   */
 pub fn compute_CEP_T_Guar(
+  In_rejected_count: u16,
+  rejected_count: u16,
   api_EthernetFramesIn0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesIn1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesIn2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_current_mode: open_platform_Data_Model::OperatingMode,
   api_EthernetFramesOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
-  api_EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+  api_EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_error_status: bool) -> bool
 {
-  let r0: bool = compute_spec_hlr_22_23_lane0_allow_guarantee(api_EthernetFramesIn0, api_EthernetFramesOut0);
-  let r1: bool = compute_spec_hlr_24_lane0_deny_flash_guarantee(api_EthernetFramesIn0, api_EthernetFramesOut0);
-  let r2: bool = compute_spec_hlr_25_26_lane0_invalid_or_no_input_guarantee(api_EthernetFramesIn0, api_EthernetFramesOut0);
-  let r3: bool = compute_spec_hlr_22_23_lane1_allow_guarantee(api_EthernetFramesIn1, api_EthernetFramesOut1);
-  let r4: bool = compute_spec_hlr_24_lane1_deny_flash_guarantee(api_EthernetFramesIn1, api_EthernetFramesOut1);
-  let r5: bool = compute_spec_hlr_25_26_lane1_invalid_or_no_input_guarantee(api_EthernetFramesIn1, api_EthernetFramesOut1);
-  let r6: bool = compute_spec_hlr_22_23_lane2_allow_guarantee(api_EthernetFramesIn2, api_EthernetFramesOut2);
-  let r7: bool = compute_spec_hlr_24_lane2_deny_flash_guarantee(api_EthernetFramesIn2, api_EthernetFramesOut2);
-  let r8: bool = compute_spec_hlr_25_26_lane2_invalid_or_no_input_guarantee(api_EthernetFramesIn2, api_EthernetFramesOut2);
-  let r9: bool = compute_spec_hlr_22_23_lane3_allow_guarantee(api_EthernetFramesIn3, api_EthernetFramesOut3);
-  let r10: bool = compute_spec_hlr_24_lane3_deny_flash_guarantee(api_EthernetFramesIn3, api_EthernetFramesOut3);
-  let r11: bool = compute_spec_hlr_25_26_lane3_invalid_or_no_input_guarantee(api_EthernetFramesIn3, api_EthernetFramesOut3);
+  let r0: bool = compute_spec_hlr_31_count_post_bound_guarantee(rejected_count);
+  let r1: bool = compute_spec_hlr_31_llr_13_count_monotonic_guarantee(In_rejected_count, rejected_count);
+  let r2: bool = compute_spec_hlr_31_llr_13_count_update_guarantee(In_rejected_count, rejected_count, api_EthernetFramesIn0, api_EthernetFramesIn1, api_EthernetFramesIn2, api_EthernetFramesIn3);
+  let r3: bool = compute_spec_hlr_25_llr_12_post_count_error_status_guarantee(rejected_count, api_error_status);
+  let r4: bool = compute_spec_hlr_22_llr_3_lane0_allow_guarantee(api_EthernetFramesIn0, api_current_mode, api_EthernetFramesOut0);
+  let r5: bool = compute_spec_hlr_19_32_lane0_deny_flash_guarantee(api_EthernetFramesIn0, api_EthernetFramesOut0);
+  let r6: bool = compute_spec_hlr_20_lane0_invalid_guarantee(api_EthernetFramesIn0, api_EthernetFramesOut0);
+  let r7: bool = compute_spec_hlr_21_lane0_no_input_guarantee(api_EthernetFramesIn0, api_EthernetFramesOut0);
+  let r8: bool = compute_spec_hlr_28_llr_10_lane0_recovery_guarantee(api_current_mode, api_EthernetFramesOut0);
+  let r9: bool = compute_spec_hlr_22_llr_3_lane1_allow_guarantee(api_EthernetFramesIn1, api_current_mode, api_EthernetFramesOut1);
+  let r10: bool = compute_spec_hlr_19_32_lane1_deny_flash_guarantee(api_EthernetFramesIn1, api_EthernetFramesOut1);
+  let r11: bool = compute_spec_hlr_20_lane1_invalid_guarantee(api_EthernetFramesIn1, api_EthernetFramesOut1);
+  let r12: bool = compute_spec_hlr_21_lane1_no_input_guarantee(api_EthernetFramesIn1, api_EthernetFramesOut1);
+  let r13: bool = compute_spec_hlr_28_llr_10_lane1_recovery_guarantee(api_current_mode, api_EthernetFramesOut1);
+  let r14: bool = compute_spec_hlr_22_llr_3_lane2_allow_guarantee(api_EthernetFramesIn2, api_current_mode, api_EthernetFramesOut2);
+  let r15: bool = compute_spec_hlr_19_32_lane2_deny_flash_guarantee(api_EthernetFramesIn2, api_EthernetFramesOut2);
+  let r16: bool = compute_spec_hlr_20_lane2_invalid_guarantee(api_EthernetFramesIn2, api_EthernetFramesOut2);
+  let r17: bool = compute_spec_hlr_21_lane2_no_input_guarantee(api_EthernetFramesIn2, api_EthernetFramesOut2);
+  let r18: bool = compute_spec_hlr_28_llr_10_lane2_recovery_guarantee(api_current_mode, api_EthernetFramesOut2);
+  let r19: bool = compute_spec_hlr_22_llr_3_lane3_allow_guarantee(api_EthernetFramesIn3, api_current_mode, api_EthernetFramesOut3);
+  let r20: bool = compute_spec_hlr_19_32_lane3_deny_flash_guarantee(api_EthernetFramesIn3, api_EthernetFramesOut3);
+  let r21: bool = compute_spec_hlr_20_lane3_invalid_guarantee(api_EthernetFramesIn3, api_EthernetFramesOut3);
+  let r22: bool = compute_spec_hlr_21_lane3_no_input_guarantee(api_EthernetFramesIn3, api_EthernetFramesOut3);
+  let r23: bool = compute_spec_hlr_28_llr_10_lane3_recovery_guarantee(api_current_mode, api_EthernetFramesOut3);
 
-  return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8 && r9 && r10 && r11;
+  return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8 && r9 && r10 && r11 && r12 && r13 && r14 && r15 && r16 && r17 && r18 && r19 && r20 && r21 && r22 && r23;
 }
 
 /** CEP-Post: Compute Entrypoint Post-Condition for MAVLinkFirewall
   *
+  * @param In_rejected_count pre-state state variable
+  * @param rejected_count post-state state variable
   * @param api_EthernetFramesIn0 incoming event data port
   * @param api_EthernetFramesIn1 incoming event data port
   * @param api_EthernetFramesIn2 incoming event data port
   * @param api_EthernetFramesIn3 incoming event data port
+  * @param api_current_mode incoming data port
   * @param api_EthernetFramesOut0 outgoing event data port
   * @param api_EthernetFramesOut1 outgoing event data port
   * @param api_EthernetFramesOut2 outgoing event data port
   * @param api_EthernetFramesOut3 outgoing event data port
+  * @param api_error_status outgoing data port
   */
 pub fn compute_CEP_Post(
+  In_rejected_count: u16,
+  rejected_count: u16,
   api_EthernetFramesIn0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesIn1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesIn2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_current_mode: open_platform_Data_Model::OperatingMode,
   api_EthernetFramesOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   api_EthernetFramesOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
-  api_EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>) -> bool
+  api_EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  api_error_status: bool) -> bool
 {
   // I-Guar-Guard: Integration constraints for MAVLinkFirewall's outgoing ports
   let r0: bool = I_Guar_Guard_EthernetFramesOut0(api_EthernetFramesOut0);
@@ -407,7 +812,7 @@ pub fn compute_CEP_Post(
   let r3: bool = I_Guar_Guard_EthernetFramesOut3(api_EthernetFramesOut3);
 
   // CEP-Guar: guarantee clauses of MAVLinkFirewall's compute entrypoint
-  let r4: bool = compute_CEP_T_Guar(api_EthernetFramesIn0, api_EthernetFramesIn1, api_EthernetFramesIn2, api_EthernetFramesIn3, api_EthernetFramesOut0, api_EthernetFramesOut1, api_EthernetFramesOut2, api_EthernetFramesOut3);
+  let r4: bool = compute_CEP_T_Guar(In_rejected_count, rejected_count, api_EthernetFramesIn0, api_EthernetFramesIn1, api_EthernetFramesIn2, api_EthernetFramesIn3, api_current_mode, api_EthernetFramesOut0, api_EthernetFramesOut1, api_EthernetFramesOut2, api_EthernetFramesOut3, api_error_status);
 
   return r0 && r1 && r2 && r3 && r4;
 }

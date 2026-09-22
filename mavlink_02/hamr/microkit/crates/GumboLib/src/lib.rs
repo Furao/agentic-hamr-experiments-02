@@ -325,21 +325,28 @@ pub fn udp_payload_offset() -> u16
   ethernet_header_length() + ipv4_header_length() + udp_header_length()
 }
 
-pub fn valid_ardupilot_udp(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
+pub fn rx_bounded_udp(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
 {
   valid_ipv4_udp(aframe) &&
-    (udp_source_port(aframe) == 14550u16) &&
-    (udp_destination_port(aframe) == 14562u16) &&
-    (udp_header_length() <= udp_length(aframe)) &&
-    (ipv4_length(aframe) + ethernet_header_length() <= 1600u16) &&
     (ipv4_header_length() <= ipv4_length(aframe)) &&
+    (ipv4_length(aframe) <= 1600u16 - ethernet_header_length()) &&
+    (udp_header_length() <= udp_length(aframe)) &&
     (udp_length(aframe) == ipv4_length(aframe) - ipv4_header_length())
+}
+
+pub fn valid_ardupilot_udp(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
+{
+  rx_bounded_udp(aframe) &&
+    (udp_source_port(aframe) == 14550u16) &&
+    (udp_destination_port(aframe) == 14562u16)
 }
 
 pub fn rx_direct_frame(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
 {
   valid_arp(aframe) ||
-    valid_ipv4_udp_port(aframe) && !(valid_ardupilot_udp(aframe))
+    rx_bounded_udp(aframe) && udp_is_valid_dst_port(aframe) &&
+      (udp_source_port(aframe) != 14550u16) &&
+      (udp_destination_port(aframe) != 14562u16)
 }
 
 pub fn valid_mavlink_carrier(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
@@ -651,21 +658,28 @@ verus! {
     (ethernet_header_length_spec() + ipv4_header_length_spec() + udp_header_length_spec()) as u16
   }
 
-  pub open spec fn valid_ardupilot_udp_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
+  pub open spec fn rx_bounded_udp_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
   {
     valid_ipv4_udp_spec(aframe) &&
-      (udp_source_port_spec(aframe) == 14550u16) &&
-      (udp_destination_port_spec(aframe) == 14562u16) &&
-      (udp_header_length_spec() <= udp_length_spec(aframe)) &&
-      (ipv4_length_spec(aframe) + ethernet_header_length_spec() <= 1600u16) &&
       (ipv4_header_length_spec() <= ipv4_length_spec(aframe)) &&
+      (ipv4_length_spec(aframe) <= 1600u16 - ethernet_header_length_spec()) &&
+      (udp_header_length_spec() <= udp_length_spec(aframe)) &&
       (udp_length_spec(aframe) == ipv4_length_spec(aframe) - ipv4_header_length_spec())
+  }
+
+  pub open spec fn valid_ardupilot_udp_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
+  {
+    rx_bounded_udp_spec(aframe) &&
+      (udp_source_port_spec(aframe) == 14550u16) &&
+      (udp_destination_port_spec(aframe) == 14562u16)
   }
 
   pub open spec fn rx_direct_frame_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
   {
     valid_arp_spec(aframe) ||
-      valid_ipv4_udp_port_spec(aframe) && !(valid_ardupilot_udp_spec(aframe))
+      rx_bounded_udp_spec(aframe) && udp_is_valid_dst_port_spec(aframe) &&
+        (udp_source_port_spec(aframe) != 14550u16) &&
+        (udp_destination_port_spec(aframe) != 14562u16)
   }
 
   pub open spec fn valid_mavlink_carrier_spec(msg: open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool

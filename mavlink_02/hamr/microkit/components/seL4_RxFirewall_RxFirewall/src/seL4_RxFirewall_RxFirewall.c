@@ -6,6 +6,8 @@ void seL4_RxFirewall_RxFirewall_initialize(void);
 void seL4_RxFirewall_RxFirewall_notify(microkit_channel channel);
 void seL4_RxFirewall_RxFirewall_timeTriggered(void);
 
+volatile sb_queue_open_platform_Data_Model_OperatingMode_1_t *current_mode_queue_1;
+sb_queue_open_platform_Data_Model_OperatingMode_1_Recv_t current_mode_recv_queue;
 volatile sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *EthernetFramesRxOut0_queue_1;
 volatile sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *EthernetFramesRxOut1_queue_1;
 volatile sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *EthernetFramesRxOut2_queue_1;
@@ -23,7 +25,20 @@ sb_queue_open_platform_Data_Model_RawEthernetMessage_1_Recv_t EthernetFramesRxIn
 volatile sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *EthernetFramesRxIn3_queue_1;
 sb_queue_open_platform_Data_Model_RawEthernetMessage_1_Recv_t EthernetFramesRxIn3_recv_queue;
 
-#define PORT_FROM_MON 60
+#define PORT_FROM_MON 58
+
+open_platform_Data_Model_OperatingMode last_current_mode_payload;
+
+bool get_current_mode(open_platform_Data_Model_OperatingMode *data) {
+  sb_event_counter_t numDropped;
+  open_platform_Data_Model_OperatingMode fresh_data;
+  bool isFresh = sb_queue_open_platform_Data_Model_OperatingMode_1_dequeue((sb_queue_open_platform_Data_Model_OperatingMode_1_Recv_t *) &current_mode_recv_queue, &numDropped, &fresh_data);
+  if (isFresh) {
+    last_current_mode_payload = fresh_data;
+  }
+  *data = last_current_mode_payload;
+  return isFresh;
+}
 
 bool put_EthernetFramesRxOut0(const open_platform_Data_Model_RawEthernetMessage *data) {
   sb_queue_open_platform_Data_Model_RawEthernetMessage_1_enqueue((sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *) EthernetFramesRxOut0_queue_1, (open_platform_Data_Model_RawEthernetMessage *) data);
@@ -126,6 +141,8 @@ bool get_EthernetFramesRxIn3(open_platform_Data_Model_RawEthernetMessage *data) 
 }
 
 void init(void) {
+  sb_queue_open_platform_Data_Model_OperatingMode_1_Recv_init(&current_mode_recv_queue, (sb_queue_open_platform_Data_Model_OperatingMode_1_t *) current_mode_queue_1);
+
   sb_queue_open_platform_Data_Model_RawEthernetMessage_1_init((sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *) EthernetFramesRxOut0_queue_1);
 
   sb_queue_open_platform_Data_Model_RawEthernetMessage_1_init((sb_queue_open_platform_Data_Model_RawEthernetMessage_1_t *) EthernetFramesRxOut1_queue_1);

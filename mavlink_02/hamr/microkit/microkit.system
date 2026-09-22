@@ -2,69 +2,105 @@
 <system xmlns:xi="http://www.w3.org/2001/XInclude">
   <!-- Content between markers will be preserved if codegen is rerun -->
 
+  <!-- the included <domains> element must precede every <protection_domain>: the
+       microkit tool resolves each PD's 'domain' attribute against the domains it
+       has seen so far in a single pass over the merged document -->
   <xi:include href="microkit.schedule.xml" />
+
+  <protection_domain name="seL4_ModeManager_ModeManager_MON" domain="domain_7">
+    <program_image path="seL4_ModeManager_ModeManager_MON.elf" />
+    <protection_domain name="seL4_ModeManager_ModeManager" domain="domain_7" id="1" stack_size="0x100_000">
+      <program_image path="seL4_ModeManager_ModeManager.elf" />
+      <map mr="ZCU102_Impl_Instance_seL4_ModeManager_ModeManager_mode_to_rx_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="rw"
+           setvar_vaddr="mode_to_rx_queue_1"
+      />
+      <map mr="ZCU102_Impl_Instance_seL4_ModeManager_ModeManager_mode_to_mavlink_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="rw"
+           setvar_vaddr="mode_to_mavlink_queue_1"
+      />
+      <map mr="ZCU102_Impl_Instance_seL4_MAVLinkFirewall_MAVLinkFirewall_error_status_1_Memory_Region"
+           vaddr="0x10_002_000"
+           perms="r"
+           setvar_vaddr="error_status_queue_1"
+      />
+
+      <!-- BEGIN CONTENT MARKER seL4_ModeManager_ModeManager -->
+  <!-- END CONTENT MARKER seL4_ModeManager_ModeManager -->
+    </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER seL4_ModeManager_ModeManager_MON -->
+  <!-- END CONTENT MARKER seL4_ModeManager_ModeManager_MON -->
+  </protection_domain>
 
   <protection_domain name="seL4_RxFirewall_RxFirewall_MON" domain="domain_5">
     <program_image path="seL4_RxFirewall_RxFirewall_MON.elf" />
     <protection_domain name="seL4_RxFirewall_RxFirewall" domain="domain_5" id="1" stack_size="0x100_000">
       <program_image path="seL4_RxFirewall_RxFirewall.elf" />
-      <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut0_1_Memory_Region"
+      <map mr="ZCU102_Impl_Instance_seL4_ModeManager_ModeManager_mode_to_rx_1_Memory_Region"
            vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="current_mode_queue_1"
+      />
+      <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut0_1_Memory_Region"
+           vaddr="0x10_001_000"
            perms="rw"
            setvar_vaddr="EthernetFramesRxOut0_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut1_1_Memory_Region"
-           vaddr="0x10_001_000"
+           vaddr="0x10_002_000"
            perms="rw"
            setvar_vaddr="EthernetFramesRxOut1_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut2_1_Memory_Region"
-           vaddr="0x10_002_000"
+           vaddr="0x10_003_000"
            perms="rw"
            setvar_vaddr="EthernetFramesRxOut2_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut3_1_Memory_Region"
-           vaddr="0x10_003_000"
+           vaddr="0x10_004_000"
            perms="rw"
            setvar_vaddr="EthernetFramesRxOut3_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MAVLinkFramesRxOut0_1_Memory_Region"
-           vaddr="0x10_004_000"
+           vaddr="0x10_005_000"
            perms="rw"
            setvar_vaddr="MAVLinkFramesRxOut0_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MAVLinkFramesRxOut1_1_Memory_Region"
-           vaddr="0x10_005_000"
+           vaddr="0x10_006_000"
            perms="rw"
            setvar_vaddr="MAVLinkFramesRxOut1_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MAVLinkFramesRxOut2_1_Memory_Region"
-           vaddr="0x10_006_000"
+           vaddr="0x10_007_000"
            perms="rw"
            setvar_vaddr="MAVLinkFramesRxOut2_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MAVLinkFramesRxOut3_1_Memory_Region"
-           vaddr="0x10_007_000"
+           vaddr="0x10_008_000"
            perms="rw"
            setvar_vaddr="MAVLinkFramesRxOut3_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx0_1_Memory_Region"
-           vaddr="0x10_008_000"
+           vaddr="0x10_009_000"
            perms="r"
            setvar_vaddr="EthernetFramesRxIn0_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx1_1_Memory_Region"
-           vaddr="0x10_009_000"
+           vaddr="0x10_00A_000"
            perms="r"
            setvar_vaddr="EthernetFramesRxIn1_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx2_1_Memory_Region"
-           vaddr="0x10_00A_000"
+           vaddr="0x10_00B_000"
            perms="r"
            setvar_vaddr="EthernetFramesRxIn2_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx3_1_Memory_Region"
-           vaddr="0x10_00B_000"
+           vaddr="0x10_00C_000"
            perms="r"
            setvar_vaddr="EthernetFramesRxIn3_queue_1"
       />
@@ -276,43 +312,53 @@
     <program_image path="seL4_MAVLinkFirewall_MAVLinkFirewall_MON.elf" />
     <protection_domain name="seL4_MAVLinkFirewall_MAVLinkFirewall" domain="domain_6" id="1" stack_size="0x100_000">
       <program_image path="seL4_MAVLinkFirewall_MAVLinkFirewall.elf" />
-      <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MAVLinkFramesRxOut0_1_Memory_Region"
+      <map mr="ZCU102_Impl_Instance_seL4_ModeManager_ModeManager_mode_to_mavlink_1_Memory_Region"
            vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="current_mode_queue_1"
+      />
+      <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MAVLinkFramesRxOut0_1_Memory_Region"
+           vaddr="0x10_001_000"
            perms="r"
            setvar_vaddr="EthernetFramesIn0_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MAVLinkFramesRxOut1_1_Memory_Region"
-           vaddr="0x10_001_000"
+           vaddr="0x10_002_000"
            perms="r"
            setvar_vaddr="EthernetFramesIn1_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MAVLinkFramesRxOut2_1_Memory_Region"
-           vaddr="0x10_002_000"
+           vaddr="0x10_003_000"
            perms="r"
            setvar_vaddr="EthernetFramesIn2_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MAVLinkFramesRxOut3_1_Memory_Region"
-           vaddr="0x10_003_000"
+           vaddr="0x10_004_000"
            perms="r"
            setvar_vaddr="EthernetFramesIn3_queue_1"
       />
+      <map mr="ZCU102_Impl_Instance_seL4_MAVLinkFirewall_MAVLinkFirewall_error_status_1_Memory_Region"
+           vaddr="0x10_005_000"
+           perms="rw"
+           setvar_vaddr="error_status_queue_1"
+      />
       <map mr="ZCU102_Impl_Instance_seL4_MAVLinkFirewall_MAVLinkFirewall_EthernetFramesOut0_1_Memory_Region"
-           vaddr="0x10_004_000"
+           vaddr="0x10_006_000"
            perms="rw"
            setvar_vaddr="EthernetFramesOut0_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_MAVLinkFirewall_MAVLinkFirewall_EthernetFramesOut1_1_Memory_Region"
-           vaddr="0x10_005_000"
+           vaddr="0x10_007_000"
            perms="rw"
            setvar_vaddr="EthernetFramesOut1_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_MAVLinkFirewall_MAVLinkFirewall_EthernetFramesOut2_1_Memory_Region"
-           vaddr="0x10_006_000"
+           vaddr="0x10_008_000"
            perms="rw"
            setvar_vaddr="EthernetFramesOut2_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_MAVLinkFirewall_MAVLinkFirewall_EthernetFramesOut3_1_Memory_Region"
-           vaddr="0x10_007_000"
+           vaddr="0x10_009_000"
            perms="rw"
            setvar_vaddr="EthernetFramesOut3_queue_1"
       />
@@ -331,6 +377,12 @@
     <!-- BEGIN CONTENT MARKER pacer -->
     <!-- END CONTENT MARKER pacer -->
   </protection_domain>
+
+  <memory_region name="ZCU102_Impl_Instance_seL4_ModeManager_ModeManager_mode_to_rx_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="ZCU102_Impl_Instance_seL4_ModeManager_ModeManager_mode_to_mavlink_1_Memory_Region"
+                 size="0x1_000" />
 
   <memory_region name="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut0_1_Memory_Region"
                  size="0x1_000" />
@@ -392,6 +444,9 @@
   <memory_region name="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_EthernetFramesTx3_1_Memory_Region"
                  size="0x1_000" />
 
+  <memory_region name="ZCU102_Impl_Instance_seL4_MAVLinkFirewall_MAVLinkFirewall_error_status_1_Memory_Region"
+                 size="0x1_000" />
+
   <memory_region name="ZCU102_Impl_Instance_seL4_MAVLinkFirewall_MAVLinkFirewall_EthernetFramesOut0_1_Memory_Region"
                  size="0x1_000" />
 
@@ -406,52 +461,62 @@
 
   <channel>
     <end pd="pacer" id="61" />
-    <end pd="seL4_RxFirewall_RxFirewall_MON" id="61" />
+    <end pd="seL4_ModeManager_ModeManager_MON" id="61" />
   </channel>
 
   <channel>
-    <end pd="seL4_RxFirewall_RxFirewall_MON" id="60" />
-    <end pd="seL4_RxFirewall_RxFirewall" id="60" />
+    <end pd="seL4_ModeManager_ModeManager_MON" id="60" />
+    <end pd="seL4_ModeManager_ModeManager" id="60" />
   </channel>
 
   <channel>
     <end pd="pacer" id="59" />
-    <end pd="seL4_TxFirewall_TxFirewall_MON" id="59" />
+    <end pd="seL4_RxFirewall_RxFirewall_MON" id="59" />
   </channel>
 
   <channel>
-    <end pd="seL4_TxFirewall_TxFirewall_MON" id="58" />
-    <end pd="seL4_TxFirewall_TxFirewall" id="58" />
+    <end pd="seL4_RxFirewall_RxFirewall_MON" id="58" />
+    <end pd="seL4_RxFirewall_RxFirewall" id="58" />
   </channel>
 
   <channel>
     <end pd="pacer" id="57" />
-    <end pd="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON" id="57" />
+    <end pd="seL4_TxFirewall_TxFirewall_MON" id="57" />
   </channel>
 
   <channel>
-    <end pd="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON" id="56" />
-    <end pd="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver" id="56" />
+    <end pd="seL4_TxFirewall_TxFirewall_MON" id="56" />
+    <end pd="seL4_TxFirewall_TxFirewall" id="56" />
   </channel>
 
   <channel>
     <end pd="pacer" id="55" />
-    <end pd="seL4_ArduPilot_ArduPilot_MON" id="55" />
+    <end pd="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON" id="55" />
   </channel>
 
   <channel>
-    <end pd="seL4_ArduPilot_ArduPilot_MON" id="54" />
-    <end pd="seL4_ArduPilot_ArduPilot" id="54" />
+    <end pd="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON" id="54" />
+    <end pd="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver" id="54" />
   </channel>
 
   <channel>
     <end pd="pacer" id="53" />
-    <end pd="seL4_MAVLinkFirewall_MAVLinkFirewall_MON" id="53" />
+    <end pd="seL4_ArduPilot_ArduPilot_MON" id="53" />
   </channel>
 
   <channel>
-    <end pd="seL4_MAVLinkFirewall_MAVLinkFirewall_MON" id="52" />
-    <end pd="seL4_MAVLinkFirewall_MAVLinkFirewall" id="52" />
+    <end pd="seL4_ArduPilot_ArduPilot_MON" id="52" />
+    <end pd="seL4_ArduPilot_ArduPilot" id="52" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="51" />
+    <end pd="seL4_MAVLinkFirewall_MAVLinkFirewall_MON" id="51" />
+  </channel>
+
+  <channel>
+    <end pd="seL4_MAVLinkFirewall_MAVLinkFirewall_MON" id="50" />
+    <end pd="seL4_MAVLinkFirewall_MAVLinkFirewall" id="50" />
   </channel>
 
   <!-- BEGIN MSD CONTENT MARKER -->

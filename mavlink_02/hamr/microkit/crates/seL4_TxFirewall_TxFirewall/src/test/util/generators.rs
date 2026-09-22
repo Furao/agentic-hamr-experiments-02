@@ -23,6 +23,27 @@ pub fn option_strategy_bias
   ]
 }
 
+/// default proptest strategy for bool: any value of the type
+pub fn bool_strategy_default() -> impl Strategy<Value = bool>
+{
+  any::<bool>()
+}
+
+pub fn open_platform_Data_Model_OperatingMode_strategy_default() -> impl Strategy<Value = open_platform_Data_Model::OperatingMode>
+{
+  open_platform_Data_Model_OperatingMode_strategy_cust(1, 1)
+}
+
+pub fn open_platform_Data_Model_OperatingMode_strategy_cust(
+  Normal_bias: u32,
+  Recovery_bias: u32) -> impl Strategy<Value = open_platform_Data_Model::OperatingMode>
+{
+  prop_oneof![
+    Normal_bias => Just(open_platform_Data_Model::OperatingMode::Normal),
+    Recovery_bias => Just(open_platform_Data_Model::OperatingMode::Recovery)
+  ]
+}
+
 /// default proptest strategy for u8: any value of the type
 pub fn u8_strategy_default() -> impl Strategy<Value = u8>
 {
@@ -45,12 +66,6 @@ pub fn u16_strategy_default() -> impl Strategy<Value = u16>
 pub fn u16_strategy_cust(range: core::ops::RangeInclusive<u16>) -> impl Strategy<Value = u16>
 {
   range
-}
-
-/// default proptest strategy for bool: any value of the type
-pub fn bool_strategy_default() -> impl Strategy<Value = bool>
-{
-  any::<bool>()
 }
 
 /// default proptest strategy for u32: any value of the type

@@ -129,6 +129,17 @@ impl seL4_RxFirewall_RxFirewall {
     pub fn initialize<API: seL4_RxFirewall_RxFirewall_Put_Api>(
       &mut self,
       api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>)
+      ensures
+        // BEGIN MARKER INITIALIZATION ENSURES
+        // guarantee hlr_17_initialize_lane0
+        final(api).EthernetFramesRxOut0.is_none() && final(api).MAVLinkFramesRxOut0.is_none(),
+        // guarantee hlr_17_initialize_lane1
+        final(api).EthernetFramesRxOut1.is_none() && final(api).MAVLinkFramesRxOut1.is_none(),
+        // guarantee hlr_17_initialize_lane2
+        final(api).EthernetFramesRxOut2.is_none() && final(api).MAVLinkFramesRxOut2.is_none(),
+        // guarantee hlr_17_initialize_lane3
+        final(api).EthernetFramesRxOut3.is_none() && final(api).MAVLinkFramesRxOut3.is_none(),
+        // END MARKER INITIALIZATION ENSURES
     {
       info("initialize entrypoint invoked");
     }
@@ -151,74 +162,102 @@ impl seL4_RxFirewall_RxFirewall {
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
+        // guarantee hlr_29_llr_10_rx0_recovery
+        (final(api).current_mode == open_platform_Data_Model::OperatingMode::Recovery) ==>
+          final(api).EthernetFramesRxOut0.is_none() && final(api).MAVLinkFramesRxOut0.is_none(),
+        // guarantee hlr_29_llr_10_rx1_recovery
+        (final(api).current_mode == open_platform_Data_Model::OperatingMode::Recovery) ==>
+          final(api).EthernetFramesRxOut1.is_none() && final(api).MAVLinkFramesRxOut1.is_none(),
+        // guarantee hlr_29_llr_10_rx2_recovery
+        (final(api).current_mode == open_platform_Data_Model::OperatingMode::Recovery) ==>
+          final(api).EthernetFramesRxOut2.is_none() && final(api).MAVLinkFramesRxOut2.is_none(),
+        // guarantee hlr_29_llr_10_rx3_recovery
+        (final(api).current_mode == open_platform_Data_Model::OperatingMode::Recovery) ==>
+          final(api).EthernetFramesRxOut3.is_none() && final(api).MAVLinkFramesRxOut3.is_none(),
         // guarantee hlr_05_13_rx0_direct
-        api.EthernetFramesRxIn0.is_some() && GumboLib::rx_direct_frame_spec(api.EthernetFramesRxIn0.unwrap()) ==>
-          api.EthernetFramesRxOut0.is_some() &&
-            (api.EthernetFramesRxOut0.unwrap() == api.EthernetFramesRxIn0.unwrap()) &&
-            api.MAVLinkFramesRxOut0.is_none(),
+        (final(api).current_mode == open_platform_Data_Model::OperatingMode::Normal) &&
+          final(api).EthernetFramesRxIn0.is_some() &&
+          GumboLib::rx_direct_frame_spec(final(api).EthernetFramesRxIn0.unwrap()) ==>
+          final(api).EthernetFramesRxOut0.is_some() &&
+            (final(api).EthernetFramesRxOut0.unwrap() == final(api).EthernetFramesRxIn0.unwrap()) &&
+            final(api).MAVLinkFramesRxOut0.is_none(),
         // guarantee hlr_18_rx0_mavlink
-        api.EthernetFramesRxIn0.is_some() && GumboLib::valid_ardupilot_udp_spec(api.EthernetFramesRxIn0.unwrap()) ==>
-          api.EthernetFramesRxOut0.is_none() && api.MAVLinkFramesRxOut0.is_some() &&
-            (api.MAVLinkFramesRxOut0.unwrap().ethernet_frame == api.EthernetFramesRxIn0.unwrap()) &&
-            (api.MAVLinkFramesRxOut0.unwrap().payload_offset == GumboLib::udp_payload_offset_spec()) &&
-            (api.MAVLinkFramesRxOut0.unwrap().payload_length == GumboLib::udp_payload_length_spec(api.EthernetFramesRxIn0.unwrap())),
-        // guarantee hlr_06_15_rx0_drop
-        api.EthernetFramesRxIn0.is_some() && !(GumboLib::rx_allow_outbound_frame_spec(api.EthernetFramesRxIn0.unwrap())) ==>
-          api.EthernetFramesRxOut0.is_none() && api.MAVLinkFramesRxOut0.is_none(),
+        (final(api).current_mode == open_platform_Data_Model::OperatingMode::Normal) &&
+          final(api).EthernetFramesRxIn0.is_some() &&
+          GumboLib::valid_ardupilot_udp_spec(final(api).EthernetFramesRxIn0.unwrap()) ==>
+          final(api).EthernetFramesRxOut0.is_none() && final(api).MAVLinkFramesRxOut0.is_some() &&
+            (final(api).MAVLinkFramesRxOut0.unwrap().ethernet_frame == final(api).EthernetFramesRxIn0.unwrap()) &&
+            (final(api).MAVLinkFramesRxOut0.unwrap().payload_offset == GumboLib::udp_payload_offset_spec()) &&
+            (final(api).MAVLinkFramesRxOut0.unwrap().payload_length == GumboLib::udp_payload_length_spec(final(api).EthernetFramesRxIn0.unwrap())),
+        // guarantee hlr_15_llr_2_rx0_drop
+        final(api).EthernetFramesRxIn0.is_some() && !(GumboLib::rx_allow_outbound_frame_spec(final(api).EthernetFramesRxIn0.unwrap())) ==>
+          final(api).EthernetFramesRxOut0.is_none() && final(api).MAVLinkFramesRxOut0.is_none(),
         // guarantee hlr_17_rx0_no_input
-        !(api.EthernetFramesRxIn0.is_some()) ==>
-          api.EthernetFramesRxOut0.is_none() && api.MAVLinkFramesRxOut0.is_none(),
+        !(final(api).EthernetFramesRxIn0.is_some()) ==>
+          final(api).EthernetFramesRxOut0.is_none() && final(api).MAVLinkFramesRxOut0.is_none(),
         // guarantee hlr_05_13_rx1_direct
-        api.EthernetFramesRxIn1.is_some() && GumboLib::rx_direct_frame_spec(api.EthernetFramesRxIn1.unwrap()) ==>
-          api.EthernetFramesRxOut1.is_some() &&
-            (api.EthernetFramesRxOut1.unwrap() == api.EthernetFramesRxIn1.unwrap()) &&
-            api.MAVLinkFramesRxOut1.is_none(),
+        (final(api).current_mode == open_platform_Data_Model::OperatingMode::Normal) &&
+          final(api).EthernetFramesRxIn1.is_some() &&
+          GumboLib::rx_direct_frame_spec(final(api).EthernetFramesRxIn1.unwrap()) ==>
+          final(api).EthernetFramesRxOut1.is_some() &&
+            (final(api).EthernetFramesRxOut1.unwrap() == final(api).EthernetFramesRxIn1.unwrap()) &&
+            final(api).MAVLinkFramesRxOut1.is_none(),
         // guarantee hlr_18_rx1_mavlink
-        api.EthernetFramesRxIn1.is_some() && GumboLib::valid_ardupilot_udp_spec(api.EthernetFramesRxIn1.unwrap()) ==>
-          api.EthernetFramesRxOut1.is_none() && api.MAVLinkFramesRxOut1.is_some() &&
-            (api.MAVLinkFramesRxOut1.unwrap().ethernet_frame == api.EthernetFramesRxIn1.unwrap()) &&
-            (api.MAVLinkFramesRxOut1.unwrap().payload_offset == GumboLib::udp_payload_offset_spec()) &&
-            (api.MAVLinkFramesRxOut1.unwrap().payload_length == GumboLib::udp_payload_length_spec(api.EthernetFramesRxIn1.unwrap())),
-        // guarantee hlr_06_15_rx1_drop
-        api.EthernetFramesRxIn1.is_some() && !(GumboLib::rx_allow_outbound_frame_spec(api.EthernetFramesRxIn1.unwrap())) ==>
-          api.EthernetFramesRxOut1.is_none() && api.MAVLinkFramesRxOut1.is_none(),
+        (final(api).current_mode == open_platform_Data_Model::OperatingMode::Normal) &&
+          final(api).EthernetFramesRxIn1.is_some() &&
+          GumboLib::valid_ardupilot_udp_spec(final(api).EthernetFramesRxIn1.unwrap()) ==>
+          final(api).EthernetFramesRxOut1.is_none() && final(api).MAVLinkFramesRxOut1.is_some() &&
+            (final(api).MAVLinkFramesRxOut1.unwrap().ethernet_frame == final(api).EthernetFramesRxIn1.unwrap()) &&
+            (final(api).MAVLinkFramesRxOut1.unwrap().payload_offset == GumboLib::udp_payload_offset_spec()) &&
+            (final(api).MAVLinkFramesRxOut1.unwrap().payload_length == GumboLib::udp_payload_length_spec(final(api).EthernetFramesRxIn1.unwrap())),
+        // guarantee hlr_15_llr_2_rx1_drop
+        final(api).EthernetFramesRxIn1.is_some() && !(GumboLib::rx_allow_outbound_frame_spec(final(api).EthernetFramesRxIn1.unwrap())) ==>
+          final(api).EthernetFramesRxOut1.is_none() && final(api).MAVLinkFramesRxOut1.is_none(),
         // guarantee hlr_17_rx1_no_input
-        !(api.EthernetFramesRxIn1.is_some()) ==>
-          api.EthernetFramesRxOut1.is_none() && api.MAVLinkFramesRxOut1.is_none(),
+        !(final(api).EthernetFramesRxIn1.is_some()) ==>
+          final(api).EthernetFramesRxOut1.is_none() && final(api).MAVLinkFramesRxOut1.is_none(),
         // guarantee hlr_05_13_rx2_direct
-        api.EthernetFramesRxIn2.is_some() && GumboLib::rx_direct_frame_spec(api.EthernetFramesRxIn2.unwrap()) ==>
-          api.EthernetFramesRxOut2.is_some() &&
-            (api.EthernetFramesRxOut2.unwrap() == api.EthernetFramesRxIn2.unwrap()) &&
-            api.MAVLinkFramesRxOut2.is_none(),
+        (final(api).current_mode == open_platform_Data_Model::OperatingMode::Normal) &&
+          final(api).EthernetFramesRxIn2.is_some() &&
+          GumboLib::rx_direct_frame_spec(final(api).EthernetFramesRxIn2.unwrap()) ==>
+          final(api).EthernetFramesRxOut2.is_some() &&
+            (final(api).EthernetFramesRxOut2.unwrap() == final(api).EthernetFramesRxIn2.unwrap()) &&
+            final(api).MAVLinkFramesRxOut2.is_none(),
         // guarantee hlr_18_rx2_mavlink
-        api.EthernetFramesRxIn2.is_some() && GumboLib::valid_ardupilot_udp_spec(api.EthernetFramesRxIn2.unwrap()) ==>
-          api.EthernetFramesRxOut2.is_none() && api.MAVLinkFramesRxOut2.is_some() &&
-            (api.MAVLinkFramesRxOut2.unwrap().ethernet_frame == api.EthernetFramesRxIn2.unwrap()) &&
-            (api.MAVLinkFramesRxOut2.unwrap().payload_offset == GumboLib::udp_payload_offset_spec()) &&
-            (api.MAVLinkFramesRxOut2.unwrap().payload_length == GumboLib::udp_payload_length_spec(api.EthernetFramesRxIn2.unwrap())),
-        // guarantee hlr_06_15_rx2_drop
-        api.EthernetFramesRxIn2.is_some() && !(GumboLib::rx_allow_outbound_frame_spec(api.EthernetFramesRxIn2.unwrap())) ==>
-          api.EthernetFramesRxOut2.is_none() && api.MAVLinkFramesRxOut2.is_none(),
+        (final(api).current_mode == open_platform_Data_Model::OperatingMode::Normal) &&
+          final(api).EthernetFramesRxIn2.is_some() &&
+          GumboLib::valid_ardupilot_udp_spec(final(api).EthernetFramesRxIn2.unwrap()) ==>
+          final(api).EthernetFramesRxOut2.is_none() && final(api).MAVLinkFramesRxOut2.is_some() &&
+            (final(api).MAVLinkFramesRxOut2.unwrap().ethernet_frame == final(api).EthernetFramesRxIn2.unwrap()) &&
+            (final(api).MAVLinkFramesRxOut2.unwrap().payload_offset == GumboLib::udp_payload_offset_spec()) &&
+            (final(api).MAVLinkFramesRxOut2.unwrap().payload_length == GumboLib::udp_payload_length_spec(final(api).EthernetFramesRxIn2.unwrap())),
+        // guarantee hlr_15_llr_2_rx2_drop
+        final(api).EthernetFramesRxIn2.is_some() && !(GumboLib::rx_allow_outbound_frame_spec(final(api).EthernetFramesRxIn2.unwrap())) ==>
+          final(api).EthernetFramesRxOut2.is_none() && final(api).MAVLinkFramesRxOut2.is_none(),
         // guarantee hlr_17_rx2_no_input
-        !(api.EthernetFramesRxIn2.is_some()) ==>
-          api.EthernetFramesRxOut2.is_none() && api.MAVLinkFramesRxOut2.is_none(),
+        !(final(api).EthernetFramesRxIn2.is_some()) ==>
+          final(api).EthernetFramesRxOut2.is_none() && final(api).MAVLinkFramesRxOut2.is_none(),
         // guarantee hlr_05_13_rx3_direct
-        api.EthernetFramesRxIn3.is_some() && GumboLib::rx_direct_frame_spec(api.EthernetFramesRxIn3.unwrap()) ==>
-          api.EthernetFramesRxOut3.is_some() &&
-            (api.EthernetFramesRxOut3.unwrap() == api.EthernetFramesRxIn3.unwrap()) &&
-            api.MAVLinkFramesRxOut3.is_none(),
+        (final(api).current_mode == open_platform_Data_Model::OperatingMode::Normal) &&
+          final(api).EthernetFramesRxIn3.is_some() &&
+          GumboLib::rx_direct_frame_spec(final(api).EthernetFramesRxIn3.unwrap()) ==>
+          final(api).EthernetFramesRxOut3.is_some() &&
+            (final(api).EthernetFramesRxOut3.unwrap() == final(api).EthernetFramesRxIn3.unwrap()) &&
+            final(api).MAVLinkFramesRxOut3.is_none(),
         // guarantee hlr_18_rx3_mavlink
-        api.EthernetFramesRxIn3.is_some() && GumboLib::valid_ardupilot_udp_spec(api.EthernetFramesRxIn3.unwrap()) ==>
-          api.EthernetFramesRxOut3.is_none() && api.MAVLinkFramesRxOut3.is_some() &&
-            (api.MAVLinkFramesRxOut3.unwrap().ethernet_frame == api.EthernetFramesRxIn3.unwrap()) &&
-            (api.MAVLinkFramesRxOut3.unwrap().payload_offset == GumboLib::udp_payload_offset_spec()) &&
-            (api.MAVLinkFramesRxOut3.unwrap().payload_length == GumboLib::udp_payload_length_spec(api.EthernetFramesRxIn3.unwrap())),
-        // guarantee hlr_06_15_rx3_drop
-        api.EthernetFramesRxIn3.is_some() && !(GumboLib::rx_allow_outbound_frame_spec(api.EthernetFramesRxIn3.unwrap())) ==>
-          api.EthernetFramesRxOut3.is_none() && api.MAVLinkFramesRxOut3.is_none(),
+        (final(api).current_mode == open_platform_Data_Model::OperatingMode::Normal) &&
+          final(api).EthernetFramesRxIn3.is_some() &&
+          GumboLib::valid_ardupilot_udp_spec(final(api).EthernetFramesRxIn3.unwrap()) ==>
+          final(api).EthernetFramesRxOut3.is_none() && final(api).MAVLinkFramesRxOut3.is_some() &&
+            (final(api).MAVLinkFramesRxOut3.unwrap().ethernet_frame == final(api).EthernetFramesRxIn3.unwrap()) &&
+            (final(api).MAVLinkFramesRxOut3.unwrap().payload_offset == GumboLib::udp_payload_offset_spec()) &&
+            (final(api).MAVLinkFramesRxOut3.unwrap().payload_length == GumboLib::udp_payload_length_spec(final(api).EthernetFramesRxIn3.unwrap())),
+        // guarantee hlr_15_llr_2_rx3_drop
+        final(api).EthernetFramesRxIn3.is_some() && !(GumboLib::rx_allow_outbound_frame_spec(final(api).EthernetFramesRxIn3.unwrap())) ==>
+          final(api).EthernetFramesRxOut3.is_none() && final(api).MAVLinkFramesRxOut3.is_none(),
         // guarantee hlr_17_rx3_no_input
-        !(api.EthernetFramesRxIn3.is_some()) ==>
-          api.EthernetFramesRxOut3.is_none() && api.MAVLinkFramesRxOut3.is_none(),
+        !(final(api).EthernetFramesRxIn3.is_some()) ==>
+          final(api).EthernetFramesRxOut3.is_none() && final(api).MAVLinkFramesRxOut3.is_none(),
         // END MARKER TIME TRIGGERED ENSURES
     {
         // Rx0 ports

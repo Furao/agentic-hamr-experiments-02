@@ -10,7 +10,7 @@ verus! {
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct SizedEthernetMessage_Impl {
     pub amessage: RawEthernetMessage,
-    pub sz: u16
+    pub sz: u16,
   }
 
   impl Default for SizedEthernetMessage_Impl {

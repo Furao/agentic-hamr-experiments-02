@@ -76,6 +76,16 @@ verus! {
 
   pub trait seL4_RxFirewall_RxFirewall_Get_Api: seL4_RxFirewall_RxFirewall_Api {
     #[verifier::external_body]
+    fn unverified_get_current_mode(
+      &mut self,
+      value: &Ghost<open_platform_Data_Model::OperatingMode>) -> (res : open_platform_Data_Model::OperatingMode)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_get_current_mode();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_EthernetFramesRxIn0(
       &mut self,
       value: &Ghost<Option<open_platform_Data_Model::RawEthernetMessage>>) -> (res : Option<open_platform_Data_Model::RawEthernetMessage>)
@@ -121,6 +131,7 @@ verus! {
   pub struct seL4_RxFirewall_RxFirewall_Application_Api<API: seL4_RxFirewall_RxFirewall_Api> {
     pub api: API,
 
+    pub ghost current_mode: open_platform_Data_Model::OperatingMode,
     pub ghost EthernetFramesRxIn0: Option<open_platform_Data_Model::RawEthernetMessage>,
     pub ghost EthernetFramesRxIn1: Option<open_platform_Data_Model::RawEthernetMessage>,
     pub ghost EthernetFramesRxIn2: Option<open_platform_Data_Model::RawEthernetMessage>,
@@ -132,7 +143,7 @@ verus! {
     pub ghost MAVLinkFramesRxOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
     pub ghost MAVLinkFramesRxOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
     pub ghost MAVLinkFramesRxOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
-    pub ghost MAVLinkFramesRxOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+    pub ghost MAVLinkFramesRxOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   }
 
   impl<API: seL4_RxFirewall_RxFirewall_Put_Api> seL4_RxFirewall_RxFirewall_Application_Api<API> {
@@ -143,21 +154,22 @@ verus! {
         // guarantee hlr_05_13_direct_out0
         GumboLib::rx_direct_frame_spec(value),
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        self.EthernetFramesRxOut0 == Some(value),
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
-        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
-        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
-        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
-        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).EthernetFramesRxIn0 == final(self).EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == final(self).EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == final(self).EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == final(self).EthernetFramesRxIn3,
+        final(self).EthernetFramesRxOut0 == Some(value),
+        old(self).EthernetFramesRxOut1 == final(self).EthernetFramesRxOut1,
+        old(self).EthernetFramesRxOut2 == final(self).EthernetFramesRxOut2,
+        old(self).EthernetFramesRxOut3 == final(self).EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == final(self).MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == final(self).MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == final(self).MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == final(self).MAVLinkFramesRxOut3,
     {
       self.api.unverified_put_EthernetFramesRxOut0(value);
-      self.EthernetFramesRxOut0 = Some(value);
+      proof { self.EthernetFramesRxOut0 = Some(value); }
     }
     pub fn put_EthernetFramesRxOut1(
       &mut self,
@@ -166,21 +178,22 @@ verus! {
         // guarantee hlr_05_13_direct_out1
         GumboLib::rx_direct_frame_spec(value),
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        self.EthernetFramesRxOut1 == Some(value),
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
-        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
-        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
-        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
-        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).EthernetFramesRxIn0 == final(self).EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == final(self).EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == final(self).EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == final(self).EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == final(self).EthernetFramesRxOut0,
+        final(self).EthernetFramesRxOut1 == Some(value),
+        old(self).EthernetFramesRxOut2 == final(self).EthernetFramesRxOut2,
+        old(self).EthernetFramesRxOut3 == final(self).EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == final(self).MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == final(self).MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == final(self).MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == final(self).MAVLinkFramesRxOut3,
     {
       self.api.unverified_put_EthernetFramesRxOut1(value);
-      self.EthernetFramesRxOut1 = Some(value);
+      proof { self.EthernetFramesRxOut1 = Some(value); }
     }
     pub fn put_EthernetFramesRxOut2(
       &mut self,
@@ -189,21 +202,22 @@ verus! {
         // guarantee hlr_05_13_direct_out2
         GumboLib::rx_direct_frame_spec(value),
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        self.EthernetFramesRxOut2 == Some(value),
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
-        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
-        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
-        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
-        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).EthernetFramesRxIn0 == final(self).EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == final(self).EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == final(self).EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == final(self).EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == final(self).EthernetFramesRxOut0,
+        old(self).EthernetFramesRxOut1 == final(self).EthernetFramesRxOut1,
+        final(self).EthernetFramesRxOut2 == Some(value),
+        old(self).EthernetFramesRxOut3 == final(self).EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == final(self).MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == final(self).MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == final(self).MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == final(self).MAVLinkFramesRxOut3,
     {
       self.api.unverified_put_EthernetFramesRxOut2(value);
-      self.EthernetFramesRxOut2 = Some(value);
+      proof { self.EthernetFramesRxOut2 = Some(value); }
     }
     pub fn put_EthernetFramesRxOut3(
       &mut self,
@@ -212,21 +226,22 @@ verus! {
         // guarantee hlr_05_13_direct_out3
         GumboLib::rx_direct_frame_spec(value),
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        self.EthernetFramesRxOut3 == Some(value),
-        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
-        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
-        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
-        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).EthernetFramesRxIn0 == final(self).EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == final(self).EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == final(self).EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == final(self).EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == final(self).EthernetFramesRxOut0,
+        old(self).EthernetFramesRxOut1 == final(self).EthernetFramesRxOut1,
+        old(self).EthernetFramesRxOut2 == final(self).EthernetFramesRxOut2,
+        final(self).EthernetFramesRxOut3 == Some(value),
+        old(self).MAVLinkFramesRxOut0 == final(self).MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == final(self).MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == final(self).MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == final(self).MAVLinkFramesRxOut3,
     {
       self.api.unverified_put_EthernetFramesRxOut3(value);
-      self.EthernetFramesRxOut3 = Some(value);
+      proof { self.EthernetFramesRxOut3 = Some(value); }
     }
     pub fn put_MAVLinkFramesRxOut0(
       &mut self,
@@ -235,21 +250,22 @@ verus! {
         // guarantee hlr_18_mavlink_out0
         GumboLib::valid_mavlink_carrier_spec(value),
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
-        self.MAVLinkFramesRxOut0 == Some(value),
-        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
-        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
-        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).EthernetFramesRxIn0 == final(self).EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == final(self).EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == final(self).EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == final(self).EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == final(self).EthernetFramesRxOut0,
+        old(self).EthernetFramesRxOut1 == final(self).EthernetFramesRxOut1,
+        old(self).EthernetFramesRxOut2 == final(self).EthernetFramesRxOut2,
+        old(self).EthernetFramesRxOut3 == final(self).EthernetFramesRxOut3,
+        final(self).MAVLinkFramesRxOut0 == Some(value),
+        old(self).MAVLinkFramesRxOut1 == final(self).MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == final(self).MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == final(self).MAVLinkFramesRxOut3,
     {
       self.api.unverified_put_MAVLinkFramesRxOut0(value);
-      self.MAVLinkFramesRxOut0 = Some(value);
+      proof { self.MAVLinkFramesRxOut0 = Some(value); }
     }
     pub fn put_MAVLinkFramesRxOut1(
       &mut self,
@@ -258,21 +274,22 @@ verus! {
         // guarantee hlr_18_mavlink_out1
         GumboLib::valid_mavlink_carrier_spec(value),
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
-        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
-        self.MAVLinkFramesRxOut1 == Some(value),
-        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
-        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).EthernetFramesRxIn0 == final(self).EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == final(self).EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == final(self).EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == final(self).EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == final(self).EthernetFramesRxOut0,
+        old(self).EthernetFramesRxOut1 == final(self).EthernetFramesRxOut1,
+        old(self).EthernetFramesRxOut2 == final(self).EthernetFramesRxOut2,
+        old(self).EthernetFramesRxOut3 == final(self).EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == final(self).MAVLinkFramesRxOut0,
+        final(self).MAVLinkFramesRxOut1 == Some(value),
+        old(self).MAVLinkFramesRxOut2 == final(self).MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == final(self).MAVLinkFramesRxOut3,
     {
       self.api.unverified_put_MAVLinkFramesRxOut1(value);
-      self.MAVLinkFramesRxOut1 = Some(value);
+      proof { self.MAVLinkFramesRxOut1 = Some(value); }
     }
     pub fn put_MAVLinkFramesRxOut2(
       &mut self,
@@ -281,21 +298,22 @@ verus! {
         // guarantee hlr_18_mavlink_out2
         GumboLib::valid_mavlink_carrier_spec(value),
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
-        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
-        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
-        self.MAVLinkFramesRxOut2 == Some(value),
-        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).EthernetFramesRxIn0 == final(self).EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == final(self).EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == final(self).EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == final(self).EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == final(self).EthernetFramesRxOut0,
+        old(self).EthernetFramesRxOut1 == final(self).EthernetFramesRxOut1,
+        old(self).EthernetFramesRxOut2 == final(self).EthernetFramesRxOut2,
+        old(self).EthernetFramesRxOut3 == final(self).EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == final(self).MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == final(self).MAVLinkFramesRxOut1,
+        final(self).MAVLinkFramesRxOut2 == Some(value),
+        old(self).MAVLinkFramesRxOut3 == final(self).MAVLinkFramesRxOut3,
     {
       self.api.unverified_put_MAVLinkFramesRxOut2(value);
-      self.MAVLinkFramesRxOut2 = Some(value);
+      proof { self.MAVLinkFramesRxOut2 = Some(value); }
     }
     pub fn put_MAVLinkFramesRxOut3(
       &mut self,
@@ -304,94 +322,118 @@ verus! {
         // guarantee hlr_18_mavlink_out3
         GumboLib::valid_mavlink_carrier_spec(value),
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
-        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
-        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
-        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
-        self.MAVLinkFramesRxOut3 == Some(value),
+        old(self).current_mode == final(self).current_mode,
+        old(self).EthernetFramesRxIn0 == final(self).EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == final(self).EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == final(self).EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == final(self).EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == final(self).EthernetFramesRxOut0,
+        old(self).EthernetFramesRxOut1 == final(self).EthernetFramesRxOut1,
+        old(self).EthernetFramesRxOut2 == final(self).EthernetFramesRxOut2,
+        old(self).EthernetFramesRxOut3 == final(self).EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == final(self).MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == final(self).MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == final(self).MAVLinkFramesRxOut2,
+        final(self).MAVLinkFramesRxOut3 == Some(value),
     {
       self.api.unverified_put_MAVLinkFramesRxOut3(value);
-      self.MAVLinkFramesRxOut3 = Some(value);
+      proof { self.MAVLinkFramesRxOut3 = Some(value); }
     }
   }
 
   impl<API: seL4_RxFirewall_RxFirewall_Get_Api> seL4_RxFirewall_RxFirewall_Application_Api<API> {
+    pub fn get_current_mode(&mut self) -> (res : open_platform_Data_Model::OperatingMode)
+      ensures
+        old(self).current_mode == final(self).current_mode,
+        res == final(self).current_mode,
+        old(self).EthernetFramesRxIn0 == final(self).EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == final(self).EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == final(self).EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == final(self).EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == final(self).EthernetFramesRxOut0,
+        old(self).EthernetFramesRxOut1 == final(self).EthernetFramesRxOut1,
+        old(self).EthernetFramesRxOut2 == final(self).EthernetFramesRxOut2,
+        old(self).EthernetFramesRxOut3 == final(self).EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == final(self).MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == final(self).MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == final(self).MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == final(self).MAVLinkFramesRxOut3,
+    {
+      self.api.unverified_get_current_mode(&Ghost(self.current_mode))
+    }
     pub fn get_EthernetFramesRxIn0(&mut self) -> (res : Option<open_platform_Data_Model::RawEthernetMessage>)
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        res == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
-        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
-        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
-        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
-        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).EthernetFramesRxIn0 == final(self).EthernetFramesRxIn0,
+        res == final(self).EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == final(self).EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == final(self).EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == final(self).EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == final(self).EthernetFramesRxOut0,
+        old(self).EthernetFramesRxOut1 == final(self).EthernetFramesRxOut1,
+        old(self).EthernetFramesRxOut2 == final(self).EthernetFramesRxOut2,
+        old(self).EthernetFramesRxOut3 == final(self).EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == final(self).MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == final(self).MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == final(self).MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == final(self).MAVLinkFramesRxOut3,
     {
       self.api.unverified_get_EthernetFramesRxIn0(&Ghost(self.EthernetFramesRxIn0))
     }
     pub fn get_EthernetFramesRxIn1(&mut self) -> (res : Option<open_platform_Data_Model::RawEthernetMessage>)
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        res == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
-        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
-        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
-        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
-        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).EthernetFramesRxIn0 == final(self).EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == final(self).EthernetFramesRxIn1,
+        res == final(self).EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == final(self).EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == final(self).EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == final(self).EthernetFramesRxOut0,
+        old(self).EthernetFramesRxOut1 == final(self).EthernetFramesRxOut1,
+        old(self).EthernetFramesRxOut2 == final(self).EthernetFramesRxOut2,
+        old(self).EthernetFramesRxOut3 == final(self).EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == final(self).MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == final(self).MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == final(self).MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == final(self).MAVLinkFramesRxOut3,
     {
       self.api.unverified_get_EthernetFramesRxIn1(&Ghost(self.EthernetFramesRxIn1))
     }
     pub fn get_EthernetFramesRxIn2(&mut self) -> (res : Option<open_platform_Data_Model::RawEthernetMessage>)
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        res == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
-        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
-        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
-        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
-        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).EthernetFramesRxIn0 == final(self).EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == final(self).EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == final(self).EthernetFramesRxIn2,
+        res == final(self).EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == final(self).EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == final(self).EthernetFramesRxOut0,
+        old(self).EthernetFramesRxOut1 == final(self).EthernetFramesRxOut1,
+        old(self).EthernetFramesRxOut2 == final(self).EthernetFramesRxOut2,
+        old(self).EthernetFramesRxOut3 == final(self).EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == final(self).MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == final(self).MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == final(self).MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == final(self).MAVLinkFramesRxOut3,
     {
       self.api.unverified_get_EthernetFramesRxIn2(&Ghost(self.EthernetFramesRxIn2))
     }
     pub fn get_EthernetFramesRxIn3(&mut self) -> (res : Option<open_platform_Data_Model::RawEthernetMessage>)
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        res == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3,
-        old(self).MAVLinkFramesRxOut0 == self.MAVLinkFramesRxOut0,
-        old(self).MAVLinkFramesRxOut1 == self.MAVLinkFramesRxOut1,
-        old(self).MAVLinkFramesRxOut2 == self.MAVLinkFramesRxOut2,
-        old(self).MAVLinkFramesRxOut3 == self.MAVLinkFramesRxOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).EthernetFramesRxIn0 == final(self).EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == final(self).EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == final(self).EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == final(self).EthernetFramesRxIn3,
+        res == final(self).EthernetFramesRxIn3,
+        old(self).EthernetFramesRxOut0 == final(self).EthernetFramesRxOut0,
+        old(self).EthernetFramesRxOut1 == final(self).EthernetFramesRxOut1,
+        old(self).EthernetFramesRxOut2 == final(self).EthernetFramesRxOut2,
+        old(self).EthernetFramesRxOut3 == final(self).EthernetFramesRxOut3,
+        old(self).MAVLinkFramesRxOut0 == final(self).MAVLinkFramesRxOut0,
+        old(self).MAVLinkFramesRxOut1 == final(self).MAVLinkFramesRxOut1,
+        old(self).MAVLinkFramesRxOut2 == final(self).MAVLinkFramesRxOut2,
+        old(self).MAVLinkFramesRxOut3 == final(self).MAVLinkFramesRxOut3,
     {
       self.api.unverified_get_EthernetFramesRxIn3(&Ghost(self.EthernetFramesRxIn3))
     }
@@ -405,6 +447,7 @@ verus! {
     return seL4_RxFirewall_RxFirewall_Application_Api {
       api: seL4_RxFirewall_RxFirewall_Initialization_Api {},
 
+      current_mode: open_platform_Data_Model::OperatingMode::Normal,
       EthernetFramesRxIn0: None,
       EthernetFramesRxIn1: None,
       EthernetFramesRxIn2: None,
@@ -430,6 +473,7 @@ verus! {
     return seL4_RxFirewall_RxFirewall_Application_Api {
       api: seL4_RxFirewall_RxFirewall_Compute_Api {},
 
+      current_mode: open_platform_Data_Model::OperatingMode::Normal,
       EthernetFramesRxIn0: None,
       EthernetFramesRxIn1: None,
       EthernetFramesRxIn2: None,

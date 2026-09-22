@@ -6,6 +6,8 @@ void seL4_MAVLinkFirewall_MAVLinkFirewall_initialize(void);
 void seL4_MAVLinkFirewall_MAVLinkFirewall_notify(microkit_channel channel);
 void seL4_MAVLinkFirewall_MAVLinkFirewall_timeTriggered(void);
 
+volatile sb_queue_open_platform_Data_Model_OperatingMode_1_t *current_mode_queue_1;
+sb_queue_open_platform_Data_Model_OperatingMode_1_Recv_t current_mode_recv_queue;
 volatile sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *EthernetFramesIn0_queue_1;
 sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_Recv_t EthernetFramesIn0_recv_queue;
 volatile sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *EthernetFramesIn1_queue_1;
@@ -14,12 +16,34 @@ volatile sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *EthernetF
 sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_Recv_t EthernetFramesIn2_recv_queue;
 volatile sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *EthernetFramesIn3_queue_1;
 sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_Recv_t EthernetFramesIn3_recv_queue;
+volatile sb_queue_bool_1_t *error_status_queue_1;
 volatile sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *EthernetFramesOut0_queue_1;
 volatile sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *EthernetFramesOut1_queue_1;
 volatile sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *EthernetFramesOut2_queue_1;
 volatile sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *EthernetFramesOut3_queue_1;
 
-#define PORT_FROM_MON 52
+#define PORT_FROM_MON 50
+
+open_platform_Data_Model_OperatingMode last_current_mode_payload;
+
+bool get_current_mode(open_platform_Data_Model_OperatingMode *data) {
+  sb_event_counter_t numDropped;
+  open_platform_Data_Model_OperatingMode fresh_data;
+  bool isFresh = sb_queue_open_platform_Data_Model_OperatingMode_1_dequeue((sb_queue_open_platform_Data_Model_OperatingMode_1_Recv_t *) &current_mode_recv_queue, &numDropped, &fresh_data);
+  if (isFresh) {
+    last_current_mode_payload = fresh_data;
+  }
+  *data = last_current_mode_payload;
+  return isFresh;
+}
+
+bool peek_current_mode(open_platform_Data_Model_OperatingMode *data) {
+  sb_event_counter_t numDropped;
+  open_platform_Data_Model_OperatingMode freshData;
+  bool isFresh = sb_queue_open_platform_Data_Model_OperatingMode_1_peek((sb_queue_open_platform_Data_Model_OperatingMode_1_Recv_t *) &current_mode_recv_queue, &numDropped, &freshData);
+  *data = isFresh ? freshData : last_current_mode_payload;
+  return isFresh;
+}
 
 bool EthernetFramesIn0_is_empty(void) {
   return sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_is_empty(&EthernetFramesIn0_recv_queue);
@@ -32,6 +56,11 @@ bool get_EthernetFramesIn0_poll(sb_event_counter_t *numDropped, open_platform_Da
 bool get_EthernetFramesIn0(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
   sb_event_counter_t numDropped;
   return get_EthernetFramesIn0_poll (&numDropped, data);
+}
+
+bool peek_EthernetFramesIn0(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
+  sb_event_counter_t numDropped;
+  return sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_peek((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_Recv_t *) &EthernetFramesIn0_recv_queue, &numDropped, data);
 }
 
 bool EthernetFramesIn1_is_empty(void) {
@@ -47,6 +76,11 @@ bool get_EthernetFramesIn1(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data
   return get_EthernetFramesIn1_poll (&numDropped, data);
 }
 
+bool peek_EthernetFramesIn1(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
+  sb_event_counter_t numDropped;
+  return sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_peek((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_Recv_t *) &EthernetFramesIn1_recv_queue, &numDropped, data);
+}
+
 bool EthernetFramesIn2_is_empty(void) {
   return sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_is_empty(&EthernetFramesIn2_recv_queue);
 }
@@ -58,6 +92,11 @@ bool get_EthernetFramesIn2_poll(sb_event_counter_t *numDropped, open_platform_Da
 bool get_EthernetFramesIn2(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
   sb_event_counter_t numDropped;
   return get_EthernetFramesIn2_poll (&numDropped, data);
+}
+
+bool peek_EthernetFramesIn2(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
+  sb_event_counter_t numDropped;
+  return sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_peek((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_Recv_t *) &EthernetFramesIn2_recv_queue, &numDropped, data);
 }
 
 bool EthernetFramesIn3_is_empty(void) {
@@ -73,10 +112,29 @@ bool get_EthernetFramesIn3(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data
   return get_EthernetFramesIn3_poll (&numDropped, data);
 }
 
+bool peek_EthernetFramesIn3(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
+  sb_event_counter_t numDropped;
+  return sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_peek((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_Recv_t *) &EthernetFramesIn3_recv_queue, &numDropped, data);
+}
+
+bool put_error_status(const bool *data) {
+  sb_queue_bool_1_enqueue((sb_queue_bool_1_t *) error_status_queue_1, (bool *) data);
+
+  return true;
+}
+
+bool peek_error_status(bool *data) {
+  return sb_queue_bool_1_peek_latest((sb_queue_bool_1_t *) error_status_queue_1, data);
+}
+
 bool put_EthernetFramesOut0(const open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
   sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_enqueue((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) EthernetFramesOut0_queue_1, (open_platform_Data_Model_MAVLinkUDPMessage_Impl *) data);
 
   return true;
+}
+
+bool peek_EthernetFramesOut0(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
+  return sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_peek_latest((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) EthernetFramesOut0_queue_1, data);
 }
 
 bool put_EthernetFramesOut1(const open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
@@ -85,10 +143,18 @@ bool put_EthernetFramesOut1(const open_platform_Data_Model_MAVLinkUDPMessage_Imp
   return true;
 }
 
+bool peek_EthernetFramesOut1(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
+  return sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_peek_latest((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) EthernetFramesOut1_queue_1, data);
+}
+
 bool put_EthernetFramesOut2(const open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
   sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_enqueue((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) EthernetFramesOut2_queue_1, (open_platform_Data_Model_MAVLinkUDPMessage_Impl *) data);
 
   return true;
+}
+
+bool peek_EthernetFramesOut2(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
+  return sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_peek_latest((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) EthernetFramesOut2_queue_1, data);
 }
 
 bool put_EthernetFramesOut3(const open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
@@ -97,7 +163,13 @@ bool put_EthernetFramesOut3(const open_platform_Data_Model_MAVLinkUDPMessage_Imp
   return true;
 }
 
+bool peek_EthernetFramesOut3(open_platform_Data_Model_MAVLinkUDPMessage_Impl *data) {
+  return sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_peek_latest((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) EthernetFramesOut3_queue_1, data);
+}
+
 void init(void) {
+  sb_queue_open_platform_Data_Model_OperatingMode_1_Recv_init(&current_mode_recv_queue, (sb_queue_open_platform_Data_Model_OperatingMode_1_t *) current_mode_queue_1);
+
   sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_Recv_init(&EthernetFramesIn0_recv_queue, (sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) EthernetFramesIn0_queue_1);
 
   sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_Recv_init(&EthernetFramesIn1_recv_queue, (sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) EthernetFramesIn1_queue_1);
@@ -105,6 +177,8 @@ void init(void) {
   sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_Recv_init(&EthernetFramesIn2_recv_queue, (sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) EthernetFramesIn2_queue_1);
 
   sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_Recv_init(&EthernetFramesIn3_recv_queue, (sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) EthernetFramesIn3_queue_1);
+
+  sb_queue_bool_1_init((sb_queue_bool_1_t *) error_status_queue_1);
 
   sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_init((sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *) EthernetFramesOut0_queue_1);
 

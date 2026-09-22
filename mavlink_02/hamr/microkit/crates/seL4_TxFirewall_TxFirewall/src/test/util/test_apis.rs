@@ -10,7 +10,7 @@ pub struct PreStateContainer {
   pub api_EthernetFramesTxIn0: Option<open_platform_Data_Model::RawEthernetMessage>,
   pub api_EthernetFramesTxIn1: Option<open_platform_Data_Model::RawEthernetMessage>,
   pub api_EthernetFramesTxIn2: Option<open_platform_Data_Model::RawEthernetMessage>,
-  pub api_EthernetFramesTxIn3: Option<open_platform_Data_Model::RawEthernetMessage>
+  pub api_EthernetFramesTxIn3: Option<open_platform_Data_Model::RawEthernetMessage>,
 }
 
 /// setter for component's incoming port values

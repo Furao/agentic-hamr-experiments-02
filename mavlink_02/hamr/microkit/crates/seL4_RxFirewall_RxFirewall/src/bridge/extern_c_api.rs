@@ -11,6 +11,7 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
+  fn get_current_mode(value: *mut open_platform_Data_Model::OperatingMode) -> bool;
   fn get_EthernetFramesRxIn0(value: *mut open_platform_Data_Model::RawEthernetMessage) -> bool;
   fn get_EthernetFramesRxIn1(value: *mut open_platform_Data_Model::RawEthernetMessage) -> bool;
   fn get_EthernetFramesRxIn2(value: *mut open_platform_Data_Model::RawEthernetMessage) -> bool;
@@ -23,6 +24,15 @@ extern "C" {
   fn put_MAVLinkFramesRxOut1(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
   fn put_MAVLinkFramesRxOut2(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
   fn put_MAVLinkFramesRxOut3(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+}
+
+pub fn unsafe_get_current_mode() -> open_platform_Data_Model::OperatingMode
+{
+  unsafe {
+    let value: *mut open_platform_Data_Model::OperatingMode = &mut open_platform_Data_Model::OperatingMode::default();
+    get_current_mode(value);
+    return *value;
+  }
 }
 
 pub fn unsafe_get_EthernetFramesRxIn0() -> Option<open_platform_Data_Model::RawEthernetMessage>
@@ -138,6 +148,7 @@ lazy_static::lazy_static! {
   // simulate the global C variables that point to the microkit shared memory regions.  In a full
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
+  pub static ref IN_current_mode: Mutex<Option<open_platform_Data_Model::OperatingMode>> = Mutex::new(None);
   pub static ref IN_EthernetFramesRxIn0: Mutex<Option<open_platform_Data_Model::RawEthernetMessage>> = Mutex::new(None);
   pub static ref IN_EthernetFramesRxIn1: Mutex<Option<open_platform_Data_Model::RawEthernetMessage>> = Mutex::new(None);
   pub static ref IN_EthernetFramesRxIn2: Mutex<Option<open_platform_Data_Model::RawEthernetMessage>> = Mutex::new(None);
@@ -155,6 +166,7 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
+    *IN_current_mode.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_EthernetFramesRxIn0.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_EthernetFramesRxIn1.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_EthernetFramesRxIn2.lock().unwrap_or_else(|e| e.into_inner()) = None;
@@ -167,6 +179,16 @@ pub fn initialize_test_globals() {
     *OUT_MAVLinkFramesRxOut1.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *OUT_MAVLinkFramesRxOut2.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *OUT_MAVLinkFramesRxOut3.lock().unwrap_or_else(|e| e.into_inner()) = None;
+  }
+}
+
+#[cfg(test)]
+pub fn get_current_mode(value: *mut open_platform_Data_Model::OperatingMode) -> bool
+{
+  unsafe {
+    let guard = IN_current_mode.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 

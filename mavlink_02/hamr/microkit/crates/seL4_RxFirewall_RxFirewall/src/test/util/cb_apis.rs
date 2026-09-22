@@ -73,12 +73,14 @@ testInitializeCB_macro {
   * @param api_EthernetFramesRxIn1 incoming event data port
   * @param api_EthernetFramesRxIn2 incoming event data port
   * @param api_EthernetFramesRxIn3 incoming event data port
+  * @param api_current_mode incoming data port
   */
 pub fn testComputeCB(
   api_EthernetFramesRxIn0: Option<open_platform_Data_Model::RawEthernetMessage>,
   api_EthernetFramesRxIn1: Option<open_platform_Data_Model::RawEthernetMessage>,
   api_EthernetFramesRxIn2: Option<open_platform_Data_Model::RawEthernetMessage>,
-  api_EthernetFramesRxIn3: Option<open_platform_Data_Model::RawEthernetMessage>) -> HarnessResult
+  api_EthernetFramesRxIn3: Option<open_platform_Data_Model::RawEthernetMessage>,
+  api_current_mode: open_platform_Data_Model::OperatingMode) -> HarnessResult
 {
   // Initialize the app
   crate::seL4_RxFirewall_RxFirewall_initialize();
@@ -88,6 +90,7 @@ pub fn testComputeCB(
   put_EthernetFramesRxIn1(api_EthernetFramesRxIn1);
   put_EthernetFramesRxIn2(api_EthernetFramesRxIn2);
   put_EthernetFramesRxIn3(api_EthernetFramesRxIn3);
+  put_current_mode(api_current_mode);
 
   // [InvokeEntryPoint]: Invoke the entry point
   crate::seL4_RxFirewall_RxFirewall_timeTriggered();
@@ -103,7 +106,7 @@ pub fn testComputeCB(
   let api_MAVLinkFramesRxOut3 = get_MAVLinkFramesRxOut3();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::compute_CEP_Post(api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3, api_EthernetFramesRxOut0, api_EthernetFramesRxOut1, api_EthernetFramesRxOut2, api_EthernetFramesRxOut3, api_MAVLinkFramesRxOut0, api_MAVLinkFramesRxOut1, api_MAVLinkFramesRxOut2, api_MAVLinkFramesRxOut3) {
+  if !GUMBOX::compute_CEP_Post(api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3, api_current_mode, api_EthernetFramesRxOut0, api_EthernetFramesRxOut1, api_EthernetFramesRxOut2, api_EthernetFramesRxOut3, api_MAVLinkFramesRxOut0, api_MAVLinkFramesRxOut1, api_MAVLinkFramesRxOut2, api_MAVLinkFramesRxOut3) {
     return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
   }
 
@@ -114,7 +117,7 @@ pub fn testComputeCB(
   */
 pub fn testComputeCB_container(container: PreStateContainer) -> HarnessResult
 {
-  return testComputeCB(container.api_EthernetFramesRxIn0, container.api_EthernetFramesRxIn1, container.api_EthernetFramesRxIn2, container.api_EthernetFramesRxIn3)
+  return testComputeCB(container.api_EthernetFramesRxIn0, container.api_EthernetFramesRxIn1, container.api_EthernetFramesRxIn2, container.api_EthernetFramesRxIn3, container.api_current_mode)
 }
 
 #[macro_export]
@@ -126,17 +129,18 @@ testComputeCB_macro {
     api_EthernetFramesRxIn0: $api_EthernetFramesRxIn0_strat:expr,
     api_EthernetFramesRxIn1: $api_EthernetFramesRxIn1_strat:expr,
     api_EthernetFramesRxIn2: $api_EthernetFramesRxIn2_strat:expr,
-    api_EthernetFramesRxIn3: $api_EthernetFramesRxIn3_strat:expr
+    api_EthernetFramesRxIn3: $api_EthernetFramesRxIn3_strat:expr,
+    api_current_mode: $api_current_mode_strat:expr
   ) => {
     proptest!{
       #![proptest_config($config)]
       #[test]
       #[serial]
       fn $test_name(
-        (api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3)
-            in ($api_EthernetFramesRxIn0_strat, $api_EthernetFramesRxIn1_strat, $api_EthernetFramesRxIn2_strat, $api_EthernetFramesRxIn3_strat)
+        (api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3, api_current_mode)
+            in ($api_EthernetFramesRxIn0_strat, $api_EthernetFramesRxIn1_strat, $api_EthernetFramesRxIn2_strat, $api_EthernetFramesRxIn3_strat, $api_current_mode_strat)
       ) {
-        match$crate::test::util::cb_apis::testComputeCB(api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3) {
+        match$crate::test::util::cb_apis::testComputeCB(api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3, api_current_mode) {
           $crate::test::util::cb_apis::HarnessResult::RejectedPrecondition => {
             return Err(proptest::test_runner::TestCaseError::reject(
               "Precondition failed: invalid input combination",

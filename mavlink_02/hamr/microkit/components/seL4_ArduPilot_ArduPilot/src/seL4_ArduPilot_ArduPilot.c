@@ -27,7 +27,7 @@ sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_Recv_t MAVLinkFirewal
 volatile sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_t *MAVLinkFirewallRx3_queue_1;
 sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1_Recv_t MAVLinkFirewallRx3_recv_queue;
 
-#define PORT_FROM_MON 54
+#define PORT_FROM_MON 52
 
 bool FirewallRx0_is_empty(void) {
   return sb_queue_open_platform_Data_Model_RawEthernetMessage_1_is_empty(&FirewallRx0_recv_queue);

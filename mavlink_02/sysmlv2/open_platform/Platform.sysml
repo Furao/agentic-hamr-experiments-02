@@ -5,7 +5,9 @@ package Platform {
     private import open_platform::*;
 
     part def Proc :> Processor {
-        attribute :>> Frame_Period = 1950 [ms];
+        // CR-02 generation minimum: 1900 ms component budgets + 180 ms pacer.
+        // Deployed schedule and D2 propagation remain subject to W3 validation.
+        attribute :>> Frame_Period = 2080 [ms];
         attribute :>> Clock_Period = 2 [ms];
         attribute :>> Max_Domain = 8;
     }

@@ -7,15 +7,38 @@ use proptest::prelude::*;
 
 /// container for component's incoming port values
 pub struct PreStateContainer {
+  pub api_current_mode: open_platform_Data_Model::OperatingMode,
   pub api_EthernetFramesIn0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   pub api_EthernetFramesIn1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   pub api_EthernetFramesIn2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
-  pub api_EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+  pub api_EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+}
+
+/// container for component's incoming port values and GUMBO state variables
+pub struct PreStateContainer_wGSV {
+  pub In_rejected_count: u16,
+  pub api_current_mode: open_platform_Data_Model::OperatingMode,
+  pub api_EthernetFramesIn0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  pub api_EthernetFramesIn1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  pub api_EthernetFramesIn2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  pub api_EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
 }
 
 /// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
+  put_current_mode(container.api_current_mode);
+  put_EthernetFramesIn0(container.api_EthernetFramesIn0);
+  put_EthernetFramesIn1(container.api_EthernetFramesIn1);
+  put_EthernetFramesIn2(container.api_EthernetFramesIn2);
+  put_EthernetFramesIn3(container.api_EthernetFramesIn3);
+}
+
+/// setter for component's incoming port values and GUMBO state variables
+pub fn put_concrete_inputs_container_wGSV(container: PreStateContainer_wGSV)
+{
+  put_rejected_count(container.In_rejected_count);
+  put_current_mode(container.api_current_mode);
   put_EthernetFramesIn0(container.api_EthernetFramesIn0);
   put_EthernetFramesIn1(container.api_EthernetFramesIn1);
   put_EthernetFramesIn2(container.api_EthernetFramesIn2);
@@ -24,15 +47,46 @@ pub fn put_concrete_inputs_container(container: PreStateContainer)
 
 /// setter for component's incoming port values
 pub fn put_concrete_inputs(
+  current_mode: open_platform_Data_Model::OperatingMode,
   EthernetFramesIn0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   EthernetFramesIn1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   EthernetFramesIn2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
 {
+  put_current_mode(current_mode);
   put_EthernetFramesIn0(EthernetFramesIn0);
   put_EthernetFramesIn1(EthernetFramesIn1);
   put_EthernetFramesIn2(EthernetFramesIn2);
   put_EthernetFramesIn3(EthernetFramesIn3);
+}
+
+/// setter for component's incoming port values and GUMBO state variables
+pub fn put_concrete_inputs_wGSV(
+  In_rejected_count: u16,
+  current_mode: open_platform_Data_Model::OperatingMode,
+  EthernetFramesIn0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  EthernetFramesIn1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  EthernetFramesIn2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+  EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+{
+  put_rejected_count(In_rejected_count);
+  put_current_mode(current_mode);
+  put_EthernetFramesIn0(EthernetFramesIn0);
+  put_EthernetFramesIn1(EthernetFramesIn1);
+  put_EthernetFramesIn2(EthernetFramesIn2);
+  put_EthernetFramesIn3(EthernetFramesIn3);
+}
+
+/// setter for IN DataPort
+pub fn put_current_mode(value: open_platform_Data_Model::OperatingMode)
+{
+  *extern_api::IN_current_mode.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
+}
+
+/// getter for OUT DataPort
+pub fn get_error_status() -> bool
+{
+  return extern_api::OUT_error_status.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// setter for IN EventDataPort
@@ -81,4 +135,26 @@ pub fn get_EthernetFramesOut2() -> Option<open_platform_Data_Model::MAVLinkUDPMe
 pub fn get_EthernetFramesOut3() -> Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
 {
   return extern_api::OUT_EthernetFramesOut3.lock().unwrap_or_else(|e| e.into_inner()).clone()
+}
+
+/// getter for GUMBO State Variable
+pub fn get_rejected_count() -> u16
+{
+  unsafe {
+    match &crate::app {
+      Some(inner) => inner.rejected_count,
+      None => panic!("The app is None")
+    }
+  }
+}
+
+/// setter for GUMBO State Variable
+pub fn put_rejected_count(value: u16)
+{
+  unsafe {
+    match &mut crate::app {
+      Some(inner) => inner.rejected_count = value,
+      None => panic!("The app is None")
+    }
+  }
 }

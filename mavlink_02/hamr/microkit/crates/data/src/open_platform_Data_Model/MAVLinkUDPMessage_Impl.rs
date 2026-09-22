@@ -11,7 +11,7 @@ verus! {
   pub struct MAVLinkUDPMessage_Impl {
     pub ethernet_frame: RawEthernetMessage,
     pub payload_offset: u16,
-    pub payload_length: u16
+    pub payload_length: u16,
   }
 
   impl Default for MAVLinkUDPMessage_Impl {

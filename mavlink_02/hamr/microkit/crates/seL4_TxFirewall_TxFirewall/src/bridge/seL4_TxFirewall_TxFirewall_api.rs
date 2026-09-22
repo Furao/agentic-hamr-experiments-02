@@ -96,7 +96,7 @@ verus! {
     pub ghost EthernetFramesTxOut0: Option<open_platform_Data_Model::SizedEthernetMessage_Impl>,
     pub ghost EthernetFramesTxOut1: Option<open_platform_Data_Model::SizedEthernetMessage_Impl>,
     pub ghost EthernetFramesTxOut2: Option<open_platform_Data_Model::SizedEthernetMessage_Impl>,
-    pub ghost EthernetFramesTxOut3: Option<open_platform_Data_Model::SizedEthernetMessage_Impl>
+    pub ghost EthernetFramesTxOut3: Option<open_platform_Data_Model::SizedEthernetMessage_Impl>,
   }
 
   impl<API: seL4_TxFirewall_TxFirewall_Put_Api> seL4_TxFirewall_TxFirewall_Application_Api<API> {
@@ -104,122 +104,122 @@ verus! {
       &mut self,
       value: open_platform_Data_Model::SizedEthernetMessage_Impl)
       ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        self.EthernetFramesTxOut0 == Some(value),
-        old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
-        old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3,
+        old(self).EthernetFramesTxIn0 == final(self).EthernetFramesTxIn0,
+        old(self).EthernetFramesTxIn1 == final(self).EthernetFramesTxIn1,
+        old(self).EthernetFramesTxIn2 == final(self).EthernetFramesTxIn2,
+        old(self).EthernetFramesTxIn3 == final(self).EthernetFramesTxIn3,
+        final(self).EthernetFramesTxOut0 == Some(value),
+        old(self).EthernetFramesTxOut1 == final(self).EthernetFramesTxOut1,
+        old(self).EthernetFramesTxOut2 == final(self).EthernetFramesTxOut2,
+        old(self).EthernetFramesTxOut3 == final(self).EthernetFramesTxOut3,
     {
       self.api.unverified_put_EthernetFramesTxOut0(value);
-      self.EthernetFramesTxOut0 = Some(value);
+      proof { self.EthernetFramesTxOut0 = Some(value); }
     }
     pub fn put_EthernetFramesTxOut1(
       &mut self,
       value: open_platform_Data_Model::SizedEthernetMessage_Impl)
       ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
-        self.EthernetFramesTxOut1 == Some(value),
-        old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3,
+        old(self).EthernetFramesTxIn0 == final(self).EthernetFramesTxIn0,
+        old(self).EthernetFramesTxIn1 == final(self).EthernetFramesTxIn1,
+        old(self).EthernetFramesTxIn2 == final(self).EthernetFramesTxIn2,
+        old(self).EthernetFramesTxIn3 == final(self).EthernetFramesTxIn3,
+        old(self).EthernetFramesTxOut0 == final(self).EthernetFramesTxOut0,
+        final(self).EthernetFramesTxOut1 == Some(value),
+        old(self).EthernetFramesTxOut2 == final(self).EthernetFramesTxOut2,
+        old(self).EthernetFramesTxOut3 == final(self).EthernetFramesTxOut3,
     {
       self.api.unverified_put_EthernetFramesTxOut1(value);
-      self.EthernetFramesTxOut1 = Some(value);
+      proof { self.EthernetFramesTxOut1 = Some(value); }
     }
     pub fn put_EthernetFramesTxOut2(
       &mut self,
       value: open_platform_Data_Model::SizedEthernetMessage_Impl)
       ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
-        old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
-        self.EthernetFramesTxOut2 == Some(value),
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3,
+        old(self).EthernetFramesTxIn0 == final(self).EthernetFramesTxIn0,
+        old(self).EthernetFramesTxIn1 == final(self).EthernetFramesTxIn1,
+        old(self).EthernetFramesTxIn2 == final(self).EthernetFramesTxIn2,
+        old(self).EthernetFramesTxIn3 == final(self).EthernetFramesTxIn3,
+        old(self).EthernetFramesTxOut0 == final(self).EthernetFramesTxOut0,
+        old(self).EthernetFramesTxOut1 == final(self).EthernetFramesTxOut1,
+        final(self).EthernetFramesTxOut2 == Some(value),
+        old(self).EthernetFramesTxOut3 == final(self).EthernetFramesTxOut3,
     {
       self.api.unverified_put_EthernetFramesTxOut2(value);
-      self.EthernetFramesTxOut2 = Some(value);
+      proof { self.EthernetFramesTxOut2 = Some(value); }
     }
     pub fn put_EthernetFramesTxOut3(
       &mut self,
       value: open_platform_Data_Model::SizedEthernetMessage_Impl)
       ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
-        old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
-        old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        self.EthernetFramesTxOut3 == Some(value),
+        old(self).EthernetFramesTxIn0 == final(self).EthernetFramesTxIn0,
+        old(self).EthernetFramesTxIn1 == final(self).EthernetFramesTxIn1,
+        old(self).EthernetFramesTxIn2 == final(self).EthernetFramesTxIn2,
+        old(self).EthernetFramesTxIn3 == final(self).EthernetFramesTxIn3,
+        old(self).EthernetFramesTxOut0 == final(self).EthernetFramesTxOut0,
+        old(self).EthernetFramesTxOut1 == final(self).EthernetFramesTxOut1,
+        old(self).EthernetFramesTxOut2 == final(self).EthernetFramesTxOut2,
+        final(self).EthernetFramesTxOut3 == Some(value),
     {
       self.api.unverified_put_EthernetFramesTxOut3(value);
-      self.EthernetFramesTxOut3 = Some(value);
+      proof { self.EthernetFramesTxOut3 = Some(value); }
     }
   }
 
   impl<API: seL4_TxFirewall_TxFirewall_Get_Api> seL4_TxFirewall_TxFirewall_Application_Api<API> {
     pub fn get_EthernetFramesTxIn0(&mut self) -> (res : Option<open_platform_Data_Model::RawEthernetMessage>)
       ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        res == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
-        old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
-        old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3,
+        old(self).EthernetFramesTxIn0 == final(self).EthernetFramesTxIn0,
+        res == final(self).EthernetFramesTxIn0,
+        old(self).EthernetFramesTxIn1 == final(self).EthernetFramesTxIn1,
+        old(self).EthernetFramesTxIn2 == final(self).EthernetFramesTxIn2,
+        old(self).EthernetFramesTxIn3 == final(self).EthernetFramesTxIn3,
+        old(self).EthernetFramesTxOut0 == final(self).EthernetFramesTxOut0,
+        old(self).EthernetFramesTxOut1 == final(self).EthernetFramesTxOut1,
+        old(self).EthernetFramesTxOut2 == final(self).EthernetFramesTxOut2,
+        old(self).EthernetFramesTxOut3 == final(self).EthernetFramesTxOut3,
     {
       self.api.unverified_get_EthernetFramesTxIn0(&Ghost(self.EthernetFramesTxIn0))
     }
     pub fn get_EthernetFramesTxIn1(&mut self) -> (res : Option<open_platform_Data_Model::RawEthernetMessage>)
       ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        res == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
-        old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
-        old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3,
+        old(self).EthernetFramesTxIn0 == final(self).EthernetFramesTxIn0,
+        old(self).EthernetFramesTxIn1 == final(self).EthernetFramesTxIn1,
+        res == final(self).EthernetFramesTxIn1,
+        old(self).EthernetFramesTxIn2 == final(self).EthernetFramesTxIn2,
+        old(self).EthernetFramesTxIn3 == final(self).EthernetFramesTxIn3,
+        old(self).EthernetFramesTxOut0 == final(self).EthernetFramesTxOut0,
+        old(self).EthernetFramesTxOut1 == final(self).EthernetFramesTxOut1,
+        old(self).EthernetFramesTxOut2 == final(self).EthernetFramesTxOut2,
+        old(self).EthernetFramesTxOut3 == final(self).EthernetFramesTxOut3,
     {
       self.api.unverified_get_EthernetFramesTxIn1(&Ghost(self.EthernetFramesTxIn1))
     }
     pub fn get_EthernetFramesTxIn2(&mut self) -> (res : Option<open_platform_Data_Model::RawEthernetMessage>)
       ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        res == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
-        old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
-        old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3,
+        old(self).EthernetFramesTxIn0 == final(self).EthernetFramesTxIn0,
+        old(self).EthernetFramesTxIn1 == final(self).EthernetFramesTxIn1,
+        old(self).EthernetFramesTxIn2 == final(self).EthernetFramesTxIn2,
+        res == final(self).EthernetFramesTxIn2,
+        old(self).EthernetFramesTxIn3 == final(self).EthernetFramesTxIn3,
+        old(self).EthernetFramesTxOut0 == final(self).EthernetFramesTxOut0,
+        old(self).EthernetFramesTxOut1 == final(self).EthernetFramesTxOut1,
+        old(self).EthernetFramesTxOut2 == final(self).EthernetFramesTxOut2,
+        old(self).EthernetFramesTxOut3 == final(self).EthernetFramesTxOut3,
     {
       self.api.unverified_get_EthernetFramesTxIn2(&Ghost(self.EthernetFramesTxIn2))
     }
     pub fn get_EthernetFramesTxIn3(&mut self) -> (res : Option<open_platform_Data_Model::RawEthernetMessage>)
       ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        res == self.EthernetFramesTxIn3,
-        old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
-        old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
-        old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3,
+        old(self).EthernetFramesTxIn0 == final(self).EthernetFramesTxIn0,
+        old(self).EthernetFramesTxIn1 == final(self).EthernetFramesTxIn1,
+        old(self).EthernetFramesTxIn2 == final(self).EthernetFramesTxIn2,
+        old(self).EthernetFramesTxIn3 == final(self).EthernetFramesTxIn3,
+        res == final(self).EthernetFramesTxIn3,
+        old(self).EthernetFramesTxOut0 == final(self).EthernetFramesTxOut0,
+        old(self).EthernetFramesTxOut1 == final(self).EthernetFramesTxOut1,
+        old(self).EthernetFramesTxOut2 == final(self).EthernetFramesTxOut2,
+        old(self).EthernetFramesTxOut3 == final(self).EthernetFramesTxOut3,
     {
       self.api.unverified_get_EthernetFramesTxIn3(&Ghost(self.EthernetFramesTxIn3))
     }

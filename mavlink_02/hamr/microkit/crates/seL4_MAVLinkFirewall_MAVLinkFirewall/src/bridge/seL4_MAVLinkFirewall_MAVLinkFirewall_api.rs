@@ -10,6 +10,14 @@ verus! {
 
   pub trait seL4_MAVLinkFirewall_MAVLinkFirewall_Put_Api: seL4_MAVLinkFirewall_MAVLinkFirewall_Api {
     #[verifier::external_body]
+    fn unverified_put_error_status(
+      &mut self,
+      value: bool)
+    {
+      extern_api::unsafe_put_error_status(&value);
+    }
+
+    #[verifier::external_body]
     fn unverified_put_EthernetFramesOut0(
       &mut self,
       value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
@@ -43,6 +51,16 @@ verus! {
   }
 
   pub trait seL4_MAVLinkFirewall_MAVLinkFirewall_Get_Api: seL4_MAVLinkFirewall_MAVLinkFirewall_Api {
+    #[verifier::external_body]
+    fn unverified_get_current_mode(
+      &mut self,
+      value: &Ghost<open_platform_Data_Model::OperatingMode>) -> (res : open_platform_Data_Model::OperatingMode)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_get_current_mode();
+    }
+
     #[verifier::external_body]
     fn unverified_get_EthernetFramesIn0(
       &mut self,
@@ -82,6 +100,106 @@ verus! {
     {
       return extern_api::unsafe_get_EthernetFramesIn3();
     }
+
+    #[verifier::external_body]
+    fn unverified_peek_current_mode(
+      &self,
+      value: &Ghost<open_platform_Data_Model::OperatingMode>) -> (res : open_platform_Data_Model::OperatingMode)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_peek_current_mode();
+    }
+
+    #[verifier::external_body]
+    fn unverified_peek_error_status(
+      &self,
+      value: &Ghost<bool>) -> (res : bool)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_peek_error_status();
+    }
+
+    #[verifier::external_body]
+    fn unverified_peek_EthernetFramesIn0(
+      &self,
+      value: &Ghost<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>>) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_peek_EthernetFramesIn0();
+    }
+
+    #[verifier::external_body]
+    fn unverified_peek_EthernetFramesIn1(
+      &self,
+      value: &Ghost<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>>) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_peek_EthernetFramesIn1();
+    }
+
+    #[verifier::external_body]
+    fn unverified_peek_EthernetFramesIn2(
+      &self,
+      value: &Ghost<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>>) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_peek_EthernetFramesIn2();
+    }
+
+    #[verifier::external_body]
+    fn unverified_peek_EthernetFramesIn3(
+      &self,
+      value: &Ghost<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>>) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_peek_EthernetFramesIn3();
+    }
+
+    #[verifier::external_body]
+    fn unverified_peek_EthernetFramesOut0(
+      &self,
+      value: &Ghost<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>>) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_peek_EthernetFramesOut0();
+    }
+
+    #[verifier::external_body]
+    fn unverified_peek_EthernetFramesOut1(
+      &self,
+      value: &Ghost<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>>) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_peek_EthernetFramesOut1();
+    }
+
+    #[verifier::external_body]
+    fn unverified_peek_EthernetFramesOut2(
+      &self,
+      value: &Ghost<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>>) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_peek_EthernetFramesOut2();
+    }
+
+    #[verifier::external_body]
+    fn unverified_peek_EthernetFramesOut3(
+      &self,
+      value: &Ghost<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>>) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_peek_EthernetFramesOut3();
+    }
   }
 
   pub trait seL4_MAVLinkFirewall_MAVLinkFirewall_Full_Api: seL4_MAVLinkFirewall_MAVLinkFirewall_Put_Api + seL4_MAVLinkFirewall_MAVLinkFirewall_Get_Api {}
@@ -89,151 +207,263 @@ verus! {
   pub struct seL4_MAVLinkFirewall_MAVLinkFirewall_Application_Api<API: seL4_MAVLinkFirewall_MAVLinkFirewall_Api> {
     pub api: API,
 
+    pub ghost current_mode: open_platform_Data_Model::OperatingMode,
     pub ghost EthernetFramesIn0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
     pub ghost EthernetFramesIn1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
     pub ghost EthernetFramesIn2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
     pub ghost EthernetFramesIn3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
+    pub ghost error_status: bool,
     pub ghost EthernetFramesOut0: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
     pub ghost EthernetFramesOut1: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
     pub ghost EthernetFramesOut2: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
-    pub ghost EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+    pub ghost EthernetFramesOut3: Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>,
   }
 
   impl<API: seL4_MAVLinkFirewall_MAVLinkFirewall_Put_Api> seL4_MAVLinkFirewall_MAVLinkFirewall_Application_Api<API> {
+    pub fn put_error_status(
+      &mut self,
+      value: bool)
+      ensures
+        old(self).current_mode == final(self).current_mode,
+        final(self).error_status == value,
+        old(self).EthernetFramesIn0 == final(self).EthernetFramesIn0,
+        old(self).EthernetFramesIn1 == final(self).EthernetFramesIn1,
+        old(self).EthernetFramesIn2 == final(self).EthernetFramesIn2,
+        old(self).EthernetFramesIn3 == final(self).EthernetFramesIn3,
+        old(self).EthernetFramesOut0 == final(self).EthernetFramesOut0,
+        old(self).EthernetFramesOut1 == final(self).EthernetFramesOut1,
+        old(self).EthernetFramesOut2 == final(self).EthernetFramesOut2,
+        old(self).EthernetFramesOut3 == final(self).EthernetFramesOut3,
+    {
+      self.api.unverified_put_error_status(value);
+      proof { self.error_status = value; }
+    }
     pub fn put_EthernetFramesOut0(
       &mut self,
       value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
       requires
-        // guarantee hlr_22_output0_allowed
+        // guarantee hlr_22_llr_9_output0_allowed
         crate::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app::mavlink_allowed(value),
       ensures
-        old(self).EthernetFramesIn0 == self.EthernetFramesIn0,
-        old(self).EthernetFramesIn1 == self.EthernetFramesIn1,
-        old(self).EthernetFramesIn2 == self.EthernetFramesIn2,
-        old(self).EthernetFramesIn3 == self.EthernetFramesIn3,
-        self.EthernetFramesOut0 == Some(value),
-        old(self).EthernetFramesOut1 == self.EthernetFramesOut1,
-        old(self).EthernetFramesOut2 == self.EthernetFramesOut2,
-        old(self).EthernetFramesOut3 == self.EthernetFramesOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).error_status == final(self).error_status,
+        old(self).EthernetFramesIn0 == final(self).EthernetFramesIn0,
+        old(self).EthernetFramesIn1 == final(self).EthernetFramesIn1,
+        old(self).EthernetFramesIn2 == final(self).EthernetFramesIn2,
+        old(self).EthernetFramesIn3 == final(self).EthernetFramesIn3,
+        final(self).EthernetFramesOut0 == Some(value),
+        old(self).EthernetFramesOut1 == final(self).EthernetFramesOut1,
+        old(self).EthernetFramesOut2 == final(self).EthernetFramesOut2,
+        old(self).EthernetFramesOut3 == final(self).EthernetFramesOut3,
     {
       self.api.unverified_put_EthernetFramesOut0(value);
-      self.EthernetFramesOut0 = Some(value);
+      proof { self.EthernetFramesOut0 = Some(value); }
     }
     pub fn put_EthernetFramesOut1(
       &mut self,
       value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
       requires
-        // guarantee hlr_22_output1_allowed
+        // guarantee hlr_22_llr_9_output1_allowed
         crate::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app::mavlink_allowed(value),
       ensures
-        old(self).EthernetFramesIn0 == self.EthernetFramesIn0,
-        old(self).EthernetFramesIn1 == self.EthernetFramesIn1,
-        old(self).EthernetFramesIn2 == self.EthernetFramesIn2,
-        old(self).EthernetFramesIn3 == self.EthernetFramesIn3,
-        old(self).EthernetFramesOut0 == self.EthernetFramesOut0,
-        self.EthernetFramesOut1 == Some(value),
-        old(self).EthernetFramesOut2 == self.EthernetFramesOut2,
-        old(self).EthernetFramesOut3 == self.EthernetFramesOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).error_status == final(self).error_status,
+        old(self).EthernetFramesIn0 == final(self).EthernetFramesIn0,
+        old(self).EthernetFramesIn1 == final(self).EthernetFramesIn1,
+        old(self).EthernetFramesIn2 == final(self).EthernetFramesIn2,
+        old(self).EthernetFramesIn3 == final(self).EthernetFramesIn3,
+        old(self).EthernetFramesOut0 == final(self).EthernetFramesOut0,
+        final(self).EthernetFramesOut1 == Some(value),
+        old(self).EthernetFramesOut2 == final(self).EthernetFramesOut2,
+        old(self).EthernetFramesOut3 == final(self).EthernetFramesOut3,
     {
       self.api.unverified_put_EthernetFramesOut1(value);
-      self.EthernetFramesOut1 = Some(value);
+      proof { self.EthernetFramesOut1 = Some(value); }
     }
     pub fn put_EthernetFramesOut2(
       &mut self,
       value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
       requires
-        // guarantee hlr_22_output2_allowed
+        // guarantee hlr_22_llr_9_output2_allowed
         crate::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app::mavlink_allowed(value),
       ensures
-        old(self).EthernetFramesIn0 == self.EthernetFramesIn0,
-        old(self).EthernetFramesIn1 == self.EthernetFramesIn1,
-        old(self).EthernetFramesIn2 == self.EthernetFramesIn2,
-        old(self).EthernetFramesIn3 == self.EthernetFramesIn3,
-        old(self).EthernetFramesOut0 == self.EthernetFramesOut0,
-        old(self).EthernetFramesOut1 == self.EthernetFramesOut1,
-        self.EthernetFramesOut2 == Some(value),
-        old(self).EthernetFramesOut3 == self.EthernetFramesOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).error_status == final(self).error_status,
+        old(self).EthernetFramesIn0 == final(self).EthernetFramesIn0,
+        old(self).EthernetFramesIn1 == final(self).EthernetFramesIn1,
+        old(self).EthernetFramesIn2 == final(self).EthernetFramesIn2,
+        old(self).EthernetFramesIn3 == final(self).EthernetFramesIn3,
+        old(self).EthernetFramesOut0 == final(self).EthernetFramesOut0,
+        old(self).EthernetFramesOut1 == final(self).EthernetFramesOut1,
+        final(self).EthernetFramesOut2 == Some(value),
+        old(self).EthernetFramesOut3 == final(self).EthernetFramesOut3,
     {
       self.api.unverified_put_EthernetFramesOut2(value);
-      self.EthernetFramesOut2 = Some(value);
+      proof { self.EthernetFramesOut2 = Some(value); }
     }
     pub fn put_EthernetFramesOut3(
       &mut self,
       value: open_platform_Data_Model::MAVLinkUDPMessage_Impl)
       requires
-        // guarantee hlr_22_output3_allowed
+        // guarantee hlr_22_llr_9_output3_allowed
         crate::component::seL4_MAVLinkFirewall_MAVLinkFirewall_app::mavlink_allowed(value),
       ensures
-        old(self).EthernetFramesIn0 == self.EthernetFramesIn0,
-        old(self).EthernetFramesIn1 == self.EthernetFramesIn1,
-        old(self).EthernetFramesIn2 == self.EthernetFramesIn2,
-        old(self).EthernetFramesIn3 == self.EthernetFramesIn3,
-        old(self).EthernetFramesOut0 == self.EthernetFramesOut0,
-        old(self).EthernetFramesOut1 == self.EthernetFramesOut1,
-        old(self).EthernetFramesOut2 == self.EthernetFramesOut2,
-        self.EthernetFramesOut3 == Some(value),
+        old(self).current_mode == final(self).current_mode,
+        old(self).error_status == final(self).error_status,
+        old(self).EthernetFramesIn0 == final(self).EthernetFramesIn0,
+        old(self).EthernetFramesIn1 == final(self).EthernetFramesIn1,
+        old(self).EthernetFramesIn2 == final(self).EthernetFramesIn2,
+        old(self).EthernetFramesIn3 == final(self).EthernetFramesIn3,
+        old(self).EthernetFramesOut0 == final(self).EthernetFramesOut0,
+        old(self).EthernetFramesOut1 == final(self).EthernetFramesOut1,
+        old(self).EthernetFramesOut2 == final(self).EthernetFramesOut2,
+        final(self).EthernetFramesOut3 == Some(value),
     {
       self.api.unverified_put_EthernetFramesOut3(value);
-      self.EthernetFramesOut3 = Some(value);
+      proof { self.EthernetFramesOut3 = Some(value); }
     }
   }
 
   impl<API: seL4_MAVLinkFirewall_MAVLinkFirewall_Get_Api> seL4_MAVLinkFirewall_MAVLinkFirewall_Application_Api<API> {
+    pub fn get_current_mode(&mut self) -> (res : open_platform_Data_Model::OperatingMode)
+      ensures
+        old(self).current_mode == final(self).current_mode,
+        res == final(self).current_mode,
+        old(self).error_status == final(self).error_status,
+        old(self).EthernetFramesIn0 == final(self).EthernetFramesIn0,
+        old(self).EthernetFramesIn1 == final(self).EthernetFramesIn1,
+        old(self).EthernetFramesIn2 == final(self).EthernetFramesIn2,
+        old(self).EthernetFramesIn3 == final(self).EthernetFramesIn3,
+        old(self).EthernetFramesOut0 == final(self).EthernetFramesOut0,
+        old(self).EthernetFramesOut1 == final(self).EthernetFramesOut1,
+        old(self).EthernetFramesOut2 == final(self).EthernetFramesOut2,
+        old(self).EthernetFramesOut3 == final(self).EthernetFramesOut3,
+    {
+      self.api.unverified_get_current_mode(&Ghost(self.current_mode))
+    }
     pub fn get_EthernetFramesIn0(&mut self) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
       ensures
-        old(self).EthernetFramesIn0 == self.EthernetFramesIn0,
-        res == self.EthernetFramesIn0,
-        old(self).EthernetFramesIn1 == self.EthernetFramesIn1,
-        old(self).EthernetFramesIn2 == self.EthernetFramesIn2,
-        old(self).EthernetFramesIn3 == self.EthernetFramesIn3,
-        old(self).EthernetFramesOut0 == self.EthernetFramesOut0,
-        old(self).EthernetFramesOut1 == self.EthernetFramesOut1,
-        old(self).EthernetFramesOut2 == self.EthernetFramesOut2,
-        old(self).EthernetFramesOut3 == self.EthernetFramesOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).error_status == final(self).error_status,
+        old(self).EthernetFramesIn0 == final(self).EthernetFramesIn0,
+        res == final(self).EthernetFramesIn0,
+        old(self).EthernetFramesIn1 == final(self).EthernetFramesIn1,
+        old(self).EthernetFramesIn2 == final(self).EthernetFramesIn2,
+        old(self).EthernetFramesIn3 == final(self).EthernetFramesIn3,
+        old(self).EthernetFramesOut0 == final(self).EthernetFramesOut0,
+        old(self).EthernetFramesOut1 == final(self).EthernetFramesOut1,
+        old(self).EthernetFramesOut2 == final(self).EthernetFramesOut2,
+        old(self).EthernetFramesOut3 == final(self).EthernetFramesOut3,
     {
       self.api.unverified_get_EthernetFramesIn0(&Ghost(self.EthernetFramesIn0))
     }
     pub fn get_EthernetFramesIn1(&mut self) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
       ensures
-        old(self).EthernetFramesIn0 == self.EthernetFramesIn0,
-        old(self).EthernetFramesIn1 == self.EthernetFramesIn1,
-        res == self.EthernetFramesIn1,
-        old(self).EthernetFramesIn2 == self.EthernetFramesIn2,
-        old(self).EthernetFramesIn3 == self.EthernetFramesIn3,
-        old(self).EthernetFramesOut0 == self.EthernetFramesOut0,
-        old(self).EthernetFramesOut1 == self.EthernetFramesOut1,
-        old(self).EthernetFramesOut2 == self.EthernetFramesOut2,
-        old(self).EthernetFramesOut3 == self.EthernetFramesOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).error_status == final(self).error_status,
+        old(self).EthernetFramesIn0 == final(self).EthernetFramesIn0,
+        old(self).EthernetFramesIn1 == final(self).EthernetFramesIn1,
+        res == final(self).EthernetFramesIn1,
+        old(self).EthernetFramesIn2 == final(self).EthernetFramesIn2,
+        old(self).EthernetFramesIn3 == final(self).EthernetFramesIn3,
+        old(self).EthernetFramesOut0 == final(self).EthernetFramesOut0,
+        old(self).EthernetFramesOut1 == final(self).EthernetFramesOut1,
+        old(self).EthernetFramesOut2 == final(self).EthernetFramesOut2,
+        old(self).EthernetFramesOut3 == final(self).EthernetFramesOut3,
     {
       self.api.unverified_get_EthernetFramesIn1(&Ghost(self.EthernetFramesIn1))
     }
     pub fn get_EthernetFramesIn2(&mut self) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
       ensures
-        old(self).EthernetFramesIn0 == self.EthernetFramesIn0,
-        old(self).EthernetFramesIn1 == self.EthernetFramesIn1,
-        old(self).EthernetFramesIn2 == self.EthernetFramesIn2,
-        res == self.EthernetFramesIn2,
-        old(self).EthernetFramesIn3 == self.EthernetFramesIn3,
-        old(self).EthernetFramesOut0 == self.EthernetFramesOut0,
-        old(self).EthernetFramesOut1 == self.EthernetFramesOut1,
-        old(self).EthernetFramesOut2 == self.EthernetFramesOut2,
-        old(self).EthernetFramesOut3 == self.EthernetFramesOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).error_status == final(self).error_status,
+        old(self).EthernetFramesIn0 == final(self).EthernetFramesIn0,
+        old(self).EthernetFramesIn1 == final(self).EthernetFramesIn1,
+        old(self).EthernetFramesIn2 == final(self).EthernetFramesIn2,
+        res == final(self).EthernetFramesIn2,
+        old(self).EthernetFramesIn3 == final(self).EthernetFramesIn3,
+        old(self).EthernetFramesOut0 == final(self).EthernetFramesOut0,
+        old(self).EthernetFramesOut1 == final(self).EthernetFramesOut1,
+        old(self).EthernetFramesOut2 == final(self).EthernetFramesOut2,
+        old(self).EthernetFramesOut3 == final(self).EthernetFramesOut3,
     {
       self.api.unverified_get_EthernetFramesIn2(&Ghost(self.EthernetFramesIn2))
     }
     pub fn get_EthernetFramesIn3(&mut self) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
       ensures
-        old(self).EthernetFramesIn0 == self.EthernetFramesIn0,
-        old(self).EthernetFramesIn1 == self.EthernetFramesIn1,
-        old(self).EthernetFramesIn2 == self.EthernetFramesIn2,
-        old(self).EthernetFramesIn3 == self.EthernetFramesIn3,
-        res == self.EthernetFramesIn3,
-        old(self).EthernetFramesOut0 == self.EthernetFramesOut0,
-        old(self).EthernetFramesOut1 == self.EthernetFramesOut1,
-        old(self).EthernetFramesOut2 == self.EthernetFramesOut2,
-        old(self).EthernetFramesOut3 == self.EthernetFramesOut3,
+        old(self).current_mode == final(self).current_mode,
+        old(self).error_status == final(self).error_status,
+        old(self).EthernetFramesIn0 == final(self).EthernetFramesIn0,
+        old(self).EthernetFramesIn1 == final(self).EthernetFramesIn1,
+        old(self).EthernetFramesIn2 == final(self).EthernetFramesIn2,
+        old(self).EthernetFramesIn3 == final(self).EthernetFramesIn3,
+        res == final(self).EthernetFramesIn3,
+        old(self).EthernetFramesOut0 == final(self).EthernetFramesOut0,
+        old(self).EthernetFramesOut1 == final(self).EthernetFramesOut1,
+        old(self).EthernetFramesOut2 == final(self).EthernetFramesOut2,
+        old(self).EthernetFramesOut3 == final(self).EthernetFramesOut3,
     {
       self.api.unverified_get_EthernetFramesIn3(&Ghost(self.EthernetFramesIn3))
+    }
+    pub fn peek_current_mode(&self) -> (res : open_platform_Data_Model::OperatingMode)
+      ensures
+        res == self.current_mode,
+    {
+      self.api.unverified_peek_current_mode(&Ghost(self.current_mode))
+    }
+    pub fn peek_error_status(&self) -> (res : bool)
+      ensures
+        res == self.error_status,
+    {
+      self.api.unverified_peek_error_status(&Ghost(self.error_status))
+    }
+    pub fn peek_EthernetFramesIn0(&self) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == self.EthernetFramesIn0,
+    {
+      self.api.unverified_peek_EthernetFramesIn0(&Ghost(self.EthernetFramesIn0))
+    }
+    pub fn peek_EthernetFramesIn1(&self) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == self.EthernetFramesIn1,
+    {
+      self.api.unverified_peek_EthernetFramesIn1(&Ghost(self.EthernetFramesIn1))
+    }
+    pub fn peek_EthernetFramesIn2(&self) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == self.EthernetFramesIn2,
+    {
+      self.api.unverified_peek_EthernetFramesIn2(&Ghost(self.EthernetFramesIn2))
+    }
+    pub fn peek_EthernetFramesIn3(&self) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == self.EthernetFramesIn3,
+    {
+      self.api.unverified_peek_EthernetFramesIn3(&Ghost(self.EthernetFramesIn3))
+    }
+    pub fn peek_EthernetFramesOut0(&self) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == self.EthernetFramesOut0,
+    {
+      self.api.unverified_peek_EthernetFramesOut0(&Ghost(self.EthernetFramesOut0))
+    }
+    pub fn peek_EthernetFramesOut1(&self) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == self.EthernetFramesOut1,
+    {
+      self.api.unverified_peek_EthernetFramesOut1(&Ghost(self.EthernetFramesOut1))
+    }
+    pub fn peek_EthernetFramesOut2(&self) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == self.EthernetFramesOut2,
+    {
+      self.api.unverified_peek_EthernetFramesOut2(&Ghost(self.EthernetFramesOut2))
+    }
+    pub fn peek_EthernetFramesOut3(&self) -> (res : Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>)
+      ensures
+        res == self.EthernetFramesOut3,
+    {
+      self.api.unverified_peek_EthernetFramesOut3(&Ghost(self.EthernetFramesOut3))
     }
   }
 
@@ -245,10 +475,12 @@ verus! {
     return seL4_MAVLinkFirewall_MAVLinkFirewall_Application_Api {
       api: seL4_MAVLinkFirewall_MAVLinkFirewall_Initialization_Api {},
 
+      current_mode: open_platform_Data_Model::OperatingMode::Normal,
       EthernetFramesIn0: None,
       EthernetFramesIn1: None,
       EthernetFramesIn2: None,
       EthernetFramesIn3: None,
+      error_status: false,
       EthernetFramesOut0: None,
       EthernetFramesOut1: None,
       EthernetFramesOut2: None,
@@ -266,10 +498,12 @@ verus! {
     return seL4_MAVLinkFirewall_MAVLinkFirewall_Application_Api {
       api: seL4_MAVLinkFirewall_MAVLinkFirewall_Compute_Api {},
 
+      current_mode: open_platform_Data_Model::OperatingMode::Normal,
       EthernetFramesIn0: None,
       EthernetFramesIn1: None,
       EthernetFramesIn2: None,
       EthernetFramesIn3: None,
+      error_status: false,
       EthernetFramesOut0: None,
       EthernetFramesOut1: None,
       EthernetFramesOut2: None,

@@ -12,6 +12,12 @@
 #![allow(unused_unsafe)]
 #![allow(unused_variables)]
 
+// The two features below are required by the Verus build but go unused on a
+// plain cargo build, and `verus_keep_ghost` is set by Verus rather than
+// declared to cargo, so both lints fire only on the non-Verus path.
+#![allow(unused_features)]
+#![allow(unexpected_cfgs)]
+
 #![feature(proc_macro_hygiene)]
 #![cfg_attr(not(verus_keep_ghost), feature(stmt_expr_attributes))]
 
@@ -42,6 +48,7 @@ pub extern "C" fn seL4_MAVLinkFirewall_MAVLinkFirewall_initialize() {
 
     let mut _app = seL4_MAVLinkFirewall_MAVLinkFirewall::new();
     _app.initialize(&mut init_api);
+    _app.r2u2_monitor_initialize();
     app = Some(_app);
   }
 }
@@ -50,7 +57,9 @@ pub extern "C" fn seL4_MAVLinkFirewall_MAVLinkFirewall_initialize() {
 pub extern "C" fn seL4_MAVLinkFirewall_MAVLinkFirewall_timeTriggered() {
   unsafe {
     if let Some(_app) = app.as_mut() {
+      _app.r2u2_monitor_pre_timeTriggered(&compute_api);
       _app.timeTriggered(&mut compute_api);
+      _app.r2u2_monitor_post_timeTriggered(&mut compute_api);
     } else {
       panic!("Unexpected: app is None");
     }

@@ -5,6 +5,22 @@ microkit_sdk_config_dir := $(MICROKIT_SDK)/board/$(MICROKIT_BOARD)/$(MICROKIT_CO
 sel4_include_dirs := $(firstword $(wildcard $(microkit_sdk_config_dir)/include \
                                             $(microkit_sdk_config_dir)/debug/include))
 
+# BEGIN MARKER FOR R2U2_BUILD_DEPS RULE
+.DEFAULT_GOAL := all
+R2U2_BUILD_DEPS := src/component/spec.bin
+
+r2u2_cli:
+	@echo "Checking/Updating r2u2_cli from crates.io..."
+	cargo +stable install r2u2_cli --version 4.2.4
+
+$(R2U2_BUILD_DEPS): r2u2_cli
+	mkdir -p .cargo && \
+	cd src/component && \
+	sed '/^--/d' spec.map > temp.map && \
+	r2u2_cli compile -o . -b ../../.cargo/config.toml spec.c2po temp.map && \
+	rm temp.map
+# END MARKER FOR R2U2_BUILD_DEPS RULE
+
 ENV_VARS = RUSTC_BOOTSTRAP=1
 
 BUILD_ENV_VARS = $(ENV_VARS) \
@@ -16,22 +32,22 @@ CARGO_FLAGS = -Z build-std=core,alloc,compiler_builtins \
 
 all: build-verus-release
 
-build-verus-release:
+build-verus-release: $(R2U2_BUILD_DEPS)
 	$(BUILD_ENV_VARS) cargo-verus build --features sel4 $(CARGO_FLAGS) --release
 
-build-verus:
+build-verus: $(R2U2_BUILD_DEPS)
 	$(BUILD_ENV_VARS) cargo-verus build --features sel4 $(CARGO_FLAGS)
 
-build-release:
+build-release: $(R2U2_BUILD_DEPS)
 	$(BUILD_ENV_VARS) cargo build --features sel4 $(CARGO_FLAGS) --release
 
-build:
+build: $(R2U2_BUILD_DEPS)
 	$(BUILD_ENV_VARS) cargo build --features sel4 $(CARGO_FLAGS)
 
-verus:
+verus: $(R2U2_BUILD_DEPS)
 	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS)
 
-verus-json:
+verus-json: $(R2U2_BUILD_DEPS)
 	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --output-json --time > verus_results.json
 
 # Test Example:
@@ -41,10 +57,10 @@ verus-json:
 #   Run only unit tests whose name contains 'proptest'
 #   Usage: make test args=proptest
 
-test-release:
+test-release: $(R2U2_BUILD_DEPS)
 	cargo test $(args) --release
 
-test:
+test: $(R2U2_BUILD_DEPS)
 	cargo test $(args)
 
 # Coverage Example:
@@ -54,7 +70,7 @@ test:
 #   Generate a test coverage report for unit tests whose name contains 'proptest'
 #   Usage: make coverage args=proptest
 
-coverage:
+coverage: $(R2U2_BUILD_DEPS)
 	cargo install grcov
 	@exists=0; if [ -f target/coverage/report/index.html ]; then exists=1; fi; \
 	rm -rf target/coverage; \

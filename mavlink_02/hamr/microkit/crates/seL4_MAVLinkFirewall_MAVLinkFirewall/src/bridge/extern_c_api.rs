@@ -11,14 +11,35 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
+  fn get_current_mode(value: *mut open_platform_Data_Model::OperatingMode) -> bool;
   fn get_EthernetFramesIn0(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
   fn get_EthernetFramesIn1(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
   fn get_EthernetFramesIn2(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
   fn get_EthernetFramesIn3(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+  fn put_error_status(value: *mut bool) -> bool;
   fn put_EthernetFramesOut0(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
   fn put_EthernetFramesOut1(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
   fn put_EthernetFramesOut2(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
   fn put_EthernetFramesOut3(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+  fn peek_current_mode(value: *mut open_platform_Data_Model::OperatingMode) -> bool;
+  fn peek_error_status(value: *mut bool) -> bool;
+  fn peek_EthernetFramesIn0(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+  fn peek_EthernetFramesIn1(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+  fn peek_EthernetFramesIn2(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+  fn peek_EthernetFramesIn3(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+  fn peek_EthernetFramesOut0(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+  fn peek_EthernetFramesOut1(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+  fn peek_EthernetFramesOut2(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+  fn peek_EthernetFramesOut3(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool;
+}
+
+pub fn unsafe_get_current_mode() -> open_platform_Data_Model::OperatingMode
+{
+  unsafe {
+    let value: *mut open_platform_Data_Model::OperatingMode = &mut open_platform_Data_Model::OperatingMode::default();
+    get_current_mode(value);
+    return *value;
+  }
 }
 
 pub fn unsafe_get_EthernetFramesIn0() -> Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
@@ -69,6 +90,13 @@ pub fn unsafe_get_EthernetFramesIn3() -> Option<open_platform_Data_Model::MAVLin
   }
 }
 
+pub fn unsafe_put_error_status(value: &bool) -> bool
+{
+  unsafe {
+    return put_error_status(value as *const bool as *mut bool);
+  }
+}
+
 pub fn unsafe_put_EthernetFramesOut0(value: &open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
 {
   unsafe {
@@ -97,6 +125,120 @@ pub fn unsafe_put_EthernetFramesOut3(value: &open_platform_Data_Model::MAVLinkUD
   }
 }
 
+pub fn unsafe_peek_current_mode() -> open_platform_Data_Model::OperatingMode
+{
+  unsafe {
+    let value: *mut open_platform_Data_Model::OperatingMode = &mut open_platform_Data_Model::OperatingMode::default();
+    peek_current_mode(value);
+    return *value;
+  }
+}
+
+pub fn unsafe_peek_error_status() -> bool
+{
+  unsafe {
+    let value: *mut bool = &mut false;
+    peek_error_status(value);
+    return *value;
+  }
+}
+
+pub fn unsafe_peek_EthernetFramesIn0() -> Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+{
+  unsafe {
+    let value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl = &mut open_platform_Data_Model::MAVLinkUDPMessage_Impl::default();
+    if (peek_EthernetFramesIn0(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
+
+pub fn unsafe_peek_EthernetFramesIn1() -> Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+{
+  unsafe {
+    let value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl = &mut open_platform_Data_Model::MAVLinkUDPMessage_Impl::default();
+    if (peek_EthernetFramesIn1(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
+
+pub fn unsafe_peek_EthernetFramesIn2() -> Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+{
+  unsafe {
+    let value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl = &mut open_platform_Data_Model::MAVLinkUDPMessage_Impl::default();
+    if (peek_EthernetFramesIn2(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
+
+pub fn unsafe_peek_EthernetFramesIn3() -> Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+{
+  unsafe {
+    let value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl = &mut open_platform_Data_Model::MAVLinkUDPMessage_Impl::default();
+    if (peek_EthernetFramesIn3(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
+
+pub fn unsafe_peek_EthernetFramesOut0() -> Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+{
+  unsafe {
+    let value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl = &mut open_platform_Data_Model::MAVLinkUDPMessage_Impl::default();
+    if (peek_EthernetFramesOut0(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
+
+pub fn unsafe_peek_EthernetFramesOut1() -> Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+{
+  unsafe {
+    let value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl = &mut open_platform_Data_Model::MAVLinkUDPMessage_Impl::default();
+    if (peek_EthernetFramesOut1(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
+
+pub fn unsafe_peek_EthernetFramesOut2() -> Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+{
+  unsafe {
+    let value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl = &mut open_platform_Data_Model::MAVLinkUDPMessage_Impl::default();
+    if (peek_EthernetFramesOut2(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
+
+pub fn unsafe_peek_EthernetFramesOut3() -> Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>
+{
+  unsafe {
+    let value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl = &mut open_platform_Data_Model::MAVLinkUDPMessage_Impl::default();
+    if (peek_EthernetFramesOut3(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
 //////////////////////////////////////////////////////////////////////////////////
@@ -106,10 +248,12 @@ lazy_static::lazy_static! {
   // simulate the global C variables that point to the microkit shared memory regions.  In a full
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
+  pub static ref IN_current_mode: Mutex<Option<open_platform_Data_Model::OperatingMode>> = Mutex::new(None);
   pub static ref IN_EthernetFramesIn0: Mutex<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>> = Mutex::new(None);
   pub static ref IN_EthernetFramesIn1: Mutex<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>> = Mutex::new(None);
   pub static ref IN_EthernetFramesIn2: Mutex<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>> = Mutex::new(None);
   pub static ref IN_EthernetFramesIn3: Mutex<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>> = Mutex::new(None);
+  pub static ref OUT_error_status: Mutex<Option<bool>> = Mutex::new(None);
   pub static ref OUT_EthernetFramesOut0: Mutex<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>> = Mutex::new(None);
   pub static ref OUT_EthernetFramesOut1: Mutex<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>> = Mutex::new(None);
   pub static ref OUT_EthernetFramesOut2: Mutex<Option<open_platform_Data_Model::MAVLinkUDPMessage_Impl>> = Mutex::new(None);
@@ -119,14 +263,26 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
+    *IN_current_mode.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_EthernetFramesIn0.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_EthernetFramesIn1.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_EthernetFramesIn2.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_EthernetFramesIn3.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_error_status.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *OUT_EthernetFramesOut0.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *OUT_EthernetFramesOut1.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *OUT_EthernetFramesOut2.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *OUT_EthernetFramesOut3.lock().unwrap_or_else(|e| e.into_inner()) = None;
+  }
+}
+
+#[cfg(test)]
+pub fn get_current_mode(value: *mut open_platform_Data_Model::OperatingMode) -> bool
+{
+  unsafe {
+    let guard = IN_current_mode.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -187,6 +343,15 @@ pub fn get_EthernetFramesIn3(value: *mut open_platform_Data_Model::MAVLinkUDPMes
 }
 
 #[cfg(test)]
+pub fn put_error_status(value: *mut bool) -> bool
+{
+  unsafe {
+    *OUT_error_status.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
+    return true;
+  }
+}
+
+#[cfg(test)]
 pub fn put_EthernetFramesOut0(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
 {
   unsafe {
@@ -219,5 +384,145 @@ pub fn put_EthernetFramesOut3(value: *mut open_platform_Data_Model::MAVLinkUDPMe
   unsafe {
     *OUT_EthernetFramesOut3.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
+  }
+}
+
+#[cfg(test)]
+pub fn peek_current_mode(value: *mut open_platform_Data_Model::OperatingMode) -> bool
+{
+  unsafe {
+    match *IN_current_mode.lock().unwrap_or_else(|e| e.into_inner()) {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
+
+#[cfg(test)]
+pub fn peek_error_status(value: *mut bool) -> bool
+{
+  unsafe {
+    match *OUT_error_status.lock().unwrap_or_else(|e| e.into_inner()) {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
+
+#[cfg(test)]
+pub fn peek_EthernetFramesIn0(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    match *IN_EthernetFramesIn0.lock().unwrap_or_else(|e| e.into_inner()) {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
+
+#[cfg(test)]
+pub fn peek_EthernetFramesIn1(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    match *IN_EthernetFramesIn1.lock().unwrap_or_else(|e| e.into_inner()) {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
+
+#[cfg(test)]
+pub fn peek_EthernetFramesIn2(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    match *IN_EthernetFramesIn2.lock().unwrap_or_else(|e| e.into_inner()) {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
+
+#[cfg(test)]
+pub fn peek_EthernetFramesIn3(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    match *IN_EthernetFramesIn3.lock().unwrap_or_else(|e| e.into_inner()) {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
+
+#[cfg(test)]
+pub fn peek_EthernetFramesOut0(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    match *OUT_EthernetFramesOut0.lock().unwrap_or_else(|e| e.into_inner()) {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
+
+#[cfg(test)]
+pub fn peek_EthernetFramesOut1(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    match *OUT_EthernetFramesOut1.lock().unwrap_or_else(|e| e.into_inner()) {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
+
+#[cfg(test)]
+pub fn peek_EthernetFramesOut2(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    match *OUT_EthernetFramesOut2.lock().unwrap_or_else(|e| e.into_inner()) {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
+
+#[cfg(test)]
+pub fn peek_EthernetFramesOut3(value: *mut open_platform_Data_Model::MAVLinkUDPMessage_Impl) -> bool
+{
+  unsafe {
+    match *OUT_EthernetFramesOut3.lock().unwrap_or_else(|e| e.into_inner()) {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
   }
 }

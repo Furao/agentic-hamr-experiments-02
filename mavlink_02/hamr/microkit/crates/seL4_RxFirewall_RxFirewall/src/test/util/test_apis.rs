@@ -7,15 +7,17 @@ use proptest::prelude::*;
 
 /// container for component's incoming port values
 pub struct PreStateContainer {
+  pub api_current_mode: open_platform_Data_Model::OperatingMode,
   pub api_EthernetFramesRxIn0: Option<open_platform_Data_Model::RawEthernetMessage>,
   pub api_EthernetFramesRxIn1: Option<open_platform_Data_Model::RawEthernetMessage>,
   pub api_EthernetFramesRxIn2: Option<open_platform_Data_Model::RawEthernetMessage>,
-  pub api_EthernetFramesRxIn3: Option<open_platform_Data_Model::RawEthernetMessage>
+  pub api_EthernetFramesRxIn3: Option<open_platform_Data_Model::RawEthernetMessage>,
 }
 
 /// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
+  put_current_mode(container.api_current_mode);
   put_EthernetFramesRxIn0(container.api_EthernetFramesRxIn0);
   put_EthernetFramesRxIn1(container.api_EthernetFramesRxIn1);
   put_EthernetFramesRxIn2(container.api_EthernetFramesRxIn2);
@@ -24,15 +26,23 @@ pub fn put_concrete_inputs_container(container: PreStateContainer)
 
 /// setter for component's incoming port values
 pub fn put_concrete_inputs(
+  current_mode: open_platform_Data_Model::OperatingMode,
   EthernetFramesRxIn0: Option<open_platform_Data_Model::RawEthernetMessage>,
   EthernetFramesRxIn1: Option<open_platform_Data_Model::RawEthernetMessage>,
   EthernetFramesRxIn2: Option<open_platform_Data_Model::RawEthernetMessage>,
   EthernetFramesRxIn3: Option<open_platform_Data_Model::RawEthernetMessage>)
 {
+  put_current_mode(current_mode);
   put_EthernetFramesRxIn0(EthernetFramesRxIn0);
   put_EthernetFramesRxIn1(EthernetFramesRxIn1);
   put_EthernetFramesRxIn2(EthernetFramesRxIn2);
   put_EthernetFramesRxIn3(EthernetFramesRxIn3);
+}
+
+/// setter for IN DataPort
+pub fn put_current_mode(value: open_platform_Data_Model::OperatingMode)
+{
+  *extern_api::IN_current_mode.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN EventDataPort
