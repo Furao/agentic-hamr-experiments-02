@@ -1,9 +1,17 @@
 # Workflow Status
 
-Project: open_platform | Profile: audited | Updated: 2026-09-11
+Project: open_platform | Profile: audited | Updated: 2026-09-22
 
 | Step | Status | Updated | Notes |
 |------|--------|---------|-------|
+| ChangePlan(CR-02) | done | 2026-09-22 | Developer explicitly approved current _06/R2U2 three-wave plan; all RD-1–RD-8 resolved; ChangeExec unlocked but not started |
+| ChangePlan(CR-02).1 | done | 2026-09-22 | Sketch preserved; _06 authoritative; developer confirmed strict UDP and owns requirements edits |
+| ChangePlan(CR-02).2 | done | 2026-09-22 | Surveyed 043d574970d28ff172f7261ea0392ddd14ae50a8; untracked request provenance and historical validation limits recorded; developer confirmed execution baseline (RD-1 resolved) |
+| ChangePlan(CR-02).3 | done | 2026-09-22 | Revision _06 resolves COMMAND_INT discrepancy; no offset code delta; authority and secure deny resolved; contract/ID/UDP impacts retained |
+| ChangePlan(CR-02).4 | done | 2026-09-22 | Impact revised for _06 and generated R2U2 HLR-30: add model monitor, hooks, runtime/build dependencies and one-time D2 logging; requirements developer-owned |
+| ChangePlan(CR-02).5 | done | 2026-09-22 | Three waves approved, including R2U2 generation, verdict/logging tests and target evidence; review and verification scope resolved |
+| ChangePlan(CR-02).6 | done | 2026-09-22 | Approved plan recorded; all eight Review Record rows resolved; developer retains requirements ownership |
+| ChangePlan(CR-02).AP1 | done | 2026-09-22 | Developer (user) explicitly approved plan on 2026-09-22; remaining proposed scope accepted; no additional external review gate |
 | ChangePlan(CR-01) | done | 2026-08-26 | Exit criteria met; plan approved by Robbie VanVossen |
 | ChangePlan(CR-01).1 | done | 2026-08-26 | Existing sketch resolved and preserved; audited ChangeScope answers recorded in change-plan.md |
 | ChangePlan(CR-01).2 | done | 2026-08-26 | Baseline pinned at 7a99f23; no pre-existing workflow/test/verification reports found |
