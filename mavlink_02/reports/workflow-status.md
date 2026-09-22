@@ -4,10 +4,10 @@ Project: open_platform | Profile: audited | Updated: 2026-09-22
 
 | Step | Status | Updated | Notes |
 |------|--------|---------|-------|
-| ChangeExec(CR-02) | in-progress | 2026-09-22 | Audited W1; architecture approved; RxFirewall contracts/type-check/audit complete, awaiting contract signoff |
+| ChangeExec(CR-02) | in-progress | 2026-09-22 | Audited W1; RxFirewall contracts approved; MAVLinkFirewall contracts/type-check/audit ready for signoff |
 | ChangeExec(CR-02).1 | done | 2026-09-22 | Approved plan/all RDs resolved; HEAD 24ba011d4f0a49c727a9b6c9cd28941f536891b4 drift is request/planning records only; approved source baseline unchanged |
 | ChangeExec(CR-02).2 | in-progress | 2026-09-22 | W1 started per approved sequence; W2/W3 not started |
-| ChangeExec(CR-02).W1 | in-progress | 2026-09-22 | _07 requirements and architecture approved; RxFirewall contract AP1 pending; remaining contracts/generation follow |
+| ChangeExec(CR-02).W1 | in-progress | 2026-09-22 | MAVLinkFirewall contract AP1 pending; monitor/reporting feasibility still required at W1 CodeGen gate |
 | ChangeExec(CR-02).W1.Requirements | done | 2026-09-22 | _07 supplies derived LLR-1–21; allocation and RF-1–RF-4 disposition in w1-requirements-planning-07.md; legacy document synchronization tracked for final sweep |
 | ChangeExec(CR-02).W1.SysModeling | done | 2026-09-22 | Developer approved architecture and audited sub-workflow boundary; continuing to RxFirewall contracts |
 | ChangeExec(CR-02).W1.SysModeling.1 | done | 2026-09-22 | Retained existing package/file layout and local aadl-lib |
@@ -16,12 +16,18 @@ Project: open_platform | Profile: audited | Updated: 2026-09-22
 | ChangeExec(CR-02).W1.SysModeling.4 | done | 2026-09-22 | Added 3 control connections, domain 7, Max_Domain 8; existing Ethernet connections/bindings retained |
 | ChangeExec(CR-02).W1.SysModeling.5 | done | 2026-09-22 | First tipe run exit 0 Well-formed; structural preservation checks passed; see w1-sysmodeling-report.md |
 | ChangeExec(CR-02).W1.SysModeling.AP1 | done | 2026-09-22 | Developer explicitly approved architecture; tipe clean |
-| ChangeExec(CR-02).W1.CompGUMBOSpec(RxFirewall) | in-progress | 2026-09-22 | Contract review ready; see reports/CR-02-RxFirewall-specification-audit.md |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(RxFirewall) | done | 2026-09-22 | Developer approved contracts including shared rx_bounded_udp refactor and audited boundary |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(RxFirewall).1 | done | 2026-09-22 | Frozen Normal guards, Recovery suppression, initialization no-send, strict direct UDP policy and LLR-4 bounds |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(RxFirewall).2 | done | 2026-09-22 | First tipe run exit 0 Well-formed |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(RxFirewall).3 | done | 2026-09-22 | Zero AP-1–AP-9 model findings; generated GUMBOX stale until planned W1 CodeGen |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(RxFirewall).4 | done | 2026-09-22 | Developer review: both UDP routes reuse rx_bounded_udp; no unresolved catalog findings or waivers; implementation and refreshed oracle tests remain W2 |
-| ChangeExec(CR-02).W1.CompGUMBOSpec(RxFirewall).AP1 | blocked | 2026-09-22 | Awaiting developer contract signoff and audited boundary approval before MAVLinkFirewall contracts |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(RxFirewall).AP1 | done | 2026-09-22 | Developer explicitly approved RxFirewall contracts |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall) | in-progress | 2026-09-22 | Review ready; reports/CR-02-MAVLinkFirewall-specification-audit.md records contract/refinement/runtime boundaries |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).1 | done | 2026-09-22 | Added saturated count, unconditional post-count status, frozen-mode guards, initialization and past-time R2U2 deadline formula |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).2 | done | 2026-09-22 | Iteration 2 Well-formed; replaced unsupported thread invariant with inductive compute pre/post bound |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).3 | done | 2026-09-22 | Zero new model-clause catalog findings; stale generated contracts and truncated SECURE_COMMAND developer-hook concern recorded |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).4 | done | 2026-09-22 | Model revisions complete; W1 generated reporter feasibility and W2 hook refinement/runtime tests remain explicit obligations |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).AP1 | blocked | 2026-09-22 | Awaiting developer review of contracts, refinement observation and runtime obligations before ModeManager contracts |
 | ChangeExec(CR-02).W1.AP1 | not-started | 2026-09-22 | Model/contracts/generation gates not yet reached |
 | ChangeExec(CR-02).W2 | not-started | 2026-09-22 | Awaiting W1 gate |
 | ChangeExec(CR-02).W3 | not-started | 2026-09-22 | Awaiting W2 gate |

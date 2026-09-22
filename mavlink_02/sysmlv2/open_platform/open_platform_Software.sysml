@@ -175,9 +175,15 @@ package open_platform_Software {
         attribute :>> Implementation_Language = Rust;
 
         language "GUMBO" /*{
+        state
+            rejected_count: Base_Types::Unsigned_16;
+
         functions
+            // LLR-6/7: refined by the existing component-owned verified parser hook.
             @spec def mavlink_frame_valid(msg: MAVLinkUDPMessage_Impl): Base_Types::Boolean;
 
+            // HLR-19/32, LLR-8: COMMAND_INT/LONG command 42650 or
+            // SECURE_COMMAND operation 7; bounded payload reads in the developer hook.
             @spec def mavlink_firmware_flash_command(msg: MAVLinkUDPMessage_Impl): Base_Types::Boolean;
 
             def mavlink_allowed(msg: MAVLinkUDPMessage_Impl): Base_Types::Boolean :=
@@ -185,64 +191,140 @@ package open_platform_Software {
                 mavlink_frame_valid(msg) and
                 not mavlink_firmware_flash_command(msg);
 
+            def rejection_limit(): Base_Types::Unsigned_16 := 20[u16];
+
+            def error_threshold(): Base_Types::Unsigned_16 := 5[u16];
+
+            def rejection_total(lane0: Base_Types::Boolean, lane1: Base_Types::Boolean,
+                                lane2: Base_Types::Boolean, lane3: Base_Types::Boolean): Base_Types::Unsigned_16 :=
+                (if lane0 ? 1[u16] else 0[u16]) + (if lane1 ? 1[u16] else 0[u16]) +
+                (if lane2 ? 1[u16] else 0[u16]) + (if lane3 ? 1[u16] else 0[u16]);
+
+            def saturated_rejection_count(count: Base_Types::Unsigned_16,
+                                          increment: Base_Types::Unsigned_16): Base_Types::Unsigned_16 :=
+                if count >= rejection_limit() ? rejection_limit()
+                else if increment >= rejection_limit() - count ? rejection_limit()
+                else count + increment;
+
         integration
-            guarantee hlr_22_output0_allowed:
+            guarantee hlr_22_llr_9_output0_allowed:
                 mavlink_allowed(EthernetFramesOut0);
-            guarantee hlr_22_output1_allowed:
+            guarantee hlr_22_llr_9_output1_allowed:
                 mavlink_allowed(EthernetFramesOut1);
-            guarantee hlr_22_output2_allowed:
+            guarantee hlr_22_llr_9_output2_allowed:
                 mavlink_allowed(EthernetFramesOut2);
-            guarantee hlr_22_output3_allowed:
+            guarantee hlr_22_llr_9_output3_allowed:
                 mavlink_allowed(EthernetFramesOut3);
 
+        initialize
+            modifies rejected_count;
+            guarantee hlr_31_llr_11_initial_count:
+                rejected_count == 0[u16];
+            guarantee hlr_25_llr_11_initial_error_status:
+                error_status == false;
+            guarantee hlr_21_initialize_lane0:
+                NoSend(EthernetFramesOut0);
+            guarantee hlr_21_initialize_lane1:
+                NoSend(EthernetFramesOut1);
+            guarantee hlr_21_initialize_lane2:
+                NoSend(EthernetFramesOut2);
+            guarantee hlr_21_initialize_lane3:
+                NoSend(EthernetFramesOut3);
+
         compute
-            guarantee hlr_22_23_lane0_allow:
-                (HasEvent(EthernetFramesIn0) and mavlink_allowed(EthernetFramesIn0)) implies
+            modifies rejected_count;
+            // Inductive state bound: established by initialization and preserved below.
+            assume hlr_31_count_pre_bound:
+                rejected_count <= rejection_limit();
+            guarantee hlr_31_count_post_bound:
+                rejected_count <= rejection_limit();
+            guarantee hlr_31_llr_13_count_monotonic:
+                rejected_count >= In(rejected_count);
+            // Each present malformed/blacklisted carrier contributes once, in either mode.
+            guarantee hlr_31_llr_13_count_update:
+                rejected_count == saturated_rejection_count(In(rejected_count), rejection_total(
+                    HasEvent(EthernetFramesIn0) and not mavlink_allowed(EthernetFramesIn0),
+                    HasEvent(EthernetFramesIn1) and not mavlink_allowed(EthernetFramesIn1),
+                    HasEvent(EthernetFramesIn2) and not mavlink_allowed(EthernetFramesIn2),
+                    HasEvent(EthernetFramesIn3) and not mavlink_allowed(EthernetFramesIn3)));
+            // Final value; LLR-12's last-output-update ordering is checked in CompDev.
+            guarantee hlr_25_llr_12_post_count_error_status:
+                error_status == (rejected_count >= error_threshold());
+
+            guarantee hlr_22_llr_3_lane0_allow:
+                (current_mode == open_platform_Data_Model::OperatingMode.Normal and
+                 HasEvent(EthernetFramesIn0) and mavlink_allowed(EthernetFramesIn0)) implies
                 (HasEvent(EthernetFramesOut0) and EthernetFramesOut0 == EthernetFramesIn0);
-            guarantee hlr_24_lane0_deny_flash:
+            guarantee hlr_19_32_lane0_deny_flash:
                 (HasEvent(EthernetFramesIn0) and GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn0) and
                  mavlink_frame_valid(EthernetFramesIn0) and
                  mavlink_firmware_flash_command(EthernetFramesIn0)) implies NoSend(EthernetFramesOut0);
-            guarantee hlr_25_26_lane0_invalid_or_no_input:
-                ((not HasEvent(EthernetFramesIn0)) or
-                 (HasEvent(EthernetFramesIn0) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn0) and
-                  mavlink_frame_valid(EthernetFramesIn0)))) implies NoSend(EthernetFramesOut0);
+            guarantee hlr_20_lane0_invalid:
+                (HasEvent(EthernetFramesIn0) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn0) and
+                 mavlink_frame_valid(EthernetFramesIn0))) implies NoSend(EthernetFramesOut0);
+            guarantee hlr_21_lane0_no_input:
+                (not HasEvent(EthernetFramesIn0)) implies NoSend(EthernetFramesOut0);
+            guarantee hlr_28_llr_10_lane0_recovery:
+                (current_mode == open_platform_Data_Model::OperatingMode.Recovery) implies NoSend(EthernetFramesOut0);
 
-            guarantee hlr_22_23_lane1_allow:
-                (HasEvent(EthernetFramesIn1) and mavlink_allowed(EthernetFramesIn1)) implies
+            guarantee hlr_22_llr_3_lane1_allow:
+                (current_mode == open_platform_Data_Model::OperatingMode.Normal and
+                 HasEvent(EthernetFramesIn1) and mavlink_allowed(EthernetFramesIn1)) implies
                 (HasEvent(EthernetFramesOut1) and EthernetFramesOut1 == EthernetFramesIn1);
-            guarantee hlr_24_lane1_deny_flash:
+            guarantee hlr_19_32_lane1_deny_flash:
                 (HasEvent(EthernetFramesIn1) and GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn1) and
                  mavlink_frame_valid(EthernetFramesIn1) and
                  mavlink_firmware_flash_command(EthernetFramesIn1)) implies NoSend(EthernetFramesOut1);
-            guarantee hlr_25_26_lane1_invalid_or_no_input:
-                ((not HasEvent(EthernetFramesIn1)) or
-                 (HasEvent(EthernetFramesIn1) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn1) and
-                  mavlink_frame_valid(EthernetFramesIn1)))) implies NoSend(EthernetFramesOut1);
+            guarantee hlr_20_lane1_invalid:
+                (HasEvent(EthernetFramesIn1) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn1) and
+                 mavlink_frame_valid(EthernetFramesIn1))) implies NoSend(EthernetFramesOut1);
+            guarantee hlr_21_lane1_no_input:
+                (not HasEvent(EthernetFramesIn1)) implies NoSend(EthernetFramesOut1);
+            guarantee hlr_28_llr_10_lane1_recovery:
+                (current_mode == open_platform_Data_Model::OperatingMode.Recovery) implies NoSend(EthernetFramesOut1);
 
-            guarantee hlr_22_23_lane2_allow:
-                (HasEvent(EthernetFramesIn2) and mavlink_allowed(EthernetFramesIn2)) implies
+            guarantee hlr_22_llr_3_lane2_allow:
+                (current_mode == open_platform_Data_Model::OperatingMode.Normal and
+                 HasEvent(EthernetFramesIn2) and mavlink_allowed(EthernetFramesIn2)) implies
                 (HasEvent(EthernetFramesOut2) and EthernetFramesOut2 == EthernetFramesIn2);
-            guarantee hlr_24_lane2_deny_flash:
+            guarantee hlr_19_32_lane2_deny_flash:
                 (HasEvent(EthernetFramesIn2) and GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn2) and
                  mavlink_frame_valid(EthernetFramesIn2) and
                  mavlink_firmware_flash_command(EthernetFramesIn2)) implies NoSend(EthernetFramesOut2);
-            guarantee hlr_25_26_lane2_invalid_or_no_input:
-                ((not HasEvent(EthernetFramesIn2)) or
-                 (HasEvent(EthernetFramesIn2) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn2) and
-                  mavlink_frame_valid(EthernetFramesIn2)))) implies NoSend(EthernetFramesOut2);
+            guarantee hlr_20_lane2_invalid:
+                (HasEvent(EthernetFramesIn2) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn2) and
+                 mavlink_frame_valid(EthernetFramesIn2))) implies NoSend(EthernetFramesOut2);
+            guarantee hlr_21_lane2_no_input:
+                (not HasEvent(EthernetFramesIn2)) implies NoSend(EthernetFramesOut2);
+            guarantee hlr_28_llr_10_lane2_recovery:
+                (current_mode == open_platform_Data_Model::OperatingMode.Recovery) implies NoSend(EthernetFramesOut2);
 
-            guarantee hlr_22_23_lane3_allow:
-                (HasEvent(EthernetFramesIn3) and mavlink_allowed(EthernetFramesIn3)) implies
+            guarantee hlr_22_llr_3_lane3_allow:
+                (current_mode == open_platform_Data_Model::OperatingMode.Normal and
+                 HasEvent(EthernetFramesIn3) and mavlink_allowed(EthernetFramesIn3)) implies
                 (HasEvent(EthernetFramesOut3) and EthernetFramesOut3 == EthernetFramesIn3);
-            guarantee hlr_24_lane3_deny_flash:
+            guarantee hlr_19_32_lane3_deny_flash:
                 (HasEvent(EthernetFramesIn3) and GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn3) and
                  mavlink_frame_valid(EthernetFramesIn3) and
                  mavlink_firmware_flash_command(EthernetFramesIn3)) implies NoSend(EthernetFramesOut3);
-            guarantee hlr_25_26_lane3_invalid_or_no_input:
-                ((not HasEvent(EthernetFramesIn3)) or
-                 (HasEvent(EthernetFramesIn3) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn3) and
-                  mavlink_frame_valid(EthernetFramesIn3)))) implies NoSend(EthernetFramesOut3);
+            guarantee hlr_20_lane3_invalid:
+                (HasEvent(EthernetFramesIn3) and not (GumboLib::GUMBO__Library::valid_mavlink_carrier(EthernetFramesIn3) and
+                 mavlink_frame_valid(EthernetFramesIn3))) implies NoSend(EthernetFramesOut3);
+            guarantee hlr_21_lane3_no_input:
+                (not HasEvent(EthernetFramesIn3)) implies NoSend(EthernetFramesOut3);
+            guarantee hlr_28_llr_10_lane3_recovery:
+                (current_mode == open_platform_Data_Model::OperatingMode.Recovery) implies NoSend(EthernetFramesOut3);
+
+        monitor
+            // HLR-25/31 make ErrorStatus monotonic until reboot, so its rising edge
+            // is the first assertion. At D2 inspect that edge two samples ago and
+            // Recovery at D1/D2. Pure past time avoids delayed future-time verdicts.
+            // LLR-15: HAMR samples frozen mode before compute and final status after.
+            // LLR-16: a regeneration-safe reporter must log a false verdict once
+            // during this dispatch; generated routine status logs are insufficient.
+            guarantee hlr_30_llr_15_16_recovery_deadline:
+                (Once [2,2] (error_status and not (Once [1,1] error_status))) implies
+                (Once [0,1] (current_mode == open_platform_Data_Model::OperatingMode.Recovery));
         }*/
     }
 
