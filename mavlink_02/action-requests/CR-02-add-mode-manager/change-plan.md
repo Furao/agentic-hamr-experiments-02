@@ -8,7 +8,7 @@
 | Target project | `/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02` |
 | Baseline | `043d574970d28ff172f7261ea0392ddd14ae50a8`, confirmed by developer 2026-09-22 |
 | Sketch | `add-mode-manager-sketch.md` (unchanged) |
-| Authoritative requirements | `Open_Platform_HLRs_26_09_22_06.md` (unchanged) |
+| Authoritative requirements | `Open_Platform_HLRs_26_09_22_07.md` (unchanged) |
 | Profile | audited; user token `audit` interpreted as audited |
 | Workflow | `ChangePlan(cr=CR-02-add-mode-manager)` |
 
@@ -31,8 +31,8 @@ Approval completes ChangePlan; ChangeExec remains a separate workflow.
 
 ## 2. Sketch Provenance and Clarifications
 
-- Immutable request files: sketch and supplied requirements revisions _01–_06.
-  Revision _06 is authoritative; earlier revisions are historical only.
+- Immutable request files: sketch and supplied requirements revisions _01–_07.
+  Revision _07 is authoritative; earlier revisions are historical only.
 - Developer, 2026-09-22: user-supplied requirements are the source of truth; adopt
   their stricter UDP policy. Baseline-derived requirements do not override them.
 - Developer, 2026-09-22: inputs are frozen immediately before HAMR component dispatch.
@@ -40,7 +40,7 @@ Approval completes ChangePlan; ChangeExec remains a separate workflow.
 - Revision _05 added HLR-32 for SECURE_COMMAND message 11004, operation 7. It supersedes
   the earlier suggestion to extend HLR-19. HLR-25 retains the threshold of five;
   HLR-30 retains D2 logging, not the earlier suggested D3 logging.
-- Revision _06 corrects HLR-19: COMMAND_INT and COMMAND_LONG both use MAVLink v1
+- Revision _06 corrected HLR-19 (retained in _07): COMMAND_INT and COMMAND_LONG both use MAVLink v1
   bytes 34–35 and v2 bytes 38–39, matching the current implementation. RD-4 is
   resolved by the developer-supplied revision; no command-offset code change is planned.
 - Developer, 2026-09-22: implement HLR-30 using a HAMR-generated R2U2 monitor
@@ -70,6 +70,19 @@ reviews, identifies gaps, and proposes wording in review artifacts; the develope
 edits the requirements documents. The agent does not run SysPlanAndReq to author
 those documents. Model, contract, implementation, and planning/report work retain
 their existing assignments.
+
+### Requirements planning update — revision _07
+
+Developer direction on 2026-09-22 makes `Open_Platform_HLRs_26_09_22_07.md`,
+including `RC_INSPECTA_00-LLR-1` through `RC_INSPECTA_00-LLR-21`, the consolidated
+source of truth. Requirements planning and complete allocation are recorded in
+`w1-requirements-planning-07.md`. This supersedes the _06 reference additions and
+resolves the missing source requirements identified in W1 feedback. Use actual LLR
+IDs, not the reference draft's CR02-DR IDs. The three-wave scope and resolved review
+choices remain; LLR-20's manager-first/100 ms preference is incorporated below.
+Legacy requirements documents remain historical until the developer reconciles them;
+their synchronization is tracked in the final back-propagation sweep, not a requirement
+to duplicate _07 before modeling. No requirement file is edited by this plan update.
 
 ## 3. Baseline
 
@@ -101,22 +114,22 @@ in the surveyed crate manifest list; do not claim an existing end-to-end mode pr
 | ID | Finding | Class | Resolution / plan treatment |
 |---|---|---|---|
 | F1 | Existing Rx/MAVLink forwarding guarantees conflict with Recovery suppression | impact | Guard forwarding by frozen Normal mode; preserve lane/no-input and validity obligations; add exhaustive Recovery clauses |
-| F2 | Baseline direct UDP permits source 14550/destination 68; _06 forbids it | impact | Developer resolved: implement source !=14550 AND destination !=14562 AND whitelist membership; test the changed case explicitly |
-| F3 | Baseline secure-command deny was previously absent from supplied HLRs | note | Resolved by _06 HLR-32; retain implementation behavior and trace it to HLR-32 |
+| F2 | Baseline direct UDP permits source 14550/destination 68; _07 forbids it | impact | Developer resolved: implement source !=14550 AND destination !=14562 AND whitelist membership; test the changed case explicitly |
+| F3 | Baseline secure-command deny was previously absent from supplied HLRs | note | Resolved by _07 HLR-32; retain implementation behavior and trace it to HLR-32 |
 | F4 | Old derived HLR-19–32 identifiers collide with new authoritative meanings | impact | Version-qualified migration map; authoritative IDs unchanged; move compatible derived details to distinct component/derived IDs; no silent renumbering of historical records |
-| F5 | Mode publication and observation occur at different component dispatches | note | _06 and developer clarification resolve semantics; use each consumer's frozen snapshot, not global instantaneous mode changes |
-| F6 | Earlier COMMAND_INT offset discrepancy resolved by revision _06 | note | HLR-19 now uses v1 bytes 34–35 and v2 bytes 38–39 for both command envelopes, matching current payload offset 28. No command-field implementation/specification change is needed; retain regression coverage and update traceability |
+| F5 | Mode publication and observation occur at different component dispatches | note | _07 and developer clarification resolve semantics; use each consumer's frozen snapshot, not global instantaneous mode changes |
+| F6 | Earlier COMMAND_INT offset discrepancy resolved by revision _07 | note | HLR-19 now uses v1 bytes 34–35 and v2 bytes 38–39 for both command envelopes, matching current payload offset 28. No command-field implementation/specification change is needed; retain regression coverage and update traceability |
 | F7 | Source well-formedness descriptions are less detailed than baseline refinements | note | User-supplied requirements remain authoritative. Preserve compatible bounds, framing, CRC, dialect and legal-truncation refinements as derived obligations; provide the developer feedback for any newly identified conflict rather than silently overriding supplied requirements |
 | F8 | Missing build helper despite older workflow notes | impact | Establish actual build/coverage entry point during W1 using setup-build-script; do not rely on nonexistent paths |
 
-Resolved (RD-4): Revision _06 supplies COMMAND_INT offsets matching the current
+Resolved (RD-4): Revision _07 supplies COMMAND_INT offsets matching the current
 implementation: bytes 34–35 in v1 and 38–39 in v2. Both command envelopes retain
 payload-relative offset 28. Source authority was already established by the developer;
 the former command-offset delta is removed from the impact, risk, and acceptance
 sections. Compatible baseline refinements remain subject to developer-owned
 requirements review, not automatic edits or unrecorded new policy.
 
-### Proposed dispatch design
+### Dispatch design
 
 Use sampled DataPorts for current Mode and ErrorStatus because each producer publishes
 a current value every dispatch. Retain EventDataPorts for Ethernet lanes. Initialize
@@ -195,7 +208,7 @@ Mode updates published after input freezing affect a later dispatch only.
 
 | Artifact / element | Predicted impact | Wave |
 |---|---|---|
-| requirements/updated_reqs.md (developer-owned) | Agent feedback for developer edits: Reconcile to _06 authority; strict UDP, mode behavior, counter/watchdog, secure deny, version-qualified ID map | W1 |
+| Consolidated _07 HLR/LLR source and legacy requirements/updated_reqs.md (developer-owned) | Agent feedback for developer edits: _07 supplies source content; allocation/ID map in w1-requirements-planning-07.md; legacy document synchronization remains developer-owned | W1 source review; final documentation sweep |
 | requirements/component-requirements.md (developer-owned) | Agent feedback for developer edits: Allocate HLR-23/24/26/27 to ModeManager; HLR-25/28/30/31 to MAVLink; HLR-29 to Rx; correct old aliases | W1 |
 | requirements/conops.md (developer-owned) | Agent feedback for developer edits: Dated CR-02 annotations, threshold/reboot scenarios, domain model, changed availability and direct UDP behavior | W1 |
 | requirements/data-dictionary.md (developer-owned) | Agent feedback for developer edits: Mode enum, ErrorStatus, count 0..20, threshold 5, D0–D2, initial values, strict UDP and secure-command mapping | W1 |
@@ -221,9 +234,9 @@ Mode updates published after input freezing affect a later dispatch only.
 | TxFirewall policy/application/contracts | No new mode port or transmit policy change; shared firewall_core/GumboLib may affect its proof/build dependencies. Reverify and rerun regression tests; inspect generated diffs |
 | LowLevelEthernetDriver functionality | Existing four input/output lane interfaces unchanged. Regeneration/build/schedule can affect integration; verify full target build and source diff |
 | VMM application/guest/virtio behavior | Carrier layout and receive/transmit queues unchanged; no manager connection to VMM. Preserve manual C/library linkage and exercise end-to-end traffic |
-| mavlink_core framing/CRC/dialect | Mode and blacklist policy remain component-owned; no intended parser or dialect change. Rerun core regressions/verification; _06 requires no command-offset or parser change |
+| mavlink_core framing/CRC/dialect | Mode and blacklist policy remain component-owned; no intended parser or dialect change. Rerun core regressions/verification; _07 requires no command-offset or parser change |
 | Ethernet data layouts | Raw/Sized/MAVLink carrier layouts unchanged; new control enum is additive. Check generated C/Rust type compatibility |
-| manual_reqs.md and archived sketches | Preserve historical input; _06 is the new authority and evolving requirements carry explicit provenance. Do not rewrite the original ConOps concept block |
+| manual_reqs.md and archived sketches | Preserve historical input; _07 is the new authority and evolving requirements carry explicit provenance. Do not rewrite the original ConOps concept block |
 
 Resolved (RD-5): The developer's plan approval accepts sampled control ports,
 continued malformed/blacklisted rejection counting during Recovery, and the stated
@@ -234,15 +247,15 @@ edits remain developer-owned.
 
 | Wave | Intent | Bound workflows / actions | Expected deltas | Verification gate |
 |---|---|---|---|---|
-| W1 | Requirements, architecture, contracts and regeneration | Developer manual requirements updates with agent review feedback; SysModeling (delta); CompGUMBOSpec(component=RxFirewall); CompGUMBOSpec(component=MAVLinkFirewall); CompGUMBOSpec(component=ModeManager); SysGUMBOIntegrationCheck; CodeGen; setup-build-script | Requirements/ID map, mode/status wiring and state contracts, new domain declarations, generated R2U2 specification/hooks, generated scaffold and build helper; preserve custom build content | Developer-supplied requirements updates reviewed and applicable findings resolved; SysML tipe clean; all three contract audits reviewed; integration check result with expected handshake count and explicit vacuity accounting; generation and R2U2 specification compilation succeed; sampling hooks/startup values inspected; demonstrate a supported same-dispatch verdict/logging path before W2. This is a model/scaffold gate, not a runnable-system claim |
+| W1 | Requirements, architecture, contracts and regeneration | Review developer-supplied consolidated _07 HLRs/LLRs and record allocation (complete); SysModeling (delta); CompGUMBOSpec(component=RxFirewall); CompGUMBOSpec(component=MAVLinkFirewall); CompGUMBOSpec(component=ModeManager); SysGUMBOIntegrationCheck; CodeGen; setup-build-script | Requirements/ID map, mode/status wiring and state contracts, new domain declarations, generated R2U2 specification/hooks, generated scaffold and build helper; preserve custom build content | Developer-supplied requirements updates reviewed and applicable findings resolved; SysML tipe clean; all three contract audits reviewed; integration check result with expected handshake count and explicit vacuity accounting; generation and R2U2 specification compilation succeed; sampling hooks/startup values inspected; demonstrate a supported same-dispatch verdict/logging path before W2. This is a model/scaffold gate, not a runnable-system claim |
 | W2 | Implement and verify mode control and affected policies | CompDev(component=ModeManager); CompDev(component=RxFirewall); CompDev(component=MAVLinkFirewall); CompDev(component=TxFirewall)/TestOnly; CompDev(component=TxFirewall)/VerifyOnly; core test/verification commands | Executable state machines, R2U2 first-trigger/deadline monitoring and one-time logging, strict UDP, blacklist reconciliation, tests, coverage and proofs | Changed components' application/GUMBOX branch coverage and passing tests; Verus clean with R2U2 trust boundary recorded; actual monitor/verdict/logging trace tests pass; both core regressions pass; Tx tests/verification pass; any coverage gaps explicitly reviewed |
 | W3 | Deployable integration and acceptance | SysSchedDef; custom.mk reconciliation and full target build; dispatch-trace integration tests; manual ZCU102 acceptance; final test-components and verify; ChangeExec.3–.5 reconciliation/report | Valid schedule/domain map, complete loader, timing and hardware evidence, final requirements sweep and report | Full ZCU102 custom.mk build; D0/D1/D2 observation and R2U2 verdict/log evidence, including runtime budget impact; hardware cases pass; final cross-crate results and non-impact diffs reviewed; unresolved tool limits explicitly dispositioned |
 
-W1 begins with an agent review of the supplied requirements and a feedback list
-covering gaps, ID reconciliation, and any suggested wording. The developer makes
-manual updates and supplies the resulting revision. The agent reviews that revision
-and records the authoritative version and disposition of findings before dependent
-model/contract work. No requirements-writing sub-workflow is assigned to the agent.
+W1's requirements input review is complete against developer-supplied _07. The
+HLR/LLR allocation and feedback dispositions in `w1-requirements-planning-07.md`
+are the planning basis for dependent model/contract work. Legacy document publication
+remains developer-owned and is tracked for the final sweep. No agent requirements-
+writing sub-workflow is assigned.
 
 The developer accepted this three-wave structure on 2026-09-22.
 Waves run sequentially. W1 generates changed interfaces before W2 implementation;
@@ -252,8 +265,10 @@ and component audit points. Contract corrections loop through CompGUMBOSpec and
 CodeGen with affected tests/proofs rerun; do not edit generated contracts in isolation.
 
 SysSchedDef is draft: its schedule-order step does not establish timing-budget or
-abstract-system-proof conformance. Candidate placement is ModeManager after MAVLink
-and before next-cycle Rx/MAVLink, preserving existing slot allocations initially.
+abstract-system-proof conformance. Per _07 LLR-20, prefer ModeManager as the first application component in the
+schedule, with a configured compute-execution time of 100 ms. Preserve required pacer
+slots and Rx/MAVLink configured periods of 1000 ms and execution times of 300 ms.
+Record ModeManager's period separately and check actual slot units and total budget.
 Determine period/budget and communication visibility from generated deployment
 semantics, then record a concrete trace demonstrating normal operation observes
 Recovery by D2. Do not infer a wall-clock bound from a dispatch count or claim this
@@ -266,6 +281,11 @@ must satisfy the specified runtime evidence gates.
 
 ## 7. Back-Propagation Plan
 
+Update for _07: consolidated HLR/LLR source content is supplied and reviewed. The
+legacy document actions below remain developer-owned publication/reconciliation
+obligations; they do not block modeling against _07. Check them at ChangeExec.3 and
+record any developer-directed retirement or replacement explicitly.
+
 Requirements ownership remains with the developer. For the first four rows below,
 the agent provides review feedback and suggested updates; the developer performs
 the edits. At ChangeExec.3 the agent checks the supplied revisions and reports any
@@ -275,10 +295,10 @@ model/contract traceability edits and the change report.
 | Document | Update | When |
 |---|---|---|
 | ConOps | Preserve §0; annotate CR-02 changes to purpose, scenarios, mode/availability, reboot, actor/domain descriptions and constraints | W1; final sweep ChangeExec.3 |
-| SysReqs | Incorporate _06 authoritative IDs; map old version-qualified obligations to new HLRs or named derived requirements; strict UDP and HLR-32 | W1; reconcile execution discoveries at ChangeExec.3 |
+| SysReqs | Incorporate _07 authoritative IDs; map old version-qualified obligations to new HLRs or named derived requirements; strict UDP and HLR-32 | W1; reconcile execution discoveries at ChangeExec.3 |
 | CompReqs | Three affected component allocations, state/timing requirements, shared-core regression and independent implementation constraints | W1; sweep ChangeExec.3 |
 | DataDict | New control values, startup, counter, watchdog and protocol offset conventions | W1; actual schedule details W3 |
-| Model/contract traceability | Replace misleading baseline guarantee aliases; link each new guarantee to _06 HLR and derived obligation | W1; confirm after W2 |
+| Model/contract traceability | Replace misleading baseline guarantee aliases; link each new guarantee to _07 HLR and derived obligation | W1; confirm after W2 |
 
 Archive old requirement identities as `CR-01:RC_INSPECTA_00-HLR-n` in the migration
 table, preserving their historical meaning. Do not assign a conflicting old derived
@@ -288,7 +308,7 @@ follow the developer's authority decision and are documented as behavior changes
 ## 8. Risks and Open Questions
 
 1. Blacklist behavior must survive the added mode/counter logic. Retain independent
-   byte-oriented fixtures for the _06 command offsets and secure operation 7; do not
+   byte-oriented fixtures for the _07 command offsets and secure operation 7; do not
    generate all tests using the same offset helper as the implementation. The earlier
    F6 offset discrepancy is resolved and creates no planned code delta.
 2. Schedule, monitor tick alignment, verdict availability, and startup visibility may
@@ -313,9 +333,10 @@ follow the developer's authority decision and are documented as behavior changes
 
 ## 9. Acceptance Criteria and Report Obligations
 
-- _06 is the authoritative requirement revision; complete HLR-to-contract/test mapping
+- _07 is the authoritative requirement revision, including all LLR-1–21; complete HLR-to-contract/test mapping
   covers Rx 5/13/15/17/18/29, Tx 7/12/14/16, MAVLink 19/20/21/22/25/28/30/31/32,
-  and ModeManager 23/24/26/27.
+  and ModeManager 23/24/26/27. The companion _07 planning report maps every LLR
+  to its component, implementation obligation and verification wave.
 - Strict UDP matrix includes source 14550/destination 68 rejection; other-source/68
   forwarding in Normal; 14550/14562 MAVLink routing; disallowed combinations dropping.
 - Normal/Recovery and empty-input tests cover all four lanes and Rx's two outputs per
@@ -332,7 +353,7 @@ follow the developer's authority decision and are documented as behavior changes
   Recovery retention after false, and reboot initialization.
 - Blacklist fixtures cover both command envelopes/versions, HLR-32 secure operation 7,
   nonblacklisted operations, malformed inputs and legal truncation. COMMAND_INT and
-  COMMAND_LONG fixtures use _06 offsets: v1 bytes 34–35 and v2 bytes 38–39.
+  COMMAND_LONG fixtures use _07 offsets: v1 bytes 34–35 and v2 bytes 38–39.
 - W2 gates prove functional state/control behavior and cover application/GUMBOX
   branches. W3 demonstrates freeze/dispatch propagation, target build, and hardware
   transition/reboot, normal routing, strict UDP, blacklist, and unchanged transmit.
@@ -350,7 +371,7 @@ follow the developer's authority decision and are documented as behavior changes
 | RD-1 | Baseline commit (§2) | Resolved: `043d574970d28ff172f7261ea0392ddd14ae50a8` | Explicit developer confirmation; supplied prefix verified against repository | Developer (user) | 2026-09-22 |
 | RD-2 | Three waves, approver and external-review needs (§2, §6) | Resolved: three waves approved; developer approval in this session satisfies review; no additional external review gate | Explicit developer approval of the current plan | Developer (user) | 2026-09-22 |
 | RD-3 | Test/report expectations and frozen areas (§2, §5–9); requirements ownership resolved in RD-7 | Resolved: testing/report expectations and frozen-area boundaries accepted as written; requirements developer-owned | Explicit developer approval of the current plan | Developer (user) | 2026-09-22 |
-| RD-4 | Requirement authority and COMMAND_INT offsets (§4 F6/F7) | Resolved: supplied _06 is authoritative; command offsets match current implementation | Developer previously established source authority; supplied _06 removes the offset discrepancy | Developer (supplied requirements and instruction) | 2026-09-22 |
+| RD-4 | Requirement authority and COMMAND_INT offsets (§4 F6/F7) | Resolved: supplied _07 is authoritative; command offsets match current implementation | Developer previously established source authority; supplied _07 removes the offset discrepancy | Developer (supplied requirements and instruction) | 2026-09-22 |
 | RD-5 | Sampled control ports, Recovery counting and non-impact boundaries (§4–5) | Resolved: sampled control ports, Recovery counting interpretation and non-impact boundaries accepted | Explicit developer approval of the current plan | Developer (user) | 2026-09-22 |
 | RD-6 | Verification scope and schedule/temporal evidence (§6) | Resolved: affected-component proofs plus final cross-crate verification and timing/hardware tests; no new whole-system temporal proof | Explicit developer approval of the current plan | Developer (user) | 2026-09-22 |
 | RD-7 | Requirements ownership (§2, §5–7) | Resolved: developer edits requirements manually; agent provides review feedback | Explicit developer instruction; replaces agent-authored SysPlanAndReq in W1 and governs later requirements reconciliation | Developer (user) | 2026-09-22 |
@@ -359,5 +380,5 @@ follow the developer's authority decision and are documented as behavior changes
 Final approval: the developer explicitly instructed “approve plan” on 2026-09-22.
 That instruction accepts the remaining proposed decisions above and approves
 ChangePlan.AP1. All eight Review Record items are resolved. Material changes require
-the ChangePlan.4–.6 revision loop and renewed approval. ChangeExec has not started.
-No source-control commit or external publication has been performed by this planning run.
+the ChangePlan.4–.6 revision loop and renewed approval. ChangeExec is in W1; requirements planning against _07 is complete.
+Execution began after approval; see workflow status and the _07 requirements planning report for the current handoff.

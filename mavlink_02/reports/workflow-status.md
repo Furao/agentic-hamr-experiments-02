@@ -4,13 +4,26 @@ Project: open_platform | Profile: audited | Updated: 2026-09-22
 
 | Step | Status | Updated | Notes |
 |------|--------|---------|-------|
-| ChangePlan(CR-02) | done | 2026-09-22 | Developer explicitly approved current _06/R2U2 three-wave plan; all RD-1–RD-8 resolved; ChangeExec unlocked but not started |
-| ChangePlan(CR-02).1 | done | 2026-09-22 | Sketch preserved; _06 authoritative; developer confirmed strict UDP and owns requirements edits |
+| ChangeExec(CR-02) | in-progress | 2026-09-22 | Audited W1; requirements planning complete against developer-supplied _07 HLR/LLR source; SysModeling next |
+| ChangeExec(CR-02).1 | done | 2026-09-22 | Approved plan/all RDs resolved; HEAD 24ba011d4f0a49c727a9b6c9cd28941f536891b4 drift is request/planning records only; approved source baseline unchanged |
+| ChangeExec(CR-02).2 | in-progress | 2026-09-22 | W1 started per approved sequence; W2/W3 not started |
+| ChangeExec(CR-02).W1 | in-progress | 2026-09-22 | Consolidated _07 reviewed; 21 LLRs allocated; model/contracts/generation pending |
+| ChangeExec(CR-02).W1.Requirements | done | 2026-09-22 | _07 supplies derived LLR-1–21; allocation and RF-1–RF-4 disposition in w1-requirements-planning-07.md; legacy document synchronization tracked for final sweep |
+| ChangeExec(CR-02).W1.SysModeling | not-started | 2026-09-22 | Ready against _07; prefer manager first/100 ms per LLR-20; preserve Rx/MAVLink 1000/300 ms; model review gate remains |
+| ChangeExec(CR-02).W1.AP1 | not-started | 2026-09-22 | Model/contracts/generation gates not yet reached |
+| ChangeExec(CR-02).W2 | not-started | 2026-09-22 | Awaiting W1 gate |
+| ChangeExec(CR-02).W3 | not-started | 2026-09-22 | Awaiting W2 gate |
+| ChangeExec(CR-02).3 | not-started | 2026-09-22 | Back-propagation review follows waves; requirements developer-owned |
+| ChangeExec(CR-02).4 | not-started | 2026-09-22 | Final tests/verification pending |
+| ChangeExec(CR-02).5 | not-started | 2026-09-22 | Final change report pending |
+| ChangeExec(CR-02).AP2 | not-started | 2026-09-22 | Completion review pending |
+| ChangePlan(CR-02) | done | 2026-09-22 | Approved three-wave plan updated per developer direction to _07 consolidated HLR/LLR source; execution in W1 |
+| ChangePlan(CR-02).1 | done | 2026-09-22 | Sketch preserved; _07 authoritative HLR/LLR source; developer owns requirements |
 | ChangePlan(CR-02).2 | done | 2026-09-22 | Surveyed 043d574970d28ff172f7261ea0392ddd14ae50a8; untracked request provenance and historical validation limits recorded; developer confirmed execution baseline (RD-1 resolved) |
 | ChangePlan(CR-02).3 | done | 2026-09-22 | Revision _06 resolves COMMAND_INT discrepancy; no offset code delta; authority and secure deny resolved; contract/ID/UDP impacts retained |
-| ChangePlan(CR-02).4 | done | 2026-09-22 | Impact revised for _06 and generated R2U2 HLR-30: add model monitor, hooks, runtime/build dependencies and one-time D2 logging; requirements developer-owned |
+| ChangePlan(CR-02).4 | done | 2026-09-22 | _07 LLR allocation and manager-first/100 ms preference incorporated; no added wave or component |
 | ChangePlan(CR-02).5 | done | 2026-09-22 | Three waves approved, including R2U2 generation, verdict/logging tests and target evidence; review and verification scope resolved |
-| ChangePlan(CR-02).6 | done | 2026-09-22 | Approved plan recorded; all eight Review Record rows resolved; developer retains requirements ownership |
+| ChangePlan(CR-02).6 | done | 2026-09-22 | Plan and source references updated for _07; all existing Review Record decisions retained |
 | ChangePlan(CR-02).AP1 | done | 2026-09-22 | Developer (user) explicitly approved plan on 2026-09-22; remaining proposed scope accepted; no additional external review gate |
 | ChangePlan(CR-01) | done | 2026-08-26 | Exit criteria met; plan approved by Robbie VanVossen |
 | ChangePlan(CR-01).1 | done | 2026-08-26 | Existing sketch resolved and preserved; audited ChangeScope answers recorded in change-plan.md |
