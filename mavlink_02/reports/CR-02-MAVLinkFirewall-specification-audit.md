@@ -4,7 +4,9 @@ Date: 2026-09-22. Auditor: HAMR GUMBO Contract Audit.
 Component: `MAVLinkFirewall`; classification: security-critical.
 Model: `sysmlv2/open_platform/open_platform_Software.sysml`, MAVLinkFirewall block.
 Authority: `action-requests/CR-02-add-mode-manager/Open_Platform_HLRs_26_09_22_07.md`.
-Status: model critique complete; audited CompGUMBOSpec.AP1 approval pending.
+Status: developer approved contracts and audited CompGUMBOSpec.AP1 on 2026-09-22.
+Recorded W1 generation/reporting and W2 refinement/testing obligations remain required;
+approval does not waive them.
 
 ## 1. Executive summary
 

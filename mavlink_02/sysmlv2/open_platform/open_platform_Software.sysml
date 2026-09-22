@@ -329,7 +329,6 @@ package open_platform_Software {
     }
 
     // CR-02 HLR-23/24/26/27; LLR-11/14/20.
-    // Stateful contracts are added by the following CompGUMBOSpec workflow.
     part def ModeManager :> Thread {
         port error_status : DataPort { in :>> type : Base_Types::Boolean; }
         port mode_to_rx : DataPort { out :>> type : OperatingMode; }
@@ -341,6 +340,34 @@ package open_platform_Software {
         attribute :>> Compute_Execution_Time = 100[ms] .. 100[ms];
         attribute :>> Stack_Size = 1048576[byte];
         attribute :>> Implementation_Language = Rust;
+
+        language "GUMBO" /*{
+        state
+            retained_mode: OperatingMode;
+
+        initialize
+            modifies retained_mode;
+            guarantee hlr_23_llr_11_initial_mode:
+                retained_mode == open_platform_Data_Model::OperatingMode.Normal;
+            guarantee hlr_26_llr_11_initial_rx_mode:
+                mode_to_rx == retained_mode;
+            guarantee hlr_26_llr_11_initial_mavlink_mode:
+                mode_to_mavlink == retained_mode;
+
+        compute
+            modifies retained_mode;
+            // Sampled ErrorStatus is frozen immediately before this dispatch.
+            guarantee hlr_27_llr_14_latched_transition:
+                retained_mode ==
+                    (if error_status or In(retained_mode) == open_platform_Data_Model::OperatingMode.Recovery
+                     ? open_platform_Data_Model::OperatingMode.Recovery
+                     else open_platform_Data_Model::OperatingMode.Normal);
+            // Both consumers receive the resulting mode in this same dispatch.
+            guarantee hlr_26_27_llr_14_publish_rx_mode:
+                mode_to_rx == retained_mode;
+            guarantee hlr_26_27_llr_14_publish_mavlink_mode:
+                mode_to_mavlink == retained_mode;
+        }*/
     }
 
     part def TxFirewall :> Thread {
