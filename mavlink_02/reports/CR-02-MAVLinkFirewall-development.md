@@ -1,6 +1,6 @@
 # CR-02 Wave 2 — MAVLinkFirewall development
 
-Date: 2026-09-23. Profile: audited. Status: coverage approved; verification 69/0; AP2 pending.
+Date: 2026-09-23. Profile: audited. Status: complete; tests/coverage, verification 69/0 and AP2 approved.
 Developer approved RxFirewall completion and continuation to this component.
 Authority: developer-owned Open_Platform_HLRs_26_09_22_07.md, approved contracts,
 and subsequent instruction to omit per-frame Recovery suppression logs.
@@ -149,3 +149,5 @@ LCOV line numbers now match current source. No codegen was run.
 Steps 6–7 are complete. AP2 and the component boundary await developer approval of
 the verification result and stated trust boundaries; broader Wave 2 regression and
 Wave 3 target evidence remain outstanding.
+
+Developer approved AP2, the documented trust boundaries and component completion; continue remaining Wave 2 regression.
