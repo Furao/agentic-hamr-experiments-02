@@ -123,3 +123,25 @@ Thus the old blocker is independently reproduced with the approved new formula;
 it is not inferred from the earlier past-time result. A synchronous per-raw-verdict
 reporting path remains required. No production workaround or requirement waiver
 was introduced. W1 remains blocked and W2 has not started.
+
+## Developer-authorized workaround — 2026-09-23
+
+Captured commit `4bc9a9ae60daefad311bcf23546ee8d4e7468c1b` verbatim as a
+project-relative patch in `patches/4bc9a9a-r2u2-false-verdict.patch`.
+`bin/apply-codegen-workarounds.py` checks reverse applicability (already installed),
+then forward applicability before applying. AGENTS.md requires attempting it after
+every codegen invocation, including failed invocations that may rewrite files.
+Conflicts stop without forcing or partially applying the patch.
+
+The current source already contains the patch. The isolated probe now passes
+**2/2 tests**, exit 0; evidence is `CR-02-r2u2-probe-workaround-output.txt`.
+The raw verdict reaches the candidate one-time reporter during D2. This resolves
+verdict visibility for this formula and the tested traces with the workaround.
+It is not production reporter integration, application verification or target evidence.
+The captured fix affects unmapped-specification logging, not alert routing.
+
+Temporary-repository checks confirmed forward application produces exactly the
+committed file, repeated application is a no-op, and conflicts exit nonzero without
+changing the target. No new codegen was needed for this capture.
+Historical failures above describe the unpatched generator. W1 review and remaining
+startup/integration obligations still apply; this patch does not authorize W2 entry.

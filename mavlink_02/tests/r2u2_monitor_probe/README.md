@@ -19,7 +19,7 @@ Run `cargo +stable fetch --locked` here first if dependencies are not cached.
 The lockfile pins the runtime and logging dependencies. Compilation replaces the
 generated component's spec.bin with its current compiled specification.
 
-Current expected outcome: **one test passes and one fails**. The raw runtime test
+Unpatched generator outcome: **one test passes and one fails**. The raw runtime test
 confirms a false verdict at D2. The generated reporting test requires that failure
 to reach a one-time Error diagnostic during D2 and currently fails because HAMR's
 last-verdict cache hides the false verdict behind a later true verdict in the same
@@ -40,3 +40,5 @@ checks first assertions at absolute dispatches 1, 2 and 4. Initializing does not
 step the monitor. No generated source is patched to make this probe pass.
 
 The revised future-time formula also samples pre-count and the threshold. The shell supplies threshold 5, matching the generated helper. Count starts at zero, reaches four on the first dispatch, then five at the trigger. The raw false verdict is timestamped D0 but delivered during D2.
+
+With the developer-authorized `4bc9a9a` workaround applied, current expected outcome is **two tests pass**. Run `python3 bin/apply-codegen-workarounds.py` from the project root after codegen; see `patches/README.md`. The candidate reporter remains outside production.

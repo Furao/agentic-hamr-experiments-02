@@ -1,0 +1,51 @@
+   Compiling cr02-r2u2-monitor-probe v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/tests/r2u2_monitor_probe)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.09s
+     Running unittests src/lib.rs (target/debug/deps/cr02_r2u2_monitor_probe-d68c45a5d7cb4d95)
+
+running 2 tests
+trigger=1 dispatch=0 runtime_time=1 spec=0 verdict_time=0 truth=true
+trigger=1 dispatch=3 runtime_time=4 spec=0 verdict_time=1 truth=false
+trigger=1 dispatch=3 runtime_time=4 spec=0 verdict_time=3 truth=true
+trigger=1 dispatch=4 runtime_time=5 spec=0 verdict_time=4 truth=true
+trigger=1 dispatch=5 runtime_time=6 spec=0 verdict_time=5 truth=true
+trigger=1 dispatch=6 runtime_time=7 spec=0 verdict_time=6 truth=true
+trigger=1 dispatch=7 runtime_time=8 spec=0 verdict_time=7 truth=true
+trigger=1 dispatch=8 runtime_time=9 spec=0 verdict_time=8 truth=true
+trigger=1 dispatch=9 runtime_time=10 spec=0 verdict_time=9 truth=true
+timely_D1: []; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (2, "hlr_30_llr_15_16_recovery_deadline is currently true"), (3, "hlr_30_llr_15_16_recovery_deadline is currently true"), (4, "hlr_30_llr_15_16_recovery_deadline is currently true"), (5, "hlr_30_llr_15_16_recovery_deadline is currently true"), (6, "hlr_30_llr_15_16_recovery_deadline is currently true"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+trigger=2 dispatch=0 runtime_time=1 spec=0 verdict_time=0 truth=true
+trigger=2 dispatch=1 runtime_time=2 spec=0 verdict_time=1 truth=true
+trigger=2 dispatch=4 runtime_time=5 spec=0 verdict_time=2 truth=false
+trigger=2 dispatch=4 runtime_time=5 spec=0 verdict_time=4 truth=true
+trigger=2 dispatch=5 runtime_time=6 spec=0 verdict_time=5 truth=true
+trigger=2 dispatch=6 runtime_time=7 spec=0 verdict_time=6 truth=true
+trigger=2 dispatch=7 runtime_time=8 spec=0 verdict_time=7 truth=true
+trigger=2 dispatch=8 runtime_time=9 spec=0 verdict_time=8 truth=true
+trigger=2 dispatch=9 runtime_time=10 spec=0 verdict_time=9 truth=true
+trigger=4 dispatch=0 runtime_time=1 spec=0 verdict_time=0 truth=true
+trigger=4 dispatch=1 runtime_time=2 spec=0 verdict_time=1 truth=true
+trigger=4 dispatch=2 runtime_time=3 spec=0 verdict_time=2 truth=true
+trigger=4 dispatch=3 runtime_time=4 spec=0 verdict_time=3 truth=true
+trigger=4 dispatch=6 runtime_time=7 spec=0 verdict_time=4 truth=false
+trigger=4 dispatch=6 runtime_time=7 spec=0 verdict_time=6 truth=true
+timely_D2: []; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (2, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (3, "hlr_30_llr_15_16_recovery_deadline is currently true"), (4, "hlr_30_llr_15_16_recovery_deadline is currently true"), (5, "hlr_30_llr_15_16_recovery_deadline is currently true"), (6, "hlr_30_llr_15_16_recovery_deadline is currently true"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+trigger=4 dispatch=7 runtime_time=8 spec=0 verdict_time=7 truth=true
+trigger=4 dispatch=8 runtime_time=9 spec=0 verdict_time=8 truth=true
+trigger=4 dispatch=9 runtime_time=10 spec=0 verdict_time=9 truth=true
+test diagnostics::raw_runtime_verdicts ... oklate_D3: [(3, Error, "Mode-transition timeout: Recovery not observed by D2")]; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (2, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (3, "hlr_30_llr_15_16_recovery_deadline is currently false"), (4, "hlr_30_llr_15_16_recovery_deadline is currently true"), (5, "hlr_30_llr_15_16_recovery_deadline is currently true"), (6, "hlr_30_llr_15_16_recovery_deadline is currently true"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+
+never_recovery: [(3, Error, "Mode-transition timeout: Recovery not observed by D2")]; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (2, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (3, "hlr_30_llr_15_16_recovery_deadline is currently false"), (4, "hlr_30_llr_15_16_recovery_deadline is currently true"), (5, "hlr_30_llr_15_16_recovery_deadline is currently true"), (6, "hlr_30_llr_15_16_recovery_deadline is currently true"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+delayed_first_assertion: [(6, Error, "Mode-transition timeout: Recovery not observed by D2")]; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently true"), (2, "hlr_30_llr_15_16_recovery_deadline is currently true"), (3, "hlr_30_llr_15_16_recovery_deadline is currently true"), (4, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (5, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (6, "hlr_30_llr_15_16_recovery_deadline is currently false"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+no_assertion: []; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently true"), (2, "hlr_30_llr_15_16_recovery_deadline is currently true"), (3, "hlr_30_llr_15_16_recovery_deadline is currently true"), (4, "hlr_30_llr_15_16_recovery_deadline is currently true"), (5, "hlr_30_llr_15_16_recovery_deadline is currently true"), (6, "hlr_30_llr_15_16_recovery_deadline is currently true"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+already_recovery: []; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (2, "hlr_30_llr_15_16_recovery_deadline is currently true"), (3, "hlr_30_llr_15_16_recovery_deadline is currently true"), (4, "hlr_30_llr_15_16_recovery_deadline is currently true"), (5, "hlr_30_llr_15_16_recovery_deadline is currently true"), (6, "hlr_30_llr_15_16_recovery_deadline is currently true"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+reboot_timeout_again: [(3, Error, "Mode-transition timeout: Recovery not observed by D2")]; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (2, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (3, "hlr_30_llr_15_16_recovery_deadline is currently false"), (4, "hlr_30_llr_15_16_recovery_deadline is currently true"), (5, "hlr_30_llr_15_16_recovery_deadline is currently true"), (6, "hlr_30_llr_15_16_recovery_deadline is currently true"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+test tests::generated_monitor_and_reporting_traces ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests cr02_r2u2_monitor_probe
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
