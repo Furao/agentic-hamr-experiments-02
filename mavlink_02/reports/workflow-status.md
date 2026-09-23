@@ -4,6 +4,11 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 
 | Step | Status | Updated | Notes |
 |------|--------|---------|-------|
+| CodeGen-HAMRUpgrade | done | 2026-09-23 | Fresh output matches patched baseline; probe 2/2; developer retired post-codegen patching; see CR-02-hamr-upgrade.md |
+| CodeGen-HAMRUpgrade.1 | done | 2026-09-23 | Existing Microkit configuration and model-directory invocation retained; fresh tipe Well-formed |
+| CodeGen-HAMRUpgrade.2 | done | 2026-09-23 | Exit 0, report Success with no warnings/errors; raw output captured before final legacy patch check |
+| CodeGen-HAMRUpgrade.3 | done | 2026-09-23 | All 1320 compared files and 52 reported editable resources unchanged; helper made no changes; probe 2/2 |
+| CodeGen-HAMRUpgrade.4 | n/a | 2026-09-23 | Regeneration; existing build scripts retained |
 | ChangeExec(CR-02) | in-progress | 2026-09-23 | Wave 2 approved; Wave 3 schedule/integration in progress |
 | ChangeExec(CR-02).1 | done | 2026-09-22 | Approved plan/all RDs resolved; HEAD 24ba011d4f0a49c727a9b6c9cd28941f536891b4 drift is request/planning records only; approved source baseline unchanged |
 | ChangeExec(CR-02).2 | in-progress | 2026-09-23 | Waves 1 and 2 approved; Wave 3 started |
@@ -121,7 +126,7 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly.boundary | done | 2026-09-23 | Developer approved completion with Wave 2 |
 | ChangeExec(CR-02).W2.CoreRegression | done | 2026-09-23 | Fresh firewall_core 17 tests/39 proofs and mavlink_core 6 tests/38 proofs; zero failures |
 | ChangeExec(CR-02).W2.AP1 | done | 2026-09-23 | Developer approved consolidated wave and continuation to Wave 3 |
-| ChangeExec(CR-02).W3 | in-progress | 2026-09-23 | Bounds loader built; developer confirms hardware behavior correct; requested ModeManager transition logging in progress; timing evidence remains |
+| ChangeExec(CR-02).W3 | in-progress | 2026-09-23 | Manual testing accepted with High/Open timeout finding CR-02-HW-01; overall Wave 3 review remains pending |
 | ChangeExec(CR-02).W3.SysSchedDef | done | 2026-09-23 | Developer approved legacy schedule ordering and documented timing limitations |
 | ChangeExec(CR-02).W3.SysSchedDef.1 | done | 2026-09-23 | Domain 7 first; existing slots retained; legacy parser accepts format; target timing remains qualified |
 | ChangeExec(CR-02).W3.SysSchedDef.2 | n/a | 2026-09-23 | Draft workflow timing/schema analysis TBD; target timing validation retained in W3 obligations |
@@ -184,7 +189,8 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.boundary | done | 2026-09-23 | Developer approved component completion and continuation to full loader rebuild |
 | ChangeExec(CR-02).W3.BoundsCoreVerify | done | 2026-09-23 | firewall_core host 39/0 and AArch64 dependency 39/0; MAVLink dependency mavlink_core 38/0 |
 | ChangeExec(CR-02).W3.BoundsBuild | done | 2026-09-23 | Full custom ZCU102/debug loader passes, 155953132 bytes; SHA-256 f524c83c…419cadf; legacy XML/custom build/monitor preserved; CR-02-bounds-build.md |
-| ChangeExec(CR-02).W3.Hardware | in-progress | 2026-09-23 | Developer reports hardware behavior correct before mode-log edit; case-level captures and physical timing measurements not supplied |
+| ChangeExec(CR-02).W3.Hardware | done | 2026-09-23 | Developer accepted manual testing with High/Open finding CR-02-HW-01 for D2 timeout; evidence limits retained |
+| ChangeExec(CR-02).W3.Finding(CR-02-HW-01) | in-progress | 2026-09-23 | High criticality assigned by developer; deadline timeout unresolved; +200 ms mitigation ineffective and reverted |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.1 | done | 2026-09-23 | Contracts/model unchanged; existing generated code current |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.2 | done | 2026-09-23 | Info log only for Normal to Recovery; existing logger reused; no extra production state |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.3 | done | 2026-09-23 | Existing four-transition and repeated-dispatch tests assert exact diagnostic count/content |
@@ -193,7 +199,14 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.AP1 | done | 2026-09-23 | Developer approved tests/coverage and continuation to verification |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.6 | done | 2026-09-23 | AArch64 Verus 9 verified, 0 errors; CR-02-mode-log-verification.txt |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.7 | done | 2026-09-23 | Initial equality-guard postcondition failure resolved by enum pattern; tests/coverage refreshed; no new trust escapes |
-| ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.AP2 | pending | 2026-09-23 | Review 9/0, refreshed tests/coverage and component completion before loader rebuild |
+| ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.AP2 | done | 2026-09-23 | Developer approved 9/0 verification, refreshed tests/coverage and component completion |
+| ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.boundary | done | 2026-09-23 | Developer approved completion and continuation to loader rebuild |
+| ChangeExec(CR-02).W3.ModeLogBuild | done | 2026-09-23 | Full ZCU102/debug loader passes; ModeManager release 9/0; image SHA-256 cac58840…3c7aba43; CR-02-mode-log.md |
+| ChangeExec(CR-02).W3.BudgetIncrease | done | 2026-09-23 | Historical attempt: developer reports no improvement and reverted it; original 100/300 ms budgets and 2080 ms frame restored |
+| ChangeExec(CR-02).W3.BudgetIncrease.SysSchedDef.1 | done | 2026-09-23 | Exact requested delta applied using existing legacy scale: domain_7=30000, domain_6=50000; other slots/order unchanged |
+| ChangeExec(CR-02).W3.BudgetIncrease.SysSchedDef.2 | n/a | 2026-09-23 | Draft workflow timing analysis TBD; physical unit conversion and timeout resolution remain unverified |
+| ChangeExec(CR-02).W3.BudgetIncrease.CodeGen | done | 2026-09-23 | Tipe Well-formed; CodeGen Success; patch applied; monitor probe 2/2; 43 editable files preserved |
+| ChangeExec(CR-02).W3.BudgetIncrease.Build | done | 2026-09-23 | Full custom ZCU102/debug build passes; release proofs 9/28/16/69, zero errors; loader b55ce4b9…7c349079; merged slots verified |
 | ChangeExec(CR-02).3 | not-started | 2026-09-22 | Back-propagation review follows waves; requirements developer-owned |
 | ChangeExec(CR-02).4 | not-started | 2026-09-22 | Final tests/verification pending |
 | ChangeExec(CR-02).5 | not-started | 2026-09-22 | Final change report pending |
@@ -329,7 +342,7 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 
 - 2026-09-11: Developer-requested MAVLink core consolidation completed, including follow-up policy separation. One verified core parser serves routing, runtime contracts, and diagnostics; firmware-flash implementation/specification/tests reside in MAVLinkFirewall. Duplicate parser/table removed. Core tests 6/6, component tests 8/8; target verification core 9/0 and MAVLinkFirewall 17/0. Details: [mavlink-core-consolidation.md](mavlink-core-consolidation.md).
 
-- 2026-09-23: Captured developer workaround commit 4bc9a9a as a reusable post-codegen patch; helper verified for application, idempotence and conflict preservation. AGENTS.md requires each codegen invocation to attempt it.
+- 2026-09-23: Captured developer workaround commit 4bc9a9a as a reusable post-codegen patch; helper verified for application, idempotence and conflict preservation. The original per-invocation requirement was subsequently retired by developer instruction after the HAMR upgrade comparison below.
 
 - 2026-09-23: Developer-authorized Verus migration completed; shared cores pass tests/verification and Tx passes 4 tests plus target verification 16/0. Rx/MAV test-interface updates and driver target environment remain planned work.
 
@@ -348,3 +361,15 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 - 2026-09-23: Developer reports hardware behavior correct. Added requested ModeManager Normal-to-Recovery diagnostic, once per transition; tests/coverage pass and AP1 pending. Existing built loader predates this logging edit.
 
 - 2026-09-23: ModeManager logging AP1 approved. Verus passes 9/0 after equivalent enum-pattern rewrite; refreshed tests 7/7 and app/GUMBOX coverage 41/41, 67/67. AP2 pending; existing loader predates the diagnostic.
+
+- 2026-09-23: Developer approved ModeManager logging AP2/component completion. New loader rebuild passes; diagnostic present in ELF/image, legacy schedule/custom build/R2U2 workaround preserved. Requested logging change complete; hardware confirmation predates this new image.
+
+- 2026-09-23: Reviewed manual log 26_09_23_14_19_open_platform.log: five firmware-flash denials (673/691/714/735/766), one Normal-to-Recovery record (767–768). Exact serial deinterleaving also confirms D2 timeout ERROR. Threshold sequence confirmed; nominal deadline finding remains open.
+
+- 2026-09-23: Applied developer-requested +200 ms model budgets to ModeManager/MAVLink, legacy slots scaled accordingly and frame raised to 2480 ms. Model/codegen/patch/probe/full build pass. New loader b55ce4b9…7c349079 awaits hardware retest; prior D2 timeout is not marked resolved.
+
+- 2026-09-23: Developer reports budget/schedule increase did not fix the issue and personally reverted it. Confirmed source: manager 100 ms, MAVLink 300 ms, frame 2080 ms; legacy slots 10000/30000. D2 timeout remains open. Documentation-only update; no regeneration/rebuild or new hardware evidence claimed.
+
+- 2026-09-23: Developer explicitly accepted manual testing with a high-criticality timeout finding. Hardware acceptance recorded done; CR-02-HW-01 remains Open/High. Acceptance does not resolve or waive the D2 requirement and does not constitute overall Wave 3/final change approval.
+
+- 2026-09-23: Updated HAMR generates the R2U2 reporting fix directly; raw output is byte-identical to the patched baseline and probe passes 2/2. Developer explicitly removed post-codegen patching from the workflow. Regression validation remains required; CR-02-HW-01 remains High/Open. See CR-02-hamr-upgrade.md.

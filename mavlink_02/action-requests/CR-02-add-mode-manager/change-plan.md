@@ -42,6 +42,18 @@ valid bytes and continuing after bad lanes. Verify affected firewalls/shared cor
 retain monitor regressions, and build the driver for ZCU102. Physical hardware and
 timing acceptance remain separate outstanding W3 obligations.
 
+### Execution budget amendment — 2026-09-23 (reverted by developer)
+
+Developer explicitly requested +200 ms for ModeManager and MAVLinkFirewall after
+reviewing the D2 timeout in manual_test_results/26_09_23_14_19_open_platform.log.
+The attempted settings were ModeManager 300 ms, MAVLinkFirewall 500 ms and model frame 2480 ms.
+The legacy schedule follows its existing scale (domain_7=30000, domain_6=50000),
+with unchanged ordering. The developer subsequently reported no improvement and reverted this amendment.
+Current settings are again ModeManager 100 ms, MAVLinkFirewall 300 ms, frame 2080 ms,
+and legacy domain_7/domain_6 lengths 10000/30000. The timeout remains unresolved;
+requirements edits remain developer-owned. See reports/CR-02-budget-increase.md
+for validation and the unresolved physical-unit/hardware timing qualification.
+
 ## 1. Change Summary
 
 Add a periodic ModeManager component publishing Normal/Recovery mode to RxFirewall
@@ -298,8 +310,9 @@ CodeGen with affected tests/proofs rerun; do not edit generated contracts in iso
 
 SysSchedDef is draft: its schedule-order step does not establish timing-budget or
 abstract-system-proof conformance. Per _07 LLR-20, prefer ModeManager as the first application component in the
-schedule, with a configured compute-execution time of 100 ms. Preserve required pacer
-slots and Rx/MAVLink configured periods of 1000 ms and execution times of 300 ms.
+schedule, with ModeManager at 100 ms and MAVLinkFirewall at 300 ms after the
+developer reverted the unsuccessful budget increase. Preserve required pacer slots,
+Rx at 300 ms, and existing 1000 ms configured periods.
 Record ModeManager's period separately and check actual slot units and total budget.
 Determine period/budget and communication visibility from generated deployment
 semantics, then record a concrete trace demonstrating normal operation observes
@@ -416,14 +429,22 @@ the ChangePlan.4–.6 revision loop and renewed approval. ChangeExec is in W1; r
 Execution began after approval; see workflow status and the _07 requirements planning report for the current handoff.
 
 
-### Execution clarification — authorized generated-code workaround (2026-09-23)
+### Execution clarification — retired generated-code workaround (2026-09-23)
 
-The developer explicitly directed capture of commit
-`4bc9a9ae60daefad311bcf23546ee8d4e7468c1b` and an application attempt after every
-codegen run. This is a scoped exception to the HLR-30 design's prohibition on
-overwrite-only edits: retain `patches/4bc9a9a-r2u2-false-verdict.patch`, run
-`python3 bin/apply-codegen-workarounds.py` after each invocation, and report conflicts
-without forcing them. The patched reporting feasibility probe passes 2/2 tests.
+The developer previously authorized capture and post-codegen application of commit
+`4bc9a9ae60daefad311bcf23546ee8d4e7468c1b`. Updated HAMR now generates that fix
+directly; fresh output matches the patched baseline and the probe passes 2/2.
+The developer explicitly removed workaround patching from the workflow on
+2026-09-23. Retain the patch/helper as historical artifacts; do not invoke them
+after codegen. Continue the reporting probe against fresh generated output.
 The three-wave scope, D2 deadline, one-time production logging obligation and
-verification gates remain unchanged. This exception was authorized directly by the
-developer; it is not an agent-inferred waiver. See `reports/CR-02-w1-gate.md`.
+verification gates remain unchanged. See `reports/CR-02-hamr-upgrade.md` for the
+comparison and `reports/CR-02-w1-gate.md` for historical workaround evidence.
+
+### Manual testing disposition — 2026-09-23
+
+Developer accepted manual testing with High/Open finding CR-02-HW-01 for the
+Recovery observation timeout. Carry reports/CR-02-HW-01-recovery-timeout.md into
+Wave 3 review and the final change report. The +200 ms mitigation was ineffective
+and reverted. Manual acceptance is complete; deadline conformance and finding
+resolution are not claimed. Requirements remain developer-owned and unchanged.

@@ -1,0 +1,12 @@
+{
+  "loader": "hamr/microkit/build/loader.img",
+  "bytes": 155953132,
+  "sha256": "cac588401b5a4853aa4a9d482f5a3743f5840063ee888f52027361893c7aba43",
+  "preserved_files_sha256": {
+    "hamr/microkit/custom.mk": "84744b5d1d721c375c8ab8752c2a74eecf39af0a9d58cdaf71abc69ec49a7619",
+    "hamr/microkit/microkit.schedule.xml": "7b35e34cffd708ee62b3947e63033fe085818a3418f514100e067ea7b7bba00c",
+    "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/r2u2_monitor.rs": "fcf457dc0b03f49084b387eab70977b992bc812703594cfcb634533d62a4d17b"
+  },
+  "legacy_schedule_matches_merged_system": true,
+  "transition_message_present_in_elf_and_loader": true
+}

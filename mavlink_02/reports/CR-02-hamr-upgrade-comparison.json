@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-23",
+  "snapshot_directory": "/tmp/cr02-codegen-upgrade-q6drswqk",
+  "excluded_directory_names": [
+    "target",
+    "build",
+    ".git",
+    ".venv",
+    "venv",
+    "__pycache__"
+  ],
+  "symlinks_excluded": true,
+  "sireum_commit": "85c9cdfe04227ec2d3064b13c231943648c8431b",
+  "hamr_codegen_commit": "5801330b0987f954f13e2188f523e24261ce2ba4",
+  "context_commit": "cf109a5e50b9208758c9f70dc5564d46a33537fc",
+  "tool_status": {
+    "type": "Status",
+    "value": "Success"
+  },
+  "warnings": [],
+  "errors": [],
+  "snapshotted_file_count": 1320,
+  "raw_file_count": 1320,
+  "final_file_count": 1320,
+  "before_to_raw": {
+    "added": [],
+    "removed": [],
+    "modified": []
+  },
+  "raw_to_after_patch_and_probe": {
+    "added": [],
+    "removed": [],
+    "modified": []
+  },
+  "reported_resource_count": 146,
+  "editable_resource_count": 52,
+  "editable_resources_missing_from_snapshot": [],
+  "editable_resources_changed": [],
+  "monitor": {
+    "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/r2u2_monitor.rs",
+    "previous_patched_sha256": "fcf457dc0b03f49084b387eab70977b992bc812703594cfcb634533d62a4d17b",
+    "raw_codegen_sha256": "fcf457dc0b03f49084b387eab70977b992bc812703594cfcb634533d62a4d17b",
+    "after_patch_and_probe_sha256": "fcf457dc0b03f49084b387eab70977b992bc812703594cfcb634533d62a4d17b"
+  },
+  "patch_exit": 0,
+  "patch_outcome": "already applied; no changes",
+  "probe_exit": 0,
+  "probe_tests_passed": 2
+}

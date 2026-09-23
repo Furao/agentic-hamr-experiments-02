@@ -1,7 +1,7 @@
 # CR-02 ModeManager transition diagnostic
 
 Date: 2026-09-23. Developer requested logging only when the mode changes.
-CompDev steps 1–7 complete; AP1 approved, AP2 verification review pending.
+CompDev complete; AP1, AP2 and component completion approved. Loader rebuild passed.
 
 ModeManager now emits the Info message `Mode changed: Normal -> Recovery` only
 when its frozen ErrorStatus is true and retained_mode is Normal. It sets Recovery
@@ -33,8 +33,8 @@ under that target's verified-profiles directory for the final iteration, cargo t
 BRF=0: no numerical branch percentage available. Four state/input cases cover the
 transition guard outcomes. Host coverage does not establish physical logging timing.
 Evidence: CR-02-mode-log-tests.txt and CR-02-mode-log-coverage.lcov.
-Git diff --check passes. The existing loader does not yet contain this diagnostic.
-A new loader follows proof sign-off.
+Git diff --check passes. The approved diagnostic is included in the rebuilt loader
+identified below.
 
 ## Verification and final iteration
 
@@ -59,5 +59,35 @@ initial app 39/39 coverage. The two existing external bodies remain log_info and
 log_warn_channel; log delivery itself remains outside the state-machine proof and
 is exercised through the existing test capture. No new trust escape was introduced.
 
-Await AP2 verification/component completion approval before building the new loader.
+Developer approved AP2 and component completion; the new loader build is complete.
 The user's prior hardware confirmation applies to the pre-diagnostic build.
+
+## Approved loader rebuild
+
+Full custom ZCU102/debug build passed, exit 0. Command from project root:
+
+```
+SYSTEM_MAKEFILE=custom.mk make -C hamr/microkit \
+ MICROKIT_SDK=/home/robertvanvossen/tools/microkit-sdk-2.2.0-dev \
+ MICROKIT_BOARD=zcu102 MICROKIT_CONFIG=debug \
+ R2U2_CLI=/tmp/cr02-r2u2-tools/bin/r2u2_cli
+```
+
+ModeManager rebuilt and linked into the loader, with release verification 9/0.
+The build also recompiles the R2U2 specification and verifies MAVLink 69/0.
+No source changes, new codegen invocation or new workaround were needed.
+SHA-256 checks confirm custom.mk, the legacy schedule and patched R2U2 monitor
+were preserved. XML comparison confirms the merged system retains the exact
+schedule entries. The exact diagnostic string is present in both the linked
+ModeManager ELF and the final loader. These are artifact checks, not a new
+hardware observation.
+
+Loader: hamr/microkit/build/loader.img, 155953132 bytes (148.73 MiB).
+SHA-256: `cac588401b5a4853aa4a9d482f5a3743f5840063ee888f52027361893c7aba43`.
+Evidence: CR-02-mode-log-build.txt and CR-02-mode-log-build-manifest.json.
+The approved tests and coverage remain applicable; no source changed during build.
+
+The user's prior hardware confirmation applies to the preceding bounds-fix image.
+The diagnostic is ready for hardware use in this image; no board was flashed by
+the agent. Broader CR-02 physical timing and documentation evidence remain tracked
+separately and are not claimed complete by this logging change.

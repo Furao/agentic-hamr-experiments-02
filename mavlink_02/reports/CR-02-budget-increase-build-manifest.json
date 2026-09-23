@@ -1,0 +1,63 @@
+{
+  "loader": "hamr/microkit/build/loader.img",
+  "bytes": 155953132,
+  "sha256": "b55ce4b99309e469e413e9fa77bf34aee034c8a0df88c5b3467dc30b7c349079",
+  "model_budgets_ms": {
+    "ModeManager": 300,
+    "MAVLinkFirewall": 500
+  },
+  "model_frame_period_ms": 2480,
+  "legacy_schedule": [
+    [
+      "domain_1",
+      3000
+    ],
+    [
+      "domain_7",
+      30000
+    ],
+    [
+      "domain_1",
+      3000
+    ],
+    [
+      "domain_2",
+      60000
+    ],
+    [
+      "domain_1",
+      3000
+    ],
+    [
+      "domain_3",
+      30000
+    ],
+    [
+      "domain_1",
+      3000
+    ],
+    [
+      "domain_4",
+      30000
+    ],
+    [
+      "domain_1",
+      3000
+    ],
+    [
+      "domain_5",
+      30000
+    ],
+    [
+      "domain_1",
+      3000
+    ],
+    [
+      "domain_6",
+      50000
+    ]
+  ],
+  "legacy_total": 248000,
+  "merged_schedule_matches": true,
+  "editable_files_preserved": 43
+}

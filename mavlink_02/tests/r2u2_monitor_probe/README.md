@@ -19,11 +19,15 @@ Run `cargo +stable fetch --locked` here first if dependencies are not cached.
 The lockfile pins the runtime and logging dependencies. Compilation replaces the
 generated component's spec.bin with its current compiled specification.
 
-Unpatched generator outcome: **one test passes and one fails**. The raw runtime test
-confirms a false verdict at D2. The generated reporting test requires that failure
-to reach a one-time Error diagnostic during D2 and currently fails because HAMR's
-last-verdict cache hides the false verdict behind a later true verdict in the same
-step. The failing assertion is intentional regression evidence; do not weaken it.
+Current expected outcome: **two tests pass with fresh HAMR output**, without any
+post-codegen patch. The 2026-09-23 upgrade was checked against the previously patched
+output; see `reports/CR-02-hamr-upgrade.md`.
+
+Historical generator outcome before the fix: **one test passed and one failed**.
+The raw runtime test confirmed a false verdict at D2, but HAMR's last-verdict cache
+hid it behind a later true verdict in the same step. The generated reporting test
+requires that failure to reach a one-time Error diagnostic during D2. Preserve
+this regression assertion.
 
 `src/reporter.rs` is a candidate allocation-free adapter for the current generated
 log interface, kept outside production code. It recognizes the named monitor's
@@ -41,4 +45,7 @@ step the monitor. No generated source is patched to make this probe pass.
 
 The revised future-time formula also samples pre-count and the threshold. The shell supplies threshold 5, matching the generated helper. Count starts at zero, reaches four on the first dispatch, then five at the trigger. The raw false verdict is timestamped D0 but delivered during D2.
 
-With the developer-authorized `4bc9a9a` workaround applied, current expected outcome is **two tests pass**. Run `python3 bin/apply-codegen-workarounds.py` from the project root after codegen; see `patches/README.md`. The candidate reporter remains outside production.
+The developer retired the `4bc9a9a` post-codegen workaround on 2026-09-23.
+Run this probe directly after successful generation; report regressions without
+automatically applying the archived patch. The candidate reporter remains outside
+production.
