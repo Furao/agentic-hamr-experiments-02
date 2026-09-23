@@ -1,28 +1,82 @@
 // This file will not be overwritten if HAMR codegen is rerun
 
 mod tests {
-  // NOTE: need to run tests sequentially to prevent race conditions
-  //       on the app and the testing apis which are static
   use serial_test::serial;
-
   use crate::test::util::*;
-  use data::*;
+  use data::open_platform_Data_Model::OperatingMode::{self, Normal, Recovery};
+  use crate::bridge::seL4_ModeManager_ModeManager_GUMBOX as oracle;
 
-  #[test]
-  #[serial]
-  fn test_initialization() {
-    crate::seL4_ModeManager_ModeManager_initialize();
+  fn assert_mode(expected: OperatingMode) {
+    assert_eq!(test_apis::get_retained_mode(), expected);
+    assert_eq!(test_apis::get_mode_to_rx(), expected);
+    assert_eq!(test_apis::get_mode_to_mavlink(), expected);
   }
 
   #[test]
   #[serial]
-  fn test_compute() {
+  fn initialization_and_reboot_reset() {
     crate::seL4_ModeManager_ModeManager_initialize();
-
-    // populate incoming data ports
-    test_apis::put_error_status(false);
-
+    assert_mode(Normal);
+    test_apis::put_error_status(true);
     crate::seL4_ModeManager_ModeManager_timeTriggered();
+    assert_mode(Recovery);
+    crate::seL4_ModeManager_ModeManager_initialize();
+    assert_mode(Normal);
+    test_apis::put_error_status(false);
+    crate::seL4_ModeManager_ModeManager_timeTriggered();
+    assert_mode(Normal);
+  }
+
+  #[test]
+  #[serial]
+  fn all_transitions_publish_both_outputs_each_dispatch() {
+    for (prior, error, expected) in [
+      (Normal, false, Normal), (Normal, true, Recovery),
+      (Recovery, false, Recovery), (Recovery, true, Recovery),
+    ] {
+      crate::seL4_ModeManager_ModeManager_initialize();
+      test_apis::put_concrete_inputs_wGSV(prior, error);
+      // Empty the test output slots so stale values cannot masquerade as publication.
+      *crate::bridge::extern_c_api::OUT_mode_to_rx.lock().unwrap() = None;
+      *crate::bridge::extern_c_api::OUT_mode_to_mavlink.lock().unwrap() = None;
+      crate::seL4_ModeManager_ModeManager_timeTriggered();
+      assert_mode(expected);
+      assert!(oracle::compute_CEP_Post(prior, expected, error,
+        test_apis::get_mode_to_mavlink(), test_apis::get_mode_to_rx()));
+    }
+  }
+
+  #[test]
+  #[serial]
+  fn recovery_stays_latched_and_notifications_preserve_state() {
+    crate::seL4_ModeManager_ModeManager_initialize();
+    for error in [false, true, false, false, true, false] {
+      test_apis::put_error_status(error);
+      crate::seL4_ModeManager_ModeManager_timeTriggered();
+    }
+    assert_mode(Recovery);
+    crate::seL4_ModeManager_ModeManager_notify(99);
+    assert_mode(Recovery);
+  }
+
+  #[test]
+  #[serial]
+  fn exhaustive_contract_oracle_accepts_only_required_results() {
+    for state in [Normal, Recovery] {
+      for rx in [Normal, Recovery] {
+        for mav in [Normal, Recovery] {
+          assert_eq!(oracle::initialize_IEP_Post(state, mav, rx),
+            state == Normal && rx == Normal && mav == Normal);
+          for (prior, error, expected) in [
+            (Normal, false, Normal), (Normal, true, Recovery),
+            (Recovery, false, Recovery), (Recovery, true, Recovery),
+          ] {
+            assert_eq!(oracle::compute_CEP_Post(prior, state, error, mav, rx),
+              state == expected && rx == expected && mav == expected);
+          }
+        }
+      }
+    }
   }
 }
 

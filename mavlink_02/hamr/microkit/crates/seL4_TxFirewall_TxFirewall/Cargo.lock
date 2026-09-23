@@ -157,6 +157,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1d07550c9036bf2ae0c684c4297d503f838287c83c53686d05370d0e139ae570"
 
 [[package]]
+name = "convert_case"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6245d59a3e82a7fc217c5828a6692dbc6dfb63a0c8c90495621f7b9d79704a0e"
+
+[[package]]
 name = "data"
 version = "0.1.0"
 dependencies = [
@@ -224,6 +230,12 @@ dependencies = [
  "jiff",
  "log",
 ]
+
+[[package]]
+name = "equivalent"
+version = "1.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "877a4ace8713b0bcf2a4e7eec82529c029f1d0619886d18145fea96c3ffe5c0f"
 
 [[package]]
 name = "errno"
@@ -328,17 +340,17 @@ checksum = "e4eba85ea1d0a966a983acd07deee566e67395d2d96b6fb39e62b5a833f1eb0b"
 
 [[package]]
 name = "hashbrown"
-version = "0.12.3"
+version = "0.17.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8a9ee70c43aaf417c914396645a0fa852624801b24ebb7ae78fe8272889ac888"
+checksum = "ed5909b6e89a2db4456e54cd5f673791d7eca6732202bbf2a9cc504fe2f9b84a"
 
 [[package]]
 name = "indexmap"
-version = "1.9.3"
+version = "2.14.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bd070e393353796e801d209ad339e89596eb4c8d430d18ede6a1cced8fafbd99"
+checksum = "cc4e190f5d26ca7051642629da2c52fc03bde85a03197c99408dcd291734c855"
 dependencies = [
- "autocfg",
+ "equivalent",
  "hashbrown",
 ]
 
@@ -1063,16 +1075,17 @@ checksum = "06abde3611657adf66d383f00b093d7faecc7fa57071cce2578660c9f1010821"
 
 [[package]]
 name = "verus_builtin"
-version = "0.0.0-2026-01-25-0057"
+version = "0.0.0-2026-08-09-0044"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eda8cc02517ca6433d1bffbde5685e75ea8d596c30372cd6782db25820b5dac4"
+checksum = "f5f2985ebd252c492375e32f2bfcff6e6a04523009a0d624785d3468f3729158"
 
 [[package]]
 name = "verus_builtin_macros"
-version = "0.0.0-2026-01-25-0057"
+version = "0.0.0-2026-08-09-0044"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bfb25e7607b9157db02674b19e073292c003217fb2fc27363d6aeac7728afa3b"
+checksum = "57091b5661094900006f07621654a455ecf8ab40efc22981cb39b773ff7bc21c"
 dependencies = [
+ "convert_case",
  "proc-macro2",
  "quote",
  "syn 2.0.119",
@@ -1083,9 +1096,9 @@ dependencies = [
 
 [[package]]
 name = "verus_prettyplease"
-version = "0.0.0-2026-01-25-0057"
+version = "0.0.0-2026-08-09-0044"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "abadab37cde6d9fd68d92ef71a46b2c34e0b7e57584a3501d7f2a24169bacdc2"
+checksum = "51fc115de5fb3806bc362060bb683024660ed2bc13c1183d1f01d464e4537139"
 dependencies = [
  "proc-macro2",
  "verus_syn",
@@ -1093,9 +1106,9 @@ dependencies = [
 
 [[package]]
 name = "verus_state_machines_macros"
-version = "0.0.0-2026-01-25-0057"
+version = "0.0.0-2026-08-02-0125"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9caf90585b9d3182fa7fa2180098b5d32039a9857b7780619ccd73203f339732"
+checksum = "93f77ff8d121edb1bf2651335769a80a2f611da8573c3b498434a66b3162805f"
 dependencies = [
  "indexmap",
  "proc-macro2",
@@ -1105,9 +1118,9 @@ dependencies = [
 
 [[package]]
 name = "verus_syn"
-version = "0.0.0-2026-01-25-0057"
+version = "0.0.0-2026-08-02-0125"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3efe87367e6aa49c2639208d0d5356b5c6287ae7021ff2d13354ad52924740c1"
+checksum = "f17237ea6d267e457d53ce36f55b315fc9edd26eb88c765dd95e035c0b415869"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1116,9 +1129,9 @@ dependencies = [
 
 [[package]]
 name = "vstd"
-version = "0.0.0-2026-01-25-0057"
+version = "0.0.0-2026-08-09-0044"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9e9e087457b5c8fc9ce5b046bd290437d6089818c4c635773524fd17d9c517b7"
+checksum = "512e38f177f75c473a03121bf0934a276468f78fea84c073f979d6670e862705"
 dependencies = [
  "verus_builtin",
  "verus_builtin_macros",

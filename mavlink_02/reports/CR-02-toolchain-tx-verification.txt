@@ -1,0 +1,27 @@
+RUSTC_BOOTSTRAP=1 cargo-verus verify -Z build-std=core,alloc,compiler_builtins -Z build-std-features=compiler-builtins-mem --target aarch64-unknown-none -- --rlimit 100 --smt-option smt.random_seed=7
+    Checking vstd v0.0.0-2026-08-09-0044
+verification results:: 1861 verified, 0 errors
+    Checking data v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/data)
+    Checking firewall-core v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/firewall_core)
+warning: use of deprecated method `vstd::array::ArrayAdditionalExecFns::set`: use `array[i] = value` instead
+  --> /home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/firewall_core/src/net.rs:32:19
+   |
+32 |             bytes.set(i, data[i]);
+   |                   ^^^
+   |
+   = note: `#[warn(deprecated)]` on by default
+
+warning: use of deprecated method `vstd::array::ArrayAdditionalExecFns::set`: use `array[i] = value` instead
+  --> /home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/firewall_core/src/net.rs:60:19
+   |
+60 |             bytes.set(i, data[i]);
+   |                   ^^^
+
+verification results:: 10 verified, 0 errors
+    Checking GumboLib v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/GumboLib)
+verification results:: 0 verified, 0 errors
+verification results:: 39 verified, 0 errors
+warning: `firewall-core` (lib) generated 4 warnings (2 duplicates)
+    Checking seL4_TxFirewall_TxFirewall v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/seL4_TxFirewall_TxFirewall)
+verification results:: 16 verified, 0 errors
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 15.31s

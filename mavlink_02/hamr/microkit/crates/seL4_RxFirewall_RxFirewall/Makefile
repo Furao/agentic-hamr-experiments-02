@@ -14,13 +14,16 @@ CARGO_FLAGS = -Z build-std=core,alloc,compiler_builtins \
               -Z build-std-features=compiler-builtins-mem \
               --target aarch64-unknown-none
 
+# Match the solver settings in the current HAMR-generated ModeManager crate.
+SMT_OPTS ?= --rlimit 100 --smt-option smt.random_seed=7
+
 all: build-verus-release
 
 build-verus-release:
-	$(BUILD_ENV_VARS) cargo-verus build --features sel4 $(CARGO_FLAGS) --release
+	$(BUILD_ENV_VARS) cargo-verus build --features sel4 --release $(CARGO_FLAGS) -- $(SMT_OPTS)
 
 build-verus:
-	$(BUILD_ENV_VARS) cargo-verus build --features sel4 $(CARGO_FLAGS)
+	$(BUILD_ENV_VARS) cargo-verus build --features sel4 $(CARGO_FLAGS) -- $(SMT_OPTS)
 
 build-release:
 	$(BUILD_ENV_VARS) cargo build --features sel4 $(CARGO_FLAGS) --release
@@ -29,10 +32,10 @@ build:
 	$(BUILD_ENV_VARS) cargo build --features sel4 $(CARGO_FLAGS)
 
 verus:
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS)
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- $(SMT_OPTS)
 
 verus-json:
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --output-json --time > verus_results.json
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- $(SMT_OPTS) --output-json --time > verus_results.json
 
 # Test Example:
 #   Run all unit tests

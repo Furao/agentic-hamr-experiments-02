@@ -1,6 +1,6 @@
 # CR-02 Wave 1 review
 
-Date: 2026-09-23. Profile: audited. Status: technical gate satisfied; wave approval pending.
+Date: 2026-09-23. Profile: audited. Status: developer approved Wave 1, including regenerated output, on 2026-09-23.
 Requirements authority: `Open_Platform_HLRs_26_09_22_07.md` (developer-owned).
 Context: `/home/robertvanvossen/tools/r2u2-HAMR-agent-context`.
 

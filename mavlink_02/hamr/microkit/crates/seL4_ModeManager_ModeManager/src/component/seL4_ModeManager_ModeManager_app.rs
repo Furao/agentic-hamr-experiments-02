@@ -35,6 +35,9 @@ verus! {
         final(api).mode_to_mavlink == final(self).retained_mode,
         // END MARKER INITIALIZATION ENSURES
     {
+      self.retained_mode = open_platform_Data_Model::OperatingMode::Normal;
+      api.put_mode_to_rx(self.retained_mode);
+      api.put_mode_to_mavlink(self.retained_mode);
       log_info("initialize entrypoint invoked");
     }
 
@@ -59,7 +62,12 @@ verus! {
         final(api).mode_to_mavlink == final(self).retained_mode,
         // END MARKER TIME TRIGGERED ENSURES
     {
-      log_info("compute entrypoint invoked");
+      let error_status = api.get_error_status();
+      if error_status {
+        self.retained_mode = open_platform_Data_Model::OperatingMode::Recovery;
+      }
+      api.put_mode_to_rx(self.retained_mode);
+      api.put_mode_to_mavlink(self.retained_mode);
     }
 
     pub fn notify(

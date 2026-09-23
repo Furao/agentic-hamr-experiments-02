@@ -4,10 +4,10 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 
 | Step | Status | Updated | Notes |
 |------|--------|---------|-------|
-| ChangeExec(CR-02) | in-progress | 2026-09-23 | W1: authorized post-codegen workaround captured; reporting probe 2/2 passes; wave approval pending |
+| ChangeExec(CR-02) | in-progress | 2026-09-23 | Wave 2: toolchain migrated; ModeManager 7/7 tests and full line coverage ready for AP1 review |
 | ChangeExec(CR-02).1 | done | 2026-09-22 | Approved plan/all RDs resolved; HEAD 24ba011d4f0a49c727a9b6c9cd28941f536891b4 drift is request/planning records only; approved source baseline unchanged |
 | ChangeExec(CR-02).2 | in-progress | 2026-09-22 | W1 started per approved sequence; W2/W3 not started |
-| ChangeExec(CR-02).W1 | in-progress | 2026-09-23 | Technical gate satisfied; startup/sampling inspection complete and patched probe 2/2; wave approval pending; CR-02-w1-gate.md |
+| ChangeExec(CR-02).W1 | done | 2026-09-23 | Developer approved Wave 1; technical gate and regenerated output accepted |
 | ChangeExec(CR-02).W1.Requirements | done | 2026-09-22 | _07 supplies derived LLR-1–21; allocation and RF-1–RF-4 disposition in w1-requirements-planning-07.md; legacy document synchronization tracked for final sweep |
 | ChangeExec(CR-02).W1.SysModeling | done | 2026-09-22 | Developer approved architecture and audited sub-workflow boundary; continuing to RxFirewall contracts |
 | ChangeExec(CR-02).W1.SysModeling.1 | done | 2026-09-22 | Retained existing package/file layout and local aadl-lib |
@@ -63,18 +63,26 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W1.CodeGen.3 | done | 2026-09-22 | Project output confirmed; custom.mk/schedule/tests preserved; R2U2 spec recompiled with CLI 4.2.4; see reports/CR-02-codegen.md |
 | ChangeExec(CR-02).W1.CodeGen.4 | n/a | 2026-09-22 | Regeneration; setup-build-script remains a separate approved-plan task |
 | ChangeExec(CR-02).W1.CodeGen.boundary | done | 2026-09-22 | Developer explicitly approved CodeGen; W1 reporting/startup obligations remain |
-| ChangeExec(CR-02).W1.CodeGen-R2 | in-progress | 2026-09-23 | Approved monitor regenerated successfully; artifact criteria met, audited boundary review pending |
+| ChangeExec(CR-02).W1.CodeGen-R2 | done | 2026-09-23 | Regenerated output accepted with Wave 1 approval |
 | ChangeExec(CR-02).W1.CodeGen-R2.1 | done | 2026-09-23 | Reused Microkit configuration and recorded invocation |
 | ChangeExec(CR-02).W1.CodeGen-R2.2 | done | 2026-09-23 | Exit 0, report Success, no warnings/errors; future-time spec emitted |
 | ChangeExec(CR-02).W1.CodeGen-R2.3 | done | 2026-09-23 | 12 editable files unchanged by hashes; compiler 4.2.4 rebuilt specification and bounds |
 | ChangeExec(CR-02).W1.CodeGen-R2.4 | n/a | 2026-09-23 | Regeneration; existing build helper retained |
-| ChangeExec(CR-02).W1.CodeGen-R2.boundary | pending | 2026-09-23 | Output review complete; patched reporting path passes; present with W1 review |
+| ChangeExec(CR-02).W1.CodeGen-R2.boundary | done | 2026-09-23 | Developer Wave 1 approval includes regenerated output |
 | ChangeExec(CR-02).W1.R2U2Reporting-R2 | done | 2026-09-23 | Developer workaround 4bc9a9a exposes D2 false verdict; isolated probe 2/2 passes; production reporter remains W2 |
 | ChangeExec(CR-02).W1.SetupBuildScript | done | 2026-09-22 | Microkit/Rust helper created; usage parses, lists five components and two cores; application tests not run |
 | ChangeExec(CR-02).W1.R2U2Reporting | done | 2026-09-23 | Original unpatched failure superseded by authorized workaround and R2 probe 2/2; historical report retained |
 | ChangeExec(CR-02).W1.StartupSampling | done | 2026-09-23 | Checked enum/defaults, retained C inputs, wiring, non-consuming peek and pre/compute/post order; runtime implementation and schedule evidence remain W2/W3 |
-| ChangeExec(CR-02).W1.AP1 | pending | 2026-09-23 | All technical W1 criteria satisfied; awaiting developer wave approval; W2 not started |
-| ChangeExec(CR-02).W2 | not-started | 2026-09-22 | Awaiting W1 gate |
+| ChangeExec(CR-02).W1.AP1 | done | 2026-09-23 | Developer explicitly approved Wave 1 |
+| ChangeExec(CR-02).W2 | in-progress | 2026-09-23 | Started CompDev(ModeManager); Rx and MAVLink implementations follow |
+| ChangeExec(CR-02).W2.CompDev(ModeManager) | in-progress | 2026-09-23 | Toolchain migration resolved blocker; steps 1–5 complete; coverage review pending |
+| ChangeExec(CR-02).W2.CompDev(ModeManager).1 | done | 2026-09-23 | Fresh tipe Well-formed; generated ModeManager contracts current |
+| ChangeExec(CR-02).W2.CompDev(ModeManager).2 | done | 2026-09-23 | Initialize/publish Normal; sample ErrorStatus once, latch Recovery, publish both outputs each dispatch |
+| ChangeExec(CR-02).W2.CompDev(ModeManager).3 | done | 2026-09-23 | Added transition/publication/reboot/notification tests and exhaustive oracle truth table; generated PropTests retained |
+| ChangeExec(CR-02).W2.CompDev(ModeManager).4 | done | 2026-09-23 | 7/7 tests; app 37/37 lines, GUMBOX 67/67; exhaustive branch cases, no LLVM branch counters |
+| ChangeExec(CR-02).W2.CompDev(ModeManager).5 | done | 2026-09-23 | Tests pass after dependency migration; no implementation or contract revision required |
+| ChangeExec(CR-02).W2.CompDev(ModeManager).AP1 | pending | 2026-09-23 | Review tests/coverage and recorded branch-metric limitation before Verus |
+| ChangeExec(CR-02).W2.CompDev(ModeManager).6 | not-started | 2026-09-23 | New verifier installed; ModeManager verification follows AP1 approval |
 | ChangeExec(CR-02).W3 | not-started | 2026-09-22 | Awaiting W2 gate |
 | ChangeExec(CR-02).3 | not-started | 2026-09-22 | Back-propagation review follows waves; requirements developer-owned |
 | ChangeExec(CR-02).4 | not-started | 2026-09-22 | Final tests/verification pending |
@@ -212,3 +220,5 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 - 2026-09-11: Developer-requested MAVLink core consolidation completed, including follow-up policy separation. One verified core parser serves routing, runtime contracts, and diagnostics; firmware-flash implementation/specification/tests reside in MAVLinkFirewall. Duplicate parser/table removed. Core tests 6/6, component tests 8/8; target verification core 9/0 and MAVLinkFirewall 17/0. Details: [mavlink-core-consolidation.md](mavlink-core-consolidation.md).
 
 - 2026-09-23: Captured developer workaround commit 4bc9a9a as a reusable post-codegen patch; helper verified for application, idempotence and conflict preservation. AGENTS.md requires each codegen invocation to attempt it.
+
+- 2026-09-23: Developer-authorized Verus migration completed; shared cores pass tests/verification and Tx passes 4 tests plus target verification 16/0. Rx/MAV test-interface updates and driver target environment remain planned work.
