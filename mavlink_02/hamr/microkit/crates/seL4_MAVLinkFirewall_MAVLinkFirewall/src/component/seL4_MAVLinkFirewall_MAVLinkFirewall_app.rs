@@ -21,9 +21,9 @@ verus! {
   // Message and operation names from the bundled common.xml and ardupilotmega.xml.
   pub(crate) const COMMAND_INT_ID: u32 = 75;
   pub(crate) const COMMAND_LONG_ID: u32 = 76;
-  pub(crate) const SECURE_COMMAND_ID: u32 = 11004;
+  pub const SECURE_COMMAND_ID: u32 = 11004;
   pub(crate) const MAV_CMD_FLASH_BOOTLOADER: u16 = 42650;
-  pub(crate) const SECURE_COMMAND_FLASH_BOOTLOADER: u32 = 7;
+  pub const SECURE_COMMAND_FLASH_BOOTLOADER: u32 = 7;
   // Payload fields are serialized by width, not XML declaration order.
   pub(crate) const COMMAND_FIELD_OFFSET: usize = 28;
   pub(crate) const COMMAND_FIELD_END: usize = COMMAND_FIELD_OFFSET + 2;

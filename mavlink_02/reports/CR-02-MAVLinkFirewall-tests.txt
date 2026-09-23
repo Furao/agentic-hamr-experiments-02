@@ -33,21 +33,21 @@ warning: `GumboLib` (lib) generated 3 warnings
      Running unittests src/lib.rs (target/cr02-current/debug/deps/seL4_MAVLinkFirewall_MAVLinkFirewall-559ca41cc92120fb)
 
 running 15 tests
-test logging::tests::reporter_matches_exact_source_message_and_level ... ok
 test component::seL4_MAVLinkFirewall_MAVLinkFirewall_app::policy_tests::firmware_policy_handles_versions_truncation_and_carrier_offsets ... ok
+test logging::tests::reporter_matches_exact_source_message_and_level ... ok
 test test::tests::GUMBOX_tests::manual_allow_deny_invalid_and_no_input_partitions ... ok
-test test::tests::GUMBOX_tests::prop_testInitializeCB_macro ... ok
 test test::tests::GUMBOX_tests::oracle_rejects_wrong_state_status_and_each_lane_output ... ok
-test test::tests::GUMBOX_tests::prop_testComputeCB_macro ... ok
-test test::tests::tests::production_monitor_reports_at_d2_once_and_resets_on_boot ... ok
-test test::tests::tests::allows_non_flash_command_and_handles_notification ... ok
-test test::tests::tests::count_modes_threshold_saturation_and_empty_dispatches ... ok
 test test::tests::tests::carrier_boundaries_and_destination_octets ... ok
-test test::tests::tests::secure_operation_zero_extension_and_upper_bytes ... ok
-test test::tests::tests::routes_allowed_and_drops_flash_and_malformed_per_lane ... ok
-test test::tests::tests::test_compute ... ok
-test test::tests::tests::test_initialization ... ok
+test test::tests::GUMBOX_tests::prop_testComputeCB_macro ... ok
 test test::tests::tests::timeout_does_not_change_routing_or_count ... ok
+test test::tests::tests::count_modes_threshold_saturation_and_empty_dispatches ... ok
+test test::tests::tests::production_monitor_reports_at_d2_once_and_resets_on_boot ... ok
+test test::tests::tests::secure_operation_zero_extension_and_upper_bytes ... ok
+test test::tests::tests::allows_non_flash_command_and_handles_notification ... ok
+test test::tests::tests::test_compute ... ok
+test test::tests::GUMBOX_tests::prop_testInitializeCB_macro ... ok
+test test::tests::tests::routes_allowed_and_drops_flash_and_malformed_per_lane ... ok
+test test::tests::tests::test_initialization ... ok
 
-test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.18s
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.20s
 

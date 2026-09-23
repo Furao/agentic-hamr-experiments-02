@@ -1,0 +1,4 @@
+RUSTC_BOOTSTRAP=1 cargo-verus verify -Z build-std=core,alloc,compiler_builtins -Z build-std-features=compiler-builtins-mem --target aarch64-unknown-none -- --rlimit 100 --smt-option smt.random_seed=7
+    Checking seL4_MAVLinkFirewall_MAVLinkFirewall v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall)
+verification results:: 69 verified, 0 errors
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.51s

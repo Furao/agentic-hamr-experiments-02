@@ -1,6 +1,6 @@
 # CR-02 Wave 2 — MAVLinkFirewall development
 
-Date: 2026-09-23. Profile: audited. Status: steps 1–5 complete, AP1 pending.
+Date: 2026-09-23. Profile: audited. Status: coverage approved; verification 69/0; AP2 pending.
 Developer approved RxFirewall completion and continuation to this component.
 Authority: developer-owned Open_Platform_HLRs_26_09_22_07.md, approved contracts,
 and subsequent instruction to omit per-frame Recovery suppression logs.
@@ -117,3 +117,35 @@ and SECURE_COMMAND_FLASH_BOOTLOADER, matching the executable classifier instead 
 duplicating their literals in local spec bindings. Component tests remain 15/15.
 This specification-only refactor does not change executable coverage; recorded LCOV
 line numbers precede the two-line removal. Verus remains pending AP1 approval.
+
+
+## Verification and completion review
+
+Developer approved AP1 after the shared-constant refactor. Target verification now
+passes: **69 verified, zero errors**, exit 0, aarch64-unknown-none, Verus
+0.2026.08.09.92f466f / Rust 1.97.1, rlimit 100 and SMT seed 7.
+
+The first verifier run rejected pub(crate) constants referenced from a public open
+specification. SECURE_COMMAND_ID and SECURE_COMMAND_FLASH_BOOTLOADER are now public
+constants, shared unchanged by executable and specification code. No behavioral
+change, contract weakening, proof assumption or additional external body was needed.
+The three application external bodies remain log_info, log_invalid_mavlink and
+log_warn_channel. The previously documented empty-output startup condition and
+unverified logger/generated-runtime trust boundaries remain applicable.
+
+The default Makefile first attempted to install R2U2 CLI 4.2.4. Network access was
+approved after a sandbox DNS failure, but installation failed linking libpython3.14.
+Verification proceeded with `make -o r2u2_cli verus`, retaining the existing compiled
+monitor and skipping the unnecessary CLI installation prerequisite. This executed
+the normal target cargo-verus command; no generated artifacts were modified. The
+installation issue remains relevant to the standard Makefile build path and should
+be resolved or configured to reuse the established CLI during Wave 3.
+
+After the visibility fix, all **15 tests pass**. Fresh proof-profiles coverage remains
+application **172/172**, GUMBOX **382/382**, logger **39/39**, with the same documented
+branch-counter and target-backend limitations. Evidence files and HTML refreshed;
+LCOV line numbers now match current source. No codegen was run.
+
+Steps 6–7 are complete. AP2 and the component boundary await developer approval of
+the verification result and stated trust boundaries; broader Wave 2 regression and
+Wave 3 target evidence remain outstanding.

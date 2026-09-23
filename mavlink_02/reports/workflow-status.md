@@ -4,7 +4,7 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 
 | Step | Status | Updated | Notes |
 |------|--------|---------|-------|
-| ChangeExec(CR-02) | in-progress | 2026-09-23 | ModeManager and RxFirewall complete; MAVLinkFirewall tests/coverage await AP1 |
+| ChangeExec(CR-02) | in-progress | 2026-09-23 | ModeManager and RxFirewall complete; MAVLinkFirewall verification 69/0 awaits AP2 |
 | ChangeExec(CR-02).1 | done | 2026-09-22 | Approved plan/all RDs resolved; HEAD 24ba011d4f0a49c727a9b6c9cd28941f536891b4 drift is request/planning records only; approved source baseline unchanged |
 | ChangeExec(CR-02).2 | in-progress | 2026-09-22 | W1 started per approved sequence; W2/W3 not started |
 | ChangeExec(CR-02).W1 | done | 2026-09-23 | Developer approved Wave 1; technical gate and regenerated output accepted |
@@ -74,7 +74,7 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W1.R2U2Reporting | done | 2026-09-23 | Original unpatched failure superseded by authorized workaround and R2 probe 2/2; historical report retained |
 | ChangeExec(CR-02).W1.StartupSampling | done | 2026-09-23 | Checked enum/defaults, retained C inputs, wiring, non-consuming peek and pre/compute/post order; runtime implementation and schedule evidence remain W2/W3 |
 | ChangeExec(CR-02).W1.AP1 | done | 2026-09-23 | Developer explicitly approved Wave 1 |
-| ChangeExec(CR-02).W2 | in-progress | 2026-09-23 | ModeManager and RxFirewall complete; MAVLinkFirewall tests/coverage await AP1 |
+| ChangeExec(CR-02).W2 | in-progress | 2026-09-23 | ModeManager and RxFirewall complete; MAVLinkFirewall verification 69/0 awaits AP2 |
 | ChangeExec(CR-02).W2.CompDev(ModeManager) | done | 2026-09-23 | Developer approved completion: tests/coverage and verification 9/0 accepted |
 | ChangeExec(CR-02).W2.CompDev(ModeManager).1 | done | 2026-09-23 | Fresh tipe Well-formed; generated ModeManager contracts current |
 | ChangeExec(CR-02).W2.CompDev(ModeManager).2 | done | 2026-09-23 | Initialize/publish Normal; sample ErrorStatus once, latch Recovery, publish both outputs each dispatch |
@@ -97,13 +97,17 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W2.CompDev(RxFirewall).7 | done | 2026-09-23 | Explicit platform empty-output initialization requires; tests 12/12 and full line coverage rechecked |
 | ChangeExec(CR-02).W2.CompDev(RxFirewall).AP2 | done | 2026-09-23 | Developer approved 28/0 and explicit empty-output startup precondition |
 | ChangeExec(CR-02).W2.CompDev(RxFirewall).boundary | done | 2026-09-23 | Developer approved completion and continuation to MAVLinkFirewall |
-| ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall) | in-progress | 2026-09-23 | 15/15 tests and full active line coverage; AP1 pending before Verus |
+| ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall) | in-progress | 2026-09-23 | Coverage approved; verification 69/0 and 15/15 tests; AP2 pending |
 | ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).1 | done | 2026-09-23 | Fresh tipe Well-formed; model/generated contracts current; no regeneration needed |
 | ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).2 | done | 2026-09-23 | Count saturation, frozen-mode routing, final ErrorStatus, zero-extended operation and production timeout logger |
 | ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).3 | done | 2026-09-23 | Lane/state/policy boundaries, 12000 negative-oracle combinations, generated PropTests and real-monitor timelines |
 | ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).4 | done | 2026-09-23 | 15/15 tests; application 172/172, GUMBOX 382/382, logger 39/39 active host lines |
 | ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).5 | done | 2026-09-23 | Fresh isolated coverage; semantic branch cases recorded; BRF=0 and target backend exclusion explicit |
-| ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).AP1 | pending | 2026-09-23 | Await developer review of tests, coverage and exclusions before Verus |
+| ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).AP1 | done | 2026-09-23 | Developer approved tests/coverage and exclusions after shared-constant refactor |
+| ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).6 | done | 2026-09-23 | Target make -o r2u2_cli verus passed: 69 verified, 0 errors |
+| ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).7 | done | 2026-09-23 | Shared constants made public for public open spec; tests 15/15 and full active line coverage retained |
+| ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).AP2 | pending | 2026-09-23 | Await verification/trust-boundary review; three existing application logging external bodies |
+| ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).boundary | pending | 2026-09-23 | Await completion approval before remaining Wave 2 regression |
 | ChangeExec(CR-02).W3 | not-started | 2026-09-22 | Awaiting W2 gate |
 | ChangeExec(CR-02).3 | not-started | 2026-09-22 | Back-propagation review follows waves; requirements developer-owned |
 | ChangeExec(CR-02).4 | not-started | 2026-09-22 | Final tests/verification pending |
