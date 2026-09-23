@@ -9,8 +9,8 @@ verus! {
 #[derive(Debug)]
 pub struct Ipv4Address(pub [u8; 4]);
 
-/// Define the max possible MTU. Use standard Jumbo size as maximum possible.
-pub const MAX_MTU: u16 = 9000;
+/// HLR-12/13/18: IPv4 must fit the 1600-byte carrier after its Ethernet header.
+pub const MAX_MTU: u16 = 1586;
 
 impl Ipv4Address {
     pub fn from_bytes(data: &[u8]) -> (r: Ipv4Address)

@@ -70,7 +70,7 @@ package GumboLib {
 
       def valid_ipv4_length(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
         size(aframe) == 1600 and
-        (ipv4_length(aframe) <= 9000[u16]);
+        (ipv4_length(aframe) <= 1600[u16] - ethernet_header_length());
 
       def valid_ipv4_protocol(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
         size(aframe) == 1600 and
@@ -175,7 +175,7 @@ package GumboLib {
         ethernet_header_length() + ipv4_header_length() + udp_header_length();
 
       // CR-02 LLR-4: both UDP routes require consistent, carrier-bounded lengths.
-      // Keep the Tx-facing valid_ipv4 predicate unchanged.
+      // HLR-12/13/18 share the 1586-byte IPv4 bound in valid_ipv4_length.
       def rx_bounded_udp(aframe: open_platform_Data_Model::RawEthernetMessage): Base_Types::Boolean :=
         valid_ipv4_udp(aframe) and
         ipv4_header_length() <= ipv4_length(aframe) and

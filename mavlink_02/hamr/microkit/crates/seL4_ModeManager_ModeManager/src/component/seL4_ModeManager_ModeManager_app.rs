@@ -4,6 +4,9 @@ use data::*;
 use crate::bridge::seL4_ModeManager_ModeManager_api::*;
 use vstd::prelude::*;
 
+#[cfg(test)]
+pub static INFO_MESSAGES: std::sync::Mutex<Vec<String>> = std::sync::Mutex::new(Vec::new());
+
 verus! {
 
   pub struct seL4_ModeManager_ModeManager {
@@ -63,8 +66,9 @@ verus! {
         // END MARKER TIME TRIGGERED ENSURES
     {
       let error_status = api.get_error_status();
-      if error_status {
+      if error_status && self.retained_mode == open_platform_Data_Model::OperatingMode::Normal {
         self.retained_mode = open_platform_Data_Model::OperatingMode::Recovery;
+        log_info("Mode changed: Normal -> Recovery");
       }
       api.put_mode_to_rx(self.retained_mode);
       api.put_mode_to_mavlink(self.retained_mode);
@@ -86,6 +90,8 @@ verus! {
   #[verifier::external_body]
   pub fn log_info(msg: &str)
   {
+    #[cfg(test)]
+    INFO_MESSAGES.lock().unwrap().push(msg.to_string());
     log::info!("{0}", msg);
   }
 

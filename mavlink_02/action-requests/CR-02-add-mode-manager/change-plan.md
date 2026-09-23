@@ -8,9 +8,39 @@
 | Target project | `/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02` |
 | Baseline | `043d574970d28ff172f7261ea0392ddd14ae50a8`, confirmed by developer 2026-09-22 |
 | Sketch | `add-mode-manager-sketch.md` (unchanged) |
-| Authoritative requirements | `Open_Platform_HLRs_26_09_22_07.md` (unchanged) |
+| Authoritative requirements | `Open_Platform_HLRs_26_09_23_01.md` (developer supplied; supersedes _07) |
 | Profile | audited; user token `audit` interpreted as audited |
 | Workflow | `ChangePlan(cr=CR-02-add-mode-manager)` |
+
+## Requirements amendment — 2026-09-23
+
+The developer explicitly directs adding a defensive driver bounds check and updating
+the firewalls against `Open_Platform_HLRs_26_09_23_01.md`. This authorizes the scope
+amendment; the three waves and audited technical gates remain. References to _07
+below record the original planning basis; the new document is now authoritative.
+No user-owned requirements are edited.
+
+The supplied delta changes HLR-12/13/18's IPv4 maximum from 9000 to 1586 bytes
+and retains LLR-4's 1600-byte Ethernet carrier. The revised Tx contract drops lengths above 1586;
+Rx/MAVLink retain their existing stricter UDP/carrier checks. All four lanes retain
+exact byte preservation. ARP, frozen mode, rejection counting and R2U2 semantics
+are unchanged. The driver independently skips zero or out-of-buffer transmit sizes
+before requesting a DMA token; it never truncates an oversized request.
+
+During W3, re-enter CompGUMBOSpec for Tx/Rx/MAVLink (shared bound and Tx output-size
+invariants), obtain contract sign-off, then CodeGen, apply the mandatory reporting
+workaround and probe, and re-enter affected CompDev tests/coverage/verification.
+Align firewall_core and MAVLink executable length limits with the revised contracts.
+Rebuild the full target after these changes. Earlier W2 proofs and W3 loader remain
+historical evidence, not acceptance of the amended code.
+
+Acceptance: valid IPv4 1586 produces Tx size 1600; 1587, 9000, 9001 and 65535
+are rejected on every Tx lane. Rx direct/MAVLink routes reject oversize carriers;
+MAVLink rejection counting remains correct in both modes. Exercise driver size 0,
+1, 1599, 1600, 1601 and 65535 (the helper test exhausts all u16 values), preserving
+valid bytes and continuing after bad lanes. Verify affected firewalls/shared core,
+retain monitor regressions, and build the driver for ZCU102. Physical hardware and
+timing acceptance remain separate outstanding W3 obligations.
 
 ## 1. Change Summary
 
@@ -31,8 +61,8 @@ Approval completes ChangePlan; ChangeExec remains a separate workflow.
 
 ## 2. Sketch Provenance and Clarifications
 
-- Immutable request files: sketch and supplied requirements revisions _01–_07.
-  Revision _07 is authoritative; earlier revisions are historical only.
+- Immutable request files: sketch and supplied requirements revisions through
+  `Open_Platform_HLRs_26_09_23_01.md`; that latest revision is authoritative.
 - Developer, 2026-09-22: user-supplied requirements are the source of truth; adopt
   their stricter UDP policy. Baseline-derived requirements do not override them.
 - Developer, 2026-09-22: inputs are frozen immediately before HAMR component dispatch.
@@ -225,14 +255,16 @@ Mode updates published after input freezing affect a later dispatch only.
 | custom.mk | Add manager image/monitor/build/test/verify rules, control-type objects and R2U2 specification/runtime build dependencies; preserve manual VMM linkage | W1/W3 |
 | microkit.schedule.xml | Add manager/pacer slot and validate actual observation order/latency; hand-maintained | W3 |
 | Build helper | Provide bin/build.cmd through setup-build-script and include new crate/coverage path | W1 |
+| Tx/Rx/MAVLink contracts and executable length validation | Shared IPv4 maximum 1586; Tx output-size invariants; refreshed boundary tests and proofs under latest requirements | W3 correction loop |
+| LowLevelEthernetDriver transmit path | Independent buffer bounds check before token acquisition, no truncation; exhaustive helper tests and target build | W3 |
 | Reports | Contract audits, component tests/coverage/verification, timing trace, hardware results and final CR-02 report | All |
 
 ### 5.2 Non-Impact Argument
 
 | Element | Proposed non-impact and required evidence |
 |---|---|
-| TxFirewall policy/application/contracts | No new mode port or transmit policy change; shared firewall_core/GumboLib may affect its proof/build dependencies. Reverify and rerun regression tests; inspect generated diffs |
-| LowLevelEthernetDriver functionality | Existing four input/output lane interfaces unchanged. Regeneration/build/schedule can affect integration; verify full target build and source diff |
+| TxFirewall mode interface | No mode port added. Length policy/contracts are now impacted by the 2026-09-23 amendment; full affected tests/verification required |
+| LowLevelEthernetDriver interfaces | Four input/output lanes unchanged. Transmit functionality now includes the authorized defensive bounds check; test it and rebuild the target |
 | VMM application/guest/virtio behavior | Carrier layout and receive/transmit queues unchanged; no manager connection to VMM. Preserve manual C/library linkage and exercise end-to-end traffic |
 | mavlink_core framing/CRC/dialect | Mode and blacklist policy remain component-owned; no intended parser or dialect change. Rerun core regressions/verification; _07 requires no command-offset or parser change |
 | Ethernet data layouts | Raw/Sized/MAVLink carrier layouts unchanged; new control enum is additive. Check generated C/Rust type compatibility |
@@ -249,7 +281,7 @@ edits remain developer-owned.
 |---|---|---|---|---|
 | W1 | Requirements, architecture, contracts and regeneration | Review developer-supplied consolidated _07 HLRs/LLRs and record allocation (complete); SysModeling (delta); CompGUMBOSpec(component=RxFirewall); CompGUMBOSpec(component=MAVLinkFirewall); CompGUMBOSpec(component=ModeManager); SysGUMBOIntegrationCheck; CodeGen; setup-build-script | Requirements/ID map, mode/status wiring and state contracts, new domain declarations, generated R2U2 specification/hooks, generated scaffold and build helper; preserve custom build content | Developer-supplied requirements updates reviewed and applicable findings resolved; SysML tipe clean; all three contract audits reviewed; integration check result with expected handshake count and explicit vacuity accounting; generation and R2U2 specification compilation succeed; sampling hooks/startup values inspected; demonstrate a supported same-dispatch verdict/logging path before W2. This is a model/scaffold gate, not a runnable-system claim |
 | W2 | Implement and verify mode control and affected policies | CompDev(component=ModeManager); CompDev(component=RxFirewall); CompDev(component=MAVLinkFirewall); CompDev(component=TxFirewall)/TestOnly; CompDev(component=TxFirewall)/VerifyOnly; core test/verification commands | Executable state machines, R2U2 first-trigger/deadline monitoring and one-time logging, strict UDP, blacklist reconciliation, tests, coverage and proofs | Changed components' application/GUMBOX branch coverage and passing tests; Verus clean with R2U2 trust boundary recorded; actual monitor/verdict/logging trace tests pass; both core regressions pass; Tx tests/verification pass; any coverage gaps explicitly reviewed |
-| W3 | Deployable integration and acceptance | SysSchedDef; custom.mk reconciliation and full target build; dispatch-trace integration tests; manual ZCU102 acceptance; final test-components and verify; ChangeExec.3–.5 reconciliation/report | Valid schedule/domain map, complete loader, timing and hardware evidence, final requirements sweep and report | Full ZCU102 custom.mk build; D0/D1/D2 observation and R2U2 verdict/log evidence, including runtime budget impact; hardware cases pass; final cross-crate results and non-impact diffs reviewed; unresolved tool limits explicitly dispositioned |
+| W3 | Deployable integration and acceptance | 2026-09-23 bounds correction loop (CompGUMBOSpec → CodeGen → CompDev; independent driver guard); SysSchedDef; custom.mk reconciliation and full target build; dispatch-trace integration tests; manual ZCU102 acceptance; final test-components and verify; ChangeExec.3–.5 reconciliation/report | Valid schedule/domain map, complete loader, timing and hardware evidence, final requirements sweep and report | Full ZCU102 custom.mk build; D0/D1/D2 observation and R2U2 verdict/log evidence, including runtime budget impact; hardware cases pass; final cross-crate results and non-impact diffs reviewed; unresolved tool limits explicitly dispositioned |
 
 W1's requirements input review is complete against developer-supplied _07. The
 HLR/LLR allocation and feedback dispositions in `w1-requirements-planning-07.md`

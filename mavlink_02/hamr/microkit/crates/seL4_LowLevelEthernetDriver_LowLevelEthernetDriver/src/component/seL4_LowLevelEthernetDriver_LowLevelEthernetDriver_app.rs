@@ -22,6 +22,7 @@ use smoltcp::{
 use eth_driver_core::{DmaDef, Driver};
 
 mod config;
+mod tx_bounds;
 
 const NUM_MSGS: usize = 4;
 
@@ -104,14 +105,14 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
 
         for i in 0..NUM_MSGS {
             if let Some(sz_pkt) = get_tx(i, api) {
-                let size = sz_pkt.sz as usize;
-                if size > 0 {
-                    // warn!("TX Packet: {:0>2X?}", &sz_pkt.message[0..size]);
+                // Validate before requesting a token: the DMA driver clamps oversized
+                // lengths, which cannot make an oversized source slice safe.
+                if let Some(payload) = tx_bounds::bounded_payload(&sz_pkt.amessage, sz_pkt.sz) {
                     debug!("TX Packet");
                     if let Some(tx_tok) = self.drv.transmit(Instant::ZERO) {
                         trace!("Valid tx token");
-                        tx_tok.consume(size, |tx_buf| {
-                            tx_buf.copy_from_slice(&sz_pkt.amessage[0..size]);
+                        tx_tok.consume(payload.len(), |tx_buf| {
+                            tx_buf.copy_from_slice(payload);
                             trace!("Copied from tmp to tx_buf");
                         });
                     };

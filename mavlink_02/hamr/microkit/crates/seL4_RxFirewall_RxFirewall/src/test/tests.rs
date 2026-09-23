@@ -152,7 +152,7 @@ mod tests {
       (ipv4_udp_frame(14550, 14562, 1559), 0),
     ];
     for base in [direct, mav] {
-      for length in [0u16, 19, 20, 27, 1587, 9000, 65535] {
+      for length in [0u16, 19, 20, 27, 1587, 9000, 9001, 65535] {
         let mut bad = base; bad[16..18].copy_from_slice(&length.to_be_bytes());
         cases.push((bad, 0));
       }

@@ -14,6 +14,110 @@ macro_rules! impliesL {
   };
 }
 
+/** I-Guar: Integration constraint on TxFirewall's outgoing event data port EthernetFramesTxOut0
+  *
+  * guarantee hlr_12_llr_4_tx0_size_bound
+  */
+pub fn I_Guar_EthernetFramesTxOut0(EthernetFramesTxOut0: open_platform_Data_Model::SizedEthernetMessage_Impl) -> bool
+{
+  EthernetFramesTxOut0.sz <= 1600u16
+}
+
+/** I-Guar: Integration constraint on TxFirewall's outgoing event data port EthernetFramesTxOut0
+  *
+  * guarantee hlr_12_llr_4_tx0_size_bound
+  */
+pub fn I_Guar_Guard_EthernetFramesTxOut0(EthernetFramesTxOut0: Option<open_platform_Data_Model::SizedEthernetMessage_Impl>) -> bool
+{
+  implies!(
+    EthernetFramesTxOut0.is_some(),
+    I_Guar_EthernetFramesTxOut0(EthernetFramesTxOut0.unwrap())
+  )
+}
+
+/** I-Guar: Integration constraint on TxFirewall's outgoing event data port EthernetFramesTxOut1
+  *
+  * guarantee hlr_12_llr_4_tx1_size_bound
+  */
+pub fn I_Guar_EthernetFramesTxOut1(EthernetFramesTxOut1: open_platform_Data_Model::SizedEthernetMessage_Impl) -> bool
+{
+  EthernetFramesTxOut1.sz <= 1600u16
+}
+
+/** I-Guar: Integration constraint on TxFirewall's outgoing event data port EthernetFramesTxOut1
+  *
+  * guarantee hlr_12_llr_4_tx1_size_bound
+  */
+pub fn I_Guar_Guard_EthernetFramesTxOut1(EthernetFramesTxOut1: Option<open_platform_Data_Model::SizedEthernetMessage_Impl>) -> bool
+{
+  implies!(
+    EthernetFramesTxOut1.is_some(),
+    I_Guar_EthernetFramesTxOut1(EthernetFramesTxOut1.unwrap())
+  )
+}
+
+/** I-Guar: Integration constraint on TxFirewall's outgoing event data port EthernetFramesTxOut2
+  *
+  * guarantee hlr_12_llr_4_tx2_size_bound
+  */
+pub fn I_Guar_EthernetFramesTxOut2(EthernetFramesTxOut2: open_platform_Data_Model::SizedEthernetMessage_Impl) -> bool
+{
+  EthernetFramesTxOut2.sz <= 1600u16
+}
+
+/** I-Guar: Integration constraint on TxFirewall's outgoing event data port EthernetFramesTxOut2
+  *
+  * guarantee hlr_12_llr_4_tx2_size_bound
+  */
+pub fn I_Guar_Guard_EthernetFramesTxOut2(EthernetFramesTxOut2: Option<open_platform_Data_Model::SizedEthernetMessage_Impl>) -> bool
+{
+  implies!(
+    EthernetFramesTxOut2.is_some(),
+    I_Guar_EthernetFramesTxOut2(EthernetFramesTxOut2.unwrap())
+  )
+}
+
+/** I-Guar: Integration constraint on TxFirewall's outgoing event data port EthernetFramesTxOut3
+  *
+  * guarantee hlr_12_llr_4_tx3_size_bound
+  */
+pub fn I_Guar_EthernetFramesTxOut3(EthernetFramesTxOut3: open_platform_Data_Model::SizedEthernetMessage_Impl) -> bool
+{
+  EthernetFramesTxOut3.sz <= 1600u16
+}
+
+/** I-Guar: Integration constraint on TxFirewall's outgoing event data port EthernetFramesTxOut3
+  *
+  * guarantee hlr_12_llr_4_tx3_size_bound
+  */
+pub fn I_Guar_Guard_EthernetFramesTxOut3(EthernetFramesTxOut3: Option<open_platform_Data_Model::SizedEthernetMessage_Impl>) -> bool
+{
+  implies!(
+    EthernetFramesTxOut3.is_some(),
+    I_Guar_EthernetFramesTxOut3(EthernetFramesTxOut3.unwrap())
+  )
+}
+
+/** IEP-Post: Initialize Entrypoint Post-Condition
+  *
+  * @param api_EthernetFramesTxOut0 outgoing event data port
+  * @param api_EthernetFramesTxOut1 outgoing event data port
+  * @param api_EthernetFramesTxOut2 outgoing event data port
+  * @param api_EthernetFramesTxOut3 outgoing event data port
+  */
+pub fn initialize_IEP_Post(
+  api_EthernetFramesTxOut0: Option<open_platform_Data_Model::SizedEthernetMessage_Impl>,
+  api_EthernetFramesTxOut1: Option<open_platform_Data_Model::SizedEthernetMessage_Impl>,
+  api_EthernetFramesTxOut2: Option<open_platform_Data_Model::SizedEthernetMessage_Impl>,
+  api_EthernetFramesTxOut3: Option<open_platform_Data_Model::SizedEthernetMessage_Impl>) -> bool
+{
+  // I-Guar-Guard: Integration constraints for TxFirewall's outgoing ports"
+  I_Guar_Guard_EthernetFramesTxOut0(api_EthernetFramesTxOut0) &
+  I_Guar_Guard_EthernetFramesTxOut1(api_EthernetFramesTxOut1) &
+  I_Guar_Guard_EthernetFramesTxOut2(api_EthernetFramesTxOut2) &
+  I_Guar_Guard_EthernetFramesTxOut3(api_EthernetFramesTxOut3)
+}
+
 /** Compute Entrypoint Contract
   *
   * guarantee hlr_07_tx0_can_send_valid_arp
@@ -324,8 +428,14 @@ pub fn compute_CEP_Post(
   api_EthernetFramesTxOut2: Option<open_platform_Data_Model::SizedEthernetMessage_Impl>,
   api_EthernetFramesTxOut3: Option<open_platform_Data_Model::SizedEthernetMessage_Impl>) -> bool
 {
-  // CEP-Guar: guarantee clauses of TxFirewall's compute entrypoint
-  let r0: bool = compute_CEP_T_Guar(api_EthernetFramesTxIn0, api_EthernetFramesTxIn1, api_EthernetFramesTxIn2, api_EthernetFramesTxIn3, api_EthernetFramesTxOut0, api_EthernetFramesTxOut1, api_EthernetFramesTxOut2, api_EthernetFramesTxOut3);
+  // I-Guar-Guard: Integration constraints for TxFirewall's outgoing ports
+  let r0: bool = I_Guar_Guard_EthernetFramesTxOut0(api_EthernetFramesTxOut0);
+  let r1: bool = I_Guar_Guard_EthernetFramesTxOut1(api_EthernetFramesTxOut1);
+  let r2: bool = I_Guar_Guard_EthernetFramesTxOut2(api_EthernetFramesTxOut2);
+  let r3: bool = I_Guar_Guard_EthernetFramesTxOut3(api_EthernetFramesTxOut3);
 
-  return r0;
+  // CEP-Guar: guarantee clauses of TxFirewall's compute entrypoint
+  let r4: bool = compute_CEP_T_Guar(api_EthernetFramesTxIn0, api_EthernetFramesTxIn1, api_EthernetFramesTxIn2, api_EthernetFramesTxIn3, api_EthernetFramesTxOut0, api_EthernetFramesTxOut1, api_EthernetFramesTxOut2, api_EthernetFramesTxOut3);
+
+  return r0 && r1 && r2 && r3 && r4;
 }

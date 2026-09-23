@@ -105,8 +105,11 @@ mod regression_tests {
     cases.push((arp(1, 0), None));
     let mut bad = arp(1, 0x0800); bad[15] = 2; cases.push((bad, None));
     for protocol in [0, 1, 2, 6, 17, 43, 44, 58, 59, 60] {
-      for length in [0u16, 20, 28, 1586, 9000] {
+      for length in [0u16, 20, 28, 1585, 1586] {
         cases.push((ipv4(length, protocol), Some(length + 14)));
+      }
+      for length in [1587u16, 9000, 9001, u16::MAX] {
+        cases.push((ipv4(length, protocol), None));
       }
     }
     cases.push((ipv4(9001, 17), None));
@@ -135,6 +138,7 @@ mod regression_tests {
         let mut expected = [None; 4];
         expected[lane] = size.map(|sz| Output { sz, amessage: frame });
         assert_eq!(outputs(), expected);
+        assert!(outputs().iter().flatten().all(|output| usize::from(output.sz) <= output.amessage.len()));
         assert!(oracle::compute_CEP_Post(inputs[0], inputs[1], inputs[2], inputs[3],
           expected[0], expected[1], expected[2], expected[3]));
       }
@@ -159,6 +163,20 @@ mod regression_tests {
     put_concrete_inputs(None, None, None, None);
     crate::seL4_TxFirewall_TxFirewall_timeTriggered();
     assert_eq!(outputs(), [None; 4]);
+  }
+
+  #[test]
+  #[serial_test::serial]
+  fn output_size_invariants_reject_oversized_values_on_every_lane() {
+    for lane in 0..4 {
+      for size in [0, 64, 1599, 1600, 1601, 9014, u16::MAX] {
+        let mut outputs = [None; 4];
+        outputs[lane] = Some(Output { sz: size, amessage: ipv4(1586, 17) });
+        // Probe the generated integration guards independently of compute routing.
+        assert_eq!(oracle::initialize_IEP_Post(outputs[0], outputs[1], outputs[2], outputs[3]), size <= 1600);
+      }
+    }
+    assert!(oracle::initialize_IEP_Post(None, None, None, None));
   }
 
   #[test]

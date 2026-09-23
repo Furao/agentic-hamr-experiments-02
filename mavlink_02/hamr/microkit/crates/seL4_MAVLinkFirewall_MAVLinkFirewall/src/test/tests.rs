@@ -231,7 +231,7 @@ pub(super) mod tests {
     let mut msg = valid; msg.ethernet_frame[..6].fill(0); fixtures.push((msg, false));
     for (at, value) in [(ETHERTYPE_OFFSET, 0x0806u16), (UDP_SOURCE_PORT_OFFSET, 68),
       (UDP_DESTINATION_PORT_OFFSET, 68), (IPV4_TOTAL_LENGTH_OFFSET, 19),
-      (IPV4_TOTAL_LENGTH_OFFSET, 1587), (IPV4_TOTAL_LENGTH_OFFSET, 9001),
+      (IPV4_TOTAL_LENGTH_OFFSET, 1587), (IPV4_TOTAL_LENGTH_OFFSET, 9000), (IPV4_TOTAL_LENGTH_OFFSET, 9001),
       (IPV4_TOTAL_LENGTH_OFFSET, u16::MAX), (UDP_LENGTH_OFFSET, 7), (UDP_LENGTH_OFFSET, 9)] {
       let mut msg = valid; msg.ethernet_frame[at..at+2].copy_from_slice(&value.to_be_bytes());
       fixtures.push((msg, false));
@@ -242,10 +242,12 @@ pub(super) mod tests {
     let mut msg = valid; msg.payload_offset = 41; fixtures.push((msg, false));
     let mut msg = valid; msg.payload_length += 1; fixtures.push((msg, false));
     for (msg, allowed) in fixtures {
-      crate::seL4_MAVLinkFirewall_MAVLinkFirewall_initialize();
-      dispatch(Normal, [Some(msg); 4]);
-      assert_eq!(outputs(), if allowed { [Some(msg); 4] } else { [None; 4] });
-      assert_eq!(get_rejected_count(), if allowed { 0 } else { 4 });
+      for mode in [Normal, Recovery] {
+        crate::seL4_MAVLinkFirewall_MAVLinkFirewall_initialize();
+        dispatch(mode, [Some(msg); 4]);
+        assert_eq!(outputs(), if allowed && mode == Normal { [Some(msg); 4] } else { [None; 4] });
+        assert_eq!(get_rejected_count(), if allowed { 0 } else { 4 });
+      }
     }
   }
 

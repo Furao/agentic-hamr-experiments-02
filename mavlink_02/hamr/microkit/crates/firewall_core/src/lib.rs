@@ -206,6 +206,26 @@ pub open spec fn ipv4_length_bytes_match(frame: &[u8], r: Option<EthFrame>) -> b
 
 #[cfg(test)]
 mod eth_frame_tests {
+    #[test]
+    fn ipv4_carrier_length_bound() {
+        let mut frame = [0u8; 1600];
+        frame[0] = 1;
+        frame[12..14].copy_from_slice(&0x0800u16.to_be_bytes());
+        frame[14] = 0x45;
+        for protocol in [0, 1, 2, 6, 17, 43, 44, 58, 59, 60] {
+            frame[23] = protocol;
+            for (length, allowed) in [(1585u16, true), (1586, true), (1587, false),
+                                      (9000, false), (9001, false), (u16::MAX, false)] {
+                frame[16..18].copy_from_slice(&length.to_be_bytes());
+                let parsed = super::EthFrame::parse(&frame);
+                assert_eq!(parsed.is_some(), allowed, "protocol={protocol}, length={length}");
+                if let Some(super::EthFrame { eth_type: super::PacketType::Ipv4(ip), .. }) = parsed {
+                    assert_eq!(ip.header.length, length);
+                }
+            }
+        }
+    }
+
     use super::*;
 
     #[test]

@@ -151,7 +151,7 @@ pub fn wellformed_arp_frame(aframe: open_platform_Data_Model::RawEthernetMessage
 pub fn valid_ipv4_length(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
 {
   (aframe.len() == 1600) &&
-    (ipv4_length(aframe) <= 9000u16)
+    (ipv4_length(aframe) <= 1600u16 - ethernet_header_length())
 }
 
 pub fn valid_ipv4_protocol(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
@@ -484,7 +484,7 @@ verus! {
   pub open spec fn valid_ipv4_length_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool
   {
     (aframe.len() == 1600) &&
-      (ipv4_length_spec(aframe) <= 9000u16)
+      (ipv4_length_spec(aframe) <= 1600u16 - ethernet_header_length_spec())
   }
 
   pub open spec fn valid_ipv4_protocol_spec(aframe: open_platform_Data_Model::RawEthernetMessage) -> bool

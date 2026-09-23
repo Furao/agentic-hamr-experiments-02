@@ -1,0 +1,14 @@
+   Compiling sel4-config-data v0.1.0 (https://github.com/seL4/rust-sel4?tag=v2.0.0#3248eeed)
+   Compiling vstd v0.0.0-2026-08-09-0044
+   Compiling env_logger v0.11.11
+   Compiling eth-driver-core v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/core)
+error: failed to run custom build command for `sel4-config-data v0.1.0 (https://github.com/seL4/rust-sel4?tag=v2.0.0#3248eeed)`
+
+Caused by:
+  process didn't exit successfully: `/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/target/debug/build/sel4-config-data-2c5fa11d16355acd/build-script-build` (exit status: 101)
+  --- stderr
+
+  thread 'main' (1777) panicked at /home/robertvanvossen/.cargo/git/checkouts/rust-sel4-d7edb8214cac2bde/3248eee/crates/sel4/build-env/src/lib.rs:55:28:
+  SEL4_INCLUDE_DIRS or SEL4_PREFIX must be set
+  note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+warning: build failed, waiting for other jobs to finish...

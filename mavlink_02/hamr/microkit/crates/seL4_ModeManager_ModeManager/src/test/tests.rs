@@ -5,6 +5,7 @@ mod tests {
   use crate::test::util::*;
   use data::open_platform_Data_Model::OperatingMode::{self, Normal, Recovery};
   use crate::bridge::seL4_ModeManager_ModeManager_GUMBOX as oracle;
+  use crate::component::seL4_ModeManager_ModeManager_app::INFO_MESSAGES;
 
   fn assert_mode(expected: OperatingMode) {
     assert_eq!(test_apis::get_retained_mode(), expected);
@@ -35,12 +36,16 @@ mod tests {
       (Recovery, false, Recovery), (Recovery, true, Recovery),
     ] {
       crate::seL4_ModeManager_ModeManager_initialize();
+      INFO_MESSAGES.lock().unwrap().clear();
       test_apis::put_concrete_inputs_wGSV(prior, error);
       // Empty the test output slots so stale values cannot masquerade as publication.
       *crate::bridge::extern_c_api::OUT_mode_to_rx.lock().unwrap() = None;
       *crate::bridge::extern_c_api::OUT_mode_to_mavlink.lock().unwrap() = None;
       crate::seL4_ModeManager_ModeManager_timeTriggered();
       assert_mode(expected);
+      assert_eq!(*INFO_MESSAGES.lock().unwrap(), if prior != expected {
+        vec!["Mode changed: Normal -> Recovery".to_string()]
+      } else { vec![] });
       assert!(oracle::compute_CEP_Post(prior, expected, error,
         test_apis::get_mode_to_mavlink(), test_apis::get_mode_to_rx()));
     }
@@ -50,11 +55,13 @@ mod tests {
   #[serial]
   fn recovery_stays_latched_and_notifications_preserve_state() {
     crate::seL4_ModeManager_ModeManager_initialize();
+    INFO_MESSAGES.lock().unwrap().clear();
     for error in [false, true, false, false, true, false] {
       test_apis::put_error_status(error);
       crate::seL4_ModeManager_ModeManager_timeTriggered();
     }
     assert_mode(Recovery);
+    assert_eq!(*INFO_MESSAGES.lock().unwrap(), vec!["Mode changed: Normal -> Recovery".to_string()]);
     crate::seL4_ModeManager_ModeManager_notify(99);
     assert_mode(Recovery);
   }

@@ -40,7 +40,7 @@ verus! {
   pub(crate) const IPV4_HEADER_BYTES: u16 = 20;
   pub(crate) const UDP_HEADER_BYTES: u16 = 8;
   pub(crate) const CARRIER_BYTES: usize = 1600;
-  const MAX_IPV4_TOTAL_LENGTH: u16 = 9000;
+  const MAX_IPV4_TOTAL_LENGTH: u16 = CARRIER_BYTES as u16 - ETHERNET_HEADER_BYTES;
   pub(crate) const ETHERTYPE_OFFSET: usize = 12;
   pub(crate) const ETHERTYPE_IPV4: u16 = 0x0800;
   pub(crate) const IPV4_VERSION_IHL_OFFSET: usize = 14;
@@ -572,6 +572,29 @@ verus! {
 mod policy_tests {
     use super::*;
     use mavlink_core::wire::*;
+    #[test]
+    #[serial_test::serial]
+    fn ipv4_carrier_length_boundary_matches_contract() {
+        // Isolate the Ethernet/IP/UDP carrier check from MAVLink framing/CRC policy.
+        for (length, allowed) in [(1585u16, true), (1586, true), (1587, false),
+                                  (9000, false), (9001, false), (u16::MAX, false)] {
+            let mut frame = [0u8; 1600];
+            frame[0] = 1;
+            frame[12..14].copy_from_slice(&0x0800u16.to_be_bytes());
+            frame[14] = 0x45;
+            frame[16..18].copy_from_slice(&length.to_be_bytes());
+            frame[23] = 17;
+            frame[34..36].copy_from_slice(&14550u16.to_be_bytes());
+            frame[36..38].copy_from_slice(&14562u16.to_be_bytes());
+            frame[38..40].copy_from_slice(&(length - 20).to_be_bytes());
+            let msg = open_platform_Data_Model::MAVLinkUDPMessage_Impl {
+                ethernet_frame: frame, payload_offset: 42, payload_length: length - 28,
+            };
+            assert_eq!(carrier_valid(&msg), allowed, "length={length}");
+            assert_eq!(GumboLib::valid_mavlink_carrier(msg), allowed, "length={length}");
+        }
+    }
+
     const COMMAND_INT_CRC_EXTRA: u8 = 158;
     const COMMAND_LONG_CRC_EXTRA: u8 = 152;
     const SECURE_COMMAND_CRC_EXTRA: u8 = 11;

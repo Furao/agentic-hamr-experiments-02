@@ -103,6 +103,9 @@ verus! {
     pub fn put_EthernetFramesTxOut0(
       &mut self,
       value: open_platform_Data_Model::SizedEthernetMessage_Impl)
+      requires
+        // guarantee hlr_12_llr_4_tx0_size_bound
+        value.sz <= 1600u16,
       ensures
         old(self).EthernetFramesTxIn0 == final(self).EthernetFramesTxIn0,
         old(self).EthernetFramesTxIn1 == final(self).EthernetFramesTxIn1,
@@ -119,6 +122,9 @@ verus! {
     pub fn put_EthernetFramesTxOut1(
       &mut self,
       value: open_platform_Data_Model::SizedEthernetMessage_Impl)
+      requires
+        // guarantee hlr_12_llr_4_tx1_size_bound
+        value.sz <= 1600u16,
       ensures
         old(self).EthernetFramesTxIn0 == final(self).EthernetFramesTxIn0,
         old(self).EthernetFramesTxIn1 == final(self).EthernetFramesTxIn1,
@@ -135,6 +141,9 @@ verus! {
     pub fn put_EthernetFramesTxOut2(
       &mut self,
       value: open_platform_Data_Model::SizedEthernetMessage_Impl)
+      requires
+        // guarantee hlr_12_llr_4_tx2_size_bound
+        value.sz <= 1600u16,
       ensures
         old(self).EthernetFramesTxIn0 == final(self).EthernetFramesTxIn0,
         old(self).EthernetFramesTxIn1 == final(self).EthernetFramesTxIn1,
@@ -151,6 +160,9 @@ verus! {
     pub fn put_EthernetFramesTxOut3(
       &mut self,
       value: open_platform_Data_Model::SizedEthernetMessage_Impl)
+      requires
+        // guarantee hlr_12_llr_4_tx3_size_bound
+        value.sz <= 1600u16,
       ensures
         old(self).EthernetFramesTxIn0 == final(self).EthernetFramesTxIn0,
         old(self).EthernetFramesTxIn1 == final(self).EthernetFramesTxIn1,

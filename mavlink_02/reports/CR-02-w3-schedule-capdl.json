@@ -1,0 +1,70 @@
+{
+  "domain_schedule": [
+    {
+      "id": 0,
+      "time": 3000
+    },
+    {
+      "id": 1,
+      "time": 10000
+    },
+    {
+      "id": 0,
+      "time": 3000
+    },
+    {
+      "id": 2,
+      "time": 60000
+    },
+    {
+      "id": 0,
+      "time": 3000
+    },
+    {
+      "id": 3,
+      "time": 30000
+    },
+    {
+      "id": 0,
+      "time": 3000
+    },
+    {
+      "id": 4,
+      "time": 30000
+    },
+    {
+      "id": 0,
+      "time": 3000
+    },
+    {
+      "id": 5,
+      "time": 30000
+    },
+    {
+      "id": 0,
+      "time": 3000
+    },
+    {
+      "id": 6,
+      "time": 30000
+    }
+  ],
+  "domain_set_start": 0,
+  "tcbs": {
+    "tcb_linux_0": 2,
+    "tcb_monitor": null,
+    "tcb_pacer": 0,
+    "tcb_seL4_ArduPilot_ArduPilot": 2,
+    "tcb_seL4_ArduPilot_ArduPilot_MON": 2,
+    "tcb_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver": 4,
+    "tcb_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON": 4,
+    "tcb_seL4_MAVLinkFirewall_MAVLinkFirewall": 6,
+    "tcb_seL4_MAVLinkFirewall_MAVLinkFirewall_MON": 6,
+    "tcb_seL4_ModeManager_ModeManager": 1,
+    "tcb_seL4_ModeManager_ModeManager_MON": 1,
+    "tcb_seL4_RxFirewall_RxFirewall": 5,
+    "tcb_seL4_RxFirewall_RxFirewall_MON": 5,
+    "tcb_seL4_TxFirewall_TxFirewall": 3,
+    "tcb_seL4_TxFirewall_TxFirewall_MON": 3
+  }
+}

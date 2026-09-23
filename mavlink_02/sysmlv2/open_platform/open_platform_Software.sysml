@@ -386,7 +386,18 @@ package open_platform_Software {
         attribute :>> Implementation_Language = Rust;
         
         language "GUMBO" /*{
-            
+
+        // HLR-7/12 and LLR-4: every emitted frame fits the driver carrier.
+        integration
+            guarantee hlr_12_llr_4_tx0_size_bound:
+                EthernetFramesTxOut0.sz <= 1600[u16];
+            guarantee hlr_12_llr_4_tx1_size_bound:
+                EthernetFramesTxOut1.sz <= 1600[u16];
+            guarantee hlr_12_llr_4_tx2_size_bound:
+                EthernetFramesTxOut2.sz <= 1600[u16];
+            guarantee hlr_12_llr_4_tx3_size_bound:
+                EthernetFramesTxOut3.sz <= 1600[u16];
+
         compute
     
             guarantee hlr_07_tx0_can_send_valid_arp:
