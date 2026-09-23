@@ -36,5 +36,7 @@ All generated-monitor scenarios execute in one serialized test because HAMR uses
 a global mutable monitor. The raw-runtime test owns a separate monitor. Tests cover
 Recovery at D1/D2/D3, never arriving, repeated true status, delayed first assertion,
 never asserted status, already-Recovery and reboot reset. The raw test additionally
-checks first assertions at absolute dispatches 0, 1 and 4. Initializing does not
+checks first assertions at absolute dispatches 1, 2 and 4. Initializing does not
 step the monitor. No generated source is patched to make this probe pass.
+
+The revised future-time formula also samples pre-count and the threshold. The shell supplies threshold 5, matching the generated helper. Count starts at zero, reaches four on the first dispatch, then five at the trigger. The raw false verdict is timestamped D0 but delivered during D2.

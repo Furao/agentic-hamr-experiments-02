@@ -46,7 +46,9 @@ impl seL4_MAVLinkFirewall_MAVLinkFirewall {
       R2U2_MONITOR.as_mut().expect("R2U2 monitor used before initialization")
     };
 
-    r2u2_core::load_int_signal(&mut r2u2_monitor.monitor, 1, current_mode as i32); // Loading enum signal api_current_mode into index 1
+    r2u2_core::load_int_signal(&mut r2u2_monitor.monitor, 0, (self.rejected_count) as i32); // Loading signal in_rejected_count into index 0
+    r2u2_core::load_int_signal(&mut r2u2_monitor.monitor, 1, (GUMBOX::error_threshold()) as i32); // Loading signal fn_error_threshold into index 1
+    r2u2_core::load_int_signal(&mut r2u2_monitor.monitor, 3, current_mode as i32); // Loading enum signal api_current_mode into index 3
   }
 
   pub fn r2u2_monitor_post_timeTriggered<API: seL4_MAVLinkFirewall_MAVLinkFirewall_Full_Api> (
@@ -59,7 +61,7 @@ impl seL4_MAVLinkFirewall_MAVLinkFirewall {
       R2U2_MONITOR.as_mut().expect("R2U2 monitor used before initialization")
     };
 
-    r2u2_core::load_bool_signal(&mut r2u2_monitor.monitor, 0, error_status); // Loading signal api_error_status into index 0
+    r2u2_core::load_bool_signal(&mut r2u2_monitor.monitor, 2, error_status); // Loading signal api_error_status into index 2
 
     r2u2_core::monitor_step(&mut r2u2_monitor.monitor);
     let r2u2_time_stamp = r2u2_monitor.monitor.time_stamp;

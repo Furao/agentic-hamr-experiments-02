@@ -12,17 +12,17 @@ R2U2_AUX_MAX_FORMULAS = { value = "1", force = true }
 R2U2_AUX_MAX_CONTRACTS = { value = "0", force = true }
 
 # Maximum number of input signals
-R2U2_MAX_SIGNALS = { value = "2", force = true }
+R2U2_MAX_SIGNALS = { value = "4", force = true }
 
 # Maximum number of Booleans passed from the frontend (from the booleanizer or directly loaded atomics) to the temporal logic engine
-R2U2_MAX_ATOMICS = { value = "2", force = true }
+R2U2_MAX_ATOMICS = { value = "3", force = true }
 
 # Maximum number of booleanizer instructions. Reserved for the booleanizer engine.
-R2U2_MAX_BZ_INSTRUCTIONS = { value = "6", force = true }
+R2U2_MAX_BZ_INSTRUCTIONS = { value = "10", force = true }
 
 # Maximum number of temporal logic instructions. Reserved for the temporal logic engine.
-R2U2_MAX_TL_INSTRUCTIONS = { value = "10", force = true }
+R2U2_MAX_TL_INSTRUCTIONS = { value = "8", force = true }
 
 # Maximum number of SCQ slots for both future-time and past-time reasoning
-R2U2_MAX_QUEUE_SLOTS = { value = "22", force = true }
+R2U2_MAX_QUEUE_SLOTS = { value = "10", force = true }
 

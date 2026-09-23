@@ -1,6 +1,6 @@
 # Workflow Status
 
-Project: open_platform | Profile: audited | Updated: 2026-09-22
+Project: open_platform | Profile: audited | Updated: 2026-09-23
 
 | Step | Status | Updated | Notes |
 |------|--------|---------|-------|
@@ -28,12 +28,30 @@ Project: open_platform | Profile: audited | Updated: 2026-09-22
 | ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).3 | done | 2026-09-22 | Zero new model-clause catalog findings; stale generated contracts and truncated SECURE_COMMAND developer-hook concern recorded |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).4 | done | 2026-09-22 | Model revisions complete; W1 generated reporter feasibility and W2 hook refinement/runtime tests remain explicit obligations |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).AP1 | done | 2026-09-22 | Developer approved contracts, refinement observation and runtime obligations; no implementation requirement waived |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall)-R2 | done | 2026-09-23 | Developer approved revised future-time monitor; CodeGen rerun follows |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall)-R2.1 | done | 2026-09-23 | _07 authoritative; first threshold-crossing trigger with Eventually[1,2] frozen Recovery; compute unchanged |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall)-R2.2 | done | 2026-09-23 | Fresh tipe exit 0: Well-formed! |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall)-R2.3 | done | 2026-09-23 | Full-mode audit: no new compute catalog findings; hook refinement, stale tests and D2 reporting obligations retained; see dated audit |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall)-R2.4 | done | 2026-09-23 | No further model revisions; generated temporal artifacts stale pending approval and CodeGen |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall)-R2.AP1 | done | 2026-09-23 | Developer explicitly approved revised monitor; implementation/reporting obligations retained |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager) | done | 2026-09-22 | Developer approved contracts, zero-finding audit and audited boundary |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).1 | done | 2026-09-22 | Retained mode, initial Normal outputs, exact latched transition and post-state publication to both consumers |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).2 | done | 2026-09-22 | First tipe run exit 0 Well-formed |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).3 | done | 2026-09-22 | Specification-only audit: zero AP-1–AP-9 findings; all four state/input combinations covered |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).4 | done | 2026-09-22 | No audit revisions or waivers required; startup/runtime publication checks remain W1/W2 |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).AP1 | done | 2026-09-22 | Developer explicitly approved ModeManager contracts |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2 | done | 2026-09-23 | Rerun with r2u2-HAMR-agent-context; unchanged contracts and existing approval retained; see CR-02-ModeManager-specification-audit-2026-09-23.md |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2.1 | done | 2026-09-23 | Reviewed _07 requirements and new-context guidance; existing six guarantees need no revisions |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2.2 | done | 2026-09-23 | Fresh tipe exit 0: Well-formed! |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2.3 | done | 2026-09-23 | Full-mode audit: zero AP-1–AP-9 findings; inspected model, GUMBOX, woven ensures and tests |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2.4 | done | 2026-09-23 | No revisions or demonstration tests required; no CodeGen needed; implementation remains W2 |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2.AP1 | done | 2026-09-23 | Prior explicit developer approval applies to unchanged contracts; no new waiver or approval requested |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R3 | done | 2026-09-23 | Repeat requested; context cf109a5; unchanged ModeManager contracts; audit report R3 addendum |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R3.1 | done | 2026-09-23 | Rechecked _07, new-context rules and current model; preserved pre-existing MAVLink monitor removal |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R3.2 | done | 2026-09-23 | Fresh tipe: Well-formed!, exit 0 |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R3.3 | done | 2026-09-23 | Zero AP-1–AP-9 findings; ModeManager generated contracts remain consistent |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R3.4 | done | 2026-09-23 | No revisions or regeneration required for ModeManager; HLR-30 monitor removal is separate outstanding work |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R3.AP1 | done | 2026-09-23 | Prior explicit approval retained for unchanged contracts |
 | ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck | done | 2026-09-22 | Exit criteria met: Logika exit 0, vacuous by design N=0; no scratch; audited boundary approval pending |
 | ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.1 | done | 2026-09-22 | Enumerated zero receiver integration assumes before run; no diagnostics/output artifacts; see reports/CR-02-integration-check.md |
 | ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.2 | n/a | 2026-09-22 | No integration failures to diagnose |
@@ -45,6 +63,13 @@ Project: open_platform | Profile: audited | Updated: 2026-09-22
 | ChangeExec(CR-02).W1.CodeGen.3 | done | 2026-09-22 | Project output confirmed; custom.mk/schedule/tests preserved; R2U2 spec recompiled with CLI 4.2.4; see reports/CR-02-codegen.md |
 | ChangeExec(CR-02).W1.CodeGen.4 | n/a | 2026-09-22 | Regeneration; setup-build-script remains a separate approved-plan task |
 | ChangeExec(CR-02).W1.CodeGen.boundary | done | 2026-09-22 | Developer explicitly approved CodeGen; W1 reporting/startup obligations remain |
+| ChangeExec(CR-02).W1.CodeGen-R2 | in-progress | 2026-09-23 | Approved monitor regenerated successfully; artifact criteria met, audited boundary review pending |
+| ChangeExec(CR-02).W1.CodeGen-R2.1 | done | 2026-09-23 | Reused Microkit configuration and recorded invocation |
+| ChangeExec(CR-02).W1.CodeGen-R2.2 | done | 2026-09-23 | Exit 0, report Success, no warnings/errors; future-time spec emitted |
+| ChangeExec(CR-02).W1.CodeGen-R2.3 | done | 2026-09-23 | 12 editable files unchanged by hashes; compiler 4.2.4 rebuilt specification and bounds |
+| ChangeExec(CR-02).W1.CodeGen-R2.4 | n/a | 2026-09-23 | Regeneration; existing build helper retained |
+| ChangeExec(CR-02).W1.CodeGen-R2.boundary | pending | 2026-09-23 | Generated artifact review ready; reporting prerequisite remains blocked |
+| ChangeExec(CR-02).W1.R2U2Reporting-R2 | blocked | 2026-09-23 | New future formula reproduces verdict loss: raw test passes, reporting test fails; future-output evidence recorded |
 | ChangeExec(CR-02).W1.SetupBuildScript | done | 2026-09-22 | Microkit/Rust helper created; usage parses, lists five components and two cores; application tests not run |
 | ChangeExec(CR-02).W1.R2U2Reporting | blocked | 2026-09-22 | Probe: raw verdict test passes, generated reporting test fails; false D2 verdict overwritten by same-step true; reports/CR-02-w1-r2u2-reporting.md |
 | ChangeExec(CR-02).W1.AP1 | blocked | 2026-09-22 | Same-dispatch one-time reporting prerequisite not met; generator must expose raw violations before cache overwrite |

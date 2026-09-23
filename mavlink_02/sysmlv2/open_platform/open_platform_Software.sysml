@@ -316,15 +316,14 @@ package open_platform_Software {
                 (current_mode == open_platform_Data_Model::OperatingMode.Recovery) implies NoSend(EthernetFramesOut3);
 
         monitor
-            // HLR-25/31 make ErrorStatus monotonic until reboot, so its rising edge
-            // is the first assertion. At D2 inspect that edge two samples ago and
-            // Recovery at D1/D2. Pure past time avoids delayed future-time verdicts.
-            // LLR-15: HAMR samples frozen mode before compute and final status after.
-            // LLR-16: a regeneration-safe reporter must log a false verdict once
-            // during this dispatch; generated routine status logs are insufficient.
+            // HLR-25/31 and LLR-12/13 make the first true ErrorStatus coincide
+            // with crossing the threshold. In(count) is captured before compute;
+            // ErrorStatus is final output and Mode is the frozen input snapshot.
+            // LLR-15/16: check D1/D2 from D0, without restarting on later true status.
+            // One-time D2 logging remains a separate reporting integration obligation.
             guarantee hlr_30_llr_15_16_recovery_deadline:
-                (Once [2,2] (error_status and not (Once [1,1] error_status))) implies
-                (Once [0,1] (current_mode == open_platform_Data_Model::OperatingMode.Recovery));
+                (In(rejected_count) < error_threshold() and error_status) implies
+                Eventually [1,2] (current_mode == open_platform_Data_Model::OperatingMode.Recovery);
         }*/
     }
 

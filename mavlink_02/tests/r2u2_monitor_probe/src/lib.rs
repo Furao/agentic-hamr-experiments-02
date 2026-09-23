@@ -8,7 +8,9 @@ pub mod open_platform_Data_Model {
     pub enum OperatingMode { Normal = 0, Recovery = 1 }
 }
 pub mod bridge {
-    pub mod seL4_MAVLinkFirewall_MAVLinkFirewall_GUMBOX {}
+    pub mod seL4_MAVLinkFirewall_MAVLinkFirewall_GUMBOX {
+        pub fn error_threshold() -> u16 { 5 }
+    }
     pub mod seL4_MAVLinkFirewall_MAVLinkFirewall_api {
         use crate::open_platform_Data_Model::OperatingMode;
         pub trait seL4_MAVLinkFirewall_MAVLinkFirewall_Full_Api {}
@@ -27,7 +29,7 @@ pub mod bridge {
 }
 pub mod component {
     pub mod seL4_MAVLinkFirewall_MAVLinkFirewall_app {
-        pub struct seL4_MAVLinkFirewall_MAVLinkFirewall;
+        pub struct seL4_MAVLinkFirewall_MAVLinkFirewall { pub rejected_count: u16 }
     }
     pub mod r2u2_monitor { include!(concat!(env!("OUT_DIR"), "/r2u2_monitor.rs")); }
 }
@@ -70,18 +72,18 @@ mod tests {
         log::set_max_level(log::LevelFilter::Info);
         // One serialized test: the generated monitor instance is static mut.
         let scenarios = [
-            ("timely_D1", Some(1), 0, None),
-            ("timely_D2", Some(2), 0, None),
-            ("late_D3", Some(3), 0, Some(2)),
-            ("never_recovery", None, 0, Some(2)),
+            ("timely_D1", Some(2), 1, None),
+            ("timely_D2", Some(3), 1, None),
+            ("late_D3", Some(4), 1, Some(3)),
+            ("never_recovery", None, 1, Some(3)),
             ("delayed_first_assertion", None, 4, Some(6)),
             ("no_assertion", None, 99, None),
-            ("already_recovery", Some(0), 0, None),
-            ("reboot_timeout_again", None, 0, Some(2)),
+            ("already_recovery", Some(0), 1, None),
+            ("reboot_timeout_again", None, 1, Some(3)),
         ];
         let mut failures = Vec::new();
         for (name, recovery_at, trigger, expected_error) in scenarios {
-            let mut app = seL4_MAVLinkFirewall_MAVLinkFirewall;
+            let mut app = seL4_MAVLinkFirewall_MAVLinkFirewall { rejected_count: 0 };
             CAPTURE.reporter.reset();
             CAPTURE.statuses.lock().unwrap().clear();
             CAPTURE.errors.lock().unwrap().clear();
@@ -95,6 +97,8 @@ mod tests {
                 api.mode = if recovery_at.is_some_and(|at| d >= at) { Recovery } else { Normal };
                 app.r2u2_monitor_pre_timeTriggered(&api);
                 // This is the application's final output for the sampled dispatch.
+                // Four initial rejections, then one at the trigger: reachable count trace.
+                app.rejected_count = if d >= trigger { 5 } else { 4 };
                 api.error = d >= trigger;
                 app.r2u2_monitor_post_timeTriggered(&mut api);
                 let actual: Vec<_> = CAPTURE.errors.lock().unwrap().iter().map(|e| e.0).collect();
@@ -120,20 +124,22 @@ mod tests {
 mod diagnostics {
     #[test]
     fn raw_runtime_verdicts() {
-        for trigger in [0, 1, 4] {
+        for trigger in [1, 2, 4] {
             let mut monitor = r2u2_core::Monitor::default();
             r2u2_core::update_binary_file(include_bytes!(concat!(env!("OUT_DIR"), "/spec.bin")), &mut monitor);
             let mut failures_seen = Vec::new();
             for d in 0..10 {
-                r2u2_core::load_bool_signal(&mut monitor, 0, d >= trigger);
-                r2u2_core::load_int_signal(&mut monitor, 1, if d >= trigger + 3 { 1 } else { 0 });
+                r2u2_core::load_int_signal(&mut monitor, 0, if d == 0 { 0 } else if d <= trigger { 4 } else { 5 });
+                r2u2_core::load_int_signal(&mut monitor, 1, 5);
+                r2u2_core::load_bool_signal(&mut monitor, 2, d >= trigger);
+                r2u2_core::load_int_signal(&mut monitor, 3, if d >= trigger + 3 { 1 } else { 0 });
                 r2u2_core::monitor_step(&mut monitor);
                 for out in r2u2_core::get_output_buffer(&monitor) {
                     if !out.verdict.truth { failures_seen.push((d, out.verdict.time)); }
                     println!("trigger={trigger} dispatch={d} runtime_time={} spec={} verdict_time={} truth={}", monitor.time_stamp, out.spec_num, out.verdict.time, out.verdict.truth);
                 }
             }
-            assert_eq!(failures_seen, vec![(trigger + 2, trigger + 2)], "raw deadline verdict");
+            assert_eq!(failures_seen, vec![(trigger + 2, trigger)], "raw deadline verdict");
         }
     }
 }

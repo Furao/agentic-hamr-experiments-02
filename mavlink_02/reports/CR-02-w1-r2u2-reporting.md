@@ -101,3 +101,25 @@ exited 0 with all seven crate names. Existing application tests were not run dur
 this scaffold step. Monitor dependencies/spec.bin must be prepared before invoking
 the template's direct Cargo test commands; generated Makefile rules provide that
 preparation. Full build/verification is still W2/W3 work.
+
+## Revised future-time monitor — 2026-09-23
+
+After developer approval and regeneration, reran the probe against the new
+threshold-crossing trigger and Eventually[1,2] formula. The harness now supplies
+pre-count and threshold as well as mode/status, with count traces starting at zero,
+then four, then five at first assertion. Generated monitor source is unchanged by
+this probe. Actual R2U2 compiler/runtime remain 4.2.4.
+
+Result: **1 passed, 1 failed**, exit 101. Evidence:
+[CR-02-r2u2-probe-future-output.txt](CR-02-r2u2-probe-future-output.txt).
+For first assertions at absolute dispatches 1, 2, 4, false verdicts are delivered
+at dispatches 3, 4, 6 respectively (D2), timestamped 1, 2, 4 (D0). Each is followed
+in the same step by a true verdict timestamped at the executing dispatch. HAMR
+retains the latter; the timeout log remains absent. Timely D1/D2, no assertion
+and already-Recovery traces produce no timeout logs. Late/never Recovery and reboot
+repeat still fail the one-time D2 diagnostic assertion.
+
+Thus the old blocker is independently reproduced with the approved new formula;
+it is not inferred from the earlier past-time result. A synchronous per-raw-verdict
+reporting path remains required. No production workaround or requirement waiver
+was introduced. W1 remains blocked and W2 has not started.

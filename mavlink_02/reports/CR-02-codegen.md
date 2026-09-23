@@ -85,3 +85,21 @@ audited boundary on 2026-09-22. The separately planned setup-build-script task f
 (this is regeneration, so CodeGen.4's first-generation-only condition does not apply).
 W1 is not complete. No application tests, Verus verification, target build or R2U2
 runtime trace tests are claimed by this report.
+
+## Revised-monitor regeneration — 2026-09-23
+
+Developer approved the revised monitor. Reused the command above: exit 0,
+report status Success, no reported warnings/errors. Generated C2PO uses FTSPEC,
+pre-count < threshold and final ErrorStatus imply F[1,2] frozen Recovery.
+The pre-hook loads count (signal 0), threshold (1), Mode (3); post-hook loads
+ErrorStatus (2). Monitor initialization does not step it.
+
+SHA-256 comparisons for 12 existing application, component-test, custom.mk and
+schedule files found no changes. Output remained inside the project. The existing
+build helper was retained; no removed components require cleanup. Compiler 4.2.4
+successfully rebuilt spec.bin and both application/probe bounds files.
+
+The updated isolated probe returned exit 101: raw verdict test passes, generated
+reporting test fails. See CR-02-r2u2-probe-future-output.txt and the reporting report
+addendum. CodeGen artifact criteria are met; audited boundary review is pending.
+W1 remains blocked on reporting; no application verification or target build claimed.
