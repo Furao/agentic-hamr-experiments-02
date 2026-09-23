@@ -1,6 +1,11 @@
 <!-- This file will not be overwritten if HAMR codegen is rerun -->
-
+<!-- CR-02: retain the developer-requested legacy domain format and existing
+     slot lengths. ModeManager is first, with length 10000 proportional to
+     the existing 30000 firewall slots (model budgets: 100 ms and 300 ms).
+     Conversion of legacy length units to target time remains to be validated. -->
 <domain_schedule>
+  <domain name="domain_1" length="3000" /> <!-- pacer -->
+  <domain name="domain_7" length="10000" /> <!-- seL4_ModeManager_ModeManager_MON -->
   <domain name="domain_1" length="3000" /> <!-- pacer -->
   <domain name="domain_2" length="60000" /> <!-- seL4_ArduPilot_ArduPilot_MON -->
   <domain name="domain_1" length="3000" /> <!-- pacer -->

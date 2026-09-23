@@ -97,3 +97,5 @@ source contents are unchanged. No codegen or full-system build was run.
 
 Await Tx VerifyOnly AP2/boundary sign-off. The consolidated Wave 2 result is ready
 for review in CR-02-w2-gate.md; Wave 3 remains unstarted.
+
+Developer approved Tx VerifyOnly/AP2 and boundary, consolidated Wave 2 completion, and continuation to Wave 3.

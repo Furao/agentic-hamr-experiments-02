@@ -1,0 +1,1 @@
+Legacy-format schedule: domain_schedule/domain name/length. Application order 7,2,3,4,5,6 with interleaved domain-1 pacer; total length 208000 legacy units. Existing slots preserved, manager length 10000 added. Absolute target-time conversion and timing validation remain pending. Previous new-format check is superseded by developer direction.

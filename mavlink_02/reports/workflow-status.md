@@ -4,9 +4,9 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 
 | Step | Status | Updated | Notes |
 |------|--------|---------|-------|
-| ChangeExec(CR-02) | in-progress | 2026-09-23 | ModeManager and RxFirewall complete; MAVLinkFirewall complete; Tx verification 16/0 and core regressions pass; Wave 2 review pending |
+| ChangeExec(CR-02) | in-progress | 2026-09-23 | Wave 2 approved; Wave 3 schedule/integration in progress |
 | ChangeExec(CR-02).1 | done | 2026-09-22 | Approved plan/all RDs resolved; HEAD 24ba011d4f0a49c727a9b6c9cd28941f536891b4 drift is request/planning records only; approved source baseline unchanged |
-| ChangeExec(CR-02).2 | in-progress | 2026-09-23 | W1 approved; W2 technical work complete, final sign-offs pending; W3 not started |
+| ChangeExec(CR-02).2 | in-progress | 2026-09-23 | Waves 1 and 2 approved; Wave 3 started |
 | ChangeExec(CR-02).W1 | done | 2026-09-23 | Developer approved Wave 1; technical gate and regenerated output accepted |
 | ChangeExec(CR-02).W1.Requirements | done | 2026-09-22 | _07 supplies derived LLR-1–21; allocation and RF-1–RF-4 disposition in w1-requirements-planning-07.md; legacy document synchronization tracked for final sweep |
 | ChangeExec(CR-02).W1.SysModeling | done | 2026-09-22 | Developer approved architecture and audited sub-workflow boundary; continuing to RxFirewall contracts |
@@ -74,7 +74,7 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W1.R2U2Reporting | done | 2026-09-23 | Original unpatched failure superseded by authorized workaround and R2 probe 2/2; historical report retained |
 | ChangeExec(CR-02).W1.StartupSampling | done | 2026-09-23 | Checked enum/defaults, retained C inputs, wiring, non-consuming peek and pre/compute/post order; runtime implementation and schedule evidence remain W2/W3 |
 | ChangeExec(CR-02).W1.AP1 | done | 2026-09-23 | Developer explicitly approved Wave 1 |
-| ChangeExec(CR-02).W2 | in-progress | 2026-09-23 | ModeManager and RxFirewall complete; MAVLinkFirewall complete; Tx verification 16/0 and core regressions pass; Wave 2 review pending |
+| ChangeExec(CR-02).W2 | done | 2026-09-23 | Developer approved component implementation, coverage, proofs and core regression |
 | ChangeExec(CR-02).W2.CompDev(ModeManager) | done | 2026-09-23 | Developer approved completion: tests/coverage and verification 9/0 accepted |
 | ChangeExec(CR-02).W2.CompDev(ModeManager).1 | done | 2026-09-23 | Fresh tipe Well-formed; generated ModeManager contracts current |
 | ChangeExec(CR-02).W2.CompDev(ModeManager).2 | done | 2026-09-23 | Initialize/publish Normal; sample ErrorStatus once, latch Recovery, publish both outputs each dispatch |
@@ -114,14 +114,18 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W2.CompDev(TxFirewall)/TestOnly.5 | done | 2026-09-23 | Only uncovered app lines are unused trace helper; target logging and BRF=0 limitations documented |
 | ChangeExec(CR-02).W2.CompDev(TxFirewall)/TestOnly.AP1 | done | 2026-09-23 | Developer approved coverage including unused trace helper exclusion |
 | ChangeExec(CR-02).W2.CompDev(TxFirewall)/TestOnly.boundary | done | 2026-09-23 | Developer approved continuation to verification |
-| ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly | in-progress | 2026-09-23 | Fresh target verification 16/0; AP2/boundary pending |
+| ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly | done | 2026-09-23 | Developer approved 16/0 verification and slice completion |
 | ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly.6 | done | 2026-09-23 | SYSTEM_MAKEFILE=custom.mk make verus; 16 verified, 0 errors |
 | ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly.7 | done | 2026-09-23 | No changes needed; three existing platform logging external bodies |
-| ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly.AP2 | pending | 2026-09-23 | Await acceptance of verification and unchanged trust boundary |
-| ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly.boundary | pending | 2026-09-23 | Verification slice ready for completion approval |
+| ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly.AP2 | done | 2026-09-23 | Developer approved verification and unchanged logging trust boundary |
+| ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly.boundary | done | 2026-09-23 | Developer approved completion with Wave 2 |
 | ChangeExec(CR-02).W2.CoreRegression | done | 2026-09-23 | Fresh firewall_core 17 tests/39 proofs and mavlink_core 6 tests/38 proofs; zero failures |
-| ChangeExec(CR-02).W2.AP1 | pending | 2026-09-23 | Wave 2 technical gate passes; consolidated report CR-02-w2-gate.md ready for approval |
-| ChangeExec(CR-02).W3 | not-started | 2026-09-22 | Awaiting W2 gate |
+| ChangeExec(CR-02).W2.AP1 | done | 2026-09-23 | Developer approved consolidated wave and continuation to Wave 3 |
+| ChangeExec(CR-02).W3 | in-progress | 2026-09-23 | SysSchedDef started; deployment and hardware evidence remain |
+| ChangeExec(CR-02).W3.SysSchedDef | in-progress | 2026-09-23 | Legacy XML retained per developer; ordering reviewed, boundary approval pending |
+| ChangeExec(CR-02).W3.SysSchedDef.1 | done | 2026-09-23 | Domain 7 first; existing slots retained; legacy parser accepts format; target timing remains qualified |
+| ChangeExec(CR-02).W3.SysSchedDef.2 | n/a | 2026-09-23 | Draft workflow timing/schema analysis TBD; target timing validation retained in W3 obligations |
+| ChangeExec(CR-02).W3.SysSchedDef.boundary | pending | 2026-09-23 | Review ordering and legacy-unit limitation before custom.mk integration |
 | ChangeExec(CR-02).3 | not-started | 2026-09-22 | Back-propagation review follows waves; requirements developer-owned |
 | ChangeExec(CR-02).4 | not-started | 2026-09-22 | Final tests/verification pending |
 | ChangeExec(CR-02).5 | not-started | 2026-09-22 | Final change report pending |
