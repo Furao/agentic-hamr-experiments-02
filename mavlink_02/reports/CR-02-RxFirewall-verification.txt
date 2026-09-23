@@ -1,0 +1,19 @@
+RUSTC_BOOTSTRAP=1 cargo-verus verify -Z build-std=core,alloc,compiler_builtins -Z build-std-features=compiler-builtins-mem --target aarch64-unknown-none -- --rlimit 100 --smt-option smt.random_seed=7
+warning: use of deprecated method `vstd::array::ArrayAdditionalExecFns::set`: use `array[i] = value` instead
+  --> /home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/firewall_core/src/net.rs:32:19
+   |
+32 |             bytes.set(i, data[i]);
+   |                   ^^^
+   |
+   = note: `#[warn(deprecated)]` on by default
+
+warning: use of deprecated method `vstd::array::ArrayAdditionalExecFns::set`: use `array[i] = value` instead
+  --> /home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/firewall_core/src/net.rs:60:19
+   |
+60 |             bytes.set(i, data[i]);
+   |                   ^^^
+
+warning: `firewall-core` (lib) generated 4 warnings (2 duplicates)
+    Checking seL4_RxFirewall_RxFirewall v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/seL4_RxFirewall_RxFirewall)
+verification results:: 28 verified, 0 errors
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.90s

@@ -11,6 +11,9 @@ use firewall_core::{EthFrame, Ipv4ProtoPacket, PacketType};
 use log::{debug, error, info, trace, warn};
 use vstd::prelude::*;
 
+#[cfg(test)]
+pub static DIAGNOSTICS: std::sync::Mutex<Vec<String>> = std::sync::Mutex::new(Vec::new());
+
 verus! {
     const ARDUPILOT_SOURCE_PORT: u16 = 14550;
     const ARDUPILOT_DESTINATION_PORT: u16 = 14562;
@@ -49,21 +52,21 @@ verus! {
                     Ipv4ProtoPacket::Udp(udp) => {
                         let ardupilot_ports = udp.src_port == ARDUPILOT_SOURCE_PORT
                             && udp.dst_port == ARDUPILOT_DESTINATION_PORT;
-                        let mavlink = ardupilot_ports
-                            && UDP_HEADER_LENGTH <= udp.length
-                            && ipv4.header.length + ETHERNET_HEADER_LENGTH <= ETHERNET_FRAME_LENGTH
+                        let bounded = UDP_HEADER_LENGTH <= udp.length
                             && IPV4_HEADER_LENGTH <= ipv4.header.length
+                            && ipv4.header.length <= ETHERNET_FRAME_LENGTH - ETHERNET_HEADER_LENGTH
                             && udp.length == ipv4.header.length - IPV4_HEADER_LENGTH;
-                        if mavlink {
+                        if !bounded {
+                            info("UDP packet has inconsistent or out-of-carrier IPv4/UDP lengths");
+                            (RxRoute::Drop, 0)
+                        } else if ardupilot_ports {
                             (RxRoute::MAVLink, udp.length - UDP_HEADER_LENGTH)
-                        } else if udp.dst_port == DIRECT_UDP_DESTINATION_PORT {
+                        } else if udp.src_port != ARDUPILOT_SOURCE_PORT
+                            && udp.dst_port != ARDUPILOT_DESTINATION_PORT
+                            && udp.dst_port == DIRECT_UDP_DESTINATION_PORT {
                             (RxRoute::Direct, 0)
                         } else {
-                            if ardupilot_ports {
-                                info("ArduPilot UDP packet has inconsistent IPv4/UDP lengths");
-                            } else {
-                                info("UDP packet destination port is not allowed by RxFirewall policy");
-                            }
+                            info("UDP packet ports are not allowed by RxFirewall policy");
                             (RxRoute::Drop, 0)
                         }
                     }
@@ -103,12 +106,16 @@ verus! {
 
     #[verifier::external_body]
     fn info(s: &str) {
+        #[cfg(test)]
+        DIAGNOSTICS.lock().unwrap().push(s.to_string());
         #[cfg(feature = "sel4")]
         info!("{s}");
     }
 
     #[verifier::external_body]
     fn trace(s: &str) {
+        #[cfg(test)]
+        DIAGNOSTICS.lock().unwrap().push(s.to_string());
         #[cfg(feature = "sel4")]
         trace!("{s}");
     }
@@ -129,6 +136,17 @@ impl seL4_RxFirewall_RxFirewall {
     pub fn initialize<API: seL4_RxFirewall_RxFirewall_Put_Api>(
       &mut self,
       api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>)
+      requires
+        // HAMR init_api() starts all event outputs empty. Unlike compute,
+        // codegen currently omits this platform precondition for initialize.
+        old(api).EthernetFramesRxOut0.is_none(),
+        old(api).EthernetFramesRxOut1.is_none(),
+        old(api).EthernetFramesRxOut2.is_none(),
+        old(api).EthernetFramesRxOut3.is_none(),
+        old(api).MAVLinkFramesRxOut0.is_none(),
+        old(api).MAVLinkFramesRxOut1.is_none(),
+        old(api).MAVLinkFramesRxOut2.is_none(),
+        old(api).MAVLinkFramesRxOut3.is_none(),
       ensures
         // BEGIN MARKER INITIALIZATION ENSURES
         // guarantee hlr_17_initialize_lane0
@@ -260,39 +278,61 @@ impl seL4_RxFirewall_RxFirewall {
           final(api).EthernetFramesRxOut3.is_none() && final(api).MAVLinkFramesRxOut3.is_none(),
         // END MARKER TIME TRIGGERED ENSURES
     {
+        let mode = api.get_current_mode();
+
         // Rx0 ports
         if let Some(frame) = api.get_EthernetFramesRxIn0() {
+            if let open_platform_Data_Model::OperatingMode::Normal = mode {
             match classify_frame(&frame) {
                 (RxRoute::Direct, _) => api.put_EthernetFramesRxOut0(frame),
-                (RxRoute::MAVLink, payload_length) => api.put_MAVLinkFramesRxOut0(make_mavlink_carrier(frame, payload_length)),
+                (RxRoute::MAVLink, payload_length) => {
+                    trace("Rx routing bounded UDP to MAVLinkFirewall");
+                    api.put_MAVLinkFramesRxOut0(make_mavlink_carrier(frame, payload_length));
+                },
                 (RxRoute::Drop, _) => info("Rx lane 0 packet rejected"),
+            }
             }
         }
 
         // Rx1 ports
         if let Some(frame) = api.get_EthernetFramesRxIn1() {
+            if let open_platform_Data_Model::OperatingMode::Normal = mode {
             match classify_frame(&frame) {
                 (RxRoute::Direct, _) => api.put_EthernetFramesRxOut1(frame),
-                (RxRoute::MAVLink, payload_length) => api.put_MAVLinkFramesRxOut1(make_mavlink_carrier(frame, payload_length)),
+                (RxRoute::MAVLink, payload_length) => {
+                    trace("Rx routing bounded UDP to MAVLinkFirewall");
+                    api.put_MAVLinkFramesRxOut1(make_mavlink_carrier(frame, payload_length));
+                },
                 (RxRoute::Drop, _) => info("Rx lane 1 packet rejected"),
+            }
             }
         }
 
         // Rx2 ports
         if let Some(frame) = api.get_EthernetFramesRxIn2() {
+            if let open_platform_Data_Model::OperatingMode::Normal = mode {
             match classify_frame(&frame) {
                 (RxRoute::Direct, _) => api.put_EthernetFramesRxOut2(frame),
-                (RxRoute::MAVLink, payload_length) => api.put_MAVLinkFramesRxOut2(make_mavlink_carrier(frame, payload_length)),
+                (RxRoute::MAVLink, payload_length) => {
+                    trace("Rx routing bounded UDP to MAVLinkFirewall");
+                    api.put_MAVLinkFramesRxOut2(make_mavlink_carrier(frame, payload_length));
+                },
                 (RxRoute::Drop, _) => info("Rx lane 2 packet rejected"),
+            }
             }
         }
 
         // Rx3 ports
         if let Some(frame) = api.get_EthernetFramesRxIn3() {
+            if let open_platform_Data_Model::OperatingMode::Normal = mode {
             match classify_frame(&frame) {
                 (RxRoute::Direct, _) => api.put_EthernetFramesRxOut3(frame),
-                (RxRoute::MAVLink, payload_length) => api.put_MAVLinkFramesRxOut3(make_mavlink_carrier(frame, payload_length)),
+                (RxRoute::MAVLink, payload_length) => {
+                    trace("Rx routing bounded UDP to MAVLinkFirewall");
+                    api.put_MAVLinkFramesRxOut3(make_mavlink_carrier(frame, payload_length));
+                },
                 (RxRoute::Drop, _) => info("Rx lane 3 packet rejected"),
+            }
             }
         }
 

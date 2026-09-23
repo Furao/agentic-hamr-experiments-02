@@ -1,7 +1,7 @@
 # CR-02 Wave 2 — ModeManager development
 
 Date: 2026-09-23. Profile: audited. Wave 1 explicitly approved by developer.
-Status: toolchain blocker resolved; 7/7 tests pass; coverage review AP1 pending.
+Status: complete; developer approved coverage, verification 9/0 and component completion.
 
 ## Implementation
 
@@ -82,3 +82,26 @@ CompDev steps 1–5 are complete. AP1 awaits review of this evidence and the exp
 branch-metric limitation. No ModeManager Verus success is claimed; verification
 follows coverage approval. Shared-core and Tx verification performed for toolchain
 migration are separately recorded in CR-02-toolchain-migration.md.
+
+Developer approved CompDev.AP1 coverage review on 2026-09-23. Target verification follows.
+
+## Verification result
+
+After explicit coverage approval, `make verus` passed with exit 0 for
+`aarch64-unknown-none`: **ModeManager 9 verified, 0 errors**. Dependencies reported
+vstd 1861/0, data 10/0 and GumboLib 0/0. Used Verus 0.2026.08.09.92f466f,
+Rust 1.97.1, --rlimit 100 and --smt-option smt.random_seed=7. Initial metadata
+resolution required permission to fetch missing target dependencies; the rerun
+completed successfully. Evidence: `CR-02-ModeManager-verification.txt`.
+
+No implementation, contract or proof changes were necessary after the approved
+coverage run. Initialization and compute verify without assumptions, admits or
+new external bodies. The two existing external-body adapters are `log_info` and
+`log_warn_channel`; they delegate to platform logging and do not implement mode
+transitions or publication. Generated API/platform abstractions remain part of the
+HAMR trust boundary; verification does not prove deployed communication timing.
+
+Steps 6–7 complete. CompDev.AP2 verification sign-off and the ModeManager sub-workflow
+boundary await developer approval. RxFirewall is the next component in Wave 2.
+
+Developer approved AP2 and ModeManager completion on 2026-09-23; continuing to RxFirewall.

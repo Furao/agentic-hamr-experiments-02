@@ -4,7 +4,7 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 
 | Step | Status | Updated | Notes |
 |------|--------|---------|-------|
-| ChangeExec(CR-02) | in-progress | 2026-09-23 | Wave 2: toolchain migrated; ModeManager 7/7 tests and full line coverage ready for AP1 review |
+| ChangeExec(CR-02) | in-progress | 2026-09-23 | Wave 2: ModeManager complete; RxFirewall verification 28/0 awaits AP2 |
 | ChangeExec(CR-02).1 | done | 2026-09-22 | Approved plan/all RDs resolved; HEAD 24ba011d4f0a49c727a9b6c9cd28941f536891b4 drift is request/planning records only; approved source baseline unchanged |
 | ChangeExec(CR-02).2 | in-progress | 2026-09-22 | W1 started per approved sequence; W2/W3 not started |
 | ChangeExec(CR-02).W1 | done | 2026-09-23 | Developer approved Wave 1; technical gate and regenerated output accepted |
@@ -74,15 +74,29 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W1.R2U2Reporting | done | 2026-09-23 | Original unpatched failure superseded by authorized workaround and R2 probe 2/2; historical report retained |
 | ChangeExec(CR-02).W1.StartupSampling | done | 2026-09-23 | Checked enum/defaults, retained C inputs, wiring, non-consuming peek and pre/compute/post order; runtime implementation and schedule evidence remain W2/W3 |
 | ChangeExec(CR-02).W1.AP1 | done | 2026-09-23 | Developer explicitly approved Wave 1 |
-| ChangeExec(CR-02).W2 | in-progress | 2026-09-23 | Started CompDev(ModeManager); Rx and MAVLink implementations follow |
-| ChangeExec(CR-02).W2.CompDev(ModeManager) | in-progress | 2026-09-23 | Toolchain migration resolved blocker; steps 1–5 complete; coverage review pending |
+| ChangeExec(CR-02).W2 | in-progress | 2026-09-23 | ModeManager complete; RxFirewall coverage review pending; MAVLink follows |
+| ChangeExec(CR-02).W2.CompDev(ModeManager) | done | 2026-09-23 | Developer approved completion: tests/coverage and verification 9/0 accepted |
 | ChangeExec(CR-02).W2.CompDev(ModeManager).1 | done | 2026-09-23 | Fresh tipe Well-formed; generated ModeManager contracts current |
 | ChangeExec(CR-02).W2.CompDev(ModeManager).2 | done | 2026-09-23 | Initialize/publish Normal; sample ErrorStatus once, latch Recovery, publish both outputs each dispatch |
 | ChangeExec(CR-02).W2.CompDev(ModeManager).3 | done | 2026-09-23 | Added transition/publication/reboot/notification tests and exhaustive oracle truth table; generated PropTests retained |
 | ChangeExec(CR-02).W2.CompDev(ModeManager).4 | done | 2026-09-23 | 7/7 tests; app 37/37 lines, GUMBOX 67/67; exhaustive branch cases, no LLVM branch counters |
 | ChangeExec(CR-02).W2.CompDev(ModeManager).5 | done | 2026-09-23 | Tests pass after dependency migration; no implementation or contract revision required |
-| ChangeExec(CR-02).W2.CompDev(ModeManager).AP1 | pending | 2026-09-23 | Review tests/coverage and recorded branch-metric limitation before Verus |
-| ChangeExec(CR-02).W2.CompDev(ModeManager).6 | not-started | 2026-09-23 | New verifier installed; ModeManager verification follows AP1 approval |
+| ChangeExec(CR-02).W2.CompDev(ModeManager).AP1 | done | 2026-09-23 | Developer approved 7/7 tests, full line coverage and exhaustive branch-case evidence |
+| ChangeExec(CR-02).W2.CompDev(ModeManager).6 | done | 2026-09-23 | Target make verus passed: ModeManager 9 verified, 0 errors |
+| ChangeExec(CR-02).W2.CompDev(ModeManager).7 | done | 2026-09-23 | No proof/implementation revisions; only two existing logging external bodies |
+| ChangeExec(CR-02).W2.CompDev(ModeManager).AP2 | done | 2026-09-23 | Developer approved verification 9/0 and logging trust boundary |
+| ChangeExec(CR-02).W2.CompDev(ModeManager).boundary | done | 2026-09-23 | Developer approved ModeManager completion and continuation to RxFirewall |
+| ChangeExec(CR-02).W2.CompDev(RxFirewall) | in-progress | 2026-09-23 | Coverage approved; verification 28/0; AP2 and component boundary pending |
+| ChangeExec(CR-02).W2.CompDev(RxFirewall).1 | done | 2026-09-23 | Model unchanged since clean tipe; generated contracts current |
+| ChangeExec(CR-02).W2.CompDev(RxFirewall).2 | done | 2026-09-23 | One Mode snapshot, Recovery suppression, shared executable bounds and independent port exclusions |
+| ChangeExec(CR-02).W2.CompDev(RxFirewall).3 | done | 2026-09-23 | Updated generated API calls; lane/mode/bounds/logging and negative oracle matrices |
+| ChangeExec(CR-02).W2.CompDev(RxFirewall).4 | done | 2026-09-23 | 12/12 tests; app 118/118 and GUMBOX 382/382 lines |
+| ChangeExec(CR-02).W2.CompDev(RxFirewall).5 | done | 2026-09-23 | Clean final coverage isolated from stale binaries; semantic branch partitions recorded |
+| ChangeExec(CR-02).W2.CompDev(RxFirewall).AP1 | done | 2026-09-23 | Developer approved updated tests/coverage after removal of Recovery logs |
+| ChangeExec(CR-02).W2.CompDev(RxFirewall).6 | done | 2026-09-23 | Target make verus 28/0 after explicit empty-output startup precondition |
+| ChangeExec(CR-02).W2.CompDev(RxFirewall).7 | done | 2026-09-23 | Explicit platform empty-output initialization requires; tests 12/12 and full line coverage rechecked |
+| ChangeExec(CR-02).W2.CompDev(RxFirewall).AP2 | pending | 2026-09-23 | Review 28/0, startup precondition and three logging external bodies |
+| ChangeExec(CR-02).W2.CompDev(RxFirewall).boundary | pending | 2026-09-23 | Component completion ready; MAVLinkFirewall follows |
 | ChangeExec(CR-02).W3 | not-started | 2026-09-22 | Awaiting W2 gate |
 | ChangeExec(CR-02).3 | not-started | 2026-09-22 | Back-propagation review follows waves; requirements developer-owned |
 | ChangeExec(CR-02).4 | not-started | 2026-09-22 | Final tests/verification pending |
@@ -222,3 +236,5 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 - 2026-09-23: Captured developer workaround commit 4bc9a9a as a reusable post-codegen patch; helper verified for application, idempotence and conflict preservation. AGENTS.md requires each codegen invocation to attempt it.
 
 - 2026-09-23: Developer-authorized Verus migration completed; shared cores pass tests/verification and Tx passes 4 tests plus target verification 16/0. Rx/MAV test-interface updates and driver target environment remain planned work.
+
+- Developer direction: omit per-frame Recovery suppression logs (Rx removed; apply to upcoming MAVLink implementation). LLR-18 wording reconciliation remains developer-owned.
