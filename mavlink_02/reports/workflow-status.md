@@ -188,9 +188,12 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.1 | done | 2026-09-23 | Contracts/model unchanged; existing generated code current |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.2 | done | 2026-09-23 | Info log only for Normal to Recovery; existing logger reused; no extra production state |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.3 | done | 2026-09-23 | Existing four-transition and repeated-dispatch tests assert exact diagnostic count/content |
-| ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.4 | done | 2026-09-23 | 7/7 tests; application 39/39, GUMBOX 67/67; BRF=0; CR-02-mode-log.md |
+| ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.4 | done | 2026-09-23 | Refreshed after equivalent pattern rewrite: 7/7 tests; app 41/41, GUMBOX 67/67; BRF=0 |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.5 | done | 2026-09-23 | No failures; all four state/input cases and repeated-dispatch diagnostic checks pass |
-| ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.AP1 | pending | 2026-09-23 | Review test/coverage evidence before fresh Verus; new loader follows proof review |
+| ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.AP1 | done | 2026-09-23 | Developer approved tests/coverage and continuation to verification |
+| ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.6 | done | 2026-09-23 | AArch64 Verus 9 verified, 0 errors; CR-02-mode-log-verification.txt |
+| ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.7 | done | 2026-09-23 | Initial equality-guard postcondition failure resolved by enum pattern; tests/coverage refreshed; no new trust escapes |
+| ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.AP2 | pending | 2026-09-23 | Review 9/0, refreshed tests/coverage and component completion before loader rebuild |
 | ChangeExec(CR-02).3 | not-started | 2026-09-22 | Back-propagation review follows waves; requirements developer-owned |
 | ChangeExec(CR-02).4 | not-started | 2026-09-22 | Final tests/verification pending |
 | ChangeExec(CR-02).5 | not-started | 2026-09-22 | Final change report pending |
@@ -343,3 +346,5 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 - 2026-09-23: Developer approved bounds AP2 and component completion. Full custom ZCU102/debug rebuild passes with corrected driver/firewalls; requested bounds correction complete. Wave 3 remains open for physical hardware/timing evidence, followed by developer-owned requirements reconciliation and final CR-02 review.
 
 - 2026-09-23: Developer reports hardware behavior correct. Added requested ModeManager Normal-to-Recovery diagnostic, once per transition; tests/coverage pass and AP1 pending. Existing built loader predates this logging edit.
+
+- 2026-09-23: ModeManager logging AP1 approved. Verus passes 9/0 after equivalent enum-pattern rewrite; refreshed tests 7/7 and app/GUMBOX coverage 41/41, 67/67. AP2 pending; existing loader predates the diagnostic.

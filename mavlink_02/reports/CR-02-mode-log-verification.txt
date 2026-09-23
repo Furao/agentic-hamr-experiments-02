@@ -1,0 +1,4 @@
+RUSTC_BOOTSTRAP=1 cargo-verus verify -Z build-std=core,alloc,compiler_builtins -Z build-std-features=compiler-builtins-mem --target aarch64-unknown-none -- --rlimit 100 --smt-option smt.random_seed=7
+    Checking seL4_ModeManager_ModeManager v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/seL4_ModeManager_ModeManager)
+verification results:: 9 verified, 0 errors
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.52s

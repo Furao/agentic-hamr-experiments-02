@@ -1,0 +1,28 @@
+make: Entering directory '/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/seL4_ModeManager_ModeManager'
+RUSTC_BOOTSTRAP=1 cargo-verus verify -Z build-std=core,alloc,compiler_builtins -Z build-std-features=compiler-builtins-mem --target aarch64-unknown-none -- --rlimit 100 --smt-option smt.random_seed=7
+    Checking data v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/data)
+verification results:: 10 verified, 0 errors
+    Checking GumboLib v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/GumboLib)
+verification results:: 0 verified, 0 errors
+    Checking seL4_ModeManager_ModeManager v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/seL4_ModeManager_ModeManager)
+error: postcondition not satisfied
+  --> src/component/seL4_ModeManager_ModeManager_app.rs:55:9
+   |
+47 | /     pub fn timeTriggered<API: seL4_ModeManager_ModeManager_Full_Api> (
+48 | |       &mut self,
+49 | |       api: &mut seL4_ModeManager_ModeManager_Application_Api<API>)
+   | |__________________________________________________________________- at the end of the function body
+...
+55 | /         final(self).retained_mode ==
+56 | |           (if (final(api).error_status ||
+57 | |             (old(self).retained_mode == open_platform_Data_Model::OperatingMode::Recovery)) {
+58 | |             open_platform_Data_Model::OperatingMode::Recovery
+59 | |           } else {
+60 | |             open_platform_Data_Model::OperatingMode::Normal
+61 | |           }),
+   | |____________^ failed this postcondition
+
+verification results:: 8 verified, 1 errors
+error: could not compile `seL4_ModeManager_ModeManager` (lib) due to 1 previous error
+make: *** [Makefile:59: verus] Error 101
+make: Leaving directory '/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/seL4_ModeManager_ModeManager'
