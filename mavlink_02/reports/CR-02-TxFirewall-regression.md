@@ -70,3 +70,30 @@ grcov target/cr02-current/profiles --binary-path target/cr02-current/debug/deps 
 Await approval of this TestOnly result and exclusions before its audited slice
 boundary and continuation to Tx VerifyOnly. No fresh Tx verification is claimed by
 this report. Earlier migration verification remains historical evidence.
+
+
+## Verification follow-up
+
+Developer approved TestOnly, its coverage exclusions and slice boundary. Fresh target
+verification passes: **16 verified, zero errors**, exit 0. Command from the Tx crate:
+`SYSTEM_MAKEFILE=custom.mk make verus`, Verus 0.2026.08.09.92f466f, Rust 1.97.1,
+aarch64-unknown-none, rlimit 100 and SMT seed 7. The first command reused Cargo's
+cache; touching the app source timestamp (without changing contents) forced the
+recorded second command to execute the verifier and report the 16/0 result.
+
+No proof or implementation changes were needed. The three existing external bodies
+are info, trace and warn_channel logging adapters. There are no new proof escapes.
+Tests/coverage are unchanged from the approved TestOnly evidence; no unnecessary test
+rerun was performed after a verification-only operation. Evidence:
+CR-02-TxFirewall-verification.txt.
+
+Fresh shared-core regression commands also passed: firewall_core tests 17/17 and
+verification 39/0; mavlink_core tests 6/6 and verification 38/0. Each core used
+`RUSTC_BOOTSTRAP=1 cargo test --offline` and
+`RUSTC_BOOTSTRAP=1 cargo-verus verify --offline -- --rlimit 100 --smt-option smt.random_seed=7`
+from its crate. Core verification is host-target evidence, distinct from the Tx
+component's aarch64 verification. Source timestamps were touched to force verification;
+source contents are unchanged. No codegen or full-system build was run.
+
+Await Tx VerifyOnly AP2/boundary sign-off. The consolidated Wave 2 result is ready
+for review in CR-02-w2-gate.md; Wave 3 remains unstarted.

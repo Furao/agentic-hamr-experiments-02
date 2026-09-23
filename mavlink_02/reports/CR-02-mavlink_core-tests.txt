@@ -1,0 +1,19 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.03s
+     Running unittests src/lib.rs (target/debug/deps/mavlink_core-69e2234c189be291)
+
+running 6 tests
+test tests::accepts_file_transfer_and_signed_frame ... ok
+test tests::preserves_all_diagnostic_reasons_and_carrier_bounds ... ok
+test tests::invalid_reasons_have_distinct_messages ... ok
+test tests::returns_payload_locations_at_carrier_boundaries ... ok
+test tests::accepts_v1 ... ok
+test tests::rejects_bad_flags_lengths_checksum_and_unknown_id ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests mavlink_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

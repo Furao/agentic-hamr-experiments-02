@@ -1,0 +1,165 @@
+warning: unexpected `cfg` condition name: `verus_keep_ghost`
+ --> src/net.rs:3:7
+  |
+3 | #[cfg(verus_keep_ghost)]
+  |       ^^^^^^^^^^^^^^^^
+  |
+  = help: expected names are: `docsrs`, `feature`, and `test` and 32 more
+  = help: consider using a Cargo feature instead
+  = help: or consider adding in `Cargo.toml` the `check-cfg` lint config for the lint:
+           [lints.rust]
+           unexpected_cfgs = { level = "warn", check-cfg = ['cfg(verus_keep_ghost)'] }
+  = help: or consider adding `println!("cargo::rustc-check-cfg=cfg(verus_keep_ghost)");` to the top of the `build.rs`
+  = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+  = note: `#[warn(unexpected_cfgs)]` on by default
+
+warning: unexpected `cfg` condition name: `verus_keep_ghost`
+   --> src/net.rs:121:7
+    |
+121 | #[cfg(verus_keep_ghost)]
+    |       ^^^^^^^^^^^^^^^^
+    |
+    = help: consider using a Cargo feature instead
+    = help: or consider adding in `Cargo.toml` the `check-cfg` lint config for the lint:
+             [lints.rust]
+             unexpected_cfgs = { level = "warn", check-cfg = ['cfg(verus_keep_ghost)'] }
+    = help: or consider adding `println!("cargo::rustc-check-cfg=cfg(verus_keep_ghost)");` to the top of the `build.rs`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+
+warning: unexpected `cfg` condition name: `verus_keep_ghost`
+   --> src/net.rs:151:7
+    |
+151 | #[cfg(verus_keep_ghost)]
+    |       ^^^^^^^^^^^^^^^^
+    |
+    = help: consider using a Cargo feature instead
+    = help: or consider adding in `Cargo.toml` the `check-cfg` lint config for the lint:
+             [lints.rust]
+             unexpected_cfgs = { level = "warn", check-cfg = ['cfg(verus_keep_ghost)'] }
+    = help: or consider adding `println!("cargo::rustc-check-cfg=cfg(verus_keep_ghost)");` to the top of the `build.rs`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+
+warning: unexpected `cfg` condition name: `verus_keep_ghost`
+   --> src/net.rs:239:7
+    |
+239 | #[cfg(verus_keep_ghost)]
+    |       ^^^^^^^^^^^^^^^^
+    |
+    = help: consider using a Cargo feature instead
+    = help: or consider adding in `Cargo.toml` the `check-cfg` lint config for the lint:
+             [lints.rust]
+             unexpected_cfgs = { level = "warn", check-cfg = ['cfg(verus_keep_ghost)'] }
+    = help: or consider adding `println!("cargo::rustc-check-cfg=cfg(verus_keep_ghost)");` to the top of the `build.rs`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+
+warning: unexpected `cfg` condition name: `verus_keep_ghost`
+   --> src/net.rs:267:7
+    |
+267 | #[cfg(verus_keep_ghost)]
+    |       ^^^^^^^^^^^^^^^^
+    |
+    = help: consider using a Cargo feature instead
+    = help: or consider adding in `Cargo.toml` the `check-cfg` lint config for the lint:
+             [lints.rust]
+             unexpected_cfgs = { level = "warn", check-cfg = ['cfg(verus_keep_ghost)'] }
+    = help: or consider adding `println!("cargo::rustc-check-cfg=cfg(verus_keep_ghost)");` to the top of the `build.rs`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+
+warning: unexpected `cfg` condition name: `verus_keep_ghost`
+   --> src/net.rs:309:7
+    |
+309 | #[cfg(verus_keep_ghost)]
+    |       ^^^^^^^^^^^^^^^^
+    |
+    = help: consider using a Cargo feature instead
+    = help: or consider adding in `Cargo.toml` the `check-cfg` lint config for the lint:
+             [lints.rust]
+             unexpected_cfgs = { level = "warn", check-cfg = ['cfg(verus_keep_ghost)'] }
+    = help: or consider adding `println!("cargo::rustc-check-cfg=cfg(verus_keep_ghost)");` to the top of the `build.rs`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+
+warning: unexpected `cfg` condition name: `verus_keep_ghost`
+   --> src/net.rs:335:7
+    |
+335 | #[cfg(verus_keep_ghost)]
+    |       ^^^^^^^^^^^^^^^^
+    |
+    = help: consider using a Cargo feature instead
+    = help: or consider adding in `Cargo.toml` the `check-cfg` lint config for the lint:
+             [lints.rust]
+             unexpected_cfgs = { level = "warn", check-cfg = ['cfg(verus_keep_ghost)'] }
+    = help: or consider adding `println!("cargo::rustc-check-cfg=cfg(verus_keep_ghost)");` to the top of the `build.rs`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+
+warning: unexpected `cfg` condition name: `verus_keep_ghost`
+   --> src/net.rs:449:7
+    |
+449 | #[cfg(verus_keep_ghost)]
+    |       ^^^^^^^^^^^^^^^^
+    |
+    = help: consider using a Cargo feature instead
+    = help: or consider adding in `Cargo.toml` the `check-cfg` lint config for the lint:
+             [lints.rust]
+             unexpected_cfgs = { level = "warn", check-cfg = ['cfg(verus_keep_ghost)'] }
+    = help: or consider adding `println!("cargo::rustc-check-cfg=cfg(verus_keep_ghost)");` to the top of the `build.rs`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+
+warning: unexpected `cfg` condition name: `verus_keep_ghost`
+   --> src/net.rs:493:7
+    |
+493 | #[cfg(verus_keep_ghost)]
+    |       ^^^^^^^^^^^^^^^^
+    |
+    = help: consider using a Cargo feature instead
+    = help: or consider adding in `Cargo.toml` the `check-cfg` lint config for the lint:
+             [lints.rust]
+             unexpected_cfgs = { level = "warn", check-cfg = ['cfg(verus_keep_ghost)'] }
+    = help: or consider adding `println!("cargo::rustc-check-cfg=cfg(verus_keep_ghost)");` to the top of the `build.rs`
+    = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+
+warning: use of deprecated method `vstd::array::ArrayAdditionalExecFns::set`: use `array[i] = value` instead
+  --> src/net.rs:32:19
+   |
+32 |             bytes.set(i, data[i]);
+   |                   ^^^
+   |
+   = note: `#[warn(deprecated)]` on by default
+
+warning: use of deprecated method `vstd::array::ArrayAdditionalExecFns::set`: use `array[i] = value` instead
+  --> src/net.rs:60:19
+   |
+60 |             bytes.set(i, data[i]);
+   |                   ^^^
+
+warning: `firewall-core` (lib) generated 11 warnings
+warning: `firewall-core` (lib test) generated 11 warnings (11 duplicates)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.03s
+     Running unittests src/lib.rs (target/debug/deps/firewall_core-281a17c7d5220ec2)
+
+running 17 tests
+test eth_frame_tests::dest_mac_empty ... ok
+test eth_frame_tests::malformed_arp ... ok
+test eth_frame_tests::eth_type_ipv6 ... ok
+test eth_frame_tests::malformed_eth_header ... ok
+test eth_frame_tests::malformed_ipv4 ... ok
+test eth_frame_tests::valid_arp_reply ... ok
+test eth_frame_tests::valid_arp_request ... ok
+test eth_frame_tests::valid_ipv4_protocols ... ok
+test net::arp_tests::parse ... ok
+test net::arp_tests::valid_ptype ... ok
+test net::ethernet_repr_tests::parse ... ok
+test net::ethertype_from_bytes_test ... ok
+test net::from_arpop_to_u16_test ... ok
+test net::from_ethertype_to_u16_test ... ok
+test net::from_hardwaretype_to_u16_test ... ok
+test net::from_ipprotocol_to_u8_test ... ok
+test net::mac_address_from_bytes_test ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests firewall_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
