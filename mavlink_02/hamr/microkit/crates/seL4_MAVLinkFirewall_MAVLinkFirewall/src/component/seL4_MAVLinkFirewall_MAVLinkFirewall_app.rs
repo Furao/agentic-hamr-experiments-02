@@ -29,6 +29,8 @@ verus! {
   pub(crate) const COMMAND_FIELD_END: usize = COMMAND_FIELD_OFFSET + 2;
   pub(crate) const SECURE_OPERATION_OFFSET: usize = 4;
   pub(crate) const SECURE_OPERATION_END: usize = SECURE_OPERATION_OFFSET + 4;
+  const REJECTION_LIMIT: u16 = 20;
+  const ERROR_THRESHOLD: u16 = 5;
   const CLASS_INVALID: u8 = 0;
   const CLASS_ALLOWED: u8 = 1;
   const CLASS_FLASH: u8 = 2;
@@ -61,14 +63,22 @@ verus! {
     (frame[at] as u16) | ((frame[at + 1] as u16) << ONE_BYTE_SHIFT)
   }
 
-  fn get_secure_operation(frame: &[u8], payload_offset: usize) -> (value: u32)
-    requires payload_offset + SECURE_OPERATION_END <= frame.len()
-    ensures value == secure_operation_spec(frame@, payload_offset as int)
+  // MAVLink v2 omitted payload bytes decode as zero, never as checksum bytes.
+  fn operation_byte(frame: &[u8], offset: usize, length: usize, field: usize) -> (value: u8)
+    requires offset + length <= frame.len(), field < 8
+    ensures value == operation_byte_spec(frame@, offset as int, length as int, field as int)
   {
-    let at = payload_offset + SECURE_OPERATION_OFFSET;
-    (frame[at] as u32) | ((frame[at + 1] as u32) << ONE_BYTE_SHIFT)
-      | ((frame[at + 2] as u32) << TWO_BYTE_SHIFT)
-      | ((frame[at + 3] as u32) << THREE_BYTE_SHIFT)
+    if field < length { frame[offset + field] } else { 0 }
+  }
+
+  fn get_secure_operation(frame: &[u8], payload_offset: usize, payload_length: usize) -> (value: u32)
+    requires payload_offset + payload_length <= frame.len()
+    ensures value == secure_operation_spec(frame@, payload_offset as int, payload_length as int)
+  {
+    (operation_byte(frame, payload_offset, payload_length, 4) as u32)
+      | ((operation_byte(frame, payload_offset, payload_length, 5) as u32) << ONE_BYTE_SHIFT)
+      | ((operation_byte(frame, payload_offset, payload_length, 6) as u32) << TWO_BYTE_SHIFT)
+      | ((operation_byte(frame, payload_offset, payload_length, 7) as u32) << THREE_BYTE_SHIFT)
   }
 
   const NETWORK_BYTE_RADIX: u16 = 256;
@@ -87,9 +97,15 @@ verus! {
     mavlink_core::verified::u16_le_spec(frame, payload_offset + command_field_offset)
   }
 
-  pub open spec fn secure_operation_spec(frame: Seq<u8>, payload_offset: int) -> u32 {
-    let secure_operation_offset: int = 4;
-    mavlink_core::verified::u32_le_spec(frame, payload_offset + secure_operation_offset)
+  pub open spec fn operation_byte_spec(frame: Seq<u8>, offset: int, length: int, field: int) -> u8 {
+    if field < length { frame[offset + field] } else { 0 }
+  }
+
+  pub open spec fn secure_operation_spec(frame: Seq<u8>, payload_offset: int, payload_length: int) -> u32 {
+    (operation_byte_spec(frame, payload_offset, payload_length, 4) as u32)
+      | ((operation_byte_spec(frame, payload_offset, payload_length, 5) as u32) << 8)
+      | ((operation_byte_spec(frame, payload_offset, payload_length, 6) as u32) << 16)
+      | ((operation_byte_spec(frame, payload_offset, payload_length, 7) as u32) << 24)
   }
 
   pub open spec fn command_requests_bootloader_flash_spec(
@@ -107,11 +123,8 @@ verus! {
   pub open spec fn secure_command_requests_bootloader_flash_spec(
     frame: Seq<u8>, message_id: u32, payload_offset: int, payload_length: int,
   ) -> bool {
-    let secure_command_id: u32 = 11004;
-    let operation_field_end: int = 8;
-    let flash_bootloader_operation: u32 = 7;
-    message_id == secure_command_id && payload_length >= operation_field_end &&
-      secure_operation_spec(frame, payload_offset) == flash_bootloader_operation
+    message_id == SECURE_COMMAND_ID &&
+      secure_operation_spec(frame, payload_offset, payload_length) == SECURE_COMMAND_FLASH_BOOTLOADER
   }
 
   pub open spec fn firmware_flash_spec(frame: Seq<u8>, offset: u16, length: u16) -> bool {
@@ -144,8 +157,7 @@ verus! {
           && get_command(frame, payload_offset) == MAV_CMD_FLASH_BOOTLOADER {
           CLASS_FLASH
       } else if message_id == SECURE_COMMAND_ID
-          && payload_length >= SECURE_OPERATION_END
-          && get_secure_operation(frame, payload_offset) == SECURE_COMMAND_FLASH_BOOTLOADER {
+          && get_secure_operation(frame, payload_offset, payload_length) == SECURE_COMMAND_FLASH_BOOTLOADER {
           CLASS_FLASH
       } else { CLASS_ALLOWED }
   }
@@ -216,6 +228,11 @@ verus! {
     pub fn initialize<API: seL4_MAVLinkFirewall_MAVLinkFirewall_Put_Api> (
       &mut self,
       api: &mut seL4_MAVLinkFirewall_MAVLinkFirewall_Application_Api<API>)
+      requires
+        old(api).EthernetFramesOut0.is_none(),
+        old(api).EthernetFramesOut1.is_none(),
+        old(api).EthernetFramesOut2.is_none(),
+        old(api).EthernetFramesOut3.is_none(),
       ensures
         // BEGIN MARKER INITIALIZATION ENSURES
         // guarantee hlr_31_llr_11_initial_count
@@ -232,6 +249,8 @@ verus! {
         final(api).EthernetFramesOut3.is_none(),
         // END MARKER INITIALIZATION ENSURES
     {
+      self.rejected_count = 0;
+      api.put_error_status(false);
       log_info("initialize entrypoint invoked");
     }
 
@@ -337,34 +356,81 @@ verus! {
           final(api).EthernetFramesOut3.is_none(),
         // END MARKER TIME TRIGGERED ENSURES
     {
+      let mode = api.get_current_mode();
+      let mut rejections: u16 = 0;
       if let Some(msg) = api.get_EthernetFramesIn0() {
         match classify(&msg) {
-          Route::Allow => api.put_EthernetFramesOut0(msg),
-          Route::DenyFlash => log_info("lane 0: firmware-flash command denied"),
-          Route::Invalid => log_invalid_mavlink(0, &msg),
+          Route::Allow => {
+            if let open_platform_Data_Model::OperatingMode::Normal = mode {
+              api.put_EthernetFramesOut0(msg);
+            }
+          },
+          Route::DenyFlash => {
+            rejections = rejections + 1;
+            log_info("lane 0: firmware-flash command denied");
+          },
+          Route::Invalid => {
+            rejections = rejections + 1;
+            log_invalid_mavlink(0, &msg);
+          },
         }
       }
       if let Some(msg) = api.get_EthernetFramesIn1() {
         match classify(&msg) {
-          Route::Allow => api.put_EthernetFramesOut1(msg),
-          Route::DenyFlash => log_info("lane 1: firmware-flash command denied"),
-          Route::Invalid => log_invalid_mavlink(1, &msg),
+          Route::Allow => {
+            if let open_platform_Data_Model::OperatingMode::Normal = mode {
+              api.put_EthernetFramesOut1(msg);
+            }
+          },
+          Route::DenyFlash => {
+            rejections = rejections + 1;
+            log_info("lane 1: firmware-flash command denied");
+          },
+          Route::Invalid => {
+            rejections = rejections + 1;
+            log_invalid_mavlink(1, &msg);
+          },
         }
       }
       if let Some(msg) = api.get_EthernetFramesIn2() {
         match classify(&msg) {
-          Route::Allow => api.put_EthernetFramesOut2(msg),
-          Route::DenyFlash => log_info("lane 2: firmware-flash command denied"),
-          Route::Invalid => log_invalid_mavlink(2, &msg),
+          Route::Allow => {
+            if let open_platform_Data_Model::OperatingMode::Normal = mode {
+              api.put_EthernetFramesOut2(msg);
+            }
+          },
+          Route::DenyFlash => {
+            rejections = rejections + 1;
+            log_info("lane 2: firmware-flash command denied");
+          },
+          Route::Invalid => {
+            rejections = rejections + 1;
+            log_invalid_mavlink(2, &msg);
+          },
         }
       }
       if let Some(msg) = api.get_EthernetFramesIn3() {
         match classify(&msg) {
-          Route::Allow => api.put_EthernetFramesOut3(msg),
-          Route::DenyFlash => log_info("lane 3: firmware-flash command denied"),
-          Route::Invalid => log_invalid_mavlink(3, &msg),
+          Route::Allow => {
+            if let open_platform_Data_Model::OperatingMode::Normal = mode {
+              api.put_EthernetFramesOut3(msg);
+            }
+          },
+          Route::DenyFlash => {
+            rejections = rejections + 1;
+            log_info("lane 3: firmware-flash command denied");
+          },
+          Route::Invalid => {
+            rejections = rejections + 1;
+            log_invalid_mavlink(3, &msg);
+          },
         }
       }
+      self.rejected_count = if rejections >= REJECTION_LIMIT - self.rejected_count {
+        REJECTION_LIMIT
+      } else { self.rejected_count + rejections };
+      // Publish from final count, including empty and Recovery dispatches.
+      api.put_error_status(self.rejected_count >= ERROR_THRESHOLD);
     }
 
     pub fn notify(
@@ -565,7 +631,7 @@ mod policy_tests {
             (v2(COMMAND_LONG_ID, &command[..COMMAND_FIELD_END - 1], 0), CLASS_ALLOWED),
             (v2(COMMAND_LONG_ID, &[0; COMMAND_LONG_PAYLOAD_BYTES], 0), CLASS_ALLOWED),
             (v2(SECURE_COMMAND_ID, &remote, 0), CLASS_FLASH),
-            (v2(SECURE_COMMAND_ID, &remote[..SECURE_OPERATION_END - 1], 0), CLASS_ALLOWED),
+            (v2(SECURE_COMMAND_ID, &remote[..SECURE_OPERATION_END - 1], 0), CLASS_FLASH),
             (v2(SECURE_COMMAND_ID, &[0; SECURE_COMMAND_PREFIX_BYTES], 0), CLASS_ALLOWED),
             (v2(COMMAND_LONG_ID, &command, MAVLINK_V2_SIGNED), CLASS_FLASH),
             (bad_crc, CLASS_INVALID),

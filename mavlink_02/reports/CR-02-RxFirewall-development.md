@@ -1,6 +1,6 @@
 # CR-02 Wave 2 — RxFirewall development
 
-Date: 2026-09-23. Profile: audited. Status: coverage approved; verification 28/0; AP2 pending.
+Date: 2026-09-23. Profile: audited. Status: complete; tests, coverage, verification 28/0 and AP2 approved.
 ModeManager completion and continuation to RxFirewall approved by developer.
 Authority: developer-owned _07 requirements and approved Rx GUMBO contracts.
 
@@ -104,3 +104,5 @@ remains application **118/118**, GUMBOX **382/382**. The prior approved executab
 behavior is unchanged; evidence files refreshed. See CR-02-RxFirewall-verification.txt.
 AP2 and component completion await review of the proof result and startup precondition.
 MAVLinkFirewall is the next Wave 2 component.
+
+Developer approved AP2, the startup precondition/trust boundary, component completion, and continuation to MAVLinkFirewall.
