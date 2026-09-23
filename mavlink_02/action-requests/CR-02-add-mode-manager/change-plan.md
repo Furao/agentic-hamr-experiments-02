@@ -382,3 +382,16 @@ That instruction accepts the remaining proposed decisions above and approves
 ChangePlan.AP1. All eight Review Record items are resolved. Material changes require
 the ChangePlan.4–.6 revision loop and renewed approval. ChangeExec is in W1; requirements planning against _07 is complete.
 Execution began after approval; see workflow status and the _07 requirements planning report for the current handoff.
+
+
+### Execution clarification — authorized generated-code workaround (2026-09-23)
+
+The developer explicitly directed capture of commit
+`4bc9a9ae60daefad311bcf23546ee8d4e7468c1b` and an application attempt after every
+codegen run. This is a scoped exception to the HLR-30 design's prohibition on
+overwrite-only edits: retain `patches/4bc9a9a-r2u2-false-verdict.patch`, run
+`python3 bin/apply-codegen-workarounds.py` after each invocation, and report conflicts
+without forcing them. The patched reporting feasibility probe passes 2/2 tests.
+The three-wave scope, D2 deadline, one-time production logging obligation and
+verification gates remain unchanged. This exception was authorized directly by the
+developer; it is not an agent-inferred waiver. See `reports/CR-02-w1-gate.md`.

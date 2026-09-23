@@ -7,7 +7,7 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02) | in-progress | 2026-09-23 | W1: authorized post-codegen workaround captured; reporting probe 2/2 passes; wave approval pending |
 | ChangeExec(CR-02).1 | done | 2026-09-22 | Approved plan/all RDs resolved; HEAD 24ba011d4f0a49c727a9b6c9cd28941f536891b4 drift is request/planning records only; approved source baseline unchanged |
 | ChangeExec(CR-02).2 | in-progress | 2026-09-22 | W1 started per approved sequence; W2/W3 not started |
-| ChangeExec(CR-02).W1 | in-progress | 2026-09-23 | Verdict visibility workaround captured; probe 2/2 passes; remaining startup/integration and wave review pending |
+| ChangeExec(CR-02).W1 | in-progress | 2026-09-23 | Technical gate satisfied; startup/sampling inspection complete and patched probe 2/2; wave approval pending; CR-02-w1-gate.md |
 | ChangeExec(CR-02).W1.Requirements | done | 2026-09-22 | _07 supplies derived LLR-1–21; allocation and RF-1–RF-4 disposition in w1-requirements-planning-07.md; legacy document synchronization tracked for final sweep |
 | ChangeExec(CR-02).W1.SysModeling | done | 2026-09-22 | Developer approved architecture and audited sub-workflow boundary; continuing to RxFirewall contracts |
 | ChangeExec(CR-02).W1.SysModeling.1 | done | 2026-09-22 | Retained existing package/file layout and local aadl-lib |
@@ -68,11 +68,12 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W1.CodeGen-R2.2 | done | 2026-09-23 | Exit 0, report Success, no warnings/errors; future-time spec emitted |
 | ChangeExec(CR-02).W1.CodeGen-R2.3 | done | 2026-09-23 | 12 editable files unchanged by hashes; compiler 4.2.4 rebuilt specification and bounds |
 | ChangeExec(CR-02).W1.CodeGen-R2.4 | n/a | 2026-09-23 | Regeneration; existing build helper retained |
-| ChangeExec(CR-02).W1.CodeGen-R2.boundary | pending | 2026-09-23 | Generated artifact review ready; reporting prerequisite remains blocked |
+| ChangeExec(CR-02).W1.CodeGen-R2.boundary | pending | 2026-09-23 | Output review complete; patched reporting path passes; present with W1 review |
 | ChangeExec(CR-02).W1.R2U2Reporting-R2 | done | 2026-09-23 | Developer workaround 4bc9a9a exposes D2 false verdict; isolated probe 2/2 passes; production reporter remains W2 |
 | ChangeExec(CR-02).W1.SetupBuildScript | done | 2026-09-22 | Microkit/Rust helper created; usage parses, lists five components and two cores; application tests not run |
-| ChangeExec(CR-02).W1.R2U2Reporting | blocked | 2026-09-22 | Probe: raw verdict test passes, generated reporting test fails; false D2 verdict overwritten by same-step true; reports/CR-02-w1-r2u2-reporting.md |
-| ChangeExec(CR-02).W1.AP1 | pending | 2026-09-23 | Reporting feasibility passes with authorized workaround; remaining W1 evidence/review required before W2 |
+| ChangeExec(CR-02).W1.R2U2Reporting | done | 2026-09-23 | Original unpatched failure superseded by authorized workaround and R2 probe 2/2; historical report retained |
+| ChangeExec(CR-02).W1.StartupSampling | done | 2026-09-23 | Checked enum/defaults, retained C inputs, wiring, non-consuming peek and pre/compute/post order; runtime implementation and schedule evidence remain W2/W3 |
+| ChangeExec(CR-02).W1.AP1 | pending | 2026-09-23 | All technical W1 criteria satisfied; awaiting developer wave approval; W2 not started |
 | ChangeExec(CR-02).W2 | not-started | 2026-09-22 | Awaiting W1 gate |
 | ChangeExec(CR-02).W3 | not-started | 2026-09-22 | Awaiting W2 gate |
 | ChangeExec(CR-02).3 | not-started | 2026-09-22 | Back-propagation review follows waves; requirements developer-owned |
