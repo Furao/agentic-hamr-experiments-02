@@ -80,8 +80,8 @@ before W2. Startup control values and frozen-snapshot consistency also require t
 planned runtime integration checks. Specification compilation alone does not prove
 verdict delivery or log timing.
 
-CodeGen's artifact-generation exit criteria are met; its audited boundary awaits
-developer approval. The separately planned setup-build-script task remains pending
+CodeGen's artifact-generation exit criteria are met; the developer approved its
+audited boundary on 2026-09-22. The separately planned setup-build-script task follows
 (this is regeneration, so CodeGen.4's first-generation-only condition does not apply).
 W1 is not complete. No application tests, Verus verification, target build or R2U2
 runtime trace tests are claimed by this report.

@@ -1,0 +1,9 @@
+[package]
+name = "cr02-r2u2-monitor-probe"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+r2u2_core = "=4.2.4"
+log = "=0.4.28"

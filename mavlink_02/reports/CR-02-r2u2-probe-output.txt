@@ -1,0 +1,87 @@
+   Compiling cr02-r2u2-monitor-probe v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/tests/r2u2_monitor_probe)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.12s
+     Running unittests src/lib.rs (target/debug/deps/cr02_r2u2_monitor_probe-d68c45a5d7cb4d95)
+
+running 2 tests
+trigger=0 dispatch=0 runtime_time=1 spec=0 verdict_time=1 truth=true
+trigger=0 dispatch=2 runtime_time=3 spec=0 verdict_time=2 truth=false
+trigger=0 dispatch=2 runtime_time=3 spec=0 verdict_time=5 truth=true
+trigger=0 dispatch=3 runtime_time=4 spec=0 verdict_time=6 truth=true
+trigger=0 dispatch=4 runtime_time=5 spec=0 verdict_time=7 truth=true
+trigger=0 dispatch=5 runtime_time=6 spec=0 verdict_time=8 truth=true
+trigger=0 dispatch=6 runtime_time=7 spec=0 verdict_time=9 truth=true
+trigger=0 dispatch=7 runtime_time=8 spec=0 verdict_time=10 truth=true
+trigger=0 dispatch=8 runtime_time=9 spec=0 verdict_time=11 truth=true
+trigger=0 dispatch=9 runtime_time=10 spec=0 verdict_time=12 truth=true
+timely_D1: []; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently true"), (2, "hlr_30_llr_15_16_recovery_deadline is currently true"), (3, "hlr_30_llr_15_16_recovery_deadline is currently true"), (4, "hlr_30_llr_15_16_recovery_deadline is currently true"), (5, "hlr_30_llr_15_16_recovery_deadline is currently true"), (6, "hlr_30_llr_15_16_recovery_deadline is currently true"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+trigger=1 dispatch=0 runtime_time=1 spec=0 verdict_time=1 truth=true
+trigger=1 dispatch=0 runtime_time=1 spec=0 verdict_time=2 truth=true
+trigger=1 dispatch=3 runtime_time=4 spec=0 verdict_time=3 truth=false
+trigger=1 dispatch=3 runtime_time=4 spec=0 verdict_time=6 truth=true
+trigger=1 dispatch=4 runtime_time=5 spec=0 verdict_time=7 truth=true
+timely_D2: []; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (2, "hlr_30_llr_15_16_recovery_deadline is currently true"), (3, "hlr_30_llr_15_16_recovery_deadline is currently true"), (4, "hlr_30_llr_15_16_recovery_deadline is currently true"), (5, "hlr_30_llr_15_16_recovery_deadline is currently true"), (6, "hlr_30_llr_15_16_recovery_deadline is currently true"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+trigger=1 dispatch=5 runtime_time=6 spec=0 verdict_time=8 truth=true
+trigger=1 dispatch=6 runtime_time=7 spec=0 verdict_time=9 truth=true
+trigger=1 dispatch=7 runtime_time=8 spec=0 verdict_time=10 truth=true
+trigger=1 dispatch=8 runtime_time=9 spec=0 verdict_time=11 truth=true
+trigger=1 dispatch=9 runtime_time=10 spec=0 verdict_time=12 truth=true
+trigger=4 dispatch=0 runtime_time=1 spec=0 verdict_time=1 truth=true
+trigger=4 dispatch=0 runtime_time=1 spec=0 verdict_time=2 truth=true
+trigger=4 dispatch=1 runtime_time=2 spec=0 verdict_time=3 truth=true
+late_D3: []; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (2, "hlr_30_llr_15_16_recovery_deadline is currently true"), (3, "hlr_30_llr_15_16_recovery_deadline is currently true"), (4, "hlr_30_llr_15_16_recovery_deadline is currently true"), (5, "hlr_30_llr_15_16_recovery_deadline is currently true"), (6, "hlr_30_llr_15_16_recovery_deadline is currently true"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+trigger=4 dispatch=2 runtime_time=3 spec=0 verdict_time=4 truth=true
+trigger=4 dispatch=3 runtime_time=4 spec=0 verdict_time=5 truth=true
+trigger=4 dispatch=6 runtime_time=7 spec=0 verdict_time=6 truth=false
+trigger=4 dispatch=6 runtime_time=7 spec=0 verdict_time=9 truth=true
+trigger=4 dispatch=7 runtime_time=8 spec=0 verdict_time=10 truth=true
+trigger=4 dispatch=8 runtime_time=9 spec=0 verdict_time=11 truth=true
+trigger=4 dispatch=9 runtime_time=10 spec=0 verdict_time=12 truth=true
+never_recovery: []; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (2, "hlr_30_llr_15_16_recovery_deadline is currently true"), (3, "hlr_30_llr_15_16_recovery_deadline is currently true"), (4, "hlr_30_llr_15_16_recovery_deadline is currently true"), (5, "hlr_30_llr_15_16_recovery_deadline is currently true"), (6, "hlr_30_llr_15_16_recovery_deadline is currently true"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+delayed_first_assertion: []; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently true"), (2, "hlr_30_llr_15_16_recovery_deadline is currently true"), (3, "hlr_30_llr_15_16_recovery_deadline is currently true"), (4, "hlr_30_llr_15_16_recovery_deadline is currently true"), (5, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (6, "hlr_30_llr_15_16_recovery_deadline is currently true"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+no_assertion: []; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently true"), (2, "hlr_30_llr_15_16_recovery_deadline is currently true"), (3, "hlr_30_llr_15_16_recovery_deadline is currently true"), (4, "hlr_30_llr_15_16_recovery_deadline is currently true"), (5, "hlr_30_llr_15_16_recovery_deadline is currently true"), (6, "hlr_30_llr_15_16_recovery_deadline is currently true"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+already_recovery: []; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently true"), (2, "hlr_30_llr_15_16_recovery_deadline is currently true"), (3, "hlr_30_llr_15_16_recovery_deadline is currently true"), (4, "hlr_30_llr_15_16_recovery_deadline is currently true"), (5, "hlr_30_llr_15_16_recovery_deadline is currently true"), (6, "hlr_30_llr_15_16_recovery_deadline is currently true"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+reboot_timeout_again: []; verdicts [(0, "hlr_30_llr_15_16_recovery_deadline is currently true"), (1, "hlr_30_llr_15_16_recovery_deadline is currently unknown"), (2, "hlr_30_llr_15_16_recovery_deadline is currently true"), (3, "hlr_30_llr_15_16_recovery_deadline is currently true"), (4, "hlr_30_llr_15_16_recovery_deadline is currently true"), (5, "hlr_30_llr_15_16_recovery_deadline is currently true"), (6, "hlr_30_llr_15_16_recovery_deadline is currently true"), (7, "hlr_30_llr_15_16_recovery_deadline is currently true"), (8, "hlr_30_llr_15_16_recovery_deadline is currently true"), (9, "hlr_30_llr_15_16_recovery_deadline is currently true")]
+test diagnostics::raw_runtime_verdicts ... ok
+thread '
+tests::generated_monitor_and_reporting_traces' (132) panicked at src/lib.rs:115:9:
+generated reporting lost required violations: [
+    "late_D3, dispatch 2: errors [], expected [2]",
+    "late_D3, dispatch 3: errors [], expected [2]",
+    "late_D3, dispatch 4: errors [], expected [2]",
+    "late_D3, dispatch 5: errors [], expected [2]",
+    "late_D3, dispatch 6: errors [], expected [2]",
+    "late_D3, dispatch 7: errors [], expected [2]",
+    "late_D3, dispatch 8: errors [], expected [2]",
+    "late_D3, dispatch 9: errors [], expected [2]",
+    "never_recovery, dispatch 2: errors [], expected [2]",
+    "never_recovery, dispatch 3: errors [], expected [2]",
+    "never_recovery, dispatch 4: errors [], expected [2]",
+    "never_recovery, dispatch 5: errors [], expected [2]",
+    "never_recovery, dispatch 6: errors [], expected [2]",
+    "never_recovery, dispatch 7: errors [], expected [2]",
+    "never_recovery, dispatch 8: errors [], expected [2]",
+    "never_recovery, dispatch 9: errors [], expected [2]",
+    "delayed_first_assertion, dispatch 6: errors [], expected [6]",
+    "delayed_first_assertion, dispatch 7: errors [], expected [6]",
+    "delayed_first_assertion, dispatch 8: errors [], expected [6]",
+    "delayed_first_assertion, dispatch 9: errors [], expected [6]",
+    "reboot_timeout_again, dispatch 2: errors [], expected [2]",
+    "reboot_timeout_again, dispatch 3: errors [], expected [2]",
+    "reboot_timeout_again, dispatch 4: errors [], expected [2]",
+    "reboot_timeout_again, dispatch 5: errors [], expected [2]",
+    "reboot_timeout_again, dispatch 6: errors [], expected [2]",
+    "reboot_timeout_again, dispatch 7: errors [], expected [2]",
+    "reboot_timeout_again, dispatch 8: errors [], expected [2]",
+    "reboot_timeout_again, dispatch 9: errors [], expected [2]",
+]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test tests::generated_monitor_and_reporting_traces ... FAILED
+
+failures:
+
+failures:
+    tests::generated_monitor_and_reporting_traces
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`

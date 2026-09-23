@@ -4,10 +4,10 @@ Project: open_platform | Profile: audited | Updated: 2026-09-22
 
 | Step | Status | Updated | Notes |
 |------|--------|---------|-------|
-| ChangeExec(CR-02) | in-progress | 2026-09-22 | Audited W1; updated HAMR CodeGen succeeded; boundary review pending; W1 reporting feasibility remains open |
+| ChangeExec(CR-02) | in-progress | 2026-09-22 | Audited W1; CodeGen approved and build helper ready; generated R2U2 reporter loses D2 false verdict, blocking W1 gate |
 | ChangeExec(CR-02).1 | done | 2026-09-22 | Approved plan/all RDs resolved; HEAD 24ba011d4f0a49c727a9b6c9cd28941f536891b4 drift is request/planning records only; approved source baseline unchanged |
 | ChangeExec(CR-02).2 | in-progress | 2026-09-22 | W1 started per approved sequence; W2/W3 not started |
-| ChangeExec(CR-02).W1 | in-progress | 2026-09-22 | Contracts/integration approved; CodeGen succeeded; build helper and same-dispatch reporter/startup evidence remain required |
+| ChangeExec(CR-02).W1 | blocked | 2026-09-22 | Raw R2U2 detects D2 violation, but generated latest-verdict cache hides it; reproducer/report ready; W2 not authorized to start |
 | ChangeExec(CR-02).W1.Requirements | done | 2026-09-22 | _07 supplies derived LLR-1–21; allocation and RF-1–RF-4 disposition in w1-requirements-planning-07.md; legacy document synchronization tracked for final sweep |
 | ChangeExec(CR-02).W1.SysModeling | done | 2026-09-22 | Developer approved architecture and audited sub-workflow boundary; continuing to RxFirewall contracts |
 | ChangeExec(CR-02).W1.SysModeling.1 | done | 2026-09-22 | Retained existing package/file layout and local aadl-lib |
@@ -39,14 +39,15 @@ Project: open_platform | Profile: audited | Updated: 2026-09-22
 | ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.2 | n/a | 2026-09-22 | No integration failures to diagnose |
 | ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.3 | n/a | 2026-09-22 | No contract revisions required |
 | ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.boundary | done | 2026-09-22 | Developer approved N=0 result and continuation to CodeGen |
-| ChangeExec(CR-02).W1.CodeGen | done | 2026-09-22 | Updated HAMR rerun exit 0, report Success; editable bodies preserved; audited boundary approval pending |
+| ChangeExec(CR-02).W1.CodeGen | done | 2026-09-22 | Developer approved successful generation and recorded limitations |
 | ChangeExec(CR-02).W1.CodeGen.1 | done | 2026-09-22 | Microkit output ../../hamr, workspace ../.., Platform::ZCU102_Impl; frame-period prerequisite raised to 2080 ms |
 | ChangeExec(CR-02).W1.CodeGen.2 | done | 2026-09-22 | Generation and attestation reporting passed after developer HAMR update; earlier frame/marker/parser failures resolved |
 | ChangeExec(CR-02).W1.CodeGen.3 | done | 2026-09-22 | Project output confirmed; custom.mk/schedule/tests preserved; R2U2 spec recompiled with CLI 4.2.4; see reports/CR-02-codegen.md |
 | ChangeExec(CR-02).W1.CodeGen.4 | n/a | 2026-09-22 | Regeneration; setup-build-script remains a separate approved-plan task |
-| ChangeExec(CR-02).W1.CodeGen.boundary | blocked | 2026-09-22 | Awaiting developer acceptance of generation artifacts/limitations; W1 remains incomplete |
-| ChangeExec(CR-02).W1.R2U2Reporting | not-started | 2026-09-22 | Spec compiles; generated routine status logs are insufficient; same-dispatch one-time reporting feasibility and startup checks required before W2 |
-| ChangeExec(CR-02).W1.AP1 | not-started | 2026-09-22 | Model/contracts/generation gates not yet reached |
+| ChangeExec(CR-02).W1.CodeGen.boundary | done | 2026-09-22 | Developer explicitly approved CodeGen; W1 reporting/startup obligations remain |
+| ChangeExec(CR-02).W1.SetupBuildScript | done | 2026-09-22 | Microkit/Rust helper created; usage parses, lists five components and two cores; application tests not run |
+| ChangeExec(CR-02).W1.R2U2Reporting | blocked | 2026-09-22 | Probe: raw verdict test passes, generated reporting test fails; false D2 verdict overwritten by same-step true; reports/CR-02-w1-r2u2-reporting.md |
+| ChangeExec(CR-02).W1.AP1 | blocked | 2026-09-22 | Same-dispatch one-time reporting prerequisite not met; generator must expose raw violations before cache overwrite |
 | ChangeExec(CR-02).W2 | not-started | 2026-09-22 | Awaiting W1 gate |
 | ChangeExec(CR-02).W3 | not-started | 2026-09-22 | Awaiting W2 gate |
 | ChangeExec(CR-02).3 | not-started | 2026-09-22 | Back-propagation review follows waves; requirements developer-owned |
