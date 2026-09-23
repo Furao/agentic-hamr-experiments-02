@@ -71,16 +71,24 @@ impl seL4_MAVLinkFirewall_MAVLinkFirewall {
             *verdict = None;
         }
     }
-    // Cache the newest verdict returned for each specification.
+    // Keep false verdicts visible when a later output replaces the cache entry.
     let output_buffer = r2u2_core::get_output_buffer(&r2u2_monitor.monitor);
     let verdict_cache = &mut r2u2_monitor.verdict_cache;
+    let mut false_verdict_seen = [false; 1];
     for out in output_buffer {
-        verdict_cache[out.spec_num as usize] = Some(out.verdict);
+        let spec_num = out.spec_num as usize;
+        if !out.verdict.truth {
+            false_verdict_seen[spec_num] = true;
+        }
+        verdict_cache[spec_num] = Some(out.verdict);
     }
-    // Report the current status of specifications without alert ports.
+    // Report one status for each specification without an alert port.
     for (spec_num, spec_name) in R2U2_LOGGED_SPECS {
         let status = match r2u2_monitor.verdict_cache[spec_num] {
-            Some(verdict) => if verdict.truth { "true" } else { "false" },
+            Some(verdict) => {
+                let truth = verdict.truth && !false_verdict_seen[spec_num];
+                if truth { "true" } else { "false" }
+            },
             None => "unknown",
         };
         log::info!("{} is currently {}", spec_name, status);
