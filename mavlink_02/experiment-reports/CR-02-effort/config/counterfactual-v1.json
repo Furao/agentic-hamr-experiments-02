@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "config_id": "cr02-delta-counterfactual-v1",
+  "description": "Same category assignments applied only to CR-02 retained changes. library denotes excluded unchanged baseline/input lines solely for v1 schema compatibility.",
+  "categories": {
+    "common_both_paths": "Authored in both counterfactuals; displayed for both paths and excluded from HAMR-saving claims.",
+    "hamr_path_authored": "Authored by the developer/agent on the HAMR path.",
+    "hamr_generated_manual_replacement": "HAMR-generated; forms the modeled manual-equivalent replacement value.",
+    "manual_only_unmodeled": "Effort the manual path would need that we deliberately do not model.",
+    "excluded_library_or_build_output": "Never counted.",
+    "unknown_provenance": "Origin unresolved (no template baseline); counted in neither headline story, displayed honestly."
+  },
+  "assignment_rules": {
+    "note": "Category is derived from provenance first, then artifact_type for developer-authored buckets. overwrittenIfExists:false sets generation_mode only, never provenance.",
+    "by_provenance": {
+      "hamr_generated": "hamr_generated_manual_replacement",
+      "hamr_woven": "hamr_generated_manual_replacement",
+      "hamr_template_retained": "hamr_generated_manual_replacement",
+      "preserved_origin_unknown": "unknown_provenance",
+      "library": "excluded_library_or_build_output",
+      "unknown": "unknown_provenance"
+    },
+    "developer_authored_by_artifact_type": {
+      "sysml_model": "common_both_paths",
+      "requirements_text": "common_both_paths",
+      "gumbo_contract": "hamr_path_authored",
+      "rust_app_code": "hamr_path_authored",
+      "rust_test_code": "hamr_path_authored",
+      "microkit_config": "hamr_path_authored",
+      "build_script": "hamr_path_authored",
+      "_default": "hamr_path_authored"
+    },
+    "fixed_decisions": [
+      "SysMLv2 models are required in both counterfactuals (John, 2026-08-10): model-authoring effort is common_both_paths and never a HAMR code-generation saving.",
+      "GUMBO contracts default to hamr_path_authored with manual-side specification effort left unmodeled (conservative; config knob, see plan section 13.4).",
+      "bin/build.cmd is skill-generated in agentic runs; it stays hamr_path_authored but is called out separately and modeled as a fixed setup activity."
+    ]
+  },
+  "manual_only_unmodeled": [
+    "Manual-path behavioral specification and verification effort in place of GUMBO contracts and Verus proofs",
+    "Manual-path test-harness construction and test authoring for hand-built infrastructure",
+    "Manual acquisition of seL4/Microkit platform expertise (protection domains, channels, static schedules)",
+    "Manual integration debugging of hand-written IPC/shared-memory plumbing",
+    "Manual maintenance of consistency between architecture documentation and code"
+  ],
+  "exclusions": [
+    {
+      "path_pattern": "unchanged lines",
+      "reason": "Inherited/input content is audited but excluded from effort"
+    },
+    {
+      "path_pattern": "hamr/microkit/vmm/",
+      "reason": "Inherited vendor/VMM source; unchanged in CR-02"
+    },
+    {
+      "path_pattern": "**/Cargo.lock",
+      "reason": "Mechanical dependency lock outputs"
+    },
+    {
+      "path_pattern": "reports/",
+      "reason": "Process evidence, not priced as source"
+    },
+    {
+      "path_pattern": "experiment-reports/",
+      "reason": "Assessment and effort meta-work"
+    },
+    {
+      "path_pattern": "patches/",
+      "reason": "Archived workaround; no longer delivered production behavior"
+    }
+  ]
+}

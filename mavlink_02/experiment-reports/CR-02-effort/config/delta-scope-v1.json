@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "change_id": "CR-02",
+  "baseline": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+  "scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31",
+  "requirements_final": "action-requests/CR-02-add-mode-manager/Open_Platform_HLRs_26_09_23_02.md",
+  "requirements_input": "action-requests/CR-02-add-mode-manager/Open_Platform_HLRs_26_09_22_01.md",
+  "concept_source": "action-requests/CR-02-add-mode-manager/add-mode-manager-sketch.md",
+  "concept_quote": "# Add cyber resilience by detecting user attacks and changing behavior\n\n## Goals for updated system functionality\nIncrease the cyber resilience of the system by counting the number of rejected mavlink messages and updating the mode of the system when a specified threshold is reached.",
+  "evidence": [
+    "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md",
+    "reports/CR-02/CR-02-add-mode-manager.md",
+    "reports/workflow-status.md"
+  ],
+  "method": "Whitespace-trimmed, order-aware final-vs-baseline line diff; equal lines moved within a file are excluded. Count added/replacement nonblank noncomment lines once. Deleted lines recorded, unpriced. Newly introduced ModeManager generate-once resources are compared to the historical first-generation scaffold; no pristine generation is claimed."
+}

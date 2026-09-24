@@ -1,0 +1,7836 @@
+{
+  "schema_version": 1,
+  "scope": {
+    "schema_version": 1,
+    "change_id": "CR-02",
+    "baseline": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+    "scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31",
+    "requirements_final": "action-requests/CR-02-add-mode-manager/Open_Platform_HLRs_26_09_23_02.md",
+    "requirements_input": "action-requests/CR-02-add-mode-manager/Open_Platform_HLRs_26_09_22_01.md",
+    "concept_source": "action-requests/CR-02-add-mode-manager/add-mode-manager-sketch.md",
+    "concept_quote": "# Add cyber resilience by detecting user attacks and changing behavior\n\n## Goals for updated system functionality\nIncrease the cyber resilience of the system by counting the number of rejected mavlink messages and updating the mode of the system when a specified threshold is reached.",
+    "evidence": [
+      "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md",
+      "reports/CR-02/CR-02-add-mode-manager.md",
+      "reports/workflow-status.md"
+    ],
+    "method": "Whitespace-trimmed, order-aware final-vs-baseline line diff; equal lines moved within a file are excluded. Count added/replacement nonblank noncomment lines once. Deleted lines recorded, unpriced. Newly introduced ModeManager generate-once resources are compared to the historical first-generation scaffold; no pristine generation is claimed."
+  },
+  "head": "97fed11b0049f0453c39cb66600183545ce56610",
+  "files": [
+    {
+      "path": "action-requests/CR-02-add-mode-manager/Open_Platform_HLRs_26_09_23_02.md",
+      "baseline_reference": "action-requests/CR-02-add-mode-manager/Open_Platform_HLRs_26_09_22_01.md",
+      "baseline_sha256": "6f0f5035ac47c70cec8c4c7d1622bc0877def5e2b5b728b623380692bc92e2fc",
+      "final_sha256": "feaf8facf23e0a22a1ae99ac17a9447810d45f9db43b5da3953080b9ac125646",
+      "baseline_lines": 479,
+      "final_lines": 677,
+      "added_or_replacement_ranges": [
+        [
+          19,
+          19
+        ],
+        [
+          22,
+          22
+        ],
+        [
+          25,
+          25
+        ],
+        [
+          30,
+          30
+        ],
+        [
+          33,
+          33
+        ],
+        [
+          36,
+          36
+        ],
+        [
+          39,
+          39
+        ],
+        [
+          54,
+          54
+        ],
+        [
+          57,
+          57
+        ],
+        [
+          60,
+          60
+        ],
+        [
+          63,
+          64
+        ],
+        [
+          67,
+          68
+        ],
+        [
+          71,
+          71
+        ],
+        [
+          74,
+          74
+        ],
+        [
+          77,
+          77
+        ],
+        [
+          80,
+          80
+        ],
+        [
+          83,
+          83
+        ],
+        [
+          86,
+          86
+        ],
+        [
+          92,
+          92
+        ],
+        [
+          106,
+          106
+        ],
+        [
+          109,
+          109
+        ],
+        [
+          112,
+          112
+        ],
+        [
+          115,
+          116
+        ],
+        [
+          119,
+          120
+        ],
+        [
+          123,
+          123
+        ],
+        [
+          126,
+          126
+        ],
+        [
+          129,
+          129
+        ],
+        [
+          132,
+          132
+        ],
+        [
+          135,
+          135
+        ],
+        [
+          137,
+          137
+        ],
+        [
+          146,
+          147
+        ],
+        [
+          150,
+          151
+        ],
+        [
+          153,
+          154
+        ],
+        [
+          156,
+          158
+        ],
+        [
+          174,
+          174
+        ],
+        [
+          177,
+          177
+        ],
+        [
+          180,
+          180
+        ],
+        [
+          185,
+          185
+        ],
+        [
+          188,
+          188
+        ],
+        [
+          191,
+          191
+        ],
+        [
+          194,
+          194
+        ],
+        [
+          208,
+          208
+        ],
+        [
+          211,
+          211
+        ],
+        [
+          214,
+          214
+        ],
+        [
+          219,
+          220
+        ],
+        [
+          223,
+          224
+        ],
+        [
+          227,
+          227
+        ],
+        [
+          230,
+          230
+        ],
+        [
+          234,
+          234
+        ],
+        [
+          266,
+          267
+        ],
+        [
+          280,
+          281
+        ],
+        [
+          288,
+          289
+        ],
+        [
+          291,
+          293
+        ],
+        [
+          297,
+          297
+        ],
+        [
+          299,
+          300
+        ],
+        [
+          302,
+          303
+        ],
+        [
+          311,
+          312
+        ],
+        [
+          314,
+          316
+        ],
+        [
+          318,
+          319
+        ],
+        [
+          322,
+          323
+        ],
+        [
+          335,
+          335
+        ],
+        [
+          337,
+          337
+        ],
+        [
+          342,
+          346
+        ],
+        [
+          348,
+          351
+        ],
+        [
+          355,
+          356
+        ],
+        [
+          362,
+          365
+        ],
+        [
+          369,
+          373
+        ],
+        [
+          391,
+          393
+        ],
+        [
+          398,
+          401
+        ],
+        [
+          403,
+          403
+        ],
+        [
+          405,
+          406
+        ],
+        [
+          408,
+          409
+        ],
+        [
+          411,
+          411
+        ],
+        [
+          413,
+          418
+        ],
+        [
+          420,
+          420
+        ],
+        [
+          422,
+          426
+        ],
+        [
+          428,
+          428
+        ],
+        [
+          430,
+          435
+        ],
+        [
+          437,
+          437
+        ],
+        [
+          439,
+          445
+        ],
+        [
+          449,
+          449
+        ],
+        [
+          451,
+          451
+        ],
+        [
+          453,
+          458
+        ],
+        [
+          460,
+          461
+        ],
+        [
+          463,
+          463
+        ],
+        [
+          465,
+          471
+        ],
+        [
+          475,
+          479
+        ],
+        [
+          481,
+          481
+        ],
+        [
+          483,
+          488
+        ],
+        [
+          490,
+          490
+        ],
+        [
+          492,
+          497
+        ],
+        [
+          499,
+          499
+        ],
+        [
+          501,
+          677
+        ]
+      ],
+      "removed_ranges": [
+        [
+          6,
+          7
+        ],
+        [
+          9,
+          9
+        ],
+        [
+          11,
+          13
+        ],
+        [
+          15,
+          17
+        ],
+        [
+          19,
+          21
+        ],
+        [
+          23,
+          25
+        ],
+        [
+          27,
+          29
+        ],
+        [
+          31,
+          33
+        ],
+        [
+          35,
+          35
+        ],
+        [
+          37,
+          39
+        ],
+        [
+          41,
+          43
+        ],
+        [
+          45,
+          47
+        ],
+        [
+          49,
+          51
+        ],
+        [
+          53,
+          53
+        ],
+        [
+          55,
+          57
+        ],
+        [
+          59,
+          61
+        ],
+        [
+          63,
+          65
+        ],
+        [
+          67,
+          69
+        ],
+        [
+          71,
+          73
+        ],
+        [
+          75,
+          77
+        ],
+        [
+          79,
+          81
+        ],
+        [
+          83,
+          85
+        ],
+        [
+          87,
+          87
+        ],
+        [
+          89,
+          90
+        ],
+        [
+          92,
+          93
+        ],
+        [
+          95,
+          96
+        ],
+        [
+          98,
+          100
+        ],
+        [
+          115,
+          115
+        ],
+        [
+          118,
+          118
+        ],
+        [
+          121,
+          121
+        ],
+        [
+          126,
+          126
+        ],
+        [
+          129,
+          129
+        ],
+        [
+          132,
+          132
+        ],
+        [
+          135,
+          135
+        ],
+        [
+          150,
+          150
+        ],
+        [
+          153,
+          153
+        ],
+        [
+          156,
+          156
+        ],
+        [
+          159,
+          160
+        ],
+        [
+          163,
+          164
+        ],
+        [
+          167,
+          167
+        ],
+        [
+          170,
+          170
+        ],
+        [
+          173,
+          173
+        ],
+        [
+          176,
+          176
+        ],
+        [
+          179,
+          179
+        ],
+        [
+          182,
+          182
+        ],
+        [
+          188,
+          190
+        ],
+        [
+          204,
+          204
+        ],
+        [
+          207,
+          207
+        ],
+        [
+          210,
+          210
+        ],
+        [
+          213,
+          214
+        ],
+        [
+          217,
+          218
+        ],
+        [
+          221,
+          221
+        ],
+        [
+          224,
+          224
+        ],
+        [
+          227,
+          227
+        ],
+        [
+          230,
+          230
+        ],
+        [
+          233,
+          233
+        ],
+        [
+          235,
+          237
+        ],
+        [
+          246,
+          247
+        ],
+        [
+          250,
+          250
+        ],
+        [
+          252,
+          253
+        ],
+        [
+          255,
+          256
+        ],
+        [
+          272,
+          272
+        ],
+        [
+          275,
+          275
+        ],
+        [
+          278,
+          278
+        ],
+        [
+          283,
+          283
+        ],
+        [
+          286,
+          286
+        ],
+        [
+          289,
+          289
+        ],
+        [
+          292,
+          292
+        ],
+        [
+          306,
+          306
+        ],
+        [
+          309,
+          309
+        ],
+        [
+          312,
+          312
+        ],
+        [
+          317,
+          318
+        ],
+        [
+          321,
+          322
+        ],
+        [
+          325,
+          325
+        ],
+        [
+          328,
+          328
+        ],
+        [
+          332,
+          334
+        ],
+        [
+          364,
+          365
+        ],
+        [
+          367,
+          368
+        ],
+        [
+          372,
+          372
+        ],
+        [
+          378,
+          378
+        ],
+        [
+          391,
+          391
+        ],
+        [
+          393,
+          394
+        ],
+        [
+          398,
+          398
+        ],
+        [
+          402,
+          402
+        ],
+        [
+          404,
+          404
+        ],
+        [
+          417,
+          418
+        ],
+        [
+          420,
+          421
+        ],
+        [
+          423,
+          424
+        ],
+        [
+          427,
+          427
+        ],
+        [
+          439,
+          439
+        ],
+        [
+          441,
+          441
+        ],
+        [
+          446,
+          448
+        ],
+        [
+          454,
+          454
+        ],
+        [
+          472,
+          473
+        ],
+        [
+          478,
+          479
+        ]
+      ],
+      "added_sloc": 314,
+      "removed_sloc": 162,
+      "ownership_evidence": [],
+      "inventory_role": "",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "bin/compile-r2u2.py",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "fc0ba7824054043ba6ba0805a9dbf960930044f4ffce82de7138dc80df7ab49d",
+      "baseline_lines": 0,
+      "final_lines": 30,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          30
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 24,
+      "removed_sloc": 0,
+      "ownership_evidence": [],
+      "inventory_role": "",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/Makefile",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "774a95c06b6840265f9724663656e750fc73b56c88cb05466a77ca2947ca5833",
+      "final_sha256": "3907b0357ae6c763bda1fff5e864270ad80b94b92ac72f3e49e8db248151177f",
+      "baseline_lines": 83,
+      "final_lines": 83,
+      "added_or_replacement_ranges": [
+        [
+          25,
+          25
+        ]
+      ],
+      "removed_ranges": [
+        [
+          25,
+          25
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/bin/build.cmd",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "a0e15dab03a340d5f72c5ee1e6f9f8c66a3bd0c926110d219392fe8267417e39",
+      "baseline_lines": 0,
+      "final_lines": 592,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          592
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 523,
+      "removed_sloc": 0,
+      "ownership_evidence": [],
+      "inventory_role": "",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/pacer/src/pacer.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "a293dc3a7e04dbba58e756d1aed65fa41050d1699ee3e493e8c7a47fa4413104",
+      "final_sha256": "d53d967589361fe2aa902306ca1977891a7dcc4f0489767543b32988a3ddaa84",
+      "baseline_lines": 32,
+      "final_lines": 36,
+      "added_or_replacement_ranges": [
+        [
+          6,
+          11
+        ],
+        [
+          17,
+          19
+        ]
+      ],
+      "removed_ranges": [
+        [
+          6,
+          10
+        ]
+      ],
+      "added_sloc": 9,
+      "removed_sloc": 5,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/seL4_ArduPilot_ArduPilot/include/seL4_ArduPilot_ArduPilot.h",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "f4f8d512d098ad31f1c8c7c91d45cfe3a6ac1e1593aa76368707f16d41a8034d",
+      "final_sha256": "2601d77311dd079bc5b9ad83de7379bc822fc209780e26967771acda017c7bb1",
+      "baseline_lines": 39,
+      "final_lines": 54,
+      "added_or_replacement_ranges": [
+        [
+          3,
+          9
+        ],
+        [
+          11,
+          19
+        ]
+      ],
+      "removed_ranges": [
+        [
+          4,
+          4
+        ]
+      ],
+      "added_sloc": 11,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "7eb7a9bce08f74ce4d5fd4a9c3e9ddeefdd135ddaf55e163e19747860059bd5c",
+      "final_sha256": "b58e95fdb19e72ccf074aa7bcddab8f3f49466743e7cf7943c8f869fb2ab398e",
+      "baseline_lines": 196,
+      "final_lines": 196,
+      "added_or_replacement_ranges": [
+        [
+          30,
+          30
+        ]
+      ],
+      "removed_ranges": [
+        [
+          30,
+          30
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot_MON.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e7f43a9dce3d92b6944cdc3b3cfcd6124655949099e6e197c58a15d0f945764c",
+      "final_sha256": "0a80dc1d42e7d003717f012a47deecdbcf586d04bd29d095fd05c68221dca32c",
+      "baseline_lines": 23,
+      "final_lines": 23,
+      "added_or_replacement_ranges": [
+        [
+          5,
+          5
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "removed_ranges": [
+        [
+          5,
+          5
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "added_sloc": 2,
+      "removed_sloc": 2,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.h",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "784d5d25cc3f673c749d8066c1187aeaa739f4c26651d9fd3cd4735f38192c41",
+      "final_sha256": "a2aba970f5fbeb6b43b43b1ee7787e15b28097dc437f4b7c765173c53a32a3e7",
+      "baseline_lines": 27,
+      "final_lines": 42,
+      "added_or_replacement_ranges": [
+        [
+          3,
+          9
+        ],
+        [
+          11,
+          19
+        ]
+      ],
+      "removed_ranges": [
+        [
+          4,
+          4
+        ]
+      ],
+      "added_sloc": 11,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "1296688980a72fd6c913613bc4a31c53afeaa50190869142c441ac7a7bfc5597",
+      "final_sha256": "50624b20737f443bfac073d419a3d9b32f2b2be2728d536d1b2198f7c8b0a7ec",
+      "baseline_lines": 128,
+      "final_lines": 128,
+      "added_or_replacement_ranges": [
+        [
+          22,
+          22
+        ]
+      ],
+      "removed_ranges": [
+        [
+          22,
+          22
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "13dadeeef93f19c1d96612499af209fbe7cd08d86cf77a97c1d3f329e8d5035b",
+      "final_sha256": "e7f43a9dce3d92b6944cdc3b3cfcd6124655949099e6e197c58a15d0f945764c",
+      "baseline_lines": 23,
+      "final_lines": 23,
+      "added_or_replacement_ranges": [
+        [
+          5,
+          5
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "removed_ranges": [
+        [
+          5,
+          5
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "added_sloc": 2,
+      "removed_sloc": 2,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/seL4_MAVLinkFirewall_MAVLinkFirewall/include/seL4_MAVLinkFirewall_MAVLinkFirewall.h",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "f2d0f89c99d4aad9cfaa855dd9c091461d295da7be436b9f383876956af8d858",
+      "final_sha256": "4212c9da2670cb568698f997ebdb932c4d96679bf76565d73650b16b19716ff7",
+      "baseline_lines": 27,
+      "final_lines": 54,
+      "added_or_replacement_ranges": [
+        [
+          3,
+          9
+        ],
+        [
+          11,
+          19
+        ],
+        [
+          27,
+          28
+        ],
+        [
+          32,
+          32
+        ],
+        [
+          36,
+          36
+        ],
+        [
+          40,
+          40
+        ],
+        [
+          44,
+          46
+        ],
+        [
+          48,
+          48
+        ],
+        [
+          50,
+          50
+        ],
+        [
+          52,
+          52
+        ],
+        [
+          54,
+          54
+        ]
+      ],
+      "removed_ranges": [
+        [
+          4,
+          4
+        ]
+      ],
+      "added_sloc": 23,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/seL4_MAVLinkFirewall_MAVLinkFirewall/src/seL4_MAVLinkFirewall_MAVLinkFirewall.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "4435de6392ea9c394e250c982236f8247858e5516acb5b3892ee3de79612556c",
+      "final_sha256": "8235a094e1562ad5274641512403e2860cc3283b6f78db65b1c62237c1a296e7",
+      "baseline_lines": 128,
+      "final_lines": 202,
+      "added_or_replacement_ranges": [
+        [
+          9,
+          10
+        ],
+        [
+          19,
+          19
+        ],
+        [
+          25,
+          46
+        ],
+        [
+          59,
+          63
+        ],
+        [
+          79,
+          83
+        ],
+        [
+          95,
+          99
+        ],
+        [
+          115,
+          129
+        ],
+        [
+          134,
+          137
+        ],
+        [
+          146,
+          149
+        ],
+        [
+          154,
+          157
+        ],
+        [
+          166,
+          169
+        ],
+        [
+          171,
+          172
+        ],
+        [
+          180,
+          181
+        ]
+      ],
+      "removed_ranges": [
+        [
+          22,
+          22
+        ]
+      ],
+      "added_sloc": 59,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/seL4_MAVLinkFirewall_MAVLinkFirewall/src/seL4_MAVLinkFirewall_MAVLinkFirewall_MON.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "0a80dc1d42e7d003717f012a47deecdbcf586d04bd29d095fd05c68221dca32c",
+      "final_sha256": "fa1af7bd12a7d7435298d51b8ab817d9cfe7effd7483f6c58be2f409555beabe",
+      "baseline_lines": 23,
+      "final_lines": 23,
+      "added_or_replacement_ranges": [
+        [
+          5,
+          5
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "removed_ranges": [
+        [
+          5,
+          5
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "added_sloc": 2,
+      "removed_sloc": 2,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/seL4_ModeManager_ModeManager/include/seL4_ModeManager_ModeManager.h",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "81bd2bd42e174d81b971593c0508f08bebbdd5adda7941df7ac91abd4d79cebc",
+      "baseline_lines": 0,
+      "final_lines": 29,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          29
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 19,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/components/seL4_ModeManager_ModeManager/src/seL4_ModeManager_ModeManager.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "8f24c29638d7a79f7730e4ec3bfe25b6a0852d8ff6b09710fdbdc8ab9c2c3797",
+      "baseline_lines": 0,
+      "final_lines": 59,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          59
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 43,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/components/seL4_ModeManager_ModeManager/src/seL4_ModeManager_ModeManager_MON.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "2fdb13c567dc48124ecaae398d5f39e1e0a7a8a16e628d1aa403d7ed909aca23",
+      "baseline_lines": 0,
+      "final_lines": 23,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          23
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 14,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/components/seL4_ModeManager_ModeManager/src/seL4_ModeManager_ModeManager_user.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "a627ffc5f7bdf5df1abfa1c90d0dfe8ac6f48d2f6146804d1194d3d6e76d6aec",
+      "baseline_lines": 0,
+      "final_lines": 19,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          19
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 13,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/components/seL4_RxFirewall_RxFirewall/include/seL4_RxFirewall_RxFirewall.h",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "cf0996020df9994c9fff0191ffc942a911f02e54160803d7913011a024d2087b",
+      "final_sha256": "76f771a675ff951667314bc2a76cb11085f2b3b8092a899a31ea79900bd47490",
+      "baseline_lines": 31,
+      "final_lines": 47,
+      "added_or_replacement_ranges": [
+        [
+          3,
+          9
+        ],
+        [
+          11,
+          19
+        ],
+        [
+          27,
+          27
+        ]
+      ],
+      "removed_ranges": [
+        [
+          4,
+          4
+        ]
+      ],
+      "added_sloc": 12,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/seL4_RxFirewall_RxFirewall/src/seL4_RxFirewall_RxFirewall.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "4bc361302334851d5980ddc05359fdd42a3fa6bdfee32927cbe0fd0fb64b8860",
+      "final_sha256": "45b62e92efdc327ab39719d462438afb0fe03e3b60928b38f158d1d5ba84de23",
+      "baseline_lines": 164,
+      "final_lines": 181,
+      "added_or_replacement_ranges": [
+        [
+          9,
+          10
+        ],
+        [
+          28,
+          41
+        ],
+        [
+          144,
+          145
+        ]
+      ],
+      "removed_ranges": [
+        [
+          26,
+          26
+        ]
+      ],
+      "added_sloc": 15,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/seL4_RxFirewall_RxFirewall/src/seL4_RxFirewall_RxFirewall_MON.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "2fdb13c567dc48124ecaae398d5f39e1e0a7a8a16e628d1aa403d7ed909aca23",
+      "final_sha256": "f90a37819ad73a44a911691d6e9eef27ab75465420e9f441873ede27a2b25581",
+      "baseline_lines": 23,
+      "final_lines": 23,
+      "added_or_replacement_ranges": [
+        [
+          5,
+          5
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "removed_ranges": [
+        [
+          5,
+          5
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "added_sloc": 2,
+      "removed_sloc": 2,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/seL4_TxFirewall_TxFirewall/include/seL4_TxFirewall_TxFirewall.h",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "ce23577a711a0c433f2bbfb77dad949216453441e85e04008ff8edc9dac5fe12",
+      "final_sha256": "cc29f28ac575de69597882433749154a564de0c1f4325ae098aac018e1b49697",
+      "baseline_lines": 27,
+      "final_lines": 42,
+      "added_or_replacement_ranges": [
+        [
+          3,
+          9
+        ],
+        [
+          11,
+          19
+        ]
+      ],
+      "removed_ranges": [
+        [
+          4,
+          4
+        ]
+      ],
+      "added_sloc": 11,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/seL4_TxFirewall_TxFirewall/src/seL4_TxFirewall_TxFirewall.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "f1198c94fe20c1326be987f7dad63641b6c8bf1e221a4cfabd0a3069d2e20155",
+      "final_sha256": "be5d25d90da0cb82ecc45a972aaf4d916a654c058501e4f161f78b75891db7c7",
+      "baseline_lines": 128,
+      "final_lines": 128,
+      "added_or_replacement_ranges": [
+        [
+          22,
+          22
+        ]
+      ],
+      "removed_ranges": [
+        [
+          22,
+          22
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/components/seL4_TxFirewall_TxFirewall/src/seL4_TxFirewall_TxFirewall_MON.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "f90a37819ad73a44a911691d6e9eef27ab75465420e9f441873ede27a2b25581",
+      "final_sha256": "13dadeeef93f19c1d96612499af209fbe7cd08d86cf77a97c1d3f329e8d5035b",
+      "baseline_lines": 23,
+      "final_lines": 23,
+      "added_or_replacement_ranges": [
+        [
+          5,
+          5
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "removed_ranges": [
+        [
+          5,
+          5
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "added_sloc": 2,
+      "removed_sloc": 2,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/GumboLib/Cargo.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "0462cafa2720f2e2193311d86faa69f6e5d87ad44109fa542df1abf78f990823",
+      "final_sha256": "45a7dee6e51063e2f866d291261af498960f5abfada72acd0c23eb1540ea5320",
+      "baseline_lines": 23,
+      "final_lines": 23,
+      "added_or_replacement_ranges": [
+        [
+          15,
+          15
+        ],
+        [
+          17,
+          19
+        ]
+      ],
+      "removed_ranges": [
+        [
+          15,
+          15
+        ],
+        [
+          17,
+          19
+        ]
+      ],
+      "added_sloc": 3,
+      "removed_sloc": 3,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/GumboLib/rust-toolchain.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "fa00eb0d8b0a203a20b340e15433c67bbed704f56bba822859953288dbe6b636",
+      "final_sha256": "e88ca6549c9d1e4aca09e6ddf839dc0d343ef901f279483f21055341e4384ad2",
+      "baseline_lines": 14,
+      "final_lines": 14,
+      "added_or_replacement_ranges": [
+        [
+          4,
+          7
+        ],
+        [
+          13,
+          13
+        ]
+      ],
+      "removed_ranges": [
+        [
+          4,
+          7
+        ],
+        [
+          13,
+          13
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/GumboLib/src/lib.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "c5b3ea346aea73bda195ab76102db30dbfc48523e9cf178ebcffed8796f521cc",
+      "final_sha256": "5e31a0ed5a049c800a333f5f287a01793348cb2505aaec163b5a2aecce06c2e7",
+      "baseline_lines": 685,
+      "final_lines": 699,
+      "added_or_replacement_ranges": [
+        [
+          154,
+          154
+        ],
+        [
+          328,
+          329
+        ],
+        [
+          332,
+          332
+        ],
+        [
+          335,
+          336
+        ],
+        [
+          339,
+          339
+        ],
+        [
+          341,
+          341
+        ],
+        [
+          347,
+          349
+        ],
+        [
+          487,
+          487
+        ],
+        [
+          661,
+          662
+        ],
+        [
+          665,
+          665
+        ],
+        [
+          668,
+          669
+        ],
+        [
+          672,
+          672
+        ],
+        [
+          674,
+          674
+        ],
+        [
+          680,
+          682
+        ]
+      ],
+      "removed_ranges": [
+        [
+          154,
+          154
+        ],
+        [
+          332,
+          332
+        ],
+        [
+          334,
+          334
+        ],
+        [
+          342,
+          342
+        ],
+        [
+          480,
+          480
+        ],
+        [
+          658,
+          658
+        ],
+        [
+          660,
+          660
+        ],
+        [
+          668,
+          668
+        ]
+      ],
+      "added_sloc": 20,
+      "removed_sloc": 8,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/data/Cargo.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "cdf8a265e071161e02978e78ba0be6edb721e1c5c5ca9829121fc2b05b06ed89",
+      "final_sha256": "3fb6dc9d5d433b1a5f4c0dc1f95272657f3ad4f0e3a1441b98acf335a63a7893",
+      "baseline_lines": 21,
+      "final_lines": 21,
+      "added_or_replacement_ranges": [
+        [
+          13,
+          13
+        ],
+        [
+          15,
+          17
+        ]
+      ],
+      "removed_ranges": [
+        [
+          13,
+          13
+        ],
+        [
+          15,
+          17
+        ]
+      ],
+      "added_sloc": 3,
+      "removed_sloc": 3,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/data/rust-toolchain.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "fa00eb0d8b0a203a20b340e15433c67bbed704f56bba822859953288dbe6b636",
+      "final_sha256": "e88ca6549c9d1e4aca09e6ddf839dc0d343ef901f279483f21055341e4384ad2",
+      "baseline_lines": 14,
+      "final_lines": 14,
+      "added_or_replacement_ranges": [
+        [
+          4,
+          7
+        ],
+        [
+          13,
+          13
+        ]
+      ],
+      "removed_ranges": [
+        [
+          4,
+          7
+        ],
+        [
+          13,
+          13
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/data/src/lib.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "5940c9a46921ad6b1d54f3c782790283b8aadae92e8c37237ef88dbd6ec90e7b",
+      "final_sha256": "6331c9107250cce17468914ce0c3e9c6cd57e3cbec47fccd4dbf8d2444ab0cbd",
+      "baseline_lines": 23,
+      "final_lines": 29,
+      "added_or_replacement_ranges": [
+        [
+          15,
+          20
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 2,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/data/src/open_platform_Data_Model/MAVLinkUDPMessage_Impl.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "9050d510365ca2dc653202ebf6366cbf3c81e5f1fa240e8ecff297e32878018f",
+      "final_sha256": "f18ae30c249f4b3f5d9411bcc8c6f1524e5d316c11ffa6d3a7cf6164a97563c9",
+      "baseline_lines": 24,
+      "final_lines": 24,
+      "added_or_replacement_ranges": [
+        [
+          14,
+          14
+        ]
+      ],
+      "removed_ranges": [
+        [
+          14,
+          14
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/data/src/open_platform_Data_Model/OperatingMode.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "d9e627df4ad035c60a8d38f389de1d652269255e2d3dc10151f45ed77475806a",
+      "baseline_lines": 0,
+      "final_lines": 23,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          23
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 16,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/data/src/open_platform_Data_Model/SizedEthernetMessage_Impl.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "5bd6b3e172769ba0fd79b6a291ce40ca641beb2bb3acb7b4c517eeab232936da",
+      "final_sha256": "460a93a79c0fb452df15cc4d19c1f16da5273973cee739e5e240ea2e95a29e8c",
+      "baseline_lines": 23,
+      "final_lines": 23,
+      "added_or_replacement_ranges": [
+        [
+          13,
+          13
+        ]
+      ],
+      "removed_ranges": [
+        [
+          13,
+          13
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/data/src/open_platform_Data_Model/mod.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "2c22abef7bcf9982fad8b1fd009e048bf21ae0fb51b062dbc4f69bb59d2ab755",
+      "final_sha256": "08ad1aed64132b9a2e0b2430923798c92ae7d9ee84418bb0a46a1301b2b411f4",
+      "baseline_lines": 24,
+      "final_lines": 25,
+      "added_or_replacement_ranges": [
+        [
+          3,
+          3
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 1,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/firewall_core/Cargo.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "cba56d99652e477e8532010c261c6a5d491c1809fe6ac670dc5451d477d46b38",
+      "final_sha256": "4dcc4b8a5420fbd50d66057857712e23416bc50340cb7994dc0ffa3c48631166",
+      "baseline_lines": 12,
+      "final_lines": 12,
+      "added_or_replacement_ranges": [
+        [
+          7,
+          9
+        ]
+      ],
+      "removed_ranges": [
+        [
+          7,
+          9
+        ]
+      ],
+      "added_sloc": 3,
+      "removed_sloc": 3,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/firewall_core/Makefile",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "1473c4dfcaf6e47a5a0d968ef79e1a82e1251ff62577ffaab7267ad6e59d4f8d",
+      "final_sha256": "961dc53af51f7b8af40fdf6702b8bac9f5c5c658858da5f8a62706270f3654e2",
+      "baseline_lines": 30,
+      "final_lines": 32,
+      "added_or_replacement_ranges": [
+        [
+          8,
+          9
+        ],
+        [
+          14,
+          14
+        ],
+        [
+          18,
+          18
+        ],
+        [
+          29,
+          29
+        ]
+      ],
+      "removed_ranges": [
+        [
+          12,
+          12
+        ],
+        [
+          16,
+          16
+        ],
+        [
+          27,
+          27
+        ]
+      ],
+      "added_sloc": 4,
+      "removed_sloc": 3,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer build/schedule",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/firewall_core/rust-toolchain.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "b97c249cf408edb3648afd7a01060ec6a462c244ab3285b9347d3ab4dcd6431a",
+      "final_sha256": "e88ca6549c9d1e4aca09e6ddf839dc0d343ef901f279483f21055341e4384ad2",
+      "baseline_lines": 5,
+      "final_lines": 14,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          10
+        ],
+        [
+          13,
+          13
+        ]
+      ],
+      "removed_ranges": [
+        [
+          1,
+          1
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/firewall_core/src/lib.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "fb2cb7617b71111651d50a5af141b89d4dd671c5905aa31add1264bb6e9abf96",
+      "final_sha256": "5e7c565b85b931c480ee668b9f8e640bd121cb40877affe961285ca8d5703eaf",
+      "baseline_lines": 477,
+      "final_lines": 497,
+      "added_or_replacement_ranges": [
+        [
+          209,
+          228
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 19,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer shared core",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/firewall_core/src/net.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "759639744af1d17465a5479a9587a47caf0f36d504727975e9c82b5e7a0545be",
+      "final_sha256": "b3e284bb9e585564f5e1443a0d92dbc11c03e69356e8ef8ce7f7cc783748fea2",
+      "baseline_lines": 1011,
+      "final_lines": 1011,
+      "added_or_replacement_ranges": [
+        [
+          12,
+          13
+        ]
+      ],
+      "removed_ranges": [
+        [
+          12,
+          13
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer shared core",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/mavlink_core/Cargo.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "af97759c34da90fa18f11d2508b524f14991358155afe59ebe64f26ee0eeb8ba",
+      "final_sha256": "e8427f1ac73cd6361db67317ba2cec0058fd5fe61edec58d0380a9eeb443e1b4",
+      "baseline_lines": 15,
+      "final_lines": 15,
+      "added_or_replacement_ranges": [
+        [
+          10,
+          12
+        ]
+      ],
+      "removed_ranges": [
+        [
+          10,
+          12
+        ]
+      ],
+      "added_sloc": 3,
+      "removed_sloc": 3,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/mavlink_core/rust-toolchain.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "e88ca6549c9d1e4aca09e6ddf839dc0d343ef901f279483f21055341e4384ad2",
+      "baseline_lines": 0,
+      "final_lines": 14,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          14
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 3,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/Cargo.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "73f32c18fd385ee6265f47e7de1b86d9470b16a8f560063bcc5ee5a70a29476f",
+      "final_sha256": "372ea15208e1b01a4b9c5e790799b41613a100d194be57929ca380eafe2c8373",
+      "baseline_lines": 56,
+      "final_lines": 56,
+      "added_or_replacement_ranges": [
+        [
+          27,
+          27
+        ],
+        [
+          29,
+          31
+        ]
+      ],
+      "removed_ranges": [
+        [
+          27,
+          27
+        ],
+        [
+          29,
+          31
+        ]
+      ],
+      "added_sloc": 3,
+      "removed_sloc": 3,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/Makefile",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "92889e209ed5a106c5b9dc31636c900b710c1edd2754f4b7cea4a95daf56f54f",
+      "final_sha256": "482e07ad12d1500951021f2f9b96b274ba05d30f299e3f27be86fca783b3a914",
+      "baseline_lines": 67,
+      "final_lines": 70,
+      "added_or_replacement_ranges": [
+        [
+          17,
+          19
+        ],
+        [
+          23,
+          23
+        ],
+        [
+          26,
+          26
+        ],
+        [
+          35,
+          35
+        ],
+        [
+          38,
+          38
+        ]
+      ],
+      "removed_ranges": [
+        [
+          20,
+          20
+        ],
+        [
+          23,
+          23
+        ],
+        [
+          32,
+          32
+        ],
+        [
+          35,
+          35
+        ]
+      ],
+      "added_sloc": 5,
+      "removed_sloc": 4,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer build/schedule",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/rust-toolchain.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "fa00eb0d8b0a203a20b340e15433c67bbed704f56bba822859953288dbe6b636",
+      "final_sha256": "e88ca6549c9d1e4aca09e6ddf839dc0d343ef901f279483f21055341e4384ad2",
+      "baseline_lines": 14,
+      "final_lines": 14,
+      "added_or_replacement_ranges": [
+        [
+          4,
+          7
+        ],
+        [
+          13,
+          13
+        ]
+      ],
+      "removed_ranges": [
+        [
+          4,
+          7
+        ],
+        [
+          13,
+          13
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/bridge/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "a55c8f55690cf16aff987258b3d419cd87c8e968512017a990f102f11e9a34fd",
+      "final_sha256": "96cf85228726f1bb7d6c08353ac7f72f75ea0f7eb8e16392df155cd4ea209abf",
+      "baseline_lines": 268,
+      "final_lines": 268,
+      "added_or_replacement_ranges": [
+        [
+          99,
+          99
+        ],
+        [
+          107,
+          114
+        ],
+        [
+          117,
+          117
+        ],
+        [
+          123,
+          130
+        ],
+        [
+          133,
+          133
+        ],
+        [
+          139,
+          146
+        ],
+        [
+          149,
+          149
+        ],
+        [
+          155,
+          162
+        ],
+        [
+          165,
+          165
+        ],
+        [
+          172,
+          180
+        ],
+        [
+          186,
+          194
+        ],
+        [
+          200,
+          208
+        ],
+        [
+          214,
+          222
+        ]
+      ],
+      "removed_ranges": [
+        [
+          99,
+          99
+        ],
+        [
+          107,
+          114
+        ],
+        [
+          117,
+          117
+        ],
+        [
+          123,
+          130
+        ],
+        [
+          133,
+          133
+        ],
+        [
+          139,
+          146
+        ],
+        [
+          149,
+          149
+        ],
+        [
+          155,
+          162
+        ],
+        [
+          165,
+          165
+        ],
+        [
+          172,
+          180
+        ],
+        [
+          186,
+          194
+        ],
+        [
+          200,
+          208
+        ],
+        [
+          214,
+          222
+        ]
+      ],
+      "added_sloc": 73,
+      "removed_sloc": 73,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/component/mod.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "5148fdf231b38398aa3a39cfd57841e42dbbfc5954f49d0973bf01d4494b8369",
+      "final_sha256": "ce8c478efa4f8e95f534babd245b08ec67726f7cef2a80817de429c092420561",
+      "baseline_lines": 3,
+      "final_lines": 5,
+      "added_or_replacement_ranges": [
+        [
+          4,
+          5
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 0,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/component/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "0e92bfb6f7cf60872a7fcab6272feb7e5741433be43f7674217260ee1b9493a2",
+      "final_sha256": "396c535e48d3cef494ea9d9ad0e976b7c6e38dc11cd1a8fdb62c3e37c69bbc7f",
+      "baseline_lines": 137,
+      "final_lines": 138,
+      "added_or_replacement_ranges": [
+        [
+          25,
+          25
+        ],
+        [
+          108,
+          110
+        ],
+        [
+          114,
+          115
+        ]
+      ],
+      "removed_ranges": [
+        [
+          107,
+          109
+        ],
+        [
+          113,
+          114
+        ]
+      ],
+      "added_sloc": 4,
+      "removed_sloc": 4,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer application / woven contract",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/component/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app/tx_bounds.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "1a43d833ca9254afe9bdb2dcc5da5cdea5b0c7a10e1f8cccf10b4f277b684c1c",
+      "baseline_lines": 0,
+      "final_lines": 42,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          42
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 36,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer implementation/tests",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/lib.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "5f42cf35a12cac09073a3a0101a1bf6b6baf7f3276fcb822c62f25ef5a9507e5",
+      "final_sha256": "cb775250bafe6db24fb6badc44bbc774c0a3e8afc49e6efee64014aebd6f6c21",
+      "baseline_lines": 77,
+      "final_lines": 83,
+      "added_or_replacement_ranges": [
+        [
+          14,
+          19
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 2,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/test/util/generators.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "3e2eaf7964cb8886729b9533fef89a7e0e26b55fc7bf82eab89a33a3bf44f1e6",
+      "final_sha256": "7ad1918307aa44b1f2619ff254a4dfde88c5b04aa075cf3a4d66ea69fadfb724",
+      "baseline_lines": 135,
+      "final_lines": 150,
+      "added_or_replacement_ranges": [
+        [
+          32,
+          46
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 13,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/test/util/test_apis.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "43b078e83dc81ab8d39cca459fcb537d2262470c3c0fffba94d83c7912666b49",
+      "final_sha256": "8e330e779792e718c0e5e2fdd5d84c78d67d994446fde28648aa2a74751a5dc8",
+      "baseline_lines": 84,
+      "final_lines": 84,
+      "added_or_replacement_ranges": [
+        [
+          13,
+          13
+        ]
+      ],
+      "removed_ranges": [
+        [
+          13,
+          13
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/.cargo/config.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "ace9f28268cb4aa0df6cf09c122dbfb08edeaf7e43cb7d937cf252e583381d43",
+      "baseline_lines": 0,
+      "final_lines": 28,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          28
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 10,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/Cargo.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "5a5e6149e82061466c3ed1ff091b5a33ddf9fd1064fe51adfa97ead236ef4878",
+      "final_sha256": "86256518d899ea790b6299ba44548fdc4b09bb80e4b55bd63312140f7073af26",
+      "baseline_lines": 47,
+      "final_lines": 54,
+      "added_or_replacement_ranges": [
+        [
+          25,
+          25
+        ],
+        [
+          27,
+          29
+        ],
+        [
+          31,
+          37
+        ]
+      ],
+      "removed_ranges": [
+        [
+          25,
+          25
+        ],
+        [
+          27,
+          29
+        ]
+      ],
+      "added_sloc": 4,
+      "removed_sloc": 3,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/Makefile",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "92889e209ed5a106c5b9dc31636c900b710c1edd2754f4b7cea4a95daf56f54f",
+      "final_sha256": "992e969c8116e3d01a5bf17e5b3eda927379950419f86cb8a136575bf724cfec",
+      "baseline_lines": 67,
+      "final_lines": 86,
+      "added_or_replacement_ranges": [
+        [
+          7,
+          22
+        ],
+        [
+          33,
+          35
+        ],
+        [
+          38,
+          39
+        ],
+        [
+          41,
+          42
+        ],
+        [
+          44,
+          44
+        ],
+        [
+          47,
+          47
+        ],
+        [
+          50,
+          51
+        ],
+        [
+          53,
+          54
+        ],
+        [
+          63,
+          63
+        ],
+        [
+          66,
+          66
+        ],
+        [
+          76,
+          76
+        ]
+      ],
+      "removed_ranges": [
+        [
+          19,
+          20
+        ],
+        [
+          22,
+          23
+        ],
+        [
+          25,
+          25
+        ],
+        [
+          28,
+          28
+        ],
+        [
+          31,
+          32
+        ],
+        [
+          34,
+          35
+        ],
+        [
+          44,
+          44
+        ],
+        [
+          47,
+          47
+        ],
+        [
+          57,
+          57
+        ]
+      ],
+      "added_sloc": 25,
+      "removed_sloc": 13,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer build/schedule",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/rust-toolchain.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "fa00eb0d8b0a203a20b340e15433c67bbed704f56bba822859953288dbe6b636",
+      "final_sha256": "e88ca6549c9d1e4aca09e6ddf839dc0d343ef901f279483f21055341e4384ad2",
+      "baseline_lines": 14,
+      "final_lines": 14,
+      "added_or_replacement_ranges": [
+        [
+          4,
+          7
+        ],
+        [
+          13,
+          13
+        ]
+      ],
+      "removed_ranges": [
+        [
+          4,
+          7
+        ],
+        [
+          13,
+          13
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/bridge/extern_c_api.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "0c857d4db6a0a8addf4628aa10c7dfde35e5c78dbe68a8d5eea462140e0d6ca7",
+      "final_sha256": "2647e0f9ce4f5f1624c7a89aed67e5980ab7cd2c4f7fbd7a45e073bb89465f1e",
+      "baseline_lines": 223,
+      "final_lines": 528,
+      "added_or_replacement_ranges": [
+        [
+          14,
+          14
+        ],
+        [
+          19,
+          19
+        ],
+        [
+          24,
+          42
+        ],
+        [
+          93,
+          99
+        ],
+        [
+          128,
+          241
+        ],
+        [
+          251,
+          251
+        ],
+        [
+          256,
+          256
+        ],
+        [
+          266,
+          266
+        ],
+        [
+          271,
+          271
+        ],
+        [
+          276,
+          285
+        ],
+        [
+          346,
+          354
+        ],
+        [
+          389,
+          528
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 281,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/bridge/seL4_MAVLinkFirewall_MAVLinkFirewall_GUMBOX.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "44c6957994fadde8b1a3c41b3a29088e9257fd5acbe107faee12c93c2c52b276",
+      "final_sha256": "fe3f0294e3e2d78ee5e70c9af12294adc2ebe7044aa3695f0b29a83f6ed6c7a4",
+      "baseline_lines": 413,
+      "final_lines": 818,
+      "added_or_replacement_ranges": [
+        [
+          45,
+          97
+        ],
+        [
+          100,
+          100
+        ],
+        [
+          109,
+          109
+        ],
+        [
+          121,
+          121
+        ],
+        [
+          130,
+          130
+        ],
+        [
+          142,
+          142
+        ],
+        [
+          151,
+          151
+        ],
+        [
+          163,
+          163
+        ],
+        [
+          172,
+          172
+        ],
+        [
+          182,
+          182
+        ],
+        [
+          184,
+          244
+        ],
+        [
+          249,
+          249
+        ],
+        [
+          251,
+          252
+        ],
+        [
+          256,
+          266
+        ],
+        [
+          268,
+          275
+        ],
+        [
+          277,
+          282
+        ],
+        [
+          288,
+          290
+        ],
+        [
+          295,
+          316
+        ],
+        [
+          318,
+          398
+        ],
+        [
+          401,
+          401
+        ],
+        [
+          403,
+          403
+        ],
+        [
+          407,
+          409
+        ],
+        [
+          416,
+          416
+        ],
+        [
+          420,
+          420
+        ],
+        [
+          433,
+          433
+        ],
+        [
+          437,
+          437
+        ],
+        [
+          448,
+          478
+        ],
+        [
+          480,
+          480
+        ],
+        [
+          483,
+          483
+        ],
+        [
+          485,
+          485
+        ],
+        [
+          489,
+          491
+        ],
+        [
+          498,
+          498
+        ],
+        [
+          502,
+          502
+        ],
+        [
+          515,
+          515
+        ],
+        [
+          519,
+          519
+        ],
+        [
+          530,
+          560
+        ],
+        [
+          562,
+          562
+        ],
+        [
+          565,
+          565
+        ],
+        [
+          567,
+          567
+        ],
+        [
+          571,
+          573
+        ],
+        [
+          580,
+          580
+        ],
+        [
+          584,
+          584
+        ],
+        [
+          597,
+          597
+        ],
+        [
+          601,
+          601
+        ],
+        [
+          612,
+          642
+        ],
+        [
+          644,
+          644
+        ],
+        [
+          647,
+          647
+        ],
+        [
+          649,
+          649
+        ],
+        [
+          653,
+          655
+        ],
+        [
+          662,
+          662
+        ],
+        [
+          666,
+          666
+        ],
+        [
+          679,
+          679
+        ],
+        [
+          683,
+          683
+        ],
+        [
+          689,
+          699
+        ],
+        [
+          701,
+          714
+        ],
+        [
+          716,
+          718
+        ],
+        [
+          724,
+          725
+        ],
+        [
+          730,
+          730
+        ],
+        [
+          735,
+          735
+        ],
+        [
+          738,
+          739
+        ],
+        [
+          744,
+          744
+        ],
+        [
+          748,
+          749
+        ],
+        [
+          751,
+          774
+        ],
+        [
+          776,
+          776
+        ],
+        [
+          781,
+          782
+        ],
+        [
+          787,
+          787
+        ],
+        [
+          792,
+          792
+        ],
+        [
+          795,
+          796
+        ],
+        [
+          801,
+          801
+        ],
+        [
+          805,
+          806
+        ],
+        [
+          815,
+          815
+        ]
+      ],
+      "removed_ranges": [
+        [
+          47,
+          47
+        ],
+        [
+          56,
+          56
+        ],
+        [
+          68,
+          68
+        ],
+        [
+          77,
+          77
+        ],
+        [
+          89,
+          89
+        ],
+        [
+          98,
+          98
+        ],
+        [
+          110,
+          110
+        ],
+        [
+          119,
+          119
+        ],
+        [
+          140,
+          140
+        ],
+        [
+          146,
+          146
+        ],
+        [
+          151,
+          151
+        ],
+        [
+          155,
+          155
+        ],
+        [
+          160,
+          160
+        ],
+        [
+          167,
+          167
+        ],
+        [
+          171,
+          171
+        ],
+        [
+          184,
+          184
+        ],
+        [
+          188,
+          188
+        ],
+        [
+          193,
+          193
+        ],
+        [
+          200,
+          200
+        ],
+        [
+          204,
+          204
+        ],
+        [
+          209,
+          209
+        ],
+        [
+          216,
+          216
+        ],
+        [
+          220,
+          220
+        ],
+        [
+          233,
+          233
+        ],
+        [
+          237,
+          237
+        ],
+        [
+          242,
+          242
+        ],
+        [
+          249,
+          249
+        ],
+        [
+          253,
+          253
+        ],
+        [
+          258,
+          258
+        ],
+        [
+          265,
+          265
+        ],
+        [
+          269,
+          269
+        ],
+        [
+          282,
+          282
+        ],
+        [
+          286,
+          286
+        ],
+        [
+          291,
+          291
+        ],
+        [
+          298,
+          298
+        ],
+        [
+          302,
+          302
+        ],
+        [
+          307,
+          307
+        ],
+        [
+          314,
+          314
+        ],
+        [
+          318,
+          318
+        ],
+        [
+          331,
+          331
+        ],
+        [
+          335,
+          335
+        ],
+        [
+          340,
+          340
+        ],
+        [
+          366,
+          377
+        ],
+        [
+          379,
+          379
+        ],
+        [
+          410,
+          410
+        ]
+      ],
+      "added_sloc": 265,
+      "removed_sloc": 36,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/bridge/seL4_MAVLinkFirewall_MAVLinkFirewall_api.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "db69ad9b3c9f0982abf9aad0904b446a814a70e3fd5786ada2e67ff1a89790ce",
+      "final_sha256": "17e40a2f464b50854b1109bdfb3ec1d0c5fd6d9904e757e22e506b7978c56de8",
+      "baseline_lines": 280,
+      "final_lines": 514,
+      "added_or_replacement_ranges": [
+        [
+          12,
+          19
+        ],
+        [
+          54,
+          63
+        ],
+        [
+          103,
+          202
+        ],
+        [
+          210,
+          210
+        ],
+        [
+          215,
+          215
+        ],
+        [
+          219,
+          219
+        ],
+        [
+          223,
+          240
+        ],
+        [
+          245,
+          245
+        ],
+        [
+          248,
+          257
+        ],
+        [
+          260,
+          260
+        ],
+        [
+          266,
+          266
+        ],
+        [
+          269,
+          278
+        ],
+        [
+          281,
+          281
+        ],
+        [
+          287,
+          287
+        ],
+        [
+          290,
+          299
+        ],
+        [
+          302,
+          302
+        ],
+        [
+          308,
+          308
+        ],
+        [
+          311,
+          320
+        ],
+        [
+          323,
+          323
+        ],
+        [
+          328,
+          343
+        ],
+        [
+          346,
+          356
+        ],
+        [
+          362,
+          372
+        ],
+        [
+          378,
+          388
+        ],
+        [
+          394,
+          404
+        ],
+        [
+          407,
+          421
+        ],
+        [
+          423,
+          427
+        ],
+        [
+          429,
+          433
+        ],
+        [
+          435,
+          439
+        ],
+        [
+          441,
+          466
+        ],
+        [
+          478,
+          478
+        ],
+        [
+          483,
+          483
+        ],
+        [
+          501,
+          501
+        ],
+        [
+          506,
+          506
+        ]
+      ],
+      "removed_ranges": [
+        [
+          99,
+          99
+        ],
+        [
+          107,
+          107
+        ],
+        [
+          110,
+          117
+        ],
+        [
+          120,
+          120
+        ],
+        [
+          126,
+          126
+        ],
+        [
+          129,
+          136
+        ],
+        [
+          139,
+          139
+        ],
+        [
+          145,
+          145
+        ],
+        [
+          148,
+          155
+        ],
+        [
+          158,
+          158
+        ],
+        [
+          164,
+          164
+        ],
+        [
+          167,
+          174
+        ],
+        [
+          177,
+          177
+        ],
+        [
+          184,
+          184
+        ],
+        [
+          186,
+          192
+        ],
+        [
+          198,
+          199
+        ],
+        [
+          201,
+          206
+        ],
+        [
+          212,
+          214
+        ],
+        [
+          216,
+          220
+        ],
+        [
+          226,
+          229
+        ],
+        [
+          231,
+          234
+        ]
+      ],
+      "added_sloc": 291,
+      "removed_sloc": 69,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/mod.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "703bc9363c81134edf5edd9f7650fc1d03c8b6f23f48764553de80619490a55f",
+      "final_sha256": "9b75609d8a1bb3974618670e7bf553cf16986122d5296fd94bd3f2b08ff13613",
+      "baseline_lines": 3,
+      "final_lines": 7,
+      "added_or_replacement_ranges": [
+        [
+          4,
+          7
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 1,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/r2u2_monitor.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "fcf457dc0b03f49084b387eab70977b992bc812703594cfcb634533d62a4d17b",
+      "baseline_lines": 0,
+      "final_lines": 97,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          97
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 77,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated monitor",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "89659dcf93b58b67b85f7f7f3f4e7f4dd558b3989476cb5c2bf2b7e20a25f474",
+      "final_sha256": "72d280dd67683356aeb5665db4b2f8d123d86a3b6eae0c65fad4a0d85bea6ee0",
+      "baseline_lines": 483,
+      "final_lines": 676,
+      "added_or_replacement_ranges": [
+        [
+          24,
+          24
+        ],
+        [
+          26,
+          26
+        ],
+        [
+          32,
+          33
+        ],
+        [
+          43,
+          43
+        ],
+        [
+          66,
+          69
+        ],
+        [
+          71,
+          81
+        ],
+        [
+          100,
+          108
+        ],
+        [
+          126,
+          127
+        ],
+        [
+          160,
+          160
+        ],
+        [
+          213,
+          215
+        ],
+        [
+          222,
+          224
+        ],
+        [
+          231,
+          235
+        ],
+        [
+          237,
+          250
+        ],
+        [
+          252,
+          253
+        ],
+        [
+          268,
+          269
+        ],
+        [
+          273,
+          356
+        ],
+        [
+          359,
+          360
+        ],
+        [
+          363,
+          375
+        ],
+        [
+          380,
+          392
+        ],
+        [
+          397,
+          409
+        ],
+        [
+          414,
+          426
+        ],
+        [
+          429,
+          433
+        ],
+        [
+          514,
+          566
+        ],
+        [
+          575,
+          597
+        ],
+        [
+          657,
+          657
+        ]
+      ],
+      "removed_ranges": [
+        [
+          24,
+          24
+        ],
+        [
+          26,
+          26
+        ],
+        [
+          41,
+          41
+        ],
+        [
+          64,
+          66
+        ],
+        [
+          68,
+          71
+        ],
+        [
+          90,
+          92
+        ],
+        [
+          110,
+          114
+        ],
+        [
+          147,
+          148
+        ],
+        [
+          201,
+          201
+        ],
+        [
+          208,
+          208
+        ],
+        [
+          216,
+          216
+        ],
+        [
+          235,
+          286
+        ],
+        [
+          291,
+          293
+        ],
+        [
+          298,
+          300
+        ],
+        [
+          305,
+          307
+        ],
+        [
+          312,
+          314
+        ],
+        [
+          464,
+          464
+        ]
+      ],
+      "added_sloc": 234,
+      "removed_sloc": 73,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer application / woven contract",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/spec.c2po",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "78be122c45f7b4a0c6f1028ea9adbf5c80a5f17113a02abc8a1687af94aa7db5",
+      "baseline_lines": 0,
+      "final_lines": 19,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          19
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 12,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated monitor",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/spec.map",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "e63a712417a9b6db16493bb399bc395cab1e7bdbc5708e037527bf04efadf779",
+      "baseline_lines": 0,
+      "final_lines": 5,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          5
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 5,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated monitor",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/lib.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "a69713860f2965fcd6a90f5c64f07d9cd36080b46c944f3da78f16d9cb615e5a",
+      "final_sha256": "9a900ec0b6cf0046ab4e80dfbdc4c04433ab6ce59849e2a29d5b852db4e34b15",
+      "baseline_lines": 77,
+      "final_lines": 86,
+      "added_or_replacement_ranges": [
+        [
+          14,
+          19
+        ],
+        [
+          51,
+          51
+        ],
+        [
+          60,
+          60
+        ],
+        [
+          62,
+          62
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 5,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/logging.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "5928f944181d22bb390b20dc1c94c635fa04be01fe17c7e7774de54838999341",
+      "final_sha256": "eb20719e61b7836b2d36b37b81e8bcdcb666a977d172103c824925080c2b78b4",
+      "baseline_lines": 47,
+      "final_lines": 112,
+      "added_or_replacement_ranges": [
+        [
+          3,
+          5
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          13,
+          16
+        ],
+        [
+          20,
+          20
+        ],
+        [
+          22,
+          24
+        ],
+        [
+          26,
+          36
+        ],
+        [
+          38,
+          44
+        ],
+        [
+          46,
+          70
+        ],
+        [
+          73,
+          73
+        ],
+        [
+          75,
+          76
+        ],
+        [
+          78,
+          83
+        ],
+        [
+          87,
+          110
+        ]
+      ],
+      "removed_ranges": [
+        [
+          3,
+          3
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          14,
+          21
+        ],
+        [
+          23,
+          26
+        ],
+        [
+          30,
+          30
+        ],
+        [
+          35,
+          35
+        ],
+        [
+          39,
+          45
+        ]
+      ],
+      "added_sloc": 89,
+      "removed_sloc": 22,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer implementation",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/test/tests.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "05eb157df2ccaf0358ef3e224c2887c35064655d45bf2627622f3e905fc8ffd6",
+      "final_sha256": "9dd28cf56d0c429dda31dfd3f900e15cc0f844910a028577fba60c64b9fb42a3",
+      "baseline_lines": 172,
+      "final_lines": 388,
+      "added_or_replacement_ranges": [
+        [
+          6,
+          6
+        ],
+        [
+          75,
+          75
+        ],
+        [
+          90,
+          90
+        ],
+        [
+          104,
+          104
+        ],
+        [
+          109,
+          275
+        ],
+        [
+          285,
+          285
+        ],
+        [
+          311,
+          357
+        ],
+        [
+          372,
+          372
+        ],
+        [
+          380,
+          380
+        ],
+        [
+          385,
+          386
+        ]
+      ],
+      "removed_ranges": [
+        [
+          88,
+          88
+        ],
+        [
+          102,
+          102
+        ],
+        [
+          116,
+          116
+        ],
+        [
+          142,
+          143
+        ],
+        [
+          158,
+          158
+        ],
+        [
+          170,
+          170
+        ]
+      ],
+      "added_sloc": 213,
+      "removed_sloc": 7,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer tests",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/test/util/cb_apis.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "007562d8410560ba8ac2db0e97f049ca85b5881ba92d5a0e8b190d65d69eea2d",
+      "final_sha256": "b4e0781302c3a5fedf2a7ae1e375b8bb8a5f87174ff61021abb5640211d3d7f2",
+      "baseline_lines": 145,
+      "final_lines": 260,
+      "added_or_replacement_ranges": [
+        [
+          25,
+          25
+        ],
+        [
+          30,
+          30
+        ],
+        [
+          33,
+          33
+        ],
+        [
+          74,
+          74
+        ],
+        [
+          80,
+          81
+        ],
+        [
+          85,
+          93
+        ],
+        [
+          100,
+          100
+        ],
+        [
+          106,
+          106
+        ],
+        [
+          111,
+          111
+        ],
+        [
+          114,
+          114
+        ],
+        [
+          125,
+          125
+        ],
+        [
+          137,
+          138
+        ],
+        [
+          145,
+          146
+        ],
+        [
+          148,
+          148
+        ],
+        [
+          163,
+          260
+        ]
+      ],
+      "removed_ranges": [
+        [
+          31,
+          31
+        ],
+        [
+          77,
+          77
+        ],
+        [
+          98,
+          98
+        ],
+        [
+          109,
+          109
+        ],
+        [
+          121,
+          121
+        ],
+        [
+          128,
+          129
+        ],
+        [
+          131,
+          131
+        ]
+      ],
+      "added_sloc": 89,
+      "removed_sloc": 8,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/test/util/generators.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "3e2eaf7964cb8886729b9533fef89a7e0e26b55fc7bf82eab89a33a3bf44f1e6",
+      "final_sha256": "7ad1918307aa44b1f2619ff254a4dfde88c5b04aa075cf3a4d66ea69fadfb724",
+      "baseline_lines": 135,
+      "final_lines": 150,
+      "added_or_replacement_ranges": [
+        [
+          32,
+          46
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 13,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/test/util/test_apis.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "bbed90eb78737dfc88cd13483a5c47720a522d004fef13c802773b2423da3975",
+      "final_sha256": "7e2a61c5e4185b1424abd66825f559e252a8e14d92ad21f4237a2985fa5d6824",
+      "baseline_lines": 84,
+      "final_lines": 160,
+      "added_or_replacement_ranges": [
+        [
+          10,
+          10
+        ],
+        [
+          14,
+          24
+        ],
+        [
+          30,
+          41
+        ],
+        [
+          50,
+          50
+        ],
+        [
+          56,
+          56
+        ],
+        [
+          61,
+          89
+        ],
+        [
+          139,
+          160
+        ]
+      ],
+      "removed_ranges": [
+        [
+          13,
+          13
+        ]
+      ],
+      "added_sloc": 63,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/Cargo.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "785f3a930dba3000c910d066939c0c46c238b6a402bdce647329f0fa8e8b2270",
+      "baseline_lines": 0,
+      "final_lines": 48,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          48
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 27,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/Makefile",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "ba12ef922a761d85bb2bb397bb9a5a3d104789585b4b44e123191de44f620183",
+      "baseline_lines": 0,
+      "final_lines": 95,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          95
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 38,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer build/schedule",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/rust-toolchain.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "e88ca6549c9d1e4aca09e6ddf839dc0d343ef901f279483f21055341e4384ad2",
+      "baseline_lines": 0,
+      "final_lines": 14,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          14
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 3,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/bridge/extern_c_api.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "b2c82b5e82e65f418c2fb86dcf7d8d5e1aa9096495a76b7c2c2b85b9fd39ae6e",
+      "baseline_lines": 0,
+      "final_lines": 91,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          91
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 68,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/bridge/mod.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "e973a7ce18ad3be354fcb372cf233a89908cab92647f65fd079dc06926501ed0",
+      "baseline_lines": 0,
+      "final_lines": 5,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          5
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 3,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/bridge/seL4_ModeManager_ModeManager_GUMBOX.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "50ec2545ab5221ba7373fa1e5fa4647922c4e90c103c0baae0a9767b92f1d239",
+      "baseline_lines": 0,
+      "final_lines": 171,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          171
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 90,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/bridge/seL4_ModeManager_ModeManager_api.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "4ae8cad661153972bc6ddd0bb70aedf68cd32f3d1fc3615ba8b77d195eb9eaf5",
+      "baseline_lines": 0,
+      "final_lines": 118,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          118
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 99,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/component/mod.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "0ecc95077228ff871d34cda1fd6e31d04f5c1dd1ca39d360afe293c4362b57a4",
+      "baseline_lines": 0,
+      "final_lines": 4,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          4
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 1,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/component/seL4_ModeManager_ModeManager_app.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "ed5b13c309aed75440a09f81c47d872c04063f5f4ac32637ecda5f3c74ea98c1",
+      "baseline_lines": 0,
+      "final_lines": 108,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          108
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 78,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer application / woven contract",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/lib.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "6e25a01d33fa94b9ce05f4d11bab9f23cd8f0cab1ca44b303beb35db6038ee20",
+      "baseline_lines": 0,
+      "final_lines": 83,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          83
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 63,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/logging.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "49b30b204f1e4dabe9c9d7514d24b78d244b90e78da2a77013844f3ac5653d70",
+      "baseline_lines": 0,
+      "final_lines": 47,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          47
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 32,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/mod.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "c07908cad52f20d928cbc57286845225c61d9e60806251d73dc5e6e44f772a15",
+      "baseline_lines": 0,
+      "final_lines": 5,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          5
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 2,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/tests.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "a8ede29bc7b9e8033320b60e9854bc74697ccbf5e7d8ad843f3e8001621dfd7c",
+      "baseline_lines": 0,
+      "final_lines": 143,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          143
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 121,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer tests",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/util/cb_apis.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "76d7f6126a3fb893f76dc7b243907d9a476f1370e5d84c76c6e4bf96f15a4f11",
+      "baseline_lines": 0,
+      "final_lines": 208,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          208
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 148,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/util/generators.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "7ad1918307aa44b1f2619ff254a4dfde88c5b04aa075cf3a4d66ea69fadfb724",
+      "baseline_lines": 0,
+      "final_lines": 150,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          150
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 121,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/util/mod.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "9bce87f127ed64a9011b5cd294e6c4ae8fa002e05eb71ecdba31a79ca89231f2",
+      "baseline_lines": 0,
+      "final_lines": 7,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          7
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 3,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/util/test_apis.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "2685c75ce3747c425463c6d8e2a82ccd046ae25792dcdad625594a733332c531",
+      "baseline_lines": 0,
+      "final_lines": 85,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          85
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 60,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": "b68c70a2974b36db08f39835c0ae6a0dc300ad31"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/Cargo.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "658dc53da31e1dc3acf7a907616bc29d450eeabb544c93b89a65babfc16e6c25",
+      "final_sha256": "e791bc8d8e0da3cead9d03db66c5d707b428c8c33f9f9f9e50555225dc274cf8",
+      "baseline_lines": 48,
+      "final_lines": 48,
+      "added_or_replacement_ranges": [
+        [
+          24,
+          24
+        ],
+        [
+          26,
+          28
+        ]
+      ],
+      "removed_ranges": [
+        [
+          24,
+          24
+        ],
+        [
+          26,
+          28
+        ]
+      ],
+      "added_sloc": 3,
+      "removed_sloc": 3,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/Makefile",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "92889e209ed5a106c5b9dc31636c900b710c1edd2754f4b7cea4a95daf56f54f",
+      "final_sha256": "482e07ad12d1500951021f2f9b96b274ba05d30f299e3f27be86fca783b3a914",
+      "baseline_lines": 67,
+      "final_lines": 70,
+      "added_or_replacement_ranges": [
+        [
+          17,
+          19
+        ],
+        [
+          23,
+          23
+        ],
+        [
+          26,
+          26
+        ],
+        [
+          35,
+          35
+        ],
+        [
+          38,
+          38
+        ]
+      ],
+      "removed_ranges": [
+        [
+          20,
+          20
+        ],
+        [
+          23,
+          23
+        ],
+        [
+          32,
+          32
+        ],
+        [
+          35,
+          35
+        ]
+      ],
+      "added_sloc": 5,
+      "removed_sloc": 4,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer build/schedule",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/rust-toolchain.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "fa00eb0d8b0a203a20b340e15433c67bbed704f56bba822859953288dbe6b636",
+      "final_sha256": "e88ca6549c9d1e4aca09e6ddf839dc0d343ef901f279483f21055341e4384ad2",
+      "baseline_lines": 14,
+      "final_lines": 14,
+      "added_or_replacement_ranges": [
+        [
+          4,
+          7
+        ],
+        [
+          13,
+          13
+        ]
+      ],
+      "removed_ranges": [
+        [
+          4,
+          7
+        ],
+        [
+          13,
+          13
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/bridge/extern_c_api.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "9c29ef1dbb6b7b938d490a834c42fb448c2667e02af2da78068985a42461a9f6",
+      "final_sha256": "39f6ff8deb98a57dc178b38e4a456dfd0bc8ab723103431af562574371c06a61",
+      "baseline_lines": 299,
+      "final_lines": 321,
+      "added_or_replacement_ranges": [
+        [
+          14,
+          14
+        ],
+        [
+          27,
+          35
+        ],
+        [
+          151,
+          151
+        ],
+        [
+          169,
+          169
+        ],
+        [
+          182,
+          191
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 20,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/bridge/seL4_RxFirewall_RxFirewall_GUMBOX.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "a63779a4ea5d49dd914ef7050dbe1630ce9c598d5c98a6022bf8efa38105a9c7",
+      "final_sha256": "77d79fe23e4281ea25fd19991e6ced5427b3378359311b8ebe03dfd8970da4dc",
+      "baseline_lines": 601,
+      "final_lines": 790,
+      "added_or_replacement_ranges": [
+        [
+          185,
+          263
+        ],
+        [
+          293,
+          363
+        ],
+        [
+          370,
+          370
+        ],
+        [
+          376,
+          376
+        ],
+        [
+          381,
+          383
+        ],
+        [
+          393,
+          393
+        ],
+        [
+          399,
+          399
+        ],
+        [
+          404,
+          406
+        ],
+        [
+          415,
+          415
+        ],
+        [
+          420,
+          420
+        ],
+        [
+          451,
+          451
+        ],
+        [
+          457,
+          457
+        ],
+        [
+          462,
+          464
+        ],
+        [
+          474,
+          474
+        ],
+        [
+          480,
+          480
+        ],
+        [
+          485,
+          487
+        ],
+        [
+          496,
+          496
+        ],
+        [
+          501,
+          501
+        ],
+        [
+          532,
+          532
+        ],
+        [
+          538,
+          538
+        ],
+        [
+          543,
+          545
+        ],
+        [
+          555,
+          555
+        ],
+        [
+          561,
+          561
+        ],
+        [
+          566,
+          568
+        ],
+        [
+          577,
+          577
+        ],
+        [
+          582,
+          582
+        ],
+        [
+          613,
+          613
+        ],
+        [
+          619,
+          619
+        ],
+        [
+          624,
+          626
+        ],
+        [
+          636,
+          636
+        ],
+        [
+          642,
+          642
+        ],
+        [
+          647,
+          649
+        ],
+        [
+          658,
+          658
+        ],
+        [
+          663,
+          663
+        ],
+        [
+          696,
+          696
+        ],
+        [
+          711,
+          711
+        ],
+        [
+          721,
+          740
+        ],
+        [
+          742,
+          742
+        ],
+        [
+          751,
+          751
+        ],
+        [
+          766,
+          766
+        ],
+        [
+          787,
+          787
+        ]
+      ],
+      "removed_ranges": [
+        [
+          214,
+          214
+        ],
+        [
+          230,
+          230
+        ],
+        [
+          249,
+          249
+        ],
+        [
+          258,
+          258
+        ],
+        [
+          263,
+          263
+        ],
+        [
+          303,
+          303
+        ],
+        [
+          322,
+          322
+        ],
+        [
+          331,
+          331
+        ],
+        [
+          336,
+          336
+        ],
+        [
+          376,
+          376
+        ],
+        [
+          395,
+          395
+        ],
+        [
+          404,
+          404
+        ],
+        [
+          409,
+          409
+        ],
+        [
+          449,
+          449
+        ],
+        [
+          468,
+          468
+        ],
+        [
+          477,
+          477
+        ],
+        [
+          482,
+          482
+        ],
+        [
+          538,
+          553
+        ],
+        [
+          555,
+          555
+        ],
+        [
+          598,
+          598
+        ]
+      ],
+      "added_sloc": 137,
+      "removed_sloc": 31,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/bridge/seL4_RxFirewall_RxFirewall_api.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "17e5059d2bab3a9a8292769df31d0e0c99985e38b7ba7b80200acfdb6a33b94c",
+      "final_sha256": "36adca1bdd0ee86654363f089f104196ac2a035ceaab0c998d8b2659ea2d01e0",
+      "baseline_lines": 448,
+      "final_lines": 492,
+      "added_or_replacement_ranges": [
+        [
+          79,
+          88
+        ],
+        [
+          134,
+          134
+        ],
+        [
+          146,
+          146
+        ],
+        [
+          157,
+          169
+        ],
+        [
+          172,
+          172
+        ],
+        [
+          181,
+          193
+        ],
+        [
+          196,
+          196
+        ],
+        [
+          205,
+          217
+        ],
+        [
+          220,
+          220
+        ],
+        [
+          229,
+          241
+        ],
+        [
+          244,
+          244
+        ],
+        [
+          253,
+          265
+        ],
+        [
+          268,
+          268
+        ],
+        [
+          277,
+          289
+        ],
+        [
+          292,
+          292
+        ],
+        [
+          301,
+          313
+        ],
+        [
+          316,
+          316
+        ],
+        [
+          325,
+          337
+        ],
+        [
+          340,
+          340
+        ],
+        [
+          345,
+          363
+        ],
+        [
+          366,
+          379
+        ],
+        [
+          385,
+          398
+        ],
+        [
+          404,
+          417
+        ],
+        [
+          423,
+          436
+        ],
+        [
+          450,
+          450
+        ],
+        [
+          476,
+          476
+        ]
+      ],
+      "removed_ranges": [
+        [
+          135,
+          135
+        ],
+        [
+          146,
+          157
+        ],
+        [
+          160,
+          160
+        ],
+        [
+          169,
+          180
+        ],
+        [
+          183,
+          183
+        ],
+        [
+          192,
+          203
+        ],
+        [
+          206,
+          206
+        ],
+        [
+          215,
+          226
+        ],
+        [
+          229,
+          229
+        ],
+        [
+          238,
+          249
+        ],
+        [
+          252,
+          252
+        ],
+        [
+          261,
+          272
+        ],
+        [
+          275,
+          275
+        ],
+        [
+          284,
+          295
+        ],
+        [
+          298,
+          298
+        ],
+        [
+          307,
+          318
+        ],
+        [
+          321,
+          321
+        ],
+        [
+          328,
+          340
+        ],
+        [
+          346,
+          358
+        ],
+        [
+          364,
+          376
+        ],
+        [
+          382,
+          394
+        ]
+      ],
+      "added_sloc": 200,
+      "removed_sloc": 157,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/component/mod.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "f8d3820addd17cda7f40898eb6da49b30673b265627fc9d5d48c0c5cf126232e",
+      "final_sha256": "2a469d46b7a870cb87ad3c6eca08ecfaebe923daf7b3fc1ab84a39db953ac3b8",
+      "baseline_lines": 3,
+      "final_lines": 5,
+      "added_or_replacement_ranges": [
+        [
+          4,
+          5
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 0,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/component/seL4_RxFirewall_RxFirewall_app.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "fb60cb309e0bbc276d18a14d0406c4d32497f0f2bad96fecd36540284aa2ae5a",
+      "final_sha256": "95ef108177dc08b761256f9454c18dfb1431347a55b9bf0dc4166520d493dfe8",
+      "baseline_lines": 606,
+      "final_lines": 685,
+      "added_or_replacement_ranges": [
+        [
+          13,
+          15
+        ],
+        [
+          55,
+          55
+        ],
+        [
+          57,
+          57
+        ],
+        [
+          59,
+          62
+        ],
+        [
+          64,
+          66
+        ],
+        [
+          69,
+          69
+        ],
+        [
+          109,
+          110
+        ],
+        [
+          117,
+          118
+        ],
+        [
+          139,
+          160
+        ],
+        [
+          183,
+          194
+        ],
+        [
+          196,
+          201
+        ],
+        [
+          203,
+          212
+        ],
+        [
+          214,
+          215
+        ],
+        [
+          217,
+          222
+        ],
+        [
+          224,
+          233
+        ],
+        [
+          235,
+          236
+        ],
+        [
+          238,
+          243
+        ],
+        [
+          245,
+          254
+        ],
+        [
+          256,
+          257
+        ],
+        [
+          259,
+          264
+        ],
+        [
+          266,
+          275
+        ],
+        [
+          277,
+          278
+        ],
+        [
+          281,
+          282
+        ],
+        [
+          285,
+          285
+        ],
+        [
+          288,
+          291
+        ],
+        [
+          299,
+          299
+        ],
+        [
+          302,
+          305
+        ],
+        [
+          307,
+          307
+        ],
+        [
+          313,
+          313
+        ],
+        [
+          316,
+          319
+        ],
+        [
+          321,
+          321
+        ],
+        [
+          327,
+          327
+        ],
+        [
+          330,
+          333
+        ],
+        [
+          335,
+          335
+        ]
+      ],
+      "removed_ranges": [
+        [
+          52,
+          54
+        ],
+        [
+          57,
+          57
+        ],
+        [
+          59,
+          59
+        ],
+        [
+          62,
+          65
+        ],
+        [
+          155,
+          158
+        ],
+        [
+          160,
+          167
+        ],
+        [
+          169,
+          170
+        ],
+        [
+          172,
+          175
+        ],
+        [
+          177,
+          184
+        ],
+        [
+          186,
+          187
+        ],
+        [
+          189,
+          192
+        ],
+        [
+          194,
+          201
+        ],
+        [
+          203,
+          204
+        ],
+        [
+          206,
+          209
+        ],
+        [
+          211,
+          218
+        ],
+        [
+          220,
+          221
+        ],
+        [
+          228,
+          228
+        ],
+        [
+          237,
+          237
+        ],
+        [
+          246,
+          246
+        ],
+        [
+          255,
+          255
+        ]
+      ],
+      "added_sloc": 130,
+      "removed_sloc": 65,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer application / woven contract",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/lib.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "93b2248d376544e28c708cb6137ccef6623a1e3edc943469bb9878a54f9e098f",
+      "final_sha256": "3e3b16059b91094c355b0dcff3e3fd94706e46167e3ff339b649c57f5e510724",
+      "baseline_lines": 77,
+      "final_lines": 83,
+      "added_or_replacement_ranges": [
+        [
+          14,
+          19
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 2,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/test/tests.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "556efad5333b3fb5d593947bbc8178d204e339b3c81b2cb6bf5e2b4f8c10d7e1",
+      "final_sha256": "d378fbc5bc33df6ff4bd2a176daaad836e4f4b482fd15e18a71aff0dde949652",
+      "baseline_lines": 210,
+      "final_lines": 318,
+      "added_or_replacement_ranges": [
+        [
+          11,
+          11
+        ],
+        [
+          33,
+          33
+        ],
+        [
+          40,
+          40
+        ],
+        [
+          48,
+          48
+        ],
+        [
+          56,
+          56
+        ],
+        [
+          63,
+          63
+        ],
+        [
+          85,
+          85
+        ],
+        [
+          89,
+          89
+        ],
+        [
+          100,
+          100
+        ],
+        [
+          103,
+          103
+        ],
+        [
+          114,
+          114
+        ],
+        [
+          128,
+          128
+        ],
+        [
+          136,
+          193
+        ],
+        [
+          204,
+          204
+        ],
+        [
+          237,
+          237
+        ],
+        [
+          240,
+          279
+        ],
+        [
+          315,
+          316
+        ]
+      ],
+      "removed_ranges": [
+        [
+          58,
+          58
+        ],
+        [
+          83,
+          83
+        ],
+        [
+          96,
+          96
+        ],
+        [
+          120,
+          120
+        ],
+        [
+          170,
+          170
+        ],
+        [
+          208,
+          208
+        ]
+      ],
+      "added_sloc": 110,
+      "removed_sloc": 6,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer tests",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/test/util/cb_apis.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e9600d0fcbb21f23a7c1048a574b1eda7f5c16cde6772a9048ce9146e66ca725",
+      "final_sha256": "3b227e5cbe008d45f2d6c1d80de2868c784e82e3576b772a24bd1c80900e40d6",
+      "baseline_lines": 153,
+      "final_lines": 157,
+      "added_or_replacement_ranges": [
+        [
+          76,
+          76
+        ],
+        [
+          82,
+          83
+        ],
+        [
+          93,
+          93
+        ],
+        [
+          109,
+          109
+        ],
+        [
+          120,
+          120
+        ],
+        [
+          132,
+          133
+        ],
+        [
+          140,
+          141
+        ],
+        [
+          143,
+          143
+        ]
+      ],
+      "removed_ranges": [
+        [
+          81,
+          81
+        ],
+        [
+          106,
+          106
+        ],
+        [
+          117,
+          117
+        ],
+        [
+          129,
+          129
+        ],
+        [
+          136,
+          137
+        ],
+        [
+          139,
+          139
+        ]
+      ],
+      "added_sloc": 10,
+      "removed_sloc": 7,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/test/util/generators.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "3e2eaf7964cb8886729b9533fef89a7e0e26b55fc7bf82eab89a33a3bf44f1e6",
+      "final_sha256": "7ad1918307aa44b1f2619ff254a4dfde88c5b04aa075cf3a4d66ea69fadfb724",
+      "baseline_lines": 135,
+      "final_lines": 150,
+      "added_or_replacement_ranges": [
+        [
+          32,
+          46
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 13,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/test/util/test_apis.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "3d09c6cfecc6ad8dac089e9edac1a938555be59c0ef633bab08895c37dc47094",
+      "final_sha256": "b673de3ffcaf4ad75183a14a18018248df1359fb8e1414ccbec801b3f0391837",
+      "baseline_lines": 108,
+      "final_lines": 118,
+      "added_or_replacement_ranges": [
+        [
+          10,
+          10
+        ],
+        [
+          14,
+          14
+        ],
+        [
+          20,
+          20
+        ],
+        [
+          29,
+          29
+        ],
+        [
+          35,
+          35
+        ],
+        [
+          40,
+          45
+        ]
+      ],
+      "removed_ranges": [
+        [
+          13,
+          13
+        ]
+      ],
+      "added_sloc": 9,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/Cargo.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "29a388dcef200ffb3941bc09f92bd58aa1b9c50a9fed3f486742478fc5f6c645",
+      "final_sha256": "29493f2440919c8d7a321cd09f4f6e2559c8159067c50b181518bf4d5047303f",
+      "baseline_lines": 48,
+      "final_lines": 48,
+      "added_or_replacement_ranges": [
+        [
+          24,
+          24
+        ],
+        [
+          26,
+          28
+        ]
+      ],
+      "removed_ranges": [
+        [
+          24,
+          24
+        ],
+        [
+          26,
+          28
+        ]
+      ],
+      "added_sloc": 3,
+      "removed_sloc": 3,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/Makefile",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "92889e209ed5a106c5b9dc31636c900b710c1edd2754f4b7cea4a95daf56f54f",
+      "final_sha256": "482e07ad12d1500951021f2f9b96b274ba05d30f299e3f27be86fca783b3a914",
+      "baseline_lines": 67,
+      "final_lines": 70,
+      "added_or_replacement_ranges": [
+        [
+          17,
+          19
+        ],
+        [
+          23,
+          23
+        ],
+        [
+          26,
+          26
+        ],
+        [
+          35,
+          35
+        ],
+        [
+          38,
+          38
+        ]
+      ],
+      "removed_ranges": [
+        [
+          20,
+          20
+        ],
+        [
+          23,
+          23
+        ],
+        [
+          32,
+          32
+        ],
+        [
+          35,
+          35
+        ]
+      ],
+      "added_sloc": 5,
+      "removed_sloc": 4,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer build/schedule",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/rust-toolchain.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "fa00eb0d8b0a203a20b340e15433c67bbed704f56bba822859953288dbe6b636",
+      "final_sha256": "e88ca6549c9d1e4aca09e6ddf839dc0d343ef901f279483f21055341e4384ad2",
+      "baseline_lines": 14,
+      "final_lines": 14,
+      "added_or_replacement_ranges": [
+        [
+          4,
+          7
+        ],
+        [
+          13,
+          13
+        ]
+      ],
+      "removed_ranges": [
+        [
+          4,
+          7
+        ],
+        [
+          13,
+          13
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Toolchain/dependency configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/bridge/seL4_TxFirewall_TxFirewall_GUMBOX.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "7355d3ceec36ccd22d83973dc7026922d890ba78a937b8048ab79ffe48c8ca61",
+      "final_sha256": "73ad6a2ae3abd99f6e035239da97660bc66f62560e92745702d33af02d6ac9ac",
+      "baseline_lines": 331,
+      "final_lines": 441,
+      "added_or_replacement_ranges": [
+        [
+          15,
+          118
+        ],
+        [
+          431,
+          436
+        ],
+        [
+          438,
+          438
+        ],
+        [
+          440,
+          440
+        ]
+      ],
+      "removed_ranges": [
+        [
+          328,
+          328
+        ],
+        [
+          330,
+          330
+        ]
+      ],
+      "added_sloc": 61,
+      "removed_sloc": 2,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/bridge/seL4_TxFirewall_TxFirewall_api.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "b6d2c7a870aed8accb03a2bbb0bce2e8bf05294c5be619ad4011921f56697184",
+      "final_sha256": "74cfcfcfc4e966690dc2ffc0d9dc45f91d514717bf07457c112f544506758484",
+      "baseline_lines": 268,
+      "final_lines": 280,
+      "added_or_replacement_ranges": [
+        [
+          99,
+          99
+        ],
+        [
+          106,
+          108
+        ],
+        [
+          110,
+          117
+        ],
+        [
+          120,
+          120
+        ],
+        [
+          125,
+          127
+        ],
+        [
+          129,
+          136
+        ],
+        [
+          139,
+          139
+        ],
+        [
+          144,
+          146
+        ],
+        [
+          148,
+          155
+        ],
+        [
+          158,
+          158
+        ],
+        [
+          163,
+          165
+        ],
+        [
+          167,
+          174
+        ],
+        [
+          177,
+          177
+        ],
+        [
+          184,
+          192
+        ],
+        [
+          198,
+          206
+        ],
+        [
+          212,
+          220
+        ],
+        [
+          226,
+          234
+        ]
+      ],
+      "removed_ranges": [
+        [
+          99,
+          99
+        ],
+        [
+          107,
+          114
+        ],
+        [
+          117,
+          117
+        ],
+        [
+          123,
+          130
+        ],
+        [
+          133,
+          133
+        ],
+        [
+          139,
+          146
+        ],
+        [
+          149,
+          149
+        ],
+        [
+          155,
+          162
+        ],
+        [
+          165,
+          165
+        ],
+        [
+          172,
+          180
+        ],
+        [
+          186,
+          194
+        ],
+        [
+          200,
+          208
+        ],
+        [
+          214,
+          222
+        ]
+      ],
+      "added_sloc": 81,
+      "removed_sloc": 73,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/component/mod.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "3b0bb09494c0bf612dda76b90cea9d0103ad9af96b933205a57a46cab81f5b6c",
+      "final_sha256": "0ed2ddb65ed26de84d8400fba33883258eb5aceff682c4fec73a20e73815d465",
+      "baseline_lines": 3,
+      "final_lines": 5,
+      "added_or_replacement_ranges": [
+        [
+          4,
+          5
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 0,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/component/seL4_TxFirewall_TxFirewall_app.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "a753ff2a99f001d55dea0dcf9109241e6a837473bc7fe99ded93e40828d04fa6",
+      "final_sha256": "14bb7c69e8acf273d41cab2e21d466d240cc0cd7529e6903e92ef30820ecdd7d",
+      "baseline_lines": 560,
+      "final_lines": 560,
+      "added_or_replacement_ranges": [
+        [
+          182,
+          185
+        ],
+        [
+          187,
+          190
+        ],
+        [
+          192,
+          193
+        ],
+        [
+          195,
+          195
+        ],
+        [
+          197,
+          200
+        ],
+        [
+          202,
+          205
+        ],
+        [
+          207,
+          208
+        ],
+        [
+          210,
+          210
+        ],
+        [
+          212,
+          215
+        ],
+        [
+          217,
+          220
+        ],
+        [
+          222,
+          223
+        ],
+        [
+          225,
+          225
+        ],
+        [
+          227,
+          230
+        ],
+        [
+          232,
+          235
+        ],
+        [
+          237,
+          238
+        ],
+        [
+          240,
+          240
+        ]
+      ],
+      "removed_ranges": [
+        [
+          182,
+          185
+        ],
+        [
+          187,
+          190
+        ],
+        [
+          192,
+          193
+        ],
+        [
+          195,
+          195
+        ],
+        [
+          197,
+          200
+        ],
+        [
+          202,
+          205
+        ],
+        [
+          207,
+          208
+        ],
+        [
+          210,
+          210
+        ],
+        [
+          212,
+          215
+        ],
+        [
+          217,
+          220
+        ],
+        [
+          222,
+          223
+        ],
+        [
+          225,
+          225
+        ],
+        [
+          227,
+          230
+        ],
+        [
+          232,
+          235
+        ],
+        [
+          237,
+          238
+        ],
+        [
+          240,
+          240
+        ]
+      ],
+      "added_sloc": 44,
+      "removed_sloc": 44,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer application / woven contract",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/lib.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "3caf35fc7ed35fd39dbec098e38e8d4c719d151a1847371193557623fe6ac078",
+      "final_sha256": "3bb9e8cb804ccb8db66b2429e56c63cba94423099762ad6a7347685ffe145b81",
+      "baseline_lines": 77,
+      "final_lines": 83,
+      "added_or_replacement_ranges": [
+        [
+          14,
+          19
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 2,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/test/tests.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "1b37b4b0070b842a421fd89ee4c9f7232153a49c32bc27a862db543a828fab74",
+      "final_sha256": "6185081a96c10203b542827e87a8b85157774cfdfb98f340a05546d75dc872fb",
+      "baseline_lines": 67,
+      "final_lines": 202,
+      "added_or_replacement_ranges": [
+        [
+          68,
+          202
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 124,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer tests",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/test/util/cb_apis.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "97a355a2fab90890369003d0a745ae999d2d132ef9797c5662fbcfe42a0cbab8",
+      "final_sha256": "0a0d865e61c2d4a749ea2d3cfc119021a1a2a9001f8d22fb3da63e058c3ba3f8",
+      "baseline_lines": 132,
+      "final_lines": 145,
+      "added_or_replacement_ranges": [
+        [
+          23,
+          35
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 9,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/test/util/generators.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "3e2eaf7964cb8886729b9533fef89a7e0e26b55fc7bf82eab89a33a3bf44f1e6",
+      "final_sha256": "7ad1918307aa44b1f2619ff254a4dfde88c5b04aa075cf3a4d66ea69fadfb724",
+      "baseline_lines": 135,
+      "final_lines": 150,
+      "added_or_replacement_ranges": [
+        [
+          32,
+          46
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 13,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/test/util/test_apis.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "77b6419ab4dbff3c49f472637fee30c58fb67af273d9fcbe2dbd854aa475083c",
+      "final_sha256": "2393523b5951babee1e1225f5d0e9a43edf2c50438ca12de8211dafe4da7b320",
+      "baseline_lines": 84,
+      "final_lines": 84,
+      "added_or_replacement_ranges": [
+        [
+          13,
+          13
+        ]
+      ],
+      "removed_ranges": [
+        [
+          13,
+          13
+        ]
+      ],
+      "added_sloc": 1,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/custom.mk",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "85772a50baeb088c7e1cd81a919e65074975f66227b897bcf1444682fdca5cd3",
+      "final_sha256": "84744b5d1d721c375c8ab8752c2a74eecf39af0a9d58cdaf71abc69ec49a7619",
+      "baseline_lines": 183,
+      "final_lines": 215,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          1
+        ],
+        [
+          20,
+          20
+        ],
+        [
+          27,
+          27
+        ],
+        [
+          56,
+          72
+        ],
+        [
+          79,
+          79
+        ],
+        [
+          90,
+          90
+        ],
+        [
+          101,
+          101
+        ],
+        [
+          122,
+          123
+        ],
+        [
+          130,
+          135
+        ],
+        [
+          156,
+          156
+        ],
+        [
+          174,
+          174
+        ],
+        [
+          190,
+          195
+        ],
+        [
+          198,
+          202
+        ],
+        [
+          204,
+          215
+        ]
+      ],
+      "removed_ranges": [
+        [
+          1,
+          1
+        ],
+        [
+          20,
+          20
+        ],
+        [
+          27,
+          27
+        ],
+        [
+          62,
+          62
+        ],
+        [
+          73,
+          73
+        ],
+        [
+          84,
+          84
+        ],
+        [
+          105,
+          106
+        ],
+        [
+          133,
+          133
+        ],
+        [
+          151,
+          151
+        ],
+        [
+          167,
+          171
+        ],
+        [
+          174,
+          177
+        ],
+        [
+          179,
+          183
+        ]
+      ],
+      "added_sloc": 44,
+      "removed_sloc": 23,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer build/schedule",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/microkit.dot",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "fcf1b9e3933487d3d390d023a4590fbf53b44b6dfac1b6b505dfaa11573e7c0d",
+      "final_sha256": "0f18f732510448d60056e81c38caa327e66a07ac293d0f51c07a16bf78d925a0",
+      "baseline_lines": 237,
+      "final_lines": 270,
+      "added_or_replacement_ranges": [
+        [
+          7,
+          22
+        ],
+        [
+          33,
+          33
+        ],
+        [
+          126,
+          126
+        ],
+        [
+          131,
+          131
+        ],
+        [
+          147,
+          150
+        ],
+        [
+          191,
+          192
+        ],
+        [
+          202,
+          203
+        ],
+        [
+          216,
+          219
+        ],
+        [
+          260,
+          260
+        ],
+        [
+          265,
+          265
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 27,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/microkit.schedule.xml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "a0f57b34b6263afb5810d15b89a8273b336c3a3a31097ab87b9d5c6d8f8104d3",
+      "final_sha256": "7b35e34cffd708ee62b3947e63033fe085818a3418f514100e067ea7b7bba00c",
+      "baseline_lines": 14,
+      "final_lines": 19,
+      "added_or_replacement_ranges": [
+        [
+          2,
+          5
+        ],
+        [
+          7,
+          8
+        ]
+      ],
+      "removed_ranges": [
+        [
+          2,
+          2
+        ]
+      ],
+      "added_sloc": 2,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Developer build/schedule",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/microkit.system",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "d9461057213ee9d2430d030ffbd5151d895fdd141ae34142f2152fa9953a4e38",
+      "final_sha256": "f7eead843281dc7dfb7f02f8f43baa45c0afeb34dab6352554a5bb2ffa01c265",
+      "baseline_lines": 466,
+      "final_lines": 531,
+      "added_or_replacement_ranges": [
+        [
+          5,
+          7
+        ],
+        [
+          9,
+          14
+        ],
+        [
+          16,
+          19
+        ],
+        [
+          21,
+          24
+        ],
+        [
+          26,
+          36
+        ],
+        [
+          42,
+          42
+        ],
+        [
+          44,
+          46
+        ],
+        [
+          103,
+          103
+        ],
+        [
+          315,
+          319
+        ],
+        [
+          321,
+          321
+        ],
+        [
+          326,
+          326
+        ],
+        [
+          340,
+          340
+        ],
+        [
+          342,
+          344
+        ],
+        [
+          356,
+          356
+        ],
+        [
+          361,
+          361
+        ],
+        [
+          380,
+          385
+        ],
+        [
+          447,
+          449
+        ],
+        [
+          464,
+          464
+        ],
+        [
+          468,
+          469
+        ],
+        [
+          474,
+          474
+        ],
+        [
+          478,
+          479
+        ],
+        [
+          484,
+          484
+        ],
+        [
+          488,
+          489
+        ],
+        [
+          494,
+          494
+        ],
+        [
+          498,
+          499
+        ],
+        [
+          504,
+          504
+        ],
+        [
+          508,
+          519
+        ]
+      ],
+      "removed_ranges": [
+        [
+          409,
+          409
+        ],
+        [
+          413,
+          414
+        ],
+        [
+          419,
+          419
+        ],
+        [
+          423,
+          424
+        ],
+        [
+          429,
+          429
+        ],
+        [
+          433,
+          434
+        ],
+        [
+          439,
+          439
+        ],
+        [
+          443,
+          444
+        ],
+        [
+          449,
+          449
+        ],
+        [
+          453,
+          454
+        ]
+      ],
+      "added_sloc": 65,
+      "removed_sloc": 15,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/system.mk",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "d1bbdb8932c38f495cc405f801abe0ab4f2e346f44190a0644cce7c4abab96a1",
+      "final_sha256": "62cf7ce9a602dd3351460b44365ab7ca7f97041e049b5577bccbee87a578fadc",
+      "baseline_lines": 179,
+      "final_lines": 207,
+      "added_or_replacement_ranges": [
+        [
+          20,
+          20
+        ],
+        [
+          27,
+          27
+        ],
+        [
+          44,
+          47
+        ],
+        [
+          59,
+          73
+        ],
+        [
+          114,
+          114
+        ],
+        [
+          131,
+          137
+        ],
+        [
+          189,
+          189
+        ],
+        [
+          196,
+          196
+        ],
+        [
+          203,
+          203
+        ]
+      ],
+      "removed_ranges": [
+        [
+          20,
+          20
+        ],
+        [
+          27,
+          27
+        ],
+        [
+          95,
+          95
+        ],
+        [
+          112,
+          112
+        ]
+      ],
+      "added_sloc": 21,
+      "removed_sloc": 4,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/types/include/sb_aadl_types.h",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "01dea73c1d0eb1211b028ca809db44ef2354a494960a2bfb9ac5e5afb79d11ef",
+      "final_sha256": "f4f56054c049684a340facc26d1e0fa28808487ed58d064759c0907236ce6f8d",
+      "baseline_lines": 27,
+      "final_lines": 30,
+      "added_or_replacement_ranges": [
+        [
+          7,
+          9
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 2,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/types/include/sb_queue_bool_1.h",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "7f568d2f28ec46348ec9ae77359ff07ab31180c8d9bb4ece22b2b0d6f8e759f0",
+      "baseline_lines": 0,
+      "final_lines": 169,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          169
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 46,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/types/include/sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1.h",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "990fed06177125eefd2111294f75a824c2206ee8646c6bbe6450eafeab5fc40d",
+      "final_sha256": "ac0236faea30d28cdd9ab3b883eeafce6e655c3207d8f64546bfa36aca6ba67f",
+      "baseline_lines": 148,
+      "final_lines": 169,
+      "added_or_replacement_ranges": [
+        [
+          35,
+          35
+        ],
+        [
+          37,
+          37
+        ],
+        [
+          41,
+          42
+        ],
+        [
+          44,
+          50
+        ],
+        [
+          97,
+          102
+        ],
+        [
+          158,
+          165
+        ]
+      ],
+      "removed_ranges": [
+        [
+          35,
+          35
+        ],
+        [
+          37,
+          39
+        ]
+      ],
+      "added_sloc": 14,
+      "removed_sloc": 4,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/types/include/sb_queue_open_platform_Data_Model_OperatingMode_1.h",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "5717398135f5792908b2936599974fd1e0c497b2fc220638c03e5d47d71480b8",
+      "baseline_lines": 0,
+      "final_lines": 169,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          169
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 46,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/types/include/sb_queue_open_platform_Data_Model_RawEthernetMessage_1.h",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "29f24bc901a543a3930a66d26b89ebc50d75c49702d2030c43dff5d5bbc5d08d",
+      "final_sha256": "2ca90fc22bdefa97352f55d868cc6c15e2a6240f202ccee78f851414f4deb020",
+      "baseline_lines": 148,
+      "final_lines": 169,
+      "added_or_replacement_ranges": [
+        [
+          35,
+          35
+        ],
+        [
+          37,
+          37
+        ],
+        [
+          41,
+          42
+        ],
+        [
+          44,
+          50
+        ],
+        [
+          97,
+          102
+        ],
+        [
+          158,
+          165
+        ]
+      ],
+      "removed_ranges": [
+        [
+          35,
+          35
+        ],
+        [
+          37,
+          39
+        ]
+      ],
+      "added_sloc": 14,
+      "removed_sloc": 4,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/types/include/sb_queue_open_platform_Data_Model_SizedEthernetMessage_Impl_1.h",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "0f5600eccdc8c8a1995b866efa38b58dec2367533160a1672c0dc76f863411bf",
+      "final_sha256": "3e4058e84a762187cccd0fcb0749b34af976b238e7cdf6ef187573e6c3caa12a",
+      "baseline_lines": 148,
+      "final_lines": 169,
+      "added_or_replacement_ranges": [
+        [
+          35,
+          35
+        ],
+        [
+          37,
+          37
+        ],
+        [
+          41,
+          42
+        ],
+        [
+          44,
+          50
+        ],
+        [
+          97,
+          102
+        ],
+        [
+          158,
+          165
+        ]
+      ],
+      "removed_ranges": [
+        [
+          35,
+          35
+        ],
+        [
+          37,
+          39
+        ]
+      ],
+      "added_sloc": 14,
+      "removed_sloc": 4,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/types/include/sb_types.h",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "de43faf4f851766a8b4e51312b71107cbab3f1aec02b47b237fa89eb3caea4fc",
+      "final_sha256": "164262254e626f788a35047ec195abe8fb62df7068e75731fc590b41adcd0b0f",
+      "baseline_lines": 8,
+      "final_lines": 10,
+      "added_or_replacement_ranges": [
+        [
+          6,
+          6
+        ],
+        [
+          10,
+          10
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 2,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/types/src/sb_queue_bool_1.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "8bb8a33ced5f4cd8c75c1a54f8ca06f655f80304a89dfea627e08c60508844a2",
+      "baseline_lines": 0,
+      "final_lines": 148,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          148
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 65,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/types/src/sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "d190afd7cbff73b2c3a02747662156ca79b8fed69b870c2b18a9d223cc7d3450",
+      "final_sha256": "8502aeea119abcce877dbc89e50f4c96631456532ca0580de3ac3832b9059b83",
+      "baseline_lines": 117,
+      "final_lines": 148,
+      "added_or_replacement_ranges": [
+        [
+          49,
+          68
+        ],
+        [
+          135,
+          145
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 21,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/types/src/sb_queue_open_platform_Data_Model_OperatingMode_1.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "82d8c2cf6c6be73701009019ab60c3af1d4c4d8214784ac7fe26b67a955c2b33",
+      "baseline_lines": 0,
+      "final_lines": 148,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          148
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 65,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/types/src/sb_queue_open_platform_Data_Model_RawEthernetMessage_1.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "9f5b40147b01ccbab22cbfa88e560bfe2ca3dc1bb49ff6b5389fd9dd5c96360d",
+      "final_sha256": "db8dcb73ffcf82fd7bc46c3caf6eb6961fe1e4898815a00fe2590a571afa8ac6",
+      "baseline_lines": 117,
+      "final_lines": 148,
+      "added_or_replacement_ranges": [
+        [
+          49,
+          68
+        ],
+        [
+          135,
+          145
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 21,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/types/src/sb_queue_open_platform_Data_Model_SizedEthernetMessage_Impl_1.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "f5ea55c9dfcdb6cad5f81ca3a73b334dce5189b1f4b3ee0b85cd7dd50b9545fe",
+      "final_sha256": "fd8ec1a37780fab0c3620397460553650c53cd98a32657ca52b36bf2f4417c56",
+      "baseline_lines": 117,
+      "final_lines": 148,
+      "added_or_replacement_ranges": [
+        [
+          49,
+          68
+        ],
+        [
+          135,
+          145
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 21,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "hamr/microkit/util/src/util.c",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "7319c3e7f9420c9122c80aeaa859e97dddbe39c0c1af6327babc4c931a2568b7",
+      "final_sha256": "22ce063ee5392b0c2c9fb180c5cb7a89dc8bd8dcb653ec31ef25b4e8997d0dcb",
+      "baseline_lines": 45,
+      "final_lines": 49,
+      "added_or_replacement_ranges": [
+        [
+          7,
+          11
+        ]
+      ],
+      "removed_ranges": [
+        [
+          7,
+          7
+        ]
+      ],
+      "added_sloc": 3,
+      "removed_sloc": 1,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Generated scaffold/configuration",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "sysmlv2/open_platform/GumboLib.sysml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "de7e118d6c24e77921fd61b6736dd81da64773422c1f681586c9d7fc511ebe2f",
+      "final_sha256": "eed84f72063d5317411b7d9e343d02cd16a8d6f420edd0a0c00e2a226e4b1e8e",
+      "baseline_lines": 200,
+      "final_lines": 208,
+      "added_or_replacement_ranges": [
+        [
+          73,
+          73
+        ],
+        [
+          177,
+          179
+        ],
+        [
+          182,
+          182
+        ],
+        [
+          187,
+          187
+        ],
+        [
+          189,
+          191
+        ],
+        [
+          194,
+          196
+        ]
+      ],
+      "removed_ranges": [
+        [
+          73,
+          73
+        ],
+        [
+          180,
+          180
+        ],
+        [
+          182,
+          182
+        ],
+        [
+          188,
+          188
+        ]
+      ],
+      "added_sloc": 8,
+      "removed_sloc": 4,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Model",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "sysmlv2/open_platform/Platform.sysml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "0d919101454fb05efa43708959e3dee9d74ab75b8d00ce717a99073838d50b83",
+      "final_sha256": "c4d758cae444f851e284fb06472cc646aedd3620dd32aab20cfe2a66fff43622",
+      "baseline_lines": 25,
+      "final_lines": 27,
+      "added_or_replacement_ranges": [
+        [
+          8,
+          10
+        ],
+        [
+          12,
+          12
+        ]
+      ],
+      "removed_ranges": [
+        [
+          8,
+          8
+        ],
+        [
+          10,
+          10
+        ]
+      ],
+      "added_sloc": 2,
+      "removed_sloc": 2,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Model",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "sysmlv2/open_platform/open_platform.sysml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "1f1d24f55de3e300a315852eb0ee6d87041996eb208940b4d281ece2d34bbaac",
+      "final_sha256": "b9ae7c65afe6b652490cf904c453e8713d20820eedaf2bf2a4aea2b017ad9196",
+      "baseline_lines": 270,
+      "final_lines": 305,
+      "added_or_replacement_ranges": [
+        [
+          44,
+          44
+        ],
+        [
+          59,
+          60
+        ],
+        [
+          91,
+          92
+        ],
+        [
+          104,
+          107
+        ],
+        [
+          126,
+          142
+        ],
+        [
+          230,
+          230
+        ],
+        [
+          236,
+          243
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 29,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Model",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "sysmlv2/open_platform/open_platform_Data_Model.sysml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "75bae76eddb748b22e36aabdac886f2778199faf1dc9642bfcec75175b046106",
+      "final_sha256": "b02e3188dc978f23606ea8a1cb0151397dbeb46769e2ed6734b2ea9de73e93d2",
+      "baseline_lines": 28,
+      "final_lines": 35,
+      "added_or_replacement_ranges": [
+        [
+          3,
+          9
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 4,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Model",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "sysmlv2/open_platform/open_platform_Properties.sysml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "93a16bd79c2b1661a2aaffa0d8b1214063003c7b56e2e77b14c6c7ea1ab44f83",
+      "final_sha256": "18ac22b8d3acf63061a82bc0ae5035edb353d0fe95f9ef113e9e0ec6e79b690c",
+      "baseline_lines": 11,
+      "final_lines": 12,
+      "added_or_replacement_ranges": [
+        [
+          11,
+          11
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 1,
+      "removed_sloc": 0,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Model",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "sysmlv2/open_platform/open_platform_Software.sysml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "9a6fc229d85ea79a9010c4f4014f89220c7045822eb54ba20d5ee6d74424de75",
+      "final_sha256": "db75d9385a12ddabf77350be877cbf9c78958441f64de57c6b2eab3dcbcfe62c",
+      "baseline_lines": 304,
+      "final_lines": 475,
+      "added_or_replacement_ranges": [
+        [
+          23,
+          23
+        ],
+        [
+          62,
+          72
+        ],
+        [
+          74,
+          87
+        ],
+        [
+          89,
+          90
+        ],
+        [
+          93,
+          94
+        ],
+        [
+          99,
+          99
+        ],
+        [
+          106,
+          107
+        ],
+        [
+          110,
+          111
+        ],
+        [
+          116,
+          116
+        ],
+        [
+          123,
+          124
+        ],
+        [
+          127,
+          128
+        ],
+        [
+          133,
+          133
+        ],
+        [
+          140,
+          141
+        ],
+        [
+          144,
+          145
+        ],
+        [
+          150,
+          150
+        ],
+        [
+          159,
+          161
+        ],
+        [
+          178,
+          180
+        ],
+        [
+          182,
+          182
+        ],
+        [
+          185,
+          186
+        ],
+        [
+          194,
+          208
+        ],
+        [
+          210,
+          210
+        ],
+        [
+          212,
+          212
+        ],
+        [
+          214,
+          214
+        ],
+        [
+          216,
+          216
+        ],
+        [
+          219,
+          233
+        ],
+        [
+          235,
+          256
+        ],
+        [
+          258,
+          258
+        ],
+        [
+          262,
+          262
+        ],
+        [
+          264,
+          268
+        ],
+        [
+          270,
+          272
+        ],
+        [
+          274,
+          274
+        ],
+        [
+          278,
+          278
+        ],
+        [
+          280,
+          284
+        ],
+        [
+          286,
+          288
+        ],
+        [
+          290,
+          290
+        ],
+        [
+          294,
+          294
+        ],
+        [
+          296,
+          300
+        ],
+        [
+          302,
+          304
+        ],
+        [
+          306,
+          306
+        ],
+        [
+          310,
+          310
+        ],
+        [
+          312,
+          368
+        ],
+        [
+          389,
+          399
+        ]
+      ],
+      "removed_ranges": [
+        [
+          63,
+          63
+        ],
+        [
+          66,
+          66
+        ],
+        [
+          71,
+          71
+        ],
+        [
+          78,
+          78
+        ],
+        [
+          81,
+          81
+        ],
+        [
+          86,
+          86
+        ],
+        [
+          93,
+          93
+        ],
+        [
+          96,
+          96
+        ],
+        [
+          101,
+          101
+        ],
+        [
+          108,
+          108
+        ],
+        [
+          111,
+          111
+        ],
+        [
+          116,
+          116
+        ],
+        [
+          152,
+          152
+        ],
+        [
+          154,
+          154
+        ],
+        [
+          156,
+          156
+        ],
+        [
+          158,
+          158
+        ],
+        [
+          162,
+          163
+        ],
+        [
+          165,
+          165
+        ],
+        [
+          169,
+          170
+        ],
+        [
+          172,
+          172
+        ],
+        [
+          174,
+          175
+        ],
+        [
+          177,
+          177
+        ],
+        [
+          181,
+          182
+        ],
+        [
+          184,
+          184
+        ],
+        [
+          186,
+          187
+        ],
+        [
+          189,
+          189
+        ],
+        [
+          193,
+          194
+        ],
+        [
+          196,
+          196
+        ],
+        [
+          198,
+          199
+        ],
+        [
+          201,
+          201
+        ],
+        [
+          205,
+          206
+        ],
+        [
+          208,
+          208
+        ]
+      ],
+      "added_sloc": 176,
+      "removed_sloc": 40,
+      "ownership_evidence": [
+        "reports/CR-02/final-validation/CR-02-final-artifact-inventory.md"
+      ],
+      "inventory_role": "Model",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "tests/r2u2_monitor_probe/.cargo/config.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "ace9f28268cb4aa0df6cf09c122dbfb08edeaf7e43cb7d937cf252e583381d43",
+      "baseline_lines": 0,
+      "final_lines": 28,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          28
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 10,
+      "removed_sloc": 0,
+      "ownership_evidence": [],
+      "inventory_role": "",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "tests/r2u2_monitor_probe/Cargo.toml",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "0e826804e44c1f56c0c11c5d41d7cdec678e6ae40b024cc97e80965388efe644",
+      "baseline_lines": 0,
+      "final_lines": 9,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          9
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 8,
+      "removed_sloc": 0,
+      "ownership_evidence": [],
+      "inventory_role": "",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "tests/r2u2_monitor_probe/build.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "044a3368807b1966d62c8939b5a70916fa144402c0b1d3c800ee7e8c3a4db4c8",
+      "baseline_lines": 0,
+      "final_lines": 11,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          11
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 11,
+      "removed_sloc": 0,
+      "ownership_evidence": [],
+      "inventory_role": "",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "tests/r2u2_monitor_probe/run.py",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "fcf69569f7b13ba8d13c0789129492e4b252a9185462e8458519960b5e8c255e",
+      "baseline_lines": 0,
+      "final_lines": 26,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          26
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 24,
+      "removed_sloc": 0,
+      "ownership_evidence": [],
+      "inventory_role": "",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "tests/r2u2_monitor_probe/src/lib.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "18f7f3bddeec552394f2180cfb14405a0032ab4ba260287ea81d6aa7a96fe868",
+      "baseline_lines": 0,
+      "final_lines": 145,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          145
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 134,
+      "removed_sloc": 0,
+      "ownership_evidence": [],
+      "inventory_role": "",
+      "historical_scaffold_ref": null
+    },
+    {
+      "path": "tests/r2u2_monitor_probe/src/reporter.rs",
+      "baseline_reference": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+      "baseline_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "c11b27aaf97d401a371a2b5ddc60f3a10bba57a3dc69702c99a9a6406c7732f7",
+      "baseline_lines": 0,
+      "final_lines": 39,
+      "added_or_replacement_ranges": [
+        [
+          1,
+          39
+        ]
+      ],
+      "removed_ranges": [],
+      "added_sloc": 32,
+      "removed_sloc": 0,
+      "ownership_evidence": [],
+      "inventory_role": "",
+      "historical_scaffold_ref": null
+    }
+  ],
+  "excluded": [
+    {
+      "path": "hamr/microkit/attestation/sysml_appraise.json",
+      "reason": "Vendor or generated reporting evidence"
+    },
+    {
+      "path": "hamr/microkit/attestation/sysml_attestation_report.json",
+      "reason": "Vendor or generated reporting evidence"
+    },
+    {
+      "path": "hamr/microkit/attestation/sysml_provision.json",
+      "reason": "Vendor or generated reporting evidence"
+    },
+    {
+      "path": "hamr/microkit/build/Makefile",
+      "reason": "Build/cache output"
+    },
+    {
+      "path": "hamr/microkit/crates/firewall_core/Cargo.lock",
+      "reason": "Mechanical lock/binary/housekeeping/archive"
+    },
+    {
+      "path": "hamr/microkit/crates/mavlink_core/Cargo.lock",
+      "reason": "Mechanical lock/binary/housekeeping/archive"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/Cargo.lock",
+      "reason": "Mechanical lock/binary/housekeeping/archive"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/Cargo.lock",
+      "reason": "Mechanical lock/binary/housekeeping/archive"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/spec.bin",
+      "reason": "Mechanical lock/binary/housekeeping/archive"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/Cargo.lock",
+      "reason": "Mechanical lock/binary/housekeeping/archive"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/Cargo.lock",
+      "reason": "Mechanical lock/binary/housekeeping/archive"
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/Cargo.lock",
+      "reason": "Mechanical lock/binary/housekeeping/archive"
+    },
+    {
+      "path": "hamr/microkit/reporting/codegen_report_sysml.json",
+      "reason": "Vendor or generated reporting evidence"
+    },
+    {
+      "path": "tests/r2u2_monitor_probe/.gitignore",
+      "reason": "Mechanical lock/binary/housekeeping/archive"
+    },
+    {
+      "path": "tests/r2u2_monitor_probe/Cargo.lock",
+      "reason": "Mechanical lock/binary/housekeeping/archive"
+    },
+    {
+      "path": "tests/r2u2_monitor_probe/README.md",
+      "reason": "Documentation; not source-priced"
+    }
+  ],
+  "config_sha256": {
+    "counterfactual-v1.json": "6d842f25956ec6b450a1a70bfe75abab59083bb021fd3bbda725c6b5b4773b3a",
+    "delta-scope-v1.json": "541ae2dacc2bc803fcaf1688c890df2ad64baffcbd35460a9774c0c875bd9d0e",
+    "effort-model-resolved.json": "2a7c6386fd2fcb4dd80f348cfda6a81cafbf5376a13eba060bd8275315713503",
+    "effort-model-v1.json": "902bf450d041c407f50a3beb31d766ad1d81cf8436db66b620a2023a26a8fa16"
+  },
+  "script_sha256": "2da2396de5a83968841e2f4d2f8d68ee77fdc28953c57d6dd697c25624559d16"
+}

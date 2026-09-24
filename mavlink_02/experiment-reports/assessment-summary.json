@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "run": {
+    "project": "/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02",
+    "session_id": "01a0c915-a92e-7ae2-a6ad-737746c47d43",
+    "harness": "codex",
+    "harness_version": "0.154.0",
+    "models": [
+      "gpt-6-astra"
+    ],
+    "profile": "audited"
+  },
+  "findings": [
+    {
+      "code": "WF-01",
+      "category": 1,
+      "severity": "positive",
+      "scope": "shared-workflow",
+      "title": "Audited gates retained distinct evidence and acceptance decisions",
+      "evidence": [
+        "reports/workflow-status.md",
+        "reports/CR-02/CR-02-add-mode-manager.md §§5–7",
+        "experiment-reports/session-transcript.md:1282–1392, 9993, 10290, 10516"
+      ],
+      "impact": "The three-wave change completed with explicit approvals, requirements ownership and scope amendments; acceptance did not silently close the hardware issue.",
+      "root_cause": "Separate contract, development, wave and final review records made approvals and exceptions inspectable.",
+      "recommendation_target": "ChangePlan/ChangeExec report templates",
+      "recommendation": "Retain explicit authority, scope-amendment and accepted-exception fields, including links to unresolved issues at final approval.",
+      "evidence_limit": "This assesses one audited change. It does not establish that every invisible interaction was compliant or that the number of gates is optimal.",
+      "status": "observed positive"
+    },
+    {
+      "code": "WF-02",
+      "category": 1,
+      "severity": "moderate",
+      "scope": "shared-workflow",
+      "title": "Component proofs initially omitted a critical carrier-capacity boundary",
+      "evidence": [
+        "reports/CR-02/deployment/CR-02-w3-build.md: Remaining acceptance work",
+        "reports/CR-02/bounds-correction/CR-02-bounds-development.md",
+        "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/component/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app/tx_bounds.rs",
+        "sysmlv2/open_platform/GumboLib.sysml"
+      ],
+      "impact": "A declared IPv4 length above 1586 could yield a transmit size above the 1600-byte carrier despite passing the earlier Tx contract/proof. The correction expanded scope late in W3.",
+      "root_cause": "The earlier shared 9000-byte limit and unchecked driver slice were inconsistent with carrier capacity; proof of the existing specification did not supply the missing bound.",
+      "recommendation_target": "Contract audit and ChangePlan impact checklist",
+      "recommendation": "Before implementation, trace every producer length through fixed-capacity carriers and consumers; require boundary fixtures and receiver capacity obligations. Preserve the corrected shared bound and independent checked-slice defense.",
+      "evidence_limit": "The source-level out-of-bounds path is documented; exploitation or occurrence on hardware is not demonstrated. The authorized correction passed tests/build and is resolved in this change.",
+      "status": "resolved during CR-02"
+    },
+    {
+      "code": "WF-03",
+      "category": 1,
+      "severity": "moderate",
+      "scope": "shared-workflow",
+      "title": "Deferred hardware timing evidence still needs an assigned follow-up",
+      "evidence": [
+        "open-issues/CR-02-HW-01-recovery-timeout.md",
+        "reports/CR-02/deployment/CR-02-manual-log-review-26_09_23_14_19.md",
+        "sysmlv2/open_platform/open_platform_Software.sysml:324–326",
+        "experiment-reports/session-transcript.md:9291–9345, 10290"
+      ],
+      "impact": "HLR-30 timely Recovery observation remains unestablished after accepted CR-02 completion. The High/Open issue has neither an owner nor a follow-up CR ID.",
+      "root_cause": "Unknown: the serial trace cannot distinguish propagation latency, sampling order or reporting error. The +200 ms budget experiment was ineffective and reverted.",
+      "recommendation_target": "Issue handoff and SysSchedDef validation",
+      "recommendation": "Assign the future CR and owner; capture image-identified D0 threshold, D1/D2 frozen inputs, publication and monitor/log events. Retain a negative deadline regression and verify actual legacy timing units before proposing another budget change.",
+      "evidence_limit": "Moderate denotes a remaining workflow/assurance gap, not a downgrade of the issue’s High criticality. The developer accepted deferral; this is not a current CR-02 approval blocker or proof of unwanted forwarding.",
+      "status": "open; accepted deferral"
+    },
+    {
+      "code": "CG-01",
+      "category": 2,
+      "severity": "blocker",
+      "scope": "hamr",
+      "title": "Generated verdict caching lost the same-dispatch timeout failure",
+      "evidence": [
+        "reports/CR-02/monitoring/CR-02-w1-r2u2-reporting.md",
+        "reports/CR-02/codegen/CR-02-hamr-upgrade.md",
+        "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/r2u2_monitor.rs:69–90",
+        "tests/r2u2_monitor_probe/README.md"
+      ],
+      "impact": "Historically blocked W1: the real runtime returned false then true in D2, but the generated log exposed only true. The initial probe passed 1 test and failed 1 despite a compiled specification.",
+      "root_cause": "The generated latest-verdict cache overwrote the false verdict within a single monitor step. Current code retains false_verdict_seen for reporting.",
+      "recommendation_target": "HAMR GumboR2U2Util.processRustOutputs regression suite",
+      "recommendation": "Promote the isolated raw-runtime versus generated-reporting probe into generator regression tests; cover delayed triggers, false-then-true, timely/late/absent Recovery and reboot. Continue validation after successful generation without invoking the retired patch.",
+      "evidence_limit": "Blocker is historical severity: the upgraded generator is byte-identical to the patched monitor and the probe passes 2/2. The tested unmapped reporting path does not establish correctness of every alert mapping or resolve the separate hardware timeout.",
+      "status": "resolved by HAMR upgrade"
+    },
+    {
+      "code": "CG-02",
+      "category": 2,
+      "severity": "moderate",
+      "scope": "hamr",
+      "title": "Generated build prerequisites couple verification to compiler installation",
+      "evidence": [
+        "reports/CR-02/deployment/CR-02-w3-build.md: Changes",
+        "reports/CR-02/final-validation/CR-02-full-verify-build.md",
+        "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/Makefile",
+        "bin/compile-r2u2.py",
+        "experiment-reports/session-transcript.md:6177–6183"
+      ],
+      "impact": "Standalone verification attempted a crates.io compiler install, adding network dependence even when an installed R2U2 4.2.4 compiler was available. The custom build needed an override.",
+      "root_cause": "Generated component prerequisites retain installation behavior; the project custom path separates installed-tool validation and specification compilation.",
+      "recommendation_target": "HAMR Microkit R2U2 Makefile generation",
+      "recommendation": "Make an explicit R2U2_CLI path/version check the normal prerequisite, compile the specification reproducibly, and move installation into a separate setup target. Preserve locked dependency preparation.",
+      "evidence_limit": "The project custom build already mitigates this. No clean-cache, fully offline rebuild was demonstrated; future availability of the compiler under /tmp is not guaranteed.",
+      "status": "mitigated locally; generator follow-up"
+    },
+    {
+      "code": "CG-03",
+      "category": 2,
+      "severity": "moderate",
+      "scope": "environment",
+      "title": "Generator schedule format and installed SDK required compatibility handling",
+      "evidence": [
+        "reports/CR-02/deployment/CR-02-schedule-review.md",
+        "reports/CR-02/deployment/CR-02-w3-build.md: Schedule and memory inspection",
+        "hamr/microkit/microkit.schedule.xml",
+        "sysmlv2/open_platform/Platform.sysml"
+      ],
+      "impact": "The installed SDK rejected the new domains wrapper. Retaining the developer-selected legacy XML enabled the loader build, but raw schedule units do not demonstrate physical periods or D2 behavior.",
+      "root_cause": "Generator and installed microkit-sdk-2.2.0-dev expected different schedule schemas; later CapDL checks established order, not complete timing conversion.",
+      "recommendation_target": "Project toolchain preflight and SysSchedDef",
+      "recommendation": "Record generator/SDK schema compatibility before schedule edits. Validate the merged schedule with the installed SDK and retain domain mapping, timer-unit conversion and measured target timing as separate checks.",
+      "evidence_limit": "Schema/build compatibility is resolved for this installation. The evidence does not diagnose CR-02-HW-01 or support a universal SDK incompatibility claim.",
+      "status": "compatibility resolved; timing remains qualified"
+    },
+    {
+      "code": "CG-04",
+      "category": 2,
+      "severity": "positive",
+      "scope": "hamr",
+      "title": "Final regeneration and assurance evidence preserve explicit trust boundaries",
+      "evidence": [
+        "reports/CR-02/codegen/CR-02-hamr-upgrade-comparison.json",
+        "reports/CR-02/final-validation/CR-02-final-validation.md",
+        "reports/CR-02/contracts/CR-02-integration-check.md",
+        "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/component/seL4_ModeManager_ModeManager_app.rs"
+      ],
+      "impact": "The upgraded generation preserved 1320 compared files and all 52 reported editable resources. Final evidence records 67 application/core tests, 2 isolated driver tests, six proof-enabled crates and a successful target build without conflating these with temporal system proof.",
+      "root_cause": "Snapshot comparison, independent application implementations, actual-runtime monitor probes and qualified coverage/verification reports provide complementary evidence.",
+      "recommendation_target": "CodeGen and final assurance templates",
+      "recommendation": "Keep preservation manifests, per-crate counts and negative monitor cases; state N=0 integration checks, logging extern boundaries, driver verify=false and BRF=0 coverage limitations beside positive results.",
+      "evidence_limit": "These are inspected historical results, not newly rerun tests. Source/configuration manifests exclude build caches and symlinks. No whole-system temporal proof, full driver host suite or numerical branch coverage is established.",
+      "status": "observed positive"
+    },
+    {
+      "code": "DOC-01",
+      "category": 3,
+      "severity": "moderate",
+      "scope": "shared-workflow",
+      "title": "Initial requirements advice did not apply HAMR frozen-input semantics",
+      "evidence": [
+        "experiment-reports/session-transcript.md:300–356",
+        "action-requests/CR-02-add-mode-manager/Open_Platform_HLRs_26_09_23_02.md: LLR-10–16",
+        "sysmlv2/open_platform/open_platform_Software.sysml:324–326"
+      ],
+      "impact": "The user had to correct advice framed around queued arrivals. That advice introduced an unnecessary consume-versus-retain ambiguity before the review was restated around the dispatch snapshot.",
+      "root_cause": "The assistant’s initial explanation mixed arrival order with dispatch-visible input state; the transcript explicitly acknowledges the error.",
+      "recommendation_target": "Requirements review and HAMR sampling guidance",
+      "recommendation": "Begin control-loop reviews with a D0/D1/D2 table covering input freezing, application execution, publication and monitor hooks. Derive deadline wording from the current authoritative requirements rather than reusing an earlier suggestion.",
+      "evidence_limit": "The advice was corrected in the session. This is a demonstrated guidance-application gap, not evidence that the final implementation uses asynchronous inputs or that current HAMR documentation lacks the explanation.",
+      "status": "corrected during requirements review"
+    },
+    {
+      "code": "DOC-02",
+      "category": 3,
+      "severity": "positive",
+      "scope": "shared-workflow",
+      "title": "Requirements retirement and report relocation preserve authority and provenance",
+      "evidence": [
+        "requirements/updated_reqs.md: retirement banner",
+        "requirements/component-requirements.md: retirement banner",
+        "reports/README.md",
+        "reports/report-locations.json",
+        "reports/CR-02/CR-02-closeout-requirements-review.md",
+        "experiment-reports/session-transcript.md:10179, 10562"
+      ],
+      "impact": "Explicit historical labels prevent reused HLR numbers from silently changing meaning. Topic indexes and the location map make relocated evidence discoverable while keeping workflow status stable.",
+      "root_cause": "Developer-directed closeout reconciled logging into revision _02 and explicitly retired four legacy requirements documents.",
+      "recommendation_target": "Report and requirements templates",
+      "recommendation": "Retain authority/supersession banners and old-to-new location maps; distinguish historical pending notes from the final status in each topic index.",
+      "evidence_limit": "This is a current-artifact navigation review, not an exhaustive audit of every historical hyperlink. Historical transcripts retain original paths.",
+      "status": "observed positive"
+    },
+    {
+      "code": "ENV-01",
+      "category": 4,
+      "severity": "moderate",
+      "scope": "codex",
+      "title": "Nested orchestration parsing materially undercounts observable friction",
+      "evidence": [
+        "experiment-reports/session-metrics.json: friction and scope",
+        "experiment-reports/session-transcript.md:2833, 3332, 4320, 4770, 4996, 6183, 7161, 9495–9501"
+      ],
+      "impact": "All three extracted failure/request/heuristic arrays are empty although the transcript visibly contains escalations and read-only errors. Treating those zeros as absence would bias harness comparisons.",
+      "root_cause": "Adapter 2.0.0 decodes nested shell arguments only when JSON literals. Its 1267 warnings comprise 761 nonliteral-argument warnings and 506 undecoded orchestration warnings spanning 506 distinct call IDs.",
+      "recommendation_target": "Codex transcription adapter and friction consumers",
+      "recommendation": "Capture nested tool invocations structurally, or safely parse supported object-literal forms without evaluating code. Add this run’s call shapes as fixtures; expose incomplete coverage prominently and retain null/unknown interpretations for missing observations.",
+      "evidence_limit": "Warnings are not 1267 distinct failures or prompts. Subagent activity is excluded. No raw-source reparse was performed, and the normalized transcript truncates many calls/results.",
+      "status": "open measurement limitation"
+    },
+    {
+      "code": "ENV-02",
+      "category": 4,
+      "severity": "moderate",
+      "scope": "codex",
+      "title": "Restricted network and external cache writes caused recoverable execution friction",
+      "evidence": [
+        "experiment-reports/session-metrics.json: friction.observed_policy_settings",
+        "experiment-reports/session-transcript.md:2823, 4320, 4456, 4764, 4990, 6177, 9495",
+        "reports/CR-02/deployment/CR-02-w3-build.md",
+        "reports/CR-02/codegen/CR-02-hamr-upgrade.md"
+      ],
+      "impact": "Dependency preparation, coverage and type-check/build operations required retries or elevated execution; the inventory below separates confirmed filesystem denials from network failures and requests.",
+      "root_cause": "Observed on-request/workspace-write policy disables network access and excludes tool-installation/cache paths. Relative LLVM profile paths additionally make write location dependent on subprocess working directory.",
+      "recommendation_target": "Codex workspace setup and project preparation scripts",
+      "recommendation": "Preinstall pinned compiler/sysroot dependencies in an authorized setup step; configure supported caches and absolute coverage output under writable project/tmp paths. Preflight external launcher/cache writes and use narrowly scoped escalation when needed.",
+      "evidence_limit": "DNS failures are consistent with disabled sandbox networking but do not independently exclude external DNS causes. Relative-profile failure location and all UI approval interactions are not recoverable from truncated output. These are harness/environment constraints, not HAMR or model-quality failures.",
+      "status": "recovered in run; setup improvement remains"
+    },
+    {
+      "code": "ENV-03",
+      "category": 4,
+      "severity": "minor",
+      "scope": "environment",
+      "title": "Driver host checks and standalone target checks require different configurations",
+      "evidence": [
+        "reports/CR-02/final-validation/CR-02-full-verify-build.md",
+        "reports/CR-02/final-validation/CR-02-final-validation.md",
+        "reports/CR-02/deployment/CR-02-w3-build.md"
+      ],
+      "impact": "The full driver host suite could not execute, and default standalone make verus failed on missing logging macros; a deployed-feature target retry compiled successfully. These failures can be misread as application test or proof failures.",
+      "root_cause": "seL4 headers/features and AArch64 dependencies do not match the generic x86 host-test path; standalone target flags omit the sel4 feature. Driver application verification is explicitly disabled.",
+      "recommendation_target": "Driver test/verify wrapper and setup documentation",
+      "recommendation": "Provide separate named host-helper and deployed-target recipes, checking SDK headers/features first. Label the latter compilation-only while verify=false; keep full driver hardware acceptance separate.",
+      "evidence_limit": "Two exhaustive helper tests and a target build do not replace the full driver suite or a driver proof. This limitation predates or lies outside the requested feature logic.",
+      "status": "documented limitation"
+    }
+  ]
+}

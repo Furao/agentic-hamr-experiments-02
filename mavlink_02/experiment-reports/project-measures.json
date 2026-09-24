@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated": "2026-08-27T10:09:49-04:00",
+  "generated": "2026-09-23T21:34:00-04:00",
   "project": {
     "name": "mavlink_02",
     "path": "/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02"
@@ -10,10 +10,10 @@
     "codegen_report": {
       "present": true,
       "path": "hamr/microkit/reporting/codegen_report_sysml.json",
-      "resource_count_raw": 160,
-      "resource_count_deduped": 118,
-      "overwritten_true": 75,
-      "overwritten_false": 43,
+      "resource_count_raw": 146,
+      "resource_count_deduped": 146,
+      "overwritten_true": 94,
+      "overwritten_false": 52,
       "internal_status": "Success",
       "report_status": "partial",
       "orphaned_files": [
@@ -24,10 +24,11 @@
         "crates/firewall_core/src/lib.rs",
         "crates/firewall_core/src/net.rs",
         "crates/mavlink_core/Cargo.toml",
-        "crates/mavlink_core/src/dialect.rs",
+        "crates/mavlink_core/rust-toolchain.toml",
         "crates/mavlink_core/src/dialect_verified.rs",
         "crates/mavlink_core/src/lib.rs",
         "crates/mavlink_core/src/verified.rs",
+        "crates/mavlink_core/src/wire.rs",
         "crates/mavlink_core/tools/generate_dialect.py",
         "crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/core/Cargo.toml",
         "crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/core/src/dma.rs",
@@ -39,6 +40,10 @@
         "crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/core/src/dma/tx/descriptor.rs",
         "crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/core/src/dma/tx/mod.rs",
         "crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/component/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app/config.rs",
+        "crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/component/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app/tx_bounds.rs",
+        "crates/seL4_MAVLinkFirewall_MAVLinkFirewall/.cargo/config.toml",
+        "crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/spec.bin",
+        "util/include/util.h",
         "vmm/.gitignore",
         "vmm/Makefile",
         "vmm/README.md",
@@ -1292,6 +1297,31 @@
       ]
     },
     {
+      "path": "hamr/microkit/bin/build.cmd",
+      "language": "shell",
+      "buckets": [
+        {
+          "artifact_type": "build_script",
+          "artifact_id": "BuildScript",
+          "component": null,
+          "generation_mode": "not_codegen",
+          "provenance": "developer_authored",
+          "classification_basis": "path_rule",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.4",
+            "granularity": "exact_step"
+          },
+          "sloc": 523,
+          "comment_lines": 0,
+          "blank_lines": 69,
+          "items": {
+            "note": "skill-generated in agentic runs; called out separately"
+          }
+        }
+      ]
+    },
+    {
       "path": "hamr/microkit/components/pacer/src/pacer.c",
       "language": "c",
       "buckets": [
@@ -1307,7 +1337,7 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 27,
+          "sloc": 31,
           "comment_lines": 1,
           "blank_lines": 4,
           "items": null
@@ -1330,9 +1360,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 34,
-          "comment_lines": 1,
-          "blank_lines": 4,
+          "sloc": 44,
+          "comment_lines": 3,
+          "blank_lines": 7,
           "items": null
         }
       ]
@@ -1422,9 +1452,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 22,
-          "comment_lines": 1,
-          "blank_lines": 4,
+          "sloc": 32,
+          "comment_lines": 3,
+          "blank_lines": 7,
           "items": null
         }
       ]
@@ -1514,9 +1544,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 22,
-          "comment_lines": 1,
-          "blank_lines": 4,
+          "sloc": 44,
+          "comment_lines": 3,
+          "blank_lines": 7,
           "items": null
         }
       ]
@@ -1537,9 +1567,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 93,
+          "sloc": 151,
           "comment_lines": 1,
-          "blank_lines": 34,
+          "blank_lines": 50,
           "items": null
         }
       ]
@@ -1591,6 +1621,98 @@
       ]
     },
     {
+      "path": "hamr/microkit/components/seL4_ModeManager_ModeManager/include/seL4_ModeManager_ModeManager.h",
+      "language": "c",
+      "buckets": [
+        {
+          "artifact_type": "c_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 19,
+          "comment_lines": 3,
+          "blank_lines": 7,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/components/seL4_ModeManager_ModeManager/src/seL4_ModeManager_ModeManager.c",
+      "language": "c",
+      "buckets": [
+        {
+          "artifact_type": "c_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 43,
+          "comment_lines": 1,
+          "blank_lines": 15,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/components/seL4_ModeManager_ModeManager/src/seL4_ModeManager_ModeManager_MON.c",
+      "language": "c",
+      "buckets": [
+        {
+          "artifact_type": "c_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 14,
+          "comment_lines": 3,
+          "blank_lines": 6,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/components/seL4_ModeManager_ModeManager/src/seL4_ModeManager_ModeManager_user.c",
+      "language": "c",
+      "buckets": [
+        {
+          "artifact_type": "c_user_code",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "generate_once",
+          "provenance": "preserved_origin_unknown",
+          "classification_basis": "fallback",
+          "confidence": "unknown",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 13,
+          "comment_lines": 2,
+          "blank_lines": 4,
+          "items": null
+        }
+      ]
+    },
+    {
       "path": "hamr/microkit/components/seL4_RxFirewall_RxFirewall/include/seL4_RxFirewall_RxFirewall.h",
       "language": "c",
       "buckets": [
@@ -1606,9 +1728,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 26,
-          "comment_lines": 1,
-          "blank_lines": 4,
+          "sloc": 37,
+          "comment_lines": 3,
+          "blank_lines": 7,
           "items": null
         }
       ]
@@ -1629,9 +1751,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 117,
+          "sloc": 131,
           "comment_lines": 1,
-          "blank_lines": 46,
+          "blank_lines": 49,
           "items": null
         }
       ]
@@ -1698,9 +1820,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 22,
-          "comment_lines": 1,
-          "blank_lines": 4,
+          "sloc": 32,
+          "comment_lines": 3,
+          "blank_lines": 7,
           "items": null
         }
       ]
@@ -1836,9 +1958,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 544,
+          "sloc": 556,
           "comment_lines": 4,
-          "blank_lines": 98,
+          "blank_lines": 100,
           "items": null
         },
         {
@@ -1922,9 +2044,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 16,
-          "comment_lines": 1,
-          "blank_lines": 6,
+          "sloc": 18,
+          "comment_lines": 4,
+          "blank_lines": 7,
           "items": null
         }
       ]
@@ -1946,6 +2068,29 @@
             "granularity": "exact_step"
           },
           "sloc": 17,
+          "comment_lines": 1,
+          "blank_lines": 6,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/data/src/open_platform_Data_Model/OperatingMode.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 16,
           "comment_lines": 1,
           "blank_lines": 6,
           "items": null
@@ -2014,7 +2159,7 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 4,
+          "sloc": 5,
           "comment_lines": 14,
           "blank_lines": 6,
           "items": null
@@ -2129,9 +2274,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 15,
+          "sloc": 16,
           "comment_lines": 8,
-          "blank_lines": 7,
+          "blank_lines": 8,
           "items": null
         }
       ]
@@ -2153,8 +2298,8 @@
             "granularity": "exact_step"
           },
           "sloc": 3,
-          "comment_lines": 1,
-          "blank_lines": 1,
+          "comment_lines": 9,
+          "blank_lines": 2,
           "items": null
         }
       ]
@@ -2175,9 +2320,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 416,
+          "sloc": 435,
           "comment_lines": 11,
-          "blank_lines": 50,
+          "blank_lines": 51,
           "items": null
         }
       ]
@@ -2229,11 +2374,11 @@
       ]
     },
     {
-      "path": "hamr/microkit/crates/mavlink_core/src/dialect.rs",
-      "language": "rust",
+      "path": "hamr/microkit/crates/mavlink_core/rust-toolchain.toml",
+      "language": "toml",
       "buckets": [
         {
-          "artifact_type": "rust_infra",
+          "artifact_type": "build_config",
           "artifact_id": "GenCode",
           "component": null,
           "generation_mode": "unknown",
@@ -2244,9 +2389,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 288,
-          "comment_lines": 1,
-          "blank_lines": 0,
+          "sloc": 3,
+          "comment_lines": 9,
+          "blank_lines": 2,
           "items": null
         }
       ]
@@ -2290,9 +2435,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 175,
-          "comment_lines": 0,
-          "blank_lines": 18,
+          "sloc": 150,
+          "comment_lines": 1,
+          "blank_lines": 13,
           "items": null
         }
       ]
@@ -2313,9 +2458,32 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 142,
-          "comment_lines": 0,
-          "blank_lines": 14,
+          "sloc": 243,
+          "comment_lines": 10,
+          "blank_lines": 30,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/mavlink_core/src/wire.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "unknown",
+          "provenance": "hamr_generated",
+          "classification_basis": "path_rule",
+          "confidence": "derived",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 26,
+          "comment_lines": 5,
+          "blank_lines": 6,
           "items": null
         }
       ]
@@ -2336,9 +2504,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 62,
+          "sloc": 64,
           "comment_lines": 0,
-          "blank_lines": 6,
+          "blank_lines": 5,
           "items": null
         }
       ]
@@ -2382,9 +2550,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 36,
-          "comment_lines": 13,
-          "blank_lines": 18,
+          "sloc": 37,
+          "comment_lines": 14,
+          "blank_lines": 19,
           "items": null
         }
       ]
@@ -2693,6 +2861,23 @@
       "language": "rust",
       "buckets": [
         {
+          "artifact_type": "rust_contract_woven",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "woven",
+          "provenance": "hamr_woven",
+          "classification_basis": "marker",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 0,
+          "comment_lines": 1,
+          "blank_lines": 0,
+          "items": null
+        },
+        {
           "artifact_type": "rust_infra",
           "artifact_id": "GenCode",
           "component": null,
@@ -2706,7 +2891,7 @@
           },
           "sloc": 1,
           "comment_lines": 1,
-          "blank_lines": 1,
+          "blank_lines": 2,
           "items": null
         }
       ]
@@ -2728,7 +2913,7 @@
             "granularity": "exact_step"
           },
           "sloc": 117,
-          "comment_lines": 3,
+          "comment_lines": 4,
           "blank_lines": 17,
           "items": null
         }
@@ -2758,6 +2943,29 @@
       ]
     },
     {
+      "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/component/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app/tx_bounds.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "unknown",
+          "provenance": "hamr_generated",
+          "classification_basis": "path_rule",
+          "confidence": "derived",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 36,
+          "comment_lines": 2,
+          "blank_lines": 4,
+          "items": null
+        }
+      ]
+    },
+    {
       "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/lib.rs",
       "language": "rust",
       "buckets": [
@@ -2773,9 +2981,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 61,
-          "comment_lines": 2,
-          "blank_lines": 14,
+          "sloc": 63,
+          "comment_lines": 5,
+          "blank_lines": 15,
           "items": null
         }
       ]
@@ -2865,9 +3073,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 108,
+          "sloc": 121,
           "comment_lines": 8,
-          "blank_lines": 19,
+          "blank_lines": 21,
           "items": null
         }
       ]
@@ -2919,6 +3127,29 @@
       ]
     },
     {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/.cargo/config.toml",
+      "language": "toml",
+      "buckets": [
+        {
+          "artifact_type": "build_config",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "unknown",
+          "provenance": "hamr_generated",
+          "classification_basis": "path_rule",
+          "confidence": "derived",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 10,
+          "comment_lines": 9,
+          "blank_lines": 9,
+          "items": null
+        }
+      ]
+    },
+    {
       "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/Cargo.toml",
       "language": "toml",
       "buckets": [
@@ -2934,9 +3165,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 28,
-          "comment_lines": 10,
-          "blank_lines": 9,
+          "sloc": 29,
+          "comment_lines": 15,
+          "blank_lines": 10,
           "items": null
         }
       ]
@@ -2957,9 +3188,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 36,
-          "comment_lines": 13,
-          "blank_lines": 18,
+          "sloc": 48,
+          "comment_lines": 16,
+          "blank_lines": 22,
           "items": null
         }
       ]
@@ -3003,9 +3234,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 190,
+          "sloc": 471,
           "comment_lines": 10,
-          "blank_lines": 23,
+          "blank_lines": 47,
           "items": null
         }
       ]
@@ -3049,9 +3280,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 232,
-          "comment_lines": 149,
-          "blank_lines": 32,
+          "sloc": 461,
+          "comment_lines": 296,
+          "blank_lines": 61,
           "items": null
         }
       ]
@@ -3072,9 +3303,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 252,
+          "sloc": 474,
           "comment_lines": 5,
-          "blank_lines": 23,
+          "blank_lines": 35,
           "items": null
         }
       ]
@@ -3083,6 +3314,23 @@
       "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/mod.rs",
       "language": "rust",
       "buckets": [
+        {
+          "artifact_type": "rust_contract_woven",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "woven",
+          "provenance": "hamr_woven",
+          "classification_basis": "marker",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 1,
+          "comment_lines": 2,
+          "blank_lines": 0,
+          "items": null
+        },
         {
           "artifact_type": "rust_infra",
           "artifact_id": "GenCode",
@@ -3097,7 +3345,30 @@
           },
           "sloc": 1,
           "comment_lines": 1,
-          "blank_lines": 1,
+          "blank_lines": 2,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/r2u2_monitor.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 77,
+          "comment_lines": 7,
+          "blank_lines": 13,
           "items": null
         }
       ]
@@ -3118,9 +3389,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 57,
-          "comment_lines": 35,
-          "blank_lines": 2,
+          "sloc": 135,
+          "comment_lines": 57,
+          "blank_lines": 6,
           "items": null
         },
         {
@@ -3135,9 +3406,78 @@
             "key": "CompDev(*).2",
             "granularity": "exact_step"
           },
-          "sloc": 135,
-          "comment_lines": 2,
-          "blank_lines": 19,
+          "sloc": 428,
+          "comment_lines": 12,
+          "blank_lines": 38,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/spec.bin",
+      "language": "text",
+      "buckets": [
+        {
+          "artifact_type": "rust_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "unknown",
+          "provenance": "hamr_generated",
+          "classification_basis": "path_rule",
+          "confidence": "derived",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 15,
+          "comment_lines": 0,
+          "blank_lines": 0,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/spec.c2po",
+      "language": "text",
+      "buckets": [
+        {
+          "artifact_type": "rust_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 12,
+          "comment_lines": 0,
+          "blank_lines": 7,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/spec.map",
+      "language": "text",
+      "buckets": [
+        {
+          "artifact_type": "rust_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 5,
+          "comment_lines": 0,
+          "blank_lines": 0,
           "items": null
         }
       ]
@@ -3158,9 +3498,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 61,
-          "comment_lines": 2,
-          "blank_lines": 14,
+          "sloc": 66,
+          "comment_lines": 5,
+          "blank_lines": 15,
           "items": null
         }
       ]
@@ -3181,8 +3521,8 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 32,
-          "comment_lines": 6,
+          "sloc": 99,
+          "comment_lines": 4,
           "blank_lines": 9,
           "items": null
         }
@@ -3227,9 +3567,9 @@
             "key": "CompDev(*).3",
             "granularity": "exact_step"
           },
-          "sloc": 116,
-          "comment_lines": 8,
-          "blank_lines": 19,
+          "sloc": 349,
+          "comment_lines": 10,
+          "blank_lines": 29,
           "items": null
         }
       ]
@@ -3250,9 +3590,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 107,
-          "comment_lines": 20,
-          "blank_lines": 18,
+          "sloc": 188,
+          "comment_lines": 42,
+          "blank_lines": 30,
           "items": null
         }
       ]
@@ -3273,9 +3613,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 108,
+          "sloc": 121,
           "comment_lines": 8,
-          "blank_lines": 19,
+          "blank_lines": 21,
           "items": null
         }
       ]
@@ -3319,7 +3659,432 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 59,
+          "sloc": 121,
+          "comment_lines": 19,
+          "blank_lines": 20,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/Cargo.toml",
+      "language": "toml",
+      "buckets": [
+        {
+          "artifact_type": "build_config",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "generate_once",
+          "provenance": "preserved_origin_unknown",
+          "classification_basis": "fallback",
+          "confidence": "unknown",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 27,
+          "comment_lines": 11,
+          "blank_lines": 10,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/Makefile",
+      "language": "makefile",
+      "buckets": [
+        {
+          "artifact_type": "makefile",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "generate_once",
+          "provenance": "preserved_origin_unknown",
+          "classification_basis": "fallback",
+          "confidence": "unknown",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 38,
+          "comment_lines": 36,
+          "blank_lines": 21,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/rust-toolchain.toml",
+      "language": "toml",
+      "buckets": [
+        {
+          "artifact_type": "build_config",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "generate_once",
+          "provenance": "preserved_origin_unknown",
+          "classification_basis": "fallback",
+          "confidence": "unknown",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 3,
+          "comment_lines": 9,
+          "blank_lines": 2,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/bridge/extern_c_api.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 68,
+          "comment_lines": 10,
+          "blank_lines": 13,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/bridge/mod.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 3,
+          "comment_lines": 1,
+          "blank_lines": 1,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/bridge/seL4_ModeManager_ModeManager_GUMBOX.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 90,
+          "comment_lines": 66,
+          "blank_lines": 15,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/bridge/seL4_ModeManager_ModeManager_api.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 99,
+          "comment_lines": 1,
+          "blank_lines": 18,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/component/mod.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_contract_woven",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "woven",
+          "provenance": "hamr_woven",
+          "classification_basis": "marker",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 0,
+          "comment_lines": 1,
+          "blank_lines": 0,
+          "items": null
+        },
+        {
+          "artifact_type": "rust_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "generate_once",
+          "provenance": "preserved_origin_unknown",
+          "classification_basis": "fallback",
+          "confidence": "unknown",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 1,
+          "comment_lines": 1,
+          "blank_lines": 1,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/component/seL4_ModeManager_ModeManager_app.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_contract_woven",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "woven",
+          "provenance": "hamr_woven",
+          "classification_basis": "marker",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 14,
+          "comment_lines": 16,
+          "blank_lines": 0,
+          "items": null
+        },
+        {
+          "artifact_type": "rust_app_code",
+          "artifact_id": "CompImpls",
+          "component": null,
+          "generation_mode": "generate_once",
+          "provenance": "preserved_origin_unknown",
+          "classification_basis": "fallback",
+          "confidence": "unknown",
+          "workflow": {
+            "key": "CompDev(*).2",
+            "granularity": "exact_step"
+          },
+          "sloc": 64,
+          "comment_lines": 2,
+          "blank_lines": 12,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/lib.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 63,
+          "comment_lines": 5,
+          "blank_lines": 15,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/logging.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "generate_once",
+          "provenance": "preserved_origin_unknown",
+          "classification_basis": "fallback",
+          "confidence": "unknown",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 32,
+          "comment_lines": 6,
+          "blank_lines": 9,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/mod.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_test_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "generate_once",
+          "provenance": "preserved_origin_unknown",
+          "classification_basis": "fallback",
+          "confidence": "unknown",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 2,
+          "comment_lines": 1,
+          "blank_lines": 2,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/tests.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_test_code",
+          "artifact_id": "CompTests",
+          "component": null,
+          "generation_mode": "generate_once",
+          "provenance": "preserved_origin_unknown",
+          "classification_basis": "fallback",
+          "confidence": "unknown",
+          "workflow": {
+            "key": "CompDev(*).3",
+            "granularity": "exact_step"
+          },
+          "sloc": 121,
+          "comment_lines": 8,
+          "blank_lines": 14,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/util/cb_apis.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_test_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 148,
+          "comment_lines": 32,
+          "blank_lines": 28,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/util/generators.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_test_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 121,
+          "comment_lines": 8,
+          "blank_lines": 21,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/util/mod.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_test_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 3,
+          "comment_lines": 1,
+          "blank_lines": 3,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/util/test_apis.rs",
+      "language": "rust",
+      "buckets": [
+        {
+          "artifact_type": "rust_test_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 60,
           "comment_lines": 12,
           "blank_lines": 13,
           "items": null
@@ -3365,9 +4130,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 36,
-          "comment_lines": 13,
-          "blank_lines": 18,
+          "sloc": 37,
+          "comment_lines": 14,
+          "blank_lines": 19,
           "items": null
         }
       ]
@@ -3411,9 +4176,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 258,
+          "sloc": 278,
           "comment_lines": 10,
-          "blank_lines": 31,
+          "blank_lines": 33,
           "items": null
         }
       ]
@@ -3457,9 +4222,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 339,
-          "comment_lines": 221,
-          "blank_lines": 41,
+          "sloc": 445,
+          "comment_lines": 294,
+          "blank_lines": 51,
           "items": null
         }
       ]
@@ -3480,9 +4245,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 412,
+          "sloc": 455,
           "comment_lines": 9,
-          "blank_lines": 27,
+          "blank_lines": 28,
           "items": null
         }
       ]
@@ -3491,6 +4256,23 @@
       "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/component/mod.rs",
       "language": "rust",
       "buckets": [
+        {
+          "artifact_type": "rust_contract_woven",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "woven",
+          "provenance": "hamr_woven",
+          "classification_basis": "marker",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 0,
+          "comment_lines": 1,
+          "blank_lines": 0,
+          "items": null
+        },
         {
           "artifact_type": "rust_infra",
           "artifact_id": "GenCode",
@@ -3505,7 +4287,7 @@
           },
           "sloc": 1,
           "comment_lines": 1,
-          "blank_lines": 1,
+          "blank_lines": 2,
           "items": null
         }
       ]
@@ -3526,8 +4308,8 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 60,
-          "comment_lines": 32,
+          "sloc": 88,
+          "comment_lines": 42,
           "blank_lines": 1,
           "items": null
         },
@@ -3543,9 +4325,9 @@
             "key": "CompDev(*).2",
             "granularity": "exact_step"
           },
-          "sloc": 338,
-          "comment_lines": 118,
-          "blank_lines": 57,
+          "sloc": 375,
+          "comment_lines": 120,
+          "blank_lines": 59,
           "items": null
         }
       ]
@@ -3566,9 +4348,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 61,
-          "comment_lines": 2,
-          "blank_lines": 14,
+          "sloc": 63,
+          "comment_lines": 5,
+          "blank_lines": 15,
           "items": null
         }
       ]
@@ -3635,9 +4417,9 @@
             "key": "CompDev(*).3",
             "granularity": "exact_step"
           },
-          "sloc": 170,
-          "comment_lines": 8,
-          "blank_lines": 32,
+          "sloc": 274,
+          "comment_lines": 10,
+          "blank_lines": 34,
           "items": null
         }
       ]
@@ -3658,8 +4440,8 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 115,
-          "comment_lines": 20,
+          "sloc": 118,
+          "comment_lines": 21,
           "blank_lines": 18,
           "items": null
         }
@@ -3681,9 +4463,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 108,
+          "sloc": 121,
           "comment_lines": 8,
-          "blank_lines": 19,
+          "blank_lines": 21,
           "items": null
         }
       ]
@@ -3727,9 +4509,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 75,
-          "comment_lines": 16,
-          "blank_lines": 17,
+          "sloc": 83,
+          "comment_lines": 17,
+          "blank_lines": 18,
           "items": null
         }
       ]
@@ -3773,9 +4555,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 36,
-          "comment_lines": 13,
-          "blank_lines": 18,
+          "sloc": 37,
+          "comment_lines": 14,
+          "blank_lines": 19,
           "items": null
         }
       ]
@@ -3865,9 +4647,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 188,
-          "comment_lines": 120,
-          "blank_lines": 23,
+          "sloc": 247,
+          "comment_lines": 161,
+          "blank_lines": 33,
           "items": null
         }
       ]
@@ -3888,8 +4670,8 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 244,
-          "comment_lines": 1,
+          "sloc": 252,
+          "comment_lines": 5,
           "blank_lines": 23,
           "items": null
         }
@@ -3899,6 +4681,23 @@
       "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/component/mod.rs",
       "language": "rust",
       "buckets": [
+        {
+          "artifact_type": "rust_contract_woven",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "woven",
+          "provenance": "hamr_woven",
+          "classification_basis": "marker",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 0,
+          "comment_lines": 1,
+          "blank_lines": 0,
+          "items": null
+        },
         {
           "artifact_type": "rust_infra",
           "artifact_id": "GenCode",
@@ -3913,7 +4712,7 @@
           },
           "sloc": 1,
           "comment_lines": 1,
-          "blank_lines": 1,
+          "blank_lines": 2,
           "items": null
         }
       ]
@@ -3974,9 +4773,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 61,
-          "comment_lines": 2,
-          "blank_lines": 14,
+          "sloc": 63,
+          "comment_lines": 5,
+          "blank_lines": 15,
           "items": null
         }
       ]
@@ -4043,9 +4842,9 @@
             "key": "CompDev(*).3",
             "granularity": "exact_step"
           },
-          "sloc": 48,
-          "comment_lines": 8,
-          "blank_lines": 11,
+          "sloc": 172,
+          "comment_lines": 9,
+          "blank_lines": 21,
           "items": null
         }
       ]
@@ -4066,9 +4865,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 98,
-          "comment_lines": 18,
-          "blank_lines": 16,
+          "sloc": 107,
+          "comment_lines": 20,
+          "blank_lines": 18,
           "items": null
         }
       ]
@@ -4089,9 +4888,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 108,
+          "sloc": 121,
           "comment_lines": 8,
-          "blank_lines": 19,
+          "blank_lines": 21,
           "items": null
         }
       ]
@@ -4158,9 +4957,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 118,
-          "comment_lines": 12,
-          "blank_lines": 53,
+          "sloc": 139,
+          "comment_lines": 15,
+          "blank_lines": 61,
           "items": null
         }
       ]
@@ -4181,9 +4980,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 188,
+          "sloc": 215,
           "comment_lines": 5,
-          "blank_lines": 44,
+          "blank_lines": 50,
           "items": null
         }
       ]
@@ -4204,9 +5003,9 @@
             "key": "SysSchedDef.1",
             "granularity": "inferred_step"
           },
-          "sloc": 12,
-          "comment_lines": 1,
-          "blank_lines": 1,
+          "sloc": 14,
+          "comment_lines": 5,
+          "blank_lines": 0,
           "items": null
         }
       ]
@@ -4227,9 +5026,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 384,
-          "comment_lines": 27,
-          "blank_lines": 55,
+          "sloc": 434,
+          "comment_lines": 34,
+          "blank_lines": 63,
           "items": null
         }
       ]
@@ -4250,9 +5049,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 115,
-          "comment_lines": 12,
-          "blank_lines": 52,
+          "sloc": 132,
+          "comment_lines": 14,
+          "blank_lines": 61,
           "items": null
         }
       ]
@@ -4273,9 +5072,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 18,
+          "sloc": 20,
           "comment_lines": 1,
-          "blank_lines": 8,
+          "blank_lines": 9,
           "items": null
         }
       ]
@@ -4304,6 +5103,29 @@
       ]
     },
     {
+      "path": "hamr/microkit/types/include/sb_queue_bool_1.h",
+      "language": "c",
+      "buckets": [
+        {
+          "artifact_type": "c_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 46,
+          "comment_lines": 98,
+          "blank_lines": 25,
+          "items": null
+        }
+      ]
+    },
+    {
       "path": "hamr/microkit/types/include/sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1.h",
       "language": "c",
       "buckets": [
@@ -4319,9 +5141,32 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 36,
-          "comment_lines": 91,
-          "blank_lines": 21,
+          "sloc": 46,
+          "comment_lines": 98,
+          "blank_lines": 25,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/types/include/sb_queue_open_platform_Data_Model_OperatingMode_1.h",
+      "language": "c",
+      "buckets": [
+        {
+          "artifact_type": "c_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 46,
+          "comment_lines": 98,
+          "blank_lines": 25,
           "items": null
         }
       ]
@@ -4342,9 +5187,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 36,
-          "comment_lines": 91,
-          "blank_lines": 21,
+          "sloc": 46,
+          "comment_lines": 98,
+          "blank_lines": 25,
           "items": null
         }
       ]
@@ -4365,9 +5210,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 36,
-          "comment_lines": 91,
-          "blank_lines": 21,
+          "sloc": 46,
+          "comment_lines": 98,
+          "blank_lines": 25,
           "items": null
         }
       ]
@@ -4388,9 +5233,32 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 5,
+          "sloc": 7,
           "comment_lines": 1,
           "blank_lines": 2,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/types/src/sb_queue_bool_1.c",
+      "language": "c",
+      "buckets": [
+        {
+          "artifact_type": "c_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 65,
+          "comment_lines": 53,
+          "blank_lines": 30,
           "items": null
         }
       ]
@@ -4411,9 +5279,32 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 44,
-          "comment_lines": 48,
-          "blank_lines": 25,
+          "sloc": 65,
+          "comment_lines": 53,
+          "blank_lines": 30,
+          "items": null
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/types/src/sb_queue_open_platform_Data_Model_OperatingMode_1.c",
+      "language": "c",
+      "buckets": [
+        {
+          "artifact_type": "c_infra",
+          "artifact_id": "GenCode",
+          "component": null,
+          "generation_mode": "overwrite",
+          "provenance": "hamr_generated",
+          "classification_basis": "codegen_report",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CodeGen.2",
+            "granularity": "exact_step"
+          },
+          "sloc": 65,
+          "comment_lines": 53,
+          "blank_lines": 30,
           "items": null
         }
       ]
@@ -4434,9 +5325,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 44,
-          "comment_lines": 48,
-          "blank_lines": 25,
+          "sloc": 65,
+          "comment_lines": 53,
+          "blank_lines": 30,
           "items": null
         }
       ]
@@ -4457,9 +5348,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 44,
-          "comment_lines": 48,
-          "blank_lines": 25,
+          "sloc": 65,
+          "comment_lines": 53,
+          "blank_lines": 30,
           "items": null
         }
       ]
@@ -4495,10 +5386,10 @@
           "artifact_type": "c_infra",
           "artifact_id": "GenCode",
           "component": null,
-          "generation_mode": "overwrite",
+          "generation_mode": "unknown",
           "provenance": "hamr_generated",
-          "classification_basis": "codegen_report",
-          "confidence": "exact",
+          "classification_basis": "path_rule",
+          "confidence": "derived",
           "workflow": {
             "key": "CodeGen.2",
             "granularity": "exact_step"
@@ -4549,9 +5440,9 @@
             "key": "CodeGen.2",
             "granularity": "exact_step"
           },
-          "sloc": 30,
-          "comment_lines": 9,
-          "blank_lines": 6,
+          "sloc": 32,
+          "comment_lines": 10,
+          "blank_lines": 7,
           "items": null
         }
       ]
@@ -31206,9 +32097,9 @@
             "key": "SysPlanAndReq.3",
             "granularity": "exact_step"
           },
-          "sloc": 48,
+          "sloc": 56,
           "comment_lines": 0,
-          "blank_lines": 11,
+          "blank_lines": 12,
           "items": null
         }
       ]
@@ -31229,9 +32120,9 @@
             "key": "SysPlanAndReq.1",
             "granularity": "exact_step"
           },
-          "sloc": 152,
+          "sloc": 160,
           "comment_lines": 0,
-          "blank_lines": 50,
+          "blank_lines": 51,
           "items": {
             "requirement_ids": 12
           }
@@ -31254,9 +32145,9 @@
             "key": "SysPlanAndReq.4",
             "granularity": "exact_step"
           },
-          "sloc": 31,
+          "sloc": 39,
           "comment_lines": 0,
-          "blank_lines": 2,
+          "blank_lines": 3,
           "items": null
         }
       ]
@@ -31300,9 +32191,9 @@
             "key": "unattributed",
             "granularity": "unattributed"
           },
-          "sloc": 112,
+          "sloc": 120,
           "comment_lines": 0,
-          "blank_lines": 51,
+          "blank_lines": 52,
           "items": null
         }
       ]
@@ -31340,9 +32231,9 @@
             "key": "CompGUMBOSpec(*)",
             "granularity": "workflow_only"
           },
-          "sloc": 140,
-          "comment_lines": 2,
-          "blank_lines": 53,
+          "sloc": 144,
+          "comment_lines": 5,
+          "blank_lines": 54,
           "items": {
             "clauses": 0,
             "owner": "GumboLib"
@@ -31367,7 +32258,7 @@
             "granularity": "workflow_only"
           },
           "sloc": 18,
-          "comment_lines": 1,
+          "comment_lines": 3,
           "blank_lines": 6,
           "items": null
         }
@@ -31389,9 +32280,9 @@
             "key": "SysModeling",
             "granularity": "workflow_only"
           },
-          "sloc": 234,
-          "comment_lines": 3,
-          "blank_lines": 33,
+          "sloc": 263,
+          "comment_lines": 5,
+          "blank_lines": 37,
           "items": null
         }
       ]
@@ -31412,9 +32303,9 @@
             "key": "SysModeling",
             "granularity": "workflow_only"
           },
-          "sloc": 24,
-          "comment_lines": 0,
-          "blank_lines": 4,
+          "sloc": 28,
+          "comment_lines": 2,
+          "blank_lines": 5,
           "items": null
         }
       ]
@@ -31435,7 +32326,7 @@
             "key": "SysModeling",
             "granularity": "workflow_only"
           },
-          "sloc": 8,
+          "sloc": 9,
           "comment_lines": 1,
           "blank_lines": 2,
           "items": null
@@ -31458,9 +32349,9 @@
             "key": "SysModeling",
             "granularity": "workflow_only"
           },
-          "sloc": 87,
-          "comment_lines": 0,
-          "blank_lines": 14,
+          "sloc": 100,
+          "comment_lines": 3,
+          "blank_lines": 17,
           "items": null
         },
         {
@@ -31475,11 +32366,11 @@
             "key": "CompGUMBOSpec(rxfirewall)",
             "granularity": "workflow_only"
           },
-          "sloc": 76,
-          "comment_lines": 0,
-          "blank_lines": 4,
+          "sloc": 105,
+          "comment_lines": 2,
+          "blank_lines": 6,
           "items": {
-            "clauses": 24,
+            "clauses": 32,
             "owner": "RxFirewall"
           }
         },
@@ -31495,12 +32386,32 @@
             "key": "CompGUMBOSpec(mavlinkfirewall)",
             "granularity": "workflow_only"
           },
-          "sloc": 63,
-          "comment_lines": 0,
-          "blank_lines": 7,
+          "sloc": 125,
+          "comment_lines": 11,
+          "blank_lines": 15,
           "items": {
-            "clauses": 16,
+            "clauses": 36,
             "owner": "MAVLinkFirewall"
+          }
+        },
+        {
+          "artifact_type": "gumbo_contract",
+          "artifact_id": "CompContracts",
+          "component": "modemanager",
+          "generation_mode": "not_codegen",
+          "provenance": "developer_authored",
+          "classification_basis": "path_rule",
+          "confidence": "exact",
+          "workflow": {
+            "key": "CompGUMBOSpec(modemanager)",
+            "granularity": "workflow_only"
+          },
+          "sloc": 23,
+          "comment_lines": 2,
+          "blank_lines": 2,
+          "items": {
+            "clauses": 6,
+            "owner": "ModeManager"
           }
         },
         {
@@ -31515,11 +32426,11 @@
             "key": "CompGUMBOSpec(txfirewall)",
             "granularity": "workflow_only"
           },
-          "sloc": 47,
-          "comment_lines": 0,
-          "blank_lines": 6,
+          "sloc": 56,
+          "comment_lines": 1,
+          "blank_lines": 7,
           "items": {
-            "clauses": 16,
+            "clauses": 20,
             "owner": "TxFirewall"
           }
         }
@@ -31547,6 +32458,14 @@
           "confidence": "exact"
         },
         "MAVLinkFirewall": {
+          "tests_rs": 0,
+          "cb_apis_rs": 0,
+          "total": 0,
+          "source": "static #[test] count incl. cb_apis.rs macro tests",
+          "classification_basis": "static_count",
+          "confidence": "exact"
+        },
+        "ModeManager": {
           "tests_rs": 0,
           "cb_apis_rs": 0,
           "total": 0,
@@ -31600,6 +32519,15 @@
           "confidence": "derived",
           "note": "Exit criteria met: approved full coverage, 7/7 component tests, 3/3 core tests, MAVLinkFirewall 16/0, and mavlink_core 7/0"
         },
+        "ModeManager": {
+          "value": {
+            "passed": null,
+            "failed": null
+          },
+          "source": "reports/workflow-status.md CompDev(ModeManager).4",
+          "classification_basis": "workflow_status_note",
+          "confidence": "derived"
+        },
         "RxFirewall": {
           "value": {
             "passed": null,
@@ -31632,6 +32560,11 @@
           "consistent": null
         },
         "MAVLinkFirewall": {
+          "static": 0,
+          "runtime_passed": null,
+          "consistent": null
+        },
+        "ModeManager": {
           "static": 0,
           "runtime_passed": null,
           "consistent": null
@@ -31673,6 +32606,15 @@
           "summary": "7 MAVLinkFirewall tests and 3 mavlink_core tests pass; coverage is app 53/53, GUMBOX 191/191, and policy-neutral parser lib 111/111 lines | Full active application, contract-oracle, and parser branches exercised; generated 284-arm dialect lookup recorded as mechanical metadata | Exit criteria met: approved full coverage, 7/7 component tests, 3/3 core tests, MAVLinkFirewall 16/0, and mavlink_core 7/0"
         },
         "source": "reports/workflow-status.md CompDev(MAVLinkFirewall).4/.5",
+        "classification_basis": "workflow_status_note",
+        "confidence": "derived"
+      },
+      "ModeManager": {
+        "value": {
+          "entrypoint_lines_percent": null,
+          "summary": null
+        },
+        "source": "reports/workflow-status.md CompDev(ModeManager).4/.5",
         "classification_basis": "workflow_status_note",
         "confidence": "derived"
       },
@@ -31723,6 +32665,15 @@
         "classification_basis": "workflow_status_note",
         "confidence": "derived"
       },
+      "ModeManager": {
+        "value": {
+          "verified": null,
+          "errors": null
+        },
+        "source": "reports/workflow-status.md CompDev(ModeManager).6",
+        "classification_basis": "workflow_status_note",
+        "confidence": "derived"
+      },
       "RxFirewall": {
         "value": {
           "verified": 27,
@@ -31766,8 +32717,19 @@
       "note": "Expected receiver-side integration handshakes N=0; pass is vacuous by reusable-contract design; no scratch artifacts produced"
     },
     "audit_findings": {
-      "present": false,
-      "note": "no assessment-summary.json for this experiment"
+      "present": true,
+      "value": {
+        "total": 12,
+        "by_severity": {
+          "positive": 3,
+          "moderate": 7,
+          "blocker": 1,
+          "minor": 1
+        }
+      },
+      "source": "experiment-reports/assessment-summary.json",
+      "classification_basis": "codegen_report",
+      "confidence": "exact"
     },
     "contract_audit_findings": {
       "ArduPilot": {
@@ -31795,6 +32757,14 @@
         "confidence": "derived",
         "note": "audit-gumbo-contracts specification-only mode: zero AP-1–AP-9 findings; abstract predicate refinement recorded for W2"
       },
+      "ModeManager": {
+        "value": {
+          "findings": null
+        },
+        "source": "reports/workflow-status.md CompGUMBOSpec(ModeManager).3",
+        "classification_basis": "workflow_status_note",
+        "confidence": "derived"
+      },
       "RxFirewall": {
         "value": {
           "findings": 9
@@ -31815,10 +32785,10 @@
     },
     "generated_resources": {
       "value": {
-        "raw": 160,
-        "deduped": 118,
-        "overwritten_true": 75,
-        "overwritten_false": 43
+        "raw": 146,
+        "deduped": 146,
+        "overwritten_true": 94,
+        "overwritten_false": 52
       },
       "source": "hamr/microkit/reporting/codegen_report_sysml.json (validated)",
       "classification_basis": "codegen_report",
@@ -31833,6 +32803,1525 @@
   "workflow_status": {
     "profile": "audited",
     "rows": [
+      {
+        "key": "CR-02.FullVerifyBuild",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Fresh proofs Mode 9, Rx 28, Tx 16, MAVLink 69, cores 39/38, zero errors; driver deployed-feature check/build passes with proof disabled; full ZCU102 loader cac58840…3c7aba43; see CR-02/final-validation/CR-02-full-verify-build.md"
+      },
+      {
+        "key": "CodeGen-HAMRUpgrade",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Fresh output matches patched baseline; probe 2/2; developer retired post-codegen patching; see CR-02/codegen/CR-02-hamr-upgrade.md"
+      },
+      {
+        "key": "CodeGen-HAMRUpgrade.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Existing Microkit configuration and model-directory invocation retained; fresh tipe Well-formed"
+      },
+      {
+        "key": "CodeGen-HAMRUpgrade.2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Exit 0, report Success with no warnings/errors; raw output captured before final legacy patch check"
+      },
+      {
+        "key": "CodeGen-HAMRUpgrade.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "All 1320 compared files and 52 reported editable resources unchanged; helper made no changes; probe 2/2"
+      },
+      {
+        "key": "CodeGen-HAMRUpgrade.4",
+        "alias": null,
+        "status": "n/a",
+        "updated": "2026-09-23",
+        "notes": "Regeneration; existing build scripts retained"
+      },
+      {
+        "key": "ChangeExec(CR-02)",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved final report and AP2; all waves/reconciliation/validation complete; High/Open timing issue deferred to future CR"
+      },
+      {
+        "key": "ChangeExec(CR-02).1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Approved plan/all RDs resolved; HEAD 24ba011d4f0a49c727a9b6c9cd28941f536891b4 drift is request/planning records only; approved source baseline unchanged"
+      },
+      {
+        "key": "ChangeExec(CR-02).2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Waves 1–3 explicitly approved by developer; hardware acceptance retains High/Open CR-02-HW-01"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved Wave 1; technical gate and regenerated output accepted"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.Requirements",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "_07 supplies derived LLR-1–21; allocation and RF-1–RF-4 disposition in w1-requirements-planning-07.md; legacy document synchronization tracked for final sweep"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.SysModeling",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Developer approved architecture and audited sub-workflow boundary; continuing to RxFirewall contracts"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.SysModeling.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Retained existing package/file layout and local aadl-lib"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.SysModeling.2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Added OperatingMode enum; existing carriers unchanged"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.SysModeling.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Added ModeManager thread/process and sampled control ports; 1000 ms period, 100 ms compute budget"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.SysModeling.4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Added 3 control connections, domain 7, Max_Domain 8; existing Ethernet connections/bindings retained"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.SysModeling.5",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "First tipe run exit 0 Well-formed; structural preservation checks passed; see w1-sysmodeling-report.md"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.SysModeling.AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Developer explicitly approved architecture; tipe clean"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(RxFirewall)",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Developer approved contracts including shared rx_bounded_udp refactor and audited boundary"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(RxFirewall).1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Frozen Normal guards, Recovery suppression, initialization no-send, strict direct UDP policy and LLR-4 bounds"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(RxFirewall).2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "First tipe run exit 0 Well-formed"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(RxFirewall).3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Zero AP-1–AP-9 model findings; generated GUMBOX stale until planned W1 CodeGen"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(RxFirewall).4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Developer review: both UDP routes reuse rx_bounded_udp; no unresolved catalog findings or waivers; implementation and refreshed oracle tests remain W2"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(RxFirewall).AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Developer explicitly approved RxFirewall contracts"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall)",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Developer approved contracts and audited boundary; recorded W1/W2 obligations remain required"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Added saturated count, unconditional post-count status, frozen-mode guards, initialization and past-time R2U2 deadline formula"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Iteration 2 Well-formed; replaced unsupported thread invariant with inductive compute pre/post bound"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Zero new model-clause catalog findings; stale generated contracts and truncated SECURE_COMMAND developer-hook concern recorded"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Model revisions complete; W1 generated reporter feasibility and W2 hook refinement/runtime tests remain explicit obligations"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall).AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Developer approved contracts, refinement observation and runtime obligations; no implementation requirement waived"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall)-R2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved revised future-time monitor; CodeGen rerun follows"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall)-R2.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "_07 authoritative; first threshold-crossing trigger with Eventually[1,2] frozen Recovery; compute unchanged"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall)-R2.2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Fresh tipe exit 0: Well-formed!"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall)-R2.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Full-mode audit: no new compute catalog findings; hook refinement, stale tests and D2 reporting obligations retained; see dated audit"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall)-R2.4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "No further model revisions; generated temporal artifacts stale pending approval and CodeGen"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(MAVLinkFirewall)-R2.AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer explicitly approved revised monitor; implementation/reporting obligations retained"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Developer approved contracts, zero-finding audit and audited boundary"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Retained mode, initial Normal outputs, exact latched transition and post-state publication to both consumers"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "First tipe run exit 0 Well-formed"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Specification-only audit: zero AP-1–AP-9 findings; all four state/input combinations covered"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "No audit revisions or waivers required; startup/runtime publication checks remain W1/W2"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Developer explicitly approved ModeManager contracts"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Rerun with r2u2-HAMR-agent-context; unchanged contracts and existing approval retained; see CR-02/contracts/CR-02-ModeManager-specification-audit-2026-09-23.md"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Reviewed _07 requirements and new-context guidance; existing six guarantees need no revisions"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2.2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Fresh tipe exit 0: Well-formed!"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Full-mode audit: zero AP-1–AP-9 findings; inspected model, GUMBOX, woven ensures and tests"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2.4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "No revisions or demonstration tests required; no CodeGen needed; implementation remains W2"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2.AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Prior explicit developer approval applies to unchanged contracts; no new waiver or approval requested"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Repeat requested; context cf109a5; unchanged ModeManager contracts; audit report R3 addendum"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R3.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Rechecked _07, new-context rules and current model; preserved pre-existing MAVLink monitor removal"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R3.2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Fresh tipe: Well-formed!, exit 0"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R3.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Zero AP-1–AP-9 findings; ModeManager generated contracts remain consistent"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R3.4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "No revisions or regeneration required for ModeManager; HLR-30 monitor removal is separate outstanding work"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R3.AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Prior explicit approval retained for unchanged contracts"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Exit criteria met: Logika exit 0, vacuous by design N=0; no scratch; audited boundary approval pending"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Enumerated zero receiver integration assumes before run; no diagnostics/output artifacts; see reports/CR-02/contracts/CR-02-integration-check.md"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.2",
+        "alias": null,
+        "status": "n/a",
+        "updated": "2026-09-22",
+        "notes": "No integration failures to diagnose"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.3",
+        "alias": null,
+        "status": "n/a",
+        "updated": "2026-09-22",
+        "notes": "No contract revisions required"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.boundary",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Developer approved N=0 result and continuation to CodeGen"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CodeGen",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Developer approved successful generation and recorded limitations"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CodeGen.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Microkit output ../../hamr, workspace ../.., Platform::ZCU102_Impl; frame-period prerequisite raised to 2080 ms"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CodeGen.2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Generation and attestation reporting passed after developer HAMR update; earlier frame/marker/parser failures resolved"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CodeGen.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Project output confirmed; custom.mk/schedule/tests preserved; R2U2 spec recompiled with CLI 4.2.4; see reports/CR-02/codegen/CR-02-codegen.md"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CodeGen.4",
+        "alias": null,
+        "status": "n/a",
+        "updated": "2026-09-22",
+        "notes": "Regeneration; setup-build-script remains a separate approved-plan task"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CodeGen.boundary",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Developer explicitly approved CodeGen; W1 reporting/startup obligations remain"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CodeGen-R2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Regenerated output accepted with Wave 1 approval"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CodeGen-R2.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Reused Microkit configuration and recorded invocation"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CodeGen-R2.2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Exit 0, report Success, no warnings/errors; future-time spec emitted"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CodeGen-R2.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "12 editable files unchanged by hashes; compiler 4.2.4 rebuilt specification and bounds"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CodeGen-R2.4",
+        "alias": null,
+        "status": "n/a",
+        "updated": "2026-09-23",
+        "notes": "Regeneration; existing build helper retained"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.CodeGen-R2.boundary",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer Wave 1 approval includes regenerated output"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.R2U2Reporting-R2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer workaround 4bc9a9a exposes D2 false verdict; isolated probe 2/2 passes; production reporter remains W2"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.SetupBuildScript",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Microkit/Rust helper created; usage parses, lists five components and two cores; application tests not run"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.R2U2Reporting",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Original unpatched failure superseded by authorized workaround and R2 probe 2/2; historical report retained"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.StartupSampling",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Checked enum/defaults, retained C inputs, wiring, non-consuming peek and pre/compute/post order; runtime implementation and schedule evidence remain W2/W3"
+      },
+      {
+        "key": "ChangeExec(CR-02).W1.AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer explicitly approved Wave 1"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved component implementation, coverage, proofs and core regression"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(ModeManager)",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved completion: tests/coverage and verification 9/0 accepted"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(ModeManager).1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Fresh tipe Well-formed; generated ModeManager contracts current"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(ModeManager).2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Initialize/publish Normal; sample ErrorStatus once, latch Recovery, publish both outputs each dispatch"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(ModeManager).3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Added transition/publication/reboot/notification tests and exhaustive oracle truth table; generated PropTests retained"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(ModeManager).4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "7/7 tests; app 37/37 lines, GUMBOX 67/67; exhaustive branch cases, no LLVM branch counters"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(ModeManager).5",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Tests pass after dependency migration; no implementation or contract revision required"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(ModeManager).AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved 7/7 tests, full line coverage and exhaustive branch-case evidence"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(ModeManager).6",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Target make verus passed: ModeManager 9 verified, 0 errors"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(ModeManager).7",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "No proof/implementation revisions; only two existing logging external bodies"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(ModeManager).AP2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved verification 9/0 and logging trust boundary"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(ModeManager).boundary",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved ModeManager completion and continuation to RxFirewall"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(RxFirewall)",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved verification 28/0, startup precondition and completion"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(RxFirewall).1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Model unchanged since clean tipe; generated contracts current"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(RxFirewall).2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "One Mode snapshot, Recovery suppression, shared executable bounds and independent port exclusions"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(RxFirewall).3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Updated generated API calls; lane/mode/bounds/logging and negative oracle matrices"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(RxFirewall).4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "12/12 tests; app 118/118 and GUMBOX 382/382 lines"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(RxFirewall).5",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Clean final coverage isolated from stale binaries; semantic branch partitions recorded"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(RxFirewall).AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved updated tests/coverage after removal of Recovery logs"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(RxFirewall).6",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Target make verus 28/0 after explicit empty-output startup precondition"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(RxFirewall).7",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Explicit platform empty-output initialization requires; tests 12/12 and full line coverage rechecked"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(RxFirewall).AP2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved 28/0 and explicit empty-output startup precondition"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(RxFirewall).boundary",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved completion and continuation to MAVLinkFirewall"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall)",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved 69/0 verification, trust boundaries and completion"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Fresh tipe Well-formed; model/generated contracts current; no regeneration needed"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Count saturation, frozen-mode routing, final ErrorStatus, zero-extended operation and production timeout logger"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Lane/state/policy boundaries, 12000 negative-oracle combinations, generated PropTests and real-monitor timelines"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "15/15 tests; application 172/172, GUMBOX 382/382, logger 39/39 active host lines"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).5",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Fresh isolated coverage; semantic branch cases recorded; BRF=0 and target backend exclusion explicit"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved tests/coverage and exclusions after shared-constant refactor"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).6",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Target make -o r2u2_cli verus passed: 69 verified, 0 errors"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).7",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Shared constants made public for public open spec; tests 15/15 and full active line coverage retained"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).AP2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved verification and documented trust boundaries"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).boundary",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved completion and remaining Wave 2 regression"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(TxFirewall)/TestOnly",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved 7/7 tests, coverage exclusions and slice completion"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(TxFirewall)/TestOnly.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Explicit ARP/IPv4/drop/empty lane fixtures and negative output-oracle matrix"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(TxFirewall)/TestOnly.4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Tests 7/7; app 82/84 lines and GUMBOX 159/159"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(TxFirewall)/TestOnly.5",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Only uncovered app lines are unused trace helper; target logging and BRF=0 limitations documented"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(TxFirewall)/TestOnly.AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved coverage including unused trace helper exclusion"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(TxFirewall)/TestOnly.boundary",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved continuation to verification"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved 16/0 verification and slice completion"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly.6",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "SYSTEM_MAKEFILE=custom.mk make verus; 16 verified, 0 errors"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly.7",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "No changes needed; three existing platform logging external bodies"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly.AP2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved verification and unchanged logging trust boundary"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly.boundary",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved completion with Wave 2"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.CoreRegression",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Fresh firewall_core 17 tests/39 proofs and mavlink_core 6 tests/38 proofs; zero failures"
+      },
+      {
+        "key": "ChangeExec(CR-02).W2.AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved consolidated wave and continuation to Wave 3"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer explicitly approved Wave 3 after full verification/build; High/Open timeout finding CR-02-HW-01 retained"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer: approve wave 3; accepts wave evidence and recorded limitations, not timeout closure or final CR approval"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.SysSchedDef",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved legacy schedule ordering and documented timing limitations"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.SysSchedDef.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Domain 7 first; existing slots retained; legacy parser accepts format; target timing remains qualified"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.SysSchedDef.2",
+        "alias": null,
+        "status": "n/a",
+        "updated": "2026-09-23",
+        "notes": "Draft workflow timing/schema analysis TBD; target timing validation retained in W3 obligations"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.SysSchedDef.boundary",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved continuation to custom.mk integration"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.Build",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "ZCU102/debug custom.mk build passes; 148.73 MiB loader; report CR-02/deployment/CR-02-w3-build.md"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BoundsScope",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer explicitly authorized driver defense and firewall alignment with 26_09_23_01; plan amended, requirements preserved"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.DriverBounds",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Checked slice before token; exhaustive u16 and mixed-lane helper tests 2/2; ZCU102 release driver build passes; no proof/hardware claim"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompGUMBOSpec(TxFirewall)-Bounds.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Shared IPv4 bound 1586; Tx size exports added; latest HLR-12/13/18 and LLR-4"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompGUMBOSpec(TxFirewall)-Bounds.2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Final tipe exit 0 Well-formed; CR-02/bounds-correction/CR-02-bounds-tipe.txt"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompGUMBOSpec(TxFirewall)-Bounds.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "AP-1–AP-9 critique; no unresolved revised compute findings; generated artifacts stale; CR-02/bounds-correction/CR-02-bounds-contract-audit.md"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompGUMBOSpec(TxFirewall)-Bounds.4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Shared bound revised; Tx bound integration exports address AP-6; no further model revisions"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompGUMBOSpec(TxFirewall)-Bounds.AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved revised contracts; continuing to regeneration"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompGUMBOSpec(RxFirewall)-Bounds.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Shared IPv4 bound 1586; Tx size exports added; latest HLR-12/13/18 and LLR-4"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompGUMBOSpec(RxFirewall)-Bounds.2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Final tipe exit 0 Well-formed; CR-02/bounds-correction/CR-02-bounds-tipe.txt"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompGUMBOSpec(RxFirewall)-Bounds.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "AP-1–AP-9 critique; no unresolved revised compute findings; generated artifacts stale; CR-02/bounds-correction/CR-02-bounds-contract-audit.md"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompGUMBOSpec(RxFirewall)-Bounds.4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Shared bound revised; Tx bound integration exports address AP-6; no further model revisions"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompGUMBOSpec(RxFirewall)-Bounds.AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved revised contracts; continuing to regeneration"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompGUMBOSpec(MAVLinkFirewall)-Bounds.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Shared IPv4 bound 1586; Tx size exports added; latest HLR-12/13/18 and LLR-4"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompGUMBOSpec(MAVLinkFirewall)-Bounds.2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Final tipe exit 0 Well-formed; CR-02/bounds-correction/CR-02-bounds-tipe.txt"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompGUMBOSpec(MAVLinkFirewall)-Bounds.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "AP-1–AP-9 critique; no unresolved revised compute findings; generated artifacts stale; CR-02/bounds-correction/CR-02-bounds-contract-audit.md"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompGUMBOSpec(MAVLinkFirewall)-Bounds.4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Shared bound revised; Tx bound integration exports address AP-6; no further model revisions"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompGUMBOSpec(MAVLinkFirewall)-Bounds.AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved revised contracts; continuing to regeneration"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BoundsCodeGen",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Generation Success, patch applied, probe 2/2, 38 editable files preserved; boundary approval pending"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BoundsCodeGen.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Reused Microkit/ZCU102 configuration and recorded command; tipe-clean approved model"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BoundsCodeGen.2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Exit 0; no report warnings/errors; required 4bc9a9a workaround applied"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BoundsCodeGen.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Project-local output, 38 editable files unchanged, four generated files updated; reporting probe 2/2"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BoundsCodeGen.4",
+        "alias": null,
+        "status": "n/a",
+        "updated": "2026-09-23",
+        "notes": "Regeneration; existing build helper preserved"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BoundsCodeGen.boundary",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved CodeGen and continuation to firewall implementation/tests"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BoundsCompDev",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved tests/coverage and core 39/0, Tx 16/0, Rx 28/0, MAVLink 69/0; component completion accepted"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Approved CodeGen current with type-clean model; no subsequent model edit"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Executable 1586-byte limit via shared parser (Rx/Tx) or independent carrier constant (MAVLink)"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Boundary, lane, and oracle regression fixtures refreshed; previous policy/state tests retained"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "8 tests; app 82/84 (unused trace helper); GUMBOX 205/205; fresh isolated instrumentation"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.5",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Tests pass; BRF=0, exclusions and semantic partitions documented in CR-02/bounds-correction/CR-02-bounds-development.md"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved coverage and exclusions; proceeding to Verus"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Approved CodeGen current with type-clean model; no subsequent model edit"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Executable 1586-byte limit via shared parser (Rx/Tx) or independent carrier constant (MAVLink)"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Boundary, lane, and oracle regression fixtures refreshed; previous policy/state tests retained"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "12 tests; app 118/118; GUMBOX 382/382; fresh isolated instrumentation"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.5",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Tests pass; BRF=0, exclusions and semantic partitions documented in CR-02/bounds-correction/CR-02-bounds-development.md"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved coverage and exclusions; proceeding to Verus"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Approved CodeGen current with type-clean model; no subsequent model edit"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Executable 1586-byte limit via shared parser (Rx/Tx) or independent carrier constant (MAVLink)"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Boundary, lane, and oracle regression fixtures refreshed; previous policy/state tests retained"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "16 tests; app 172/172; GUMBOX 382/382; logger 39/39; fresh isolated instrumentation"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.5",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Tests pass; BRF=0, exclusions and semantic partitions documented in CR-02/bounds-correction/CR-02-bounds-development.md"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved coverage and exclusions; proceeding to Verus"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BoundsCoreTests",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "firewall_core 18/18 including ten-protocol length-boundary test; core verification pending"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.6",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "AArch64 Verus 16 verified, 0 errors; CR-02/bounds-correction/CR-02-bounds-TxFirewall-verification.txt"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.7",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "First run passes; no proof/source changes or new trust escapes; approved coverage retained"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.AP2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved verification and unchanged trust boundaries"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.boundary",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved component completion and continuation to full loader rebuild"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.6",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "AArch64 Verus 28 verified, 0 errors; CR-02/bounds-correction/CR-02-bounds-RxFirewall-verification.txt"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.7",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "First run passes; no proof/source changes or new trust escapes; approved coverage retained"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.AP2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved verification and unchanged trust boundaries"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.boundary",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved component completion and continuation to full loader rebuild"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.6",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "AArch64 Verus 69 verified, 0 errors; CR-02/bounds-correction/CR-02-bounds-MAVLinkFirewall-verification.txt"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.7",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "First run passes; no proof/source changes or new trust escapes; approved coverage retained"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.AP2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved verification and unchanged trust boundaries"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.boundary",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved component completion and continuation to full loader rebuild"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BoundsCoreVerify",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "firewall_core host 39/0 and AArch64 dependency 39/0; MAVLink dependency mavlink_core 38/0"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BoundsBuild",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Full custom ZCU102/debug loader passes, 155953132 bytes; SHA-256 f524c83c…419cadf; legacy XML/custom build/monitor preserved; CR-02/bounds-correction/CR-02-bounds-build.md"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.Hardware",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer accepted manual testing with High/Open finding CR-02-HW-01 for D2 timeout; evidence limits retained"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.Finding(CR-02-HW-01)",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "CR-02 disposition complete: developer deferred [High/Open issue](../open-issues/CR-02-HW-01-recovery-timeout.md) to future CR; issue unresolved but non-blocking for this change"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Contracts/model unchanged; existing generated code current"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Info log only for Normal to Recovery; existing logger reused; no extra production state"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Existing four-transition and repeated-dispatch tests assert exact diagnostic count/content"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Refreshed after equivalent pattern rewrite: 7/7 tests; app 41/41, GUMBOX 67/67; BRF=0"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.5",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "No failures; all four state/input cases and repeated-dispatch diagnostic checks pass"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved tests/coverage and continuation to verification"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.6",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "AArch64 Verus 9 verified, 0 errors; CR-02/mode-logging/CR-02-mode-log-verification.txt"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.7",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Initial equality-guard postcondition failure resolved by enum pattern; tests/coverage refreshed; no new trust escapes"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.AP2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved 9/0 verification, refreshed tests/coverage and component completion"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.boundary",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer approved completion and continuation to loader rebuild"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.ModeLogBuild",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Full ZCU102/debug loader passes; ModeManager release 9/0; image SHA-256 cac58840…3c7aba43; CR-02/mode-logging/CR-02-mode-log.md"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BudgetIncrease",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Historical attempt: developer reports no improvement and reverted it; original 100/300 ms budgets and 2080 ms frame restored"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BudgetIncrease.SysSchedDef.1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Exact requested delta applied using existing legacy scale: domain_7=30000, domain_6=50000; other slots/order unchanged"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BudgetIncrease.SysSchedDef.2",
+        "alias": null,
+        "status": "n/a",
+        "updated": "2026-09-23",
+        "notes": "Draft workflow timing analysis TBD; physical unit conversion and timeout resolution remain unverified"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BudgetIncrease.CodeGen",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Tipe Well-formed; CodeGen Success; patch applied; monitor probe 2/2; 43 editable files preserved"
+      },
+      {
+        "key": "ChangeExec(CR-02).W3.BudgetIncrease.Build",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Full custom ZCU102/debug build passes; release proofs 9/28/16/69, zero errors; loader b55ce4b9…7c349079; merged slots verified"
+      },
+      {
+        "key": "ChangeExec(CR-02).3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "_26_09_23_02 authoritative; LLR-18 reconciled; developer explicitly retired four legacy CR-01 documents, notices added with historical bodies preserved; CR-02/CR-02-closeout-requirements-review.md"
+      },
+      {
+        "key": "ChangeExec(CR-02).4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "67 application/core tests plus 2 driver helper tests pass; entry-point coverage 100%; unchanged-source full proofs/build retained; accepted driver host/proof limits; CR-02/final-validation/CR-02-final-validation.md"
+      },
+      {
+        "key": "ChangeExec(CR-02).5",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "CR-02/CR-02-add-mode-manager.md traces requirements/model/code/tests, commits, impacts and accepted deviations; artifact inventory and final-review manifest recorded"
+      },
+      {
+        "key": "ChangeExec(CR-02).AP2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-23",
+        "notes": "Developer explicitly approved final CR-02 review; report, validation, deviations and future-CR timing deferral accepted"
+      },
+      {
+        "key": "ChangePlan(CR-02)",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Approved three-wave plan updated per developer direction to _07 consolidated HLR/LLR source; execution in W1"
+      },
+      {
+        "key": "ChangePlan(CR-02).1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Sketch preserved; _07 authoritative HLR/LLR source; developer owns requirements"
+      },
+      {
+        "key": "ChangePlan(CR-02).2",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Surveyed 043d574970d28ff172f7261ea0392ddd14ae50a8; untracked request provenance and historical validation limits recorded; developer confirmed execution baseline (RD-1 resolved)"
+      },
+      {
+        "key": "ChangePlan(CR-02).3",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Revision _06 resolves COMMAND_INT discrepancy; no offset code delta; authority and secure deny resolved; contract/ID/UDP impacts retained"
+      },
+      {
+        "key": "ChangePlan(CR-02).4",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "_07 LLR allocation and manager-first/100 ms preference incorporated; no added wave or component"
+      },
+      {
+        "key": "ChangePlan(CR-02).5",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Three waves approved, including R2U2 generation, verdict/logging tests and target evidence; review and verification scope resolved"
+      },
+      {
+        "key": "ChangePlan(CR-02).6",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Plan and source references updated for _07; all existing Review Record decisions retained"
+      },
+      {
+        "key": "ChangePlan(CR-02).AP1",
+        "alias": null,
+        "status": "done",
+        "updated": "2026-09-22",
+        "notes": "Developer (user) explicitly approved plan on 2026-09-22; remaining proposed scope accepted; no additional external review gate"
+      },
       {
         "key": "ChangePlan(CR-01)",
         "alias": null,
@@ -32650,7 +35139,7 @@
         "alias": null,
         "status": "done",
         "updated": "2026-08-27",
-        "notes": "Standard change report written at reports/CR-01-add-mavlink-firewall.md with traceability, deviations, non-impact evidence, and verification summary"
+        "notes": "Standard change report written at reports/CR-01/CR-01-add-mavlink-firewall.md with traceability, deviations, non-impact evidence, and verification summary"
       },
       {
         "key": "ChangeExec(CR-01).AP2",
@@ -32685,6 +35174,7 @@
       "ArduPilot",
       "LowLevelEthernetDriver",
       "MAVLinkFirewall",
+      "ModeManager",
       "RxFirewall",
       "TxFirewall"
     ]
@@ -32718,12 +35208,12 @@
     {
       "path": "action-requests/",
       "reason": "change-request sketches (empty in greenfield subjects)",
-      "file_count": 15
+      "file_count": 31
     },
     {
       "path": "experiment-reports/",
       "reason": "experiment meta-artifacts, not system development work",
-      "file_count": 3
+      "file_count": 17
     },
     {
       "path": "hamr/microkit/attestation/",
@@ -32733,7 +35223,7 @@
     {
       "path": "hamr/microkit/build/",
       "reason": "build output",
-      "file_count": 33
+      "file_count": 39
     },
     {
       "path": "hamr/microkit/crates/firewall_core/Cargo.lock",
@@ -32752,6 +35242,11 @@
     },
     {
       "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/Cargo.lock",
+      "reason": "dependency lock / OS metadata (build output)",
+      "file_count": 1
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/Cargo.lock",
       "reason": "dependency lock / OS metadata (build output)",
       "file_count": 1
     },
@@ -33068,7 +35563,7 @@
     {
       "path": "reports/",
       "reason": "process/audit documentation; excluded from effort modeling (conservative)",
-      "file_count": 5
+      "file_count": 161
     },
     {
       "path": "sysmlv2/aadl-lib/",
@@ -33079,28 +35574,28 @@
   "rollups": {
     "by_provenance": {
       "developer_authored": {
-        "sloc": 1121,
-        "comment_lines": 8,
-        "blank_lines": 268,
-        "buckets": 15
+        "sloc": 1850,
+        "comment_lines": 36,
+        "blank_lines": 363,
+        "buckets": 17
       },
       "hamr_generated": {
-        "sloc": 13141,
-        "comment_lines": 2698,
-        "blank_lines": 2741,
-        "buckets": 205
+        "sloc": 15654,
+        "comment_lines": 3566,
+        "blank_lines": 3283,
+        "buckets": 229
       },
       "hamr_woven": {
-        "sloc": 709,
-        "comment_lines": 95,
-        "blank_lines": 101,
-        "buckets": 4
+        "sloc": 842,
+        "comment_lines": 149,
+        "blank_lines": 107,
+        "buckets": 10
       },
       "preserved_origin_unknown": {
-        "sloc": 341130,
-        "comment_lines": 49126,
-        "blank_lines": 48924,
-        "buckets": 1091
+        "sloc": 342307,
+        "comment_lines": 49233,
+        "blank_lines": 49053,
+        "buckets": 1100
       },
       "unknown": {
         "sloc": 0,
@@ -33111,22 +35606,28 @@
     },
     "by_artifact_type": {
       "build_config": {
-        "sloc": 198,
-        "comment_lines": 114,
-        "blank_lines": 71,
-        "buckets": 16
+        "sloc": 242,
+        "comment_lines": 165,
+        "blank_lines": 96,
+        "buckets": 20
+      },
+      "build_script": {
+        "sloc": 523,
+        "comment_lines": 0,
+        "blank_lines": 69,
+        "buckets": 1
       },
       "c_infra": {
-        "sloc": 127137,
-        "comment_lines": 48744,
-        "blank_lines": 22683,
-        "buckets": 642
+        "sloc": 127673,
+        "comment_lines": 49100,
+        "blank_lines": 22884,
+        "buckets": 649
       },
       "c_user_code": {
-        "sloc": 65,
-        "comment_lines": 10,
-        "blank_lines": 20,
-        "buckets": 5
+        "sloc": 78,
+        "comment_lines": 12,
+        "blank_lines": 24,
+        "buckets": 6
       },
       "docs": {
         "sloc": 214119,
@@ -33135,188 +35636,207 @@
         "buckets": 435
       },
       "gumbo_contract": {
-        "sloc": 326,
-        "comment_lines": 2,
-        "blank_lines": 70,
-        "buckets": 4
+        "sloc": 453,
+        "comment_lines": 21,
+        "blank_lines": 84,
+        "buckets": 5
       },
       "makefile": {
-        "sloc": 3742,
-        "comment_lines": 1133,
-        "blank_lines": 1228,
-        "buckets": 116
+        "sloc": 3834,
+        "comment_lines": 1180,
+        "blank_lines": 1274,
+        "buckets": 117
       },
       "microkit_config": {
-        "sloc": 584,
-        "comment_lines": 33,
-        "blank_lines": 100,
+        "sloc": 663,
+        "comment_lines": 44,
+        "blank_lines": 113,
         "buckets": 3
       },
       "requirements_text": {
-        "sloc": 421,
+        "sloc": 453,
         "comment_lines": 0,
-        "blank_lines": 138,
+        "blank_lines": 142,
         "buckets": 5
       },
       "rust_app_code": {
-        "sloc": 722,
-        "comment_lines": 424,
-        "blank_lines": 148,
-        "buckets": 4
+        "sloc": 1116,
+        "comment_lines": 439,
+        "blank_lines": 181,
+        "buckets": 5
       },
       "rust_contract_woven": {
-        "sloc": 709,
-        "comment_lines": 95,
-        "blank_lines": 101,
-        "buckets": 4
+        "sloc": 842,
+        "comment_lines": 149,
+        "blank_lines": 107,
+        "buckets": 10
       },
       "rust_infra": {
-        "sloc": 6332,
-        "comment_lines": 785,
-        "blank_lines": 785,
-        "buckets": 54
+        "sloc": 7733,
+        "comment_lines": 1178,
+        "blank_lines": 1001,
+        "buckets": 67
       },
       "rust_test_code": {
-        "sloc": 350,
-        "comment_lines": 27,
-        "blank_lines": 66,
-        "buckets": 4
+        "sloc": 932,
+        "comment_lines": 40,
+        "blank_lines": 102,
+        "buckets": 5
       },
       "rust_test_infra": {
-        "sloc": 1022,
-        "comment_lines": 150,
-        "blank_lines": 202,
-        "buckets": 19
+        "sloc": 1571,
+        "comment_lines": 237,
+        "blank_lines": 299,
+        "buckets": 24
       },
       "sysml_model": {
-        "sloc": 374,
-        "comment_lines": 6,
-        "blank_lines": 60,
+        "sloc": 421,
+        "comment_lines": 15,
+        "blank_lines": 68,
         "buckets": 6
       }
     },
     "by_component": {
       "mavlinkfirewall": {
-        "sloc": 63,
-        "comment_lines": 0,
-        "blank_lines": 7,
+        "sloc": 125,
+        "comment_lines": 11,
+        "blank_lines": 15,
+        "buckets": 1
+      },
+      "modemanager": {
+        "sloc": 23,
+        "comment_lines": 2,
+        "blank_lines": 2,
         "buckets": 1
       },
       "rxfirewall": {
-        "sloc": 76,
-        "comment_lines": 0,
-        "blank_lines": 4,
+        "sloc": 105,
+        "comment_lines": 2,
+        "blank_lines": 6,
         "buckets": 1
       },
       "txfirewall": {
-        "sloc": 47,
-        "comment_lines": 0,
-        "blank_lines": 6,
+        "sloc": 56,
+        "comment_lines": 1,
+        "blank_lines": 7,
         "buckets": 1
       }
     },
     "by_step_bucket": {
       "CodeGen.2": {
-        "sloc": 14383,
+        "sloc": 17228,
         "granularity": "exact_step",
         "by_provenance": {
-          "hamr_generated": 13141,
-          "preserved_origin_unknown": 533,
-          "hamr_woven": 709
+          "hamr_generated": 15654,
+          "preserved_origin_unknown": 732,
+          "hamr_woven": 842
+        }
+      },
+      "CodeGen.4": {
+        "sloc": 523,
+        "granularity": "exact_step",
+        "by_provenance": {
+          "developer_authored": 523
         }
       },
       "CompDev(*).2": {
-        "sloc": 722,
+        "sloc": 1116,
         "granularity": "exact_step",
         "by_provenance": {
-          "preserved_origin_unknown": 722
+          "preserved_origin_unknown": 1116
         }
       },
       "CompDev(*).3": {
-        "sloc": 350,
+        "sloc": 932,
         "granularity": "exact_step",
         "by_provenance": {
-          "preserved_origin_unknown": 350
+          "preserved_origin_unknown": 932
         }
       },
       "CompGUMBOSpec(*)": {
-        "sloc": 140,
+        "sloc": 144,
         "granularity": "workflow_only",
         "by_provenance": {
-          "developer_authored": 140
+          "developer_authored": 144
         }
       },
       "CompGUMBOSpec(mavlinkfirewall)": {
-        "sloc": 63,
+        "sloc": 125,
         "granularity": "workflow_only",
         "by_provenance": {
-          "developer_authored": 63
+          "developer_authored": 125
+        }
+      },
+      "CompGUMBOSpec(modemanager)": {
+        "sloc": 23,
+        "granularity": "workflow_only",
+        "by_provenance": {
+          "developer_authored": 23
         }
       },
       "CompGUMBOSpec(rxfirewall)": {
-        "sloc": 76,
+        "sloc": 105,
         "granularity": "workflow_only",
         "by_provenance": {
-          "developer_authored": 76
+          "developer_authored": 105
         }
       },
       "CompGUMBOSpec(txfirewall)": {
-        "sloc": 47,
+        "sloc": 56,
         "granularity": "workflow_only",
         "by_provenance": {
-          "developer_authored": 47
+          "developer_authored": 56
         }
       },
       "SysModeling": {
-        "sloc": 374,
+        "sloc": 421,
         "granularity": "workflow_only",
         "by_provenance": {
-          "developer_authored": 374
+          "developer_authored": 421
         }
       },
       "SysPlanAndReq.1": {
-        "sloc": 152,
+        "sloc": 160,
         "granularity": "exact_step",
         "by_provenance": {
-          "developer_authored": 152
+          "developer_authored": 160
         }
       },
       "SysPlanAndReq.3": {
-        "sloc": 48,
+        "sloc": 56,
         "granularity": "exact_step",
         "by_provenance": {
-          "developer_authored": 48
+          "developer_authored": 56
         }
       },
       "SysPlanAndReq.4": {
-        "sloc": 31,
+        "sloc": 39,
         "granularity": "exact_step",
         "by_provenance": {
-          "developer_authored": 31
+          "developer_authored": 39
         }
       },
       "SysSchedDef.1": {
-        "sloc": 12,
+        "sloc": 14,
         "granularity": "inferred_step",
         "by_provenance": {
-          "preserved_origin_unknown": 12
+          "preserved_origin_unknown": 14
         }
       },
       "unattributed": {
-        "sloc": 339703,
+        "sloc": 339711,
         "granularity": "unattributed",
         "by_provenance": {
           "preserved_origin_unknown": 339513,
           "unknown": 0,
-          "developer_authored": 190
+          "developer_authored": 198
         }
       }
     },
-    "total_sloc": 356101
+    "total_sloc": 360653
   },
   "caveats": [
-    "codegen report contains 42 duplicate resource path(s); deduplicated (flags agreed)",
-    "codegen report is PARTIAL: internal status 'Success' is not trusted as a completeness signal; 1238 generated-looking file(s) on disk are absent from the report",
+    "codegen report is PARTIAL: internal status 'Success' is not trusted as a completeness signal; 1243 generated-looking file(s) on disk are absent from the report",
     "no generation baseline supplied; non-marker content of generate-once files is preserved_origin_unknown"
   ]
 }

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "change_id": "CR-02",
+  "baseline": "043d574970d28ff172f7261ea0392ddd14ae50a8",
+  "transcript_line_window": {
+    "first": 136,
+    "last": 10560
+  },
+  "boundary_evidence": {
+    "start": "CR-02 requirements-review request at user block line 136",
+    "approval": "user approved at line 10516",
+    "end": "completion response before next user at line 10562"
+  },
+  "metrics_scope": "Whole normalized primary session; not recomputed as CR-02-only time/tokens/cost",
+  "excluded_work": [
+    "CR-01 development",
+    "unchanged baseline authorship",
+    "initial status/setup",
+    "post-closeout report reorganization",
+    "transcription/assessment/effort reporting"
+  ],
+  "finding_relations": {
+    "WF-01": "CR-02 planning, approval and exception handling",
+    "WF-02": "Inherited defect discovered and corrected during CR-02; not introduced by the change",
+    "WF-03": "Open CR-02 timing observation and accepted handoff",
+    "CG-01": "Generator reporting defect encountered by new CR-02 monitor and resolved within CR-02",
+    "CG-02": "Build integration friction encountered by CR-02 R2U2 work",
+    "CG-03": "Generator/SDK compatibility encountered in CR-02 deployment",
+    "CG-04": "Preservation and validation performed during CR-02; includes regression coverage of inherited assets",
+    "DOC-01": "Advice error and user correction during CR-02 requirements review",
+    "DOC-02": "Requirements authority and logging reconciliation completed before CR-02 approval",
+    "ENV-02": "Observed harness execution friction within the CR-02 transcript interval",
+    "ENV-03": "Inherited platform limitation re-observed in CR-02 driver amendment and final validation"
+  },
+  "metadata_only": [
+    "ENV-01 parser coverage limitation",
+    "unlinked saved-prefix approval"
+  ],
+  "input_sha256": {
+    "experiment-reports/session-transcript.md": "de83acecca0806fe37a529e1997526a64c019fdbe7c886c9fab9ea413756dbd6",
+    "experiment-reports/session-metrics.json": "ff004eedab7f113419f3f125dfc95d459a33dd16c5f15528f9ea705e2810098c",
+    "reports/workflow-status.md": "b2497647a3debcfea053578e509cc6c92397ed67b1fff5d01de70008e069803d",
+    "reports/CR-02/CR-02-add-mode-manager.md": "fe2291084aa8f58fdb4ee1f5e549fa8bb646d0291644bc626198fa39cb68914b",
+    "reports/CR-02/final-validation/CR-02-final-validation.md": "d9d9c0041787663cfd025c90e4b362b64038f896e140d95c3112d1e8f1a19d68",
+    "action-requests/CR-02-add-mode-manager/Open_Platform_HLRs_26_09_23_02.md": "feaf8facf23e0a22a1ae99ac17a9447810d45f9db43b5da3953080b9ac125646",
+    "open-issues/CR-02-HW-01-recovery-timeout.md": "f49be0d8abc764e5d88425bc340e4d1242b9f6a6c733b4e993d28cee0ccae702"
+  }
+}

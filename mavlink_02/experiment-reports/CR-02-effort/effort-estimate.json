@@ -1,0 +1,2114 @@
+{
+  "schema_version": 1,
+  "generated": "2026-09-23T21:50:00-04:00",
+  "project": {
+    "name": "mavlink_02-CR-02",
+    "path": "/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02"
+  },
+  "manifest": {
+    "schema_version": 1,
+    "experiment_id": "mavlink_02-CR-02",
+    "lifecycle": "change",
+    "workflow": "ChangeExec(CR-02)",
+    "profile": "audited",
+    "actor": "agent",
+    "harness": "codex",
+    "concept_quote": "# Reduce potential cyber attacks by adding a mavlink firewall that can blacklist certain mavlink commands/messages\n\n## Goals for updated system functionality\nIncrease the cyber resilience of the system by adding a protocol specific firewall which can reject specific or malformed mavlink messages before they can make it to the Ardupilot software running in the VM. THe mavlink firewall should reject any messages that can update firmware.",
+    "concept_sha256": "90eb65e0daa6fe4a6733366be7b8fe486c6c04b0f13b020e342cef545e430a45",
+    "project_dir": ".",
+    "session_metrics": "experiment-reports/session-metrics.json",
+    "metrics_cover_full_run": false,
+    "known_exclusions": [
+      "CR-02 only: baseline 043d574 to current working tree; unchanged lines, all CR-01/vendor work and post-session reporting work excluded from priced delta.",
+      "Final requirements compared with initial supplied CR-02 draft, not empty text. Revisions are collaborative/developer-owned work, not claimed as agent-authored. Intermediate versions are not summed.",
+      "Net retained additions/replacements are a proxy, not actual authoring time; removed-only work, debugging, reverted experiments, repeated edits and review effort are not fully modeled.",
+      "Historical ModeManager scaffold at b68c70a provides limited provenance, not a pristine final-model regeneration. Other generated classifications use markers, generator report and contemporaneous artifact inventory.",
+      "Scope is partial: the session includes interaction, troubleshooting and closeout omitted from source-based effort; subagents are excluded, costs unavailable, ratios suppressed.",
+      "concept_quote retains the skill-required historical conops section 0; current CR-02 concept is quoted separately in config/delta-scope-v1.json.",
+      "Unchanged audited lines use library provenance only as the v1 excluded category; they are not claimed to be third-party libraries. They never contribute hours.",
+      "Fixed tool overheads reuse uncalibrated v1 amounts for explicit completed CR-02 steps; not observed command durations. Build-script setup is counted once."
+    ],
+    "hamr_version": "Final HAMR codegen checkout 5801330b0987f954f13e2188f523e24261ce2ba4; Sireum checkout 85c9cdfe04227ec2d3064b13c231943648c8431b (upgraded during session)",
+    "generation_baseline": null
+  },
+  "measures_ref": "/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/experiment-reports/CR-02-effort/project-measures.json",
+  "estimator": {
+    "model": "linear_sloc_v1",
+    "config_sha256": "2a7c6386fd2fcb4dd80f348cfda6a81cafbf5376a13eba060bd8275315713503",
+    "calibration_status": "uncalibrated_placeholder",
+    "scope_note": "CR-02 retained authored/specification/test/configuration delta plus fixed overhead for recorded completed technical activities. Excludes inherited lines, supplied requirements draft, deleted-only/reverted/repeated work, reports, review meetings, board operations and issue-resolution work after CR-02."
+  },
+  "counterfactual": {
+    "config_sha256": "6d842f25956ec6b450a1a70bfe75abab59083bb021fd3bbda725c6b5b4773b3a",
+    "assignments": {
+      "common_both_paths": {
+        "sloc": 365,
+        "by_artifact_type": {
+          "requirements_text": 314,
+          "sysml_model": 51
+        }
+      },
+      "excluded_library_or_build_output": {
+        "sloc": 9175,
+        "by_artifact_type": {
+          "inherited_baseline": 9175
+        }
+      },
+      "hamr_generated_manual_replacement": {
+        "sloc": 3628,
+        "by_artifact_type": {
+          "build_config": 94,
+          "c_infra": 498,
+          "makefile": 60,
+          "microkit_config": 65,
+          "rust_contract_woven": 277,
+          "rust_infra": 1548,
+          "rust_test_infra": 1086
+        }
+      },
+      "hamr_path_authored": {
+        "sloc": 1894,
+        "by_artifact_type": {
+          "build_config": 43,
+          "build_script": 523,
+          "gumbo_contract": 169,
+          "makefile": 88,
+          "microkit_config": 2,
+          "proof_code": 10,
+          "python_tool": 48,
+          "rust_app_code": 227,
+          "rust_test_code": 784
+        }
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "name": "nominal",
+      "factor": 1.0,
+      "note": "A manual build writes an equivalent of every generated line."
+    },
+    {
+      "name": "conservative",
+      "factor": 0.5,
+      "note": "A hand-built system may need only about half the generated line count (less generality, fewer harness layers)."
+    }
+  ],
+  "steps": [
+    {
+      "step_key": "CR-02.CodeGen",
+      "granularity": "workflow_only",
+      "status": "done",
+      "measures": {
+        "sloc_total": 3628,
+        "by_provenance": {
+          "hamr_generated": 2401,
+          "hamr_template_retained": 950,
+          "hamr_woven": 277
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.0,
+          "cost_usd": 0.0,
+          "by_type": {},
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 0.0,
+          "cost_usd": 0.0,
+          "by_type": {},
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CR-02.CompDev(MAVLinkFirewall).2",
+      "granularity": "workflow_only",
+      "status": "done",
+      "measures": {
+        "sloc_total": 159,
+        "by_provenance": {
+          "developer_authored": 159
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 17.4,
+          "cost_usd": 2610.0,
+          "by_type": {
+            "proof_code": {
+              "sloc": 10,
+              "hours": 2.5
+            },
+            "rust_app_code": {
+              "sloc": 149,
+              "hours": 14.9
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 32.35,
+          "cost_usd": 3558.5,
+          "by_type": {
+            "proof_code": {
+              "sloc": 10,
+              "hours": 10.0
+            },
+            "rust_app_code": {
+              "sloc": 149,
+              "hours": 22.35
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CR-02.CompDev(MAVLinkFirewall).3",
+      "granularity": "workflow_only",
+      "status": "done",
+      "measures": {
+        "sloc_total": 259,
+        "by_provenance": {
+          "developer_authored": 259
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 17.27,
+          "cost_usd": 2590.5,
+          "by_type": {
+            "rust_test_code": {
+              "sloc": 259,
+              "hours": 17.27
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 25.9,
+          "cost_usd": 2849.0,
+          "by_type": {
+            "rust_test_code": {
+              "sloc": 259,
+              "hours": 25.9
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CR-02.CompDev(ModeManager).2",
+      "granularity": "workflow_only",
+      "status": "done",
+      "measures": {
+        "sloc_total": 16,
+        "by_provenance": {
+          "developer_authored": 16
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 1.6,
+          "cost_usd": 240.0,
+          "by_type": {
+            "rust_app_code": {
+              "sloc": 16,
+              "hours": 1.6
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 2.4,
+          "cost_usd": 264.0,
+          "by_type": {
+            "rust_app_code": {
+              "sloc": 16,
+              "hours": 2.4
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CR-02.CompDev(ModeManager).3",
+      "granularity": "workflow_only",
+      "status": "done",
+      "measures": {
+        "sloc_total": 66,
+        "by_provenance": {
+          "developer_authored": 66
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 4.4,
+          "cost_usd": 660.0,
+          "by_type": {
+            "rust_test_code": {
+              "sloc": 66,
+              "hours": 4.4
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 6.6,
+          "cost_usd": 726.0,
+          "by_type": {
+            "rust_test_code": {
+              "sloc": 66,
+              "hours": 6.6
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CR-02.CompDev(RxFirewall).2",
+      "granularity": "workflow_only",
+      "status": "done",
+      "measures": {
+        "sloc_total": 50,
+        "by_provenance": {
+          "developer_authored": 50
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 5.0,
+          "cost_usd": 750.0,
+          "by_type": {
+            "rust_app_code": {
+              "sloc": 50,
+              "hours": 5.0
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 7.5,
+          "cost_usd": 825.0,
+          "by_type": {
+            "rust_app_code": {
+              "sloc": 50,
+              "hours": 7.5
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CR-02.CompDev(RxFirewall).3",
+      "granularity": "workflow_only",
+      "status": "done",
+      "measures": {
+        "sloc_total": 110,
+        "by_provenance": {
+          "developer_authored": 110
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 7.33,
+          "cost_usd": 1099.5,
+          "by_type": {
+            "rust_test_code": {
+              "sloc": 110,
+              "hours": 7.33
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 11.0,
+          "cost_usd": 1210.0,
+          "by_type": {
+            "rust_test_code": {
+              "sloc": 110,
+              "hours": 11.0
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CR-02.CompDev(TxFirewall).3",
+      "granularity": "workflow_only",
+      "status": "done",
+      "measures": {
+        "sloc_total": 124,
+        "by_provenance": {
+          "developer_authored": 124
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 8.27,
+          "cost_usd": 1240.5,
+          "by_type": {
+            "rust_test_code": {
+              "sloc": 124,
+              "hours": 8.27
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 12.4,
+          "cost_usd": 1364.0,
+          "by_type": {
+            "rust_test_code": {
+              "sloc": 124,
+              "hours": 12.4
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CR-02.CompGUMBOSpec(MAVLinkFirewall)",
+      "granularity": "workflow_only",
+      "status": "done",
+      "measures": {
+        "sloc_total": 90,
+        "by_provenance": {
+          "developer_authored": 90
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 30.0,
+          "cost_usd": 4500.0,
+          "by_type": {
+            "gumbo_contract": {
+              "sloc": 90,
+              "hours": 30.0
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 75.0,
+          "cost_usd": 8250.0,
+          "by_type": {
+            "gumbo_contract": {
+              "sloc": 90,
+              "hours": 75.0
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CR-02.CompGUMBOSpec(ModeManager)",
+      "granularity": "workflow_only",
+      "status": "done",
+      "measures": {
+        "sloc_total": 21,
+        "by_provenance": {
+          "developer_authored": 21
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 7.0,
+          "cost_usd": 1050.0,
+          "by_type": {
+            "gumbo_contract": {
+              "sloc": 21,
+              "hours": 7.0
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 17.5,
+          "cost_usd": 1925.0,
+          "by_type": {
+            "gumbo_contract": {
+              "sloc": 21,
+              "hours": 17.5
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CR-02.CompGUMBOSpec(RxFirewall)",
+      "granularity": "workflow_only",
+      "status": "done",
+      "measures": {
+        "sloc_total": 41,
+        "by_provenance": {
+          "developer_authored": 41
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 13.67,
+          "cost_usd": 2050.5,
+          "by_type": {
+            "gumbo_contract": {
+              "sloc": 41,
+              "hours": 13.67
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 34.17,
+          "cost_usd": 3758.7,
+          "by_type": {
+            "gumbo_contract": {
+              "sloc": 41,
+              "hours": 34.17
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CR-02.CompGUMBOSpec(TxFirewall)",
+      "granularity": "workflow_only",
+      "status": "done",
+      "measures": {
+        "sloc_total": 9,
+        "by_provenance": {
+          "developer_authored": 9
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 3.0,
+          "cost_usd": 450.0,
+          "by_type": {
+            "gumbo_contract": {
+              "sloc": 9,
+              "hours": 3.0
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 7.5,
+          "cost_usd": 825.0,
+          "by_type": {
+            "gumbo_contract": {
+              "sloc": 9,
+              "hours": 7.5
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CR-02.SharedContracts",
+      "granularity": "workflow_only",
+      "status": "done",
+      "measures": {
+        "sloc_total": 8,
+        "by_provenance": {
+          "developer_authored": 8
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 2.67,
+          "cost_usd": 400.5,
+          "by_type": {
+            "gumbo_contract": {
+              "sloc": 8,
+              "hours": 2.67
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 6.67,
+          "cost_usd": 733.7,
+          "by_type": {
+            "gumbo_contract": {
+              "sloc": 8,
+              "hours": 6.67
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CR-02.Toolchain",
+      "granularity": "workflow_only",
+      "status": "done",
+      "measures": {
+        "sloc_total": 35,
+        "by_provenance": {
+          "developer_authored": 35
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 2.92,
+          "cost_usd": 438.0,
+          "by_type": {
+            "build_config": {
+              "sloc": 35,
+              "hours": 2.92
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 4.38,
+          "cost_usd": 481.8,
+          "by_type": {
+            "build_config": {
+              "sloc": 35,
+              "hours": 4.38
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W1.CodeGen-R2.2",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "generation and output inspection"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W1.CodeGen.2",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "generation and output inspection"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W1.R2U2Reporting",
+      "granularity": "inferred_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 209,
+        "by_provenance": {
+          "developer_authored": 209
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 15.47,
+          "cost_usd": 2320.5,
+          "by_type": {
+            "build_config": {
+              "sloc": 8,
+              "hours": 0.67
+            },
+            "python_tool": {
+              "sloc": 24,
+              "hours": 3.0
+            },
+            "rust_test_code": {
+              "sloc": 177,
+              "hours": 11.8
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 23.2,
+          "cost_usd": 2552.0,
+          "by_type": {
+            "build_config": {
+              "sloc": 8,
+              "hours": 1.0
+            },
+            "python_tool": {
+              "sloc": 24,
+              "hours": 4.5
+            },
+            "rust_test_code": {
+              "sloc": 177,
+              "hours": 17.7
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W1.Requirements",
+      "granularity": "inferred_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 314,
+        "by_provenance": {
+          "developer_authored": 314
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 26.17,
+          "cost_usd": 3925.5,
+          "by_type": {
+            "requirements_text": {
+              "sloc": 314,
+              "hours": 26.17
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 39.25,
+          "cost_usd": 4317.5,
+          "by_type": {
+            "requirements_text": {
+              "sloc": 314,
+              "hours": 39.25
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W1.SetupBuildScript",
+      "granularity": "inferred_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 523,
+        "by_provenance": {
+          "developer_authored": 523
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {
+            "build_script": {
+              "sloc": 523,
+              "hours": 0.5
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {
+            "build_script": {
+              "sloc": 523,
+              "hours": 0.75
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.1",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "integration check"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.25,
+          "cost_usd": 37.5,
+          "by_type": {},
+          "overhead_hours": 0.25
+        },
+        "new_to_sel4": {
+          "hours": 0.38,
+          "cost_usd": 41.8,
+          "by_type": {},
+          "overhead_hours": 0.38
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W1.SysModeling",
+      "granularity": "inferred_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 51,
+        "by_provenance": {
+          "developer_authored": 51
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 8.5,
+          "cost_usd": 1275.0,
+          "by_type": {
+            "sysml_model": {
+              "sloc": 51,
+              "hours": 8.5
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 12.75,
+          "cost_usd": 1402.5,
+          "by_type": {
+            "sysml_model": {
+              "sloc": 51,
+              "hours": 12.75
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W1.SysModeling.5",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "type-check and triage"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.25,
+          "cost_usd": 37.5,
+          "by_type": {},
+          "overhead_hours": 0.25
+        },
+        "new_to_sel4": {
+          "hours": 0.38,
+          "cost_usd": 41.8,
+          "by_type": {},
+          "overhead_hours": 0.38
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).4",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component test/coverage check"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W2.CompDev(MAVLinkFirewall).6",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component verification/triage"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W2.CompDev(ModeManager).4",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component test/coverage check"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W2.CompDev(ModeManager).6",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component verification/triage"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W2.CompDev(RxFirewall).4",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component test/coverage check"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W2.CompDev(RxFirewall).6",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component verification/triage"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W2.CompDev(TxFirewall)/TestOnly.4",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component test/coverage check"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly.6",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component verification/triage"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W3.BoundsCodeGen.2",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "generation and output inspection"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W3.BoundsCompDev",
+      "granularity": "inferred_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 20,
+        "by_provenance": {
+          "developer_authored": 20
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 1.37,
+          "cost_usd": 205.5,
+          "by_type": {
+            "rust_app_code": {
+              "sloc": 1,
+              "hours": 0.1
+            },
+            "rust_test_code": {
+              "sloc": 19,
+              "hours": 1.27
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 2.05,
+          "cost_usd": 225.5,
+          "by_type": {
+            "rust_app_code": {
+              "sloc": 1,
+              "hours": 0.15
+            },
+            "rust_test_code": {
+              "sloc": 19,
+              "hours": 1.9
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W3.BudgetIncrease.SysSchedDef.1",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "schedule review"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.25,
+          "cost_usd": 37.5,
+          "by_type": {},
+          "overhead_hours": 0.25
+        },
+        "new_to_sel4": {
+          "hours": 0.38,
+          "cost_usd": 41.8,
+          "by_type": {},
+          "overhead_hours": 0.38
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W3.Build",
+      "granularity": "inferred_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 112,
+        "by_provenance": {
+          "developer_authored": 112
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 11.8,
+          "cost_usd": 1770.0,
+          "by_type": {
+            "makefile": {
+              "sloc": 88,
+              "hours": 8.8
+            },
+            "python_tool": {
+              "sloc": 24,
+              "hours": 3.0
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 17.7,
+          "cost_usd": 1947.0,
+          "by_type": {
+            "makefile": {
+              "sloc": 88,
+              "hours": 13.2
+            },
+            "python_tool": {
+              "sloc": 24,
+              "hours": 4.5
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.4",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component test/coverage check"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.6",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component verification/triage"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.4",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component test/coverage check"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.6",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component verification/triage"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.4",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component test/coverage check"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.6",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component verification/triage"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.4",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component test/coverage check"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.6",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "component verification/triage"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W3.DriverBounds",
+      "granularity": "inferred_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 40,
+        "by_provenance": {
+          "developer_authored": 40
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 3.03,
+          "cost_usd": 454.5,
+          "by_type": {
+            "rust_app_code": {
+              "sloc": 11,
+              "hours": 1.1
+            },
+            "rust_test_code": {
+              "sloc": 29,
+              "hours": 1.93
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 4.55,
+          "cost_usd": 500.5,
+          "by_type": {
+            "rust_app_code": {
+              "sloc": 11,
+              "hours": 1.65
+            },
+            "rust_test_code": {
+              "sloc": 29,
+              "hours": 2.9
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "ChangeExec(CR-02).W3.SysSchedDef.1",
+      "granularity": "inferred_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 2,
+        "by_provenance": {
+          "developer_authored": 2
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "schedule review"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.92,
+          "cost_usd": 138.0,
+          "by_type": {
+            "microkit_config": {
+              "sloc": 2,
+              "hours": 0.67
+            }
+          },
+          "overhead_hours": 0.25
+        },
+        "new_to_sel4": {
+          "hours": 3.05,
+          "cost_usd": 335.5,
+          "by_type": {
+            "microkit_config": {
+              "sloc": 2,
+              "hours": 2.67
+            }
+          },
+          "overhead_hours": 0.38
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CodeGen-HAMRUpgrade.2",
+      "granularity": "exact_step",
+      "status": "done",
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "generation and output inspection"
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {},
+          "overhead_hours": 0.5
+        },
+        "new_to_sel4": {
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {},
+          "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "Excluded baseline/input",
+      "granularity": "inferred_step",
+      "status": null,
+      "measures": {
+        "sloc_total": 9175,
+        "by_provenance": {
+          "library": 9175
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.0,
+          "cost_usd": 0.0,
+          "by_type": {},
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 0.0,
+          "cost_usd": 0.0,
+          "by_type": {},
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    }
+  ],
+  "hamr_generated_value": {
+    "sloc": 3628,
+    "by_artifact_type": {
+      "build_config": 94,
+      "c_infra": 498,
+      "makefile": 60,
+      "microkit_config": 65,
+      "rust_contract_woven": 277,
+      "rust_infra": 1548,
+      "rust_test_infra": 1086
+    },
+    "template_accounting": {
+      "files": 21,
+      "supplied": 968,
+      "retained": 964,
+      "replaced": 4
+    },
+    "estimates": {
+      "experienced_sel4": {
+        "nominal": {
+          "hours": 471.75,
+          "cost_usd": 70762.5,
+          "by_type": {
+            "build_config": {
+              "sloc": 94,
+              "hours": 7.83
+            },
+            "c_infra": {
+              "sloc": 498,
+              "hours": 83.0
+            },
+            "makefile": {
+              "sloc": 60,
+              "hours": 6.0
+            },
+            "microkit_config": {
+              "sloc": 65,
+              "hours": 21.67
+            },
+            "rust_contract_woven": {
+              "sloc": 277,
+              "hours": 69.25
+            },
+            "rust_infra": {
+              "sloc": 1548,
+              "hours": 193.5
+            },
+            "rust_test_infra": {
+              "sloc": 1086,
+              "hours": 90.5
+            }
+          }
+        },
+        "conservative": {
+          "hours": 235.88,
+          "cost_usd": 35381.25,
+          "by_type": {
+            "build_config": {
+              "sloc": 94,
+              "hours": 3.92
+            },
+            "c_infra": {
+              "sloc": 498,
+              "hours": 41.5
+            },
+            "makefile": {
+              "sloc": 60,
+              "hours": 3.0
+            },
+            "microkit_config": {
+              "sloc": 65,
+              "hours": 10.83
+            },
+            "rust_contract_woven": {
+              "sloc": 277,
+              "hours": 34.62
+            },
+            "rust_infra": {
+              "sloc": 1548,
+              "hours": 96.75
+            },
+            "rust_test_infra": {
+              "sloc": 1086,
+              "hours": 45.25
+            }
+          }
+        }
+      },
+      "new_to_sel4": {
+        "nominal": {
+          "hours": 955.54,
+          "cost_usd": 105109.58,
+          "by_type": {
+            "build_config": {
+              "sloc": 94,
+              "hours": 11.75
+            },
+            "c_infra": {
+              "sloc": 498,
+              "hours": 249.0
+            },
+            "makefile": {
+              "sloc": 60,
+              "hours": 9.0
+            },
+            "microkit_config": {
+              "sloc": 65,
+              "hours": 86.67
+            },
+            "rust_contract_woven": {
+              "sloc": 277,
+              "hours": 173.12
+            },
+            "rust_infra": {
+              "sloc": 1548,
+              "hours": 290.25
+            },
+            "rust_test_infra": {
+              "sloc": 1086,
+              "hours": 135.75
+            }
+          }
+        },
+        "conservative": {
+          "hours": 477.77,
+          "cost_usd": 52554.79,
+          "by_type": {
+            "build_config": {
+              "sloc": 94,
+              "hours": 5.88
+            },
+            "c_infra": {
+              "sloc": 498,
+              "hours": 124.5
+            },
+            "makefile": {
+              "sloc": 60,
+              "hours": 4.5
+            },
+            "microkit_config": {
+              "sloc": 65,
+              "hours": 43.33
+            },
+            "rust_contract_woven": {
+              "sloc": 277,
+              "hours": 86.56
+            },
+            "rust_infra": {
+              "sloc": 1548,
+              "hours": 145.12
+            },
+            "rust_test_infra": {
+              "sloc": 1086,
+              "hours": 67.88
+            }
+          }
+        }
+      }
+    }
+  },
+  "common_mode": {
+    "sloc": 365,
+    "by_artifact_type": {
+      "requirements_text": 314,
+      "sysml_model": 51
+    },
+    "estimates": {
+      "experienced_sel4": {
+        "hours": 34.67,
+        "cost_usd": 5200.0,
+        "by_type": {
+          "requirements_text": {
+            "sloc": 314,
+            "hours": 26.17
+          },
+          "sysml_model": {
+            "sloc": 51,
+            "hours": 8.5
+          }
+        }
+      },
+      "new_to_sel4": {
+        "hours": 52.0,
+        "cost_usd": 5720.0,
+        "by_type": {
+          "requirements_text": {
+            "sloc": 314,
+            "hours": 39.25
+          },
+          "sysml_model": {
+            "sloc": 51,
+            "hours": 12.75
+          }
+        }
+      }
+    }
+  },
+  "authored_hamr_path": {
+    "sloc": 1894,
+    "by_artifact_type": {
+      "build_config": 43,
+      "build_script": 523,
+      "gumbo_contract": 169,
+      "makefile": 88,
+      "microkit_config": 2,
+      "proof_code": 10,
+      "python_tool": 48,
+      "rust_app_code": 227,
+      "rust_test_code": 784
+    },
+    "estimates": {
+      "experienced_sel4": {
+        "hours": 153.35,
+        "cost_usd": 23002.5,
+        "by_type": {
+          "build_config": {
+            "sloc": 43,
+            "hours": 3.58
+          },
+          "build_script": {
+            "sloc": 523,
+            "hours": 0.5
+          },
+          "gumbo_contract": {
+            "sloc": 169,
+            "hours": 56.33
+          },
+          "makefile": {
+            "sloc": 88,
+            "hours": 8.8
+          },
+          "microkit_config": {
+            "sloc": 2,
+            "hours": 0.67
+          },
+          "proof_code": {
+            "sloc": 10,
+            "hours": 2.5
+          },
+          "python_tool": {
+            "sloc": 48,
+            "hours": 6.0
+          },
+          "rust_app_code": {
+            "sloc": 227,
+            "hours": 22.7
+          },
+          "rust_test_code": {
+            "sloc": 784,
+            "hours": 52.27
+          }
+        }
+      },
+      "new_to_sel4": {
+        "hours": 294.27,
+        "cost_usd": 32370.25,
+        "by_type": {
+          "build_config": {
+            "sloc": 43,
+            "hours": 5.38
+          },
+          "build_script": {
+            "sloc": 523,
+            "hours": 0.75
+          },
+          "gumbo_contract": {
+            "sloc": 169,
+            "hours": 140.83
+          },
+          "makefile": {
+            "sloc": 88,
+            "hours": 13.2
+          },
+          "microkit_config": {
+            "sloc": 2,
+            "hours": 2.67
+          },
+          "proof_code": {
+            "sloc": 10,
+            "hours": 10.0
+          },
+          "python_tool": {
+            "sloc": 48,
+            "hours": 9.0
+          },
+          "rust_app_code": {
+            "sloc": 227,
+            "hours": 34.05
+          },
+          "rust_test_code": {
+            "sloc": 784,
+            "hours": 78.4
+          }
+        }
+      }
+    }
+  },
+  "unknown_provenance": {
+    "sloc": 0,
+    "by_artifact_type": {},
+    "note": "origin unresolved (no compatible template baseline); counted in neither headline story"
+  },
+  "unmodeled_manual": [
+    "Manual-path behavioral specification and verification effort in place of GUMBO contracts and Verus proofs",
+    "Manual-path test-harness construction and test authoring for hand-built infrastructure",
+    "Manual acquisition of seL4/Microkit platform expertise (protection domains, channels, static schedules)",
+    "Manual integration debugging of hand-written IPC/shared-memory plumbing",
+    "Manual maintenance of consistency between architecture documentation and code"
+  ],
+  "workflow_completion": {
+    "workflows": {
+      "ChangeExec(CR-02)": "done"
+    },
+    "completed": [
+      "ChangeExec(CR-02)"
+    ],
+    "components": [
+      "ModeManager",
+      "MAVLinkFirewall",
+      "RxFirewall",
+      "TxFirewall",
+      "LowLevelEthernetDriver"
+    ],
+    "profile": "audited"
+  },
+  "session_totals": {
+    "source": "/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/experiment-reports/session-metrics.json",
+    "schema_or_adapter": "schema-v2",
+    "harness": "codex",
+    "harness_version": "0.154.0",
+    "models": [
+      "gpt-6-astra"
+    ],
+    "tokens": {
+      "input": 2345891,
+      "output": 295554,
+      "cache_read": 82935168,
+      "cache_write": 0,
+      "reasoning_output": 35002
+    },
+    "cost_usd": {
+      "kind": null,
+      "total": null
+    },
+    "active_seconds": 18143,
+    "wall_clock_seconds": 132704,
+    "friction": {
+      "escalation_requests": 0,
+      "dynamic_shell_commands": 0,
+      "sandbox_failures": 0,
+      "observable_approval_outcomes": 1,
+      "parser_coverage_warnings": 1267
+    },
+    "caveats": [
+      "1267 parser coverage warning(s); friction counts undercounted",
+      "actual billed cost unavailable",
+      "subagents excluded"
+    ]
+  },
+  "comparisons": [
+    {
+      "kind": "within_experiment_modeled_human_vs_observed_agent",
+      "scope_alignment": "partial",
+      "values": {
+        "modeled_human": {
+          "experienced_sel4": {
+            "hours": 199.02,
+            "cost_usd": 29853.0,
+            "composition": "common_both_paths + hamr_path_authored + activity overheads"
+          },
+          "new_to_sel4": {
+            "hours": 362.79,
+            "cost_usd": 39906.9,
+            "composition": "common_both_paths + hamr_path_authored + activity overheads"
+          }
+        },
+        "observed_agent": {
+          "active_seconds": 18143,
+          "wall_clock_seconds": 132704,
+          "cost_usd": {
+            "kind": null,
+            "total": null
+          },
+          "tokens": {
+            "input": 2345891,
+            "output": 295554,
+            "cache_read": 82935168,
+            "cache_write": 0,
+            "reasoning_output": 35002
+          }
+        }
+      },
+      "ratio": null,
+      "caveats": [
+        "1267 parser coverage warning(s); friction counts undercounted",
+        "actual billed cost unavailable",
+        "subagents excluded",
+        "UNCALIBRATED MODEL: modeled human hours use uncalibrated placeholder rates under a named profile",
+        "scope alignment is not exact; ratio suppressed"
+      ]
+    }
+  ],
+  "attribution_summary": {
+    "coverage": 1.0,
+    "by_granularity": {
+      "workflow_only": 4616,
+      "exact_step": 0,
+      "inferred_step": 10446
+    }
+  },
+  "caveats": [
+    "CR-02 only: baseline 043d574 to current working tree; unchanged lines, all CR-01/vendor work and post-session reporting work excluded from priced delta.",
+    "Final requirements compared with initial supplied CR-02 draft, not empty text. Revisions are collaborative/developer-owned work, not claimed as agent-authored. Intermediate versions are not summed.",
+    "Net retained additions/replacements are a proxy, not actual authoring time; removed-only work, debugging, reverted experiments, repeated edits and review effort are not fully modeled.",
+    "Historical ModeManager scaffold at b68c70a provides limited provenance, not a pristine final-model regeneration. Other generated classifications use markers, generator report and contemporaneous artifact inventory.",
+    "Scope is partial: the session includes interaction, troubleshooting and closeout omitted from source-based effort; subagents are excluded, costs unavailable, ratios suppressed.",
+    "concept_quote retains the skill-required historical conops section 0; current CR-02 concept is quoted separately in config/delta-scope-v1.json.",
+    "Unchanged audited lines use library provenance only as the v1 excluded category; they are not claimed to be third-party libraries. They never contribute hours.",
+    "Fixed tool overheads reuse uncalibrated v1 amounts for explicit completed CR-02 steps; not observed command durations. Build-script setup is counted once.",
+    "all effort estimates are UNCALIBRATED MODEL placeholders (calibration_status=uncalibrated_placeholder)"
+  ]
+}

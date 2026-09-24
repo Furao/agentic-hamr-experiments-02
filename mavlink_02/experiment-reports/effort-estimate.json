@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated": "2026-08-27T10:09:50-04:00",
+  "generated": "2026-09-23T21:34:00-04:00",
   "project": {
     "name": "mavlink_02",
     "path": "/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02"
@@ -9,7 +9,7 @@
     "schema_version": 1,
     "experiment_id": "mavlink_02",
     "lifecycle": "change",
-    "workflow": "ChangeExec(CR-01)",
+    "workflow": "ChangeExec(CR-02)",
     "profile": "audited",
     "actor": "agent",
     "harness": "codex",
@@ -17,13 +17,19 @@
     "concept_sha256": "90eb65e0daa6fe4a6733366be7b8fe486c6c04b0f13b020e342cef545e430a45",
     "project_dir": ".",
     "session_metrics": "experiment-reports/session-metrics.json",
-    "metrics_cover_full_run": true,
+    "metrics_cover_full_run": false,
     "known_exclusions": [
-      "Subagent activity is excluded by the schema-v2 session metrics adapter.",
-      "Actual billed cost is unavailable; session cost is API list-price equivalent only.",
-      "No pristine generation baseline was prepared; generate-once non-marker provenance remains unknown."
+      "CHANGE-REQUEST SCOPE: Measurements cover the current project snapshot, including inherited CR-01 artifacts; they are not the CR-02 changed-line delta. The measured agent session covers CR-02 only, so modeled-vs-observed ratios must remain suppressed.",
+      "The required concept_quote is retained verbatim from requirements/conops.md section 0, a retired CR-01 concept. CR-02 authority is action-requests/CR-02-add-mode-manager/Open_Platform_HLRs_26_09_23_02.md and its approved change plan.",
+      "The greenfield-oriented measurer excludes action-requests wholesale, including the current CR-02 requirements, but measures the historical requirements directory. Requirements effort is therefore not a complete or current CR-02 estimate.",
+      "Workflow status contains both CR-01 history and CR-02 records. Derived step and assurance observations may mix historical evidence; the authoritative final results are reports/CR-02/final-validation/CR-02-final-validation.md.",
+      "Subagent activity is excluded by schema-v2 metrics. Nested-shell friction has 1267 parser warnings; top-level counts are not complete nested-command counts.",
+      "Both actual billed cost and API list-price-equivalent cost are unavailable in this session; no agent dollar cost or measured savings can be inferred.",
+      "No pristine generation baseline was prepared; generate-once non-marker provenance remains preserved_origin_unknown and is not silently counted as developer-authored.",
+      "Coding and unit-debug placeholder rates exclude deployment, board bring-up, assurance-case writing, elicitation meetings and coordination. Hardware timing CR-02-HW-01 remains High/Open and deferred.",
+      "The skill-referenced docs/effort-measurement-spec.md is absent at the repository root. Counting is performed by the bundled v1 scripts/configs with line-allocation validation; no missing specification content is assumed."
     ],
-    "hamr_version": null,
+    "hamr_version": "Final HAMR codegen checkout 5801330b0987f954f13e2188f523e24261ce2ba4; Sireum checkout 85c9cdfe04227ec2d3064b13c231943648c8431b (upgraded during session)",
     "generation_baseline": null
   },
   "measures_ref": "/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/experiment-reports/project-measures.json",
@@ -37,43 +43,44 @@
     "config_sha256": "39507c77cdeb96f70a04159e74beb9ec49a33772ec88b1893daa63265d1eebb9",
     "assignments": {
       "common_both_paths": {
-        "sloc": 795,
+        "sloc": 874,
         "by_artifact_type": {
-          "requirements_text": 421,
-          "sysml_model": 374
+          "requirements_text": 453,
+          "sysml_model": 421
         }
       },
       "hamr_generated_manual_replacement": {
-        "sloc": 13850,
+        "sloc": 16496,
         "by_artifact_type": {
-          "build_config": 41,
-          "c_infra": 1834,
-          "makefile": 3598,
-          "microkit_config": 572,
-          "rust_contract_woven": 709,
-          "rust_infra": 6082,
-          "rust_test_infra": 1014
+          "build_config": 54,
+          "c_infra": 2370,
+          "makefile": 3637,
+          "microkit_config": 649,
+          "rust_contract_woven": 842,
+          "rust_infra": 7383,
+          "rust_test_infra": 1561
         }
       },
       "hamr_path_authored": {
-        "sloc": 326,
+        "sloc": 976,
         "by_artifact_type": {
-          "gumbo_contract": 326
+          "build_script": 523,
+          "gumbo_contract": 453
         }
       },
       "unknown_provenance": {
-        "sloc": 341130,
+        "sloc": 342307,
         "by_artifact_type": {
-          "build_config": 157,
+          "build_config": 188,
           "c_infra": 125303,
-          "c_user_code": 65,
+          "c_user_code": 78,
           "docs": 214119,
-          "makefile": 144,
-          "microkit_config": 12,
-          "rust_app_code": 722,
-          "rust_infra": 250,
-          "rust_test_code": 350,
-          "rust_test_infra": 8
+          "makefile": 197,
+          "microkit_config": 14,
+          "rust_app_code": 1116,
+          "rust_infra": 350,
+          "rust_test_code": 932,
+          "rust_test_infra": 10
         }
       }
     }
@@ -96,9 +103,9 @@
       "granularity": "exact_step",
       "status": "done",
       "measures": {
-        "sloc_total": 152,
+        "sloc_total": 160,
         "by_provenance": {
-          "developer_authored": 152
+          "developer_authored": 160
         },
         "unknown_sloc": 0,
         "artifact_ids": [
@@ -109,23 +116,23 @@
       "assurance": null,
       "human_estimates": {
         "experienced_sel4": {
-          "hours": 12.67,
-          "cost_usd": 1900.5,
+          "hours": 13.33,
+          "cost_usd": 1999.5,
           "by_type": {
             "requirements_text": {
-              "sloc": 152,
-              "hours": 12.67
+              "sloc": 160,
+              "hours": 13.33
             }
           },
           "overhead_hours": 0.0
         },
         "new_to_sel4": {
-          "hours": 19.0,
-          "cost_usd": 2090.0,
+          "hours": 20.0,
+          "cost_usd": 2200.0,
           "by_type": {
             "requirements_text": {
-              "sloc": 152,
-              "hours": 19.0
+              "sloc": 160,
+              "hours": 20.0
             }
           },
           "overhead_hours": 0.0
@@ -138,9 +145,9 @@
       "granularity": "exact_step",
       "status": "done",
       "measures": {
-        "sloc_total": 48,
+        "sloc_total": 56,
         "by_provenance": {
-          "developer_authored": 48
+          "developer_authored": 56
         },
         "unknown_sloc": 0,
         "artifact_ids": [
@@ -151,23 +158,23 @@
       "assurance": null,
       "human_estimates": {
         "experienced_sel4": {
-          "hours": 4.0,
-          "cost_usd": 600.0,
+          "hours": 4.67,
+          "cost_usd": 700.5,
           "by_type": {
             "requirements_text": {
-              "sloc": 48,
-              "hours": 4.0
+              "sloc": 56,
+              "hours": 4.67
             }
           },
           "overhead_hours": 0.0
         },
         "new_to_sel4": {
-          "hours": 6.0,
-          "cost_usd": 660.0,
+          "hours": 7.0,
+          "cost_usd": 770.0,
           "by_type": {
             "requirements_text": {
-              "sloc": 48,
-              "hours": 6.0
+              "sloc": 56,
+              "hours": 7.0
             }
           },
           "overhead_hours": 0.0
@@ -180,9 +187,9 @@
       "granularity": "exact_step",
       "status": "done",
       "measures": {
-        "sloc_total": 31,
+        "sloc_total": 39,
         "by_provenance": {
-          "developer_authored": 31
+          "developer_authored": 39
         },
         "unknown_sloc": 0,
         "artifact_ids": [
@@ -193,23 +200,23 @@
       "assurance": null,
       "human_estimates": {
         "experienced_sel4": {
-          "hours": 2.58,
-          "cost_usd": 387.0,
+          "hours": 3.25,
+          "cost_usd": 487.5,
           "by_type": {
             "requirements_text": {
-              "sloc": 31,
-              "hours": 2.58
+              "sloc": 39,
+              "hours": 3.25
             }
           },
           "overhead_hours": 0.0
         },
         "new_to_sel4": {
-          "hours": 3.88,
-          "cost_usd": 426.8,
+          "hours": 4.88,
+          "cost_usd": 536.8,
           "by_type": {
             "requirements_text": {
-              "sloc": 31,
-              "hours": 3.88
+              "sloc": 39,
+              "hours": 4.88
             }
           },
           "overhead_hours": 0.0
@@ -222,9 +229,9 @@
       "granularity": "workflow_only",
       "status": "done",
       "measures": {
-        "sloc_total": 374,
+        "sloc_total": 421,
         "by_provenance": {
-          "developer_authored": 374
+          "developer_authored": 421
         },
         "unknown_sloc": 0,
         "artifact_ids": [
@@ -235,23 +242,23 @@
       "assurance": null,
       "human_estimates": {
         "experienced_sel4": {
-          "hours": 62.33,
-          "cost_usd": 9349.5,
+          "hours": 70.17,
+          "cost_usd": 10525.5,
           "by_type": {
             "sysml_model": {
-              "sloc": 374,
-              "hours": 62.33
+              "sloc": 421,
+              "hours": 70.17
             }
           },
           "overhead_hours": 0.0
         },
         "new_to_sel4": {
-          "hours": 93.5,
-          "cost_usd": 10285.0,
+          "hours": 105.25,
+          "cost_usd": 11577.5,
           "by_type": {
             "sysml_model": {
-              "sloc": 374,
-              "hours": 93.5
+              "sloc": 421,
+              "hours": 105.25
             }
           },
           "overhead_hours": 0.0
@@ -292,9 +299,9 @@
       "granularity": "workflow_only",
       "status": null,
       "measures": {
-        "sloc_total": 140,
+        "sloc_total": 144,
         "by_provenance": {
-          "developer_authored": 140
+          "developer_authored": 144
         },
         "unknown_sloc": 0,
         "artifact_ids": [
@@ -305,23 +312,23 @@
       "assurance": null,
       "human_estimates": {
         "experienced_sel4": {
-          "hours": 46.67,
-          "cost_usd": 7000.5,
+          "hours": 48.0,
+          "cost_usd": 7200.0,
           "by_type": {
             "gumbo_contract": {
-              "sloc": 140,
-              "hours": 46.67
+              "sloc": 144,
+              "hours": 48.0
             }
           },
           "overhead_hours": 0.0
         },
         "new_to_sel4": {
-          "hours": 116.67,
-          "cost_usd": 12833.7,
+          "hours": 120.0,
+          "cost_usd": 13200.0,
           "by_type": {
             "gumbo_contract": {
-              "sloc": 140,
-              "hours": 116.67
+              "sloc": 144,
+              "hours": 120.0
             }
           },
           "overhead_hours": 0.0
@@ -334,9 +341,9 @@
       "granularity": "workflow_only",
       "status": "done",
       "measures": {
-        "sloc_total": 63,
+        "sloc_total": 125,
         "by_provenance": {
-          "developer_authored": 63
+          "developer_authored": 125
         },
         "unknown_sloc": 0,
         "artifact_ids": [
@@ -347,23 +354,65 @@
       "assurance": null,
       "human_estimates": {
         "experienced_sel4": {
-          "hours": 21.0,
-          "cost_usd": 3150.0,
+          "hours": 41.67,
+          "cost_usd": 6250.5,
           "by_type": {
             "gumbo_contract": {
-              "sloc": 63,
-              "hours": 21.0
+              "sloc": 125,
+              "hours": 41.67
             }
           },
           "overhead_hours": 0.0
         },
         "new_to_sel4": {
-          "hours": 52.5,
-          "cost_usd": 5775.0,
+          "hours": 104.17,
+          "cost_usd": 11458.7,
           "by_type": {
             "gumbo_contract": {
-              "sloc": 63,
-              "hours": 52.5
+              "sloc": 125,
+              "hours": 104.17
+            }
+          },
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CompGUMBOSpec(modemanager)",
+      "granularity": "workflow_only",
+      "status": null,
+      "measures": {
+        "sloc_total": 23,
+        "by_provenance": {
+          "developer_authored": 23
+        },
+        "unknown_sloc": 0,
+        "artifact_ids": [
+          "CompContracts"
+        ],
+        "activity": null
+      },
+      "assurance": null,
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 7.67,
+          "cost_usd": 1150.5,
+          "by_type": {
+            "gumbo_contract": {
+              "sloc": 23,
+              "hours": 7.67
+            }
+          },
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 19.17,
+          "cost_usd": 2108.7,
+          "by_type": {
+            "gumbo_contract": {
+              "sloc": 23,
+              "hours": 19.17
             }
           },
           "overhead_hours": 0.0
@@ -376,9 +425,9 @@
       "granularity": "workflow_only",
       "status": "done",
       "measures": {
-        "sloc_total": 76,
+        "sloc_total": 105,
         "by_provenance": {
-          "developer_authored": 76
+          "developer_authored": 105
         },
         "unknown_sloc": 0,
         "artifact_ids": [
@@ -389,23 +438,23 @@
       "assurance": null,
       "human_estimates": {
         "experienced_sel4": {
-          "hours": 25.33,
-          "cost_usd": 3799.5,
+          "hours": 35.0,
+          "cost_usd": 5250.0,
           "by_type": {
             "gumbo_contract": {
-              "sloc": 76,
-              "hours": 25.33
+              "sloc": 105,
+              "hours": 35.0
             }
           },
           "overhead_hours": 0.0
         },
         "new_to_sel4": {
-          "hours": 63.33,
-          "cost_usd": 6966.3,
+          "hours": 87.5,
+          "cost_usd": 9625.0,
           "by_type": {
             "gumbo_contract": {
-              "sloc": 76,
-              "hours": 63.33
+              "sloc": 105,
+              "hours": 87.5
             }
           },
           "overhead_hours": 0.0
@@ -418,9 +467,9 @@
       "granularity": "workflow_only",
       "status": null,
       "measures": {
-        "sloc_total": 47,
+        "sloc_total": 56,
         "by_provenance": {
-          "developer_authored": 47
+          "developer_authored": 56
         },
         "unknown_sloc": 0,
         "artifact_ids": [
@@ -431,23 +480,23 @@
       "assurance": null,
       "human_estimates": {
         "experienced_sel4": {
-          "hours": 15.67,
-          "cost_usd": 2350.5,
+          "hours": 18.67,
+          "cost_usd": 2800.5,
           "by_type": {
             "gumbo_contract": {
-              "sloc": 47,
-              "hours": 15.67
+              "sloc": 56,
+              "hours": 18.67
             }
           },
           "overhead_hours": 0.0
         },
         "new_to_sel4": {
-          "hours": 39.17,
-          "cost_usd": 4308.7,
+          "hours": 46.67,
+          "cost_usd": 5133.7,
           "by_type": {
             "gumbo_contract": {
-              "sloc": 47,
-              "hours": 39.17
+              "sloc": 56,
+              "hours": 46.67
             }
           },
           "overhead_hours": 0.0
@@ -499,13 +548,13 @@
       "granularity": "exact_step",
       "status": "done",
       "measures": {
-        "sloc_total": 14383,
+        "sloc_total": 17228,
         "by_provenance": {
-          "hamr_generated": 13141,
-          "preserved_origin_unknown": 533,
-          "hamr_woven": 709
+          "hamr_generated": 15654,
+          "preserved_origin_unknown": 732,
+          "hamr_woven": 842
         },
-        "unknown_sloc": 533,
+        "unknown_sloc": 732,
         "artifact_ids": [
           "GenCode"
         ],
@@ -514,10 +563,10 @@
       "assurance": {
         "generated_resources": {
           "value": {
-            "raw": 160,
-            "deduped": 118,
-            "overwritten_true": 75,
-            "overwritten_false": 43
+            "raw": 146,
+            "deduped": 146,
+            "overwritten_true": 94,
+            "overwritten_false": 52
           },
           "source": "hamr/microkit/reporting/codegen_report_sysml.json (validated)",
           "classification_basis": "codegen_report",
@@ -545,24 +594,38 @@
       "granularity": "exact_step",
       "status": "n",
       "measures": {
-        "sloc_total": 0,
-        "by_provenance": {},
+        "sloc_total": 523,
+        "by_provenance": {
+          "developer_authored": 523
+        },
         "unknown_sloc": 0,
-        "artifact_ids": [],
+        "artifact_ids": [
+          "BuildScript"
+        ],
         "activity": "generate the build script via the setup-build-script skill and verify usage"
       },
       "assurance": null,
       "human_estimates": {
         "experienced_sel4": {
-          "hours": 0.0,
-          "cost_usd": 0.0,
-          "by_type": {},
+          "hours": 0.5,
+          "cost_usd": 75.0,
+          "by_type": {
+            "build_script": {
+              "sloc": 523,
+              "hours": 0.5
+            }
+          },
           "overhead_hours": 0.0
         },
         "new_to_sel4": {
-          "hours": 0.0,
-          "cost_usd": 0.0,
-          "by_type": {},
+          "hours": 0.75,
+          "cost_usd": 82.5,
+          "by_type": {
+            "build_script": {
+              "sloc": 523,
+              "hours": 0.75
+            }
+          },
           "overhead_hours": 0.0
         }
       },
@@ -573,11 +636,11 @@
       "granularity": "exact_step",
       "status": null,
       "measures": {
-        "sloc_total": 722,
+        "sloc_total": 1116,
         "by_provenance": {
-          "preserved_origin_unknown": 722
+          "preserved_origin_unknown": 1116
         },
-        "unknown_sloc": 722,
+        "unknown_sloc": 1116,
         "artifact_ids": [
           "CompImpls"
         ],
@@ -605,11 +668,11 @@
       "granularity": "exact_step",
       "status": null,
       "measures": {
-        "sloc_total": 350,
+        "sloc_total": 932,
         "by_provenance": {
-          "preserved_origin_unknown": 350
+          "preserved_origin_unknown": 932
         },
-        "unknown_sloc": 350,
+        "unknown_sloc": 932,
         "artifact_ids": [
           "CompTests"
         ],
@@ -770,6 +833,53 @@
           "cost_usd": 82.5,
           "by_type": {},
           "overhead_hours": 0.75
+        }
+      },
+      "agent_actuals": null
+    },
+    {
+      "step_key": "CompDev(ModeManager).4",
+      "granularity": "exact_step",
+      "status": null,
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "run tests with coverage instrumentation and read reports"
+      },
+      "assurance": {
+        "tests_runtime": {
+          "value": {
+            "passed": null,
+            "failed": null
+          },
+          "source": "reports/workflow-status.md CompDev(ModeManager).4",
+          "classification_basis": "workflow_status_note",
+          "confidence": "derived"
+        },
+        "coverage": {
+          "value": {
+            "entrypoint_lines_percent": null,
+            "summary": null
+          },
+          "source": "reports/workflow-status.md CompDev(ModeManager).4/.5",
+          "classification_basis": "workflow_status_note",
+          "confidence": "derived"
+        }
+      },
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.0,
+          "cost_usd": 0.0,
+          "by_type": {},
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 0.0,
+          "cost_usd": 0.0,
+          "by_type": {},
+          "overhead_hours": 0.0
         }
       },
       "agent_actuals": null
@@ -984,6 +1094,44 @@
       "agent_actuals": null
     },
     {
+      "step_key": "CompDev(ModeManager).6",
+      "granularity": "exact_step",
+      "status": null,
+      "measures": {
+        "sloc_total": 0,
+        "by_provenance": {},
+        "unknown_sloc": 0,
+        "artifact_ids": [],
+        "activity": "run Verus verification and triage results"
+      },
+      "assurance": {
+        "component_verus": {
+          "value": {
+            "verified": null,
+            "errors": null
+          },
+          "source": "reports/workflow-status.md CompDev(ModeManager).6",
+          "classification_basis": "workflow_status_note",
+          "confidence": "derived"
+        }
+      },
+      "human_estimates": {
+        "experienced_sel4": {
+          "hours": 0.0,
+          "cost_usd": 0.0,
+          "by_type": {},
+          "overhead_hours": 0.0
+        },
+        "new_to_sel4": {
+          "hours": 0.0,
+          "cost_usd": 0.0,
+          "by_type": {},
+          "overhead_hours": 0.0
+        }
+      },
+      "agent_actuals": null
+    },
+    {
       "step_key": "CompDev(RxFirewall).6",
       "granularity": "exact_step",
       "status": "done",
@@ -1064,11 +1212,11 @@
       "granularity": "inferred_step",
       "status": "done",
       "measures": {
-        "sloc_total": 12,
+        "sloc_total": 14,
         "by_provenance": {
-          "preserved_origin_unknown": 12
+          "preserved_origin_unknown": 14
         },
-        "unknown_sloc": 12,
+        "unknown_sloc": 14,
         "artifact_ids": [
           "Schedule"
         ],
@@ -1135,11 +1283,11 @@
       "granularity": "unattributed",
       "status": null,
       "measures": {
-        "sloc_total": 339703,
+        "sloc_total": 339711,
         "by_provenance": {
           "preserved_origin_unknown": 339513,
           "unknown": 0,
-          "developer_authored": 190
+          "developer_authored": 198
         },
         "unknown_sloc": 339513,
         "artifact_ids": [],
@@ -1148,23 +1296,23 @@
       "assurance": null,
       "human_estimates": {
         "experienced_sel4": {
-          "hours": 15.83,
-          "cost_usd": 2374.5,
+          "hours": 16.5,
+          "cost_usd": 2475.0,
           "by_type": {
             "requirements_text": {
-              "sloc": 190,
-              "hours": 15.83
+              "sloc": 198,
+              "hours": 16.5
             }
           },
           "overhead_hours": 0.0
         },
         "new_to_sel4": {
-          "hours": 23.75,
-          "cost_usd": 2612.5,
+          "hours": 24.75,
+          "cost_usd": 2722.5,
           "by_type": {
             "requirements_text": {
-              "sloc": 190,
-              "hours": 23.75
+              "sloc": 198,
+              "hours": 24.75
             }
           },
           "overhead_hours": 0.0
@@ -1174,15 +1322,15 @@
     }
   ],
   "hamr_generated_value": {
-    "sloc": 13850,
+    "sloc": 16496,
     "by_artifact_type": {
-      "build_config": 41,
-      "c_infra": 1834,
-      "makefile": 3598,
-      "microkit_config": 572,
-      "rust_contract_woven": 709,
-      "rust_infra": 6082,
-      "rust_test_infra": 1014
+      "build_config": 54,
+      "c_infra": 2370,
+      "makefile": 3637,
+      "microkit_config": 649,
+      "rust_contract_woven": 842,
+      "rust_infra": 7383,
+      "rust_test_infra": 1561
     },
     "template_accounting": {
       "files": 0,
@@ -1193,140 +1341,140 @@
     "estimates": {
       "experienced_sel4": {
         "nominal": {
-          "hours": 1881.55,
-          "cost_usd": 282232.5,
+          "hours": 2242.99,
+          "cost_usd": 336448.75,
           "by_type": {
             "build_config": {
-              "sloc": 41,
-              "hours": 3.42
+              "sloc": 54,
+              "hours": 4.5
             },
             "c_infra": {
-              "sloc": 1834,
-              "hours": 305.67
+              "sloc": 2370,
+              "hours": 395.0
             },
             "makefile": {
-              "sloc": 3598,
-              "hours": 359.8
+              "sloc": 3637,
+              "hours": 363.7
             },
             "microkit_config": {
-              "sloc": 572,
-              "hours": 190.67
+              "sloc": 649,
+              "hours": 216.33
             },
             "rust_contract_woven": {
-              "sloc": 709,
-              "hours": 177.25
+              "sloc": 842,
+              "hours": 210.5
             },
             "rust_infra": {
-              "sloc": 6082,
-              "hours": 760.25
+              "sloc": 7383,
+              "hours": 922.88
             },
             "rust_test_infra": {
-              "sloc": 1014,
-              "hours": 84.5
+              "sloc": 1561,
+              "hours": 130.08
             }
           }
         },
         "conservative": {
-          "hours": 940.78,
-          "cost_usd": 141116.25,
+          "hours": 1121.5,
+          "cost_usd": 168224.38,
           "by_type": {
             "build_config": {
-              "sloc": 41,
-              "hours": 1.71
+              "sloc": 54,
+              "hours": 2.25
             },
             "c_infra": {
-              "sloc": 1834,
-              "hours": 152.83
+              "sloc": 2370,
+              "hours": 197.5
             },
             "makefile": {
-              "sloc": 3598,
-              "hours": 179.9
+              "sloc": 3637,
+              "hours": 181.85
             },
             "microkit_config": {
-              "sloc": 572,
-              "hours": 95.33
+              "sloc": 649,
+              "hours": 108.17
             },
             "rust_contract_woven": {
-              "sloc": 709,
-              "hours": 88.62
+              "sloc": 842,
+              "hours": 105.25
             },
             "rust_infra": {
-              "sloc": 6082,
-              "hours": 380.12
+              "sloc": 7383,
+              "hours": 461.44
             },
             "rust_test_infra": {
-              "sloc": 1014,
-              "hours": 42.25
+              "sloc": 1561,
+              "hours": 65.04
             }
           }
         }
       },
       "new_to_sel4": {
         "nominal": {
-          "hours": 3934.74,
-          "cost_usd": 432821.58,
+          "hours": 4708.32,
+          "cost_usd": 517915.29,
           "by_type": {
             "build_config": {
-              "sloc": 41,
-              "hours": 5.12
+              "sloc": 54,
+              "hours": 6.75
             },
             "c_infra": {
-              "sloc": 1834,
-              "hours": 917.0
+              "sloc": 2370,
+              "hours": 1185.0
             },
             "makefile": {
-              "sloc": 3598,
-              "hours": 539.7
+              "sloc": 3637,
+              "hours": 545.55
             },
             "microkit_config": {
-              "sloc": 572,
-              "hours": 762.67
+              "sloc": 649,
+              "hours": 865.33
             },
             "rust_contract_woven": {
-              "sloc": 709,
-              "hours": 443.12
+              "sloc": 842,
+              "hours": 526.25
             },
             "rust_infra": {
-              "sloc": 6082,
-              "hours": 1140.38
+              "sloc": 7383,
+              "hours": 1384.31
             },
             "rust_test_infra": {
-              "sloc": 1014,
-              "hours": 126.75
+              "sloc": 1561,
+              "hours": 195.12
             }
           }
         },
         "conservative": {
-          "hours": 1967.37,
-          "cost_usd": 216410.79,
+          "hours": 2354.16,
+          "cost_usd": 258957.65,
           "by_type": {
             "build_config": {
-              "sloc": 41,
-              "hours": 2.56
+              "sloc": 54,
+              "hours": 3.38
             },
             "c_infra": {
-              "sloc": 1834,
-              "hours": 458.5
+              "sloc": 2370,
+              "hours": 592.5
             },
             "makefile": {
-              "sloc": 3598,
-              "hours": 269.85
+              "sloc": 3637,
+              "hours": 272.77
             },
             "microkit_config": {
-              "sloc": 572,
-              "hours": 381.33
+              "sloc": 649,
+              "hours": 432.67
             },
             "rust_contract_woven": {
-              "sloc": 709,
-              "hours": 221.56
+              "sloc": 842,
+              "hours": 263.12
             },
             "rust_infra": {
-              "sloc": 6082,
-              "hours": 570.19
+              "sloc": 7383,
+              "hours": 692.16
             },
             "rust_test_infra": {
-              "sloc": 1014,
-              "hours": 63.38
+              "sloc": 1561,
+              "hours": 97.56
             }
           }
         }
@@ -1334,83 +1482,92 @@
     }
   },
   "common_mode": {
-    "sloc": 795,
+    "sloc": 874,
     "by_artifact_type": {
-      "requirements_text": 421,
-      "sysml_model": 374
+      "requirements_text": 453,
+      "sysml_model": 421
     },
     "estimates": {
       "experienced_sel4": {
-        "hours": 97.42,
-        "cost_usd": 14612.5,
+        "hours": 107.92,
+        "cost_usd": 16187.5,
         "by_type": {
           "requirements_text": {
-            "sloc": 421,
-            "hours": 35.08
+            "sloc": 453,
+            "hours": 37.75
           },
           "sysml_model": {
-            "sloc": 374,
-            "hours": 62.33
+            "sloc": 421,
+            "hours": 70.17
           }
         }
       },
       "new_to_sel4": {
-        "hours": 146.12,
-        "cost_usd": 16073.75,
+        "hours": 161.88,
+        "cost_usd": 17806.25,
         "by_type": {
           "requirements_text": {
-            "sloc": 421,
-            "hours": 52.62
+            "sloc": 453,
+            "hours": 56.62
           },
           "sysml_model": {
-            "sloc": 374,
-            "hours": 93.5
+            "sloc": 421,
+            "hours": 105.25
           }
         }
       }
     }
   },
   "authored_hamr_path": {
-    "sloc": 326,
+    "sloc": 976,
     "by_artifact_type": {
-      "gumbo_contract": 326
+      "build_script": 523,
+      "gumbo_contract": 453
     },
     "estimates": {
       "experienced_sel4": {
-        "hours": 108.67,
-        "cost_usd": 16300.0,
+        "hours": 151.5,
+        "cost_usd": 22725.0,
         "by_type": {
+          "build_script": {
+            "sloc": 523,
+            "hours": 0.5
+          },
           "gumbo_contract": {
-            "sloc": 326,
-            "hours": 108.67
+            "sloc": 453,
+            "hours": 151.0
           }
         }
       },
       "new_to_sel4": {
-        "hours": 271.67,
-        "cost_usd": 29883.33,
+        "hours": 378.25,
+        "cost_usd": 41607.5,
         "by_type": {
+          "build_script": {
+            "sloc": 523,
+            "hours": 0.75
+          },
           "gumbo_contract": {
-            "sloc": 326,
-            "hours": 271.67
+            "sloc": 453,
+            "hours": 377.5
           }
         }
       }
     }
   },
   "unknown_provenance": {
-    "sloc": 341130,
+    "sloc": 342307,
     "by_artifact_type": {
-      "build_config": 157,
+      "build_config": 188,
       "c_infra": 125303,
-      "c_user_code": 65,
+      "c_user_code": 78,
       "docs": 214119,
-      "makefile": 144,
-      "microkit_config": 12,
-      "rust_app_code": 722,
-      "rust_infra": 250,
-      "rust_test_code": 350,
-      "rust_test_infra": 8
+      "makefile": 197,
+      "microkit_config": 14,
+      "rust_app_code": 1116,
+      "rust_infra": 350,
+      "rust_test_code": 932,
+      "rust_test_infra": 10
     },
     "note": "origin unresolved (no compatible template baseline); counted in neither headline story"
   },
@@ -1447,6 +1604,7 @@
       "ArduPilot",
       "LowLevelEthernetDriver",
       "MAVLinkFirewall",
+      "ModeManager",
       "RxFirewall",
       "TxFirewall"
     ],
@@ -1456,32 +1614,32 @@
     "source": "/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/experiment-reports/session-metrics.json",
     "schema_or_adapter": "schema-v2",
     "harness": "codex",
-    "harness_version": "0.149.0",
+    "harness_version": "0.154.0",
     "models": [
-      "gpt-5.6-sol"
+      "gpt-6-astra"
     ],
     "tokens": {
-      "input": 1842495,
-      "output": 220658,
-      "cache_read": 67979264,
+      "input": 2345891,
+      "output": 295554,
+      "cache_read": 82935168,
       "cache_write": 0,
-      "reasoning_output": 43217
+      "reasoning_output": 35002
     },
     "cost_usd": {
-      "kind": "list_price_equivalent",
-      "total": 49.821847
+      "kind": null,
+      "total": null
     },
-    "active_seconds": 11825,
-    "wall_clock_seconds": 71026,
+    "active_seconds": 18143,
+    "wall_clock_seconds": 132704,
     "friction": {
       "escalation_requests": 0,
-      "dynamic_shell_commands": 35,
+      "dynamic_shell_commands": 0,
       "sandbox_failures": 0,
       "observable_approval_outcomes": 1,
-      "parser_coverage_warnings": 608
+      "parser_coverage_warnings": 1267
     },
     "caveats": [
-      "608 parser coverage warning(s); friction counts undercounted",
+      "1267 parser coverage warning(s); friction counts undercounted",
       "actual billed cost unavailable",
       "subagents excluded"
     ]
@@ -1493,35 +1651,35 @@
       "values": {
         "modeled_human": {
           "experienced_sel4": {
-            "hours": 209.34,
-            "cost_usd": 31401.0,
+            "hours": 262.67,
+            "cost_usd": 39400.5,
             "composition": "common_both_paths + hamr_path_authored + activity overheads"
           },
           "new_to_sel4": {
-            "hours": 422.68,
-            "cost_usd": 46494.8,
+            "hours": 545.02,
+            "cost_usd": 59952.2,
             "composition": "common_both_paths + hamr_path_authored + activity overheads"
           }
         },
         "observed_agent": {
-          "active_seconds": 11825,
-          "wall_clock_seconds": 71026,
+          "active_seconds": 18143,
+          "wall_clock_seconds": 132704,
           "cost_usd": {
-            "kind": "list_price_equivalent",
-            "total": 49.821847
+            "kind": null,
+            "total": null
           },
           "tokens": {
-            "input": 1842495,
-            "output": 220658,
-            "cache_read": 67979264,
+            "input": 2345891,
+            "output": 295554,
+            "cache_read": 82935168,
             "cache_write": 0,
-            "reasoning_output": 43217
+            "reasoning_output": 35002
           }
         }
       },
       "ratio": null,
       "caveats": [
-        "608 parser coverage warning(s); friction counts undercounted",
+        "1267 parser coverage warning(s); friction counts undercounted",
         "actual billed cost unavailable",
         "subagents excluded",
         "UNCALIBRATED MODEL: modeled human hours use uncalibrated placeholder rates under a named profile",
@@ -1530,18 +1688,28 @@
     }
   ],
   "attribution_summary": {
-    "coverage": 0.046,
+    "coverage": 0.0581,
     "by_granularity": {
-      "exact_step": 15686,
-      "workflow_only": 700,
-      "inferred_step": 12,
-      "unattributed": 339703
+      "exact_step": 20054,
+      "workflow_only": 874,
+      "inferred_step": 14,
+      "unattributed": 339711
     }
   },
   "caveats": [
-    "codegen report contains 42 duplicate resource path(s); deduplicated (flags agreed)",
-    "codegen report is PARTIAL: internal status 'Success' is not trusted as a completeness signal; 1238 generated-looking file(s) on disk are absent from the report",
+    "codegen report is PARTIAL: internal status 'Success' is not trusted as a completeness signal; 1243 generated-looking file(s) on disk are absent from the report",
     "no generation baseline supplied; non-marker content of generate-once files is preserved_origin_unknown",
-    "all effort estimates are UNCALIBRATED MODEL placeholders (calibration_status=uncalibrated_placeholder)"
+    "all effort estimates are UNCALIBRATED MODEL placeholders (calibration_status=uncalibrated_placeholder)",
+    "CHANGE-REQUEST SCOPE: Measurements cover the current project snapshot, including inherited CR-01 artifacts; they are not the CR-02 changed-line delta. The measured agent session covers CR-02 only, so modeled-vs-observed ratios must remain suppressed.",
+    "The required concept_quote is retained verbatim from requirements/conops.md section 0, a retired CR-01 concept. CR-02 authority is action-requests/CR-02-add-mode-manager/Open_Platform_HLRs_26_09_23_02.md and its approved change plan.",
+    "The greenfield-oriented measurer excludes action-requests wholesale, including the current CR-02 requirements, but measures the historical requirements directory. Requirements effort is therefore not a complete or current CR-02 estimate.",
+    "Workflow status contains both CR-01 history and CR-02 records. Derived step and assurance observations may mix historical evidence; the authoritative final results are reports/CR-02/final-validation/CR-02-final-validation.md.",
+    "Subagent activity is excluded by schema-v2 metrics. Nested-shell friction has 1267 parser warnings; top-level counts are not complete nested-command counts.",
+    "Both actual billed cost and API list-price-equivalent cost are unavailable in this session; no agent dollar cost or measured savings can be inferred.",
+    "No pristine generation baseline was prepared; generate-once non-marker provenance remains preserved_origin_unknown and is not silently counted as developer-authored.",
+    "Coding and unit-debug placeholder rates exclude deployment, board bring-up, assurance-case writing, elicitation meetings and coordination. Hardware timing CR-02-HW-01 remains High/Open and deferred.",
+    "The skill-referenced docs/effort-measurement-spec.md is absent at the repository root. Counting is performed by the bundled v1 scripts/configs with line-allocation validation; no missing specification content is assumed.",
+    "Observed SLOC is a snapshot inventory, not newly produced session output. Vendor/VMM content contributes to the large unknown and unattributed buckets; the partial codegen report is not itself evidence of a failed generation.",
+    "Workflow parsing misses some CR-02-qualified steps and retains older CR-01 assurance values (for example MAVLink 14/0 and Rx 27/0). A dash or zero modeled overhead does not mean CR-02 work was absent or incomplete. Final recorded proof counts are ModeManager 9/0, Rx 28/0, Tx 16/0, MAVLink 69/0, firewall_core 39/0, mavlink_core 38/0; 67 application/core tests and 2 driver helper tests pass. See reports/CR-02/final-validation/CR-02-final-validation.md."
   ]
 }

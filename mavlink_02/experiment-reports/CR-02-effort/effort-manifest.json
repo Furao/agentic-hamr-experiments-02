@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "experiment_id": "mavlink_02-CR-02",
+  "lifecycle": "change",
+  "workflow": "ChangeExec(CR-02)",
+  "profile": "audited",
+  "actor": "agent",
+  "harness": "codex",
+  "concept_quote": "# Reduce potential cyber attacks by adding a mavlink firewall that can blacklist certain mavlink commands/messages\n\n## Goals for updated system functionality\nIncrease the cyber resilience of the system by adding a protocol specific firewall which can reject specific or malformed mavlink messages before they can make it to the Ardupilot software running in the VM. THe mavlink firewall should reject any messages that can update firmware.",
+  "concept_sha256": "90eb65e0daa6fe4a6733366be7b8fe486c6c04b0f13b020e342cef545e430a45",
+  "project_dir": ".",
+  "session_metrics": "experiment-reports/session-metrics.json",
+  "metrics_cover_full_run": false,
+  "known_exclusions": [
+    "CR-02 only: baseline 043d574 to current working tree; unchanged lines, all CR-01/vendor work and post-session reporting work excluded from priced delta.",
+    "Final requirements compared with initial supplied CR-02 draft, not empty text. Revisions are collaborative/developer-owned work, not claimed as agent-authored. Intermediate versions are not summed.",
+    "Net retained additions/replacements are a proxy, not actual authoring time; removed-only work, debugging, reverted experiments, repeated edits and review effort are not fully modeled.",
+    "Historical ModeManager scaffold at b68c70a provides limited provenance, not a pristine final-model regeneration. Other generated classifications use markers, generator report and contemporaneous artifact inventory.",
+    "Scope is partial: the session includes interaction, troubleshooting and closeout omitted from source-based effort; subagents are excluded, costs unavailable, ratios suppressed.",
+    "concept_quote retains the skill-required historical conops section 0; current CR-02 concept is quoted separately in config/delta-scope-v1.json.",
+    "Unchanged audited lines use library provenance only as the v1 excluded category; they are not claimed to be third-party libraries. They never contribute hours.",
+    "Fixed tool overheads reuse uncalibrated v1 amounts for explicit completed CR-02 steps; not observed command durations. Build-script setup is counted once."
+  ],
+  "hamr_version": "Final HAMR codegen checkout 5801330b0987f954f13e2188f523e24261ce2ba4; Sireum checkout 85c9cdfe04227ec2d3064b13c231943648c8431b (upgraded during session)",
+  "generation_baseline": null
+}

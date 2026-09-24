@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated": "2026-08-27T10:09:49-04:00",
+  "generated": "2026-09-23T21:34:00-04:00",
   "project": {
     "name": "mavlink_02",
     "path": "/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02"
@@ -32,9 +32,33 @@
       ]
     },
     {
+      "path": "hamr/microkit/bin/build.cmd",
+      "language": "shell",
+      "line_count": 592,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "build_script",
+          "provenance": "developer_authored",
+          "generation_mode": "not_codegen",
+          "workflow_key": "CodeGen.4",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              592
+            ]
+          ],
+          "sloc": 523,
+          "comment_lines": 0,
+          "blank_lines": 69
+        }
+      ]
+    },
+    {
       "path": "hamr/microkit/components/pacer/src/pacer.c",
       "language": "c",
-      "line_count": 32,
+      "line_count": 36,
       "buckets": [
         {
           "bucket_index": 0,
@@ -46,10 +70,10 @@
           "ranges": [
             [
               1,
-              32
+              36
             ]
           ],
-          "sloc": 27,
+          "sloc": 31,
           "comment_lines": 1,
           "blank_lines": 4
         }
@@ -58,7 +82,7 @@
     {
       "path": "hamr/microkit/components/seL4_ArduPilot_ArduPilot/include/seL4_ArduPilot_ArduPilot.h",
       "language": "c",
-      "line_count": 39,
+      "line_count": 54,
       "buckets": [
         {
           "bucket_index": 0,
@@ -70,12 +94,12 @@
           "ranges": [
             [
               1,
-              39
+              54
             ]
           ],
-          "sloc": 34,
-          "comment_lines": 1,
-          "blank_lines": 4
+          "sloc": 44,
+          "comment_lines": 3,
+          "blank_lines": 7
         }
       ]
     },
@@ -154,7 +178,7 @@
     {
       "path": "hamr/microkit/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.h",
       "language": "c",
-      "line_count": 27,
+      "line_count": 42,
       "buckets": [
         {
           "bucket_index": 0,
@@ -166,12 +190,12 @@
           "ranges": [
             [
               1,
-              27
+              42
             ]
           ],
-          "sloc": 22,
-          "comment_lines": 1,
-          "blank_lines": 4
+          "sloc": 32,
+          "comment_lines": 3,
+          "blank_lines": 7
         }
       ]
     },
@@ -250,7 +274,7 @@
     {
       "path": "hamr/microkit/components/seL4_MAVLinkFirewall_MAVLinkFirewall/include/seL4_MAVLinkFirewall_MAVLinkFirewall.h",
       "language": "c",
-      "line_count": 27,
+      "line_count": 54,
       "buckets": [
         {
           "bucket_index": 0,
@@ -262,19 +286,19 @@
           "ranges": [
             [
               1,
-              27
+              54
             ]
           ],
-          "sloc": 22,
-          "comment_lines": 1,
-          "blank_lines": 4
+          "sloc": 44,
+          "comment_lines": 3,
+          "blank_lines": 7
         }
       ]
     },
     {
       "path": "hamr/microkit/components/seL4_MAVLinkFirewall_MAVLinkFirewall/src/seL4_MAVLinkFirewall_MAVLinkFirewall.c",
       "language": "c",
-      "line_count": 128,
+      "line_count": 202,
       "buckets": [
         {
           "bucket_index": 0,
@@ -286,12 +310,12 @@
           "ranges": [
             [
               1,
-              128
+              202
             ]
           ],
-          "sloc": 93,
+          "sloc": 151,
           "comment_lines": 1,
-          "blank_lines": 34
+          "blank_lines": 50
         }
       ]
     },
@@ -344,9 +368,9 @@
       ]
     },
     {
-      "path": "hamr/microkit/components/seL4_RxFirewall_RxFirewall/include/seL4_RxFirewall_RxFirewall.h",
+      "path": "hamr/microkit/components/seL4_ModeManager_ModeManager/include/seL4_ModeManager_ModeManager.h",
       "language": "c",
-      "line_count": 31,
+      "line_count": 29,
       "buckets": [
         {
           "bucket_index": 0,
@@ -358,19 +382,115 @@
           "ranges": [
             [
               1,
-              31
+              29
             ]
           ],
-          "sloc": 26,
+          "sloc": 19,
+          "comment_lines": 3,
+          "blank_lines": 7
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/components/seL4_ModeManager_ModeManager/src/seL4_ModeManager_ModeManager.c",
+      "language": "c",
+      "line_count": 59,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "c_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              59
+            ]
+          ],
+          "sloc": 43,
           "comment_lines": 1,
+          "blank_lines": 15
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/components/seL4_ModeManager_ModeManager/src/seL4_ModeManager_ModeManager_MON.c",
+      "language": "c",
+      "line_count": 23,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "c_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              23
+            ]
+          ],
+          "sloc": 14,
+          "comment_lines": 3,
+          "blank_lines": 6
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/components/seL4_ModeManager_ModeManager/src/seL4_ModeManager_ModeManager_user.c",
+      "language": "c",
+      "line_count": 19,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "c_user_code",
+          "provenance": "preserved_origin_unknown",
+          "generation_mode": "generate_once",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              19
+            ]
+          ],
+          "sloc": 13,
+          "comment_lines": 2,
           "blank_lines": 4
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/components/seL4_RxFirewall_RxFirewall/include/seL4_RxFirewall_RxFirewall.h",
+      "language": "c",
+      "line_count": 47,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "c_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              47
+            ]
+          ],
+          "sloc": 37,
+          "comment_lines": 3,
+          "blank_lines": 7
         }
       ]
     },
     {
       "path": "hamr/microkit/components/seL4_RxFirewall_RxFirewall/src/seL4_RxFirewall_RxFirewall.c",
       "language": "c",
-      "line_count": 164,
+      "line_count": 181,
       "buckets": [
         {
           "bucket_index": 0,
@@ -382,12 +502,12 @@
           "ranges": [
             [
               1,
-              164
+              181
             ]
           ],
-          "sloc": 117,
+          "sloc": 131,
           "comment_lines": 1,
-          "blank_lines": 46
+          "blank_lines": 49
         }
       ]
     },
@@ -442,7 +562,7 @@
     {
       "path": "hamr/microkit/components/seL4_TxFirewall_TxFirewall/include/seL4_TxFirewall_TxFirewall.h",
       "language": "c",
-      "line_count": 27,
+      "line_count": 42,
       "buckets": [
         {
           "bucket_index": 0,
@@ -454,12 +574,12 @@
           "ranges": [
             [
               1,
-              27
+              42
             ]
           ],
-          "sloc": 22,
-          "comment_lines": 1,
-          "blank_lines": 4
+          "sloc": 32,
+          "comment_lines": 3,
+          "blank_lines": 7
         }
       ]
     },
@@ -586,7 +706,7 @@
     {
       "path": "hamr/microkit/crates/GumboLib/src/lib.rs",
       "language": "rust",
-      "line_count": 685,
+      "line_count": 699,
       "buckets": [
         {
           "bucket_index": 0,
@@ -598,16 +718,16 @@
           "ranges": [
             [
               35,
-              357
+              364
             ],
             [
-              361,
-              683
+              368,
+              697
             ]
           ],
-          "sloc": 544,
+          "sloc": 556,
           "comment_lines": 4,
-          "blank_lines": 98
+          "blank_lines": 100
         },
         {
           "bucket_index": 1,
@@ -622,12 +742,12 @@
               34
             ],
             [
-              358,
-              360
+              365,
+              367
             ],
             [
-              684,
-              685
+              698,
+              699
             ]
           ],
           "sloc": 27,
@@ -687,7 +807,7 @@
     {
       "path": "hamr/microkit/crates/data/src/lib.rs",
       "language": "rust",
-      "line_count": 23,
+      "line_count": 29,
       "buckets": [
         {
           "bucket_index": 0,
@@ -699,12 +819,12 @@
           "ranges": [
             [
               1,
-              23
+              29
             ]
           ],
-          "sloc": 16,
-          "comment_lines": 1,
-          "blank_lines": 6
+          "sloc": 18,
+          "comment_lines": 4,
+          "blank_lines": 7
         }
       ]
     },
@@ -727,6 +847,30 @@
             ]
           ],
           "sloc": 17,
+          "comment_lines": 1,
+          "blank_lines": 6
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/data/src/open_platform_Data_Model/OperatingMode.rs",
+      "language": "rust",
+      "line_count": 23,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              23
+            ]
+          ],
+          "sloc": 16,
           "comment_lines": 1,
           "blank_lines": 6
         }
@@ -783,7 +927,7 @@
     {
       "path": "hamr/microkit/crates/data/src/open_platform_Data_Model/mod.rs",
       "language": "rust",
-      "line_count": 24,
+      "line_count": 25,
       "buckets": [
         {
           "bucket_index": 0,
@@ -795,10 +939,10 @@
           "ranges": [
             [
               1,
-              24
+              25
             ]
           ],
-          "sloc": 4,
+          "sloc": 5,
           "comment_lines": 14,
           "blank_lines": 6
         }
@@ -903,7 +1047,7 @@
     {
       "path": "hamr/microkit/crates/firewall_core/Makefile",
       "language": "makefile",
-      "line_count": 30,
+      "line_count": 32,
       "buckets": [
         {
           "bucket_index": 0,
@@ -915,19 +1059,19 @@
           "ranges": [
             [
               1,
-              30
+              32
             ]
           ],
-          "sloc": 15,
+          "sloc": 16,
           "comment_lines": 8,
-          "blank_lines": 7
+          "blank_lines": 8
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/firewall_core/rust-toolchain.toml",
       "language": "toml",
-      "line_count": 5,
+      "line_count": 14,
       "buckets": [
         {
           "bucket_index": 0,
@@ -939,19 +1083,19 @@
           "ranges": [
             [
               1,
-              5
+              14
             ]
           ],
           "sloc": 3,
-          "comment_lines": 1,
-          "blank_lines": 1
+          "comment_lines": 9,
+          "blank_lines": 2
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/firewall_core/src/lib.rs",
       "language": "rust",
-      "line_count": 477,
+      "line_count": 497,
       "buckets": [
         {
           "bucket_index": 0,
@@ -963,12 +1107,12 @@
           "ranges": [
             [
               1,
-              477
+              497
             ]
           ],
-          "sloc": 416,
+          "sloc": 435,
           "comment_lines": 11,
-          "blank_lines": 50
+          "blank_lines": 51
         }
       ]
     },
@@ -1021,13 +1165,13 @@
       ]
     },
     {
-      "path": "hamr/microkit/crates/mavlink_core/src/dialect.rs",
-      "language": "rust",
-      "line_count": 289,
+      "path": "hamr/microkit/crates/mavlink_core/rust-toolchain.toml",
+      "language": "toml",
+      "line_count": 14,
       "buckets": [
         {
           "bucket_index": 0,
-          "artifact_type": "rust_infra",
+          "artifact_type": "build_config",
           "provenance": "hamr_generated",
           "generation_mode": "unknown",
           "workflow_key": "CodeGen.2",
@@ -1035,12 +1179,12 @@
           "ranges": [
             [
               1,
-              289
+              14
             ]
           ],
-          "sloc": 288,
-          "comment_lines": 1,
-          "blank_lines": 0
+          "sloc": 3,
+          "comment_lines": 9,
+          "blank_lines": 2
         }
       ]
     },
@@ -1071,7 +1215,7 @@
     {
       "path": "hamr/microkit/crates/mavlink_core/src/lib.rs",
       "language": "rust",
-      "line_count": 193,
+      "line_count": 164,
       "buckets": [
         {
           "bucket_index": 0,
@@ -1083,19 +1227,19 @@
           "ranges": [
             [
               1,
-              193
+              164
             ]
           ],
-          "sloc": 175,
-          "comment_lines": 0,
-          "blank_lines": 18
+          "sloc": 150,
+          "comment_lines": 1,
+          "blank_lines": 13
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/mavlink_core/src/verified.rs",
       "language": "rust",
-      "line_count": 156,
+      "line_count": 283,
       "buckets": [
         {
           "bucket_index": 0,
@@ -1107,19 +1251,43 @@
           "ranges": [
             [
               1,
-              156
+              283
             ]
           ],
-          "sloc": 142,
-          "comment_lines": 0,
-          "blank_lines": 14
+          "sloc": 243,
+          "comment_lines": 10,
+          "blank_lines": 30
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/mavlink_core/src/wire.rs",
+      "language": "rust",
+      "line_count": 37,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "unknown",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              37
+            ]
+          ],
+          "sloc": 26,
+          "comment_lines": 5,
+          "blank_lines": 6
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/mavlink_core/tools/generate_dialect.py",
       "language": "text",
-      "line_count": 68,
+      "line_count": 69,
       "buckets": [
         {
           "bucket_index": 0,
@@ -1131,12 +1299,12 @@
           "ranges": [
             [
               1,
-              68
+              69
             ]
           ],
-          "sloc": 62,
+          "sloc": 64,
           "comment_lines": 0,
-          "blank_lines": 6
+          "blank_lines": 5
         }
       ]
     },
@@ -1167,7 +1335,7 @@
     {
       "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/Makefile",
       "language": "makefile",
-      "line_count": 67,
+      "line_count": 70,
       "buckets": [
         {
           "bucket_index": 0,
@@ -1179,12 +1347,12 @@
           "ranges": [
             [
               1,
-              67
+              70
             ]
           ],
-          "sloc": 36,
-          "comment_lines": 13,
-          "blank_lines": 18
+          "sloc": 37,
+          "comment_lines": 14,
+          "blank_lines": 19
         }
       ]
     },
@@ -1503,10 +1671,27 @@
     {
       "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/component/mod.rs",
       "language": "rust",
-      "line_count": 3,
+      "line_count": 5,
       "buckets": [
         {
           "bucket_index": 0,
+          "artifact_type": "rust_contract_woven",
+          "provenance": "hamr_woven",
+          "generation_mode": "woven",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              5,
+              5
+            ]
+          ],
+          "sloc": 0,
+          "comment_lines": 1,
+          "blank_lines": 0
+        },
+        {
+          "bucket_index": 1,
           "artifact_type": "rust_infra",
           "provenance": "preserved_origin_unknown",
           "generation_mode": "generate_once",
@@ -1515,19 +1700,19 @@
           "ranges": [
             [
               1,
-              3
+              4
             ]
           ],
           "sloc": 1,
           "comment_lines": 1,
-          "blank_lines": 1
+          "blank_lines": 2
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/component/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app.rs",
       "language": "rust",
-      "line_count": 137,
+      "line_count": 138,
       "buckets": [
         {
           "bucket_index": 0,
@@ -1539,11 +1724,11 @@
           "ranges": [
             [
               1,
-              137
+              138
             ]
           ],
           "sloc": 117,
-          "comment_lines": 3,
+          "comment_lines": 4,
           "blank_lines": 17
         }
       ]
@@ -1573,9 +1758,33 @@
       ]
     },
     {
+      "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/component/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app/tx_bounds.rs",
+      "language": "rust",
+      "line_count": 42,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "unknown",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              42
+            ]
+          ],
+          "sloc": 36,
+          "comment_lines": 2,
+          "blank_lines": 4
+        }
+      ]
+    },
+    {
       "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/lib.rs",
       "language": "rust",
-      "line_count": 77,
+      "line_count": 83,
       "buckets": [
         {
           "bucket_index": 0,
@@ -1587,12 +1796,12 @@
           "ranges": [
             [
               1,
-              77
+              83
             ]
           ],
-          "sloc": 61,
-          "comment_lines": 2,
-          "blank_lines": 14
+          "sloc": 63,
+          "comment_lines": 5,
+          "blank_lines": 15
         }
       ]
     },
@@ -1671,7 +1880,7 @@
     {
       "path": "hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/test/util/generators.rs",
       "language": "rust",
-      "line_count": 135,
+      "line_count": 150,
       "buckets": [
         {
           "bucket_index": 0,
@@ -1683,12 +1892,12 @@
           "ranges": [
             [
               1,
-              135
+              150
             ]
           ],
-          "sloc": 108,
+          "sloc": 121,
           "comment_lines": 8,
-          "blank_lines": 19
+          "blank_lines": 21
         }
       ]
     },
@@ -1741,9 +1950,33 @@
       ]
     },
     {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/.cargo/config.toml",
+      "language": "toml",
+      "line_count": 28,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "build_config",
+          "provenance": "hamr_generated",
+          "generation_mode": "unknown",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              28
+            ]
+          ],
+          "sloc": 10,
+          "comment_lines": 9,
+          "blank_lines": 9
+        }
+      ]
+    },
+    {
       "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/Cargo.toml",
       "language": "toml",
-      "line_count": 47,
+      "line_count": 54,
       "buckets": [
         {
           "bucket_index": 0,
@@ -1755,19 +1988,19 @@
           "ranges": [
             [
               1,
-              47
+              54
             ]
           ],
-          "sloc": 28,
-          "comment_lines": 10,
-          "blank_lines": 9
+          "sloc": 29,
+          "comment_lines": 15,
+          "blank_lines": 10
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/Makefile",
       "language": "makefile",
-      "line_count": 67,
+      "line_count": 86,
       "buckets": [
         {
           "bucket_index": 0,
@@ -1779,12 +2012,12 @@
           "ranges": [
             [
               1,
-              67
+              86
             ]
           ],
-          "sloc": 36,
-          "comment_lines": 13,
-          "blank_lines": 18
+          "sloc": 48,
+          "comment_lines": 16,
+          "blank_lines": 22
         }
       ]
     },
@@ -1815,7 +2048,7 @@
     {
       "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/bridge/extern_c_api.rs",
       "language": "rust",
-      "line_count": 223,
+      "line_count": 528,
       "buckets": [
         {
           "bucket_index": 0,
@@ -1827,12 +2060,12 @@
           "ranges": [
             [
               1,
-              223
+              528
             ]
           ],
-          "sloc": 190,
+          "sloc": 471,
           "comment_lines": 10,
-          "blank_lines": 23
+          "blank_lines": 47
         }
       ]
     },
@@ -1863,7 +2096,7 @@
     {
       "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/bridge/seL4_MAVLinkFirewall_MAVLinkFirewall_GUMBOX.rs",
       "language": "rust",
-      "line_count": 413,
+      "line_count": 818,
       "buckets": [
         {
           "bucket_index": 0,
@@ -1875,19 +2108,19 @@
           "ranges": [
             [
               1,
-              413
+              818
             ]
           ],
-          "sloc": 232,
-          "comment_lines": 149,
-          "blank_lines": 32
+          "sloc": 461,
+          "comment_lines": 296,
+          "blank_lines": 61
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/bridge/seL4_MAVLinkFirewall_MAVLinkFirewall_api.rs",
       "language": "rust",
-      "line_count": 280,
+      "line_count": 514,
       "buckets": [
         {
           "bucket_index": 0,
@@ -1899,43 +2132,19 @@
           "ranges": [
             [
               1,
-              280
+              514
             ]
           ],
-          "sloc": 252,
+          "sloc": 474,
           "comment_lines": 5,
-          "blank_lines": 23
+          "blank_lines": 35
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/mod.rs",
       "language": "rust",
-      "line_count": 3,
-      "buckets": [
-        {
-          "bucket_index": 0,
-          "artifact_type": "rust_infra",
-          "provenance": "preserved_origin_unknown",
-          "generation_mode": "generate_once",
-          "workflow_key": "CodeGen.2",
-          "component": null,
-          "ranges": [
-            [
-              1,
-              3
-            ]
-          ],
-          "sloc": 1,
-          "comment_lines": 1,
-          "blank_lines": 1
-        }
-      ]
-    },
-    {
-      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
-      "language": "rust",
-      "line_count": 250,
+      "line_count": 7,
       "buckets": [
         {
           "bucket_index": 0,
@@ -1946,33 +2155,98 @@
           "component": null,
           "ranges": [
             [
-              72,
-              72
-            ],
-            [
-              79,
-              79
-            ],
-            [
-              87,
-              87
-            ],
-            [
-              96,
-              103
-            ],
-            [
-              105,
-              158
-            ],
-            [
-              220,
-              248
+              5,
+              7
             ]
           ],
-          "sloc": 57,
-          "comment_lines": 35,
+          "sloc": 1,
+          "comment_lines": 2,
+          "blank_lines": 0
+        },
+        {
+          "bucket_index": 1,
+          "artifact_type": "rust_infra",
+          "provenance": "preserved_origin_unknown",
+          "generation_mode": "generate_once",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              4
+            ]
+          ],
+          "sloc": 1,
+          "comment_lines": 1,
           "blank_lines": 2
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/r2u2_monitor.rs",
+      "language": "rust",
+      "line_count": 97,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              97
+            ]
+          ],
+          "sloc": 77,
+          "comment_lines": 7,
+          "blank_lines": 13
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/seL4_MAVLinkFirewall_MAVLinkFirewall_app.rs",
+      "language": "rust",
+      "line_count": 676,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_contract_woven",
+          "provenance": "hamr_woven",
+          "generation_mode": "woven",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              213,
+              215
+            ],
+            [
+              222,
+              224
+            ],
+            [
+              237,
+              250
+            ],
+            [
+              261,
+              270
+            ],
+            [
+              272,
+              357
+            ],
+            [
+              486,
+              567
+            ]
+          ],
+          "sloc": 135,
+          "comment_lines": 57,
+          "blank_lines": 6
         },
         {
           "bucket_index": 1,
@@ -1984,43 +2258,67 @@
           "ranges": [
             [
               1,
-              71
+              212
             ],
             [
-              73,
-              78
+              216,
+              221
             ],
             [
-              80,
-              86
+              225,
+              236
             ],
             [
-              88,
-              95
+              251,
+              260
             ],
             [
-              104,
-              104
+              271,
+              271
             ],
             [
-              159,
-              219
+              358,
+              485
             ],
             [
-              249,
-              250
+              568,
+              676
             ]
           ],
-          "sloc": 135,
-          "comment_lines": 2,
-          "blank_lines": 19
+          "sloc": 428,
+          "comment_lines": 12,
+          "blank_lines": 38
         }
       ]
     },
     {
-      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/lib.rs",
-      "language": "rust",
-      "line_count": 77,
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/spec.bin",
+      "language": "text",
+      "line_count": 15,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "unknown",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              15
+            ]
+          ],
+          "sloc": 15,
+          "comment_lines": 0,
+          "blank_lines": 0
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/spec.c2po",
+      "language": "text",
+      "line_count": 19,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2032,19 +2330,67 @@
           "ranges": [
             [
               1,
-              77
+              19
             ]
           ],
-          "sloc": 61,
-          "comment_lines": 2,
-          "blank_lines": 14
+          "sloc": 12,
+          "comment_lines": 0,
+          "blank_lines": 7
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/spec.map",
+      "language": "text",
+      "line_count": 5,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              5
+            ]
+          ],
+          "sloc": 5,
+          "comment_lines": 0,
+          "blank_lines": 0
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/lib.rs",
+      "language": "rust",
+      "line_count": 86,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              86
+            ]
+          ],
+          "sloc": 66,
+          "comment_lines": 5,
+          "blank_lines": 15
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/logging.rs",
       "language": "rust",
-      "line_count": 47,
+      "line_count": 112,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2056,11 +2402,11 @@
           "ranges": [
             [
               1,
-              47
+              112
             ]
           ],
-          "sloc": 32,
-          "comment_lines": 6,
+          "sloc": 99,
+          "comment_lines": 4,
           "blank_lines": 9
         }
       ]
@@ -2092,7 +2438,7 @@
     {
       "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/test/tests.rs",
       "language": "rust",
-      "line_count": 143,
+      "line_count": 388,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2104,19 +2450,19 @@
           "ranges": [
             [
               1,
-              143
+              388
             ]
           ],
-          "sloc": 116,
-          "comment_lines": 8,
-          "blank_lines": 19
+          "sloc": 349,
+          "comment_lines": 10,
+          "blank_lines": 29
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/test/util/cb_apis.rs",
       "language": "rust",
-      "line_count": 145,
+      "line_count": 260,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2128,19 +2474,19 @@
           "ranges": [
             [
               1,
-              145
+              260
             ]
           ],
-          "sloc": 107,
-          "comment_lines": 20,
-          "blank_lines": 18
+          "sloc": 188,
+          "comment_lines": 42,
+          "blank_lines": 30
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/test/util/generators.rs",
       "language": "rust",
-      "line_count": 135,
+      "line_count": 150,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2152,12 +2498,12 @@
           "ranges": [
             [
               1,
-              135
+              150
             ]
           ],
-          "sloc": 108,
+          "sloc": 121,
           "comment_lines": 8,
-          "blank_lines": 19
+          "blank_lines": 21
         }
       ]
     },
@@ -2188,7 +2534,7 @@
     {
       "path": "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/test/util/test_apis.rs",
       "language": "rust",
-      "line_count": 84,
+      "line_count": 160,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2200,10 +2546,496 @@
           "ranges": [
             [
               1,
-              84
+              160
             ]
           ],
-          "sloc": 59,
+          "sloc": 121,
+          "comment_lines": 19,
+          "blank_lines": 20
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/Cargo.toml",
+      "language": "toml",
+      "line_count": 48,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "build_config",
+          "provenance": "preserved_origin_unknown",
+          "generation_mode": "generate_once",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              48
+            ]
+          ],
+          "sloc": 27,
+          "comment_lines": 11,
+          "blank_lines": 10
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/Makefile",
+      "language": "makefile",
+      "line_count": 95,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "makefile",
+          "provenance": "preserved_origin_unknown",
+          "generation_mode": "generate_once",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              95
+            ]
+          ],
+          "sloc": 38,
+          "comment_lines": 36,
+          "blank_lines": 21
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/rust-toolchain.toml",
+      "language": "toml",
+      "line_count": 14,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "build_config",
+          "provenance": "preserved_origin_unknown",
+          "generation_mode": "generate_once",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              14
+            ]
+          ],
+          "sloc": 3,
+          "comment_lines": 9,
+          "blank_lines": 2
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/bridge/extern_c_api.rs",
+      "language": "rust",
+      "line_count": 91,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              91
+            ]
+          ],
+          "sloc": 68,
+          "comment_lines": 10,
+          "blank_lines": 13
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/bridge/mod.rs",
+      "language": "rust",
+      "line_count": 5,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              5
+            ]
+          ],
+          "sloc": 3,
+          "comment_lines": 1,
+          "blank_lines": 1
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/bridge/seL4_ModeManager_ModeManager_GUMBOX.rs",
+      "language": "rust",
+      "line_count": 171,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              171
+            ]
+          ],
+          "sloc": 90,
+          "comment_lines": 66,
+          "blank_lines": 15
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/bridge/seL4_ModeManager_ModeManager_api.rs",
+      "language": "rust",
+      "line_count": 118,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              118
+            ]
+          ],
+          "sloc": 99,
+          "comment_lines": 1,
+          "blank_lines": 18
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/component/mod.rs",
+      "language": "rust",
+      "line_count": 4,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_contract_woven",
+          "provenance": "hamr_woven",
+          "generation_mode": "woven",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              4,
+              4
+            ]
+          ],
+          "sloc": 0,
+          "comment_lines": 1,
+          "blank_lines": 0
+        },
+        {
+          "bucket_index": 1,
+          "artifact_type": "rust_infra",
+          "provenance": "preserved_origin_unknown",
+          "generation_mode": "generate_once",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              3
+            ]
+          ],
+          "sloc": 1,
+          "comment_lines": 1,
+          "blank_lines": 1
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/component/seL4_ModeManager_ModeManager_app.rs",
+      "language": "rust",
+      "line_count": 108,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_contract_woven",
+          "provenance": "hamr_woven",
+          "generation_mode": "woven",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              13,
+              15
+            ],
+            [
+              22,
+              24
+            ],
+            [
+              32,
+              39
+            ],
+            [
+              51,
+              51
+            ],
+            [
+              53,
+              66
+            ],
+            [
+              106,
+              106
+            ]
+          ],
+          "sloc": 14,
+          "comment_lines": 16,
+          "blank_lines": 0
+        },
+        {
+          "bucket_index": 1,
+          "artifact_type": "rust_app_code",
+          "provenance": "preserved_origin_unknown",
+          "generation_mode": "generate_once",
+          "workflow_key": "CompDev(*).2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              12
+            ],
+            [
+              16,
+              21
+            ],
+            [
+              25,
+              31
+            ],
+            [
+              40,
+              50
+            ],
+            [
+              52,
+              52
+            ],
+            [
+              67,
+              105
+            ],
+            [
+              107,
+              108
+            ]
+          ],
+          "sloc": 64,
+          "comment_lines": 2,
+          "blank_lines": 12
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/lib.rs",
+      "language": "rust",
+      "line_count": 83,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              83
+            ]
+          ],
+          "sloc": 63,
+          "comment_lines": 5,
+          "blank_lines": 15
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/logging.rs",
+      "language": "rust",
+      "line_count": 47,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_infra",
+          "provenance": "preserved_origin_unknown",
+          "generation_mode": "generate_once",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              47
+            ]
+          ],
+          "sloc": 32,
+          "comment_lines": 6,
+          "blank_lines": 9
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/mod.rs",
+      "language": "rust",
+      "line_count": 5,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_test_infra",
+          "provenance": "preserved_origin_unknown",
+          "generation_mode": "generate_once",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              5
+            ]
+          ],
+          "sloc": 2,
+          "comment_lines": 1,
+          "blank_lines": 2
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/tests.rs",
+      "language": "rust",
+      "line_count": 143,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_test_code",
+          "provenance": "preserved_origin_unknown",
+          "generation_mode": "generate_once",
+          "workflow_key": "CompDev(*).3",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              143
+            ]
+          ],
+          "sloc": 121,
+          "comment_lines": 8,
+          "blank_lines": 14
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/util/cb_apis.rs",
+      "language": "rust",
+      "line_count": 208,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_test_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              208
+            ]
+          ],
+          "sloc": 148,
+          "comment_lines": 32,
+          "blank_lines": 28
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/util/generators.rs",
+      "language": "rust",
+      "line_count": 150,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_test_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              150
+            ]
+          ],
+          "sloc": 121,
+          "comment_lines": 8,
+          "blank_lines": 21
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/util/mod.rs",
+      "language": "rust",
+      "line_count": 7,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_test_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              7
+            ]
+          ],
+          "sloc": 3,
+          "comment_lines": 1,
+          "blank_lines": 3
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_ModeManager_ModeManager/src/test/util/test_apis.rs",
+      "language": "rust",
+      "line_count": 85,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_test_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              85
+            ]
+          ],
+          "sloc": 60,
           "comment_lines": 12,
           "blank_lines": 13
         }
@@ -2236,7 +3068,7 @@
     {
       "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/Makefile",
       "language": "makefile",
-      "line_count": 67,
+      "line_count": 70,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2248,12 +3080,12 @@
           "ranges": [
             [
               1,
-              67
+              70
             ]
           ],
-          "sloc": 36,
-          "comment_lines": 13,
-          "blank_lines": 18
+          "sloc": 37,
+          "comment_lines": 14,
+          "blank_lines": 19
         }
       ]
     },
@@ -2284,7 +3116,7 @@
     {
       "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/bridge/extern_c_api.rs",
       "language": "rust",
-      "line_count": 299,
+      "line_count": 321,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2296,12 +3128,12 @@
           "ranges": [
             [
               1,
-              299
+              321
             ]
           ],
-          "sloc": 258,
+          "sloc": 278,
           "comment_lines": 10,
-          "blank_lines": 31
+          "blank_lines": 33
         }
       ]
     },
@@ -2332,7 +3164,7 @@
     {
       "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/bridge/seL4_RxFirewall_RxFirewall_GUMBOX.rs",
       "language": "rust",
-      "line_count": 601,
+      "line_count": 790,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2344,19 +3176,19 @@
           "ranges": [
             [
               1,
-              601
+              790
             ]
           ],
-          "sloc": 339,
-          "comment_lines": 221,
-          "blank_lines": 41
+          "sloc": 445,
+          "comment_lines": 294,
+          "blank_lines": 51
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/bridge/seL4_RxFirewall_RxFirewall_api.rs",
       "language": "rust",
-      "line_count": 448,
+      "line_count": 492,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2368,43 +3200,19 @@
           "ranges": [
             [
               1,
-              448
+              492
             ]
           ],
-          "sloc": 412,
+          "sloc": 455,
           "comment_lines": 9,
-          "blank_lines": 27
+          "blank_lines": 28
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/component/mod.rs",
       "language": "rust",
-      "line_count": 3,
-      "buckets": [
-        {
-          "bucket_index": 0,
-          "artifact_type": "rust_infra",
-          "provenance": "preserved_origin_unknown",
-          "generation_mode": "generate_once",
-          "workflow_key": "CodeGen.2",
-          "component": null,
-          "ranges": [
-            [
-              1,
-              3
-            ]
-          ],
-          "sloc": 1,
-          "comment_lines": 1,
-          "blank_lines": 1
-        }
-      ]
-    },
-    {
-      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/component/seL4_RxFirewall_RxFirewall_app.rs",
-      "language": "rust",
-      "line_count": 606,
+      "line_count": 5,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2415,20 +3223,65 @@
           "component": null,
           "ranges": [
             [
-              140,
-              151
-            ],
-            [
-              153,
-              222
-            ],
-            [
-              284,
-              294
+              5,
+              5
             ]
           ],
-          "sloc": 60,
-          "comment_lines": 32,
+          "sloc": 0,
+          "comment_lines": 1,
+          "blank_lines": 0
+        },
+        {
+          "bucket_index": 1,
+          "artifact_type": "rust_infra",
+          "provenance": "preserved_origin_unknown",
+          "generation_mode": "generate_once",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              4
+            ]
+          ],
+          "sloc": 1,
+          "comment_lines": 1,
+          "blank_lines": 2
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/component/seL4_RxFirewall_RxFirewall_app.rs",
+      "language": "rust",
+      "line_count": 685,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "rust_contract_woven",
+          "provenance": "hamr_woven",
+          "generation_mode": "woven",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              151,
+              160
+            ],
+            [
+              169,
+              180
+            ],
+            [
+              182,
+              279
+            ],
+            [
+              363,
+              373
+            ]
+          ],
+          "sloc": 88,
+          "comment_lines": 42,
           "blank_lines": 1
         },
         {
@@ -2441,31 +3294,35 @@
           "ranges": [
             [
               1,
-              139
+              150
             ],
             [
-              152,
-              152
+              161,
+              168
             ],
             [
-              223,
-              283
+              181,
+              181
             ],
             [
-              295,
-              606
+              280,
+              362
+            ],
+            [
+              374,
+              685
             ]
           ],
-          "sloc": 338,
-          "comment_lines": 118,
-          "blank_lines": 57
+          "sloc": 375,
+          "comment_lines": 120,
+          "blank_lines": 59
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/lib.rs",
       "language": "rust",
-      "line_count": 77,
+      "line_count": 83,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2477,12 +3334,12 @@
           "ranges": [
             [
               1,
-              77
+              83
             ]
           ],
-          "sloc": 61,
-          "comment_lines": 2,
-          "blank_lines": 14
+          "sloc": 63,
+          "comment_lines": 5,
+          "blank_lines": 15
         }
       ]
     },
@@ -2537,7 +3394,7 @@
     {
       "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/test/tests.rs",
       "language": "rust",
-      "line_count": 210,
+      "line_count": 318,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2549,19 +3406,19 @@
           "ranges": [
             [
               1,
-              210
+              318
             ]
           ],
-          "sloc": 170,
-          "comment_lines": 8,
-          "blank_lines": 32
+          "sloc": 274,
+          "comment_lines": 10,
+          "blank_lines": 34
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/test/util/cb_apis.rs",
       "language": "rust",
-      "line_count": 153,
+      "line_count": 157,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2573,11 +3430,11 @@
           "ranges": [
             [
               1,
-              153
+              157
             ]
           ],
-          "sloc": 115,
-          "comment_lines": 20,
+          "sloc": 118,
+          "comment_lines": 21,
           "blank_lines": 18
         }
       ]
@@ -2585,7 +3442,7 @@
     {
       "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/test/util/generators.rs",
       "language": "rust",
-      "line_count": 135,
+      "line_count": 150,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2597,12 +3454,12 @@
           "ranges": [
             [
               1,
-              135
+              150
             ]
           ],
-          "sloc": 108,
+          "sloc": 121,
           "comment_lines": 8,
-          "blank_lines": 19
+          "blank_lines": 21
         }
       ]
     },
@@ -2633,7 +3490,7 @@
     {
       "path": "hamr/microkit/crates/seL4_RxFirewall_RxFirewall/src/test/util/test_apis.rs",
       "language": "rust",
-      "line_count": 108,
+      "line_count": 118,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2645,12 +3502,12 @@
           "ranges": [
             [
               1,
-              108
+              118
             ]
           ],
-          "sloc": 75,
-          "comment_lines": 16,
-          "blank_lines": 17
+          "sloc": 83,
+          "comment_lines": 17,
+          "blank_lines": 18
         }
       ]
     },
@@ -2681,7 +3538,7 @@
     {
       "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/Makefile",
       "language": "makefile",
-      "line_count": 67,
+      "line_count": 70,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2693,12 +3550,12 @@
           "ranges": [
             [
               1,
-              67
+              70
             ]
           ],
-          "sloc": 36,
-          "comment_lines": 13,
-          "blank_lines": 18
+          "sloc": 37,
+          "comment_lines": 14,
+          "blank_lines": 19
         }
       ]
     },
@@ -2777,7 +3634,7 @@
     {
       "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/bridge/seL4_TxFirewall_TxFirewall_GUMBOX.rs",
       "language": "rust",
-      "line_count": 331,
+      "line_count": 441,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2789,19 +3646,19 @@
           "ranges": [
             [
               1,
-              331
+              441
             ]
           ],
-          "sloc": 188,
-          "comment_lines": 120,
-          "blank_lines": 23
+          "sloc": 247,
+          "comment_lines": 161,
+          "blank_lines": 33
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/bridge/seL4_TxFirewall_TxFirewall_api.rs",
       "language": "rust",
-      "line_count": 268,
+      "line_count": 280,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2813,11 +3670,11 @@
           "ranges": [
             [
               1,
-              268
+              280
             ]
           ],
-          "sloc": 244,
-          "comment_lines": 1,
+          "sloc": 252,
+          "comment_lines": 5,
           "blank_lines": 23
         }
       ]
@@ -2825,10 +3682,27 @@
     {
       "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/component/mod.rs",
       "language": "rust",
-      "line_count": 3,
+      "line_count": 5,
       "buckets": [
         {
           "bucket_index": 0,
+          "artifact_type": "rust_contract_woven",
+          "provenance": "hamr_woven",
+          "generation_mode": "woven",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              5,
+              5
+            ]
+          ],
+          "sloc": 0,
+          "comment_lines": 1,
+          "blank_lines": 0
+        },
+        {
+          "bucket_index": 1,
           "artifact_type": "rust_infra",
           "provenance": "preserved_origin_unknown",
           "generation_mode": "generate_once",
@@ -2837,12 +3711,12 @@
           "ranges": [
             [
               1,
-              3
+              4
             ]
           ],
           "sloc": 1,
           "comment_lines": 1,
-          "blank_lines": 1
+          "blank_lines": 2
         }
       ]
     },
@@ -2910,7 +3784,7 @@
     {
       "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/lib.rs",
       "language": "rust",
-      "line_count": 77,
+      "line_count": 83,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2922,12 +3796,12 @@
           "ranges": [
             [
               1,
-              77
+              83
             ]
           ],
-          "sloc": 61,
-          "comment_lines": 2,
-          "blank_lines": 14
+          "sloc": 63,
+          "comment_lines": 5,
+          "blank_lines": 15
         }
       ]
     },
@@ -2982,7 +3856,7 @@
     {
       "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/test/tests.rs",
       "language": "rust",
-      "line_count": 67,
+      "line_count": 202,
       "buckets": [
         {
           "bucket_index": 0,
@@ -2994,19 +3868,19 @@
           "ranges": [
             [
               1,
-              67
+              202
             ]
           ],
-          "sloc": 48,
-          "comment_lines": 8,
-          "blank_lines": 11
+          "sloc": 172,
+          "comment_lines": 9,
+          "blank_lines": 21
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/test/util/cb_apis.rs",
       "language": "rust",
-      "line_count": 132,
+      "line_count": 145,
       "buckets": [
         {
           "bucket_index": 0,
@@ -3018,19 +3892,19 @@
           "ranges": [
             [
               1,
-              132
+              145
             ]
           ],
-          "sloc": 98,
-          "comment_lines": 18,
-          "blank_lines": 16
+          "sloc": 107,
+          "comment_lines": 20,
+          "blank_lines": 18
         }
       ]
     },
     {
       "path": "hamr/microkit/crates/seL4_TxFirewall_TxFirewall/src/test/util/generators.rs",
       "language": "rust",
-      "line_count": 135,
+      "line_count": 150,
       "buckets": [
         {
           "bucket_index": 0,
@@ -3042,12 +3916,12 @@
           "ranges": [
             [
               1,
-              135
+              150
             ]
           ],
-          "sloc": 108,
+          "sloc": 121,
           "comment_lines": 8,
-          "blank_lines": 19
+          "blank_lines": 21
         }
       ]
     },
@@ -3102,7 +3976,7 @@
     {
       "path": "hamr/microkit/custom.mk",
       "language": "makefile",
-      "line_count": 183,
+      "line_count": 215,
       "buckets": [
         {
           "bucket_index": 0,
@@ -3114,19 +3988,19 @@
           "ranges": [
             [
               1,
-              183
+              215
             ]
           ],
-          "sloc": 118,
-          "comment_lines": 12,
-          "blank_lines": 53
+          "sloc": 139,
+          "comment_lines": 15,
+          "blank_lines": 61
         }
       ]
     },
     {
       "path": "hamr/microkit/microkit.dot",
       "language": "dot",
-      "line_count": 237,
+      "line_count": 270,
       "buckets": [
         {
           "bucket_index": 0,
@@ -3138,19 +4012,19 @@
           "ranges": [
             [
               1,
-              237
+              270
             ]
           ],
-          "sloc": 188,
+          "sloc": 215,
           "comment_lines": 5,
-          "blank_lines": 44
+          "blank_lines": 50
         }
       ]
     },
     {
       "path": "hamr/microkit/microkit.schedule.xml",
       "language": "xml",
-      "line_count": 14,
+      "line_count": 19,
       "buckets": [
         {
           "bucket_index": 0,
@@ -3162,19 +4036,19 @@
           "ranges": [
             [
               1,
-              14
+              19
             ]
           ],
-          "sloc": 12,
-          "comment_lines": 1,
-          "blank_lines": 1
+          "sloc": 14,
+          "comment_lines": 5,
+          "blank_lines": 0
         }
       ]
     },
     {
       "path": "hamr/microkit/microkit.system",
       "language": "xml",
-      "line_count": 466,
+      "line_count": 531,
       "buckets": [
         {
           "bucket_index": 0,
@@ -3186,19 +4060,19 @@
           "ranges": [
             [
               1,
-              466
+              531
             ]
           ],
-          "sloc": 384,
-          "comment_lines": 27,
-          "blank_lines": 55
+          "sloc": 434,
+          "comment_lines": 34,
+          "blank_lines": 63
         }
       ]
     },
     {
       "path": "hamr/microkit/system.mk",
       "language": "makefile",
-      "line_count": 179,
+      "line_count": 207,
       "buckets": [
         {
           "bucket_index": 0,
@@ -3210,19 +4084,19 @@
           "ranges": [
             [
               1,
-              179
+              207
             ]
           ],
-          "sloc": 115,
-          "comment_lines": 12,
-          "blank_lines": 52
+          "sloc": 132,
+          "comment_lines": 14,
+          "blank_lines": 61
         }
       ]
     },
     {
       "path": "hamr/microkit/types/include/sb_aadl_types.h",
       "language": "c",
-      "line_count": 27,
+      "line_count": 30,
       "buckets": [
         {
           "bucket_index": 0,
@@ -3234,12 +4108,12 @@
           "ranges": [
             [
               1,
-              27
+              30
             ]
           ],
-          "sloc": 18,
+          "sloc": 20,
           "comment_lines": 1,
-          "blank_lines": 8
+          "blank_lines": 9
         }
       ]
     },
@@ -3268,9 +4142,9 @@
       ]
     },
     {
-      "path": "hamr/microkit/types/include/sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1.h",
+      "path": "hamr/microkit/types/include/sb_queue_bool_1.h",
       "language": "c",
-      "line_count": 148,
+      "line_count": 169,
       "buckets": [
         {
           "bucket_index": 0,
@@ -3282,19 +4156,67 @@
           "ranges": [
             [
               1,
-              148
+              169
             ]
           ],
-          "sloc": 36,
-          "comment_lines": 91,
-          "blank_lines": 21
+          "sloc": 46,
+          "comment_lines": 98,
+          "blank_lines": 25
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/types/include/sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1.h",
+      "language": "c",
+      "line_count": 169,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "c_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              169
+            ]
+          ],
+          "sloc": 46,
+          "comment_lines": 98,
+          "blank_lines": 25
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/types/include/sb_queue_open_platform_Data_Model_OperatingMode_1.h",
+      "language": "c",
+      "line_count": 169,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "c_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              169
+            ]
+          ],
+          "sloc": 46,
+          "comment_lines": 98,
+          "blank_lines": 25
         }
       ]
     },
     {
       "path": "hamr/microkit/types/include/sb_queue_open_platform_Data_Model_RawEthernetMessage_1.h",
       "language": "c",
-      "line_count": 148,
+      "line_count": 169,
       "buckets": [
         {
           "bucket_index": 0,
@@ -3306,18 +4228,66 @@
           "ranges": [
             [
               1,
-              148
+              169
             ]
           ],
-          "sloc": 36,
-          "comment_lines": 91,
-          "blank_lines": 21
+          "sloc": 46,
+          "comment_lines": 98,
+          "blank_lines": 25
         }
       ]
     },
     {
       "path": "hamr/microkit/types/include/sb_queue_open_platform_Data_Model_SizedEthernetMessage_Impl_1.h",
       "language": "c",
+      "line_count": 169,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "c_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              169
+            ]
+          ],
+          "sloc": 46,
+          "comment_lines": 98,
+          "blank_lines": 25
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/types/include/sb_types.h",
+      "language": "c",
+      "line_count": 10,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "c_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              10
+            ]
+          ],
+          "sloc": 7,
+          "comment_lines": 1,
+          "blank_lines": 2
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/types/src/sb_queue_bool_1.c",
+      "language": "c",
       "line_count": 148,
       "buckets": [
         {
@@ -3333,40 +4303,16 @@
               148
             ]
           ],
-          "sloc": 36,
-          "comment_lines": 91,
-          "blank_lines": 21
-        }
-      ]
-    },
-    {
-      "path": "hamr/microkit/types/include/sb_types.h",
-      "language": "c",
-      "line_count": 8,
-      "buckets": [
-        {
-          "bucket_index": 0,
-          "artifact_type": "c_infra",
-          "provenance": "hamr_generated",
-          "generation_mode": "overwrite",
-          "workflow_key": "CodeGen.2",
-          "component": null,
-          "ranges": [
-            [
-              1,
-              8
-            ]
-          ],
-          "sloc": 5,
-          "comment_lines": 1,
-          "blank_lines": 2
+          "sloc": 65,
+          "comment_lines": 53,
+          "blank_lines": 30
         }
       ]
     },
     {
       "path": "hamr/microkit/types/src/sb_queue_open_platform_Data_Model_MAVLinkUDPMessage_Impl_1.c",
       "language": "c",
-      "line_count": 117,
+      "line_count": 148,
       "buckets": [
         {
           "bucket_index": 0,
@@ -3378,19 +4324,43 @@
           "ranges": [
             [
               1,
-              117
+              148
             ]
           ],
-          "sloc": 44,
-          "comment_lines": 48,
-          "blank_lines": 25
+          "sloc": 65,
+          "comment_lines": 53,
+          "blank_lines": 30
+        }
+      ]
+    },
+    {
+      "path": "hamr/microkit/types/src/sb_queue_open_platform_Data_Model_OperatingMode_1.c",
+      "language": "c",
+      "line_count": 148,
+      "buckets": [
+        {
+          "bucket_index": 0,
+          "artifact_type": "c_infra",
+          "provenance": "hamr_generated",
+          "generation_mode": "overwrite",
+          "workflow_key": "CodeGen.2",
+          "component": null,
+          "ranges": [
+            [
+              1,
+              148
+            ]
+          ],
+          "sloc": 65,
+          "comment_lines": 53,
+          "blank_lines": 30
         }
       ]
     },
     {
       "path": "hamr/microkit/types/src/sb_queue_open_platform_Data_Model_RawEthernetMessage_1.c",
       "language": "c",
-      "line_count": 117,
+      "line_count": 148,
       "buckets": [
         {
           "bucket_index": 0,
@@ -3402,19 +4372,19 @@
           "ranges": [
             [
               1,
-              117
+              148
             ]
           ],
-          "sloc": 44,
-          "comment_lines": 48,
-          "blank_lines": 25
+          "sloc": 65,
+          "comment_lines": 53,
+          "blank_lines": 30
         }
       ]
     },
     {
       "path": "hamr/microkit/types/src/sb_queue_open_platform_Data_Model_SizedEthernetMessage_Impl_1.c",
       "language": "c",
-      "line_count": 117,
+      "line_count": 148,
       "buckets": [
         {
           "bucket_index": 0,
@@ -3426,12 +4396,12 @@
           "ranges": [
             [
               1,
-              117
+              148
             ]
           ],
-          "sloc": 44,
-          "comment_lines": 48,
-          "blank_lines": 25
+          "sloc": 65,
+          "comment_lines": 53,
+          "blank_lines": 30
         }
       ]
     },
@@ -3468,7 +4438,7 @@
           "bucket_index": 0,
           "artifact_type": "c_infra",
           "provenance": "hamr_generated",
-          "generation_mode": "overwrite",
+          "generation_mode": "unknown",
           "workflow_key": "CodeGen.2",
           "component": null,
           "ranges": [
@@ -3510,7 +4480,7 @@
     {
       "path": "hamr/microkit/util/src/util.c",
       "language": "c",
-      "line_count": 45,
+      "line_count": 49,
       "buckets": [
         {
           "bucket_index": 0,
@@ -3522,12 +4492,12 @@
           "ranges": [
             [
               1,
-              45
+              49
             ]
           ],
-          "sloc": 30,
-          "comment_lines": 9,
-          "blank_lines": 6
+          "sloc": 32,
+          "comment_lines": 10,
+          "blank_lines": 7
         }
       ]
     },
@@ -31316,7 +32286,7 @@
     {
       "path": "requirements/component-requirements.md",
       "language": "markdown",
-      "line_count": 59,
+      "line_count": 68,
       "buckets": [
         {
           "bucket_index": 0,
@@ -31328,19 +32298,19 @@
           "ranges": [
             [
               1,
-              59
+              68
             ]
           ],
-          "sloc": 48,
+          "sloc": 56,
           "comment_lines": 0,
-          "blank_lines": 11
+          "blank_lines": 12
         }
       ]
     },
     {
       "path": "requirements/conops.md",
       "language": "markdown",
-      "line_count": 202,
+      "line_count": 211,
       "buckets": [
         {
           "bucket_index": 0,
@@ -31352,19 +32322,19 @@
           "ranges": [
             [
               1,
-              202
+              211
             ]
           ],
-          "sloc": 152,
+          "sloc": 160,
           "comment_lines": 0,
-          "blank_lines": 50
+          "blank_lines": 51
         }
       ]
     },
     {
       "path": "requirements/data-dictionary.md",
       "language": "markdown",
-      "line_count": 33,
+      "line_count": 42,
       "buckets": [
         {
           "bucket_index": 0,
@@ -31376,12 +32346,12 @@
           "ranges": [
             [
               1,
-              33
+              42
             ]
           ],
-          "sloc": 31,
+          "sloc": 39,
           "comment_lines": 0,
-          "blank_lines": 2
+          "blank_lines": 3
         }
       ]
     },
@@ -31412,7 +32382,7 @@
     {
       "path": "requirements/updated_reqs.md",
       "language": "markdown",
-      "line_count": 163,
+      "line_count": 172,
       "buckets": [
         {
           "bucket_index": 0,
@@ -31424,19 +32394,19 @@
           "ranges": [
             [
               1,
-              163
+              172
             ]
           ],
-          "sloc": 112,
+          "sloc": 120,
           "comment_lines": 0,
-          "blank_lines": 51
+          "blank_lines": 52
         }
       ]
     },
     {
       "path": "sysmlv2/open_platform/GumboLib.sysml",
       "language": "sysml",
-      "line_count": 200,
+      "line_count": 208,
       "buckets": [
         {
           "bucket_index": 0,
@@ -31451,8 +32421,8 @@
               4
             ],
             [
-              200,
-              200
+              208,
+              208
             ]
           ],
           "sloc": 3,
@@ -31469,19 +32439,19 @@
           "ranges": [
             [
               5,
-              199
+              207
             ]
           ],
-          "sloc": 140,
-          "comment_lines": 2,
-          "blank_lines": 53
+          "sloc": 144,
+          "comment_lines": 5,
+          "blank_lines": 54
         }
       ]
     },
     {
       "path": "sysmlv2/open_platform/Platform.sysml",
       "language": "sysml",
-      "line_count": 25,
+      "line_count": 27,
       "buckets": [
         {
           "bucket_index": 0,
@@ -31493,11 +32463,11 @@
           "ranges": [
             [
               1,
-              25
+              27
             ]
           ],
           "sloc": 18,
-          "comment_lines": 1,
+          "comment_lines": 3,
           "blank_lines": 6
         }
       ]
@@ -31505,7 +32475,7 @@
     {
       "path": "sysmlv2/open_platform/open_platform.sysml",
       "language": "sysml",
-      "line_count": 270,
+      "line_count": 305,
       "buckets": [
         {
           "bucket_index": 0,
@@ -31517,19 +32487,19 @@
           "ranges": [
             [
               1,
-              270
+              305
             ]
           ],
-          "sloc": 234,
-          "comment_lines": 3,
-          "blank_lines": 33
+          "sloc": 263,
+          "comment_lines": 5,
+          "blank_lines": 37
         }
       ]
     },
     {
       "path": "sysmlv2/open_platform/open_platform_Data_Model.sysml",
       "language": "sysml",
-      "line_count": 28,
+      "line_count": 35,
       "buckets": [
         {
           "bucket_index": 0,
@@ -31541,19 +32511,19 @@
           "ranges": [
             [
               1,
-              28
+              35
             ]
           ],
-          "sloc": 24,
-          "comment_lines": 0,
-          "blank_lines": 4
+          "sloc": 28,
+          "comment_lines": 2,
+          "blank_lines": 5
         }
       ]
     },
     {
       "path": "sysmlv2/open_platform/open_platform_Properties.sysml",
       "language": "sysml",
-      "line_count": 11,
+      "line_count": 12,
       "buckets": [
         {
           "bucket_index": 0,
@@ -31565,10 +32535,10 @@
           "ranges": [
             [
               1,
-              11
+              12
             ]
           ],
-          "sloc": 8,
+          "sloc": 9,
           "comment_lines": 1,
           "blank_lines": 2
         }
@@ -31577,7 +32547,7 @@
     {
       "path": "sysmlv2/open_platform/open_platform_Software.sysml",
       "language": "sysml",
-      "line_count": 304,
+      "line_count": 475,
       "buckets": [
         {
           "bucket_index": 0,
@@ -31589,24 +32559,28 @@
           "ranges": [
             [
               1,
-              41
+              42
             ],
             [
-              122,
-              139
+              156,
+              176
             ],
             [
-              210,
-              227
+              328,
+              342
             ],
             [
-              281,
-              304
+              370,
+              387
+            ],
+            [
+              452,
+              475
             ]
           ],
-          "sloc": 87,
-          "comment_lines": 0,
-          "blank_lines": 14
+          "sloc": 100,
+          "comment_lines": 3,
+          "blank_lines": 17
         },
         {
           "bucket_index": 1,
@@ -31617,13 +32591,13 @@
           "component": "rxfirewall",
           "ranges": [
             [
-              42,
-              121
+              43,
+              155
             ]
           ],
-          "sloc": 76,
-          "comment_lines": 0,
-          "blank_lines": 4
+          "sloc": 105,
+          "comment_lines": 2,
+          "blank_lines": 6
         },
         {
           "bucket_index": 2,
@@ -31634,16 +32608,33 @@
           "component": "mavlinkfirewall",
           "ranges": [
             [
-              140,
-              209
+              177,
+              327
             ]
           ],
-          "sloc": 63,
-          "comment_lines": 0,
-          "blank_lines": 7
+          "sloc": 125,
+          "comment_lines": 11,
+          "blank_lines": 15
         },
         {
           "bucket_index": 3,
+          "artifact_type": "gumbo_contract",
+          "provenance": "developer_authored",
+          "generation_mode": "not_codegen",
+          "workflow_key": "CompGUMBOSpec(modemanager)",
+          "component": "modemanager",
+          "ranges": [
+            [
+              343,
+              369
+            ]
+          ],
+          "sloc": 23,
+          "comment_lines": 2,
+          "blank_lines": 2
+        },
+        {
+          "bucket_index": 4,
           "artifact_type": "gumbo_contract",
           "provenance": "developer_authored",
           "generation_mode": "not_codegen",
@@ -31651,13 +32642,13 @@
           "component": "txfirewall",
           "ranges": [
             [
-              228,
-              280
+              388,
+              451
             ]
           ],
-          "sloc": 47,
-          "comment_lines": 0,
-          "blank_lines": 6
+          "sloc": 56,
+          "comment_lines": 1,
+          "blank_lines": 7
         }
       ]
     }

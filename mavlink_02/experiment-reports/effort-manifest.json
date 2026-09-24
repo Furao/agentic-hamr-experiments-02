@@ -2,7 +2,7 @@
   "schema_version": 1,
   "experiment_id": "mavlink_02",
   "lifecycle": "change",
-  "workflow": "ChangeExec(CR-01)",
+  "workflow": "ChangeExec(CR-02)",
   "profile": "audited",
   "actor": "agent",
   "harness": "codex",
@@ -10,12 +10,18 @@
   "concept_sha256": "90eb65e0daa6fe4a6733366be7b8fe486c6c04b0f13b020e342cef545e430a45",
   "project_dir": ".",
   "session_metrics": "experiment-reports/session-metrics.json",
-  "metrics_cover_full_run": true,
+  "metrics_cover_full_run": false,
   "known_exclusions": [
-    "Subagent activity is excluded by the schema-v2 session metrics adapter.",
-    "Actual billed cost is unavailable; session cost is API list-price equivalent only.",
-    "No pristine generation baseline was prepared; generate-once non-marker provenance remains unknown."
+    "CHANGE-REQUEST SCOPE: Measurements cover the current project snapshot, including inherited CR-01 artifacts; they are not the CR-02 changed-line delta. The measured agent session covers CR-02 only, so modeled-vs-observed ratios must remain suppressed.",
+    "The required concept_quote is retained verbatim from requirements/conops.md section 0, a retired CR-01 concept. CR-02 authority is action-requests/CR-02-add-mode-manager/Open_Platform_HLRs_26_09_23_02.md and its approved change plan.",
+    "The greenfield-oriented measurer excludes action-requests wholesale, including the current CR-02 requirements, but measures the historical requirements directory. Requirements effort is therefore not a complete or current CR-02 estimate.",
+    "Workflow status contains both CR-01 history and CR-02 records. Derived step and assurance observations may mix historical evidence; the authoritative final results are reports/CR-02/final-validation/CR-02-final-validation.md.",
+    "Subagent activity is excluded by schema-v2 metrics. Nested-shell friction has 1267 parser warnings; top-level counts are not complete nested-command counts.",
+    "Both actual billed cost and API list-price-equivalent cost are unavailable in this session; no agent dollar cost or measured savings can be inferred.",
+    "No pristine generation baseline was prepared; generate-once non-marker provenance remains preserved_origin_unknown and is not silently counted as developer-authored.",
+    "Coding and unit-debug placeholder rates exclude deployment, board bring-up, assurance-case writing, elicitation meetings and coordination. Hardware timing CR-02-HW-01 remains High/Open and deferred.",
+    "The skill-referenced docs/effort-measurement-spec.md is absent at the repository root. Counting is performed by the bundled v1 scripts/configs with line-allocation validation; no missing specification content is assumed."
   ],
-  "hamr_version": null,
+  "hamr_version": "Final HAMR codegen checkout 5801330b0987f954f13e2188f523e24261ce2ba4; Sireum checkout 85c9cdfe04227ec2d3064b13c231943648c8431b (upgraded during session)",
   "generation_baseline": null
 }
