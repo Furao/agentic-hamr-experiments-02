@@ -1,0 +1,6 @@
+RUSTC_BOOTSTRAP=1 cargo-verus verify --features sel4 -Z build-std=core,alloc,compiler_builtins -Z build-std-features=compiler-builtins-mem --target aarch64-unknown-none -- --rlimit 100 --smt-option smt.random_seed=7
+    Checking sel4-logging v0.1.0 (https://github.com/seL4/rust-sel4?tag=v2.0.0#3248eeed)
+    Checking sel4 v0.1.0 (https://github.com/seL4/rust-sel4?tag=v2.0.0#3248eeed)
+    Checking sel4-microkit-base v0.1.0 (https://github.com/seL4/rust-sel4?tag=v2.0.0#3248eeed)
+    Checking seL4_LowLevelEthernetDriver_LowLevelEthernetDriver v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.47s

@@ -1,0 +1,155 @@
+   Compiling memchr v2.8.3
+   Compiling cfg-if v1.0.4
+   Compiling syn v3.0.3
+   Compiling serde_core v1.0.229
+   Compiling zmij v1.0.23
+   Compiling libc v0.2.189
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling itoa v1.0.18
+   Compiling regex-syntax v0.8.11
+   Compiling sel4-build-env v0.1.0 (https://github.com/seL4/rust-sel4?tag=v2.0.0#3248eeed)
+   Compiling prettyplease v0.2.37
+   Compiling lazy_static v1.5.0
+   Compiling glob v0.3.4
+   Compiling ucd-trie v0.1.7
+   Compiling scopeguard v1.2.0
+   Compiling minimal-lexical v0.2.1
+   Compiling rustversion v1.0.23
+   Compiling autocfg v1.5.1
+   Compiling libloading v0.8.9
+   Compiling bindgen v0.71.1
+   Compiling lock_api v0.4.14
+   Compiling either v1.18.0
+   Compiling fallible-iterator v0.3.0
+   Compiling byteorder v1.5.0
+   Compiling getrandom v0.3.4
+   Compiling log v0.4.33
+   Compiling shlex v1.3.0
+   Compiling bitflags v2.13.1
+   Compiling rustc-hash v2.1.3
+   Compiling semver v1.0.28
+   Compiling xml-rs v0.8.29
+   Compiling itertools v0.13.0
+   Compiling num-traits v0.2.19
+   Compiling rustix v1.1.4
+   Compiling getrandom v0.4.3
+   Compiling zerocopy v0.8.56
+   Compiling stable_deref_trait v1.2.1
+   Compiling clang-sys v1.9.1
+   Compiling pest v2.9.0
+   Compiling aho-corasick v1.1.5
+   Compiling nom v7.1.3
+   Compiling rustc_version v0.4.1
+   Compiling heapless v0.8.0
+   Compiling tock-registers v0.9.0
+   Compiling sel4-bitfield-ops v0.1.0 (https://github.com/seL4/rust-sel4?tag=v2.0.0#3248eeed)
+   Compiling parking_lot_core v0.9.12
+   Compiling linux-raw-sys v0.12.0
+   Compiling once_cell v1.21.4
+   Compiling heapless v0.7.17
+   Compiling hash32 v0.3.1
+   Compiling xmltree v0.11.0
+   Compiling hash32 v0.2.1
+   Compiling spin v0.9.9
+   Compiling chrono v0.4.45
+   Compiling embedded-hal v1.0.0
+   Compiling rand_core v0.9.5
+   Compiling utf8parse v0.2.2
+   Compiling futures-task v0.3.34
+   Compiling slab v0.4.12
+   Compiling pin-project-lite v0.2.17
+   Compiling futures-core v0.3.34
+   Compiling fastrand v2.5.0
+   Compiling smoltcp v0.10.0
+   Compiling regex-automata v0.4.18
+   Compiling nb v1.1.0
+   Compiling smallvec v1.15.2
+   Compiling embedded-hal-nb v1.0.0
+   Compiling futures-util v0.3.34
+   Compiling anstyle-parse v1.0.0
+   Compiling wait-timeout v0.2.1
+   Compiling eth_phy v0.1.0 (https://github.com/dornerworks/zynqmp_hal.git#fda01792)
+   Compiling zynqmp_pac v0.1.0 (https://github.com/dornerworks/zynqmp_hal.git#fda01792)
+   Compiling pest_meta v2.9.0
+   Compiling anstyle v1.0.14
+   Compiling jiff-core v0.1.0
+   Compiling rtcc v0.3.2
+   Compiling fnv v1.0.7
+   Compiling anstyle-query v1.1.5
+   Compiling colorchoice v1.0.5
+   Compiling bitflags v1.3.2
+   Compiling bit-vec v0.8.0
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling quick-error v1.2.3
+   Compiling managed v0.8.0
+   Compiling anstream v1.0.0
+   Compiling cexpr v0.6.0
+   Compiling pest_generator v2.9.0
+   Compiling bit-set v0.8.0
+   Compiling parking_lot v0.12.5
+   Compiling data v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/data)
+   Compiling rand v0.9.5
+   Compiling rand_xorshift v0.4.0
+   Compiling serde_derive v1.0.229
+   Compiling serial_test_derive v3.5.0
+   Compiling tempfile v3.27.0
+   Compiling futures-executor v0.3.34
+   Compiling jiff v0.2.35
+   Compiling unarray v0.1.4
+   Compiling sel4-immutable-cell v0.1.0 (https://github.com/seL4/rust-sel4?tag=v2.0.0#3248eeed)
+   Compiling GumboLib v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/GumboLib)
+   Compiling rusty-fork v0.3.1
+warning: unexpected `cfg` condition name: `verus_keep_ghost`
+  --> /home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/GumboLib/src/lib.rs:16:17
+   |
+16 | #![cfg_attr(not(verus_keep_ghost), feature(stmt_expr_attributes))]
+   |                 ^^^^^^^^^^^^^^^^
+   |
+   = help: expected names are: `docsrs`, `feature`, and `test` and 32 more
+   = help: consider using a Cargo feature instead
+   = help: or consider adding in `Cargo.toml` the `check-cfg` lint config for the lint:
+            [lints.rust]
+            unexpected_cfgs = { level = "warn", check-cfg = ['cfg(verus_keep_ghost)'] }
+   = help: or consider adding `println!("cargo::rustc-check-cfg=cfg(verus_keep_ghost)");` to the top of the `build.rs`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: `#[warn(unexpected_cfgs)]` on by default
+
+warning: feature `proc_macro_hygiene` is declared but not used
+  --> /home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/GumboLib/src/lib.rs:15:12
+   |
+15 | #![feature(proc_macro_hygiene)]
+   |            ^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_features)]` (part of `#[warn(unused)]`) on by default
+
+warning: feature `stmt_expr_attributes` is declared but not used
+  --> /home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/GumboLib/src/lib.rs:16:44
+   |
+16 | #![cfg_attr(not(verus_keep_ghost), feature(stmt_expr_attributes))]
+   |                                            ^^^^^^^^^^^^^^^^^^^^
+
+warning: `GumboLib` (lib) generated 3 warnings
+   Compiling serial_test v3.5.0
+   Compiling pest_derive v2.9.0
+   Compiling regex v1.13.1
+   Compiling env_filter v2.0.0
+   Compiling ppv-lite86 v0.2.21
+   Compiling rand_chacha v0.9.0
+   Compiling sel4-driver-interfaces v0.1.0 (https://github.com/seL4/rust-sel4?tag=v2.0.0#3248eeed)
+   Compiling proptest v1.11.0
+   Compiling sel4-config-types v0.1.0 (https://github.com/seL4/rust-sel4?tag=v2.0.0#3248eeed)
+   Compiling zynqmp_hal v0.1.0 (https://github.com/dornerworks/zynqmp_hal.git#fda01792)
+   Compiling sel4-config-data v0.1.0 (https://github.com/seL4/rust-sel4?tag=v2.0.0#3248eeed)
+   Compiling eth-driver-core v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/core)
+   Compiling env_logger v0.11.11
+error: failed to run custom build command for `sel4-config-data v0.1.0 (https://github.com/seL4/rust-sel4?tag=v2.0.0#3248eeed)`
+
+Caused by:
+  process didn't exit successfully: `/tmp/cr02-final-tests-mviyqjbs/target/debug/build/sel4-config-data-3a341509100b3741/build-script-build` (exit status: 101)
+  --- stderr
+
+  thread 'main' (3091) panicked at /home/robertvanvossen/.cargo/git/checkouts/rust-sel4-d7edb8214cac2bde/3248eee/crates/sel4/build-env/src/lib.rs:55:28:
+  SEL4_INCLUDE_DIRS or SEL4_PREFIX must be set
+  note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+warning: build failed, waiting for other jobs to finish...

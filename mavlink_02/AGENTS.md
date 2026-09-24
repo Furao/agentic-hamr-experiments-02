@@ -7,6 +7,9 @@ per-workflow `/...` skills in Claude Code, or use `$wf` and per-workflow `$...`
 skills in Codex. Progress: reports/workflow-status.md. Model source:
 sysmlv2/open_platform/; generated code will land in hamr/microkit/.
 
+Open findings are tracked in `open-issues/README.md`, with individual issue records
+in `open-issues/`.
+
 ## Post-codegen R2U2 validation
 
 HAMR now generates the R2U2 false-verdict reporting fix directly. The developer

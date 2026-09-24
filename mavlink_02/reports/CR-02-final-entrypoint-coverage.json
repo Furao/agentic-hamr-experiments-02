@@ -1,0 +1,78 @@
+[
+  {
+    "crate": "seL4_ModeManager_ModeManager",
+    "entry_points": {
+      "initialize": {
+        "hit": 8,
+        "total": 8,
+        "uncovered": []
+      },
+      "timeTriggered": {
+        "hit": 13,
+        "total": 13,
+        "uncovered": []
+      }
+    },
+    "app_total": {
+      "hit": 41,
+      "total": 41
+    }
+  },
+  {
+    "crate": "seL4_RxFirewall_RxFirewall",
+    "entry_points": {
+      "initialize": {
+        "hit": 5,
+        "total": 5,
+        "uncovered": []
+      },
+      "timeTriggered": {
+        "hit": 49,
+        "total": 49,
+        "uncovered": []
+      }
+    },
+    "app_total": {
+      "hit": 118,
+      "total": 118
+    }
+  },
+  {
+    "crate": "seL4_TxFirewall_TxFirewall",
+    "entry_points": {
+      "initialize": {
+        "hit": 5,
+        "total": 5,
+        "uncovered": []
+      },
+      "timeTriggered": {
+        "hit": 48,
+        "total": 48,
+        "uncovered": []
+      }
+    },
+    "app_total": {
+      "hit": 82,
+      "total": 84
+    }
+  },
+  {
+    "crate": "seL4_MAVLinkFirewall_MAVLinkFirewall",
+    "entry_points": {
+      "initialize": {
+        "hit": 7,
+        "total": 7,
+        "uncovered": []
+      },
+      "timeTriggered": {
+        "hit": 66,
+        "total": 66,
+        "uncovered": []
+      }
+    },
+    "app_total": {
+      "hit": 253,
+      "total": 254
+    }
+  }
+]

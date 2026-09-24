@@ -1,0 +1,98 @@
+{
+  "date": "2026-09-23",
+  "source_commit": "9cf01d9b9cebb31c94265c082a2ea257ca8dbe52",
+  "sdk": "/home/robertvanvossen/tools/microkit-sdk-2.2.0-dev",
+  "board": "zcu102",
+  "config": "debug",
+  "build_exit": 0,
+  "artifacts": {
+    "hamr/microkit/build/loader.img": {
+      "bytes": 155953132,
+      "sha256": "cac588401b5a4853aa4a9d482f5a3743f5840063ee888f52027361893c7aba43"
+    },
+    "hamr/microkit/build/microkit.system.merged": {
+      "bytes": 21850,
+      "sha256": "38364ce09fa259411a0cb75d5825dd87ea71faa67bdf80801a34080de01f7a50"
+    },
+    "hamr/microkit/custom.mk": {
+      "bytes": 11585,
+      "sha256": "84744b5d1d721c375c8ab8752c2a74eecf39af0a9d58cdaf71abc69ec49a7619"
+    },
+    "hamr/microkit/microkit.schedule.xml": {
+      "bytes": 1301,
+      "sha256": "7b35e34cffd708ee62b3947e63033fe085818a3418f514100e067ea7b7bba00c"
+    },
+    "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/r2u2_monitor.rs": {
+      "bytes": 3807,
+      "sha256": "fcf457dc0b03f49084b387eab70977b992bc812703594cfcb634533d62a4d17b"
+    },
+    "hamr/microkit/crates/seL4_MAVLinkFirewall_MAVLinkFirewall/src/component/spec.bin": {
+      "bytes": 574,
+      "sha256": "d46fb7a585a85c88486ac312dde8e891042beb7bcf64ac97698e4c23d05f2202"
+    }
+  },
+  "source_files_compared": 1347,
+  "source_content_delta": {
+    "added": [],
+    "removed": [],
+    "modified": []
+  },
+  "schedule_matches_merged": true,
+  "schedule": [
+    {
+      "name": "domain_1",
+      "length": "3000"
+    },
+    {
+      "name": "domain_7",
+      "length": "10000"
+    },
+    {
+      "name": "domain_1",
+      "length": "3000"
+    },
+    {
+      "name": "domain_2",
+      "length": "60000"
+    },
+    {
+      "name": "domain_1",
+      "length": "3000"
+    },
+    {
+      "name": "domain_3",
+      "length": "30000"
+    },
+    {
+      "name": "domain_1",
+      "length": "3000"
+    },
+    {
+      "name": "domain_4",
+      "length": "30000"
+    },
+    {
+      "name": "domain_1",
+      "length": "3000"
+    },
+    {
+      "name": "domain_5",
+      "length": "30000"
+    },
+    {
+      "name": "domain_1",
+      "length": "3000"
+    },
+    {
+      "name": "domain_6",
+      "length": "30000"
+    }
+  ],
+  "schedule_total_legacy_units": 208000,
+  "mode_transition_log_present": {
+    "hamr/microkit/build/loader.img": true,
+    "hamr/microkit/build/seL4_ModeManager_ModeManager.elf": true
+  },
+  "codegen_ran": false,
+  "workaround_applied": false
+}

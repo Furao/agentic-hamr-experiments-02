@@ -1,0 +1,16 @@
+warning: use of deprecated method `vstd::array::ArrayAdditionalExecFns::set`: use `array[i] = value` instead
+  --> src/net.rs:32:19
+   |
+32 |             bytes.set(i, data[i]);
+   |                   ^^^
+   |
+   = note: `#[warn(deprecated)]` on by default
+
+warning: use of deprecated method `vstd::array::ArrayAdditionalExecFns::set`: use `array[i] = value` instead
+  --> src/net.rs:60:19
+   |
+60 |             bytes.set(i, data[i]);
+   |                   ^^^
+
+warning: `firewall-core` (lib) generated 4 warnings (2 duplicates)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.06s

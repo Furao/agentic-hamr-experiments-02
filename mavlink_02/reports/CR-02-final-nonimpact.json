@@ -1,0 +1,29 @@
+{
+  "VMM source and integration": {
+    "paths": [
+      "hamr/microkit/vmm"
+    ],
+    "unchanged": true
+  },
+  "MAVLink parser and dialect source": {
+    "paths": [
+      "hamr/microkit/crates/mavlink_core/src"
+    ],
+    "unchanged": true
+  },
+  "original requirements and sketches": {
+    "paths": [
+      "requirements/manual_reqs.md",
+      "action-requests/CR-01-add-mavlink-firewall/mavlink-firewall-change-sketch.md"
+    ],
+    "unchanged": true
+  },
+  "Ethernet data model": {
+    "result": "Only additive OperatingMode enum; carrier definitions unchanged in model; generated Rust carrier deltas are trailing commas."
+  },
+  "current requirements sha256": "feaf8facf23e0a22a1ae99ac17a9447810d45f9db43b5da3953080b9ac125646",
+  "untracked build helpers": {
+    "bin/compile-r2u2.py": "fc0ba7824054043ba6ba0805a9dbf960930044f4ffce82de7138dc80df7ab49d",
+    "hamr/microkit/bin/build.cmd": "a0e15dab03a340d5f72c5ee1e6f9f8c66a3bd0c926110d219392fe8267417e39"
+  }
+}

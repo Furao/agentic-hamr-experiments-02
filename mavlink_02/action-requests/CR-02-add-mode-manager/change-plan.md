@@ -3,21 +3,39 @@
 | Field | Value |
 |---|---|
 | Change ID | CR-02 |
-| Status | Approved |
+| Status | Executed |
+| Execution completion | Developer approved final CR-02 review on 2026-09-23; report: ../../reports/CR-02-add-mode-manager.md |
 | Approved by / date | Developer (user), 2026-09-22 — explicit “approve plan” instruction |
 | Target project | `/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02` |
 | Baseline | `043d574970d28ff172f7261ea0392ddd14ae50a8`, confirmed by developer 2026-09-22 |
 | Sketch | `add-mode-manager-sketch.md` (unchanged) |
-| Authoritative requirements | `Open_Platform_HLRs_26_09_23_01.md` (developer supplied; supersedes _07) |
+| Authoritative requirements | `Open_Platform_HLRs_26_09_23_02.md` (developer supplied; supersedes _26_09_23_01; logging reconciled) |
 | Profile | audited; user token `audit` interpreted as audited |
 | Workflow | `ChangePlan(cr=CR-02-add-mode-manager)` |
 
-## Requirements amendment — 2026-09-23
+## Requirements reconciliation — revision _26_09_23_02
+
+The developer supplied `Open_Platform_HLRs_26_09_23_02.md` and reported requirements
+reconciliation on 2026-09-23. This is the current source of truth. Its only change
+from _26_09_23_01 is LLR-18: omit per-message Recovery-suppression diagnostics and
+log ModeManager's Normal-to-Recovery transition once. This matches the implemented,
+tested and approved behavior; no model, codegen, code or verification changes are
+needed. The bounds, strict UDP policy and D2 deadline are unchanged.
+
+The developer explicitly retired the four legacy CR-01 documents on 2026-09-23:
+`requirements/conops.md`, `updated_reqs.md`, `component-requirements.md` and
+`data-dictionary.md`. Retirement notices link to the current requirements and
+CR-02 sketch/plan; their historical bodies, including ConOps §0, are preserved.
+This disposition replaces their planned publication updates and closes the
+remaining requirements reconciliation obligation. See
+`reports/CR-02-closeout-requirements-review.md`. CR-02-HW-01 remains High/Open.
+
+## Requirements amendment — 2026-09-23 (historical _01 scope)
 
 The developer explicitly directs adding a defensive driver bounds check and updating
 the firewalls against `Open_Platform_HLRs_26_09_23_01.md`. This authorizes the scope
 amendment; the three waves and audited technical gates remain. References to _07
-below record the original planning basis; the new document is now authoritative.
+below record the original planning basis; _02 above is now authoritative.
 No user-owned requirements are edited.
 
 The supplied delta changes HLR-12/13/18's IPv4 maximum from 9000 to 1586 bytes
@@ -28,8 +46,9 @@ are unchanged. The driver independently skips zero or out-of-buffer transmit siz
 before requesting a DMA token; it never truncates an oversized request.
 
 During W3, re-enter CompGUMBOSpec for Tx/Rx/MAVLink (shared bound and Tx output-size
-invariants), obtain contract sign-off, then CodeGen, apply the mandatory reporting
-workaround and probe, and re-enter affected CompDev tests/coverage/verification.
+invariants), obtain contract sign-off, then CodeGen and the reporting probe, and
+re-enter affected CompDev tests/coverage/verification. The historical workaround
+used during this amendment is retired following the HAMR upgrade.
 Align firewall_core and MAVLink executable length limits with the revised contracts.
 Rebuild the full target after these changes. Earlier W2 proofs and W3 loader remain
 historical evidence, not acceptance of the amended code.
@@ -55,6 +74,13 @@ requirements edits remain developer-owned. See reports/CR-02-budget-increase.md
 for validation and the unresolved physical-unit/hardware timing qualification.
 
 ## 1. Change Summary
+
+Final-review disposition (developer instruction, 2026-09-23): the unresolved timing
+issue CR-02-HW-01 is deferred to a future CR and does not block CR-02 completion.
+The issue remains High/Open in `open-issues/CR-02-HW-01-recovery-timeout.md`; a
+follow-up CR ID has not been assigned. This explicitly dispositions the unmet
+nominal D2 timing evidence in the original W3 gate. Required monitor behavior,
+the source requirements and the issue's closure criteria remain unchanged.
 
 Add a periodic ModeManager component publishing Normal/Recovery mode to RxFirewall
 and MAVLinkFirewall. MAVLinkFirewall aggregates malformed/blacklisted rejections
@@ -326,6 +352,13 @@ must satisfy the specified runtime evidence gates.
 
 ## 7. Back-Propagation Plan
 
+Closeout disposition (2026-09-23): the developer supplied _26_09_23_02 to reconcile
+LLR-18 and explicitly retired the four legacy documents listed below. Their
+retirement notices supersede the original update obligations in this section.
+Current requirements remain in the developer-supplied _02 document; historical
+content and provenance remain available in place. Requirements reconciliation is
+complete under this developer-directed disposition.
+
 Update for _07: consolidated HLR/LLR source content is supplied and reviewed. The
 legacy document actions below remain developer-owned publication/reconciliation
 obligations; they do not block modeling against _07. Check them at ChangeExec.3 and
@@ -444,7 +477,21 @@ comparison and `reports/CR-02-w1-gate.md` for historical workaround evidence.
 ### Manual testing disposition — 2026-09-23
 
 Developer accepted manual testing with High/Open finding CR-02-HW-01 for the
-Recovery observation timeout. Carry reports/CR-02-HW-01-recovery-timeout.md into
+Recovery observation timeout. Carry [the issue record](../../open-issues/CR-02-HW-01-recovery-timeout.md) into
 Wave 3 review and the final change report. The +200 ms mitigation was ineffective
 and reverted. Manual acceptance is complete; deadline conformance and finding
 resolution are not claimed. Requirements remain developer-owned and unchanged.
+
+## Wave 3 approval — 2026-09-23
+
+Developer explicitly approved Wave 3 after the full verification/build recorded in
+reports/CR-02-full-verify-build.md. The wave is accepted with CR-02-HW-01 retained
+as High/Open. This supersedes earlier statements that Wave 3 approval was pending;
+it does not resolve the timeout or grant final CR-02 completion approval.
+
+## Final completion approval — 2026-09-23
+
+The developer explicitly approved the final CR-02 review. All three waves,
+requirements reconciliation, final validation and change reporting are complete.
+ChangeExec.AP2 is approved and this plan is Executed. CR-02-HW-01 remains High/Open
+in open-issues, deferred to a future CR and non-blocking for this completed change.

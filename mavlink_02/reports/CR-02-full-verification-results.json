@@ -1,0 +1,172 @@
+[
+  {
+    "crate": "seL4_ModeManager_ModeManager",
+    "label": "ModeManager",
+    "command": [
+      "make",
+      "verus"
+    ],
+    "exit_code": 0,
+    "seconds": 1.4,
+    "verification_results": [
+      "verification results:: 10 verified, 0 errors",
+      "verification results:: 0 verified, 0 errors",
+      "verification results:: 9 verified, 0 errors"
+    ],
+    "log": "reports/CR-02-full-ModeManager-verification.txt"
+  },
+  {
+    "crate": "seL4_RxFirewall_RxFirewall",
+    "label": "RxFirewall",
+    "command": [
+      "make",
+      "verus"
+    ],
+    "exit_code": 0,
+    "seconds": 3.4,
+    "verification_results": [
+      "verification results:: 10 verified, 0 errors",
+      "verification results:: 0 verified, 0 errors",
+      "verification results:: 28 verified, 0 errors"
+    ],
+    "log": "reports/CR-02-full-RxFirewall-verification.txt"
+  },
+  {
+    "crate": "seL4_TxFirewall_TxFirewall",
+    "label": "TxFirewall",
+    "command": [
+      "make",
+      "verus"
+    ],
+    "exit_code": 0,
+    "seconds": 2.16,
+    "verification_results": [
+      "verification results:: 10 verified, 0 errors",
+      "verification results:: 0 verified, 0 errors",
+      "verification results:: 16 verified, 0 errors"
+    ],
+    "log": "reports/CR-02-full-TxFirewall-verification.txt"
+  },
+  {
+    "crate": "seL4_LowLevelEthernetDriver_LowLevelEthernetDriver",
+    "label": "LowLevelEthernetDriver",
+    "command": [
+      "make",
+      "verus"
+    ],
+    "exit_code": 2,
+    "seconds": 22.65,
+    "verification_results": [
+      "verification results:: 1861 verified, 0 errors",
+      "verification results:: 10 verified, 0 errors",
+      "verification results:: 0 verified, 0 errors"
+    ],
+    "log": "reports/CR-02-full-LowLevelEthernetDriver-verification.txt"
+  },
+  {
+    "crate": "seL4_MAVLinkFirewall_MAVLinkFirewall",
+    "label": "MAVLinkFirewall",
+    "command": [
+      "make",
+      "verus",
+      "R2U2_BUILD_DEPS="
+    ],
+    "exit_code": 0,
+    "seconds": 3.92,
+    "verification_results": [
+      "verification results:: 10 verified, 0 errors",
+      "verification results:: 0 verified, 0 errors",
+      "verification results:: 69 verified, 0 errors"
+    ],
+    "log": "reports/CR-02-full-MAVLinkFirewall-verification.txt"
+  },
+  {
+    "crate": "firewall_core",
+    "label": "firewall_core",
+    "command": [
+      "cargo-verus",
+      "verify",
+      "--offline",
+      "--",
+      "--rlimit",
+      "100",
+      "--smt-option",
+      "smt.random_seed=7"
+    ],
+    "exit_code": 0,
+    "seconds": 0.14,
+    "verification_results": [],
+    "log": "reports/CR-02-full-firewall_core-verification.txt"
+  },
+  {
+    "crate": "mavlink_core",
+    "label": "mavlink_core",
+    "command": [
+      "cargo-verus",
+      "verify",
+      "--offline",
+      "--",
+      "--rlimit",
+      "100",
+      "--smt-option",
+      "smt.random_seed=7"
+    ],
+    "exit_code": 0,
+    "seconds": 0.12,
+    "verification_results": [],
+    "log": "reports/CR-02-full-mavlink_core-verification.txt"
+  },
+  {
+    "crate": "seL4_LowLevelEthernetDriver_LowLevelEthernetDriver",
+    "label": "LowLevelEthernetDriver",
+    "command": [
+      "make",
+      "verus",
+      "CARGO_FLAGS=--features sel4 -Z build-std=core,alloc,compiler_builtins -Z build-std-features=compiler-builtins-mem --target aarch64-unknown-none"
+    ],
+    "exit_code": 0,
+    "seconds": 0.62,
+    "verification_results": [],
+    "log": "reports/CR-02-full-LowLevelEthernetDriver-verification-retry.txt"
+  },
+  {
+    "crate": "firewall_core",
+    "label": "firewall_core",
+    "command": [
+      "cargo-verus",
+      "verify",
+      "--offline",
+      "--",
+      "--rlimit",
+      "100",
+      "--smt-option",
+      "smt.random_seed=7"
+    ],
+    "exit_code": 0,
+    "seconds": 0.97,
+    "verification_results": [
+      "verification results:: 39 verified, 0 errors"
+    ],
+    "log": "reports/CR-02-full-firewall_core-verification-retry.txt"
+  },
+  {
+    "crate": "mavlink_core",
+    "label": "mavlink_core",
+    "command": [
+      "cargo-verus",
+      "verify",
+      "--offline",
+      "--",
+      "--rlimit",
+      "100",
+      "--smt-option",
+      "smt.random_seed=7"
+    ],
+    "exit_code": 0,
+    "seconds": 0.83,
+    "verification_results": [
+      "verification results:: 38 verified, 0 errors"
+    ],
+    "log": "reports/CR-02-full-mavlink_core-verification-retry.txt"
+  }
+]

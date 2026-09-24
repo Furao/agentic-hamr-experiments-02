@@ -4,14 +4,15 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 
 | Step | Status | Updated | Notes |
 |------|--------|---------|-------|
+| CR-02.FullVerifyBuild | done | 2026-09-23 | Fresh proofs Mode 9, Rx 28, Tx 16, MAVLink 69, cores 39/38, zero errors; driver deployed-feature check/build passes with proof disabled; full ZCU102 loader cac58840…3c7aba43; see CR-02-full-verify-build.md |
 | CodeGen-HAMRUpgrade | done | 2026-09-23 | Fresh output matches patched baseline; probe 2/2; developer retired post-codegen patching; see CR-02-hamr-upgrade.md |
 | CodeGen-HAMRUpgrade.1 | done | 2026-09-23 | Existing Microkit configuration and model-directory invocation retained; fresh tipe Well-formed |
 | CodeGen-HAMRUpgrade.2 | done | 2026-09-23 | Exit 0, report Success with no warnings/errors; raw output captured before final legacy patch check |
 | CodeGen-HAMRUpgrade.3 | done | 2026-09-23 | All 1320 compared files and 52 reported editable resources unchanged; helper made no changes; probe 2/2 |
 | CodeGen-HAMRUpgrade.4 | n/a | 2026-09-23 | Regeneration; existing build scripts retained |
-| ChangeExec(CR-02) | in-progress | 2026-09-23 | Wave 2 approved; Wave 3 schedule/integration in progress |
+| ChangeExec(CR-02) | done | 2026-09-23 | Developer approved final report and AP2; all waves/reconciliation/validation complete; High/Open timing issue deferred to future CR |
 | ChangeExec(CR-02).1 | done | 2026-09-22 | Approved plan/all RDs resolved; HEAD 24ba011d4f0a49c727a9b6c9cd28941f536891b4 drift is request/planning records only; approved source baseline unchanged |
-| ChangeExec(CR-02).2 | in-progress | 2026-09-23 | Waves 1 and 2 approved; Wave 3 started |
+| ChangeExec(CR-02).2 | done | 2026-09-23 | Waves 1–3 explicitly approved by developer; hardware acceptance retains High/Open CR-02-HW-01 |
 | ChangeExec(CR-02).W1 | done | 2026-09-23 | Developer approved Wave 1; technical gate and regenerated output accepted |
 | ChangeExec(CR-02).W1.Requirements | done | 2026-09-22 | _07 supplies derived LLR-1–21; allocation and RF-1–RF-4 disposition in w1-requirements-planning-07.md; legacy document synchronization tracked for final sweep |
 | ChangeExec(CR-02).W1.SysModeling | done | 2026-09-22 | Developer approved architecture and audited sub-workflow boundary; continuing to RxFirewall contracts |
@@ -126,7 +127,8 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W2.CompDev(TxFirewall)/VerifyOnly.boundary | done | 2026-09-23 | Developer approved completion with Wave 2 |
 | ChangeExec(CR-02).W2.CoreRegression | done | 2026-09-23 | Fresh firewall_core 17 tests/39 proofs and mavlink_core 6 tests/38 proofs; zero failures |
 | ChangeExec(CR-02).W2.AP1 | done | 2026-09-23 | Developer approved consolidated wave and continuation to Wave 3 |
-| ChangeExec(CR-02).W3 | in-progress | 2026-09-23 | Manual testing accepted with High/Open timeout finding CR-02-HW-01; overall Wave 3 review remains pending |
+| ChangeExec(CR-02).W3 | done | 2026-09-23 | Developer explicitly approved Wave 3 after full verification/build; High/Open timeout finding CR-02-HW-01 retained |
+| ChangeExec(CR-02).W3.AP1 | done | 2026-09-23 | Developer: approve wave 3; accepts wave evidence and recorded limitations, not timeout closure or final CR approval |
 | ChangeExec(CR-02).W3.SysSchedDef | done | 2026-09-23 | Developer approved legacy schedule ordering and documented timing limitations |
 | ChangeExec(CR-02).W3.SysSchedDef.1 | done | 2026-09-23 | Domain 7 first; existing slots retained; legacy parser accepts format; target timing remains qualified |
 | ChangeExec(CR-02).W3.SysSchedDef.2 | n/a | 2026-09-23 | Draft workflow timing/schema analysis TBD; target timing validation retained in W3 obligations |
@@ -190,7 +192,7 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W3.BoundsCoreVerify | done | 2026-09-23 | firewall_core host 39/0 and AArch64 dependency 39/0; MAVLink dependency mavlink_core 38/0 |
 | ChangeExec(CR-02).W3.BoundsBuild | done | 2026-09-23 | Full custom ZCU102/debug loader passes, 155953132 bytes; SHA-256 f524c83c…419cadf; legacy XML/custom build/monitor preserved; CR-02-bounds-build.md |
 | ChangeExec(CR-02).W3.Hardware | done | 2026-09-23 | Developer accepted manual testing with High/Open finding CR-02-HW-01 for D2 timeout; evidence limits retained |
-| ChangeExec(CR-02).W3.Finding(CR-02-HW-01) | in-progress | 2026-09-23 | High criticality assigned by developer; deadline timeout unresolved; +200 ms mitigation ineffective and reverted |
+| ChangeExec(CR-02).W3.Finding(CR-02-HW-01) | done | 2026-09-23 | CR-02 disposition complete: developer deferred [High/Open issue](../open-issues/CR-02-HW-01-recovery-timeout.md) to future CR; issue unresolved but non-blocking for this change |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.1 | done | 2026-09-23 | Contracts/model unchanged; existing generated code current |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.2 | done | 2026-09-23 | Info log only for Normal to Recovery; existing logger reused; no extra production state |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.3 | done | 2026-09-23 | Existing four-transition and repeated-dispatch tests assert exact diagnostic count/content |
@@ -207,10 +209,10 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W3.BudgetIncrease.SysSchedDef.2 | n/a | 2026-09-23 | Draft workflow timing analysis TBD; physical unit conversion and timeout resolution remain unverified |
 | ChangeExec(CR-02).W3.BudgetIncrease.CodeGen | done | 2026-09-23 | Tipe Well-formed; CodeGen Success; patch applied; monitor probe 2/2; 43 editable files preserved |
 | ChangeExec(CR-02).W3.BudgetIncrease.Build | done | 2026-09-23 | Full custom ZCU102/debug build passes; release proofs 9/28/16/69, zero errors; loader b55ce4b9…7c349079; merged slots verified |
-| ChangeExec(CR-02).3 | not-started | 2026-09-22 | Back-propagation review follows waves; requirements developer-owned |
-| ChangeExec(CR-02).4 | not-started | 2026-09-22 | Final tests/verification pending |
-| ChangeExec(CR-02).5 | not-started | 2026-09-22 | Final change report pending |
-| ChangeExec(CR-02).AP2 | not-started | 2026-09-22 | Completion review pending |
+| ChangeExec(CR-02).3 | done | 2026-09-23 | _26_09_23_02 authoritative; LLR-18 reconciled; developer explicitly retired four legacy CR-01 documents, notices added with historical bodies preserved; CR-02-closeout-requirements-review.md |
+| ChangeExec(CR-02).4 | done | 2026-09-23 | 67 application/core tests plus 2 driver helper tests pass; entry-point coverage 100%; unchanged-source full proofs/build retained; accepted driver host/proof limits; CR-02-final-validation.md |
+| ChangeExec(CR-02).5 | done | 2026-09-23 | CR-02-add-mode-manager.md traces requirements/model/code/tests, commits, impacts and accepted deviations; artifact inventory and final-review manifest recorded |
+| ChangeExec(CR-02).AP2 | done | 2026-09-23 | Developer explicitly approved final CR-02 review; report, validation, deviations and future-CR timing deferral accepted |
 | ChangePlan(CR-02) | done | 2026-09-22 | Approved three-wave plan updated per developer direction to _07 consolidated HLR/LLR source; execution in W1 |
 | ChangePlan(CR-02).1 | done | 2026-09-22 | Sketch preserved; _07 authoritative HLR/LLR source; developer owns requirements |
 | ChangePlan(CR-02).2 | done | 2026-09-22 | Surveyed 043d574970d28ff172f7261ea0392ddd14ae50a8; untracked request provenance and historical validation limits recorded; developer confirmed execution baseline (RD-1 resolved) |
@@ -373,3 +375,5 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 - 2026-09-23: Developer explicitly accepted manual testing with a high-criticality timeout finding. Hardware acceptance recorded done; CR-02-HW-01 remains Open/High. Acceptance does not resolve or waive the D2 requirement and does not constitute overall Wave 3/final change approval.
 
 - 2026-09-23: Updated HAMR generates the R2U2 reporting fix directly; raw output is byte-identical to the patched baseline and probe passes 2/2. Developer explicitly removed post-codegen patching from the workflow. Regression validation remains required; CR-02-HW-01 remains High/Open. See CR-02-hamr-upgrade.md.
+
+- 2026-09-23: Developer approved final CR-02 completion review. ChangeExec is done and the plan is Executed. CR-02-HW-01 remains High/Open for a future CR; no issue closure, commit or merge is implied.

@@ -1,0 +1,3 @@
+    Checking mavlink-core v0.1.0 (/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02/hamr/microkit/crates/mavlink_core)
+verification results:: 38 verified, 0 errors
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.75s

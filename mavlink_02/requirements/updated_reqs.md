@@ -1,5 +1,14 @@
 # Open Platform Updated System Requirements – CR-01
 
+> **Retired — CR-01 historical reference only (2026-09-23).**
+> Retired by explicit developer instruction during CR-02 closeout. This document
+> is not an active requirements source; its original content is preserved below.
+> Current authority: [Open Platform requirements, revision 26_09_23_02](../action-requests/CR-02-add-mode-manager/Open_Platform_HLRs_26_09_23_02.md).
+> Current change context: [CR-02 sketch](../action-requests/CR-02-add-mode-manager/add-mode-manager-sketch.md)
+> and [approved change plan](../action-requests/CR-02-add-mode-manager/change-plan.md).
+> Requirement identifiers below retain their CR-01 meanings and must not be
+> interpreted as current CR-02 identifiers.
+
 This document is the evolving requirements baseline for CR-01. It preserves the
 `RC_INSPECTA_00-HLR-*` naming scheme from `manual_reqs.md`; that source remains
 unchanged. Requirements are evaluated independently for each of the four queue-size-1

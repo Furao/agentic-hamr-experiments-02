@@ -1,7 +1,9 @@
 # CR-02 ZCU102 acceptance record
 
 Status: **ACCEPTED WITH OPEN HIGH-CRITICALITY FINDING CR-02-HW-01**.
-Accepted by developer on 2026-09-23. See CR-02-HW-01-recovery-timeout.md.
+Accepted by developer on 2026-09-23. See [the open issue](../open-issues/CR-02-HW-01-recovery-timeout.md).
+Final-review disposition: developer deferred the timing issue to a future CR;
+it remains High/Open and is non-blocking for CR-02 completion.
 This acceptance covers the supplied manual testing; it does not resolve the timeout
 or claim that every individual procedure below has captured evidence.
 
@@ -17,7 +19,8 @@ This image includes the approved 26_09_23_01 firewall bounds and driver defense.
 Build evidence: CR-02-bounds-build.md. This record does not inherit CR-01 hardware results.
 
 Use the ZCU102/debug loader built with SYSTEM_MAKEFILE=custom.mk, the legacy schedule,
-and the authorized R2U2 false-verdict workaround. Record serial output and input/output
+and HAMR's generated R2U2 false-verdict fix (the old patch workflow is retired).
+Record serial output and input/output
 packet captures. Reboot between tests that must begin with count zero and Normal.
 Use a controlled bench for blacklisted-command fixtures; acceptance expects no guest
 delivery. Record actual fixture bytes, including valid MAVLink CRCs.

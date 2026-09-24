@@ -3,11 +3,20 @@ title: "ConOps – Open Platform MAVLink Firewall"
 version: "0.1"
 date: "2026-08-26"
 authors: "Open Platform development team"
-status: "Draft"
+status: "Retired — historical CR-01 reference"
 security_classification: "Project internal"
 ---
 
 # ConOps – Open Platform MAVLink Firewall
+
+> **Retired — CR-01 historical reference only (2026-09-23).**
+> Retired by explicit developer instruction during CR-02 closeout. This document
+> is not an active requirements source; its original content is preserved below.
+> Current authority: [Open Platform requirements, revision 26_09_23_02](../action-requests/CR-02-add-mode-manager/Open_Platform_HLRs_26_09_23_02.md).
+> Current change context: [CR-02 sketch](../action-requests/CR-02-add-mode-manager/add-mode-manager-sketch.md)
+> and [approved change plan](../action-requests/CR-02-add-mode-manager/change-plan.md).
+> Requirement identifiers below retain their CR-01 meanings and must not be
+> interpreted as current CR-02 identifiers.
 
 ## 0. Developer Concept (Verbatim)
 
