@@ -15,6 +15,7 @@ future CR and is non-blocking for CR-02.
 
 | Folder | Contents |
 |---|---|
+| [Pre-ChangePlan requirements review](requirements-review/README.md) | Original review dialogue for requirements revisions `_01`–`_04`, before CR-02 ChangePlan began. |
 | [Contracts and model checks](contracts/README.md) | Component contract audits, model type checks and the qualified integration result. |
 | [Component development](components/README.md) | Implementation reviews and their component/core tests, coverage and verification evidence. |
 | [Code generation and HAMR upgrade](codegen/README.md) | Generation reviews and the comparison confirming HAMR now emits the former R2U2 workaround directly. |
