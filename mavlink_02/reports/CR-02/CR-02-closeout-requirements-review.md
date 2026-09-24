@@ -43,7 +43,7 @@ malformed/blacklist diagnostics or counting in Recovery, or change the D2 deadli
 ## Acceptance and remaining closeout
 
 All three waves are approved. Wave 3 approval includes the full target build and
-fresh verification in `CR-02-full-verify-build.md`, manual testing accepted with
+fresh verification in `final-validation/CR-02-full-verify-build.md`, manual testing accepted with
 High/Open `CR-02-HW-01`, and the documented driver/tool/coverage limitations.
 The HAMR reporting fix is now generated directly; post-codegen patching is retired.
 

@@ -39,7 +39,7 @@ R2U2_CLI=/tmp/cr02-r2u2-tools/bin/r2u2_cli python3 tests/r2u2_monitor_probe/run.
 ```
 
 Result: exit 101; **1 passed, 1 failed**. Complete output is in
-`reports/CR-02-r2u2-probe-output.txt`.
+`reports/CR-02/monitoring/CR-02-r2u2-probe-output.txt`.
 
 - Raw runtime check passes: first assertions at 0, 1 and 4 each yield exactly one
   false verdict at first-assertion dispatch + 2.

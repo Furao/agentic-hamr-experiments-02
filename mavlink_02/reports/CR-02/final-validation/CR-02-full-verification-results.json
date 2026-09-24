@@ -13,7 +13,7 @@
       "verification results:: 0 verified, 0 errors",
       "verification results:: 9 verified, 0 errors"
     ],
-    "log": "reports/CR-02-full-ModeManager-verification.txt"
+    "log": "reports/CR-02/final-validation/CR-02-full-ModeManager-verification.txt"
   },
   {
     "crate": "seL4_RxFirewall_RxFirewall",
@@ -29,7 +29,7 @@
       "verification results:: 0 verified, 0 errors",
       "verification results:: 28 verified, 0 errors"
     ],
-    "log": "reports/CR-02-full-RxFirewall-verification.txt"
+    "log": "reports/CR-02/final-validation/CR-02-full-RxFirewall-verification.txt"
   },
   {
     "crate": "seL4_TxFirewall_TxFirewall",
@@ -45,7 +45,7 @@
       "verification results:: 0 verified, 0 errors",
       "verification results:: 16 verified, 0 errors"
     ],
-    "log": "reports/CR-02-full-TxFirewall-verification.txt"
+    "log": "reports/CR-02/final-validation/CR-02-full-TxFirewall-verification.txt"
   },
   {
     "crate": "seL4_LowLevelEthernetDriver_LowLevelEthernetDriver",
@@ -61,7 +61,7 @@
       "verification results:: 10 verified, 0 errors",
       "verification results:: 0 verified, 0 errors"
     ],
-    "log": "reports/CR-02-full-LowLevelEthernetDriver-verification.txt"
+    "log": "reports/CR-02/final-validation/CR-02-full-LowLevelEthernetDriver-verification.txt"
   },
   {
     "crate": "seL4_MAVLinkFirewall_MAVLinkFirewall",
@@ -78,7 +78,7 @@
       "verification results:: 0 verified, 0 errors",
       "verification results:: 69 verified, 0 errors"
     ],
-    "log": "reports/CR-02-full-MAVLinkFirewall-verification.txt"
+    "log": "reports/CR-02/final-validation/CR-02-full-MAVLinkFirewall-verification.txt"
   },
   {
     "crate": "firewall_core",
@@ -96,7 +96,7 @@
     "exit_code": 0,
     "seconds": 0.14,
     "verification_results": [],
-    "log": "reports/CR-02-full-firewall_core-verification.txt"
+    "log": "reports/CR-02/final-validation/CR-02-full-firewall_core-verification.txt"
   },
   {
     "crate": "mavlink_core",
@@ -114,7 +114,7 @@
     "exit_code": 0,
     "seconds": 0.12,
     "verification_results": [],
-    "log": "reports/CR-02-full-mavlink_core-verification.txt"
+    "log": "reports/CR-02/final-validation/CR-02-full-mavlink_core-verification.txt"
   },
   {
     "crate": "seL4_LowLevelEthernetDriver_LowLevelEthernetDriver",
@@ -127,7 +127,7 @@
     "exit_code": 0,
     "seconds": 0.62,
     "verification_results": [],
-    "log": "reports/CR-02-full-LowLevelEthernetDriver-verification-retry.txt"
+    "log": "reports/CR-02/final-validation/CR-02-full-LowLevelEthernetDriver-verification-retry.txt"
   },
   {
     "crate": "firewall_core",
@@ -147,7 +147,7 @@
     "verification_results": [
       "verification results:: 39 verified, 0 errors"
     ],
-    "log": "reports/CR-02-full-firewall_core-verification-retry.txt"
+    "log": "reports/CR-02/final-validation/CR-02-full-firewall_core-verification-retry.txt"
   },
   {
     "crate": "mavlink_core",
@@ -167,6 +167,6 @@
     "verification_results": [
       "verification results:: 38 verified, 0 errors"
     ],
-    "log": "reports/CR-02-full-mavlink_core-verification-retry.txt"
+    "log": "reports/CR-02/final-validation/CR-02-full-mavlink_core-verification-retry.txt"
   }
 ]

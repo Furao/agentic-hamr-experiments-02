@@ -4,8 +4,8 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 
 | Step | Status | Updated | Notes |
 |------|--------|---------|-------|
-| CR-02.FullVerifyBuild | done | 2026-09-23 | Fresh proofs Mode 9, Rx 28, Tx 16, MAVLink 69, cores 39/38, zero errors; driver deployed-feature check/build passes with proof disabled; full ZCU102 loader cac58840…3c7aba43; see CR-02-full-verify-build.md |
-| CodeGen-HAMRUpgrade | done | 2026-09-23 | Fresh output matches patched baseline; probe 2/2; developer retired post-codegen patching; see CR-02-hamr-upgrade.md |
+| CR-02.FullVerifyBuild | done | 2026-09-23 | Fresh proofs Mode 9, Rx 28, Tx 16, MAVLink 69, cores 39/38, zero errors; driver deployed-feature check/build passes with proof disabled; full ZCU102 loader cac58840…3c7aba43; see CR-02/final-validation/CR-02-full-verify-build.md |
+| CodeGen-HAMRUpgrade | done | 2026-09-23 | Fresh output matches patched baseline; probe 2/2; developer retired post-codegen patching; see CR-02/codegen/CR-02-hamr-upgrade.md |
 | CodeGen-HAMRUpgrade.1 | done | 2026-09-23 | Existing Microkit configuration and model-directory invocation retained; fresh tipe Well-formed |
 | CodeGen-HAMRUpgrade.2 | done | 2026-09-23 | Exit 0, report Success with no warnings/errors; raw output captured before final legacy patch check |
 | CodeGen-HAMRUpgrade.3 | done | 2026-09-23 | All 1320 compared files and 52 reported editable resources unchanged; helper made no changes; probe 2/2 |
@@ -46,7 +46,7 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).3 | done | 2026-09-22 | Specification-only audit: zero AP-1–AP-9 findings; all four state/input combinations covered |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).4 | done | 2026-09-22 | No audit revisions or waivers required; startup/runtime publication checks remain W1/W2 |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager).AP1 | done | 2026-09-22 | Developer explicitly approved ModeManager contracts |
-| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2 | done | 2026-09-23 | Rerun with r2u2-HAMR-agent-context; unchanged contracts and existing approval retained; see CR-02-ModeManager-specification-audit-2026-09-23.md |
+| ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2 | done | 2026-09-23 | Rerun with r2u2-HAMR-agent-context; unchanged contracts and existing approval retained; see CR-02/contracts/CR-02-ModeManager-specification-audit-2026-09-23.md |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2.1 | done | 2026-09-23 | Reviewed _07 requirements and new-context guidance; existing six guarantees need no revisions |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2.2 | done | 2026-09-23 | Fresh tipe exit 0: Well-formed! |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R2.3 | done | 2026-09-23 | Full-mode audit: zero AP-1–AP-9 findings; inspected model, GUMBOX, woven ensures and tests |
@@ -59,14 +59,14 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R3.4 | done | 2026-09-23 | No revisions or regeneration required for ModeManager; HLR-30 monitor removal is separate outstanding work |
 | ChangeExec(CR-02).W1.CompGUMBOSpec(ModeManager)-R3.AP1 | done | 2026-09-23 | Prior explicit approval retained for unchanged contracts |
 | ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck | done | 2026-09-22 | Exit criteria met: Logika exit 0, vacuous by design N=0; no scratch; audited boundary approval pending |
-| ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.1 | done | 2026-09-22 | Enumerated zero receiver integration assumes before run; no diagnostics/output artifacts; see reports/CR-02-integration-check.md |
+| ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.1 | done | 2026-09-22 | Enumerated zero receiver integration assumes before run; no diagnostics/output artifacts; see reports/CR-02/contracts/CR-02-integration-check.md |
 | ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.2 | n/a | 2026-09-22 | No integration failures to diagnose |
 | ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.3 | n/a | 2026-09-22 | No contract revisions required |
 | ChangeExec(CR-02).W1.SysGUMBOIntegrationCheck.boundary | done | 2026-09-22 | Developer approved N=0 result and continuation to CodeGen |
 | ChangeExec(CR-02).W1.CodeGen | done | 2026-09-22 | Developer approved successful generation and recorded limitations |
 | ChangeExec(CR-02).W1.CodeGen.1 | done | 2026-09-22 | Microkit output ../../hamr, workspace ../.., Platform::ZCU102_Impl; frame-period prerequisite raised to 2080 ms |
 | ChangeExec(CR-02).W1.CodeGen.2 | done | 2026-09-22 | Generation and attestation reporting passed after developer HAMR update; earlier frame/marker/parser failures resolved |
-| ChangeExec(CR-02).W1.CodeGen.3 | done | 2026-09-22 | Project output confirmed; custom.mk/schedule/tests preserved; R2U2 spec recompiled with CLI 4.2.4; see reports/CR-02-codegen.md |
+| ChangeExec(CR-02).W1.CodeGen.3 | done | 2026-09-22 | Project output confirmed; custom.mk/schedule/tests preserved; R2U2 spec recompiled with CLI 4.2.4; see reports/CR-02/codegen/CR-02-codegen.md |
 | ChangeExec(CR-02).W1.CodeGen.4 | n/a | 2026-09-22 | Regeneration; setup-build-script remains a separate approved-plan task |
 | ChangeExec(CR-02).W1.CodeGen.boundary | done | 2026-09-22 | Developer explicitly approved CodeGen; W1 reporting/startup obligations remain |
 | ChangeExec(CR-02).W1.CodeGen-R2 | done | 2026-09-23 | Regenerated output accepted with Wave 1 approval |
@@ -133,22 +133,22 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W3.SysSchedDef.1 | done | 2026-09-23 | Domain 7 first; existing slots retained; legacy parser accepts format; target timing remains qualified |
 | ChangeExec(CR-02).W3.SysSchedDef.2 | n/a | 2026-09-23 | Draft workflow timing/schema analysis TBD; target timing validation retained in W3 obligations |
 | ChangeExec(CR-02).W3.SysSchedDef.boundary | done | 2026-09-23 | Developer approved continuation to custom.mk integration |
-| ChangeExec(CR-02).W3.Build | done | 2026-09-23 | ZCU102/debug custom.mk build passes; 148.73 MiB loader; report CR-02-w3-build.md |
+| ChangeExec(CR-02).W3.Build | done | 2026-09-23 | ZCU102/debug custom.mk build passes; 148.73 MiB loader; report CR-02/deployment/CR-02-w3-build.md |
 | ChangeExec(CR-02).W3.BoundsScope | done | 2026-09-23 | Developer explicitly authorized driver defense and firewall alignment with 26_09_23_01; plan amended, requirements preserved |
 | ChangeExec(CR-02).W3.DriverBounds | done | 2026-09-23 | Checked slice before token; exhaustive u16 and mixed-lane helper tests 2/2; ZCU102 release driver build passes; no proof/hardware claim |
 | ChangeExec(CR-02).W3.CompGUMBOSpec(TxFirewall)-Bounds.1 | done | 2026-09-23 | Shared IPv4 bound 1586; Tx size exports added; latest HLR-12/13/18 and LLR-4 |
-| ChangeExec(CR-02).W3.CompGUMBOSpec(TxFirewall)-Bounds.2 | done | 2026-09-23 | Final tipe exit 0 Well-formed; CR-02-bounds-tipe.txt |
-| ChangeExec(CR-02).W3.CompGUMBOSpec(TxFirewall)-Bounds.3 | done | 2026-09-23 | AP-1–AP-9 critique; no unresolved revised compute findings; generated artifacts stale; CR-02-bounds-contract-audit.md |
+| ChangeExec(CR-02).W3.CompGUMBOSpec(TxFirewall)-Bounds.2 | done | 2026-09-23 | Final tipe exit 0 Well-formed; CR-02/bounds-correction/CR-02-bounds-tipe.txt |
+| ChangeExec(CR-02).W3.CompGUMBOSpec(TxFirewall)-Bounds.3 | done | 2026-09-23 | AP-1–AP-9 critique; no unresolved revised compute findings; generated artifacts stale; CR-02/bounds-correction/CR-02-bounds-contract-audit.md |
 | ChangeExec(CR-02).W3.CompGUMBOSpec(TxFirewall)-Bounds.4 | done | 2026-09-23 | Shared bound revised; Tx bound integration exports address AP-6; no further model revisions |
 | ChangeExec(CR-02).W3.CompGUMBOSpec(TxFirewall)-Bounds.AP1 | done | 2026-09-23 | Developer approved revised contracts; continuing to regeneration |
 | ChangeExec(CR-02).W3.CompGUMBOSpec(RxFirewall)-Bounds.1 | done | 2026-09-23 | Shared IPv4 bound 1586; Tx size exports added; latest HLR-12/13/18 and LLR-4 |
-| ChangeExec(CR-02).W3.CompGUMBOSpec(RxFirewall)-Bounds.2 | done | 2026-09-23 | Final tipe exit 0 Well-formed; CR-02-bounds-tipe.txt |
-| ChangeExec(CR-02).W3.CompGUMBOSpec(RxFirewall)-Bounds.3 | done | 2026-09-23 | AP-1–AP-9 critique; no unresolved revised compute findings; generated artifacts stale; CR-02-bounds-contract-audit.md |
+| ChangeExec(CR-02).W3.CompGUMBOSpec(RxFirewall)-Bounds.2 | done | 2026-09-23 | Final tipe exit 0 Well-formed; CR-02/bounds-correction/CR-02-bounds-tipe.txt |
+| ChangeExec(CR-02).W3.CompGUMBOSpec(RxFirewall)-Bounds.3 | done | 2026-09-23 | AP-1–AP-9 critique; no unresolved revised compute findings; generated artifacts stale; CR-02/bounds-correction/CR-02-bounds-contract-audit.md |
 | ChangeExec(CR-02).W3.CompGUMBOSpec(RxFirewall)-Bounds.4 | done | 2026-09-23 | Shared bound revised; Tx bound integration exports address AP-6; no further model revisions |
 | ChangeExec(CR-02).W3.CompGUMBOSpec(RxFirewall)-Bounds.AP1 | done | 2026-09-23 | Developer approved revised contracts; continuing to regeneration |
 | ChangeExec(CR-02).W3.CompGUMBOSpec(MAVLinkFirewall)-Bounds.1 | done | 2026-09-23 | Shared IPv4 bound 1586; Tx size exports added; latest HLR-12/13/18 and LLR-4 |
-| ChangeExec(CR-02).W3.CompGUMBOSpec(MAVLinkFirewall)-Bounds.2 | done | 2026-09-23 | Final tipe exit 0 Well-formed; CR-02-bounds-tipe.txt |
-| ChangeExec(CR-02).W3.CompGUMBOSpec(MAVLinkFirewall)-Bounds.3 | done | 2026-09-23 | AP-1–AP-9 critique; no unresolved revised compute findings; generated artifacts stale; CR-02-bounds-contract-audit.md |
+| ChangeExec(CR-02).W3.CompGUMBOSpec(MAVLinkFirewall)-Bounds.2 | done | 2026-09-23 | Final tipe exit 0 Well-formed; CR-02/bounds-correction/CR-02-bounds-tipe.txt |
+| ChangeExec(CR-02).W3.CompGUMBOSpec(MAVLinkFirewall)-Bounds.3 | done | 2026-09-23 | AP-1–AP-9 critique; no unresolved revised compute findings; generated artifacts stale; CR-02/bounds-correction/CR-02-bounds-contract-audit.md |
 | ChangeExec(CR-02).W3.CompGUMBOSpec(MAVLinkFirewall)-Bounds.4 | done | 2026-09-23 | Shared bound revised; Tx bound integration exports address AP-6; no further model revisions |
 | ChangeExec(CR-02).W3.CompGUMBOSpec(MAVLinkFirewall)-Bounds.AP1 | done | 2026-09-23 | Developer approved revised contracts; continuing to regeneration |
 | ChangeExec(CR-02).W3.BoundsCodeGen | done | 2026-09-23 | Generation Success, patch applied, probe 2/2, 38 editable files preserved; boundary approval pending |
@@ -162,35 +162,35 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.2 | done | 2026-09-23 | Executable 1586-byte limit via shared parser (Rx/Tx) or independent carrier constant (MAVLink) |
 | ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.3 | done | 2026-09-23 | Boundary, lane, and oracle regression fixtures refreshed; previous policy/state tests retained |
 | ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.4 | done | 2026-09-23 | 8 tests; app 82/84 (unused trace helper); GUMBOX 205/205; fresh isolated instrumentation |
-| ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.5 | done | 2026-09-23 | Tests pass; BRF=0, exclusions and semantic partitions documented in CR-02-bounds-development.md |
+| ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.5 | done | 2026-09-23 | Tests pass; BRF=0, exclusions and semantic partitions documented in CR-02/bounds-correction/CR-02-bounds-development.md |
 | ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.AP1 | done | 2026-09-23 | Developer approved coverage and exclusions; proceeding to Verus |
 | ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.1 | done | 2026-09-23 | Approved CodeGen current with type-clean model; no subsequent model edit |
 | ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.2 | done | 2026-09-23 | Executable 1586-byte limit via shared parser (Rx/Tx) or independent carrier constant (MAVLink) |
 | ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.3 | done | 2026-09-23 | Boundary, lane, and oracle regression fixtures refreshed; previous policy/state tests retained |
 | ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.4 | done | 2026-09-23 | 12 tests; app 118/118; GUMBOX 382/382; fresh isolated instrumentation |
-| ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.5 | done | 2026-09-23 | Tests pass; BRF=0, exclusions and semantic partitions documented in CR-02-bounds-development.md |
+| ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.5 | done | 2026-09-23 | Tests pass; BRF=0, exclusions and semantic partitions documented in CR-02/bounds-correction/CR-02-bounds-development.md |
 | ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.AP1 | done | 2026-09-23 | Developer approved coverage and exclusions; proceeding to Verus |
 | ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.1 | done | 2026-09-23 | Approved CodeGen current with type-clean model; no subsequent model edit |
 | ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.2 | done | 2026-09-23 | Executable 1586-byte limit via shared parser (Rx/Tx) or independent carrier constant (MAVLink) |
 | ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.3 | done | 2026-09-23 | Boundary, lane, and oracle regression fixtures refreshed; previous policy/state tests retained |
 | ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.4 | done | 2026-09-23 | 16 tests; app 172/172; GUMBOX 382/382; logger 39/39; fresh isolated instrumentation |
-| ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.5 | done | 2026-09-23 | Tests pass; BRF=0, exclusions and semantic partitions documented in CR-02-bounds-development.md |
+| ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.5 | done | 2026-09-23 | Tests pass; BRF=0, exclusions and semantic partitions documented in CR-02/bounds-correction/CR-02-bounds-development.md |
 | ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.AP1 | done | 2026-09-23 | Developer approved coverage and exclusions; proceeding to Verus |
 | ChangeExec(CR-02).W3.BoundsCoreTests | done | 2026-09-23 | firewall_core 18/18 including ten-protocol length-boundary test; core verification pending |
-| ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.6 | done | 2026-09-23 | AArch64 Verus 16 verified, 0 errors; CR-02-bounds-TxFirewall-verification.txt |
+| ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.6 | done | 2026-09-23 | AArch64 Verus 16 verified, 0 errors; CR-02/bounds-correction/CR-02-bounds-TxFirewall-verification.txt |
 | ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.7 | done | 2026-09-23 | First run passes; no proof/source changes or new trust escapes; approved coverage retained |
 | ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.AP2 | done | 2026-09-23 | Developer approved verification and unchanged trust boundaries |
 | ChangeExec(CR-02).W3.CompDev(TxFirewall)-Bounds.boundary | done | 2026-09-23 | Developer approved component completion and continuation to full loader rebuild |
-| ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.6 | done | 2026-09-23 | AArch64 Verus 28 verified, 0 errors; CR-02-bounds-RxFirewall-verification.txt |
+| ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.6 | done | 2026-09-23 | AArch64 Verus 28 verified, 0 errors; CR-02/bounds-correction/CR-02-bounds-RxFirewall-verification.txt |
 | ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.7 | done | 2026-09-23 | First run passes; no proof/source changes or new trust escapes; approved coverage retained |
 | ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.AP2 | done | 2026-09-23 | Developer approved verification and unchanged trust boundaries |
 | ChangeExec(CR-02).W3.CompDev(RxFirewall)-Bounds.boundary | done | 2026-09-23 | Developer approved component completion and continuation to full loader rebuild |
-| ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.6 | done | 2026-09-23 | AArch64 Verus 69 verified, 0 errors; CR-02-bounds-MAVLinkFirewall-verification.txt |
+| ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.6 | done | 2026-09-23 | AArch64 Verus 69 verified, 0 errors; CR-02/bounds-correction/CR-02-bounds-MAVLinkFirewall-verification.txt |
 | ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.7 | done | 2026-09-23 | First run passes; no proof/source changes or new trust escapes; approved coverage retained |
 | ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.AP2 | done | 2026-09-23 | Developer approved verification and unchanged trust boundaries |
 | ChangeExec(CR-02).W3.CompDev(MAVLinkFirewall)-Bounds.boundary | done | 2026-09-23 | Developer approved component completion and continuation to full loader rebuild |
 | ChangeExec(CR-02).W3.BoundsCoreVerify | done | 2026-09-23 | firewall_core host 39/0 and AArch64 dependency 39/0; MAVLink dependency mavlink_core 38/0 |
-| ChangeExec(CR-02).W3.BoundsBuild | done | 2026-09-23 | Full custom ZCU102/debug loader passes, 155953132 bytes; SHA-256 f524c83c…419cadf; legacy XML/custom build/monitor preserved; CR-02-bounds-build.md |
+| ChangeExec(CR-02).W3.BoundsBuild | done | 2026-09-23 | Full custom ZCU102/debug loader passes, 155953132 bytes; SHA-256 f524c83c…419cadf; legacy XML/custom build/monitor preserved; CR-02/bounds-correction/CR-02-bounds-build.md |
 | ChangeExec(CR-02).W3.Hardware | done | 2026-09-23 | Developer accepted manual testing with High/Open finding CR-02-HW-01 for D2 timeout; evidence limits retained |
 | ChangeExec(CR-02).W3.Finding(CR-02-HW-01) | done | 2026-09-23 | CR-02 disposition complete: developer deferred [High/Open issue](../open-issues/CR-02-HW-01-recovery-timeout.md) to future CR; issue unresolved but non-blocking for this change |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.1 | done | 2026-09-23 | Contracts/model unchanged; existing generated code current |
@@ -199,19 +199,19 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.4 | done | 2026-09-23 | Refreshed after equivalent pattern rewrite: 7/7 tests; app 41/41, GUMBOX 67/67; BRF=0 |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.5 | done | 2026-09-23 | No failures; all four state/input cases and repeated-dispatch diagnostic checks pass |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.AP1 | done | 2026-09-23 | Developer approved tests/coverage and continuation to verification |
-| ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.6 | done | 2026-09-23 | AArch64 Verus 9 verified, 0 errors; CR-02-mode-log-verification.txt |
+| ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.6 | done | 2026-09-23 | AArch64 Verus 9 verified, 0 errors; CR-02/mode-logging/CR-02-mode-log-verification.txt |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.7 | done | 2026-09-23 | Initial equality-guard postcondition failure resolved by enum pattern; tests/coverage refreshed; no new trust escapes |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.AP2 | done | 2026-09-23 | Developer approved 9/0 verification, refreshed tests/coverage and component completion |
 | ChangeExec(CR-02).W3.CompDev(ModeManager)-Logging.boundary | done | 2026-09-23 | Developer approved completion and continuation to loader rebuild |
-| ChangeExec(CR-02).W3.ModeLogBuild | done | 2026-09-23 | Full ZCU102/debug loader passes; ModeManager release 9/0; image SHA-256 cac58840…3c7aba43; CR-02-mode-log.md |
+| ChangeExec(CR-02).W3.ModeLogBuild | done | 2026-09-23 | Full ZCU102/debug loader passes; ModeManager release 9/0; image SHA-256 cac58840…3c7aba43; CR-02/mode-logging/CR-02-mode-log.md |
 | ChangeExec(CR-02).W3.BudgetIncrease | done | 2026-09-23 | Historical attempt: developer reports no improvement and reverted it; original 100/300 ms budgets and 2080 ms frame restored |
 | ChangeExec(CR-02).W3.BudgetIncrease.SysSchedDef.1 | done | 2026-09-23 | Exact requested delta applied using existing legacy scale: domain_7=30000, domain_6=50000; other slots/order unchanged |
 | ChangeExec(CR-02).W3.BudgetIncrease.SysSchedDef.2 | n/a | 2026-09-23 | Draft workflow timing analysis TBD; physical unit conversion and timeout resolution remain unverified |
 | ChangeExec(CR-02).W3.BudgetIncrease.CodeGen | done | 2026-09-23 | Tipe Well-formed; CodeGen Success; patch applied; monitor probe 2/2; 43 editable files preserved |
 | ChangeExec(CR-02).W3.BudgetIncrease.Build | done | 2026-09-23 | Full custom ZCU102/debug build passes; release proofs 9/28/16/69, zero errors; loader b55ce4b9…7c349079; merged slots verified |
-| ChangeExec(CR-02).3 | done | 2026-09-23 | _26_09_23_02 authoritative; LLR-18 reconciled; developer explicitly retired four legacy CR-01 documents, notices added with historical bodies preserved; CR-02-closeout-requirements-review.md |
-| ChangeExec(CR-02).4 | done | 2026-09-23 | 67 application/core tests plus 2 driver helper tests pass; entry-point coverage 100%; unchanged-source full proofs/build retained; accepted driver host/proof limits; CR-02-final-validation.md |
-| ChangeExec(CR-02).5 | done | 2026-09-23 | CR-02-add-mode-manager.md traces requirements/model/code/tests, commits, impacts and accepted deviations; artifact inventory and final-review manifest recorded |
+| ChangeExec(CR-02).3 | done | 2026-09-23 | _26_09_23_02 authoritative; LLR-18 reconciled; developer explicitly retired four legacy CR-01 documents, notices added with historical bodies preserved; CR-02/CR-02-closeout-requirements-review.md |
+| ChangeExec(CR-02).4 | done | 2026-09-23 | 67 application/core tests plus 2 driver helper tests pass; entry-point coverage 100%; unchanged-source full proofs/build retained; accepted driver host/proof limits; CR-02/final-validation/CR-02-final-validation.md |
+| ChangeExec(CR-02).5 | done | 2026-09-23 | CR-02/CR-02-add-mode-manager.md traces requirements/model/code/tests, commits, impacts and accepted deviations; artifact inventory and final-review manifest recorded |
 | ChangeExec(CR-02).AP2 | done | 2026-09-23 | Developer explicitly approved final CR-02 review; report, validation, deviations and future-CR timing deferral accepted |
 | ChangePlan(CR-02) | done | 2026-09-22 | Approved three-wave plan updated per developer direction to _07 consolidated HLR/LLR source; execution in W1 |
 | ChangePlan(CR-02).1 | done | 2026-09-22 | Sketch preserved; _07 authoritative HLR/LLR source; developer owns requirements |
@@ -337,12 +337,12 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 | ChangeExec(CR-01).W4.AP1 | done | 2026-08-27 | Robbie VanVossen approved the W4 hardware/software/build wave gate |
 | ChangeExec(CR-01).3 | done | 2026-08-27 | Back-propagation sweep complete; manual_reqs.md unchanged and HLR-21, component allocation, and DataDict clarify legal MAVLink v2 trailing-zero truncation |
 | ChangeExec(CR-01).4 | done | 2026-08-27 | Final pass consolidated fresh tests, Verus, 221/221 capture validation, and passing full custom.mk ZCU102 build; known LowLevel host-only limitation retained |
-| ChangeExec(CR-01).5 | done | 2026-08-27 | Standard change report written at reports/CR-01-add-mavlink-firewall.md with traceability, deviations, non-impact evidence, and verification summary |
+| ChangeExec(CR-01).5 | done | 2026-08-27 | Standard change report written at reports/CR-01/CR-01-add-mavlink-firewall.md with traceability, deviations, non-impact evidence, and verification summary |
 | ChangeExec(CR-01).AP2 | done | 2026-08-27 | Robbie VanVossen approved the completed change, final report, impact reconciliation, and evidence |
 
 ## Subsequent maintenance
 
-- 2026-09-11: Developer-requested MAVLink core consolidation completed, including follow-up policy separation. One verified core parser serves routing, runtime contracts, and diagnostics; firmware-flash implementation/specification/tests reside in MAVLinkFirewall. Duplicate parser/table removed. Core tests 6/6, component tests 8/8; target verification core 9/0 and MAVLinkFirewall 17/0. Details: [mavlink-core-consolidation.md](mavlink-core-consolidation.md).
+- 2026-09-11: Developer-requested MAVLink core consolidation completed, including follow-up policy separation. One verified core parser serves routing, runtime contracts, and diagnostics; firmware-flash implementation/specification/tests reside in MAVLinkFirewall. Duplicate parser/table removed. Core tests 6/6, component tests 8/8; target verification core 9/0 and MAVLinkFirewall 17/0. Details: [mavlink-core-consolidation.md](maintenance/mavlink-core-consolidation.md).
 
 - 2026-09-23: Captured developer workaround commit 4bc9a9a as a reusable post-codegen patch; helper verified for application, idempotence and conflict preservation. The original per-invocation requirement was subsequently retired by developer instruction after the HAMR upgrade comparison below.
 
@@ -354,7 +354,7 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 
 - 2026-09-23: `Open_Platform_HLRs_26_09_23_01.md` supersedes _07 as current authority. W1/W2 and earlier W3 build evidence remain historical; amended firewall acceptance requires regeneration and fresh validation. Driver fix tested/built; contract AP1 subsequently approved; CodeGen complete with boundary review pending.
 
-- 2026-09-23: Developer approved bounds CodeGen boundary. Executable maximum aligned; all 54 affected tests pass. Coverage review pending before fresh verification and loader rebuild; see CR-02-bounds-development.md.
+- 2026-09-23: Developer approved bounds CodeGen boundary. Executable maximum aligned; all 54 affected tests pass. Coverage review pending before fresh verification and loader rebuild; see CR-02/bounds-correction/CR-02-bounds-development.md.
 
 - 2026-09-23: Coverage approved; bounds verification passes without changes (core 39/0, Tx 16/0, Rx 28/0, MAVLink 69/0). Await AP2/component completion approval before full loader rebuild.
 
@@ -374,6 +374,8 @@ Project: open_platform | Profile: audited | Updated: 2026-09-23
 
 - 2026-09-23: Developer explicitly accepted manual testing with a high-criticality timeout finding. Hardware acceptance recorded done; CR-02-HW-01 remains Open/High. Acceptance does not resolve or waive the D2 requirement and does not constitute overall Wave 3/final change approval.
 
-- 2026-09-23: Updated HAMR generates the R2U2 reporting fix directly; raw output is byte-identical to the patched baseline and probe passes 2/2. Developer explicitly removed post-codegen patching from the workflow. Regression validation remains required; CR-02-HW-01 remains High/Open. See CR-02-hamr-upgrade.md.
+- 2026-09-23: Updated HAMR generates the R2U2 reporting fix directly; raw output is byte-identical to the patched baseline and probe passes 2/2. Developer explicitly removed post-codegen patching from the workflow. Regression validation remains required; CR-02-HW-01 remains High/Open. See CR-02/codegen/CR-02-hamr-upgrade.md.
 
 - 2026-09-23: Developer approved final CR-02 completion review. ChangeExec is done and the plan is Executed. CR-02-HW-01 remains High/Open for a future CR; no issue closure, commit or merge is implied.
+
+- 2026-09-23: Reorganized reports by change request and topic at developer request. Navigation: [reports index](README.md); prior locations: [location map](report-locations.json). Workflow state and approvals are unchanged; raw evidence bytes were preserved.

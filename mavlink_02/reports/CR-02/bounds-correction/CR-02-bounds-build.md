@@ -52,7 +52,7 @@ Git diff --check passes.
 
 ## Remaining Wave 3 work
 
-CR-02-hardware-acceptance.md now identifies this exact image and includes explicit
+../deployment/CR-02-hardware-acceptance.md now identifies this exact image and includes explicit
 IPv4 boundary/driver-defense cases. All physical cases remain NOT RUN; no board was
 flashed. Operator/access, packet/serial captures, D0/D1/D2 traces and legacy schedule
 unit/budget measurements remain outstanding. The configured model's 2080 ms is not

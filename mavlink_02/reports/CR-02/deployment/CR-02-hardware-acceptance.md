@@ -1,7 +1,7 @@
 # CR-02 ZCU102 acceptance record
 
 Status: **ACCEPTED WITH OPEN HIGH-CRITICALITY FINDING CR-02-HW-01**.
-Accepted by developer on 2026-09-23. See [the open issue](../open-issues/CR-02-HW-01-recovery-timeout.md).
+Accepted by developer on 2026-09-23. See [the open issue](../../../open-issues/CR-02-HW-01-recovery-timeout.md).
 Final-review disposition: developer deferred the timing issue to a future CR;
 it remains High/Open and is non-blocking for CR-02 completion.
 This acceptance covers the supplied manual testing; it does not resolve the timeout
@@ -14,9 +14,9 @@ confirmation precedes the subsequent ModeManager transition-log edit.
 Loader at time of hardware confirmation: f524c83c893a10b0f20a638dc58a5d0b9784b9c0aaa4ee8f64ef3cbd5419cadf.
 Prior rebuilt loader with transition diagnostic: cac588401b5a4853aa4a9d482f5a3743f5840063ee888f52027361893c7aba43.
 The diagnostic build is not yet covered by a separate hardware confirmation;
-see CR-02-mode-log.md for its tests, proof and build evidence.
+see ../mode-logging/CR-02-mode-log.md for its tests, proof and build evidence.
 This image includes the approved 26_09_23_01 firewall bounds and driver defense.
-Build evidence: CR-02-bounds-build.md. This record does not inherit CR-01 hardware results.
+Build evidence: ../bounds-correction/CR-02-bounds-build.md. This record does not inherit CR-01 hardware results.
 
 Use the ZCU102/debug loader built with SYSTEM_MAKEFILE=custom.mk, the legacy schedule,
 and HAMR's generated R2U2 false-verdict fix (the old patch workflow is retired).
@@ -74,7 +74,7 @@ trace is present. See CR-02-manual-log-review-26_09_23_14_19.md for evidence and
 
 ## Budget-increase retest image (subsequently reverted)
 
-Developer requested +200 ms each for manager and MAVLink. Historical test-image SHA-256: `b55ce4b99309e469e413e9fa77bf34aee034c8a0df88c5b3467dc30b7c349079`. Model budgets are now 300/500 ms; legacy slot lengths are 30000/50000 using the retained scale. Full build/proofs and monitor probe pass. Repeat the five-rejection scenario and check for one Recovery diagnostic without the D2 timeout. This new run and physical legacy-time conversion remain unverified; see CR-02-budget-increase.md.
+Developer requested +200 ms each for manager and MAVLink. Historical test-image SHA-256: `b55ce4b99309e469e413e9fa77bf34aee034c8a0df88c5b3467dc30b7c349079`. Model budgets are now 300/500 ms; legacy slot lengths are 30000/50000 using the retained scale. Full build/proofs and monitor probe pass. Repeat the five-rejection scenario and check for one Recovery diagnostic without the D2 timeout. This new run and physical legacy-time conversion remain unverified; see ../timing-experiment/CR-02-budget-increase.md.
 
 ## Developer rollback — 2026-09-23
 

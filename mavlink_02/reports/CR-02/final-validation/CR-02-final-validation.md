@@ -81,7 +81,7 @@ during this final review.
 
 Evidence: [full verification/build](CR-02-full-verify-build.md),
 [artifact manifest](CR-02-full-build-manifest.json),
-[HAMR upgrade and probe](CR-02-hamr-upgrade.md).
+[HAMR upgrade and probe](../codegen/CR-02-hamr-upgrade.md).
 
 ## Hardware disposition
 
@@ -91,4 +91,4 @@ case-specific captures are not available for every acceptance procedure. No new
 hardware run is claimed. The developer explicitly deferred the unresolved timing
 issue to a future CR, making it non-blocking for CR-02 final review. The issue
 remains High/Open with unchanged evidence and closure criteria in
-[CR-02-HW-01](../open-issues/CR-02-HW-01-recovery-timeout.md).
+[CR-02-HW-01](../../../open-issues/CR-02-HW-01-recovery-timeout.md).

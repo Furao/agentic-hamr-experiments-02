@@ -11,10 +11,10 @@ Context: `/home/robertvanvossen/tools/r2u2-HAMR-agent-context`.
 | Requirements reviewed and allocated | `action-requests/CR-02-add-mode-manager/w1-requirements-planning-07.md`; _07 review complete, legacy publication remains developer-owned |
 | Model and contracts type-check | Latest revised MAVLink monitor run: Well-formed!, exit 0; no model changes since |
 | Three contract audits reviewed | Rx and ModeManager approved; revised MAVLink future-time monitor explicitly approved; dated audit records retain refinement obligations |
-| Integration result and handshake count | `CR-02-integration-check.md`: N=0, vacuous by design; subsequent monitor-only revision adds no integration assumptions |
-| Code generation and specification compilation | `CR-02-codegen.md`: R2 generation Success without warnings/errors, R2U2 compiler 4.2.4 succeeds; 12 editable files preserved by hash |
+| Integration result and handshake count | `contracts/CR-02-integration-check.md`: N=0, vacuous by design; subsequent monitor-only revision adds no integration assumptions |
+| Code generation and specification compilation | `codegen/CR-02-codegen.md`: R2 generation Success without warnings/errors, R2U2 compiler 4.2.4 succeeds; 12 editable files preserved by hash |
 | Sampling and startup inspection | Source inspection below complete |
-| Same-dispatch reporting feasibility | `CR-02-r2u2-probe-workaround-output.txt`: 2/2 tests pass with authorized 4bc9a9a patch and candidate reporter |
+| Same-dispatch reporting feasibility | `monitoring/CR-02-r2u2-probe-workaround-output.txt`: 2/2 tests pass with authorized 4bc9a9a patch and candidate reporter |
 | Build helper | `hamr/microkit/bin/build.cmd` exists; recorded usage check lists five components and two cores; application tests remain W2 |
 
 No codegen or duplicate runtime test was needed for this closure inspection: model,

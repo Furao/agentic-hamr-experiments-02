@@ -106,7 +106,7 @@ Code generation completed successfully and wrote its report under
 | HLR-18–HLR-20 | Direct/MAVLink/drop partitions, malformed lengths, disallowed ports, all lanes | RxFirewall tests and GUMBOX property tests |
 | HLR-21–HLR-27 | v1/v2, signed v2, CRC, IDs, flags, exact datagram framing, legal v2 truncation, FTP, flash deny, lane isolation | MAVLinkFirewall and mavlink_core tests |
 | HLR-28–HLR-30 | Full custom.mk ZCU102 build and schedule/image generation | Build result and workflow status |
-| HLR-21–HLR-33 | Twelve-case hardware procedure and 221-message follow-up capture | `reports/CR-01-add-mavlink-firewall-hardware-test.md`, `manual_test_results/` |
+| HLR-21–HLR-33 | Twelve-case hardware procedure and 221-message follow-up capture | `reports/CR-01/CR-01-add-mavlink-firewall-hardware-test.md`, `manual_test_results/` |
 
 ## 5. Change Process Summary
 

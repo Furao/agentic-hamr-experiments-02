@@ -81,7 +81,7 @@ notification and reboot paths also execute. No application/contract line gap rem
 CompDev steps 1–5 are complete. AP1 awaits review of this evidence and the explicit
 branch-metric limitation. No ModeManager Verus success is claimed; verification
 follows coverage approval. Shared-core and Tx verification performed for toolchain
-migration are separately recorded in CR-02-toolchain-migration.md.
+migration are separately recorded in ../toolchain/CR-02-toolchain-migration.md.
 
 Developer approved CompDev.AP1 coverage review on 2026-09-23. Target verification follows.
 

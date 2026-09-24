@@ -28,7 +28,7 @@ this is preliminary evidence, not an approved change plan.
 - Existing schedule assigns domains 2 through 6 to ArduPilot, TxFirewall, driver,
   RxFirewall, and MAVLinkFirewall respectively; pacer is domain 1. Platform
   `Max_Domain` is 7. Adding a component requires model/deployment/schedule analysis.
-- Recorded maintenance evidence in `reports/mavlink-core-consolidation.md` reports
+- Recorded maintenance evidence in `reports/maintenance/mavlink-core-consolidation.md` reports
   core tests 6/6, component tests 8/8, core verification 9/0 and component 17/0.
   These are historical results, not freshly rerun checks. That maintenance report
   explicitly excludes rerunning hardware, full build, and coverage.

@@ -90,7 +90,7 @@ The listed semantic partitions cover the active policy/control/oracle decisions;
 line coverage alone is not treated as proof of exhaustive path coverage.
 
 Evidence: CR-02-MAVLinkFirewall-tests.txt, CR-02-MAVLinkFirewall-coverage.lcov,
-CR-02-MAVLinkFirewall-tipe.txt. HTML: component target/cr02-current/report/index.html.
+../contracts/CR-02-MAVLinkFirewall-tipe.txt. HTML: component target/cr02-current/report/index.html.
 Run from the component crate so .cargo/config.toml supplies generated R2U2 bounds:
 
 ```

@@ -56,7 +56,7 @@ Further timing/dispatch investigation is needed to resolve this hardware finding
 
 Update hardware evidence with five denials followed by one actual transition log.
 Developer subsequently accepted manual testing with high-criticality finding
-CR-02-HW-01 retained open; see [the issue record](../open-issues/CR-02-HW-01-recovery-timeout.md). The manual testing
+CR-02-HW-01 retained open; see [the issue record](../../../open-issues/CR-02-HW-01-recovery-timeout.md). The manual testing
 acceptance step is complete. The timeout investigation remains outstanding; overall
 Wave 3 approval is separate.
 This capture does not contain a build hash, so it demonstrates use of transition

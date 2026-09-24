@@ -18,7 +18,7 @@ Five lane-0 MAVLink firmware-flash denials appear at lines 673, 691, 714, 735 an
 766. Lines 767–768 contain the Normal-to-Recovery diagnostic interleaved with
 `Mode-transition timeout: Recovery not observed by D2`. Exact byte-level
 interleaving verification is documented in the
-[manual log review](../reports/CR-02-manual-log-review-26_09_23_14_19.md).
+[manual log review](../reports/CR-02/deployment/CR-02-manual-log-review-26_09_23_14_19.md).
 
 The threshold-triggered state change is observed, but the monitor reports that it
 did not observe Recovery by D2. The log does not establish exact dispatch timing,
@@ -64,7 +64,7 @@ evidence. Record the tested image and any remaining timing limitations.
 ## Wave 3 approval — 2026-09-23
 
 Developer explicitly approved Wave 3 after the full verification/build recorded in
-[the full verification/build report](../reports/CR-02-full-verify-build.md).
+[the full verification/build report](../reports/CR-02/final-validation/CR-02-full-verify-build.md).
 The wave is accepted with CR-02-HW-01 retained
 as High/Open. This supersedes earlier statements that Wave 3 approval was pending;
 it does not resolve the timeout or grant final CR-02 completion approval.

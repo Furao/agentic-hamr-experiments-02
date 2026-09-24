@@ -100,6 +100,6 @@ build helper was retained; no removed components require cleanup. Compiler 4.2.4
 successfully rebuilt spec.bin and both application/probe bounds files.
 
 The updated isolated probe returned exit 101: raw verdict test passes, generated
-reporting test fails. See CR-02-r2u2-probe-future-output.txt and the reporting report
+reporting test fails. See ../monitoring/CR-02-r2u2-probe-future-output.txt and the reporting report
 addendum. CodeGen artifact criteria are met; audited boundary review is pending.
 W1 remains blocked on reporting; no application verification or target build claimed.

@@ -3,75 +3,75 @@
     "crate": "firewall_core",
     "exit": 0,
     "seconds": 10.12,
-    "log": "reports/CR-02-final-firewall_core-tests.txt",
+    "log": "reports/CR-02/final-validation/CR-02-final-firewall_core-tests.txt",
     "test_results": [
       "test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
       "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
     ],
     "coverage_exit": 0,
-    "coverage": "reports/CR-02-final-firewall_core-coverage.lcov"
+    "coverage": "reports/CR-02/final-validation/CR-02-final-firewall_core-coverage.lcov"
   },
   {
     "crate": "mavlink_core",
     "exit": 0,
     "seconds": 9.76,
-    "log": "reports/CR-02-final-mavlink_core-tests.txt",
+    "log": "reports/CR-02/final-validation/CR-02-final-mavlink_core-tests.txt",
     "test_results": [
       "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
       "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
     ],
     "coverage_exit": 0,
-    "coverage": "reports/CR-02-final-mavlink_core-coverage.lcov"
+    "coverage": "reports/CR-02/final-validation/CR-02-final-mavlink_core-coverage.lcov"
   },
   {
     "crate": "seL4_LowLevelEthernetDriver_LowLevelEthernetDriver",
     "exit": 101,
     "seconds": 6.39,
-    "log": "reports/CR-02-final-seL4_LowLevelEthernetDriver_LowLevelEthernetDriver-tests.txt",
+    "log": "reports/CR-02/final-validation/CR-02-final-seL4_LowLevelEthernetDriver_LowLevelEthernetDriver-tests.txt",
     "test_results": []
   },
   {
     "crate": "seL4_MAVLinkFirewall_MAVLinkFirewall",
     "exit": 0,
     "seconds": 2.68,
-    "log": "reports/CR-02-final-seL4_MAVLinkFirewall_MAVLinkFirewall-tests.txt",
+    "log": "reports/CR-02/final-validation/CR-02-final-seL4_MAVLinkFirewall_MAVLinkFirewall-tests.txt",
     "test_results": [
       "test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.39s"
     ],
     "coverage_exit": 0,
-    "coverage": "reports/CR-02-final-seL4_MAVLinkFirewall_MAVLinkFirewall-coverage.lcov"
+    "coverage": "reports/CR-02/final-validation/CR-02-final-seL4_MAVLinkFirewall_MAVLinkFirewall-coverage.lcov"
   },
   {
     "crate": "seL4_ModeManager_ModeManager",
     "exit": 0,
     "seconds": 10.76,
-    "log": "reports/CR-02-final-seL4_ModeManager_ModeManager-tests.txt",
+    "log": "reports/CR-02/final-validation/CR-02-final-seL4_ModeManager_ModeManager-tests.txt",
     "test_results": [
       "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s"
     ],
     "coverage_exit": 0,
-    "coverage": "reports/CR-02-final-seL4_ModeManager_ModeManager-coverage.lcov"
+    "coverage": "reports/CR-02/final-validation/CR-02-final-seL4_ModeManager_ModeManager-coverage.lcov"
   },
   {
     "crate": "seL4_RxFirewall_RxFirewall",
     "exit": 0,
     "seconds": 1.51,
-    "log": "reports/CR-02-final-seL4_RxFirewall_RxFirewall-tests.txt",
+    "log": "reports/CR-02/final-validation/CR-02-final-seL4_RxFirewall_RxFirewall-tests.txt",
     "test_results": [
       "test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.37s"
     ],
     "coverage_exit": 0,
-    "coverage": "reports/CR-02-final-seL4_RxFirewall_RxFirewall-coverage.lcov"
+    "coverage": "reports/CR-02/final-validation/CR-02-final-seL4_RxFirewall_RxFirewall-coverage.lcov"
   },
   {
     "crate": "seL4_TxFirewall_TxFirewall",
     "exit": 0,
     "seconds": 1.22,
-    "log": "reports/CR-02-final-seL4_TxFirewall_TxFirewall-tests.txt",
+    "log": "reports/CR-02/final-validation/CR-02-final-seL4_TxFirewall_TxFirewall-tests.txt",
     "test_results": [
       "test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.36s"
     ],
     "coverage_exit": 0,
-    "coverage": "reports/CR-02-final-seL4_TxFirewall_TxFirewall-coverage.lcov"
+    "coverage": "reports/CR-02/final-validation/CR-02-final-seL4_TxFirewall_TxFirewall-coverage.lcov"
   }
 ]

@@ -52,7 +52,7 @@ meaning; they must not be read as current IDs.
 bodies, including ConOps §0, are preserved. This is the developer's explicit
 replacement for the plan's legacy-publication update obligations. See
 [requirements reconciliation](CR-02-closeout-requirements-review.md) and
-[complete requirement allocation](../action-requests/CR-02-add-mode-manager/w1-requirements-planning-07.md).
+[complete requirement allocation](../../action-requests/CR-02-add-mode-manager/w1-requirements-planning-07.md).
 
 ## 2. Model changes
 
@@ -69,7 +69,7 @@ Paths in this table are under `sysmlv2/open_platform/`.
 | Same: TxFirewall; `GumboLib.sysml` | Shared 1586-byte IPv4 bound; four Tx size integration guarantees; direct/MAVLink UDP share rx_bounded_udp (HLR-12/13/18, LLR-4) | 86c4a5b, 09ae41d |
 
 Model type checks passed after contract changes and again with the updated HAMR:
-`CR-02-hamr-upgrade-tipe.txt` reports `Well-formed!`, exit 0. No model change
+`codegen/CR-02-hamr-upgrade-tipe.txt` reports `Well-formed!`, exit 0. No model change
 followed that check. Contract audits and all wave gates were approved. The GUMBO
 integration check returned exit 0 with **zero receiver assumptions (N=0)**; this
 is a vacuous integration pass, not an end-to-end mode-propagation proof.
@@ -99,7 +99,7 @@ files, including all 52 reported editable resources. The regression probe passes
 | Shared bounds / Tx guarantees | `crates/GumboLib/src/lib.rs`, Tx API/GUMBOX and initialization test helper | 1586 limit and <=1600 output obligations |
 | Deployment | `microkit.system`, generated build files, C monitors and pacer | Manager images/domain, queues and generated scaffolding |
 
-The [complete artifact inventory](CR-02-final-artifact-inventory.md) lists every
+The [complete artifact inventory](final-validation/CR-02-final-artifact-inventory.md) lists every
 tracked model/code delta and its role, including mechanical generator/toolchain
 changes. No orphan components were removed. Monitor, compiler/runtime and logger
 behavior remains a tested runtime boundary outside application Verus proofs.
@@ -182,13 +182,13 @@ output is tested separately from executable GUMBOX oracles.
 
 | Step | Action / method | Evidence |
 |---|---|---|
-| W1 — approved | Review user requirements; SysModeling, component contracts/audits, Logika integration and HAMR generation | CR-02-w1-gate.md; contract audit reports; CR-02-integration-check.md |
+| W1 — approved | Review user requirements; SysModeling, component contracts/audits, Logika integration and HAMR generation | CR-02-w1-gate.md; contract audit reports; contracts/CR-02-integration-check.md |
 | W2 — approved | Component implementation, independent tests/GUMBOX, coverage and Verus; production monitor reporting | CR-02-w2-gate.md; component development reports |
-| W3 — approved | Custom build/schedule; approved bounds/driver correction and transition logging; hardware acceptance | CR-02-bounds-*.md, CR-02-mode-log.md, CR-02-hardware-acceptance.md |
-| HAMR upgrade | Compare raw output to patched baseline; probe 2/2; retire patch workflow | CR-02-hamr-upgrade.md |
+| W3 — approved | Custom build/schedule; approved bounds/driver correction and transition logging; hardware acceptance | CR-02-bounds-*.md, mode-logging/CR-02-mode-log.md, deployment/CR-02-hardware-acceptance.md |
+| HAMR upgrade | Compare raw output to patched baseline; probe 2/2; retire patch workflow | codegen/CR-02-hamr-upgrade.md |
 | Requirements closeout | User supplies _02; explicitly retires four legacy docs | CR-02-closeout-requirements-review.md |
-| Final verification/build | Six proof-enabled crates pass; full target loader passes | CR-02-full-verify-build.md and build manifest |
-| Final test sweep | 67 application/core tests and 2 isolated driver tests pass; entry-point coverage checked | CR-02-final-validation.md, final-test-results.json and entrypoint-coverage.json |
+| Final verification/build | Six proof-enabled crates pass; full target loader passes | final-validation/CR-02-full-verify-build.md and build manifest |
+| Final test sweep | 67 application/core tests and 2 isolated driver tests pass; entry-point coverage checked | final-validation/CR-02-final-validation.md, final-test-results.json and entrypoint-coverage.json |
 | Issue disposition | Developer defers hardware timing correction to a future CR | open-issues/CR-02-HW-01-recovery-timeout.md |
 
 Final proof counts (verified/errors): ModeManager 9/0, Rx 28/0, Tx 16/0,
@@ -219,11 +219,11 @@ Manual testing is developer-accepted. Supplied serial evidence contains five fla
 denials, a Recovery transition and a D2 timeout; not every procedure has separate
 captures and the serial log does not identify its image hash. No new hardware run
 is claimed. The developer has explicitly accepted deferral of the timing issue for
-this CR. The [final validation summary](CR-02-final-validation.md) consolidates the
+this CR. The [final validation summary](final-validation/CR-02-final-validation.md) consolidates the
 exact scope and limitations.
 
 Commit history is appended below. Full hashes are retained in
-[CR-02-final-commits.txt](CR-02-final-commits.txt). Uncommitted delivery includes the
+[CR-02-final-commits.txt](final-validation/CR-02-final-commits.txt). Uncommitted delivery includes the
 supplied _02 requirements, retirement/status/issue records, final reports and the
 previously created build helpers; no commit or merge is claimed by this review.
 
@@ -276,7 +276,7 @@ unchanged; Rust carrier changes are trailing commas, while the OperatingMode enu
 is additive. Tx has no mode input; driver four-lane interfaces remain. Generated
 bridge/queue formatting and API changes are recorded rather than claimed untouched.
 No unsupported claim of unmeasured end-to-end traffic preservation is made.
-See [non-impact evidence](CR-02-final-nonimpact.json) and artifact inventory.
+See [non-impact evidence](final-validation/CR-02-final-nonimpact.json) and artifact inventory.
 
 ## 7. Completion review
 

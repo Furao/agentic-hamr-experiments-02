@@ -4,7 +4,7 @@
 |---|---|
 | Change ID | CR-02 |
 | Status | Executed |
-| Execution completion | Developer approved final CR-02 review on 2026-09-23; report: ../../reports/CR-02-add-mode-manager.md |
+| Execution completion | Developer approved final CR-02 review on 2026-09-23; report: ../../reports/CR-02/CR-02-add-mode-manager.md |
 | Approved by / date | Developer (user), 2026-09-22 — explicit “approve plan” instruction |
 | Target project | `/home/robertvanvossen/dev/agentic-hamr-experiments-02/mavlink_02` |
 | Baseline | `043d574970d28ff172f7261ea0392ddd14ae50a8`, confirmed by developer 2026-09-22 |
@@ -28,7 +28,7 @@ The developer explicitly retired the four legacy CR-01 documents on 2026-09-23:
 CR-02 sketch/plan; their historical bodies, including ConOps §0, are preserved.
 This disposition replaces their planned publication updates and closes the
 remaining requirements reconciliation obligation. See
-`reports/CR-02-closeout-requirements-review.md`. CR-02-HW-01 remains High/Open.
+`reports/CR-02/CR-02-closeout-requirements-review.md`. CR-02-HW-01 remains High/Open.
 
 ## Requirements amendment — 2026-09-23 (historical _01 scope)
 
@@ -70,7 +70,7 @@ The legacy schedule follows its existing scale (domain_7=30000, domain_6=50000),
 with unchanged ordering. The developer subsequently reported no improvement and reverted this amendment.
 Current settings are again ModeManager 100 ms, MAVLinkFirewall 300 ms, frame 2080 ms,
 and legacy domain_7/domain_6 lengths 10000/30000. The timeout remains unresolved;
-requirements edits remain developer-owned. See reports/CR-02-budget-increase.md
+requirements edits remain developer-owned. See reports/CR-02/timing-experiment/CR-02-budget-increase.md
 for validation and the unresolved physical-unit/hardware timing qualification.
 
 ## 1. Change Summary
@@ -170,7 +170,7 @@ planning updates to `reports/workflow-status.md`. Intake evidence is recorded in
 | Build | `hamr/microkit/custom.mk` explicitly enumerates component images, monitors, types, Rust builds, test/verify targets, and manual VMM library linkage |
 | Rx code | `crates/seL4_RxFirewall_RxFirewall/src/component/seL4_RxFirewall_RxFirewall_app.rs` uses firewall_core; shared GumboLib carries routing predicates |
 | MAVLink code | Component owns classify_mavlink and firmware_flash_spec; mavlink_core provides verified framing/CRC parsing and dialect metadata |
-| Latest recorded evidence | `reports/mavlink-core-consolidation.md`: core tests 6/6, MAVLink tests 8/8; core verification 9/0, MAVLink 17/0; no full-build/hardware/coverage rerun in that maintenance |
+| Latest recorded evidence | `reports/maintenance/mavlink-core-consolidation.md`: core tests 6/6, MAVLink tests 8/8; core verification 9/0, MAVLink 17/0; no full-build/hardware/coverage rerun in that maintenance |
 | Build helper | Neither root `bin/` nor `hamr/microkit/bin/` currently exists; reconcile old status claims with actual files and provide supported coverage orchestration before CompDev |
 
 Historical test results are not current execution evidence. No tests or verification
@@ -437,7 +437,7 @@ follow the developer's authority decision and are documented as behavior changes
   transition/reboot, normal routing, strict UDP, blacklist, and unchanged transmit.
 - Run all make commands with `SYSTEM_MAKEFILE=custom.mk`; retain tool exit status,
   exact commands, build configuration, evidence paths and limitations in reports.
-- Final report: `reports/CR-02-add-mode-manager.md`; include predicted/actual impact,
+- Final report: `reports/CR-02/CR-02-add-mode-manager.md`; include predicted/actual impact,
   deviations, non-impact evidence, requirement migration, coverage/proof results,
   schedule trace, hardware results, R2U2 compiler/runtime versions, monitor formula,
   verdict timing and reporting integration, trust boundaries, and unresolved limitations.
@@ -471,8 +471,8 @@ The developer explicitly removed workaround patching from the workflow on
 2026-09-23. Retain the patch/helper as historical artifacts; do not invoke them
 after codegen. Continue the reporting probe against fresh generated output.
 The three-wave scope, D2 deadline, one-time production logging obligation and
-verification gates remain unchanged. See `reports/CR-02-hamr-upgrade.md` for the
-comparison and `reports/CR-02-w1-gate.md` for historical workaround evidence.
+verification gates remain unchanged. See `reports/CR-02/codegen/CR-02-hamr-upgrade.md` for the
+comparison and `reports/CR-02/CR-02-w1-gate.md` for historical workaround evidence.
 
 ### Manual testing disposition — 2026-09-23
 
@@ -485,7 +485,7 @@ resolution are not claimed. Requirements remain developer-owned and unchanged.
 ## Wave 3 approval — 2026-09-23
 
 Developer explicitly approved Wave 3 after the full verification/build recorded in
-reports/CR-02-full-verify-build.md. The wave is accepted with CR-02-HW-01 retained
+reports/CR-02/final-validation/CR-02-full-verify-build.md. The wave is accepted with CR-02-HW-01 retained
 as High/Open. This supersedes earlier statements that Wave 3 approval was pending;
 it does not resolve the timeout or grant final CR-02 completion approval.
 

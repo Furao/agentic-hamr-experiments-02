@@ -14,12 +14,12 @@ one timeout during D2 and resets on reboot. No handwritten deadline timer was ad
 
 | Component/core | Tests passed | Verus verified / errors | Evidence |
 |---|---:|---:|---|
-| ModeManager | 7 | 9 / 0 | CR-02-ModeManager-development.md |
-| RxFirewall | 12 | 28 / 0 | CR-02-RxFirewall-development.md |
-| MAVLinkFirewall | 15 | 69 / 0 | CR-02-MAVLinkFirewall-development.md |
-| TxFirewall | 7 | 16 / 0 | CR-02-TxFirewall-regression.md |
-| firewall_core | 17 | 39 / 0 | CR-02-firewall_core-tests.txt and CR-02-firewall_core-verification.txt |
-| mavlink_core | 6 | 38 / 0 | CR-02-mavlink_core-tests.txt and CR-02-mavlink_core-verification.txt |
+| ModeManager | 7 | 9 / 0 | components/CR-02-ModeManager-development.md |
+| RxFirewall | 12 | 28 / 0 | components/CR-02-RxFirewall-development.md |
+| MAVLinkFirewall | 15 | 69 / 0 | components/CR-02-MAVLinkFirewall-development.md |
+| TxFirewall | 7 | 16 / 0 | components/CR-02-TxFirewall-regression.md |
+| firewall_core | 17 | 39 / 0 | components/CR-02-firewall_core-tests.txt and components/CR-02-firewall_core-verification.txt |
+| mavlink_core | 6 | 38 / 0 | components/CR-02-mavlink_core-tests.txt and components/CR-02-mavlink_core-verification.txt |
 
 Results are consolidated from component runs, not claimed as one simultaneous run.
 Tx verification and both core regression suites were rerun for this gate. Previously

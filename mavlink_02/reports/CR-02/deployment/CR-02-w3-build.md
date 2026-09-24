@@ -2,7 +2,7 @@
 
 Date: 2026-09-23. Status: historical build passed; Wave 3 acceptance incomplete.
 The subsequent 26_09_23_01 requirements/driver amendment requires a fresh loader;
-see CR-02-bounds-contract-audit.md. This image predates that correction.
+see ../bounds-correction/CR-02-bounds-contract-audit.md. This image predates that correction.
 Developer approved the legacy schedule review and continuation to this integration.
 
 ## Changes
@@ -99,4 +99,4 @@ LLR-18 suppression-log exception, remains outstanding for the final sweep.
 
 ## Bounds correction rebuild follow-up
 
-The subsequent correction is implemented, approved and rebuilt successfully. Current loader and preservation evidence: CR-02-bounds-build.md. Earlier bounds scope/contract/proof pending notes above are historical; physical acceptance and requirements reconciliation remain outstanding.
+The subsequent correction is implemented, approved and rebuilt successfully. Current loader and preservation evidence: ../bounds-correction/CR-02-bounds-build.md. Earlier bounds scope/contract/proof pending notes above are historical; physical acceptance and requirements reconciliation remain outstanding.
